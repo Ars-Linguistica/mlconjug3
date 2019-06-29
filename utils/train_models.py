@@ -14,9 +14,10 @@ train_model.
 
 import mlconjug
 import pickle
+import pprint
 from functools import partial
 from collections import defaultdict
-import tabulate
+from tabulate import tabulate
 
 # Set a language to train the Conjugator on
 langs = ('en', 'es', 'fr', 'it', 'pt', 'ro')
@@ -31,15 +32,25 @@ for lang in langs:
         ngrange = (2, 7)
 
         # Transforms dataset with CountVectorizer. We pass the function extract_verb_features to the CountVectorizer.
-        vectorizer = mlconjug.CountVectorizer(analyzer=partial(mlconjug.extract_verb_features, lang=lang, ngram_range=ngrange),
+        vectorizer = mlconjug.CountVectorizer(analyzer=partial(mlconjug.extract_verb_features,
+                                                               lang=lang,
+                                                               ngram_range=ngrange),
                                               binary=True)
 
         # Feature reduction
-        feature_reductor = mlconjug.SelectFromModel(mlconjug.LinearSVC(penalty="l1", max_iter=12000, dual=False, verbose=1))
+        feature_reductor = mlconjug.SelectFromModel(mlconjug.LinearSVC(penalty="l1",
+                                                                       max_iter=12000,
+                                                                       dual=False,
+                                                                       verbose=0))
 
         # Prediction Classifier
-        classifier = mlconjug.SGDClassifier(loss="log", penalty='elasticnet', l1_ratio=0.15, max_iter=40000, alpha=1e-5,
-                                            random_state=42, verbose=1)
+        classifier = mlconjug.SGDClassifier(loss="log",
+                                            penalty='elasticnet',
+                                            l1_ratio=0.15,
+                                            max_iter=40000,
+                                            alpha=1e-5,
+                                            random_state=42,
+                                            verbose=0)
 
         # Initialize Data Set
         dataset = mlconjug.DataSet(manager(language=lang).verbs)
@@ -63,4 +74,4 @@ for lang in langs:
         # Save trained model
         with open('/home/ubuntu/Documents/mlconjug/utils/raw_data/experiments/trained_model-{0}- {1}.pickle'.format(lang, manager), 'wb') as file:
             pickle.dump(conjugator.model, file)
-print(tabulate(results))
+pprint(results)
