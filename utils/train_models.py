@@ -16,7 +16,6 @@ from sklearn.exceptions import ConvergenceWarning
 import warnings
 
 import mlconjug
-import pickle
 import json
 from pprint import pprint
 from functools import partial
@@ -98,7 +97,7 @@ for red_tol in reductor_tols:
                         max_score[lang] = score
                     results[lang][manager.__name__] = {'language': lang,
                                                        'manager': manager.__name__,
-                                                       'score': score,
+                                                       'score': round(score, 3),
                                                        'model_training_duration': str(model_duration) + ' seconds.',
                                                        'model_parameters': model_parameters,
                                                        'current_iteration_max_score': max_score[lang],
@@ -110,6 +109,7 @@ for red_tol in reductor_tols:
                         json.dump(results, file, ensure_ascii=False, indent=4)
                     print('\nSaved experiments data to json file.\n')
             results[lang]['max_score'] = {'max_score': max_score[lang], 'manager': manager.__name__, 'model_parameters': model_parameters}
+            pprint(results[lang]['max_score'])
 duration = round(time() - start, 3)
 print('The training took {0} seconds in total.'.format(duration))
 pprint(results)
