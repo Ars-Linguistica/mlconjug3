@@ -26,5 +26,5 @@ jobs:
     - stage: test
       script: tox
     - name: train
-      script: sudo ./utils/train_models.py
+      script: sudo python -m ./utils/train_models.py
 
