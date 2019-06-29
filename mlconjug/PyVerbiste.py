@@ -424,7 +424,7 @@ class Verb:
         :param term: string.
         :return:
         """
-        if self.verb_info.root == self.verb_info.template[1:]:
+        if self.verb_info.root == self.verb_info.template[:self.verb_info.template.index(':')]:
             persons_dict[key] = term
         else:
             persons_dict[key] = self.verb_info.root + term
@@ -498,7 +498,7 @@ class VerbEn(Verb):
                         elif tense_name == 'imperative present':
                             key = _IMPERATIVE_PRONOUNS[self.language][self.subject][pers]
                         else:
-                            key = term
+                            key = 'to'
                         if term is not None:
                             self.conjugate_person(key, persons_dict, term)
                         else:
