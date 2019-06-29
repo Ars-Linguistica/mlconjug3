@@ -12,6 +12,9 @@ train_model.
 
 """
 
+from sklearn.exceptions import ConvergenceWarning
+import warnings
+
 import mlconjug
 import pickle
 import json
@@ -72,40 +75,44 @@ for red_tol in reductor_tols:
 
                     # Initialize Conjugator
                     model = mlconjug.Model(vectorizer, feature_reductor, classifier)
-                    model_parameters = {'reductor_tol': red_tol,
+                    model_parameters = {'feature_reductor_tol': red_tol,
                                         'classifier_tol': class_tol,
                                         'feature_reductor_max_iter': feat_max_iter}
                     conjugator = mlconjug.Conjugator(lang, model)
 
                     # Training and prediction
-                    model_start = time()
-                    conjugator.model.train(dataset.train_input, dataset.train_labels)
-                    predicted = conjugator.model.predict(dataset.test_input)
-                    model_duration = round(time() - model_start, 3)
+                    with warnings.catch_warnings(record=True) as w:
+                        model_start = time()
+                        conjugator.model.train(dataset.train_input, dataset.train_labels)
+                        predicted = conjugator.model.predict(dataset.test_input)
+                        model_duration = round(time() - model_start, 3)
+                        if w:
+                            caught_warnings = [warning._category_name for warning in w]
+                        else:
+                            caught_warnings = False
 
                     # Assess the performance of the model's predictions
                     score = len([a == b for a, b in zip(predicted, dataset.test_labels) if a == b]) / len(predicted)
-                    # print('The score of the {0} model is {1} with the {2} model.\nThe training took {3} seconds.'.format(lang, score, manager.__name__, duration))
                     if score > max_score:
                         max_score = score
-                        pass
-
                     results[lang][manager.__name__] = {'language': lang,
                                                        'manager': manager.__name__,
                                                        'score': score,
                                                        'model_training_duration': str(model_duration) + ' seconds.',
-                                                       'model_parameters': model_parameters}
+                                                       'model_parameters': model_parameters,
+                                                       'current_max_score': max_score,
+                                                       'warnings': caught_warnings}
                     pprint(results[lang][manager.__name__])
 
                     # # Save trained model
                     # with open('/home/ubuntu/PycharmProjects/mlconjug/utils/raw_data/experiments/trained_model-{0}- {1}.pickle'.format(lang, manager), 'wb') as file:
                     #     pickle.dump(conjugator.model, file)
 
-                    # Save trained model
+                    # Save experiments results
                     with open('/home/ubuntu/PycharmProjects/mlconjug/utils/raw_data/experiments/results.json', 'w', encoding='utf-8') as file:
                         json.dump(results, file, ensure_ascii=False, indent=4)
                     print('Saved experiments data to json file.')
-            results[lang]['max_score'] = {'max_score': max_score,'manager': manager.__name__, 'model_parameters': model_parameters}
+            results[lang]['max_score'] = {'max_score': max_score, 'manager': manager.__name__, 'model_parameters': model_parameters}
 duration = round(time() - start, 3)
 print('The training took {0} seconds in total.'.format(duration))
 pprint(results)
