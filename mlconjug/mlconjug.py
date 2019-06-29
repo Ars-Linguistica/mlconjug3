@@ -157,6 +157,11 @@ class Conjugator:
         :return: Verb object or None.
 
         """
+        # TODO templates starting with re* are causing issue in the conjugate method.
+        #  FIX by selecting the templates names more specifically to avoid ambiguities.
+        #  Example: 'awake' has 'reaw:aken' as a template name to reconstruct the conjugated forms.
+        #  Implement ranking of verbs in each category for representativity of the conjugation paradigm.
+        #  See GitHub Issue #80.
         verb = verb.lower()
         prediction_score = 0
         if not self.conjug_manager.is_valid_verb(verb):
