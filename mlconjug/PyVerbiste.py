@@ -329,7 +329,7 @@ class VerbInfo:
     def __init__(self, infinitive, root, template):
         self.infinitive = infinitive
         if not root:
-            self.root = infinitive
+            self.root = ''
         else:
             self.root = root
         self.template = template
