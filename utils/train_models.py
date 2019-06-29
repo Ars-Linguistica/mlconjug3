@@ -14,6 +14,7 @@ train_model.
 
 import mlconjug
 import pickle
+import json
 import pprint
 from functools import partial
 from collections import defaultdict
@@ -74,4 +75,8 @@ for lang in langs:
         # Save trained model
         with open('/home/ubuntu/Documents/mlconjug/utils/raw_data/experiments/trained_model-{0}- {1}.pickle'.format(lang, manager), 'wb') as file:
             pickle.dump(conjugator.model, file)
+
+        # Save trained model
+        with open('/home/ubuntu/Documents/mlconjug/utils/raw_data/experiments/results.json', 'w', encoding='utf-8') as file:
+            json.dump(conjugator.model, file, ensure_ascii=False, indent=4)
 pprint(results)
