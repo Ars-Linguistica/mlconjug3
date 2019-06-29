@@ -25,6 +25,7 @@ from time import time
 langs = ('en', 'es', 'fr', 'it', 'pt', 'ro')
 reductor_tols = (1e-3, 1e-4, 1e-5)
 classifier_tols = (1e-3, 1e-4, 1e-5)
+feature_reductor_max_iter = (3600, 4800, 6400)
 
 managers = (mlconjug.Verbiste, mlconjug.ConjugManager)
 results = defaultdict(dict)
@@ -33,69 +34,73 @@ experiment = 0
 
 for red_tol in reductor_tols:
     for class_tol in classifier_tols:
-        for lang in langs:
-            for manager in managers:
+        for feat_max_iter in feature_reductor_max_iter:
+            for lang in langs:
+                for manager in managers:
 
-                # Set a ngram range sliding window for the vectorizer
-                ngrange = (2, 7)
+                    # Set a ngram range sliding window for the vectorizer
+                    ngrange = (2, 7)
 
-                # Transforms dataset with CountVectorizer. We pass the function extract_verb_features to the CountVectorizer.
-                vectorizer = mlconjug.CountVectorizer(analyzer=partial(mlconjug.extract_verb_features,
-                                                                       lang=lang,
-                                                                       ngram_range=ngrange),
-                                                      binary=True)
+                    # Transforms dataset with CountVectorizer. We pass the function extract_verb_features to the CountVectorizer.
+                    vectorizer = mlconjug.CountVectorizer(analyzer=partial(mlconjug.extract_verb_features,
+                                                                           lang=lang,
+                                                                           ngram_range=ngrange),
+                                                          binary=True)
 
-                # Feature reduction
-                feature_reductor = mlconjug.SelectFromModel(mlconjug.LinearSVC(penalty="l1",
-                                                                               max_iter=36000,
-                                                                               dual=False,
-                                                                               verbose=0),
-                                                                               tol=red_tol)
+                    # Feature reduction
+                    feature_reductor = mlconjug.SelectFromModel(mlconjug.LinearSVC(penalty="l1",
+                                                                                   max_iter=feat_max_iter,
+                                                                                   dual=False,
+                                                                                   verbose=0,
+                                                                                   tol=red_tol))
 
-                # Prediction Classifier
-                classifier = mlconjug.SGDClassifier(loss="log",
-                                                    penalty='elasticnet',
-                                                    l1_ratio=0.15,
-                                                    max_iter=40000,
-                                                    alpha=1e-5,
-                                                    random_state=42,
-                                                    verbose=0,
-                                                    tol=class_tol)
+                    # Prediction Classifier
+                    classifier = mlconjug.SGDClassifier(loss="log",
+                                                        penalty='elasticnet',
+                                                        l1_ratio=0.15,
+                                                        max_iter=40000,
+                                                        alpha=1e-5,
+                                                        random_state=42,
+                                                        verbose=0,
+                                                        tol=class_tol)
 
-                # Initialize Data Set
-                dataset = mlconjug.DataSet(manager(language=lang).verbs)
-                dataset.construct_dict_conjug()
-                dataset.split_data(proportion=0.90)
+                    # Initialize Data Set
+                    dataset = mlconjug.DataSet(manager(language=lang).verbs)
+                    dataset.construct_dict_conjug()
+                    dataset.split_data(proportion=0.90)
 
-                # Initialize Conjugator
-                model = mlconjug.Model(vectorizer, feature_reductor, classifier)
-                model_parameters = model.pipeline.get_params()
-                conjugator = mlconjug.Conjugator(lang, model)
+                    # Initialize Conjugator
+                    model = mlconjug.Model(vectorizer, feature_reductor, classifier)
+                    model_parameters = {'reductor_tol': red_tol,
+                                        'classifier_tol': class_tol,
+                                        'feature_reductor_max_iter': feat_max_iter}
+                    conjugator = mlconjug.Conjugator(lang, model)
 
-                # Training and prediction
-                model_start = time()
-                conjugator.model.train(dataset.train_input, dataset.train_labels)
-                predicted = conjugator.model.predict(dataset.test_input)
-                model_duration = round(time() - model_start, 3)
+                    # Training and prediction
+                    model_start = time()
+                    conjugator.model.train(dataset.train_input, dataset.train_labels)
+                    predicted = conjugator.model.predict(dataset.test_input)
+                    model_duration = round(time() - model_start, 3)
 
-                # Assess the performance of the model's predictions
-                score = len([a == b for a, b in zip(predicted, dataset.test_labels) if a == b]) / len(predicted)
-                # print('The score of the {0} model is {1} with the {2} model.\nThe training took {3} seconds.'.format(lang, score, manager.__name__, duration))
+                    # Assess the performance of the model's predictions
+                    score = len([a == b for a, b in zip(predicted, dataset.test_labels) if a == b]) / len(predicted)
+                    # print('The score of the {0} model is {1} with the {2} model.\nThe training took {3} seconds.'.format(lang, score, manager.__name__, duration))
 
-                results[lang][manager.__name__] = {'language': lang,
-                                                   'manager': manager.__name__,
-                                                   'score': score,
-                                                   'model_training_duration': model_duration,
-                                                   'model_parameters': model_parameters}
-                pprint(results[lang][manager.__name__])
+                    results[lang][manager.__name__] = {'language': lang,
+                                                       'manager': manager.__name__,
+                                                       'score': score,
+                                                       'model_training_duration': str(model_duration) + ' seconds.',
+                                                       'model_parameters': model_parameters}
+                    pprint(results[lang][manager.__name__])
 
-                # Save trained model
-                with open('/home/ubuntu/PycharmProjects/mlconjug/utils/raw_data/experiments/trained_model-{0}- {1}.pickle'.format(lang, manager), 'wb') as file:
-                    pickle.dump(conjugator.model, file)
+                    # # Save trained model
+                    # with open('/home/ubuntu/PycharmProjects/mlconjug/utils/raw_data/experiments/trained_model-{0}- {1}.pickle'.format(lang, manager), 'wb') as file:
+                    #     pickle.dump(conjugator.model, file)
 
-                # Save trained model
-                with open('/home/ubuntu/PycharmProjects/mlconjug/utils/raw_data/experiments/results.json', 'w', encoding='utf-8') as file:
-                    json.dump(results, file, ensure_ascii=False, indent=4)
+                    # Save trained model
+                    with open('/home/ubuntu/PycharmProjects/mlconjug/utils/raw_data/experiments/results.json', 'w', encoding='utf-8') as file:
+                        json.dump(results, file, ensure_ascii=False, indent=4)
+                    print('Saved experiments data to json file.')
 duration = round(time() - start, 3)
 print('The training took {0} seconds in total.'.format(duration))
 pprint(results)
