@@ -7,6 +7,8 @@ from .mlconjug import Conjugator
 from pprint import pprint
 
 
+# TODO: add mlconjug -h for friendlier interface.
+# TODO: render the verb information in a more user friendly manner.
 @click.command()
 @click.argument('verb')
 @click.option('-l', '--language',
