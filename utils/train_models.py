@@ -100,18 +100,14 @@ for red_tol in reductor_tols:
                                                        'score': score,
                                                        'model_training_duration': str(model_duration) + ' seconds.',
                                                        'model_parameters': model_parameters,
-                                                       'current_max_score': max_score,
+                                                       'current_iteration_max_score': max_score,
                                                        'warnings': caught_warnings}
                     pprint(results[lang][manager.__name__])
-
-                    # # Save trained model
-                    # with open('/home/ubuntu/PycharmProjects/mlconjug/utils/raw_data/experiments/trained_model-{0}- {1}.pickle'.format(lang, manager), 'wb') as file:
-                    #     pickle.dump(conjugator.model, file)
 
                     # Save experiments results
                     with open('/home/ubuntu/PycharmProjects/mlconjug/utils/raw_data/experiments/results.json', 'w', encoding='utf-8') as file:
                         json.dump(results, file, ensure_ascii=False, indent=4)
-                    print('Saved experiments data to json file.')
+                    pprint('Saved experiments data to json file.')
             results[lang]['max_score'] = {'max_score': max_score, 'manager': manager.__name__, 'model_parameters': model_parameters}
 duration = round(time() - start, 3)
 print('The training took {0} seconds in total.'.format(duration))
