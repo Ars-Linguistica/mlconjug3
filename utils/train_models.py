@@ -36,6 +36,7 @@ for red_tol in reductor_tols:
     for class_tol in classifier_tols:
         for feat_max_iter in feature_reductor_max_iter:
             for lang in langs:
+                max_score = 0
                 for manager in managers:
 
                     # Set a ngram range sliding window for the vectorizer
@@ -85,6 +86,9 @@ for red_tol in reductor_tols:
                     # Assess the performance of the model's predictions
                     score = len([a == b for a, b in zip(predicted, dataset.test_labels) if a == b]) / len(predicted)
                     # print('The score of the {0} model is {1} with the {2} model.\nThe training took {3} seconds.'.format(lang, score, manager.__name__, duration))
+                    if score > max_score:
+                        max_score = score
+                        pass
 
                     results[lang][manager.__name__] = {'language': lang,
                                                        'manager': manager.__name__,
@@ -101,6 +105,7 @@ for red_tol in reductor_tols:
                     with open('/home/ubuntu/PycharmProjects/mlconjug/utils/raw_data/experiments/results.json', 'w', encoding='utf-8') as file:
                         json.dump(results, file, ensure_ascii=False, indent=4)
                     print('Saved experiments data to json file.')
+            results[lang]['max_score'] = {'max_score': max_score,'manager': manager.__name__, 'model_parameters': model_parameters}
 duration = round(time() - start, 3)
 print('The training took {0} seconds in total.'.format(duration))
 pprint(results)
