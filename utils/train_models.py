@@ -40,7 +40,7 @@ for lang in langs:
 
         # Feature reduction
         feature_reductor = mlconjug.SelectFromModel(mlconjug.LinearSVC(penalty="l1",
-                                                                       max_iter=12000,
+                                                                       max_iter=24000,
                                                                        dual=False,
                                                                        verbose=0))
 
