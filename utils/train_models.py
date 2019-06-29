@@ -107,10 +107,10 @@ for red_tol in reductor_tols:
                     with open('/home/ubuntu/PycharmProjects/mlconjug/utils/raw_data/experiments/results.json', 'w', encoding='utf-8') as file:
                         json.dump(results, file, ensure_ascii=False, indent=4)
                     print('\nSaved experiments data to json file.\n')
-                    current_duration = round(time() - start, 3)
-                    print('The training has taken {0} seconds so far.'.format(current_duration))
+                    current_duration = round((time() - start) / 60, 3)
+                    print('The training has taken {0} minutes so far.'.format(current_duration))
             results[lang]['max_score'] = {'max_score': max_score[lang], 'manager': manager.__name__, 'model_parameters': model_parameters}
             pprint(results[lang]['max_score'])
-duration = round(time() - start, 3)
-print('The training took {0} seconds in total.'.format(duration))
+duration = round((time() - start) / 60, 3)
+print('The training took {0} minutes in total.'.format(duration))
 pprint(results)
