@@ -62,3 +62,6 @@ target/
 
 # pyenv python configuration file
 .python-version
+
+# Training experiments results and old models
+utils/raw_data/
