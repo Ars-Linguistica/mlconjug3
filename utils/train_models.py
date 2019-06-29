@@ -28,13 +28,12 @@ langs = ('en', 'es', 'fr', 'it', 'pt', 'ro')
 reductor_tols = (1e-3, 1e-4, 1e-5)
 classifier_tols = (1e-3, 1e-4, 1e-5)
 feature_reductor_max_iter = (3600, 4800, 6400)
-
 managers = (mlconjug.Verbiste, mlconjug.ConjugManager)
 results = defaultdict(dict)
-start = time()
 experiment = 0
-
 max_score = dict(zip(langs, (0, 0, 0, 0, 0, 0)))
+
+start = time()
 
 for red_tol in reductor_tols:
     for class_tol in classifier_tols:
@@ -108,6 +107,8 @@ for red_tol in reductor_tols:
                     with open('/home/ubuntu/PycharmProjects/mlconjug/utils/raw_data/experiments/results.json', 'w', encoding='utf-8') as file:
                         json.dump(results, file, ensure_ascii=False, indent=4)
                     print('\nSaved experiments data to json file.\n')
+                    current_duration = round(time() - start, 3)
+                    print('The training has taken {0} seconds so far.'.format(current_duration))
             results[lang]['max_score'] = {'max_score': max_score[lang], 'manager': manager.__name__, 'model_parameters': model_parameters}
             pprint(results[lang]['max_score'])
 duration = round(time() - start, 3)
