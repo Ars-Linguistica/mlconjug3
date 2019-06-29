@@ -64,9 +64,9 @@ class TestPyVerbiste:
 
     def test_get_verb_info(self):
         verb_info = self.verbiste.get_verb_info('aller')
-        assert verb_info == VerbInfo('aller', 'aller', ':aller')
+        assert verb_info == VerbInfo('aller', '', ':aller')
         assert self.verbiste.get_verb_info('cacater') is None
-        assert verb_info.__repr__() == 'mlconjug.PyVerbiste.VerbInfo(aller, aller, :aller)'
+        assert verb_info.__repr__() == 'mlconjug.PyVerbiste.VerbInfo(aller, , :aller)'
 
     def test_get_conjug_info(self):
         conjug_info = self.verbiste.get_conjug_info(':aller')
