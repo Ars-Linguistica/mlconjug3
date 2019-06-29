@@ -21,10 +21,5 @@ branches:
   - dev
   - "/v\\d+\\.\\d+[a-z]*.\\d+[a-z]*/"
 install: pip install -U tox-travis
-jobs:
-  include:
-    - stage: test
-      script: tox
-    - name: train
-      script: sudo python -m ./utils/train_models.py
+script: tox
 
