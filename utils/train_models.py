@@ -35,11 +35,12 @@ results = defaultdict(dict)
 start = time()
 experiment = 0
 
+max_score = dict(zip(langs, (0, 0, 0, 0, 0, 0)))
+
 for red_tol in reductor_tols:
     for class_tol in classifier_tols:
         for feat_max_iter in feature_reductor_max_iter:
             for lang in langs:
-                max_score = 0
                 for manager in managers:
 
                     # Set a ngram range sliding window for the vectorizer
@@ -93,21 +94,21 @@ for red_tol in reductor_tols:
 
                     # Assess the performance of the model's predictions
                     score = len([a == b for a, b in zip(predicted, dataset.test_labels) if a == b]) / len(predicted)
-                    if score > max_score:
-                        max_score = score
+                    if score > max_score[lang]:
+                        max_score[lang] = score
                     results[lang][manager.__name__] = {'language': lang,
                                                        'manager': manager.__name__,
                                                        'score': score,
                                                        'model_training_duration': str(model_duration) + ' seconds.',
                                                        'model_parameters': model_parameters,
-                                                       'current_iteration_max_score': max_score,
+                                                       'current_iteration_max_score': max_score[lang],
                                                        'warnings': caught_warnings}
                     pprint(results[lang][manager.__name__])
 
                     # Save experiments results
                     with open('/home/ubuntu/PycharmProjects/mlconjug/utils/raw_data/experiments/results.json', 'w', encoding='utf-8') as file:
                         json.dump(results, file, ensure_ascii=False, indent=4)
-                    pprint('\nSaved experiments data to json file./n')
+                    print('\nSaved experiments data to json file.\n')
             results[lang]['max_score'] = {'max_score': max_score, 'manager': manager.__name__, 'model_parameters': model_parameters}
 duration = round(time() - start, 3)
 print('The training took {0} seconds in total.'.format(duration))
