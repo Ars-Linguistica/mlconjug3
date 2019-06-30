@@ -7,8 +7,6 @@ from .mlconjug import Conjugator
 import json
 
 
-# TODO: add mlconjug -h for friendlier interface.
-# TODO: render the verb information in a more user friendly manner.
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
 @click.argument('verbs', nargs=-1)
 @click.option('-l', '--language',
