@@ -18,7 +18,7 @@ __author_email__ = 'sekoud.python@gmail.com'
 
 
 import copy
-import xml.etree.ElementTree as ET
+import defusedxml.ElementTree as ET
 import json
 from collections import OrderedDict
 import pkg_resources
