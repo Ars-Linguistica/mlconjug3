@@ -29,7 +29,7 @@ reductor_tols = (1e-3, 1e-4, 1e-5)
 classifier_tols = (1e-3, 1e-4, 1e-5)
 feature_reductor_max_iter = (3600, 4800, 6400)
 managers = (mlconjug.Verbiste, mlconjug.ConjugManager)
-results = defaultdict(dict)
+results = defaultdict(list)
 experiment = 0
 max_score = dict(zip(langs, (0, 0, 0, 0, 0, 0)))
 
@@ -40,6 +40,7 @@ for red_tol in reductor_tols:
         for feat_max_iter in feature_reductor_max_iter:
             for lang in langs:
                 for manager in managers:
+                    experiment += 1
 
                     # Set a ngram range sliding window for the vectorizer
                     ngrange = (2, 7)
@@ -91,26 +92,27 @@ for red_tol in reductor_tols:
                             caught_warnings = False
 
                     # Assess the performance of the model's predictions
-                    score = len([a == b for a, b in zip(predicted, dataset.test_labels) if a == b]) / len(predicted)
+                    score = round(len([a == b for a, b in zip(predicted, dataset.test_labels) if a == b]) / len(predicted), 3)
                     if score > max_score[lang]:
                         max_score[lang] = score
-                    results[lang][manager.__name__] = {'language': lang,
-                                                       'manager': manager.__name__,
-                                                       'score': round(score, 3),
-                                                       'model_training_duration': str(model_duration) + ' seconds.',
-                                                       'model_parameters': model_parameters,
-                                                       'current_iteration_max_score': max_score[lang],
-                                                       'warnings': caught_warnings}
-                    pprint(results[lang][manager.__name__])
+                    stats = {'language': lang,
+                             'experiment_#': experiment,
+                             'manager': manager.__name__,
+                             'score': round(score, 3),
+                             'model_training_duration': str(model_duration) + ' seconds.',
+                             'model_parameters': model_parameters,
+                             'current_iteration_max_score': max_score[lang],
+                             'warnings': caught_warnings}
+                    results[lang].append(stats)
+                    pprint(stats)
 
                     # Save experiments results
                     with open('/home/ubuntu/PycharmProjects/mlconjug/utils/raw_data/experiments/results.json', 'w', encoding='utf-8') as file:
                         json.dump(results, file, ensure_ascii=False, indent=4)
                     print('\nSaved experiments data to json file.\n')
                     current_duration = round((time() - start) / 60, 3)
-                    print('The training has taken {0} minutes so far.'.format(current_duration))
-            results[lang]['max_score'] = {'max_score': max_score[lang], 'manager': manager.__name__, 'model_parameters': model_parameters}
-            pprint(results[lang]['max_score'])
+                    print('The training has taken {0} minutes so far to run {1} experiments.\n'.format(current_duration, str(experiment)))
+            pprint(results[lang])
 duration = round((time() - start) / 60, 3)
 print('The training took {0} minutes in total.'.format(duration))
 pprint(results)
