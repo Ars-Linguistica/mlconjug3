@@ -27,7 +27,7 @@ from time import time
 langs = ('en', 'es', 'fr', 'it', 'pt', 'ro')
 reductor_tols = (1e-3, 1e-4, 1e-5)
 classifier_tols = (1e-3, 1e-4, 1e-5)
-feature_reductor_max_iter = (3600, 4800, 6400)
+feature_reductor_max_iter = (12000, 8400, 3600, 4800, 6400)
 managers = (mlconjug.Verbiste, mlconjug.ConjugManager)
 results = defaultdict(list)
 experiment = 0
