@@ -66,5 +66,3 @@ target/
 # Training experiments results and old models
 utils/raw_data/old_models/
 
-# TO DOS
-TODO.rst
