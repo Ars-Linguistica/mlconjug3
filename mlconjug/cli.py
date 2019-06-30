@@ -4,22 +4,54 @@
 
 import click
 from .mlconjug import Conjugator
-from pprint import pprint
+import json
 
 
 # TODO: add mlconjug -h for friendlier interface.
 # TODO: render the verb information in a more user friendly manner.
-@click.command()
-@click.argument('verb')
+@click.command(context_settings=dict(help_option_names=["-h", "--help"]))
+@click.argument('verbs', nargs=-1)
 @click.option('-l', '--language',
               default='fr',
-              help=_("The language for the conjugation pipeline. The values can be fr, en, es, it, pt or ro. The default value is fr."),
+              help=_("The language for the conjugation pipeline."
+                     " The values can be 'fr', 'en', 'es', 'it', 'pt' or 'ro'."
+                     " The default value is fr."),
               type=click.STRING)
-def main(verb, language):
-    """Console script for mlconjug."""
+@click.option('-s', '--subject',
+              default='abbrev',
+              help=_("The subject format type for the conjugated forms."
+                     " The values can be 'abbrev' or 'pronoun'. The default value is 'abbrev'."),
+              type=click.STRING)
+def main(verbs, language, subject):
+    """
+    MLConjug is a Python library to conjugate verbs of in French, English, Spanish, Italian, Portuguese and Romanian (mores soon) using Machine Learning techniques.
+    Any verb in one of the supported language can be conjugated as the module contains a Machine Learning pipeline of how the verbs behave.
+    Even completely new or made-up verbs can be successfully conjugated in this manner.
+    The supplied pre-trained models are composed of:
+
+    - a binary feature extractor,
+
+    - a feature selector using Linear Support Vector Classification,
+
+    - a classifier using Stochastic Gradient Descent.
+
+    MLConjug uses scikit-learn to implement the Machine Learning algorithms.
+    Users of the library can use any compatible classifiers from scikit-learn to modify and retrain the pipeline.
+
+    Usage example:
+        $ mlconjug manger
+
+        $ mlconjug bring -l en
+
+        $ mlconjug gallofar --language es
+
+    """
     conjugator = Conjugator(language)
-    result = conjugator.conjugate(verb)
-    pprint(result.conjug_info)
+    results = {}
+    for verb in verbs:
+        result = conjugator.conjugate(verb, subject)
+        results[verb] = result.conjug_info
+    print(json.dumps(results, ensure_ascii=False, indent=4))
     return
 
 
