@@ -114,5 +114,6 @@ for red_tol in reductor_tols:
                     print('The training has taken {0} minutes so far to run {1} experiments.\n'.format(current_duration, str(experiment)))
             pprint(results[lang])
 duration = round((time() - start) / 60, 3)
-print('The training took {0} minutes in total.'.format(duration))
-pprint(results)
+print('The training took {0} minutes in total.\n'.format(duration))
+
+pass
