@@ -1,7 +1,3 @@
-# steps to reproduce Github issue #80.
-#  Example: 'awake' has 'reaw:aken' as a template name to reconstruct the conjugated forms.
-#  Implement ranking of verbs in each category for representativity of the conjugation paradigm.
-
 
 import mlconjug
 
