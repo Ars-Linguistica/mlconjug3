@@ -22,5 +22,6 @@ mlOutput = []
 for item in verbList:
     pp = default_conjugator.conjugate(item).conjug_info
     mlOutput.append(pp)
+    print('OK')
 
 print('Done')
