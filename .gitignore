@@ -64,4 +64,4 @@ target/
 .python-version
 
 # Training experiments results and old models
-utils/raw_data/
+utils/raw_data/old_models/
