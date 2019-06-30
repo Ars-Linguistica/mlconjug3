@@ -1,0 +1,2212 @@
+{
+    "en": [
+        {
+            "language": "en",
+            "experiment_#": 1,
+            "manager": "Verbiste",
+            "score": 0.937,
+            "model_training_duration": "7.736 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 3600
+            },
+            "current_iteration_max_score": 0.937,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "en",
+            "experiment_#": 2,
+            "manager": "ConjugManager",
+            "score": 0.941,
+            "model_training_duration": "8.02 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 3600
+            },
+            "current_iteration_max_score": 0.941,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "en",
+            "experiment_#": 13,
+            "manager": "Verbiste",
+            "score": 0.934,
+            "model_training_duration": "8.872 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 4800
+            },
+            "current_iteration_max_score": 0.941,
+            "warnings": false
+        },
+        {
+            "language": "en",
+            "experiment_#": 14,
+            "manager": "ConjugManager",
+            "score": 0.955,
+            "model_training_duration": "8.929 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 4800
+            },
+            "current_iteration_max_score": 0.955,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "en",
+            "experiment_#": 25,
+            "manager": "Verbiste",
+            "score": 0.943,
+            "model_training_duration": "8.604 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 6400
+            },
+            "current_iteration_max_score": 0.955,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "en",
+            "experiment_#": 26,
+            "manager": "ConjugManager",
+            "score": 0.928,
+            "model_training_duration": "8.875 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 6400
+            },
+            "current_iteration_max_score": 0.955,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "en",
+            "experiment_#": 37,
+            "manager": "Verbiste",
+            "score": 0.937,
+            "model_training_duration": "9.924 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.0001,
+                "feature_reductor_max_iter": 3600
+            },
+            "current_iteration_max_score": 0.955,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "en",
+            "experiment_#": 38,
+            "manager": "ConjugManager",
+            "score": 0.93,
+            "model_training_duration": "9.565 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.0001,
+                "feature_reductor_max_iter": 3600
+            },
+            "current_iteration_max_score": 0.955,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "en",
+            "experiment_#": 49,
+            "manager": "Verbiste",
+            "score": 0.946,
+            "model_training_duration": "7.81 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.0001,
+                "feature_reductor_max_iter": 4800
+            },
+            "current_iteration_max_score": 0.955,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "en",
+            "experiment_#": 50,
+            "manager": "ConjugManager",
+            "score": 0.934,
+            "model_training_duration": "7.84 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.0001,
+                "feature_reductor_max_iter": 4800
+            },
+            "current_iteration_max_score": 0.955,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "en",
+            "experiment_#": 61,
+            "manager": "Verbiste",
+            "score": 0.952,
+            "model_training_duration": "7.947 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.0001,
+                "feature_reductor_max_iter": 6400
+            },
+            "current_iteration_max_score": 0.955,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "en",
+            "experiment_#": 62,
+            "manager": "ConjugManager",
+            "score": 0.948,
+            "model_training_duration": "8.609 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.0001,
+                "feature_reductor_max_iter": 6400
+            },
+            "current_iteration_max_score": 0.955,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "en",
+            "experiment_#": 73,
+            "manager": "Verbiste",
+            "score": 0.937,
+            "model_training_duration": "8.24 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 1e-05,
+                "feature_reductor_max_iter": 3600
+            },
+            "current_iteration_max_score": 0.955,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "en",
+            "experiment_#": 74,
+            "manager": "ConjugManager",
+            "score": 0.943,
+            "model_training_duration": "8.667 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 1e-05,
+                "feature_reductor_max_iter": 3600
+            },
+            "current_iteration_max_score": 0.955,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "en",
+            "experiment_#": 85,
+            "manager": "Verbiste",
+            "score": 0.955,
+            "model_training_duration": "8.158 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 1e-05,
+                "feature_reductor_max_iter": 4800
+            },
+            "current_iteration_max_score": 0.955,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "en",
+            "experiment_#": 86,
+            "manager": "ConjugManager",
+            "score": 0.943,
+            "model_training_duration": "7.896 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 1e-05,
+                "feature_reductor_max_iter": 4800
+            },
+            "current_iteration_max_score": 0.955,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "en",
+            "experiment_#": 97,
+            "manager": "Verbiste",
+            "score": 0.93,
+            "model_training_duration": "8.485 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 1e-05,
+                "feature_reductor_max_iter": 6400
+            },
+            "current_iteration_max_score": 0.955,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "en",
+            "experiment_#": 98,
+            "manager": "ConjugManager",
+            "score": 0.943,
+            "model_training_duration": "8.049 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 1e-05,
+                "feature_reductor_max_iter": 6400
+            },
+            "current_iteration_max_score": 0.955,
+            "warnings": false
+        },
+        {
+            "language": "en",
+            "experiment_#": 109,
+            "manager": "Verbiste",
+            "score": 0.932,
+            "model_training_duration": "9.637 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.0001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 3600
+            },
+            "current_iteration_max_score": 0.955,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "en",
+            "experiment_#": 110,
+            "manager": "ConjugManager",
+            "score": 0.948,
+            "model_training_duration": "9.298 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.0001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 3600
+            },
+            "current_iteration_max_score": 0.955,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "en",
+            "experiment_#": 121,
+            "manager": "Verbiste",
+            "score": 0.952,
+            "model_training_duration": "9.789 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.0001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 4800
+            },
+            "current_iteration_max_score": 0.955,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "en",
+            "experiment_#": 122,
+            "manager": "ConjugManager",
+            "score": 0.943,
+            "model_training_duration": "9.453 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.0001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 4800
+            },
+            "current_iteration_max_score": 0.955,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "en",
+            "experiment_#": 133,
+            "manager": "Verbiste",
+            "score": 0.939,
+            "model_training_duration": "10.406 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.0001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 6400
+            },
+            "current_iteration_max_score": 0.955,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "en",
+            "experiment_#": 134,
+            "manager": "ConjugManager",
+            "score": 0.952,
+            "model_training_duration": "10.393 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.0001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 6400
+            },
+            "current_iteration_max_score": 0.955,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        }
+    ],
+    "es": [
+        {
+            "language": "es",
+            "experiment_#": 3,
+            "manager": "Verbiste",
+            "score": 0.971,
+            "model_training_duration": "55.045 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 3600
+            },
+            "current_iteration_max_score": 0.971,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "es",
+            "experiment_#": 4,
+            "manager": "ConjugManager",
+            "score": 0.982,
+            "model_training_duration": "55.9 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 3600
+            },
+            "current_iteration_max_score": 0.982,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "es",
+            "experiment_#": 15,
+            "manager": "Verbiste",
+            "score": 0.971,
+            "model_training_duration": "57.775 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 4800
+            },
+            "current_iteration_max_score": 0.982,
+            "warnings": false
+        },
+        {
+            "language": "es",
+            "experiment_#": 16,
+            "manager": "ConjugManager",
+            "score": 0.981,
+            "model_training_duration": "60.717 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 4800
+            },
+            "current_iteration_max_score": 0.982,
+            "warnings": false
+        },
+        {
+            "language": "es",
+            "experiment_#": 27,
+            "manager": "Verbiste",
+            "score": 0.975,
+            "model_training_duration": "59.747 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 6400
+            },
+            "current_iteration_max_score": 0.982,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "es",
+            "experiment_#": 28,
+            "manager": "ConjugManager",
+            "score": 0.973,
+            "model_training_duration": "64.451 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 6400
+            },
+            "current_iteration_max_score": 0.982,
+            "warnings": false
+        },
+        {
+            "language": "es",
+            "experiment_#": 39,
+            "manager": "Verbiste",
+            "score": 0.974,
+            "model_training_duration": "60.592 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.0001,
+                "feature_reductor_max_iter": 3600
+            },
+            "current_iteration_max_score": 0.982,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "es",
+            "experiment_#": 40,
+            "manager": "ConjugManager",
+            "score": 0.976,
+            "model_training_duration": "59.068 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.0001,
+                "feature_reductor_max_iter": 3600
+            },
+            "current_iteration_max_score": 0.982,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "es",
+            "experiment_#": 51,
+            "manager": "Verbiste",
+            "score": 0.983,
+            "model_training_duration": "51.754 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.0001,
+                "feature_reductor_max_iter": 4800
+            },
+            "current_iteration_max_score": 0.983,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "es",
+            "experiment_#": 52,
+            "manager": "ConjugManager",
+            "score": 0.986,
+            "model_training_duration": "52.76 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.0001,
+                "feature_reductor_max_iter": 4800
+            },
+            "current_iteration_max_score": 0.986,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "es",
+            "experiment_#": 63,
+            "manager": "Verbiste",
+            "score": 0.973,
+            "model_training_duration": "53.283 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.0001,
+                "feature_reductor_max_iter": 6400
+            },
+            "current_iteration_max_score": 0.986,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "es",
+            "experiment_#": 64,
+            "manager": "ConjugManager",
+            "score": 0.969,
+            "model_training_duration": "51.733 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.0001,
+                "feature_reductor_max_iter": 6400
+            },
+            "current_iteration_max_score": 0.986,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "es",
+            "experiment_#": 75,
+            "manager": "Verbiste",
+            "score": 0.974,
+            "model_training_duration": "56.404 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 1e-05,
+                "feature_reductor_max_iter": 3600
+            },
+            "current_iteration_max_score": 0.986,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "es",
+            "experiment_#": 76,
+            "manager": "ConjugManager",
+            "score": 0.98,
+            "model_training_duration": "56.996 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 1e-05,
+                "feature_reductor_max_iter": 3600
+            },
+            "current_iteration_max_score": 0.986,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "es",
+            "experiment_#": 87,
+            "manager": "Verbiste",
+            "score": 0.977,
+            "model_training_duration": "54.34 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 1e-05,
+                "feature_reductor_max_iter": 4800
+            },
+            "current_iteration_max_score": 0.986,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "es",
+            "experiment_#": 88,
+            "manager": "ConjugManager",
+            "score": 0.974,
+            "model_training_duration": "61.284 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 1e-05,
+                "feature_reductor_max_iter": 4800
+            },
+            "current_iteration_max_score": 0.986,
+            "warnings": false
+        },
+        {
+            "language": "es",
+            "experiment_#": 99,
+            "manager": "Verbiste",
+            "score": 0.976,
+            "model_training_duration": "53.84 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 1e-05,
+                "feature_reductor_max_iter": 6400
+            },
+            "current_iteration_max_score": 0.986,
+            "warnings": false
+        },
+        {
+            "language": "es",
+            "experiment_#": 100,
+            "manager": "ConjugManager",
+            "score": 0.974,
+            "model_training_duration": "54.043 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 1e-05,
+                "feature_reductor_max_iter": 6400
+            },
+            "current_iteration_max_score": 0.986,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "es",
+            "experiment_#": 111,
+            "manager": "Verbiste",
+            "score": 0.968,
+            "model_training_duration": "56.316 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.0001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 3600
+            },
+            "current_iteration_max_score": 0.986,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "es",
+            "experiment_#": 112,
+            "manager": "ConjugManager",
+            "score": 0.971,
+            "model_training_duration": "56.547 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.0001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 3600
+            },
+            "current_iteration_max_score": 0.986,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "es",
+            "experiment_#": 123,
+            "manager": "Verbiste",
+            "score": 0.974,
+            "model_training_duration": "64.504 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.0001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 4800
+            },
+            "current_iteration_max_score": 0.986,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "es",
+            "experiment_#": 124,
+            "manager": "ConjugManager",
+            "score": 0.977,
+            "model_training_duration": "68.069 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.0001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 4800
+            },
+            "current_iteration_max_score": 0.986,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "es",
+            "experiment_#": 135,
+            "manager": "Verbiste",
+            "score": 0.977,
+            "model_training_duration": "67.28 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.0001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 6400
+            },
+            "current_iteration_max_score": 0.986,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "es",
+            "experiment_#": 136,
+            "manager": "ConjugManager",
+            "score": 0.977,
+            "model_training_duration": "66.46 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.0001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 6400
+            },
+            "current_iteration_max_score": 0.986,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        }
+    ],
+    "fr": [
+        {
+            "language": "fr",
+            "experiment_#": 5,
+            "manager": "Verbiste",
+            "score": 0.991,
+            "model_training_duration": "15.398 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 3600
+            },
+            "current_iteration_max_score": 0.991,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "fr",
+            "experiment_#": 6,
+            "manager": "ConjugManager",
+            "score": 0.994,
+            "model_training_duration": "14.578 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 3600
+            },
+            "current_iteration_max_score": 0.994,
+            "warnings": false
+        },
+        {
+            "language": "fr",
+            "experiment_#": 17,
+            "manager": "Verbiste",
+            "score": 0.993,
+            "model_training_duration": "16.986 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 4800
+            },
+            "current_iteration_max_score": 0.994,
+            "warnings": false
+        },
+        {
+            "language": "fr",
+            "experiment_#": 18,
+            "manager": "ConjugManager",
+            "score": 0.997,
+            "model_training_duration": "17.747 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 4800
+            },
+            "current_iteration_max_score": 0.997,
+            "warnings": false
+        },
+        {
+            "language": "fr",
+            "experiment_#": 29,
+            "manager": "Verbiste",
+            "score": 0.993,
+            "model_training_duration": "20.269 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 6400
+            },
+            "current_iteration_max_score": 0.997,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "fr",
+            "experiment_#": 30,
+            "manager": "ConjugManager",
+            "score": 0.991,
+            "model_training_duration": "18.373 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 6400
+            },
+            "current_iteration_max_score": 0.997,
+            "warnings": false
+        },
+        {
+            "language": "fr",
+            "experiment_#": 41,
+            "manager": "Verbiste",
+            "score": 0.994,
+            "model_training_duration": "16.093 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.0001,
+                "feature_reductor_max_iter": 3600
+            },
+            "current_iteration_max_score": 0.997,
+            "warnings": false
+        },
+        {
+            "language": "fr",
+            "experiment_#": 42,
+            "manager": "ConjugManager",
+            "score": 0.996,
+            "model_training_duration": "15.652 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.0001,
+                "feature_reductor_max_iter": 3600
+            },
+            "current_iteration_max_score": 0.997,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "fr",
+            "experiment_#": 53,
+            "manager": "Verbiste",
+            "score": 0.991,
+            "model_training_duration": "15.257 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.0001,
+                "feature_reductor_max_iter": 4800
+            },
+            "current_iteration_max_score": 0.997,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "fr",
+            "experiment_#": 54,
+            "manager": "ConjugManager",
+            "score": 0.996,
+            "model_training_duration": "15.619 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.0001,
+                "feature_reductor_max_iter": 4800
+            },
+            "current_iteration_max_score": 0.997,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "fr",
+            "experiment_#": 65,
+            "manager": "Verbiste",
+            "score": 0.993,
+            "model_training_duration": "14.892 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.0001,
+                "feature_reductor_max_iter": 6400
+            },
+            "current_iteration_max_score": 0.997,
+            "warnings": false
+        },
+        {
+            "language": "fr",
+            "experiment_#": 66,
+            "manager": "ConjugManager",
+            "score": 0.996,
+            "model_training_duration": "15.283 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.0001,
+                "feature_reductor_max_iter": 6400
+            },
+            "current_iteration_max_score": 0.997,
+            "warnings": false
+        },
+        {
+            "language": "fr",
+            "experiment_#": 77,
+            "manager": "Verbiste",
+            "score": 0.996,
+            "model_training_duration": "15.73 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 1e-05,
+                "feature_reductor_max_iter": 3600
+            },
+            "current_iteration_max_score": 0.997,
+            "warnings": false
+        },
+        {
+            "language": "fr",
+            "experiment_#": 78,
+            "manager": "ConjugManager",
+            "score": 0.99,
+            "model_training_duration": "14.899 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 1e-05,
+                "feature_reductor_max_iter": 3600
+            },
+            "current_iteration_max_score": 0.997,
+            "warnings": false
+        },
+        {
+            "language": "fr",
+            "experiment_#": 89,
+            "manager": "Verbiste",
+            "score": 0.996,
+            "model_training_duration": "16.393 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 1e-05,
+                "feature_reductor_max_iter": 4800
+            },
+            "current_iteration_max_score": 0.997,
+            "warnings": false
+        },
+        {
+            "language": "fr",
+            "experiment_#": 90,
+            "manager": "ConjugManager",
+            "score": 0.993,
+            "model_training_duration": "21.366 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 1e-05,
+                "feature_reductor_max_iter": 4800
+            },
+            "current_iteration_max_score": 0.997,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "fr",
+            "experiment_#": 101,
+            "manager": "Verbiste",
+            "score": 0.99,
+            "model_training_duration": "16.142 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 1e-05,
+                "feature_reductor_max_iter": 6400
+            },
+            "current_iteration_max_score": 0.997,
+            "warnings": false
+        },
+        {
+            "language": "fr",
+            "experiment_#": 102,
+            "manager": "ConjugManager",
+            "score": 0.996,
+            "model_training_duration": "16.256 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 1e-05,
+                "feature_reductor_max_iter": 6400
+            },
+            "current_iteration_max_score": 0.997,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "fr",
+            "experiment_#": 113,
+            "manager": "Verbiste",
+            "score": 0.991,
+            "model_training_duration": "16.907 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.0001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 3600
+            },
+            "current_iteration_max_score": 0.997,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "fr",
+            "experiment_#": 114,
+            "manager": "ConjugManager",
+            "score": 0.994,
+            "model_training_duration": "16.793 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.0001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 3600
+            },
+            "current_iteration_max_score": 0.997,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "fr",
+            "experiment_#": 125,
+            "manager": "Verbiste",
+            "score": 0.997,
+            "model_training_duration": "17.411 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.0001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 4800
+            },
+            "current_iteration_max_score": 0.997,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "fr",
+            "experiment_#": 126,
+            "manager": "ConjugManager",
+            "score": 0.999,
+            "model_training_duration": "19.495 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.0001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 4800
+            },
+            "current_iteration_max_score": 0.999,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "fr",
+            "experiment_#": 137,
+            "manager": "Verbiste",
+            "score": 0.991,
+            "model_training_duration": "19.018 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.0001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 6400
+            },
+            "current_iteration_max_score": 0.999,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "fr",
+            "experiment_#": 138,
+            "manager": "ConjugManager",
+            "score": 0.994,
+            "model_training_duration": "18.675 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.0001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 6400
+            },
+            "current_iteration_max_score": 0.999,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        }
+    ],
+    "it": [
+        {
+            "language": "it",
+            "experiment_#": 7,
+            "manager": "Verbiste",
+            "score": 0.903,
+            "model_training_duration": "121.772 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 3600
+            },
+            "current_iteration_max_score": 0.903,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "it",
+            "experiment_#": 8,
+            "manager": "ConjugManager",
+            "score": 0.919,
+            "model_training_duration": "117.187 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 3600
+            },
+            "current_iteration_max_score": 0.919,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "it",
+            "experiment_#": 19,
+            "manager": "Verbiste",
+            "score": 0.906,
+            "model_training_duration": "170.271 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 4800
+            },
+            "current_iteration_max_score": 0.919,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "it",
+            "experiment_#": 20,
+            "manager": "ConjugManager",
+            "score": 0.916,
+            "model_training_duration": "146.516 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 4800
+            },
+            "current_iteration_max_score": 0.919,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "it",
+            "experiment_#": 31,
+            "manager": "Verbiste",
+            "score": 0.895,
+            "model_training_duration": "168.744 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 6400
+            },
+            "current_iteration_max_score": 0.919,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "it",
+            "experiment_#": 32,
+            "manager": "ConjugManager",
+            "score": 0.916,
+            "model_training_duration": "167.307 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 6400
+            },
+            "current_iteration_max_score": 0.919,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "it",
+            "experiment_#": 43,
+            "manager": "Verbiste",
+            "score": 0.915,
+            "model_training_duration": "120.959 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.0001,
+                "feature_reductor_max_iter": 3600
+            },
+            "current_iteration_max_score": 0.919,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "it",
+            "experiment_#": 44,
+            "manager": "ConjugManager",
+            "score": 0.916,
+            "model_training_duration": "108.569 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.0001,
+                "feature_reductor_max_iter": 3600
+            },
+            "current_iteration_max_score": 0.919,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "it",
+            "experiment_#": 55,
+            "manager": "Verbiste",
+            "score": 0.894,
+            "model_training_duration": "131.933 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.0001,
+                "feature_reductor_max_iter": 4800
+            },
+            "current_iteration_max_score": 0.919,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "it",
+            "experiment_#": 56,
+            "manager": "ConjugManager",
+            "score": 0.92,
+            "model_training_duration": "128.418 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.0001,
+                "feature_reductor_max_iter": 4800
+            },
+            "current_iteration_max_score": 0.92,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "it",
+            "experiment_#": 67,
+            "manager": "Verbiste",
+            "score": 0.916,
+            "model_training_duration": "175.52 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.0001,
+                "feature_reductor_max_iter": 6400
+            },
+            "current_iteration_max_score": 0.92,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "it",
+            "experiment_#": 68,
+            "manager": "ConjugManager",
+            "score": 0.92,
+            "model_training_duration": "176.487 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.0001,
+                "feature_reductor_max_iter": 6400
+            },
+            "current_iteration_max_score": 0.92,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "it",
+            "experiment_#": 79,
+            "manager": "Verbiste",
+            "score": 0.908,
+            "model_training_duration": "120.96 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 1e-05,
+                "feature_reductor_max_iter": 3600
+            },
+            "current_iteration_max_score": 0.92,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "it",
+            "experiment_#": 80,
+            "manager": "ConjugManager",
+            "score": 0.923,
+            "model_training_duration": "117.017 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 1e-05,
+                "feature_reductor_max_iter": 3600
+            },
+            "current_iteration_max_score": 0.923,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "it",
+            "experiment_#": 91,
+            "manager": "Verbiste",
+            "score": 0.898,
+            "model_training_duration": "142.748 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 1e-05,
+                "feature_reductor_max_iter": 4800
+            },
+            "current_iteration_max_score": 0.923,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "it",
+            "experiment_#": 92,
+            "manager": "ConjugManager",
+            "score": 0.904,
+            "model_training_duration": "137.263 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 1e-05,
+                "feature_reductor_max_iter": 4800
+            },
+            "current_iteration_max_score": 0.923,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "it",
+            "experiment_#": 103,
+            "manager": "Verbiste",
+            "score": 0.909,
+            "model_training_duration": "182.231 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 1e-05,
+                "feature_reductor_max_iter": 6400
+            },
+            "current_iteration_max_score": 0.923,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "it",
+            "experiment_#": 104,
+            "manager": "ConjugManager",
+            "score": 0.91,
+            "model_training_duration": "185.018 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 1e-05,
+                "feature_reductor_max_iter": 6400
+            },
+            "current_iteration_max_score": 0.923,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "it",
+            "experiment_#": 115,
+            "manager": "Verbiste",
+            "score": 0.901,
+            "model_training_duration": "119.525 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.0001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 3600
+            },
+            "current_iteration_max_score": 0.923,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "it",
+            "experiment_#": 116,
+            "manager": "ConjugManager",
+            "score": 0.92,
+            "model_training_duration": "115.706 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.0001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 3600
+            },
+            "current_iteration_max_score": 0.923,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "it",
+            "experiment_#": 127,
+            "manager": "Verbiste",
+            "score": 0.909,
+            "model_training_duration": "175.856 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.0001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 4800
+            },
+            "current_iteration_max_score": 0.923,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "it",
+            "experiment_#": 128,
+            "manager": "ConjugManager",
+            "score": 0.916,
+            "model_training_duration": "185.635 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.0001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 4800
+            },
+            "current_iteration_max_score": 0.923,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "it",
+            "experiment_#": 139,
+            "manager": "Verbiste",
+            "score": 0.909,
+            "model_training_duration": "203.865 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.0001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 6400
+            },
+            "current_iteration_max_score": 0.923,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "it",
+            "experiment_#": 140,
+            "manager": "ConjugManager",
+            "score": 0.913,
+            "model_training_duration": "199.512 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.0001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 6400
+            },
+            "current_iteration_max_score": 0.923,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        }
+    ],
+    "pt": [
+        {
+            "language": "pt",
+            "experiment_#": 9,
+            "manager": "Verbiste",
+            "score": 0.989,
+            "model_training_duration": "127.78 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 3600
+            },
+            "current_iteration_max_score": 0.989,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "pt",
+            "experiment_#": 10,
+            "manager": "ConjugManager",
+            "score": 0.991,
+            "model_training_duration": "116.424 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 3600
+            },
+            "current_iteration_max_score": 0.991,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "pt",
+            "experiment_#": 21,
+            "manager": "Verbiste",
+            "score": 0.986,
+            "model_training_duration": "121.502 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 4800
+            },
+            "current_iteration_max_score": 0.991,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "pt",
+            "experiment_#": 22,
+            "manager": "ConjugManager",
+            "score": 0.986,
+            "model_training_duration": "120.723 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 4800
+            },
+            "current_iteration_max_score": 0.991,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "pt",
+            "experiment_#": 33,
+            "manager": "Verbiste",
+            "score": 0.986,
+            "model_training_duration": "117.013 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 6400
+            },
+            "current_iteration_max_score": 0.991,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "pt",
+            "experiment_#": 34,
+            "manager": "ConjugManager",
+            "score": 0.987,
+            "model_training_duration": "129.469 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 6400
+            },
+            "current_iteration_max_score": 0.991,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "pt",
+            "experiment_#": 45,
+            "manager": "Verbiste",
+            "score": 0.992,
+            "model_training_duration": "107.668 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.0001,
+                "feature_reductor_max_iter": 3600
+            },
+            "current_iteration_max_score": 0.992,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "pt",
+            "experiment_#": 46,
+            "manager": "ConjugManager",
+            "score": 0.988,
+            "model_training_duration": "103.39 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.0001,
+                "feature_reductor_max_iter": 3600
+            },
+            "current_iteration_max_score": 0.992,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "pt",
+            "experiment_#": 57,
+            "manager": "Verbiste",
+            "score": 0.99,
+            "model_training_duration": "108.77 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.0001,
+                "feature_reductor_max_iter": 4800
+            },
+            "current_iteration_max_score": 0.992,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "pt",
+            "experiment_#": 58,
+            "manager": "ConjugManager",
+            "score": 0.986,
+            "model_training_duration": "107.066 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.0001,
+                "feature_reductor_max_iter": 4800
+            },
+            "current_iteration_max_score": 0.992,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "pt",
+            "experiment_#": 69,
+            "manager": "Verbiste",
+            "score": 0.99,
+            "model_training_duration": "115.171 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.0001,
+                "feature_reductor_max_iter": 6400
+            },
+            "current_iteration_max_score": 0.992,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "pt",
+            "experiment_#": 70,
+            "manager": "ConjugManager",
+            "score": 0.988,
+            "model_training_duration": "120.068 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.0001,
+                "feature_reductor_max_iter": 6400
+            },
+            "current_iteration_max_score": 0.992,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "pt",
+            "experiment_#": 81,
+            "manager": "Verbiste",
+            "score": 0.986,
+            "model_training_duration": "126.363 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 1e-05,
+                "feature_reductor_max_iter": 3600
+            },
+            "current_iteration_max_score": 0.992,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "pt",
+            "experiment_#": 82,
+            "manager": "ConjugManager",
+            "score": 0.991,
+            "model_training_duration": "113.313 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 1e-05,
+                "feature_reductor_max_iter": 3600
+            },
+            "current_iteration_max_score": 0.992,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "pt",
+            "experiment_#": 93,
+            "manager": "Verbiste",
+            "score": 0.984,
+            "model_training_duration": "123.958 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 1e-05,
+                "feature_reductor_max_iter": 4800
+            },
+            "current_iteration_max_score": 0.992,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "pt",
+            "experiment_#": 94,
+            "manager": "ConjugManager",
+            "score": 0.988,
+            "model_training_duration": "114.338 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 1e-05,
+                "feature_reductor_max_iter": 4800
+            },
+            "current_iteration_max_score": 0.992,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "pt",
+            "experiment_#": 105,
+            "manager": "Verbiste",
+            "score": 0.988,
+            "model_training_duration": "113.41 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 1e-05,
+                "feature_reductor_max_iter": 6400
+            },
+            "current_iteration_max_score": 0.992,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "pt",
+            "experiment_#": 106,
+            "manager": "ConjugManager",
+            "score": 0.986,
+            "model_training_duration": "113.735 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 1e-05,
+                "feature_reductor_max_iter": 6400
+            },
+            "current_iteration_max_score": 0.992,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "pt",
+            "experiment_#": 117,
+            "manager": "Verbiste",
+            "score": 0.986,
+            "model_training_duration": "118.013 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.0001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 3600
+            },
+            "current_iteration_max_score": 0.992,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "pt",
+            "experiment_#": 118,
+            "manager": "ConjugManager",
+            "score": 0.99,
+            "model_training_duration": "117.685 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.0001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 3600
+            },
+            "current_iteration_max_score": 0.992,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "pt",
+            "experiment_#": 129,
+            "manager": "Verbiste",
+            "score": 0.987,
+            "model_training_duration": "139.17 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.0001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 4800
+            },
+            "current_iteration_max_score": 0.992,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "pt",
+            "experiment_#": 130,
+            "manager": "ConjugManager",
+            "score": 0.986,
+            "model_training_duration": "138.193 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.0001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 4800
+            },
+            "current_iteration_max_score": 0.992,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        }
+    ],
+    "ro": [
+        {
+            "language": "ro",
+            "experiment_#": 11,
+            "manager": "Verbiste",
+            "score": 0.88,
+            "model_training_duration": "25.355 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 3600
+            },
+            "current_iteration_max_score": 0.88,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "ro",
+            "experiment_#": 12,
+            "manager": "ConjugManager",
+            "score": 0.873,
+            "model_training_duration": "26.206 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 3600
+            },
+            "current_iteration_max_score": 0.88,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "ro",
+            "experiment_#": 23,
+            "manager": "Verbiste",
+            "score": 0.891,
+            "model_training_duration": "24.681 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 4800
+            },
+            "current_iteration_max_score": 0.891,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "ro",
+            "experiment_#": 24,
+            "manager": "ConjugManager",
+            "score": 0.88,
+            "model_training_duration": "25.828 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 4800
+            },
+            "current_iteration_max_score": 0.891,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "ro",
+            "experiment_#": 35,
+            "manager": "Verbiste",
+            "score": 0.876,
+            "model_training_duration": "26.107 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 6400
+            },
+            "current_iteration_max_score": 0.891,
+            "warnings": false
+        },
+        {
+            "language": "ro",
+            "experiment_#": 36,
+            "manager": "ConjugManager",
+            "score": 0.87,
+            "model_training_duration": "28.24 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 6400
+            },
+            "current_iteration_max_score": 0.891,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "ro",
+            "experiment_#": 47,
+            "manager": "Verbiste",
+            "score": 0.876,
+            "model_training_duration": "23.029 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.0001,
+                "feature_reductor_max_iter": 3600
+            },
+            "current_iteration_max_score": 0.891,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "ro",
+            "experiment_#": 48,
+            "manager": "ConjugManager",
+            "score": 0.876,
+            "model_training_duration": "22.412 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.0001,
+                "feature_reductor_max_iter": 3600
+            },
+            "current_iteration_max_score": 0.891,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "ro",
+            "experiment_#": 59,
+            "manager": "Verbiste",
+            "score": 0.879,
+            "model_training_duration": "22.967 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.0001,
+                "feature_reductor_max_iter": 4800
+            },
+            "current_iteration_max_score": 0.891,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "ro",
+            "experiment_#": 60,
+            "manager": "ConjugManager",
+            "score": 0.876,
+            "model_training_duration": "22.996 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.0001,
+                "feature_reductor_max_iter": 4800
+            },
+            "current_iteration_max_score": 0.891,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "ro",
+            "experiment_#": 71,
+            "manager": "Verbiste",
+            "score": 0.87,
+            "model_training_duration": "23.694 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.0001,
+                "feature_reductor_max_iter": 6400
+            },
+            "current_iteration_max_score": 0.891,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "ro",
+            "experiment_#": 72,
+            "manager": "ConjugManager",
+            "score": 0.904,
+            "model_training_duration": "23.419 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 0.0001,
+                "feature_reductor_max_iter": 6400
+            },
+            "current_iteration_max_score": 0.904,
+            "warnings": false
+        },
+        {
+            "language": "ro",
+            "experiment_#": 83,
+            "manager": "Verbiste",
+            "score": 0.884,
+            "model_training_duration": "24.226 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 1e-05,
+                "feature_reductor_max_iter": 3600
+            },
+            "current_iteration_max_score": 0.904,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "ro",
+            "experiment_#": 84,
+            "manager": "ConjugManager",
+            "score": 0.871,
+            "model_training_duration": "23.76 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 1e-05,
+                "feature_reductor_max_iter": 3600
+            },
+            "current_iteration_max_score": 0.904,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "ro",
+            "experiment_#": 95,
+            "manager": "Verbiste",
+            "score": 0.873,
+            "model_training_duration": "26.831 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 1e-05,
+                "feature_reductor_max_iter": 4800
+            },
+            "current_iteration_max_score": 0.904,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "ro",
+            "experiment_#": 96,
+            "manager": "ConjugManager",
+            "score": 0.874,
+            "model_training_duration": "24.104 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 1e-05,
+                "feature_reductor_max_iter": 4800
+            },
+            "current_iteration_max_score": 0.904,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "ro",
+            "experiment_#": 107,
+            "manager": "Verbiste",
+            "score": 0.884,
+            "model_training_duration": "24.515 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 1e-05,
+                "feature_reductor_max_iter": 6400
+            },
+            "current_iteration_max_score": 0.904,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "ro",
+            "experiment_#": 108,
+            "manager": "ConjugManager",
+            "score": 0.887,
+            "model_training_duration": "24.92 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.001,
+                "classifier_tol": 1e-05,
+                "feature_reductor_max_iter": 6400
+            },
+            "current_iteration_max_score": 0.904,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "ro",
+            "experiment_#": 119,
+            "manager": "Verbiste",
+            "score": 0.887,
+            "model_training_duration": "26.128 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.0001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 3600
+            },
+            "current_iteration_max_score": 0.904,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "ro",
+            "experiment_#": 120,
+            "manager": "ConjugManager",
+            "score": 0.885,
+            "model_training_duration": "24.616 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.0001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 3600
+            },
+            "current_iteration_max_score": 0.904,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        },
+        {
+            "language": "ro",
+            "experiment_#": 131,
+            "manager": "Verbiste",
+            "score": 0.877,
+            "model_training_duration": "27.344 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.0001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 4800
+            },
+            "current_iteration_max_score": 0.904,
+            "warnings": false
+        },
+        {
+            "language": "ro",
+            "experiment_#": 132,
+            "manager": "ConjugManager",
+            "score": 0.874,
+            "model_training_duration": "27.497 seconds.",
+            "model_parameters": {
+                "feature_reductor_tol": 0.0001,
+                "classifier_tol": 0.001,
+                "feature_reductor_max_iter": 4800
+            },
+            "current_iteration_max_score": 0.904,
+            "warnings": [
+                "ConvergenceWarning"
+            ]
+        }
+    ]
+}
