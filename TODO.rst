@@ -10,6 +10,7 @@ General
 * TODO: use as much generators/FP as possible.
 * TODO: check types with mypy.
 * TODO: refactor as much as possible.
+* TODO: use the package asq or similar to better handle nested dictionaries.
 
 CLI
 ---
@@ -33,7 +34,7 @@ test_mlconjug
 -------------
 
 * TODO: use the package colorama to colorize input.
-* TODO: add more tests for each language.
+* TODO: add more tests for each language Verb class.
 
 train_models
 ------------
