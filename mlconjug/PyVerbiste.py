@@ -329,7 +329,10 @@ class VerbInfo:
     def __init__(self, infinitive, root, template):
         self.infinitive = infinitive
         if not root:
-            self.root = ''
+            if template[0] == ':':
+                self.root = ''
+            else:
+                self.root = template[:template.index(':')]
         else:
             self.root = root
         self.template = template
@@ -424,10 +427,7 @@ class Verb:
         :param term: string.
         :return:
         """
-        if self.verb_info.root == self.verb_info.template[:self.verb_info.template.index(':')]:
-            persons_dict[key] = term
-        else:
-            persons_dict[key] = self.verb_info.root + term
+        persons_dict[key] = self.verb_info.root + term
         return
 
 
