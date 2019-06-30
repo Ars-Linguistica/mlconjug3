@@ -18,6 +18,7 @@ with open('docs/usage.rst') as usage_file:
     usage = usage_file.read()
 
 requirements = [
+    'defusedxml',
     'cython',
     'Click>=6.0',
     'numpy',
@@ -30,6 +31,7 @@ setup_requirements = [
 ]
 
 test_requirements = [
+    'defusedxml',
     'pytest',
     'Sphinx',
     'docutils',

@@ -1,3 +1,4 @@
+defusedxml
 cython
 numpy
 scikit-learn>=0.20.2
