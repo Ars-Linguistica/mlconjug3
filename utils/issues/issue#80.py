@@ -14,9 +14,13 @@ verbList = ['arise', 'awake', 'be', 'bear', 'beat', 'become', 'begin', 'bend', '
             'wake', 'wear', 'weep', 'win', 'wound', 'write']
 
 default_conjugator = mlconjug.Conjugator(language='en')
+errors = []
 mlOutput = []
 for item in verbList:
     pp = default_conjugator.conjugate(item).conjug_info
+    for mood, tense in pp.items():
+        if None in tense.values():
+            errors.append((item, pp))
     mlOutput.append(pp)
 
 pass
