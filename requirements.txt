@@ -4,3 +4,5 @@ numpy
 scikit-learn>=0.20.2
 scipy
 click
+colorama
+skl2onnx
