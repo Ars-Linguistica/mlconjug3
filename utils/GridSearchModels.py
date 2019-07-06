@@ -3,7 +3,7 @@
 """
 train_model.
 
-| Trains a collection of new conjugation models.
+| Trains and ranks a collection of new conjugation models.
 
 
 | The conjugation data conforms to the JSON structure of the files in mlconjug/data/conjug_manager/
