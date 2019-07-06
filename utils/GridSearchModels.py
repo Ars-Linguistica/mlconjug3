@@ -12,12 +12,10 @@ train_model.
 
 """
 
-# Author: Olivier Grisel <olivier.grisel@ensta.org>
-#         Peter Prettenhofer <peter.prettenhofer@gmail.com>
-#         Mathieu Blondel <mathieu@mblondel.org>
-# License: BSD 3 clause
 
 import logging
+from sklearn.exceptions import ConvergenceWarning
+import warnings
 from sklearn.model_selection import GridSearchCV
 from sklearn.pipeline import Pipeline
 import mlconjug
@@ -27,6 +25,8 @@ from functools import partial
 from time import time
 
 print(__doc__)
+
+warnings.filterwarnings("ignore", category=ConvergenceWarning)
 
 # Display progress logs on stdout
 logging.basicConfig(level=logging.INFO,
@@ -69,12 +69,11 @@ pipeline = Pipeline([
 # uncommenting more parameters will give better exploring power but will
 # increase processing time in a combinatorial way
 parameters = {
-    'feat__max_iter': (12000, 8400, 3600, 4800, 6400),
-    'feat__tol': (1e-3, 1e-4, 1e-5),
-    'feat__C': (1e-1, 1),
+    'feat__estimator__max_iter': (12000, 8400, 3600, 4800, 6400),
+    'feat__estimator__tol': (1e-3, 1e-4, 1e-5),
+    'feat__estimator__C': (1e-1, 1),
     'clf__alpha': (0.00001, 0.000001),
     'clf__penalty': ('l2', 'elasticnet'),
-    'clf__C': (1e-1, 1),
     'clf__tol': (1e-3, 1e-4, 1e-5),
     'clf__l1_ratio': (0.15, 0.3, 0.45, 0.6),
     'clf__loss': ('log', 'modified_huber'),
@@ -88,7 +87,7 @@ if __name__ == "__main__":
     # find the best parameters for both the feature extraction and the
     # classifier
     grid_search = GridSearchCV(pipeline, parameters, cv=5,
-                               n_jobs=-1, verbose=1)
+                               n_jobs=3, verbose=1)
 
     print("Performing grid search...")
     print("pipeline:", [name for name, _ in pipeline.steps])
