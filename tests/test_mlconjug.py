@@ -4,12 +4,9 @@
 """Tests for `mlconjug` package."""
 
 import pytest
-import os
 
 from sklearn.exceptions import ConvergenceWarning
 import warnings
-warnings.filterwarnings("ignore", category=FutureWarning)
-warnings.filterwarnings("ignore", category=ConvergenceWarning)
 
 from functools import partial
 
@@ -17,13 +14,16 @@ from click.testing import CliRunner
 
 from collections import OrderedDict
 
-from mlconjug import Conjugator, DataSet, Model, extract_verb_features,\
-    LinearSVC, SGDClassifier,SelectFromModel, CountVectorizer
+from mlconjug import Conjugator, DataSet, Model, extract_verb_features, \
+    LinearSVC, SGDClassifier, SelectFromModel, CountVectorizer
 
-from mlconjug import Verbiste, VerbInfo, Verb, VerbEn,\
+from mlconjug import Verbiste, VerbInfo, Verb, VerbEn, \
     VerbEs, VerbFr, VerbIt, VerbPt, VerbRo, ConjugManager
 
 from mlconjug import cli
+
+warnings.filterwarnings("ignore", category=FutureWarning)
+warnings.filterwarnings("ignore", category=ConvergenceWarning)
 
 
 LANGUAGES = ('default', 'fr', 'en', 'es', 'it', 'pt', 'ro')
@@ -37,15 +37,17 @@ VERBS = {'default': Verb,
          'ro': VerbRo}
 
 TEST_VERBS = {'fr': ('manger', 'man:ger'),
-         'en': ('bring', 'br:ing'),
-         'es': ('gallofar', 'cort:ar'),
-         'it': ('lavare', 'lav:are'),
-         'pt': ('anunciar', 'compr:ar'),
-         'ro': ('cambra', 'dans:a')}
+              'en': ('bring', 'br:ing'),
+              'es': ('gallofar', 'cort:ar'),
+              'it': ('lavare', 'lav:are'),
+              'pt': ('anunciar', 'compr:ar'),
+              'ro': ('cambra', 'dans:a')}
+
 
 class TestPyVerbiste:
     verbiste = Verbiste(language='fr')
     verbiste_en = Verbiste(language='en')
+
     def test_init_verbiste(self):
         assert len(self.verbiste.templates) == len(self.verbiste.conjugations) == 149
         assert self.verbiste.templates[0] == ':aller'
@@ -79,6 +81,7 @@ class TestPyVerbiste:
         assert self.verbiste.is_valid_verb('manger')
         assert not self.verbiste.is_valid_verb('banane')
         assert self.verbiste_en.is_valid_verb('bring')
+
 
 class TestVerb:
     def test_verbinfo(self):
@@ -120,6 +123,7 @@ class TestEndingCountVectorizer:
     ngrange = (2, 7)
     custom_vectorizer = partial(extract_verb_features, lang='fr', ngram_range=ngrange)
     vectorizer = CountVectorizer(analyzer=custom_vectorizer, binary=True, ngram_range=ngrange)
+
     def test_char_ngrams(self):
         ngrams = self.vectorizer._char_ngrams('aller')
         assert 'ller' in ngrams
@@ -127,6 +131,7 @@ class TestEndingCountVectorizer:
 
 class TestConjugator:
     conjugator = Conjugator()
+
     def test_repr(self):
         assert self.conjugator.__repr__() == 'mlconjug.mlconjug.Conjugator(language=fr)'
 
@@ -148,6 +153,7 @@ class TestConjugator:
 class TestDataSet:
     conjug_manager = ConjugManager()
     data_set = DataSet(conjug_manager.verbs)
+
     def test_repr(self):
         assert self.data_set.__repr__() == 'mlconjug.mlconjug.DataSet()'
 
@@ -168,7 +174,8 @@ class TestDataSet:
 
 class TestModel:
     extract_verb_features = extract_verb_features
-    vectorizer = CountVectorizer(analyzer=partial(extract_verb_features, lang='fr', ngram_range=(2,7)), binary=True, ngram_range=(2, 7))
+    vectorizer = CountVectorizer(analyzer=partial(extract_verb_features, lang='fr', ngram_range=(2, 7)), binary=True,
+                                 ngram_range=(2, 7))
     # Feature reduction
     feature_reductor = SelectFromModel(
         LinearSVC(penalty="l1", max_iter=3000, dual=False, verbose=2))
@@ -188,9 +195,8 @@ class TestModel:
         assert isinstance(self.model, Model)
 
     def test_predict(self):
-        result = self.model.predict(['aimer',])
+        result = self.model.predict(['aimer', ])
         assert self.dataset.templates[result[0]] == 'aim:er'
-
 
 
 def test_command_line_interface():
