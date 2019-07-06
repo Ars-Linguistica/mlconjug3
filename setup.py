@@ -24,6 +24,8 @@ requirements = [
     'numpy',
     'scipy',
     'scikit-learn>=0.20.2',
+    'colorama',
+    'joblib',
 ]
 
 setup_requirements = [
