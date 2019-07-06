@@ -42,7 +42,7 @@ train_models
 
 * TODO: implement results_parser to select and train the best performing models.
 * TODO: display prettier output.
-* TODO: implement multicore grid search.
+* DONE: implement multicore grid search.
 
 conjug_formatter
 ----------------
