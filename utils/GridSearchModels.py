@@ -14,7 +14,8 @@ train_model.
 
 
 import logging
-from sklearn.exceptions import ConvergenceWarning
+import sys
+import os
 import warnings
 from sklearn.model_selection import GridSearchCV
 from sklearn.pipeline import Pipeline
@@ -26,7 +27,7 @@ from time import time
 
 print(__doc__)
 
-warnings.filterwarnings("ignore", category=ConvergenceWarning)
+
 
 # Display progress logs on stdout
 logging.basicConfig(level=logging.INFO,
@@ -83,6 +84,9 @@ parameters = {
 if __name__ == "__main__":
     # multiprocessing requires the fork to happen in a __main__ protected
     # block
+    if not sys.warnoptions:
+        warnings.simplefilter("ignore")
+        os.environ["PYTHONWARNINGS"] = "ignore"
 
     # find the best parameters for both the feature extraction and the
     # classifier
