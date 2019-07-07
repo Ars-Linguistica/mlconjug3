@@ -121,3 +121,4 @@ if __name__ == "__main__":
                   'w',
                   encoding='utf-8') as file:
             json.dump(best_parameters, file, ensure_ascii=False, indent=4)
+        print('\nSaved the parameters of the best "{0}" model found by the GridSearch as a json file.\n')
