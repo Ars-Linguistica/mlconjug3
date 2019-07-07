@@ -22,7 +22,7 @@ CLI
 mlconjug
 --------
 
-* FIXME: fix verb formation bug. Example 'flabergast' or some verbs from issue#80.
+* FIXED: fix verb formation bug. Example 'beat' or some verbs from issue#80.
 * TODO: add more magic methods following Python data model.
 
 PyVerbiste
