@@ -23,4 +23,3 @@ asq==1.3
 defusedxml==0.6.0
 MonkeyType==19.5.0
 colorama==0.4.1
-skl2onnx==1.5.0
