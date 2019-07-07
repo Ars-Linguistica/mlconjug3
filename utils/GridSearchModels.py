@@ -41,8 +41,6 @@ if __name__ == "__main__":
         # #############################################################################
         # Initialize Data Set
         dataset = mlconjug.DataSet(mlconjug.Verbiste(language=lang).verbs)
-        dataset.construct_dict_conjug()
-        dataset.split_data(proportion=0.90)
 
         # #############################################################################
         # Define a pipeline.
