@@ -20,9 +20,11 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.pipeline import Pipeline
 import mlconjug
 import json
+import joblib
 from pprint import pprint
 from functools import partial
 from time import time
+
 
 print(__doc__)
 
@@ -103,9 +105,17 @@ if __name__ == "__main__":
 
         print("Best score: %0.3f" % grid_search.best_score_)
         print("Best parameters set:")
+        best_estimator = grid_search.best_estimator_
         best_parameters = grid_search.best_estimator_.get_params()
         for param_name in sorted(parameters.keys()):
             print("\t%s: %r" % (param_name, best_parameters[param_name]))
+
+        # Save model
+        with open('/home/ubuntu/PycharmProjects/mlconjug/utils/raw_data/models/best_model_{0}.pkl'.format(lang),
+                  'wb') as file:
+            joblib.dump(best_estimator, file)
+        print('\nSaved the best "{0}" model found by the GridSearch as a joblib file.\n')
+
         # Save experiments results
         with open('/home/ubuntu/PycharmProjects/mlconjug/utils/raw_data/experiments/best_results{0}.json'.format(lang),
                   'w',
