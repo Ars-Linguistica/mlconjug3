@@ -7,8 +7,8 @@ General
 
 * TODO: use logging instead of print() whenever appropriate.
 * DONE: implement safe pickling/persistence of trained Pipelines. Use joblib for model persistence instead.
-* TODO: use as much generators/FP as possible.
-* TODO: check types with mypy.
+* INPROGRESS: use as much generators/FP as possible.
+* INPROGRESS: check types with mypy.
 * TODO: refactor as much as possible.
 * TODO: use the package asq or similar to better handle nested dictionaries.
 * INPROGRESS: use MonkeyType to generate type information.
@@ -40,8 +40,8 @@ test_mlconjug
 train_models
 ------------
 
-* TODO: implement results_parser to select and train the best performing models.
-* TODO: display prettier output.
+* DONE: implement results_parser to select and train the best performing models.
+* DONE: display prettier output.
 * DONE: implement multicore grid search.
 
 conjug_formatter
