@@ -63,6 +63,9 @@ target/
 # pyenv python configuration file
 .python-version
 
+# ignore PyCharm settings
+.idea/
+
 # Training experiments results and old models
 utils/raw_data/old_models/
 
