@@ -307,8 +307,12 @@ class Verbiste(ConjugManager):
                 return None
             conjug = persons[0].find("i").text
         else:
-            conjug = [(pers, term.find("i").text if term.find("i") is not None else None)
-                      for pers, term in enumerate(persons)]
+            conjug = []
+            for pers, term in enumerate(persons):
+                if term.find("i") is not None:
+                    conjug.append((pers, term.find("i").text))
+                else:
+                    conjug.append((pers, ''))
         return conjug
 
 
@@ -502,7 +506,7 @@ class VerbEn(Verb):
                         if term is not None:
                             self.conjugate_person(key, persons_dict, term)
                         else:
-                            persons_dict[key] = None
+                            self.conjugate_person(key, persons_dict, '')
                     self.conjug_info[mood][tense_name] = persons_dict
                 elif isinstance(persons, str):
                     if tense_name == 'infinitive present':
@@ -510,6 +514,12 @@ class VerbEn(Verb):
                     else:
                         prefix = ''
                     self.conjug_info[mood][tense_name] = prefix + self.verb_info.root + persons
+                elif persons is None:
+                    if tense_name == 'infinitive present':
+                        prefix = 'to '
+                    else:
+                        prefix = ''
+                    self.conjug_info[mood][tense_name] = prefix + self.verb_info.infinitive
         return
 
 
