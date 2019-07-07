@@ -107,6 +107,7 @@ if __name__ == "__main__":
         for param_name in sorted(parameters.keys()):
             print("\t%s: %r" % (param_name, best_parameters[param_name]))
         # Save experiments results
-        with open('/home/ubuntu/PycharmProjects/mlconjug/utils/raw_data/experiments/results{0}.json'.format(lang), 'w',
+        with open('/home/ubuntu/PycharmProjects/mlconjug/utils/raw_data/experiments/best_results{0}.json'.format(lang),
+                  'w',
                   encoding='utf-8') as file:
             json.dump(best_parameters, file, ensure_ascii=False, indent=4)
