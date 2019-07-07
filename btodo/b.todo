@@ -6,7 +6,7 @@ General
 -------
 
 * TODO: use logging instead of print() whenever appropriate.
-* TODO: implement safe pickling/persistence of trained Pipelines. Use ONNX for model persistence.
+* TODO: implement safe pickling/persistence of trained Pipelines. Use joblib for model persistence instead.
 * TODO: use as much generators/FP as possible.
 * TODO: check types with mypy.
 * TODO: refactor as much as possible.
