@@ -99,7 +99,7 @@ if __name__ == "__main__":
         print("parameters:")
         pprint(parameters)
         t0 = time()
-        grid_search.fit(dataset.train_input, dataset.train_labels)
+        grid_search.fit(dataset.verbs_list, dataset.templates_list)
         print("done in %0.3fs" % (time() - t0))
         print()
 
