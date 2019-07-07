@@ -23,6 +23,7 @@ mlconjug
 --------
 
 * FIXED: fix verb formation bug. Example 'beat' or some verbs from issue#80.
+* TODO: investigate the quality of predicted verbs like 'flabbergast' => 'run'
 * TODO: add more magic methods following Python data model.
 
 PyVerbiste
