@@ -15,7 +15,7 @@ from .__init__ import Pipeline, SelectFromModel, CountVectorizer, LinearSVC, SGD
 
 import random
 from collections import defaultdict
-import pickle
+import joblib
 import pkg_resources
 import re
 from zipfile import ZipFile
@@ -129,7 +129,7 @@ class Conjugator:
             with ZipFile(pkg_resources.resource_stream(
                     _RESOURCE_PACKAGE, _PRE_TRAINED_MODEL_PATH[language])) as content:
                 with content.open('trained_model-{0}-final.pickle'.format(self.language), 'r') as archive:
-                    model = pickle.loads(archive.read())
+                    model = joblib.load(archive)
         if model:
             self.set_model(model)
         else:
