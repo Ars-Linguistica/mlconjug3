@@ -31,6 +31,7 @@ PyVerbiste
 
 * TODO: add more magic methods following Python data model.
 * TODO: Investigate the use of dataclasses.
+* TODO: check that the latest Verbiste data is correct.
 
 test_mlconjug
 -------------
