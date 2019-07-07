@@ -13,14 +13,19 @@ verbList = ['arise', 'awake', 'be', 'bear', 'beat', 'become', 'begin', 'bend', '
             'swear', 'sweep', 'swell', 'swum', 'swing', 'take', 'teach', 'tear', 'tell', 'think', 'throw', 'understand',
             'wake', 'wear', 'weep', 'win', 'wound', 'write']
 
+problematic_verbs = ['beat', 'bet', 'broadcast', 'burn', 'burst', 'clung', 'cost', 'cut', 'delt', 'dream', 'drunk',
+                     'ground', 'hear', 'hit', 'knelt', 'learn', 'ment', 'mow', 'overtaken', 'put', 'read', 'ring',
+                     'sawn', 'set', 'sew', 'shed', 'show', 'shut', 'smell', 'sow', 'spell', 'spill', 'spat', 'stunk',
+                     'wound']
+
 default_conjugator = mlconjug.Conjugator(language='en')
-errors = []
+verbs_with_Nones = []
 mlOutput = []
 for item in verbList:
     pp = default_conjugator.conjugate(item).conjug_info
     for mood, tense in pp.items():
         if None in tense.values():
-            errors.append((item, pp))
+            verbs_with_Nones.append(item)
     mlOutput.append(pp)
 
 pass
