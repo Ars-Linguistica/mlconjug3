@@ -25,6 +25,7 @@ mlconjug
 * FIXED: fix verb formation bug. Example 'beat' or some verbs from issue#80.
 * TODO: investigate the quality of predicted verbs like 'flabbergast' => 'run'
 * TODO: add more magic methods following Python data model.
+* TODO: investigate the use of None.
 
 PyVerbiste
 ----------
@@ -32,6 +33,7 @@ PyVerbiste
 * TODO: add more magic methods following Python data model.
 * TODO: Investigate the use of dataclasses.
 * TODO: check that the latest Verbiste data is correct.
+* TODO: investigate the use of None.
 
 test_mlconjug
 -------------
