@@ -6,3 +6,4 @@ scipy
 click
 colorama
 joblib
+progressbar2

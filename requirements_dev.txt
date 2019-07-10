@@ -24,3 +24,4 @@ defusedxml==0.6.0
 MonkeyType==19.5.0
 colorama==0.4.1
 joblib==0.13.2
+progressbar2==3.42.0
