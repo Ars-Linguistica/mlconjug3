@@ -56,8 +56,6 @@ def main(verbs, language, subject):
     logger.addHandler(console_handler)
     logger.addHandler(error_handler)
     logger.setLevel(logging.INFO)
-    # TODO: use the package colorama to colorize input.
-    # TODO: allow to specify output file to save results to json file.
     conjugator = Conjugator(language)
     results = {}
     for verb in verbs:
