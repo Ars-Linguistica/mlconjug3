@@ -5,7 +5,7 @@ TODOS
 General
 -------
 
-* TODO: use logging instead of print() whenever appropriate.
+* DONE: use logging instead of print() whenever appropriate.
 * DONE: implement safe pickling/persistence of trained Pipelines. Use joblib for model persistence instead.
 * INPROGRESS: use as much generators/FP as possible.
 * INPROGRESS: check types with mypy.
@@ -23,7 +23,7 @@ mlconjug
 --------
 
 * FIXED: fix verb formation bug. Example 'beat' or some verbs from issue#80.
-* TODO: investigate the quality of predicted verbs like 'flabbergast' => 'run'
+* TODO: investigate the quality of predicted verbs like 'flabbergast' => 'run' 'rob' => 'mob'
 * TODO: add more magic methods following Python data model.
 * TODO: investigate the use of None.
 
