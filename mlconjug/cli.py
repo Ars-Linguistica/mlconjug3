@@ -5,6 +5,8 @@
 import click
 from .mlconjug import Conjugator
 import json
+import logging
+import sys
 
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
@@ -44,6 +46,16 @@ def main(verbs, language, subject):
         $ mlconjug gallofar --language es
 
     """
+    logger = logging.getLogger(__name__)
+
+    # create console handler and set level to debug
+    console_handler = logging.StreamHandler(sys.stdout)
+    error_handler = logging.StreamHandler(sys.stderr)
+    console_handler.setLevel(logging.INFO)
+    error_handler.setLevel(logging.ERROR)
+    logger.addHandler(console_handler)
+    logger.addHandler(error_handler)
+    logger.setLevel(logging.INFO)
     # TODO: use the package colorama to colorize input.
     # TODO: allow to specify output file to save results to json file.
     conjugator = Conjugator(language)
