@@ -4,6 +4,7 @@
 from .mlconjug import *
 from .PyVerbiste import *
 from typing import Text, Tuple, Any
+from logging import Logger
 import gettext
 
 __author__: Text
@@ -19,6 +20,7 @@ SelectFromModel: Any
 CountVectorizer: Any
 LinearSVC: Any
 SGDClassifier: Any
+logger: Logger
 _RESOURCE_PACKAGE: Text = __name__
 _TRANSLATIONS_PATH: Text
 _SUPPORTED_LANGUAGES: Tuple[Text]

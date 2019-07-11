@@ -11,7 +11,7 @@ MLConjug Main module.
 
 from .PyVerbiste import Verbiste, VerbInfo, Verb, VerbEn, VerbEs, VerbFr, VerbIt, VerbPt, VerbRo, ConjugManager
 
-from .__init__ import Pipeline, SelectFromModel, CountVectorizer, LinearSVC, SGDClassifier
+from .__init__ import Pipeline, SelectFromModel, CountVectorizer, LinearSVC, SGDClassifier, logger
 
 import random
 from collections import defaultdict
@@ -199,7 +199,7 @@ class Conjugator:
 
         """
         if not isinstance(model, Model):
-            print(_('Please provide an instance of a mlconjug.mlconjug.Model'))
+            logger.warning(_('Please provide an instance of a mlconjug.mlconjug.Model'))
             raise ValueError
         else:
             self.model = model

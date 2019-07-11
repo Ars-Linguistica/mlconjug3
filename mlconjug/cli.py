@@ -63,7 +63,7 @@ def main(verbs, language, subject):
     for verb in verbs:
         result = conjugator.conjugate(verb, subject)
         results[verb] = result.conjug_info
-    print(json.dumps(results, ensure_ascii=False, indent=4))
+    logger.info(json.dumps(results, ensure_ascii=False, indent=4))
     return
 
 
