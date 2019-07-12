@@ -47,13 +47,6 @@ import platform
 from locale import windows_locale, getdefaultlocale
 import gettext
 import inspect
-import logging
-
-logger = logging.getLogger(__name__)
-
-level = 'WARNING'
-fmt = '\r%(asctime)s%(levelname)8s%(filename)15s %(lineno)4s: %(message)s'
-logging.basicConfig(format=fmt, level=level)
 
 # Sets up the automatic translation of annotated strings displayed to the user.
 _RESOURCE_PACKAGE = __name__
