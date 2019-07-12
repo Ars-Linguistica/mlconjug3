@@ -23,7 +23,7 @@ mlconjug
 --------
 
 * FIXED: fix verb formation bug. Example 'beat' or some verbs from issue#80.
-* TODO: investigate the quality of predicted verbs like 'flabbergast' => 'run' 'rob' => 'mob'
+* FIXED: investigate the quality of predicted verbs like 'flabbergast' => 'run' 'rob' => 'mob' from issue#82.
 * TODO: add more magic methods following Python data model.
 * TODO: investigate the use of None.
 
