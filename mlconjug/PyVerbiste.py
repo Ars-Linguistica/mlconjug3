@@ -253,7 +253,10 @@ class Verbiste(ConjugManager):
             verb_name = verb.find("i").text
             template = verb.find("t").text
             index = - len(template[template.index(":") + 1:])
-            root = verb_name[:index]
+            if index == 0:
+                root = verb_name
+            else:
+                root = verb_name[:index]
             verbs_dic[verb_name] = {"template": template, "root": root}
         return verbs_dic
 
