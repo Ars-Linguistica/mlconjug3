@@ -16,7 +16,7 @@ General
 CLI
 ---
 
-* TODO: use the package colorama to colorize input.
+* TODO: use the package colorama to colorize output.
 * TODO: allow to specify output file to save results to json file or potentially other formats.
 
 mlconjug
@@ -38,7 +38,7 @@ PyVerbiste
 test_mlconjug
 -------------
 
-* TODO: use the package colorama to colorize input.
+* TODO: use the package colorama to colorize output.
 * TODO: add more tests for each language Verb class.
 
 train_models
