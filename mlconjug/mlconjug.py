@@ -170,7 +170,10 @@ class Conjugator:
             predicted = True
             template = self.conjug_manager.templates[prediction]
             index = - len(template[template.index(":") + 1:])
-            root = verb[:index]
+            if index == 0:
+                root = verb
+            else:
+                root = verb[:index]
             verb_info = VerbInfo(verb, root, template)
             conjug_info = self.conjug_manager.get_conjug_info(verb_info.template)
         else:
@@ -184,7 +187,6 @@ class Conjugator:
                 return None
         if predicted:
             verb_object = _VERBS[self.language](verb_info, conjug_info, subject, predicted)
-            verb_object.predicted = predicted
             verb_object.confidence_score = round(prediction_score, 3)
         else:
             verb_object = _VERBS[self.language](verb_info, conjug_info, subject)
