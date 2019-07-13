@@ -117,7 +117,6 @@ if __name__ == "__main__":
 
         # Save best model parameters
         with open('/home/ubuntu/PycharmProjects/mlconjug/utils/raw_data/experiments/best_model_parameters_{0}.pkl'.format(lang),
-                  'wb',
-                  encoding='utf-8') as file:
+                  'wb') as file:
             joblib.dump(best_parameters, file, compress=('gzip', 6))
         print('\nSaved the parameters of the best "{0}" model found by the GridSearch as a json file.\n')
