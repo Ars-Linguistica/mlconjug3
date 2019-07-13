@@ -30,7 +30,7 @@ fmt = '\r%(asctime)s%(levelname)8s%(filename)15s %(lineno)4s: %(message)s'
 logging.basicConfig(format=fmt, level=level)
 
 
-def set_save_folder(folder):
+def set_save_folder(folder=None):
     """
     Sets the folder in which conjugation tables will be downloaded and saved.
 
