@@ -14,7 +14,7 @@ except ImportError:
     try:
         from imp import reload
     except:
-        pass
+        raise NotImplementedError
 
 # Python 2.7 compatibility
 # Works for Python 2 and 3
