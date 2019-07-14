@@ -34,6 +34,7 @@ PyVerbiste
 * TODO: Investigate the use of dataclasses.
 * TODO: check that the latest Verbiste data is correct.
 * TODO: investigate the use of None.
+* TODO: write tests for conjugation file saving feature.
 
 test_mlconjug
 -------------
