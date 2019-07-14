@@ -8,6 +8,8 @@ import pytest
 from sklearn.exceptions import ConvergenceWarning
 import warnings
 
+import json
+
 from functools import partial
 
 from click.testing import CliRunner
@@ -21,6 +23,11 @@ from mlconjug import Verbiste, VerbInfo, Verb, VerbEn, \
     VerbEs, VerbFr, VerbIt, VerbPt, VerbRo, ConjugManager
 
 from mlconjug import cli
+
+try:
+    from pathlib import Path
+except ImportError:
+    from pathlib2 import Path
 
 warnings.filterwarnings("ignore", category=FutureWarning)
 warnings.filterwarnings("ignore", category=ConvergenceWarning)
@@ -199,13 +206,33 @@ class TestModel:
         assert self.dataset.templates[result[0]] == 'aim:er'
 
 
-def test_command_line_interface():
-    """Test the CLI."""
-    verb = 'aller'
-    runner = CliRunner()
-    result = runner.invoke(cli.main, [verb])
-    assert result.exit_code == 0
-    assert 'allassions' in result.output
-    help_result = runner.invoke(cli.main, ['--help'])
-    assert help_result.exit_code == 0
-    # assert 'Console script for mlconjug.' in help_result.output
+class TestCLI:
+    verbiste = Verbiste(language='fr')
+    conjugator = Conjugator()
+    def test_command_line_interface(self):
+        """Test the CLI."""
+        verb = 'aller'
+        runner = CliRunner()
+        result = runner.invoke(cli.main, [verb])
+        assert result.exit_code == 0
+        assert 'allassions' in result.output
+        help_result = runner.invoke(cli.main, ['--help'])
+        assert help_result.exit_code == 0
+        # assert 'Console script for mlconjug.' in help_result.output
+
+    def test_save_file(self, tmpdir):
+        """
+        Tests file saving feature.
+
+        """
+        test_verb = self.conjugator.conjugate('aller')
+        path = tmpdir.mkdir("sub").join('conjugations.json')
+        verb = 'aller'
+        runner = CliRunner()
+        result = runner.invoke(cli.main, [verb, '-o', path])
+        assert result.exit_code == 0
+        my_file = Path(path)
+        assert my_file.is_file()
+        with open(my_file, encoding='utf-8') as file:
+            output = json.load(file)
+        assert output['aller'] == test_verb.conjug_info
