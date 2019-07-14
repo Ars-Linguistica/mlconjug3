@@ -19,12 +19,15 @@ import warnings
 from sklearn.model_selection import GridSearchCV
 from sklearn.pipeline import Pipeline
 import mlconjug
-import json
 import joblib
 from pprint import pprint
 from functools import partial
 from time import time
 import datetime
+try:
+    from pathlib import Path
+except ImportError:
+    from pathlib2 import Path
 
 
 print(__doc__)
@@ -39,84 +42,88 @@ if __name__ == "__main__":
     # multiprocessing requires the fork to happen in a __main__ protected
     # block
     for lang in langs:
-        # #############################################################################
-        # Initialize Data Set
-        dataset = mlconjug.DataSet(mlconjug.Verbiste(language=lang).verbs)
+        my_file = Path('/home/ubuntu/PycharmProjects/mlconjug/utils/raw_data/models/best_model_{0}.pkl'.format(lang))
+        if my_file.is_file():
+            continue
+        else:
+            # #############################################################################
+            # Initialize Data Set
+            dataset = mlconjug.DataSet(mlconjug.Verbiste(language=lang).verbs)
 
-        # #############################################################################
-        # Define a pipeline.
+            # #############################################################################
+            # Define a pipeline.
 
-        # Transforms dataset with CountVectorizer. We pass the function extract_verb_features to the CountVectorizer.
-        ngrange = (2, 7)
-        vectorizer = mlconjug.CountVectorizer(analyzer=partial(mlconjug.extract_verb_features,
-                                                               lang=lang,
-                                                               ngram_range=ngrange),
-                                              binary=True)
+            # Transforms dataset with CountVectorizer. We pass the function extract_verb_features to the CountVectorizer.
+            ngrange = (2, 7)
+            vectorizer = mlconjug.CountVectorizer(analyzer=partial(mlconjug.extract_verb_features,
+                                                                   lang=lang,
+                                                                   ngram_range=ngrange),
+                                                  binary=True)
 
-        # Feature reduction
-        feature_reductor = mlconjug.SelectFromModel(mlconjug.LinearSVC(random_state=42,
-                                                                       penalty="l1",
-                                                                       dual=False,
-                                                                       verbose=0))
+            # Feature reduction
+            feature_reductor = mlconjug.SelectFromModel(mlconjug.LinearSVC(random_state=42,
+                                                                           penalty="l1",
+                                                                           dual=False,
+                                                                           verbose=0))
 
-        # Prediction Classifier
-        classifier = mlconjug.SGDClassifier(random_state=42,
-                                            verbose=0)
+            # Prediction Classifier
+            classifier = mlconjug.SGDClassifier(random_state=42,
+                                                verbose=0)
 
-        pipeline = Pipeline([
-            ('vect', vectorizer),
-            ('feat', feature_reductor),
-            ('clf', classifier),
-        ])
+            pipeline = Pipeline([
+                ('vect', vectorizer),
+                ('feat', feature_reductor),
+                ('clf', classifier),
+            ])
 
-        # uncommenting more parameters will give better exploring power but will
-        # increase processing time in a combinatorial way
-        parameters = {
-            'feat__estimator__max_iter': (12000, 8400, 3600, 4800, 6400),
-            'feat__estimator__tol': (1e-3, 1e-4, 1e-5),
-            'feat__estimator__C': (1e-1, 1),
-            'clf__alpha': (0.00001, 0.000001),
-            'clf__penalty': ('l2', 'elasticnet'),
-            'clf__tol': (1e-3, 1e-4, 1e-5),
-            'clf__l1_ratio': (0.15, 0.3, 0.45, 0.6),
-            'clf__loss': ('log', 'modified_huber'),
-            'clf__max_iter': (30000, 40000, 50000),
-        }
+            # uncommenting more parameters will give better exploring power but will
+            # increase processing time in a combinatorial way
+            parameters = {
+                'feat__estimator__max_iter': (12000, 8400, 3600, 4800, 6400),
+                'feat__estimator__tol': (1e-3, 1e-4, 1e-5),
+                'feat__estimator__C': (1e-1, 1),
+                'clf__alpha': (0.00001, 0.000001),
+                'clf__penalty': ('l2', 'elasticnet'),
+                'clf__tol': (1e-3, 1e-4, 1e-5),
+                'clf__l1_ratio': (0.15, 0.3, 0.45, 0.6),
+                'clf__loss': ('log', 'modified_huber'),
+                'clf__max_iter': (30000, 40000, 50000),
+            }
 
-        # ignores CnvergenceWarnings during model selection
-        if not sys.warnoptions:
-            warnings.simplefilter("ignore")
-            os.environ["PYTHONWARNINGS"] = "ignore"
+            # ignores CnvergenceWarnings during model selection
+            if not sys.warnoptions:
+                warnings.simplefilter("ignore")
+                os.environ["PYTHONWARNINGS"] = "ignore"
 
-        # find the best parameters for both the feature extraction and the
-        # classifier
-        grid_search = GridSearchCV(pipeline, parameters, cv=3,
-                                   n_jobs=3, verbose=1,)
+            # find the best parameters for both the feature extraction and the
+            # classifier
+            grid_search = GridSearchCV(pipeline, parameters, cv=3,
+                                       n_jobs=3, verbose=1,)
 
-        print("Performing grid search for language '{0}' started at {1}...".format(lang, datetime.datetime.now()))
-        print("pipeline:", [name for name, _ in pipeline.steps])
-        print("parameters:")
-        pprint(parameters)
-        t0 = time()
-        grid_search.fit(dataset.verbs_list, dataset.templates_list)
-        print("done in %0.3fs" % (time() - t0))
-        print()
+            print("Performing grid search for language '{0}' started at {1}...".format(lang, datetime.datetime.now()))
+            print("pipeline:", [name for name, _ in pipeline.steps])
+            print("parameters:")
+            pprint(parameters)
+            t0 = time()
+            grid_search.fit(dataset.verbs_list, dataset.templates_list)
+            print("done in %0.3fs" % (time() - t0))
+            print()
 
-        print("Best score: %0.3f" % grid_search.best_score_)
-        print("Best parameters set:")
-        best_estimator = grid_search.best_estimator_
-        best_parameters = grid_search.best_estimator_.get_params()
-        for param_name in sorted(parameters.keys()):
-            print("\t%s: %r" % (param_name, best_parameters[param_name]))
+            print("Best score: %0.3f" % grid_search.best_score_)
+            print("Best parameters set:")
+            best_estimator = grid_search.best_estimator_
+            best_parameters = grid_search.best_estimator_.get_params()
+            for param_name in sorted(parameters.keys()):
+                print("\t%s: %r" % (param_name, best_parameters[param_name]))
 
-        # Save best model
-        with open('/home/ubuntu/PycharmProjects/mlconjug/utils/raw_data/models/best_model_{0}.pkl'.format(lang),
-                  'wb') as file:
-            joblib.dump(best_estimator, file, compress=('gzip', 6))
-        print('\nSaved the best "{0}" model found by the GridSearch as a joblib file.\n')
+            # Save best model
+            with open('/home/ubuntu/PycharmProjects/mlconjug/utils/raw_data/models/best_model_{0}.pkl'.format(lang),
+                      'wb') as file:
+                joblib.dump(best_estimator, file, compress=('gzip', 6))
+            print('\nSaved the best "{0}" model found by the GridSearch as a joblib file.\n')
 
-        # Save best model parameters
-        with open('/home/ubuntu/PycharmProjects/mlconjug/utils/raw_data/experiments/best_model_parameters_{0}.pkl'.format(lang),
-                  'wb') as file:
-            joblib.dump(grid_search.best_params_, file, compress=('gzip', 6))
-        print('\nSaved the parameters of the best "{0}" model found by the GridSearch as a joblib file.\n')
+            # Save best model parameters
+            with open('/home/ubuntu/PycharmProjects/mlconjug/utils/raw_data/experiments/best_model_parameters_{0}.pkl'.format(lang),
+                      'wb') as file:
+                joblib.dump(grid_search.best_params_, file, compress=('gzip', 6))
+            print('\nSaved the parameters of the best "{0}" model found by the GridSearch as a joblib file.\n')
