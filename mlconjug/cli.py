@@ -17,12 +17,16 @@ import sys
                      " The values can be 'fr', 'en', 'es', 'it', 'pt' or 'ro'."
                      " The default value is fr."),
               type=click.STRING)
+@click.option('-o', '--output',
+              default=None,
+              help=_("Path of the filename for storing the conjugation tables."),
+              type=click.STRING)
 @click.option('-s', '--subject',
               default='abbrev',
               help=_("The subject format type for the conjugated forms."
                      " The values can be 'abbrev' or 'pronoun'. The default value is 'abbrev'."),
               type=click.STRING)
-def main(verbs, language, subject):
+def main(verbs, language, output, subject):
     """
     MLConjug is a Python library to conjugate verbs of in French, English, Spanish, Italian, Portuguese and Romanian (mores soon) using Machine Learning techniques.
     Any verb in one of the supported language can be conjugated as the module contains a Machine Learning pipeline of how the verbs behave.
@@ -61,7 +65,11 @@ def main(verbs, language, subject):
     for verb in verbs:
         result = conjugator.conjugate(verb, subject)
         results[verb] = result.conjug_info
-    print(json.dumps(results, ensure_ascii=False, indent=4))
+    if output:
+        with open(output, 'w') as file:
+            json.dump(results, file, ensure_ascii=False, indent=4)
+    else:
+        print(json.dumps(results, ensure_ascii=False, indent=4))
     # Use print(in CLI to prevent doubling of output.
     # logger.info(json.dumps(results, ensure_ascii=False, indent=4))
     return

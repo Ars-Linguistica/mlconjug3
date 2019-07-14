@@ -17,7 +17,7 @@ CLI
 ---
 
 * TODO: use the package colorama to colorize output.
-* TODO: allow to specify output file to save results to json file or potentially other formats.
+* DONE: allow to specify output file to save results to json file or potentially other formats.
 
 mlconjug
 --------
