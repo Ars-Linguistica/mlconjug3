@@ -45,41 +45,41 @@ _CONJUGATIONS_RESOURCE_PATH = {'fr': '/'.join(('data', 'conjug_manager', 'conjug
 _ABBREVS = ("1s", "2s", "3s", "1p", "2p", "3p")
 
 _PRONOUNS = {'fr': {'abbrev': _ABBREVS,
-                   'pronoun': ("je", "tu", "il (elle, on)", "nous", "vous", "ils (elles)")},
+                    'pronoun': ("je", "tu", "il (elle, on)", "nous", "vous", "ils (elles)")},
              'it': {'abbrev': _ABBREVS,
-                   'pronoun': ('io', 'tu', 'egli/ella', 'noi', 'voi', 'essi/esse')},
+                    'pronoun': ('io', 'tu', 'egli/ella', 'noi', 'voi', 'essi/esse')},
              'es': {'abbrev': _ABBREVS,
-                   'pronoun': ('yo', 'tú', 'él', 'nosotros', 'vosotros', 'ellos')},
+                    'pronoun': ('yo', 'tú', 'él', 'nosotros', 'vosotros', 'ellos')},
              'en': {'abbrev': _ABBREVS,
-                   'pronoun': ('I', 'you', 'he/she/it', 'you', 'we', 'they')},
+                    'pronoun': ('I', 'you', 'he/she/it', 'you', 'we', 'they')},
              'pt': {'abbrev': _ABBREVS,
-                   'pronoun': ('eu', 'tu', 'ele', 'nós', 'vós', 'eles')},
+                    'pronoun': ('eu', 'tu', 'ele', 'nós', 'vós', 'eles')},
              'ro': {'abbrev': _ABBREVS,
-                   'pronoun': ('eu', 'tu', 'el/ea', 'noi', 'voi', 'ei/ele')}
+                    'pronoun': ('eu', 'tu', 'el/ea', 'noi', 'voi', 'ei/ele')}
              }
 
 _IMPERATIVE_PRONOUNS = {'fr': {'abbrev': ("2s", "1p", "2p"),
-                              'pronoun': ("", "", "")},
+                               'pronoun': ("", "", "")},
                         'it': None,
                         'es': {'abbrev': ("2s", "3s", "1p", "2p", "3p"),
-                              'pronoun': ('tú', 'él', 'nosotros', 'vosotros', 'ellos')},
+                               'pronoun': ('tú', 'él', 'nosotros', 'vosotros', 'ellos')},
                         'en': {'abbrev': ("2s", "1p", "2p"),
-                              'pronoun': ("", "let's", "")},
+                               'pronoun': ("", "let's", "")},
                         'pt': None,
                         'ro': {'abbrev': ("2s", "2p"),
-                              'pronoun': ("tu", "voi")},
+                               'pronoun': ("tu", "voi")},
                         }
 
-_AUXILIARIES = {'fr':None,
+_AUXILIARIES = {'fr': None,
                 'it': 'non',
                 'es': 'no',
-                'en':  {'abbrev': _ABBREVS,
-                    'pronoun': ('am', 'are', 'is', 'are', 'are', 'are')},
+                'en': {'abbrev': _ABBREVS,
+                       'pronoun': ('am', 'are', 'is', 'are', 'are', 'are')},
                 'pt': 'não',
                 'ro': 'nu'}
 
 _GENDER = {'fr': {'abbrev': ("ms", "mp", "fs", "fp"),
-                 'pronoun': ("masculin singulier", "masculin pluriel", "feminin singulier", "feminin pluriel")},
+                  'pronoun': ("masculin singulier", "masculin pluriel", "feminin singulier", "feminin pluriel")},
            'it': None,
            'es': None,
            'en': None,
@@ -237,7 +237,8 @@ class Verbiste(ConjugManager):
         self.verbs = self._parse_verbs(verbs_file.replace('json', 'xml'))
         return
 
-    def _parse_verbs(self, file):
+    @staticmethod
+    def _parse_verbs(file):
         """
         Parses the XML file.
 
@@ -292,7 +293,8 @@ class Verbiste(ConjugManager):
                     conjugations_dic[template_name][mood.tag][tense.tag.replace('-', ' ')] = self._load_tense(tense)
         return conjugations_dic
 
-    def _load_tense(self, tense):
+    @staticmethod
+    def _load_tense(tense):
         """
         Load and parses the inflected forms of the tense from xml file.
 
