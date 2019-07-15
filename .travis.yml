@@ -14,11 +14,11 @@ matrix:
   - python: pypy3.5
   - python: 3.5
   - python: 3.4
-  - python: 3.7-dev
 branches:
   only:
   - master
   - dev
+  - enhancements
   - "/v\\d+\\.\\d+[a-z]*.\\d+[a-z]*/"
 install: pip install -U tox-travis
 script: tox
