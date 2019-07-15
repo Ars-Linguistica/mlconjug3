@@ -13,7 +13,7 @@ from .PyVerbiste import Verbiste, VerbInfo, Verb, VerbEn, VerbEs, VerbFr, VerbIt
 
 from .__init__ import Pipeline, SelectFromModel, CountVectorizer, LinearSVC, SGDClassifier
 
-from.utils import logger
+from .utils import logger
 
 import random
 from collections import defaultdict
@@ -48,7 +48,7 @@ _PRE_TRAINED_MODEL_PATH = {
     'en': '/'.join(('data', 'models', 'trained_model-en-final.zip')),
     'pt': '/'.join(('data', 'models', 'trained_model-pt-final.zip')),
     'ro': '/'.join(('data', 'models', 'trained_model-ro-final.zip')),
-    }
+}
 
 _ALPHABET = {'fr': {'vowels': 'aáàâeêéèiîïoôöœuûùy',
                     'consonants': 'bcçdfghjklmnpqrstvwxyz'},
@@ -166,6 +166,7 @@ class Conjugator:
                 _('The supplied word: {0} is not a valid verb in {1}.').format(verb, _LANGUAGE_FULL[self.language]))
         if verb not in self.conjug_manager.verbs.keys():
             if self.model is None:
+                # TODO: Raise error indicating that the verb is unknown and that no model has been provided.
                 return None
             prediction = self.model.predict([verb])[0]
             prediction_score = self.model.pipeline.predict_proba([verb])[0][prediction]
@@ -227,6 +228,8 @@ class DataSet:
         self.verbs_list = []
         self.templates_list = []
         self.dict_conjug = {}
+        self.min_threshold = 8
+        self.split_proportion = 0.5
         self.train_input = []
         self.train_labels = []
         self.test_input = []
@@ -305,7 +308,8 @@ class Model(object):
 
     def __init__(self, vectorizer=None, feature_selector=None, classifier=None, language=None):
         if not vectorizer:
-            vectorizer = CountVectorizer(analyzer=partial(extract_verb_features, lang=language, ngram_range=(2, 7)), binary=True)
+            vectorizer = CountVectorizer(analyzer=partial(extract_verb_features, lang=language, ngram_range=(2, 7)),
+                                         binary=True)
         if not feature_selector:
             feature_selector = SelectFromModel(LinearSVC(penalty='l1', max_iter=12000, dual=False, verbose=2))
         if not classifier:
