@@ -66,7 +66,7 @@ class Verbiste(ConjugManager):
 
     def _parse_verbs(self,
                      file: _PathLike
-                     ) -> Mapping[Text, Text]: ...
+                     ) -> Mapping[Text,Mapping[Text, Text]]: ...
 
     def _load_conjugations(self,
                            conjugations_file: _PathLike
