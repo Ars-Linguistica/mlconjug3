@@ -23,7 +23,7 @@ SGDClassifier: Any
 logger: Logger
 _RESOURCE_PACKAGE: Text = __name__
 _TRANSLATIONS_PATH: Text
-_SUPPORTED_LANGUAGES: Tuple[Text]
+_SUPPORTED_LANGUAGES: Tuple[Text, ...]
 _TRANSLATED_LANGUAGES: Tuple[Text]
 _MLCONJUG_TRANSLATIONS: gettext.GNUTranslations
 _user_locale: Text
