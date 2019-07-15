@@ -5,7 +5,7 @@ from typing import Text, Sequence, Mapping, Dict, Tuple, Optional, Union, Set, T
 __author__: Text
 __author_email__: Text
 _RESOURCE_PACKAGE: Text = __name__
-_LANGUAGES: Tuple[Text]
+_LANGUAGES: Tuple[Text, ...]
 _VERBS_RESOURCE_PATH: Mapping[Text, Text]
 _CONJUGATIONS_RESOURCE_PATH: Mapping[Text, Text]
 _ABBREVS: Tuple[Text]
