@@ -209,6 +209,7 @@ class TestModel:
 class TestCLI:
     verbiste = Verbiste(language='fr')
     conjugator = Conjugator()
+
     def test_command_line_interface(self):
         """Test the CLI."""
         verb = 'aller'
