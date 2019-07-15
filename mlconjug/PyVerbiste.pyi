@@ -8,7 +8,7 @@ _RESOURCE_PACKAGE: Text = __name__
 _LANGUAGES: Tuple[Text, ...]
 _VERBS_RESOURCE_PATH: Mapping[Text, Text]
 _CONJUGATIONS_RESOURCE_PATH: Mapping[Text, Text]
-_ABBREVS: Tuple[Text]
+_ABBREVS: Tuple[Text, ...]
 _PRONOUNS: Mapping[Text, Mapping[Text, Tuple[Text]]]
 _IMPERATIVE_PRONOUNS: Mapping[Text, Optional[Mapping[Text, Tuple[Text]]]]
 _GENDER: Mapping[Text, Optional[Mapping[Text, Tuple[Text]]]]
