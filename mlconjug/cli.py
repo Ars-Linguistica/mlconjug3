@@ -68,6 +68,7 @@ def main(verbs, language, output, subject):
     if output:
         with open(output, 'w') as file:
             json.dump(results, file, ensure_ascii=False, indent=4)
+            print('The conjugations have been succesfully saved to {0}.'.format(output))
     else:
         print(json.dumps(results, ensure_ascii=False, indent=4))
     # Use print(in CLI to prevent doubling of output.
