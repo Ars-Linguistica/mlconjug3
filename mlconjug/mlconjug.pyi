@@ -1,6 +1,7 @@
 # Stubs for mlconjug.mlconjug (Python 3)
 
 from .PyVerbiste import Verb, ConjugManager
+from sklearn.pipeline import Pipeline
 
 # I am commenting out the sklearn imports because they have yet no stub files.
 # from sklearn.feature_extraction.text import CountVectorizer
@@ -68,7 +69,7 @@ class DataSet:
                    ) -> None: ...
 
 class Model:
-    pipeline: Model = ...
+    pipeline: Pipeline = ...
     language: Text = ...
     def __init__(self,
                  vectorizer: Optional[Any] = ...,
