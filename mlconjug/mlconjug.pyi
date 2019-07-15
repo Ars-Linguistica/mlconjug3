@@ -5,12 +5,12 @@ from .PyVerbiste import Verb, ConjugManager
 # I am commenting out the sklearn imports because they have yet no stub files.
 # from sklearn.feature_extraction.text import CountVectorizer
 # from sklearn.base import BaseEstimator
-from typing import Optional, Text, Mapping, List, Sequence, DefaultDict, KeysView, Any
+from typing import Optional, Text, Mapping, List, Sequence, DefaultDict, KeysView, Any, Type
 
 
 _RESOURCE_PACKAGE: Text = __name__
 _LANGUAGE_FULL: Mapping[Text, Text]
-_VERBS: Mapping[Text, Verb]
+_VERBS: Mapping[Text, Type[Verb]]
 _PRE_TRAINED_MODEL_PATH: Mapping[Text, Text]
 
 
