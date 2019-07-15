@@ -8,7 +8,7 @@ General
 * DONE: use logging instead of print() whenever appropriate.
 * DONE: implement safe pickling/persistence of trained Pipelines. Use joblib for model persistence instead.
 * INPROGRESS: use as much generators/FP as possible.
-* INPROGRESS: check types with mypy/MonkeyType.
+* DONE: check types with mypy/MonkeyType.
 * INPROGRESS: refactor as much as possible.
 * TODO: use the package asq or similar to better handle nested dictionaries.
 * INPROGRESS: use MonkeyType to generate type information.
