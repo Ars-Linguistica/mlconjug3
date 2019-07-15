@@ -227,7 +227,7 @@ class DataSet:
         self.templates = sorted(set([verb['template'] for verb in self.verbs_dict.values()]))
         self.verbs_list = []
         self.templates_list = []
-        self.dict_conjug = {}
+        self.dict_conjug = None
         self.min_threshold = 8
         self.split_proportion = 0.5
         self.train_input = []
