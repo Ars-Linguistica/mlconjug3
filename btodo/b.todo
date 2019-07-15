@@ -11,7 +11,7 @@ General
 * DONE: check types with mypy/MonkeyType.
 * INPROGRESS: refactor as much as possible.
 * TODO: use the package asq or similar to better handle nested dictionaries.
-* INPROGRESS: use MonkeyType to generate type information.
+* DONE: use MonkeyType to generate type information.
 
 CLI
 ---
