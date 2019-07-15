@@ -81,16 +81,16 @@ def _get_user_locale():
     return user_locale
 
 
-def _getdoc(object):
+def _getdoc(obj):
     """
     Translates the docstrings of the objects defined in the packeage in the supported languages.
 
-    :param object:
+    :param obj:
     :return: string.
         The translated version of the object's docstring.
     """
     try:
-        doc = object.__doc__
+        doc = obj.__doc__
     except AttributeError:
         return None
     if not isinstance(doc, str):

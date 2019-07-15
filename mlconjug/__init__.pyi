@@ -3,7 +3,7 @@
 
 from .mlconjug import *
 from .PyVerbiste import *
-from typing import Text, Tuple, Any
+from typing import Text, Tuple, Any, Union
 from logging import Logger
 import gettext
 
@@ -25,7 +25,7 @@ _RESOURCE_PACKAGE: Text = __name__
 _TRANSLATIONS_PATH: Text
 _SUPPORTED_LANGUAGES: Tuple[Text, ...]
 _TRANSLATED_LANGUAGES: Tuple[Text]
-_MLCONJUG_TRANSLATIONS: gettext.GNUTranslations
+_MLCONJUG_TRANSLATIONS: Union[gettext.GNUTranslations, gettext.NullTranslations]
 _user_locale: Text
 
 def _get_user_locale() -> Text: ...
