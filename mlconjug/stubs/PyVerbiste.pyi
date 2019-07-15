@@ -1,0 +1,29 @@
+from collections import OrderedDict
+from typing import (
+    Dict,
+    List,
+    Optional,
+    Set,
+    Tuple,
+    Union,
+)
+from xml.etree.ElementTree import Element
+
+
+class ConjugManager:
+    def __init__(self, language: str = ...) -> None: ...
+    def _detect_allowed_endings(self) -> Union[bool, Set[str]]: ...
+    def _load_conjugations(self, conjugations_file: str) -> None: ...
+    def _load_verbs(self, verbs_file: str) -> None: ...
+
+
+class Verbiste:
+    def _load_conjugations(self, conjugations_file: str) -> None: ...
+    @staticmethod
+    def _load_tense(
+        tense: Element
+    ) -> Optional[Union[str, List[Tuple[int, None]], List[Tuple[int, str]], List[Union[Tuple[int, str], Tuple[int, None]]]]]: ...
+    def _load_verbs(self, verbs_file: str) -> None: ...
+    def _parse_conjugations(self, file: str) -> Dict[str, OrderedDict]: ...
+    @staticmethod
+    def _parse_verbs(file: str) -> Dict[str, Dict[str, str]]: ...
