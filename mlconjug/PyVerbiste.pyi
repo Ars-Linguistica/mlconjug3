@@ -122,7 +122,7 @@ class Verb:
 
     def conjugate_person(self,
                          key: Text,
-                         persons_dict: OrderedDict,
+                         persons_dict: Mapping[Text, Text],
                          term: Text
                          ) -> None: ...
 
