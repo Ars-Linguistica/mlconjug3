@@ -1,6 +1,7 @@
 # Stubs for mlconjug.PyVerbiste (Python 3)
 
 from typing import Text, Sequence, Mapping, Dict, Tuple, Optional, Union, Set, TextIO
+from collections import OrderedDict
 
 __author__: Text
 __author_email__: Text
@@ -121,7 +122,7 @@ class Verb:
 
     def conjugate_person(self,
                          key: Text,
-                         persons_dict: Mapping[Text, Text],
+                         persons_dict: OrderedDict,
                          term: Text
                          ) -> None: ...
 
