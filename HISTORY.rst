@@ -15,7 +15,7 @@ History
 * Implemented multicore grid search.
 * Display prettier output in the CLI.
 * Updated scikit-learn dependency.
-* Updated other Dependencies.
+* Updated other dependencies.
 
 3.4 (2019-29-04)
 ------------------
