@@ -2,7 +2,7 @@
 History
 =======
 
-3.5 (2019-18-07)
+3.5.1 (2019-18-07)
 ------------------
 
 * Fixed bug in issue #80 and #81 reported by @rongybika and @NoelHVincent.
