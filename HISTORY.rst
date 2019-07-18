@@ -14,7 +14,8 @@ History
 * Implemented results_parser to select and train the best performing models.
 * Implemented multicore grid search.
 * Display prettier output in the CLI.
-* Updated Dependencies.
+* Updated scikit-learn dependency.
+* Updated other Dependencies.
 
 3.4 (2019-29-04)
 ------------------
