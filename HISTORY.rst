@@ -2,6 +2,20 @@
 History
 =======
 
+3.5 (2019-18-07)
+------------------
+
+* Fixed bug in issue #80 and #81 reported by @rongybika and @NoelHVincent.
+* Added new option '-o' to the CLI allowing to specify output file to save results to json file.
+* Use logging instead of print() whenever appropriate.
+* Use joblib for model persistence instead.
+* Updated Type declarations.
+* Added more tests in the test-suite.
+* Implemented results_parser to select and train the best performing models.
+* Implemented multicore grid search.
+* Display prettier output in the CLI.
+* Updated Dependencies.
+
 3.4 (2019-29-04)
 ------------------
 
