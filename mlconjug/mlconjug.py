@@ -166,8 +166,10 @@ class Conjugator:
                 _('The supplied word: {0} is not a valid verb in {1}.').format(verb, _LANGUAGE_FULL[self.language]))
         if verb not in self.conjug_manager.verbs.keys():
             if self.model is None:
-                # TODO: Raise error indicating that the verb is unknown and that no model has been provided.
-                return None
+                logger.warning(_('Please provide an instance of a mlconjug.mlconjug.Model'))
+                raise ValueError(
+                _('The supplied word: {0} is not in the conjugation {1} table and no Conjugation Model was provided.').format(
+                    verb, _LANGUAGE_FULL[self.language]))
             prediction = self.model.predict([verb])[0]
             prediction_score = self.model.pipeline.predict_proba([verb])[0][prediction]
             predicted = True
