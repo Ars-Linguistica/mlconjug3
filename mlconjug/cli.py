@@ -66,7 +66,7 @@ def main(verbs, language, output, subject):
         result = conjugator.conjugate(verb, subject)
         results[verb] = result.conjug_info
     if output:
-        with open(output, 'w') as file:
+        with open(output, 'w', encoding='utf-8') as file:
             json.dump(results, file, ensure_ascii=False, indent=4)
             print('The conjugations have been succesfully saved to {0}.'.format(output))
     else:
