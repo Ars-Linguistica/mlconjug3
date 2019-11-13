@@ -69,4 +69,4 @@ for lang in langs:
     # Save trained model
     with open('/home/ubuntu/PycharmProjects/mlconjug/utils/raw_data/experiments/trained_model-{0}-final.pickle'.format(lang), 'wb') as file:
         pickle.dump(conjugator.model, file)
-pprint(results)
+pprint.pprint(results)
