@@ -42,7 +42,7 @@ if __name__ == "__main__":
     # multiprocessing requires the fork to happen in a __main__ protected
     # block
     for lang in langs:
-        my_file = Path('/home/ubuntu/PycharmProjects/mlconjug/utils/raw_data/models/best_model_{0}.pkl'.format(lang))
+        my_file = Path('raw_data/models/best_model_{0}.pkl'.format(lang))
         if my_file.is_file():
             continue
         else:
@@ -117,13 +117,13 @@ if __name__ == "__main__":
                 print("\t%s: %r" % (param_name, best_parameters[param_name]))
 
             # Save best model
-            with open('/home/ubuntu/PycharmProjects/mlconjug/utils/raw_data/models/best_model_{0}.pkl'.format(lang),
+            with open('raw_data/models/best_model_{0}.pkl'.format(lang),
                       'wb') as file:
                 joblib.dump(best_estimator, file, compress=('gzip', 6))
             print('\nSaved the best "{0}" model found by the GridSearch as a joblib file.\n')
 
             # Save best model parameters
-            with open('/home/ubuntu/PycharmProjects/mlconjug/utils/raw_data/experiments/best_model_parameters_{0}.pkl'.format(lang),
+            with open('raw_data/experiments/best_model_parameters_{0}.pkl'.format(lang),
                       'wb') as file:
                 joblib.dump(grid_search.best_params_, file, compress=('gzip', 6))
             print('\nSaved the parameters of the best "{0}" model found by the GridSearch as a joblib file.\n')
