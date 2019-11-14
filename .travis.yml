@@ -1,12 +1,12 @@
 sudo: required
-dist: trusty
+dist: bionic
 cache: pip
 language: python
 python:
 - 3.8-dev
-- 3.8.0
+- 3.8
 - 3.7-dev
-- 3.7.5
+- 3.7
 - 3.6
 - 3.5
 #  PyPy versions
@@ -15,8 +15,8 @@ matrix:
   allow_failures:
   - python: pypy3
   - python: 3.8-dev
-  - python: 3.8.0
-  - python: 3.7.5
+  - python: 3.8
+  - python: 3.7
   - python: 3.5
 branches:
   only:
