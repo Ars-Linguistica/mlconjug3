@@ -12,7 +12,6 @@ PyYAML==5.1.2
 pytest==5.2.2
 pytest-runner==5.2
 cython==0.29.14
-numpy==1.17.4
 scikit-learn==0.21.3
 click==7.0
 mypy==0.740
