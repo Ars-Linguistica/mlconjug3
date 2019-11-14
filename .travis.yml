@@ -1,5 +1,5 @@
 sudo: required
-dist: bionic
+dist: xenial
 cache: pip
 language: python
 python:
@@ -10,10 +10,10 @@ python:
 - 3.6
 - 3.5
 #  PyPy versions
-- pypy3.5-6.0
+- pypy3
 matrix:
   allow_failures:
-  - python: pypy3.5-6.0
+  - python: pypy3
   - python: 3.8-dev
   - python: 3.7-dev
   - python: 3.5
