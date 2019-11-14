@@ -11,6 +11,7 @@ General
 * DONE: check types with mypy/MonkeyType.
 * INPROGRESS: refactor as much as possible.
 * TODO: use the package asq or similar to better handle nested dictionaries.
+* TODO: update pipenv dependencies.
 * DONE: use MonkeyType to generate type information.
 
 CLI
