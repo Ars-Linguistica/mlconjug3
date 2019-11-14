@@ -15,7 +15,6 @@ __credits__: Tuple[Text]
 __license__: Text
 __maintainer__: Text
 __status__: Text
-Pipeline: Any
 SelectFromModel: Any
 CountVectorizer: Any
 LinearSVC: Any
