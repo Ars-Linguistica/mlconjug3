@@ -3,15 +3,16 @@ dist: trusty
 cache: pip
 language: python
 python:
+- 3.8
+- 3.7
 - 3.6
 - 3.5
 - 3.4
-- 3.7-dev
 #  PyPy versions
-- pypy3.5
+- pypy3
 matrix:
   allow_failures:
-  - python: pypy3.5
+  - python: pypy3
   - python: 3.5
   - python: 3.4
 branches:
@@ -25,7 +26,7 @@ deploy:
   distributions: sdist bdist_wheel
   user: SekouD
   on:
-    python: 3.7-dev
+    python: 3.7
     repo: blackdebordeaux/mlconjug
     tags: true
     branch: master
