@@ -2,6 +2,12 @@
 History
 =======
 
+3.6 (2019-14-11)
+------------------
+
+* Updated scikit-learn dependency to 0.21.3.
+* Updated other dependencies.
+
 3.5.1 (2019-18-07)
 ------------------
 
