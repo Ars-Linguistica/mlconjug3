@@ -7,7 +7,6 @@ python:
 - 3.7-dev
 - 3.6
 - 3.5
-- 3.4
 #  PyPy versions
 - pypy3
 matrix:
@@ -15,7 +14,6 @@ matrix:
   - python: pypy3
   - python: 3.8-dev
   - python: 3.5
-  - python: 3.4
 branches:
   only:
   - master
