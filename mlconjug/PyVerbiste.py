@@ -139,10 +139,10 @@ class ConjugManager:
 
     def _load_conjugations(self, conjugations_file):
         """
-        Load and parses the conjugations from the xml file.
+        Load and parses the conjugations from the json file.
 
         :param conjugations_file: string or path object.
-            Path to the conjugation xml file.
+            Path to the conjugation json file.
 
         """
         with open(conjugations_file, 'r', encoding='utf-8') as file:
