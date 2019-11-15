@@ -98,7 +98,7 @@ if __name__ == "__main__":
             # find the best parameters for both the feature extraction and the
             # classifier
             grid_search = GridSearchCV(pipeline, parameters, cv=3,
-                                       n_jobs=3, verbose=1,)
+                                       n_jobs=-1, verbose=1,)
 
             print("Performing grid search for language '{0}' started at {1}...".format(lang, datetime.datetime.now()))
             print("pipeline:", [name for name, _ in pipeline.steps])
