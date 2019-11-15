@@ -36,7 +36,7 @@ print(__doc__)
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s %(levelname)s %(message)s')
 
-langs = ('fr', 'it', 'en', 'es', 'pt', 'ro')
+langs = ('ro', 'it', 'en', 'es', 'pt', 'fr')
 
 if __name__ == "__main__":
     # multiprocessing requires the fork to happen in a __main__ protected

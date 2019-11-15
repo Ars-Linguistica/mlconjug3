@@ -18,7 +18,7 @@ import pprint
 from functools import partial
 
 # Set a language to train the Conjugator on
-langs = ('en', 'es', 'fr', 'it', 'pt', 'ro')
+langs = ('ro', 'it', 'en', 'es', 'fr', 'pt')
 
 managers = (mlconjug.Verbiste, mlconjug.ConjugManager)
 results = {}
