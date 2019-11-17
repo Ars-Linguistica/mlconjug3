@@ -120,10 +120,10 @@ if __name__ == "__main__":
             with open('raw_data/models/best_model_{0}.pkl'.format(lang),
                       'wb') as file:
                 joblib.dump(best_estimator, file, compress=('gzip', 6))
-            print('\nSaved the best "{0}" model found by the GridSearch as a joblib file.\n')
+            print('\nSaved the best "{0}" model found by the GridSearch as a joblib file.\n'.format(lang))
 
             # Save best model parameters
             with open('raw_data/experiments/best_model_parameters_{0}.pkl'.format(lang),
                       'wb') as file:
                 joblib.dump(grid_search.best_params_, file, compress=('gzip', 6))
-            print('\nSaved the parameters of the best "{0}" model found by the GridSearch as a joblib file.\n')
+            print('\nSaved the parameters of the best "{0}" model found by the GridSearch as a joblib file.\n'.format(lang))
