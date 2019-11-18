@@ -15,8 +15,11 @@ train_model.
 import mlconjug
 import pickle
 import pprint
+import numpy as np
 from functools import partial
 from time import time
+
+np.random.seed(42)
 
 # Set a language to train the Conjugator on
 langs = ('ro', 'it', 'en', 'es', 'fr', 'pt')
@@ -38,8 +41,7 @@ for lang in langs:
     feature_reductor = mlconjug.SelectFromModel(mlconjug.LinearSVC(penalty="l1",
                                                                    max_iter=12000,
                                                                    dual=False,
-                                                                   verbose=0,
-                                                                   random_state=42))
+                                                                   verbose=0))
 
     # Prediction Classifier
     classifier = mlconjug.SGDClassifier(loss="log",
@@ -47,7 +49,6 @@ for lang in langs:
                                         l1_ratio=0.15,
                                         max_iter=40000,
                                         alpha=1e-5,
-                                        random_state=42,
                                         verbose=0)
 
     # Initialize Data Set
