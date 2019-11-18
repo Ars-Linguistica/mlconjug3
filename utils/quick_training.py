@@ -37,7 +37,8 @@ for lang in langs:
     feature_reductor = mlconjug.SelectFromModel(mlconjug.LinearSVC(penalty="l1",
                                                                    max_iter=12000,
                                                                    dual=False,
-                                                                   verbose=0))
+                                                                   verbose=0,
+                                                                   random_state=42))
 
     # Prediction Classifier
     classifier = mlconjug.SGDClassifier(loss="log",

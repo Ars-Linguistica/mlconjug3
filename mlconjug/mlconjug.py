@@ -250,6 +250,7 @@ class DataSet:
         """
         conjug = defaultdict(list)
         verb_items = list(self.verbs_dict.items())
+        random.seed = 42
         random.shuffle(verb_items)
         for verb, info_verb in verb_items:
             self.verbs_list.append(verb)
