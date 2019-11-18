@@ -62,14 +62,16 @@ for lang in langs:
     print('training {0} model on train set'.format(lang))
     t0 = time()
     conjugator.model.train(dataset.train_input, dataset.train_labels)
-    print('{0} model trained on train set in {1} seconds.'.format(lang, round(time() - t0), 3))
+    duration = round(time() - t0, 3)
+    print('{0} model trained on train set in {1} seconds.'.format(lang, duration))
     predicted = conjugator.model.predict(dataset.test_input)
     predicted2 = conjugator.model.predict(dataset.verbs_list)
 
     print('training {0} model on full data set'.format(lang))
     t0 = time()
     conjugator.model.train(dataset.verbs_list, dataset.templates_list)
-    print('{0} model trained on full data set in {1} seconds.'.format(lang, round(time() - t0), 3))
+    duration2 = round(time() - t0, 3)
+    print('{0} model trained on full data set in {1} seconds.'.format(lang, duration2))
     predicted_full = conjugator.model.predict(dataset.verbs_list)
 
     # Assess the performance of the model's predictions
@@ -88,7 +90,7 @@ for lang in langs:
     entries_full = len(predicted_full)
     print('The score of the {0} model trained on the full dataset is {1} with the {2} model.'.format(lang, score_full, managers[0].__name__))
 
-    results[lang] = (score, misses, entries), (score2, misses2, entries2), (score_full, misses_full,entries_full)
+    results[lang] = (duration, duration2), (score, misses, entries), (score2, misses2, entries2), (score_full, misses_full,entries_full)
 
     # Save trained model
     with open('raw_data/experiments/trained_model-{0}-final.pickle'.format(lang), 'wb') as file:
