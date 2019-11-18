@@ -16,6 +16,7 @@ import mlconjug
 import pickle
 import pprint
 from functools import partial
+from time import time
 
 # Set a language to train the Conjugator on
 langs = ('ro', 'it', 'en', 'es', 'fr', 'pt')
@@ -59,25 +60,35 @@ for lang in langs:
 
     # Training and prediction
     print('training {0} model on train set'.format(lang))
+    t0 = time()
     conjugator.model.train(dataset.train_input, dataset.train_labels)
+    print('{0} model trained on train set in {1} seconds.'.format(lang, round(time() - t0), 3))
     predicted = conjugator.model.predict(dataset.test_input)
     predicted2 = conjugator.model.predict(dataset.verbs_list)
 
     print('training {0} model on full data set'.format(lang))
+    t0 = time()
     conjugator.model.train(dataset.verbs_list, dataset.templates_list)
+    print('{0} model trained on full data set in {1} seconds.'.format(lang, round(time() - t0), 3))
     predicted_full = conjugator.model.predict(dataset.verbs_list)
 
     # Assess the performance of the model's predictions
     score = len([a == b for a, b in zip(predicted, dataset.test_labels) if a == b]) / len(predicted)
+    misses = len([a != b for a, b in zip(predicted, dataset.test_labels) if a == b])
+    entries = len(predicted)
     print('The score of the {0} model trained on the train set is {1} with the {2} model on test set.'.format(lang, score, managers[0].__name__))
 
     score2 = len([a == b for a, b in zip(predicted2, dataset.templates_list) if a == b]) / len(predicted2)
+    misses2 = len([a == b for a, b in zip(predicted2, dataset.templates_list) if a == b])
+    entries2 = len(predicted2)
     print('The score of the {0} model trained on the train set is {1} with the {2} model on full dataset.'.format(lang, score2, managers[0].__name__))
 
     score_full = len([a == b for a, b in zip(predicted_full, dataset.templates_list) if a == b]) / len(predicted_full)
+    misses_full = len([a == b for a, b in zip(predicted_full, dataset.templates_list) if a == b])
+    entries_full = len(predicted_full)
     print('The score of the {0} model trained on the full dataset is {1} with the {2} model.'.format(lang, score_full, managers[0].__name__))
 
-    results[lang] = score, score2, score_full
+    results[lang] = (score, misses, entries), (score2, misses2, entries2), (score_full, misses_full,entries_full)
 
     # Save trained model
     with open('raw_data/experiments/trained_model-{0}-final.pickle'.format(lang), 'wb') as file:
