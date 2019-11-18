@@ -57,14 +57,26 @@ for lang in langs:
     conjugator = mlconjug.Conjugator(lang, model)
 
     # Training and prediction
+    print('training {0} model on train set'.format(lang))
     conjugator.model.train(dataset.train_input, dataset.train_labels)
     predicted = conjugator.model.predict(dataset.test_input)
+    predicted2 = conjugator.model.predict(dataset.verbs_list)
+
+    print('training {0} model on full data set'.format(lang))
+    conjugator.model.train(dataset.verbs_list, dataset.templates_list)
+    predicted_full = conjugator.model.predict(dataset.verbs_list)
 
     # Assess the performance of the model's predictions
     score = len([a == b for a, b in zip(predicted, dataset.test_labels) if a == b]) / len(predicted)
-    print('The score of the {0} model is {1} with the {2} model.'.format(lang, score, managers[0].__name__))
+    print('The score of the {0} model trained on the train set is {1} with the {2} model on test set.'.format(lang, score, managers[0].__name__))
 
-    results[lang] = score
+    score2 = len([a == b for a, b in zip(predicted2, dataset.templates_list) if a == b]) / len(predicted2)
+    print('The score of the {0} model trained on the train set is {1} with the {2} model on full dataset.'.format(lang, score2, managers[0].__name__))
+
+    score_full = len([a == b for a, b in zip(predicted_full, dataset.templates_list) if a == b]) / len(predicted_full)
+    print('The score of the {0} model trained on the full dataset is {1} with the {2} model.'.format(lang, score_full, managers[0].__name__))
+
+    results[lang] = score, score2, score_full
 
     # Save trained model
     with open('raw_data/experiments/trained_model-{0}-final.pickle'.format(lang), 'wb') as file:
