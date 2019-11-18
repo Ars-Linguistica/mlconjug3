@@ -74,17 +74,17 @@ for lang in langs:
 
     # Assess the performance of the model's predictions
     score = len([a == b for a, b in zip(predicted, dataset.test_labels) if a == b]) / len(predicted)
-    misses = len([a != b for a, b in zip(predicted, dataset.test_labels) if a == b])
+    misses = len([a != b for a, b in zip(predicted, dataset.test_labels) if a != b])
     entries = len(predicted)
     print('The score of the {0} model trained on the train set is {1} with the {2} model on test set.'.format(lang, score, managers[0].__name__))
 
     score2 = len([a == b for a, b in zip(predicted2, dataset.templates_list) if a == b]) / len(predicted2)
-    misses2 = len([a == b for a, b in zip(predicted2, dataset.templates_list) if a == b])
+    misses2 = len([a == b for a, b in zip(predicted2, dataset.templates_list) if a != b])
     entries2 = len(predicted2)
     print('The score of the {0} model trained on the train set is {1} with the {2} model on full dataset.'.format(lang, score2, managers[0].__name__))
 
     score_full = len([a == b for a, b in zip(predicted_full, dataset.templates_list) if a == b]) / len(predicted_full)
-    misses_full = len([a == b for a, b in zip(predicted_full, dataset.templates_list) if a == b])
+    misses_full = len([a == b for a, b in zip(predicted_full, dataset.templates_list) if a != b])
     entries_full = len(predicted_full)
     print('The score of the {0} model trained on the full dataset is {1} with the {2} model.'.format(lang, score_full, managers[0].__name__))
 
