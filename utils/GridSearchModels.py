@@ -71,9 +71,9 @@ if __name__ == "__main__":
                                                 verbose=0)
 
             pipeline = Pipeline([
-                ('vect', vectorizer),
-                ('feat', feature_reductor),
-                ('clf', classifier),
+                ('vectoriser', vectorizer),
+                ('feature_selector', feature_reductor),
+                ('classifier', classifier),
             ])
 
             # uncommenting more parameters will give better exploring power but will
