@@ -15,7 +15,7 @@ from .__init__ import Pipeline, SelectFromModel, CountVectorizer, LinearSVC, SGD
 
 from .utils import logger
 
-import random
+from random import Random
 from collections import defaultdict
 import joblib
 import pkg_resources
@@ -250,8 +250,7 @@ class DataSet:
         """
         conjug = defaultdict(list)
         verb_items = list(self.verbs_dict.items())
-        random.seed = 42
-        random.shuffle(verb_items)
+        Random(42).shuffle(verb_items)
         for verb, info_verb in verb_items:
             self.verbs_list.append(verb)
             self.templates_list.append(self.templates.index(info_verb["template"]))
@@ -286,8 +285,8 @@ class DataSet:
                     train_set.append((verbe, template))
                 for verbe in lverbs[index:]:
                     test_set.append((verbe, template))
-        random.shuffle(train_set)
-        random.shuffle(test_set)
+        Random(42).shuffle(train_set)
+        Random(42).shuffle(test_set)
         self.train_input = [elmt[0] for elmt in train_set]
         self.train_labels = [self.templates.index(elmt[1]) for elmt in train_set]
         self.test_input = [elmt[0] for elmt in test_set]
