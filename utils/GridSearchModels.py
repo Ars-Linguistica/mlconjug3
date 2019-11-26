@@ -79,9 +79,9 @@ if __name__ == "__main__":
             # uncommenting more parameters will give better exploring power but will
             # increase processing time in a combinatorial way
             parameters = {
-                'feat__estimator__max_iter': (12000, 8400, 3600, 4800, 6400),
-                'feat__estimator__tol': (1e-3, 1e-4, 1e-5),
-                'feat__estimator__C': (1e-1, 1),
+                'feature_selector__estimator__max_iter': (12000, 8400, 3600, 4800, 6400),
+                'feature_selector__estimator__tol': (1e-3, 1e-4, 1e-5),
+                'feature_selector__estimator__C': (1e-1, 1),
                 'classifier__alpha': (0.00001, 0.000001),
                 'classifier__penalty': ('l2', 'elasticnet'),
                 'classifier__tol': (1e-3, 1e-4, 1e-5),
