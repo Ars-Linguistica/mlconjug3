@@ -82,12 +82,12 @@ if __name__ == "__main__":
                 'feat__estimator__max_iter': (12000, 8400, 3600, 4800, 6400),
                 'feat__estimator__tol': (1e-3, 1e-4, 1e-5),
                 'feat__estimator__C': (1e-1, 1),
-                'clf__alpha': (0.00001, 0.000001),
-                'clf__penalty': ('l2', 'elasticnet'),
-                'clf__tol': (1e-3, 1e-4, 1e-5),
-                'clf__l1_ratio': (0.15, 0.3, 0.45, 0.6),
-                'clf__loss': ('log', 'modified_huber'),
-                'clf__max_iter': (30000, 40000, 50000),
+                'classifier__alpha': (0.00001, 0.000001),
+                'classifier__penalty': ('l2', 'elasticnet'),
+                'classifier__tol': (1e-3, 1e-4, 1e-5),
+                'classifier__l1_ratio': (0.15, 0.3, 0.45, 0.6),
+                'classifier__loss': ('log', 'modified_huber'),
+                'classifier__max_iter': (30000, 40000, 50000),
             }
 
             # ignores CnvergenceWarnings during model selection
