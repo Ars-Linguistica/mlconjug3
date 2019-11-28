@@ -2,7 +2,15 @@
 History
 =======
 
-3.6 (2019-14-11)
+3.6.1 (2019-28-11)
+------------------
+
+* Updated the pre-trained models for better accuracy (Now all models have more than 99.9% accuracy) .
+* Added new utilities for model training and persistence.
+* Now all training and GridSearch results are reproducible from run to run.
+* Updated development dependencies.
+
+3.6.0 (2019-14-11)
 ------------------
 
 * Updated scikit-learn dependency to 0.21.3.
