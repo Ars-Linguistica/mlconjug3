@@ -9,7 +9,7 @@ Sphinx==2.2.1
 docutils==0.15.2
 cryptography==2.8
 PyYAML==5.1.2
-pytest==5.2.2
+pytest==5.3.1
 pytest-runner==5.2
 cython==0.29.14
 scikit-learn==0.21.3
