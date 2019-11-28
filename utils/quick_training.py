@@ -18,6 +18,12 @@ import pprint
 import numpy as np
 from functools import partial
 from time import time
+import joblib
+
+try:
+    from pathlib import Path
+except ImportError:
+    from pathlib2 import Path
 
 np.random.seed(42)
 
@@ -28,6 +34,14 @@ managers = (mlconjug.Verbiste, mlconjug.ConjugManager)
 results = {}
 
 for lang in langs:
+    my_file = Path('raw_data/experiments/reduced_search/best_model_parameters_{0}.pkl'.format(lang))
+    if not my_file.exists():
+        continue
+    else:
+        # Loads best model parameters
+        with open('raw_data/experiments/reduced_search/best_model_parameters_{0}.pkl'.format(lang),
+                  'rb') as file:
+            best_params = joblib.load(file)
     # Set a ngram range sliding window for the vectorizer
     ngrange = (2, 7)
 
@@ -39,17 +53,11 @@ for lang in langs:
 
     # Feature reduction
     feature_reductor = mlconjug.SelectFromModel(mlconjug.LinearSVC(penalty="l1",
-                                                                   max_iter=12000,
                                                                    dual=False,
                                                                    verbose=0))
 
     # Prediction Classifier
-    classifier = mlconjug.SGDClassifier(loss="log",
-                                        penalty='elasticnet',
-                                        l1_ratio=0.15,
-                                        max_iter=40000,
-                                        alpha=1e-5,
-                                        verbose=0)
+    classifier = mlconjug.SGDClassifier(verbose=0)
 
     # Initialize Data Set
     dataset = mlconjug.DataSet(mlconjug.Verbiste(language=lang).verbs)
@@ -57,6 +65,7 @@ for lang in langs:
 
     # Initialize Conjugator
     model = mlconjug.Model(vectorizer, feature_reductor, classifier)
+    model.pipeline.set_params(**best_params)
     conjugator = mlconjug.Conjugator(lang, model)
 
     # Training and prediction
