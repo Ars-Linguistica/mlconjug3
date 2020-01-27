@@ -434,7 +434,7 @@ class Verb:
         :param key: string.
         :param persons_dict: OrderedDict
         :param term: string.
-        :return:
+        :return: None.
         """
         persons_dict[key] = self.verb_info.root + term
         return
