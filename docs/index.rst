@@ -1,4 +1,4 @@
-Welcome to MLConjug's documentation!
+Welcome to MLConjug3's documentation!
 ====================================
 
 Contents:

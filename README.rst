@@ -23,9 +23,9 @@ mlconjug3
         :target: https://mlconjug3.readthedocs.io/en/latest
         :alt: Documentation Status
 
-.. image:: https://pyup.io/repos/github/SekouDiao/mlconjug3/shield.svg
-        :target: https://pyup.io/repos/github/SekouDiaoNlp/mlconjug3/
-        :alt: Depedencies Update Status
+.. image:: https://pyup.io/repos/github/SekouDiaoNlp/mlconjug3/shield.svg
+     :target: https://pyup.io/repos/github/SekouDiaoNlp/mlconjug3/
+     :alt: Dependencies status
 
 .. image:: https://codecov.io/gh/SekouDiaoNlp/mlconjug3/branch/master/graph/badge.svg
         :target: https://codecov.io/gh/SekouDiaoNlp/mlconjug3
