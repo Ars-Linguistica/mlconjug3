@@ -58,7 +58,7 @@ mlconjug3
   using the French model as a model to query during the training.
 
 .. warning::
-    MLCONJUG3 now onky supports Python 3.x as Python 2.x has been deprecated in 2020.
+    MLCONJUG3 now only supports Python 3.x as Python 2.x has been deprecated in 2020.
 
 * Free software: MIT license
 * Documentation: https://mlconjug.readthedocs.io.
