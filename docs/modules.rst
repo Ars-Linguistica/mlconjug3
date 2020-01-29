@@ -3,8 +3,8 @@ Package Api Documentation for mlconjug
 ======================================
 
 
-API Reference for the classes in mlconjug.mlconjug.py
------------------------------------------------------
+API Reference for the classes in mlconjug3.mlconjug.py
+------------------------------------------------------
 
 .. automodule:: mlconjug.mlconjug
     :member-order: bysource
@@ -13,8 +13,8 @@ API Reference for the classes in mlconjug.mlconjug.py
     :show-inheritance:
 
 
-API Reference for the classes in mlconjug.PyVerbiste.py
--------------------------------------------------------
+API Reference for the classes in mlconjug3.PyVerbiste.py
+--------------------------------------------------------
 
 .. automodule:: mlconjug.PyVerbiste
     :member-order: bysource
