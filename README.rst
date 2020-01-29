@@ -11,8 +11,8 @@ mlconjug3
         :target: https://pypi.python.org/pypi/mlconjug3
         :alt: Pypi Python Package Index Status
 
-.. image:: https://img.shields.io/travis/SekouDiaoNlpiaoNlp/mlconjug3.svg
-        :target: https://travis-ci.org/SekouDiaoNlpiaoNlp/mlconjug3
+.. image:: https://img.shields.io/travis/SekouDiaoNlp/mlconjug3.svg
+        :target: https://travis-ci.org/SekouDiao/mlconjug3
         :alt: Linux Continuous Integration Status
 
 .. image:: https://ci.appveyor.com/api/projects/status/6iatj101xxfehbo8/branch/master?svg=true
@@ -23,8 +23,8 @@ mlconjug3
         :target: https://mlconjug3.readthedocs.io/en/latest
         :alt: Documentation Status
 
-.. image:: https://pyup.io/repos/github/SekouDiaoNlpiaoNlp/mlconjug3/shield.svg
-        :target: https://pyup.io/repos/github/SekouDiaoNlpiaoNlp/mlconjug3/
+.. image:: https://pyup.io/repos/github/SekouDiao/mlconjug3/shield.svg
+        :target: https://pyup.io/repos/github/SekouDiaoNlp/mlconjug3/
         :alt: Depedencies Update Status
 
 .. image:: https://codecov.io/gh/SekouDiaoNlp/mlconjug3/branch/master/graph/badge.svg
