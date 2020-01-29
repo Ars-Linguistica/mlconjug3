@@ -6,22 +6,11 @@ import os
 import logging
 
 
-# Python 2.7 compatibility
-# Works for Python 2 and 3
-try:
-    from importlib import reload
-except ImportError:
-    try:
-        from imp import reload
-    except:
-        raise NotImplementedError
 
-# Python 2.7 compatibility
-# Works for Python 2 and 3
-try:
-    basestring
-except NameError:
-    basestring = str
+from importlib import reload
+
+
+basestring = str
 
 logger = logging.getLogger(__name__)
 
