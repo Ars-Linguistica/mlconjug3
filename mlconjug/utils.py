@@ -4,7 +4,6 @@
 
 import os
 import logging
-from importlib import reload
 
 
 basestring = str
