@@ -57,6 +57,8 @@ mlconjug3
 | The training data for English, Spanish, Italian, Portuguese and Romanian was generated using unsupervised learning techniques
   using the French model as a model to query during the training.
 
+.. warning::
+    MLCONJUG3 now onky supports Python 3.x as Python 2.x has been deprecated in 2020.
 
 * Free software: MIT license
 * Documentation: https://mlconjug.readthedocs.io.
