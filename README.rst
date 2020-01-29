@@ -61,7 +61,7 @@ mlconjug3
     MLCONJUG3 now only supports Python 3.x as Python 2.x has been deprecated in 2020.
 
 * Free software: MIT license
-* Documentation: https://mlconjug.readthedocs.io.
+* Documentation: https://mlconjug3.readthedocs.io.
 
 Supported Languages
 -------------------
