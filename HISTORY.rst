@@ -2,7 +2,7 @@
 History
 =======
 
-3.7 (2020-29-01)
+3.7.1 (2020-29-01)
 ------------------
 
 * Updated the pre-trained models for better accuracy (Now all models have more than 99.9% accuracy) .
