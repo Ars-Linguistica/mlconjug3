@@ -11,28 +11,28 @@ mlconjug
         :target: https://pypi.python.org/pypi/mlconjug3
         :alt: Pypi Python Package Index Status
 
-.. image:: https://img.shields.io/travis/SekouDiaoNlpiaoNlp/mlconjug.svg
-        :target: https://travis-ci.org/SekouDiaoNlpiaoNlp/mlconjug
+.. image:: https://img.shields.io/travis/SekouDiaoNlpiaoNlp/mlconjug3.svg
+        :target: https://travis-ci.org/SekouDiaoNlpiaoNlp/mlconjug3
         :alt: Linux Continuous Integration Status
 
 .. image:: https://ci.appveyor.com/api/projects/status/6iatj101xxfehbo8/branch/master?svg=true
-        :target: https://ci.appveyor.com/project/SekouDiaoNlp/mlconjug
+        :target: https://ci.appveyor.com/project/SekouDiaoNlp/mlconjug3
         :alt: Windows Continuous Integration Status
 
-.. image:: https://readthedocs.org/projects/mlconjug/badge/?version=latest
-        :target: https://mlconjug.readthedocs.io/en/latest
+.. image:: https://readthedocs.org/projects/mlconjug3/badge/?version=latest
+        :target: https://mlconjug3.readthedocs.io/en/latest
         :alt: Documentation Status
 
-.. image:: https://pyup.io/repos/github/SekouDiaoNlpiaoNlp/mlconjug/shield.svg
-        :target: https://pyup.io/repos/github/SekouDiaoNlpiaoNlp/mlconjug/
+.. image:: https://pyup.io/repos/github/SekouDiaoNlpiaoNlp/mlconjug3/shield.svg
+        :target: https://pyup.io/repos/github/SekouDiaoNlpiaoNlp/mlconjug3/
         :alt: Depedencies Update Status
 
-.. image:: https://codecov.io/gh/SekouDiaoNlp/mlconjug/branch/master/graph/badge.svg
-        :target: https://codecov.io/gh/SekouDiaoNlp/mlconjug
+.. image:: https://codecov.io/gh/SekouDiaoNlp/mlconjug3/branch/master/graph/badge.svg
+        :target: https://codecov.io/gh/SekouDiaoNlp/mlconjug3
         :alt: Code Coverage Status
 
-.. image:: https://snyk.io/test/github/SekouDiaoNlp/mlconjug/badge.svg?targetFile=requirements.txt
-        :target: https://snyk.io/test/github/SekouDiaoNlp/mlconjug?targetFile=requirements.txt
+.. image:: https://snyk.io/test/github/SekouDiaoNlp/mlconjug3/badge.svg?targetFile=requirements.txt
+        :target: https://snyk.io/test/github/SekouDiaoNlp/mlconjug3?targetFile=requirements.txt
         :alt: Code Vulnerability Status
 
 
