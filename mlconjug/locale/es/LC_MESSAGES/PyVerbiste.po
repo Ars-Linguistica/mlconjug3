@@ -1,6 +1,6 @@
 # Translation template for mlconjug.py.
-# Copyright (C) 2018 SekouD
-# SekouD <diao.sekou.nlp@gmail.com>, 2018.
+# Copyright (C) 2018 SekouDiaoNlp
+# SekouDiaoNlp <diao.sekou.nlp@gmail.com>, 2018.
 #
 msgid ""
 msgstr ""
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
 "X-Generator: Poedit 2.0.8\n"
-"Last-Translator: SekouD <diao.sekou.nlp@gmail.com>\n"
+"Last-Translator: SekouDiaoNlp <diao.sekou.nlp@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Language: es\n"
 
