@@ -36,7 +36,7 @@ Or download the `tarball`_:
 
 .. code-block:: console
 
-    $ curl  -OL https://github.com/SekouDiaoNlp/mlconjug/tarball/master
+    $ curl  -OL https://github.com/SekouDiaoNlp/mlconjug3/tarball/master
 
 Once you have a copy of the source, you can install it with:
 
@@ -45,5 +45,5 @@ Once you have a copy of the source, you can install it with:
     $ python setup.py install
 
 
-.. _Github repo: https://github.com/SekouDiaoNlp/mlconjug
-.. _tarball: https://github.com/SekouDiaoNlp/mlconjug/tarball/master
+.. _Github repo: https://github.com/SekouDiaoNlp/mlconjug3
+.. _tarball: https://github.com/SekouDiaoNlp/mlconjug3/tarball/master

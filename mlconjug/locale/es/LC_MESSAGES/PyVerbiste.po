@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Language: es\n"
 
-#: C:\Users\Utilisateur\PycharmProjects\mlconjug\mlconjug\PyVerbiste.py:91
+#: C:\Users\Utilisateur\PycharmProjects\mlconjug3\mlconjug\PyVerbiste.py:91
 msgid ""
 "\n"
 "    This is the class handling the Verbiste xml files.\n"
@@ -38,7 +38,7 @@ msgstr ""
 "\n"
 "    "
 
-#: C:\Users\Utilisateur\PycharmProjects\mlconjug\mlconjug\PyVerbiste.py:102
+#: C:\Users\Utilisateur\PycharmProjects\mlconjug3\mlconjug\PyVerbiste.py:102
 msgid ""
 "Unsupported language.\n"
 "The allowed languages are fr, en, es, it, pt, ro."

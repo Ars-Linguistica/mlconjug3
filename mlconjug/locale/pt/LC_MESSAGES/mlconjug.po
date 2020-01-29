@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Language: pt\n"
 
-#: C:\Users\Utilisateur\PycharmProjects\mlconjug\mlconjug\mlconjug.py:51
+#: C:\Users\Utilisateur\PycharmProjects\mlconjug3\mlconjug\mlconjug3.py:51
 msgid ""
 "\n"
 "    | This is the main class of the project.\n"
@@ -53,7 +53,7 @@ msgstr ""
 "\n"
 "    "
 
-#: C:\Users\Utilisateur\PycharmProjects\mlconjug\mlconjug\mlconjug.py:77
+#: C:\Users\Utilisateur\PycharmProjects\mlconjug3\mlconjug\mlconjug.py:77
 msgid ""
 "\n"
 "        | This is the main method of this class.\n"
@@ -93,11 +93,11 @@ msgstr ""
 "\n"
 "        "
 
-#: C:\Users\Utilisateur\PycharmProjects\mlconjug\mlconjug\mlconjug.py:95
+#: C:\Users\Utilisateur\PycharmProjects\mlconjug3\mlconjug\mlconjug.py:95
 msgid "The supplied word: {0} is not a valid verb in {1}."
 msgstr "A palavra fornecida: {0} não é um verbo válido em {1}."
 
-#: C:\Users\Utilisateur\PycharmProjects\mlconjug\mlconjug\mlconjug.py:117
+#: C:\Users\Utilisateur\PycharmProjects\mlconjug3\mlconjug\mlconjug.py:117
 msgid ""
 "\n"
 "        Assigns the provided pre-trained scikit-learn model to be able to "
@@ -115,7 +115,7 @@ msgstr ""
 "\n"
 "        "
 
-#: C:\Users\Utilisateur\PycharmProjects\mlconjug\mlconjug\mlconjug.py:129
+#: C:\Users\Utilisateur\PycharmProjects\mlconjug3\mlconjug\mlconjug.py:129
 msgid ""
 "\n"
 "    | Custom Vectorizer optimized for extracting verbs features.\n"
@@ -145,7 +145,7 @@ msgstr ""
 "\n"
 "    "
 
-#: C:\Users\Utilisateur\PycharmProjects\mlconjug\mlconjug\mlconjug.py:139
+#: C:\Users\Utilisateur\PycharmProjects\mlconjug3\mlconjug\mlconjug.py:139
 msgid ""
 "\n"
 "        Parses a verb and returns the ending ngrams.\n"
@@ -165,7 +165,7 @@ msgstr ""
 "            N-grams finais do verbo.\n"
 "        "
 
-#: C:\Users\Utilisateur\PycharmProjects\mlconjug\mlconjug\mlconjug.py:156
+#: C:\Users\Utilisateur\PycharmProjects\mlconjug3\mlconjug\mlconjug.py:156
 msgid ""
 "\n"
 "    | This class holds and manages the data set.\n"
@@ -187,7 +187,7 @@ msgstr ""
 "\n"
 "    "
 
-#: C:\Users\Utilisateur\PycharmProjects\mlconjug\mlconjug\mlconjug.py:181
+#: C:\Users\Utilisateur\PycharmProjects\mlconjug3\mlconjug\mlconjug.py:181
 msgid ""
 "\n"
 "        | Populates the dictionary containing the conjugation templates.\n"
@@ -201,7 +201,7 @@ msgstr ""
 "\n"
 "        "
 
-#: C:\Users\Utilisateur\PycharmProjects\mlconjug\mlconjug\mlconjug.py:195
+#: C:\Users\Utilisateur\PycharmProjects\mlconjug3\mlconjug\mlconjug.py:195
 msgid ""
 "\n"
 "        Splits the data into a training and a testing set.\n"
