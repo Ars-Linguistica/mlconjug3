@@ -20,10 +20,7 @@ from functools import partial
 from time import time
 import joblib
 
-try:
-    from pathlib import Path
-except ImportError:
-    from pathlib2 import Path
+from pathlib2 import Path
 
 np.random.seed(42)
 
