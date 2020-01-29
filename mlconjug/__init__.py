@@ -24,13 +24,13 @@ Usage example:
 
 """
 
-__author__ = """SekouD"""
+__author__ = """SekouDiaoNlp"""
 __email__ = 'sekoud.python@gmail.com'
 __version__ = '3.6.1'
-__copyright__ = "Copyright (c) 2017, SekouD"
+__copyright__ = "Copyright (c) 2017, SekouDiaoNlp"
 __credits__ = ("Pierre Sarrazin",)
 __license__ = "MIT"
-__maintainer__ = "SekouD"
+__maintainer__ = "SekouDiaoNlp"
 __status__ = "Production"
 
 from .mlconjug import *

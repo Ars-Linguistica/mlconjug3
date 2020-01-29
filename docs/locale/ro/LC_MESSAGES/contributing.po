@@ -1,7 +1,7 @@
 # TRANSLATION TEMPLATE FOR contributing.rst.
-# Copyright (C) 2018, SekouD
+# Copyright (C) 2018, SekouDiaoNlp
 # This file is distributed under the same license as the MLConjug package.
-# SekouD <sekoud.python@gmail.com>, 2018.
+# SekouDiaoNlp <sekoud.python@gmail.com>, 2018.
 #
 #, fuzzy
 msgid ""
@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-06-27 11:51+0200\n"
 "PO-Revision-Date: 2018-06-16 18:14+0000\n"
-"Last-Translator: SekouD <sekoud.python@gmail.com>.\n"
+"Last-Translator: SekouDiaoNlp <sekoud.python@gmail.com>.\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -42,8 +42,8 @@ msgid "Report Bugs"
 msgstr "Raportează bug-uri"
 
 #: ../../../CONTRIBUTING.rst:18
-msgid "Report bugs at https://github.com/SekouD/mlconjug/issues."
-msgstr "Raportați bug-uri la adresa https://github.com/SekouD/mlconjug/issues\""
+msgid "Report bugs at https://github.com/SekouDiaoNlp/mlconjug/issues."
+msgstr "Raportați bug-uri la adresa https://github.com/SekouDiaoNlp/mlconjug/issues\""
 
 #: ../../../CONTRIBUTING.rst:20
 msgid "If you are reporting a bug, please include:"
@@ -111,10 +111,10 @@ msgstr "Trimite parerea ta"
 #: ../../../CONTRIBUTING.rst:48
 msgid ""
 "The best way to send feedback is to file an issue at "
-"https://github.com/SekouD/mlconjug/issues."
+"https://github.com/SekouDiaoNlp/mlconjug/issues."
 msgstr ""
 "Cea mai bună modalitate de a trimite feedback este să trimiteți o problemă "
-"la adresa https://github.com/SekouD/mlconjug/issues."
+"la adresa https://github.com/SekouDiaoNlp/mlconjug/issues."
 
 #: ../../../CONTRIBUTING.rst:50
 msgid "If you are proposing a feature:"
@@ -226,12 +226,12 @@ msgstr ""
 #, fuzzy
 msgid ""
 "The pull request should work for Python 3.3, 3.4, 3.5 and 3.6. Check https"
-"://travis-ci.org/SekouD/mlconjug/pull_requests and make sure that the tests "
+"://travis-ci.org/SekouDiaoNlp/mlconjug/pull_requests and make sure that the tests "
 "pass for all supported Python versions."
 msgstr ""
 "Cererea de tragere ar trebui să funcționeze pentru Python 2.6, 2.7, 3.3, 3.4"
 " și 3.5 și pentru PyPy. Verificați https://travis-"
-"ci.org/SekouD/mlconjug/pull_requests și asigurați-vă că trece testul pentru "
+"ci.org/SekouDiaoNlp/mlconjug/pull_requests și asigurați-vă că trece testul pentru "
 "toate versiunile Python acceptate ."
 
 #: ../../../CONTRIBUTING.rst:109
