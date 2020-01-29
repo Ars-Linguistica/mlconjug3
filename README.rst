@@ -16,7 +16,7 @@ mlconjug3
      :alt: Python 3
 
 .. image:: https://img.shields.io/travis/SekouDiaoNlp/mlconjug3.svg
-        :target: https://travis-ci.org/SekouDiao/mlconjug3
+        :target: https://travis-ci.org/SekouDiaoNLP/mlconjug3
         :alt: Linux Continuous Integration Status
 
 .. image:: https://ci.appveyor.com/api/projects/status/6iatj101xxfehbo8/branch/master?svg=true
