@@ -45,13 +45,13 @@ test_requirements = [
 ]
 
 setup(
-    name='mlconjug',
+    name='mlconjug3',
     version='3.6.1',
     description="A Python library to conjugate French, English, Spanish, Italian, Portuguese and Romanian verbs using Machine Learning techniques.",
     long_description=readme + '\n\n' + installation + '\n\n' + usage + '\n\n' + history,
     author="SekouDiaoNlp",
     author_email='diao.sekou.nlp@gmail.com',
-    url='https://github.com/SekouDiaoNlp/mlconjug',
+    url='https://github.com/SekouDiaoNlp/mlconjug3',
     packages=find_packages(include=['mlconjug']),
     entry_points={
         'console_scripts': [
