@@ -2,9 +2,9 @@
         :target: https://pypi.python.org/pypi/mlconjug
         :alt: mlconjug PyPi Home Page
 
-========
-mlconjug
-========
+=========
+mlconjug3
+=========
 
 
 .. image:: https://img.shields.io/pypi/v/mlconjug3.svg
