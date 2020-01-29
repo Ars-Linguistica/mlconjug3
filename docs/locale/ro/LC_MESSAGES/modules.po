@@ -18,18 +18,18 @@ msgstr ""
 "Generated-By: Babel 2.6.0\n"
 
 #: ../../modules.rst:3
-msgid "Package Api Documentation for mlconjug"
-msgstr "Pachetul Api Documentația pentru mlconjug"
+msgid "Package Api Documentation for mlconjug3"
+msgstr "Pachetul Api Documentația pentru mlconjug3"
 
 #: ../../modules.rst:7
-msgid "API Reference for the classes in mlconjug.mlconjug.py"
-msgstr "Referință API pentru clasele din mlconjug.mlconjug.py"
+msgid "API Reference for the classes in mlconjug3.mlconjug.py"
+msgstr "Referință API pentru clasele din mlconjug3.mlconjug.py"
 
-#: mlconjug.mlconjug:1 of
+#: mlconjug3.mlconjug:1 of
 msgid "MLConjug Main module."
 msgstr "Modul principal MLConjug."
 
-#: mlconjug.mlconjug:3 of
+#: mlconjug3.mlconjug:3 of
 msgid "This module declares the main classes the user interacts with."
 msgstr ""
 "Acest modul declară clasele principale cu care interacționează utilizatorul."

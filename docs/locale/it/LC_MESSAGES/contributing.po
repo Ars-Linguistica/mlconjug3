@@ -42,8 +42,8 @@ msgid "Report Bugs"
 msgstr "Segnala bug"
 
 #: ../../../CONTRIBUTING.rst:18
-msgid "Report bugs at https://github.com/SekouDiaoNlp/mlconjug/issues."
-msgstr "Segnala bug a https://github.com/SekouDiaoNlp/mlconjug/issues."
+msgid "Report bugs at https://github.com/SekouDiaoNlp/mlconjug3/issues."
+msgstr "Segnala bug a https://github.com/SekouDiaoNlp/mlconjug3/issues."
 
 #: ../../../CONTRIBUTING.rst:20
 msgid "If you are reporting a bug, please include:"
@@ -111,10 +111,10 @@ msgstr "Invia feedback"
 #: ../../../CONTRIBUTING.rst:48
 msgid ""
 "The best way to send feedback is to file an issue at "
-"https://github.com/SekouDiaoNlp/mlconjug/issues."
+"https://github.com/SekouDiaoNlp/mlconjug3/issues."
 msgstr ""
 "Il modo migliore per inviare feedback è presentare un problema su "
-"https://github.com/SekouDiaoNlp/mlconjug/issues."
+"https://github.com/SekouDiaoNlp/mlconjug3/issues."
 
 #: ../../../CONTRIBUTING.rst:50
 msgid "If you are proposing a feature:"
@@ -144,14 +144,14 @@ msgstr "Iniziare!"
 
 #: ../../../CONTRIBUTING.rst:60
 msgid ""
-"Ready to contribute? Here's how to set up `mlconjug` for local development."
+"Ready to contribute? Here's how to set up `mlconjug3` for local development."
 msgstr ""
-"Pronto a contribuire? Ecco come impostare` mlconjug` per lo sviluppo locale."
+"Pronto a contribuire? Ecco come impostare` mlconjug3` per lo sviluppo locale."
 " "
 
 #: ../../../CONTRIBUTING.rst:62
-msgid "Fork the `mlconjug` repo on GitHub."
-msgstr "Prepara il repo 'mlconjug` su GitHub."
+msgid "Fork the `mlconjug3` repo on GitHub."
+msgstr "Prepara il repo 'mlconjug3` su GitHub."
 
 #: ../../../CONTRIBUTING.rst:63
 msgid "Clone your fork locally::"
@@ -224,11 +224,11 @@ msgstr ""
 #, fuzzy
 msgid ""
 "The pull request should work for Python 3.3, 3.4, 3.5 and 3.6. Check https"
-"://travis-ci.org/SekouDiaoNlp/mlconjug/pull_requests and make sure that the tests "
+"://travis-ci.org/SekouDiaoNlp/mlconjug3/pull_requests and make sure that the tests "
 "pass for all supported Python versions."
 msgstr ""
 "La richiesta pull dovrebbe funzionare per Python 2.6, 2.7, 3.3, 3.4 e 3.5 e "
-"per PyPy. Controlla https://travis-ci.org/SekouDiaoNlp/mlconjug/pull_requests e "
+"per PyPy. Controlla https://travis-ci.org/SekouDiaoNlp/mlconjug3/pull_requests e "
 "assicurati che i test passino per tutte le versioni di Python supportate \""
 
 #: ../../../CONTRIBUTING.rst:109

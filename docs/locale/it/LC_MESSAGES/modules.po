@@ -18,11 +18,11 @@ msgstr ""
 "Generated-By: Babel 2.6.0\n"
 
 #: ../../modules.rst:3
-msgid "Package Api Documentation for mlconjug"
-msgstr "Documentazione pacchetto API per mlconjug"
+msgid "Package Api Documentation for mlconjug3"
+msgstr "Documentazione pacchetto API per mlconjug3"
 
 #: ../../modules.rst:7
-msgid "API Reference for the classes in mlconjug.mlconjug.py"
+msgid "API Reference for the classes in mlconjug3.mlconjug.py"
 msgstr "Riferimento API per le classi in mlconjug.mlconjug.py"
 
 #: mlconjug.mlconjug:1 of

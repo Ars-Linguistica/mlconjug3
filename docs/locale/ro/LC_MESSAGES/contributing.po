@@ -42,8 +42,8 @@ msgid "Report Bugs"
 msgstr "Raportează bug-uri"
 
 #: ../../../CONTRIBUTING.rst:18
-msgid "Report bugs at https://github.com/SekouDiaoNlp/mlconjug/issues."
-msgstr "Raportați bug-uri la adresa https://github.com/SekouDiaoNlp/mlconjug/issues\""
+msgid "Report bugs at https://github.com/SekouDiaoNlp/mlconjug3/issues."
+msgstr "Raportați bug-uri la adresa https://github.com/SekouDiaoNlp/mlconjug3/issues\""
 
 #: ../../../CONTRIBUTING.rst:20
 msgid "If you are reporting a bug, please include:"
@@ -111,10 +111,10 @@ msgstr "Trimite parerea ta"
 #: ../../../CONTRIBUTING.rst:48
 msgid ""
 "The best way to send feedback is to file an issue at "
-"https://github.com/SekouDiaoNlp/mlconjug/issues."
+"https://github.com/SekouDiaoNlp/mlconjug3/issues."
 msgstr ""
 "Cea mai bună modalitate de a trimite feedback este să trimiteți o problemă "
-"la adresa https://github.com/SekouDiaoNlp/mlconjug/issues."
+"la adresa https://github.com/SekouDiaoNlp/mlconjug3/issues."
 
 #: ../../../CONTRIBUTING.rst:50
 msgid "If you are proposing a feature:"
@@ -144,14 +144,14 @@ msgstr "Incepe!"
 
 #: ../../../CONTRIBUTING.rst:60
 msgid ""
-"Ready to contribute? Here's how to set up `mlconjug` for local development."
+"Ready to contribute? Here's how to set up `mlconjug3` for local development."
 msgstr ""
-"Ați venit să contribuiți? Iată cum puteți crea\" mlconjug \"pentru "
+"Ați venit să contribuiți? Iată cum puteți crea\" mlconjug3 \"pentru "
 "dezvoltarea locală."
 
 #: ../../../CONTRIBUTING.rst:62
-msgid "Fork the `mlconjug` repo on GitHub."
-msgstr "Reportați repo-ul\" mlconjug \"pe GitHub."
+msgid "Fork the `mlconjug3` repo on GitHub."
+msgstr "Reportați repo-ul\" mlconjug3 \"pe GitHub."
 
 #: ../../../CONTRIBUTING.rst:63
 msgid "Clone your fork locally::"
@@ -226,12 +226,12 @@ msgstr ""
 #, fuzzy
 msgid ""
 "The pull request should work for Python 3.3, 3.4, 3.5 and 3.6. Check https"
-"://travis-ci.org/SekouDiaoNlp/mlconjug/pull_requests and make sure that the tests "
+"://travis-ci.org/SekouDiaoNlp/mlconjug3/pull_requests and make sure that the tests "
 "pass for all supported Python versions."
 msgstr ""
 "Cererea de tragere ar trebui să funcționeze pentru Python 2.6, 2.7, 3.3, 3.4"
 " și 3.5 și pentru PyPy. Verificați https://travis-"
-"ci.org/SekouDiaoNlp/mlconjug/pull_requests și asigurați-vă că trece testul pentru "
+"ci.org/SekouDiaoNlp/mlconjug3/pull_requests și asigurați-vă că trece testul pentru "
 "toate versiunile Python acceptate ."
 
 #: ../../../CONTRIBUTING.rst:109
