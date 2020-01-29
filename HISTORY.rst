@@ -2,6 +2,15 @@
 History
 =======
 
+3.7 (2020-29-01)
+------------------
+
+* Updated the pre-trained models for better accuracy (Now all models have more than 99.9% accuracy) .
+* Added new utilities for model training and persistence.
+* Now all training and GridSearch results are reproducible from run to run.
+* Retrained all models with scikit-learn 0.22.1.
+* Corrected mutliple edge cases and enlarged the test suite.
+
 3.6.1 (2019-28-11)
 ------------------
 
