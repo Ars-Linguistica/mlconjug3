@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-MLConjug.
+MLConjug3.
 
 A Python library to conjugate verbs of in French, English, Spanish, Italian, Portuguese and Romanian (mores soon) using Machine Learning techniques.
 Any verb in one of the supported language can be conjugated as the module contains a Machine Learning pipeline of how the verbs behave.
