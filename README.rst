@@ -11,6 +11,10 @@ mlconjug3
         :target: https://pypi.python.org/pypi/mlconjug3
         :alt: Pypi Python Package Index Status
 
+.. image:: https://pyup.io/repos/github/SekouDiaoNlp/mlconjug3/python-3-shield.svg
+     :target: https://pyup.io/repos/github/SekouDiaoNlp/mlconjug3/
+     :alt: Python 3
+
 .. image:: https://img.shields.io/travis/SekouDiaoNlp/mlconjug3.svg
         :target: https://travis-ci.org/SekouDiao/mlconjug3
         :alt: Linux Continuous Integration Status
