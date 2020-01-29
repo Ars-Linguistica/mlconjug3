@@ -14,7 +14,7 @@ PyVerbiste.
 """
 
 __author__ = 'SekouD'
-__author_email__ = 'sekoud.python@gmail.com'
+__author_email__ = 'diao.sekou.nlp@gmail.com'
 
 
 import copy
