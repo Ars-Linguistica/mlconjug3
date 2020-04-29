@@ -6,13 +6,13 @@ train_model.
 | Trains a collection of new conjugation models.
 
 
-| The conjugation data conforms to the JSON structure of the files in mlconjug/data/conjug_manager/
+| The conjugation data conforms to the JSON structure of the files in mlconjug33/data/conjug_manager/
 | or to the XML schema defined by Verbiste.
 | More information on Verbiste at https://perso.b2b2c.ca/~sarrazip/dev/conjug_manager.html
 
 """
 
-import mlconjug
+import mlconjug3
 import pickle
 import pprint
 import numpy as np
@@ -27,7 +27,7 @@ np.random.seed(42)
 # Set a language to train the Conjugator on
 langs = ('ro', 'it', 'en', 'es', 'fr', 'pt')
 
-managers = (mlconjug.Verbiste, mlconjug.ConjugManager)
+managers = (mlconjug3.Verbiste, mlconjug3.ConjugManager)
 results = {}
 
 for lang in langs:
@@ -43,27 +43,27 @@ for lang in langs:
     ngrange = (2, 7)
 
     # Transforms dataset with CountVectorizer. We pass the function extract_verb_features to the CountVectorizer.
-    vectorizer = mlconjug.CountVectorizer(analyzer=partial(mlconjug.extract_verb_features,
-                                                           lang=lang,
-                                                           ngram_range=ngrange),
-                                          binary=True)
+    vectorizer = mlconjug3.CountVectorizer(analyzer=partial(mlconjug3.extract_verb_features,
+                                                            lang=lang,
+                                                            ngram_range=ngrange),
+                                           binary=True)
 
     # Feature reduction
-    feature_reductor = mlconjug.SelectFromModel(mlconjug.LinearSVC(penalty="l1",
-                                                                   dual=False,
-                                                                   verbose=0))
+    feature_reductor = mlconjug3.SelectFromModel(mlconjug3.LinearSVC(penalty="l1",
+                                                                     dual=False,
+                                                                     verbose=0))
 
     # Prediction Classifier
-    classifier = mlconjug.SGDClassifier(verbose=0)
+    classifier = mlconjug3.SGDClassifier(verbose=0)
 
     # Initialize Data Set
-    dataset = mlconjug.DataSet(mlconjug.Verbiste(language=lang).verbs)
+    dataset = mlconjug3.DataSet(mlconjug3.Verbiste(language=lang).verbs)
     dataset.split_data(proportion=0.95)
 
     # Initialize Conjugator
-    model = mlconjug.Model(vectorizer, feature_reductor, classifier)
+    model = mlconjug3.Model(vectorizer, feature_reductor, classifier)
     model.pipeline.set_params(**best_params)
-    conjugator = mlconjug.Conjugator(lang, model)
+    conjugator = mlconjug3.Conjugator(lang, model)
 
     # Training and prediction
     print('training {0} model on train set'.format(lang))

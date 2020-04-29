@@ -106,7 +106,7 @@ History
 
 * Updated the conjugation models for Spanish and Portuguese.
 * Internal changes to the format of the verbiste data from xml to json for better handling of unicode characters.
-* New class ConjugManager to more easily add new languages to mlconjug.
+* New class ConjugManager to more easily add new languages to mlconjug3.
 * Minor Api enhancement (see `API documentation`_)
 
 
@@ -124,7 +124,7 @@ History
     - Renamed "Model.model" to "Model.pipeline"
     - Renamed "DataSet.liste_verbes" and "DataSet.liste_templates" to "DataSet.verbs_list" and "DataSet.templates_list" respectively. (Pardon my french ;-) )
     - Added the attributes "predicted" and "confidence_score" to the class Verb.
-    - The whole package have been typed check. I will soon add mlconjug's type stubs to typeshed.
+    - The whole package have been typed check. I will soon add mlconjug3's type stubs to typeshed.
 
 
 2.1.11 (2018-06-21)
@@ -148,20 +148,20 @@ History
 * Added `Type annotations`_ to the whole library for robustness and ease of scaling-out.
 * The performance of the Engish and Romanian Models have improved significantly lately. I guess in a few more iteration they will be on par with the French Model which is the best performing at the moment as i have been tuning its parameters for a caouple of year now. Not so much with the other languages, but if you update regularly you will see nice improvents in the 2.2 release.
 * Enhanced the localization of the program.
-* Now the user interface of mlconjug is avalaible in French, Spanish, Italian, Portuguese and Romanian, in addition to English.
+* Now the user interface of mlconjug3 is avalaible in French, Spanish, Italian, Portuguese and Romanian, in addition to English.
 * `All the documentation of the project`_ have been translated in the supported languages.
 
 
 .. _Type annotations: https://github.com/python/typeshed
-.. _All the documentation of the project: https://mlconjug.readthedocs.io/en/latest/
-.. _API documentation: https://mlconjug.readthedocs.io/en/latest/modules.html
+.. _All the documentation of the project: https://mlconjug3.readthedocs.io/en/latest/
+.. _API documentation: https://mlconjug3.readthedocs.io/en/latest/modules.html
 
 
 2.1.5 (2018-06-15)
 ------------------
 
 * Added localization.
-* Now the user interface of mlconjug is avalaible in French, Spanish, Italian, Portuguese and Romanian, in addition to English.
+* Now the user interface of mlconjug3 is avalaible in French, Spanish, Italian, Portuguese and Romanian, in addition to English.
 
 
 2.1.2 (2018-06-15)

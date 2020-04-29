@@ -1,7 +1,7 @@
 defusedxml
 cython
 numpy
-scikit-learn>=0.22.1
+scikit-learn>=0.22.2.post1
 scipy
 click
 colorama

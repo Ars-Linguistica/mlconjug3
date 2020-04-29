@@ -109,7 +109,7 @@ def construct_conjug_dict(hastable, verb_roots, all_verbs_conjugation):
 
 
 if __name__ == "__main__":
-    path = 'C:/Users/SDiao/PycharmProjects/mlconjug/utils/cooljugator'
+    path = 'C:/Users/SDiao/PycharmProjects/mlconjug3/utils/cooljugator'
     files = [join(path, f) for f in listdir(path) if isfile(join(path, f))]
     for file in files:
         conjugation = {}

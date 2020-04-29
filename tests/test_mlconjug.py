@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Tests for `mlconjug` package."""
+"""Tests for `mlconjug3` package."""
 
 import pytest
 import sys
@@ -17,13 +17,13 @@ from click.testing import CliRunner
 
 from collections import OrderedDict
 
-from mlconjug import Conjugator, DataSet, Model, extract_verb_features, \
+from mlconjug3 import Conjugator, DataSet, Model, extract_verb_features, \
     LinearSVC, SGDClassifier, SelectFromModel, CountVectorizer
 
-from mlconjug import Verbiste, VerbInfo, Verb, VerbEn, \
+from mlconjug3 import Verbiste, VerbInfo, Verb, VerbEn, \
     VerbEs, VerbFr, VerbIt, VerbPt, VerbRo, ConjugManager
 
-from mlconjug import cli
+from mlconjug3 import cli
 
 try:
     from pathlib import Path
@@ -65,7 +65,7 @@ class TestPyVerbiste:
         assert self.verbiste.verbs['abaisser'] == {'template': 'aim:er', 'root': 'abaiss'}
 
     def test_repr(self):
-        assert self.verbiste.__repr__() == 'mlconjug.PyVerbiste.Verbiste(language=fr)'
+        assert self.verbiste.__repr__() == 'mlconjug3.PyVerbiste.Verbiste(language=fr)'
 
     def test_unsupported_language(self):
         with pytest.raises(ValueError) as excinfo:
@@ -76,7 +76,7 @@ class TestPyVerbiste:
         verb_info = self.verbiste.get_verb_info('aller')
         assert verb_info == VerbInfo('aller', '', ':aller')
         assert self.verbiste.get_verb_info('cacater') is None
-        assert verb_info.__repr__() == 'mlconjug.PyVerbiste.VerbInfo(aller, , :aller)'
+        assert verb_info.__repr__() == 'mlconjug3.PyVerbiste.VerbInfo(aller, , :aller)'
 
     def test_get_conjug_info(self):
         conjug_info = self.verbiste.get_conjug_info(':aller')
@@ -114,7 +114,7 @@ class TestVerb:
         test_verb_info = verbiste.get_verb_info(TEST_VERBS[verbiste.language][0])
         test_conjug_info = verbiste.get_conjug_info(TEST_VERBS[verbiste.language][1])
         test_verb = VerbFr(test_verb_info, test_conjug_info)
-        assert test_verb.__repr__() == 'mlconjug.PyVerbiste.VerbFr(manger)'
+        assert test_verb.__repr__() == 'mlconjug3.PyVerbiste.VerbFr(manger)'
 
     def test_iterate(self):
         verbiste = Verbiste(language='default')
@@ -141,7 +141,7 @@ class TestConjugator:
     conjugator = Conjugator()
 
     def test_repr(self):
-        assert self.conjugator.__repr__() == 'mlconjug.mlconjug.Conjugator(language=fr)'
+        assert self.conjugator.__repr__() == 'mlconjug3.mlconjug.Conjugator(language=fr)'
 
     def test_conjugate(self):
         test_verb = self.conjugator.conjugate('aller')
@@ -163,7 +163,7 @@ class TestDataSet:
     data_set = DataSet(conjug_manager.verbs)
 
     def test_repr(self):
-        assert self.data_set.__repr__() == 'mlconjug.mlconjug.DataSet()'
+        assert self.data_set.__repr__() == 'mlconjug3.mlconjug.DataSet()'
 
     def test_construct_dict_conjug(self):
         self.data_set.construct_dict_conjug()
@@ -196,7 +196,7 @@ class TestModel:
     dataset.split_data(proportion=0.9)
 
     def test_repr(self):
-        assert self.model.__repr__() == 'mlconjug.mlconjug.Model(classifier, feature_selector, vectorizer)'
+        assert self.model.__repr__() == 'mlconjug3.mlconjug.Model(classifier, feature_selector, vectorizer)'
 
     def test_train(self):
         self.model.train(self.dataset.test_input, self.dataset.test_labels)
@@ -220,7 +220,7 @@ class TestCLI:
         assert 'allassions' in result.output
         help_result = runner.invoke(cli.main, ['--help'])
         assert help_result.exit_code == 0
-        # assert 'Console script for mlconjug.' in help_result.output
+        # assert 'Console script for mlconjug3.' in help_result.output
 
     @pytest.mark.skipif('3.5' in sys.version,
                         reason="Random TypeError('invalid file') on Python 3.5.")

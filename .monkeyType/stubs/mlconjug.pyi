@@ -1,4 +1,4 @@
-from mlconjug.PyVerbiste import VerbFr
+from mlconjug3.PyVerbiste import VerbFr
 from numpy import ndarray
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_selection.from_model import SelectFromModel

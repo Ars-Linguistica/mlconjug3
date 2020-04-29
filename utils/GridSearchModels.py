@@ -6,7 +6,7 @@ train_model.
 | Trains and ranks a collection of new conjugation models.
 
 
-| The conjugation data conforms to the JSON structure of the files in mlconjug/data/conjug_manager/
+| The conjugation data conforms to the JSON structure of the files in mlconjug33/data/conjug_manager/
 | or to the XML schema defined by Verbiste.
 | More information on Verbiste at https://perso.b2b2c.ca/~sarrazip/dev/conjug_manager.html
 
@@ -18,7 +18,7 @@ import os
 import warnings
 from sklearn.model_selection import GridSearchCV
 from sklearn.pipeline import Pipeline
-import mlconjug
+import mlconjug3
 import joblib
 from pprint import pprint
 from functools import partial
@@ -48,26 +48,26 @@ if __name__ == "__main__":
         else:
             # #############################################################################
             # Initialize Data Set
-            dataset = mlconjug.DataSet(mlconjug.Verbiste(language=lang).verbs)
+            dataset = mlconjug3.DataSet(mlconjug3.Verbiste(language=lang).verbs)
 
             # #############################################################################
             # Define a pipeline.
 
             # Transforms dataset with CountVectorizer. We pass the function extract_verb_features to the CountVectorizer.
             ngrange = (2, 7)
-            vectorizer = mlconjug.CountVectorizer(analyzer=partial(mlconjug.extract_verb_features,
+            vectorizer = mlconjug3.CountVectorizer(analyzer=partial(mlconjug3.extract_verb_features,
                                                                    lang=lang,
                                                                    ngram_range=ngrange),
                                                   binary=True)
 
             # Feature reduction
-            feature_reductor = mlconjug.SelectFromModel(mlconjug.LinearSVC(random_state=42,
+            feature_reductor = mlconjug3.SelectFromModel(mlconjug3.LinearSVC(random_state=42,
                                                                            penalty="l1",
                                                                            dual=False,
                                                                            verbose=0))
 
             # Prediction Classifier
-            classifier = mlconjug.SGDClassifier(random_state=42,
+            classifier = mlconjug3.SGDClassifier(random_state=42,
                                                 verbose=0)
 
             pipeline = Pipeline([
