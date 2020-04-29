@@ -1,0 +1,30 @@
+# Translation template for mlconjug.py.
+# Copyright (C) 2018 SekouDiaoNlp
+# SekouDiaoNlp <diao.sekou.nlp@gmail.com>, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2018-06-15 21:53+0200\n"
+"PO-Revision-Date: 2018-06-16 12:16+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Generator: Poedit 2.0.8\n"
+"Last-Translator: SekouDiaoNlp <diao.sekou.nlp@gmail.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: es\n"
+
+#: C:\Users\Utilisateur\PycharmProjects\mlconjug\mlconjug\cli.py:14
+msgid ""
+"The language for the conjugation model. The values can be fr, en, es, it, pt "
+"or ro. The default value is fr."
+msgstr ""
+"El lenguaje para el modelo de conjugación. Los valores pueden ser fr, en, "
+"es, it, pt o ro. El valor predeterminado es fr."
+
+#: C:\Users\Utilisateur\PycharmProjects\mlconjug\mlconjug\cli.py:17
+msgid "Console script for mlconjug."
+msgstr "Script de consola para mlconjug."

@@ -1,5 +1,5 @@
 
-import mlconjug
+import mlconjug3
 
 verbList = ['arise', 'awake', 'be', 'bear', 'beat', 'become', 'begin', 'bend', 'bet', 'bind', 'bite', 'bleed', 'blow',
             'break', 'breed', 'bring', 'broadcast', 'build', 'burn', 'burst', 'buy', 'be', 'catch', 'choose', 'clung',
@@ -18,7 +18,7 @@ problematic_verbs = ['beat', 'bet', 'broadcast', 'burn', 'burst', 'clung', 'cost
                      'sawn', 'set', 'sew', 'shed', 'show', 'shut', 'smell', 'sow', 'spell', 'spill', 'spat', 'stunk',
                      'wound']
 
-default_conjugator = mlconjug.Conjugator(language='en')
+default_conjugator = mlconjug3.Conjugator(language='en')
 verbs_with_Nones = []
 mlOutput = []
 for item in verbList:

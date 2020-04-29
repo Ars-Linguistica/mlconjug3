@@ -18,23 +18,23 @@ msgstr ""
 "Generated-By: Babel 2.6.0\n"
 
 #: ../../modules.rst:3
-msgid "Package Api Documentation for mlconjug"
-msgstr "Package Api Documentation for mlconjug"
+msgid "Package Api Documentation for mlconjug3"
+msgstr "Package Api Documentation for mlconjug3"
 
 #: ../../modules.rst:7
-msgid "API Reference for the classes in mlconjug.mlconjug.py"
-msgstr "Referência de API para as classes em mlconjug.mlconjug.py"
+msgid "API Reference for the classes in mlconjug3.mlconjug.py"
+msgstr "Referência de API para as classes em mlconjug3.mlconjug.py"
 
-#: mlconjug.mlconjug:1 of
+#: mlconjug3.mlconjug:1 of
 msgid "MLConjug Main module."
 msgstr "Módulo principal do MLConjug."
 
-#: mlconjug.mlconjug:3 of
+#: mlconjug3.mlconjug:3 of
 msgid "This module declares the main classes the user interacts with."
 msgstr ""
 "Este módulo declara as principais classes com as quais o usuário interage."
 
-#: mlconjug.mlconjug:5 of
+#: mlconjug3.mlconjug:5 of
 msgid ""
 "The module defines the classes needed to interface with Machine Learning "
 "models."
@@ -42,17 +42,17 @@ msgstr ""
 "O módulo define as classes necessárias para interagir com os modelos de "
 "Machine Learning."
 
-#: mlconjug.mlconjug.extract_verb_features:1 of
+#: mlconjug3.mlconjug.extract_verb_features:1 of
 msgid "Custom Vectorizer optimized for extracting verbs features."
 msgstr "Custom Vectorizer otimizado para extrair recursos de verbos."
 
-#: mlconjug.mlconjug.extract_verb_features:2 of
+#: mlconjug3.mlconjug.extract_verb_features:2 of
 msgid ""
 "The Vectorizer subclasses sklearn.feature_extraction.text.CountVectorizer ."
 msgstr ""
 "O vetorizador subclasse sklearn.feature_extraction.text.CountVectorizer."
 
-#: mlconjug.mlconjug.extract_verb_features:4 of
+#: mlconjug3.mlconjug.extract_verb_features:4 of
 #, fuzzy
 msgid ""
 "As in Indo-European languages verbs are inflected by adding a morphological "
@@ -62,7 +62,7 @@ msgstr ""
 "o vetorizador extrai terminações verbais e produz uma representação vetorial"
 " do verbo com características binárias."
 
-#: mlconjug.mlconjug.extract_verb_features:6 of
+#: mlconjug3.mlconjug.extract_verb_features:6 of
 msgid ""
 "To enhance the results of the feature extration, several other features have"
 " been included:"
@@ -70,7 +70,7 @@ msgstr ""
 "Para aprimorar os resultados da extração de recursos, vários outros recursos"
 " foram incluídos:"
 
-#: mlconjug.mlconjug.extract_verb_features:9 of
+#: mlconjug3.mlconjug.extract_verb_features:9 of
 msgid ""
 "The features are the verb's ending n-grams, starting n-grams, length of the "
 "verb, number of vowels, number of consonants and the ratio of vowels over "
@@ -80,59 +80,59 @@ msgstr ""
 "comprimento do verbo, número de vogais, número de consoantes e a razão entre"
 " vogais e consoantes."
 
-#: mlconjug.PyVerbiste.ConjugManager
-#: mlconjug.PyVerbiste.ConjugManager._load_conjugations
-#: mlconjug.PyVerbiste.ConjugManager._load_verbs
-#: mlconjug.PyVerbiste.ConjugManager.get_conjug_info
-#: mlconjug.PyVerbiste.ConjugManager.get_verb_info
-#: mlconjug.PyVerbiste.ConjugManager.is_valid_verb mlconjug.PyVerbiste.Verb
-#: mlconjug.PyVerbiste.VerbInfo mlconjug.PyVerbiste.Verbiste
-#: mlconjug.PyVerbiste.Verbiste._load_conjugations
-#: mlconjug.PyVerbiste.Verbiste._load_tense
-#: mlconjug.PyVerbiste.Verbiste._load_verbs
-#: mlconjug.PyVerbiste.Verbiste._parse_conjugations
-#: mlconjug.PyVerbiste.Verbiste._parse_verbs
-#: mlconjug.PyVerbiste.Verbiste.get_conjug_info
-#: mlconjug.PyVerbiste.Verbiste.get_verb_info
-#: mlconjug.PyVerbiste.Verbiste.is_valid_verb mlconjug.mlconjug.Conjugator
-#: mlconjug.mlconjug.Conjugator.conjugate
-#: mlconjug.mlconjug.Conjugator.set_model mlconjug.mlconjug.DataSet
-#: mlconjug.mlconjug.DataSet.split_data mlconjug.mlconjug.Model
-#: mlconjug.mlconjug.Model.predict mlconjug.mlconjug.Model.train
-#: mlconjug.mlconjug.extract_verb_features of
+#: mlconjug3.PyVerbiste.ConjugManager
+#: mlconjug3.PyVerbiste.ConjugManager._load_conjugations
+#: mlconjug3.PyVerbiste.ConjugManager._load_verbs
+#: mlconjug3.PyVerbiste.ConjugManager.get_conjug_info
+#: mlconjug3.PyVerbiste.ConjugManager.get_verb_info
+#: mlconjug3.PyVerbiste.ConjugManager.is_valid_verb mlconjug3.PyVerbiste.Verb
+#: mlconjug3.PyVerbiste.VerbInfo mlconjug3.PyVerbiste.Verbiste
+#: mlconjug3.PyVerbiste.Verbiste._load_conjugations
+#: mlconjug3.PyVerbiste.Verbiste._load_tense
+#: mlconjug3.PyVerbiste.Verbiste._load_verbs
+#: mlconjug3.PyVerbiste.Verbiste._parse_conjugations
+#: mlconjug3.PyVerbiste.Verbiste._parse_verbs
+#: mlconjug3.PyVerbiste.Verbiste.get_conjug_info
+#: mlconjug3.PyVerbiste.Verbiste.get_verb_info
+#: mlconjug3.PyVerbiste.Verbiste.is_valid_verb mlconjug3.mlconjug.Conjugator
+#: mlconjug3.mlconjug.Conjugator.conjugate
+#: mlconjug3.mlconjug.Conjugator.set_model mlconjug3.mlconjug.DataSet
+#: mlconjug3.mlconjug.DataSet.split_data mlconjug3.mlconjug.Model
+#: mlconjug3.mlconjug.Model.predict mlconjug3.mlconjug.Model.train
+#: mlconjug3.mlconjug.extract_verb_features of
 msgid "Parameters"
 msgstr "Parâmetros"
 
-#: mlconjug.mlconjug.extract_verb_features:11 of
+#: mlconjug3.mlconjug.extract_verb_features:11 of
 msgid "string. Verb to vectorize."
 msgstr "string. Verb para vetorizar."
 
-#: mlconjug.mlconjug.extract_verb_features:13 of
+#: mlconjug3.mlconjug.extract_verb_features:13 of
 #, fuzzy
 msgid "string. Language to analyze."
 msgstr "string. Verb para conjugar."
 
-#: mlconjug.mlconjug.extract_verb_features:15 of
+#: mlconjug3.mlconjug.extract_verb_features:15 of
 msgid "tuple. The range of the ngram sliding window."
 msgstr "tupla. O intervalo da janela deslizante do ngram."
 
-#: mlconjug.PyVerbiste.ConjugManager._detect_allowed_endings
-#: mlconjug.PyVerbiste.ConjugManager.get_conjug_info
-#: mlconjug.PyVerbiste.ConjugManager.get_verb_info
-#: mlconjug.PyVerbiste.ConjugManager.is_valid_verb
-#: mlconjug.PyVerbiste.Verbiste._detect_allowed_endings
-#: mlconjug.PyVerbiste.Verbiste._load_tense
-#: mlconjug.PyVerbiste.Verbiste._parse_conjugations
-#: mlconjug.PyVerbiste.Verbiste._parse_verbs
-#: mlconjug.PyVerbiste.Verbiste.get_conjug_info
-#: mlconjug.PyVerbiste.Verbiste.get_verb_info
-#: mlconjug.PyVerbiste.Verbiste.is_valid_verb
-#: mlconjug.mlconjug.Conjugator.conjugate mlconjug.mlconjug.Model.predict
-#: mlconjug.mlconjug.extract_verb_features of
+#: mlconjug3.PyVerbiste.ConjugManager._detect_allowed_endings
+#: mlconjug3.PyVerbiste.ConjugManager.get_conjug_info
+#: mlconjug3.PyVerbiste.ConjugManager.get_verb_info
+#: mlconjug3.PyVerbiste.ConjugManager.is_valid_verb
+#: mlconjug3.PyVerbiste.Verbiste._detect_allowed_endings
+#: mlconjug3.PyVerbiste.Verbiste._load_tense
+#: mlconjug3.PyVerbiste.Verbiste._parse_conjugations
+#: mlconjug3.PyVerbiste.Verbiste._parse_verbs
+#: mlconjug3.PyVerbiste.Verbiste.get_conjug_info
+#: mlconjug3.PyVerbiste.Verbiste.get_verb_info
+#: mlconjug3.PyVerbiste.Verbiste.is_valid_verb
+#: mlconjug3.mlconjug.Conjugator.conjugate mlconjug3.mlconjug.Model.predict
+#: mlconjug3.mlconjug.extract_verb_features of
 msgid "Returns"
 msgstr "Retorna"
 
-#: mlconjug.mlconjug.extract_verb_features:17 of
+#: mlconjug3.mlconjug.extract_verb_features:17 of
 msgid ""
 "list. List of the most salient features of the verb for the task of finding "
 "it's conjugation's class."

@@ -1,5 +1,5 @@
 
-import mlconjug
+import mlconjug3
 import joblib
 
 try:
@@ -25,7 +25,7 @@ for lang in langs:
                   'rb') as file:
             best_params = joblib.load(file)
 
-        dataset = mlconjug.DataSet(mlconjug.Verbiste(language=lang).verbs)
+        dataset = mlconjug3.DataSet(mlconjug3.Verbiste(language=lang).verbs)
         dataset.split_data(proportion=0.95)
 
         predicted = best_model.predict(dataset.test_input)

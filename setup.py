@@ -52,23 +52,23 @@ setup(
     author="SekouDiaoNlp",
     author_email='diao.sekou.nlp@gmail.com',
     url='https://github.com/SekouDiaoNlp/mlconjug3',
-    packages=find_packages(include=['mlconjug']),
+    packages=find_packages(include=['mlconjug3']),
     entry_points={
         'console_scripts': [
-            'mlconjug=mlconjug.cli:main'
+            'mlconjug3=mlconjug3.cli:main'
         ]
     },
-    package_data={'conjug_manager': ['mlconjug/data/conjug_manager/*'],
+    package_data={'conjug_manager': ['mlconjug3/data/conjug_manager/*'],
                   'documentation': ['docs/*'],
                   'tests': ['tests/*'],
-                  'trained_models': ['mlconjug/data/models/*'],
-                  'translations': ['mlconjug/locale/*'],
-                  'type_stubs': ['mlconjug/py.typed', 'mlconjug/*']},
+                  'trained_models': ['mlconjug3/data/models/*'],
+                  'translations': ['mlconjug3/locale/*'],
+                  'type_stubs': ['mlconjug3/py.typed', 'mlconjug3/*']},
     include_package_data=True,
     install_requires=requirements,
     license="MIT license",
     zip_safe=False,
-    keywords='mlconjug conjugate conjugator conjugation conjugaison conjugación coniugazione conjugação conjugare'
+    keywords='mlconjug3 conjugate conjugator conjugation conjugaison conjugación coniugazione conjugação conjugare'
              ' verbs verbes verbos ML machine-learning NLP linguistics linguistique linguistica conjug_manager sklearn'
              'scikit-learn',
     classifiers=[

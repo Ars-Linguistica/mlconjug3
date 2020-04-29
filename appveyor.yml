@@ -44,7 +44,7 @@ test_script:
   - "%PYTHON%\\python.exe -m pip install codecov"
   - "%PYTHON%\\python.exe -m pip install docutils"
   - "%PYTHON%\\python.exe -m pip install -r requirements_dev.txt"
-  - "%PYTHON%\\Scripts\\py.test --cov=./mlconjug/"
+  - "%PYTHON%\\Scripts\\py.test --cov=./mlconjug3/"
   - "%PYTHON%\\Scripts\\codecov -f .coverage"
   - "%PYTHON%\\python.exe setup.py check --restructuredtext -s"
 

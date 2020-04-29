@@ -1,9 +1,9 @@
 
-import mlconjug
+import mlconjug3
 
 verbList = ['flabbergarst', 'rob', 'mob']
 
-default_conjugator = mlconjug.Conjugator(language='en')
+default_conjugator = mlconjug3.Conjugator(language='en')
 verbs_with_Nones = []
 mlOutput = []
 for item in verbList:

@@ -6,7 +6,7 @@ include README.rst
 include INSTALL.rst
 
 recursive-include tests *
-recursive-include mlconjug *
+recursive-include mlconjug3 *
 
 recursive-exclude * __pycache__
 recursive-exclude * *.py[co]
