@@ -49,7 +49,7 @@ import gettext
 import inspect
 
 # Sets up the automatic translation of annotated strings displayed to the user.
-_RESOURCE_PACKAGE = __name__
+_RESOURCE_PACKAGE = 'mlconjug3'
 _TRANSLATIONS_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'locale')
 
 _SUPPORTED_LANGUAGES = ('default', 'en', 'es', 'fr', 'it', 'pt', 'ro')
