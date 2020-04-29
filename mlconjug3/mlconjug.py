@@ -23,7 +23,7 @@ import re
 from zipfile import ZipFile
 from functools import partial
 
-_RESOURCE_PACKAGE = __name__
+_RESOURCE_PACKAGE = 'mlconjug3'
 
 _LANGUAGE_FULL = {'fr': 'Français',
                   'en': 'English',
