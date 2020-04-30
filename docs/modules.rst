@@ -6,7 +6,7 @@ Package Api Documentation for mlconjug
 API Reference for the classes in mlconjug3.mlconjug.py
 ------------------------------------------------------
 
-.. automodule:: mlconjug.mlconjug
+.. automodule:: mlconjug3.mlconjug
     :member-order: bysource
     :members:
     :private-members:
@@ -16,7 +16,7 @@ API Reference for the classes in mlconjug3.mlconjug.py
 API Reference for the classes in mlconjug3.PyVerbiste.py
 --------------------------------------------------------
 
-.. automodule:: mlconjug.PyVerbiste
+.. automodule:: mlconjug3.PyVerbiste
     :member-order: bysource
     :members:
     :private-members:
