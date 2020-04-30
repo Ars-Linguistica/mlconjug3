@@ -5,12 +5,12 @@ Usage
 .. NOTE:: The default language is French.
     When called without specifying a language, the library will try to conjugate the verb in French.
 
-To use MLConjug in a project with the provided pre-trained conjugation models::
+To use MLConjug3 in a project with the provided pre-trained conjugation models::
 
-    import mlconjug
+    import mlconjug3
 
-    # To use mlconjug with the default parameters and a pre-trained conjugation model.
-    default_conjugator = mlconjug.Conjugator(language='fr')
+    # To use mlconjug3 with the default parameters and a pre-trained conjugation model.
+    default_conjugator = mlconjug3.Conjugator(language='fr')
 
     # Verify that the model works
     test1 = default_conjugator.conjugate("manger").conjug_info['Indicatif']['Passé Simple']['1p']
@@ -25,12 +25,12 @@ To use MLConjug in a project with the provided pre-trained conjugation models::
     print(test5)
 
     # You can now iterate over all conjugated forms of a verb by using the newly added Verb.iterate() method.
-    default_conjugator = mlconjug.Conjugator(language='en')
+    default_conjugator = mlconjug3.Conjugator(language='en')
     test_verb = default_conjugator.conjugate("be")
     all_conjugated_forms = test_verb.iterate()
     print(all_conjugated_forms)
 
-To use MLConjug in a project and train a new model::
+To use MLConjug3 in a project and train a new model::
 
     # Set a language to train the Conjugator on
     lang = 'fr'
@@ -39,23 +39,23 @@ To use MLConjug in a project and train a new model::
     ngrange = (2,7)
 
     # Transforms dataset with CountVectorizer. We pass the function extract_verb_features to the CountVectorizer.
-    vectorizer = mlconjug.CountVectorizer(analyzer=partial(mlconjug.extract_verb_features, lang=lang, ngram_range=ngrange),
+    vectorizer = mlconjug3.CountVectorizer(analyzer=partial(mlconjug3.extract_verb_features, lang=lang, ngram_range=ngrange),
                                  binary=True)
 
     # Feature reduction
-    feature_reductor = mlconjug.SelectFromModel(mlconjug.LinearSVC(penalty="l1", max_iter=12000, dual=False, verbose=0))
+    feature_reductor = mlconjug3.SelectFromModel(mlconjug3.LinearSVC(penalty="l1", max_iter=12000, dual=False, verbose=0))
 
     # Prediction Classifier
-    classifier = mlconjug.SGDClassifier(loss="log", penalty='elasticnet', l1_ratio=0.15, max_iter=4000, alpha=1e-5, random_state=42, verbose=0)
+    classifier = mlconjug3.SGDClassifier(loss="log", penalty='elasticnet', l1_ratio=0.15, max_iter=4000, alpha=1e-5, random_state=42, verbose=0)
 
     # Initialize Data Set
-    dataset = mlconjug.DataSet(mlconjug.Verbiste(language=lang).verbs)
+    dataset = mlconjug3.DataSet(mlconjug3.Verbiste(language=lang).verbs)
     dataset.construct_dict_conjug()
     dataset.split_data(proportion=0.9)
 
     # Initialize Conjugator
-    model = mlconjug.Model(vectorizer, feature_reductor, classifier)
-    conjugator = mlconjug.Conjugator(lang, model)
+    model = mlconjug3.Model(vectorizer, feature_reductor, classifier)
+    conjugator = mlconjug3.Conjugator(lang, model)
 
     #Training and prediction
     conjugator.model.train(dataset.train_input, dataset.train_labels)
@@ -82,11 +82,11 @@ To use MLConjug in a project and train a new model::
         pickle.dump(conjugator.model, file)
 
 
-To use MLConjug from the command line::
+To use MLConjug3 from the command line::
 
-    $ mlconjug manger
+    $ mlconjug3 manger
 
-    $ mlconjug bring -l en
+    $ mlconjug3 bring -l en
 
-    $ mlconjug gallofar --language es
+    $ mlconjug3 gallofar --language es
 

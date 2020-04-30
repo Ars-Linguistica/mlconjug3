@@ -2,6 +2,18 @@
 History
 =======
 
+3.7.3 (2020-30-04)
+------------------
+
+* Updated the documentation.
+
+3.7.2 (2020-30-04)
+------------------
+
+* Fixed issue with package renaming.
+* Fixed bug with Portuguese verbs ending in 'ar'.
+* Retrained all models with scikit-learn 0.22.2.
+
 3.7.1 (2020-29-01)
 ------------------
 
