@@ -555,8 +555,13 @@ class VerbEs(Verb):
                         elif tense_name == 'Imperativo non':
                             key = ' '.join((_IMPERATIVE_PRONOUNS[self.language][self.subject][pers],
                                             _NEGATION[self.language]))
-                        elif tense_name in ('Gerundio Gerondio', 'Infinitivo Infinitivo'):
-                            if pers == 0:
+                        elif tense_name == 'Gerundio Gerondio':
+                            if term.endswith('ndo'):
+                                key = ''
+                            else:
+                                continue
+                        elif tense_name == 'Infinitivo Infinitivo':
+                            if term.endswith('r'):
                                 key = ''
                             else:
                                 continue
