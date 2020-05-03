@@ -2,6 +2,17 @@
 History
 =======
 
+3.7.5 (2020-03-05)
+------------------
+
+* Updated the documentation.
+
+3.7.4 (2020-03-05)
+------------------
+
+* Fixed issue #44 where Spanish gerunds were not conjugated properly.
+* Updated dependencies.
+
 3.7.3 (2020-30-04)
 ------------------
 
