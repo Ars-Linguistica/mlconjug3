@@ -1,4 +1,4 @@
-.. image:: https://raw.githubusercontent.com/SekouDiaoNlp/mlconjug3/master/logo/logotype2%20mlconjug3.png
+.. image:: https://raw.githubusercontent.com/SekouDiaoNlp/mlconjug3/master/logo/logotype2%20mlconjug.png
         :target: https://pypi.python.org/pypi/mlconjug3
         :alt: mlconjug3 PyPi Home Page
 
