@@ -3,7 +3,7 @@
         :alt: mlconjug3 PyPi Home Page
 
 =========
-mlconjug3
+MLCONJUG3
 =========
 
 
@@ -50,7 +50,7 @@ mlconjug3
 - a feature selector using Linear Support Vector Classification,
 - a classifier using Stochastic Gradient Descent.
 
-| MLConjug uses scikit-learn to implement the Machine Learning algorithms.
+| MLConjug3 uses scikit-learn to implement the Machine Learning algorithms.
 | Users of the library can use any compatible classifiers from scikit-learn to modify and retrain the models.
 
 | The training data for the french model is based on Verbiste https://perso.b2b2c.ca/~sarrazip/dev/verbiste.html .
