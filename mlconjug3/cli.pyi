@@ -1,4 +1,4 @@
-# Stubs for mlconjug33.cli (Python 3)
+# Stubs for mlconjug3.cli (Python 3)
 
 from typing import Text
 

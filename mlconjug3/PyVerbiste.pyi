@@ -1,4 +1,4 @@
-# Stubs for mlconjug33.PyVerbiste (Python 3)
+# Stubs for mlconjug3.PyVerbiste (Python 3)
 
 from typing import Text, Sequence, Mapping, Dict, Tuple, Optional, Union, Set, TextIO
 from collections import OrderedDict

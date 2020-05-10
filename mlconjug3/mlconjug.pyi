@@ -1,4 +1,4 @@
-# Stubs for mlconjug33.mlconjug3 (Python 3)
+# Stubs for mlconjug3.mlconjug3 (Python 3)
 
 from .PyVerbiste import Verb, ConjugManager
 from sklearn.pipeline import Pipeline

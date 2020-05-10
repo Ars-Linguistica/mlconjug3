@@ -1,3 +1,3 @@
 # -*- coding: utf-8 -*-
 
-"""Unit test package for mlconjug33."""
+"""Unit test package for mlconjug3."""
