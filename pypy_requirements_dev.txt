@@ -9,7 +9,7 @@ Sphinx==3.0.3
 docutils==0.16
 cryptography==2.9.2
 PyYAML==5.3.1
-pytest==5.4.1
+pytest==5.4.2
 pytest-runner==5.2
 cython==0.29.17
 https://antocuni.github.io/pypy-wheels/manylinux2010/numpy/numpy-1.18.2-pp371-pypy3_71-manylinux2010_x86_64.whl
