@@ -119,7 +119,7 @@ class Conjugator:
 
     :param language: string.
         Language of the conjugator. The default language is 'fr' for french.
-    :param model: mlconjug33.Model or scikit-learn Pipeline or Classifier implementing the fit() and predict() methods.
+    :param model: mlconjug3.Model or scikit-learn Pipeline or Classifier implementing the fit() and predict() methods.
         A user provided pipeline if the user has trained his own pipeline.
 
     """
@@ -166,7 +166,7 @@ class Conjugator:
                 _('The supplied word: {0} is not a valid verb in {1}.').format(verb, _LANGUAGE_FULL[self.language]))
         if verb not in self.conjug_manager.verbs.keys():
             if self.model is None:
-                logger.warning(_('Please provide an instance of a mlconjug33.mlconjug33.Model'))
+                logger.warning(_('Please provide an instance of a mlconjug3.mlconjug3.Model'))
                 raise ValueError(
                 _('The supplied word: {0} is not in the conjugation {1} table and no Conjugation Model was provided.').format(
                     verb, _LANGUAGE_FULL[self.language]))
@@ -206,7 +206,7 @@ class Conjugator:
 
         """
         if not isinstance(model, Model):
-            logger.warning(_('Please provide an instance of a mlconjug33.mlconjug33.Model'))
+            logger.warning(_('Please provide an instance of a mlconjug3.mlconjug3.Model'))
             raise ValueError
         else:
             self.model = model
