@@ -2,6 +2,13 @@
 History
 =======
 
+3.7.6 (2020-17-05)
+------------------
+
+* Fixed issue #47 and #48 where some English and Spanish verbs were not conjugated correctly.
+* Fixed issue #50 dealing with some spurious data for Spanish.
+* Updated dependencies.
+
 3.7.5 (2020-03-05)
 ------------------
 
