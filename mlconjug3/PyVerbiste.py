@@ -315,9 +315,12 @@ class Verbiste(ConjugManager):
             conjug = []
             for pers, term in enumerate(persons):
                 if term.find("i") is not None:
-                    conjug.append((pers, term.find("i").text))
+                    if term.find("i").text is not None:
+                        conjug.append((pers, term.find("i").text))
+                    else:
+                        conjug.append((pers, ''))
                 else:
-                    conjug.append((pers, ''))
+                    conjug.append((pers, None))
         return conjug
 
 
@@ -422,7 +425,7 @@ class Verb:
                         if term is not None:
                             self.conjugate_person(key, persons_dict, term)
                         else:
-                            persons[key] = None
+                            persons_dict[key] = None
                     self.conjug_info[mood][tense_name] = persons_dict
                 elif isinstance(persons, str):
                     self.conjug_info[mood][tense_name] = self.verb_info.root + persons
