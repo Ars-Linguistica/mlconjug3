@@ -107,10 +107,7 @@ class ConjugManager:
     def __init__(self, language='default'):
         if language not in _LANGUAGES:
             raise ValueError(_('Unsupported language.\nThe allowed languages are fr, en, es, it, pt, ro.'))
-        if language == 'default':
-            self.language = 'fr'
-        else:
-            self.language = language
+        self.language = 'fr' if language == 'default' else language
         self.verbs = {}
         self.conjugations = OrderedDict()
         verbs_file = pkg_resources.resource_filename(_RESOURCE_PACKAGE, _VERBS_RESOURCE_PATH[self.language])
@@ -161,8 +158,7 @@ class ConjugManager:
         """
         if self.language == 'en':
             return True
-        results = {verb.split(' ')[0][-2:] for verb in self.verbs if 2 <= len(verb)}
-        return results
+        return {verb.split(' ')[0][-2:] for verb in self.verbs if len(verb) >= 2}
 
     def is_valid_verb(self, verb):
         """
@@ -178,10 +174,7 @@ class ConjugManager:
         """
         if self.language == 'en':
             return True  # LOL!
-        if verb[-2:] in self._allowed_endings:
-            return True
-        else:
-            return False
+        return verb[-2:] in self._allowed_endings
 
     def get_verb_info(self, verb):
         """
@@ -197,8 +190,7 @@ class ConjugManager:
         infinitive = verb
         root = self.verbs[verb]['root']
         template = self.verbs[verb]['template']
-        verb_info = VerbInfo(infinitive, root, template)
-        return verb_info
+        return VerbInfo(infinitive, root, template)
 
     def get_conjug_info(self, template):
         """
@@ -212,8 +204,7 @@ class ConjugManager:
         """
         if template not in self.conjugations.keys():
             return None
-        info = copy.deepcopy(self.conjugations[template])
-        return info
+        return copy.deepcopy(self.conjugations[template])
 
 
 class Verbiste(ConjugManager):
@@ -254,10 +245,7 @@ class Verbiste(ConjugManager):
             verb_name = verb.find("i").text
             template = verb.find("t").text
             index = - len(template[template.index(":") + 1:])
-            if index == 0:
-                root = verb_name
-            else:
-                root = verb_name[:index]
+            root = verb_name if index == 0 else verb_name[:index]
             verbs_dic[verb_name] = {"template": template, "root": root}
         return verbs_dic
 
@@ -341,10 +329,7 @@ class VerbInfo:
     def __init__(self, infinitive, root, template):
         self.infinitive = infinitive
         if not root:
-            if template[0] == ':':
-                self.root = ''
-            else:
-                self.root = template[:template.index(':')]
+            self.root = '' if template[0] == ':' else template[:template.index(':')]
         else:
             self.root = root
         self.template = template
@@ -418,10 +403,7 @@ class Verb:
                 if isinstance(persons, list):
                     persons_dict = OrderedDict()
                     for pers, term in persons:
-                        if len(persons) == 6:
-                            key = _ABBREVS[pers]
-                        else:
-                            key = ''
+                        key = _ABBREVS[pers] if len(persons) == 6 else ''
                         if term is not None:
                             self.conjugate_person(key, persons_dict, term)
                         else:
@@ -504,8 +486,7 @@ class VerbEn(Verb):
                         if tense_name == 'indicative present continuous':
                             key = " ".join((_PRONOUNS[self.language][self.subject][pers],
                                             _AUXILIARIES[self.language][self.subject][pers],))
-                            pass
-                        elif len(persons) == 6 and not tense_name == 'indicative present continuous':
+                        elif len(persons) == 6:
                             key = _PRONOUNS[self.language][self.subject][pers]
                         elif tense_name == 'imperative present':
                             key = _IMPERATIVE_PRONOUNS[self.language][self.subject][pers]
@@ -517,16 +498,10 @@ class VerbEn(Verb):
                             self.conjugate_person(key, persons_dict, '')
                     self.conjug_info[mood][tense_name] = persons_dict
                 elif isinstance(persons, str):
-                    if tense_name == 'infinitive present':
-                        prefix = 'to '
-                    else:
-                        prefix = ''
+                    prefix = 'to ' if tense_name == 'infinitive present' else ''
                     self.conjug_info[mood][tense_name] = prefix + self.verb_info.root + persons
                 elif persons is None:
-                    if tense_name == 'infinitive present':
-                        prefix = 'to '
-                    else:
-                        prefix = ''
+                    prefix = 'to ' if tense_name == 'infinitive present' else ''
                     self.conjug_info[mood][tense_name] = prefix + self.verb_info.infinitive
         return
 
@@ -698,10 +673,7 @@ class VerbRo(Verb):
                             persons_dict[key] = None
                     self.conjug_info[mood][tense_name] = persons_dict
                 elif isinstance(persons, str):
-                    if tense_name == 'Infinitiv Afirmativ':
-                        prefix = 'a '
-                    else:
-                        prefix = ''
+                    prefix = 'a ' if tense_name == 'Infinitiv Afirmativ' else ''
                     self.conjug_info[mood][tense_name] = prefix + self.verb_info.root + persons
         return
 

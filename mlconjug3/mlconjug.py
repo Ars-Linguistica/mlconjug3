@@ -175,10 +175,7 @@ class Conjugator:
             predicted = True
             template = self.conjug_manager.templates[prediction]
             index = - len(template[template.index(":") + 1:])
-            if index == 0:
-                root = verb
-            else:
-                root = verb[:index]
+            root = verb if index == 0 else verb[:index]
             verb_info = VerbInfo(verb, root, template)
             conjug_info = self.conjug_manager.get_conjug_info(verb_info.template)
         else:
@@ -226,7 +223,10 @@ class DataSet:
     def __init__(self, verbs_dict):
         self.verbs_dict = verbs_dict
         self.verbs = self.verbs_dict.keys()
-        self.templates = sorted(set([verb['template'] for verb in self.verbs_dict.values()]))
+        self.templates = sorted(
+            {verb['template'] for verb in self.verbs_dict.values()}
+        )
+
         self.verbs_list = []
         self.templates_list = []
         self.dict_conjug = None
@@ -349,8 +349,7 @@ class Model(object):
             List of predicted conjugation groups.
 
         """
-        prediction = self.pipeline.predict(verbs)
-        return prediction
+        return self.pipeline.predict(verbs)
 
 
 if __name__ == "__main__":
