@@ -102,13 +102,12 @@ _user_locale = _get_user_locale()
 
 if _user_locale in _TRANSLATED_LANGUAGES:
     _MLCONJUG_TRANSLATIONS = gettext.translation(domain='mlconjug3',
-                                                localedir=_TRANSLATIONS_PATH,
-                                                languages=[_user_locale], fallback=True, codeset='UTF-8')
+                                                 localedir=_TRANSLATIONS_PATH,
+                                                 languages=[_user_locale], fallback=True, codeset='UTF-8')
 else:
     _MLCONJUG_TRANSLATIONS = gettext.NullTranslations()
 
 _MLCONJUG_TRANSLATIONS.install()
-
 
 # Replaces the getdoc method
 inspect.getdoc = _getdoc
