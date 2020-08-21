@@ -14,9 +14,6 @@ environment:
     - PYTHON: "C:\\Python38"
     - PYTHON: "C:\\Python38-x64"
 
-matrix:
-    allow_failures:
-
 
 cache:
   - C:\Users\appveyor\pip\wheels -> appveyor.yml
