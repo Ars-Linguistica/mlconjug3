@@ -9,13 +9,11 @@ python:
 - 3.7-dev
 - 3.7
 - 3.6
-- 3.5
 #  PyPy versions
 - pypy3
 matrix:
   allow_failures:
   - python: pypy3
-  - python: 3.5
   - python: 3.9-dev
 branches:
   only:
