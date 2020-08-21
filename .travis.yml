@@ -4,7 +4,6 @@ cache: pip
 language: python
 python:
 - 3.9-dev
-- 3.9
 - 3.8-dev
 - 3.8
 - 3.7-dev
@@ -17,6 +16,7 @@ matrix:
   allow_failures:
   - python: pypy3
   - python: 3.5
+  - python: 3.9-dev
 branches:
   only:
   - master
