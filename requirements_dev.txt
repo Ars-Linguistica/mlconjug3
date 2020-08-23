@@ -21,5 +21,6 @@ defusedxml==0.6.0
 colorama==0.4.3
 joblib==0.16.0
 progressbar2==3.51.4
+pathlib2==2.3.5
 #MonkeyType==19.5.0
 #wily==1.12.4
