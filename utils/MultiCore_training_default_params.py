@@ -84,15 +84,18 @@ if __name__ == "__main__":
             ])
 
             parameters = {
-                'feature_reductor__estimator__max_iter': (8400, 3600),
-                'feature_reductor__estimator__tol': (1e-3, 1e-4, 1e-5),
-                'feature_reductor__estimator__C': (1,),
+                'feature_reductor__estimator__random_state': (42, ),
+                'feature_reductor__estimator__penalty': ('l1', ),
+                'feature_reductor__estimator__max_iter': (40000, ),
+                'feature_reductor__estimator__dual': (False, ),
+                'feature_reductor__estimator__verbose': (0,),
                 'classifier__alpha': (1e-5,),
-                'classifier__penalty': ('l2',),
-                'classifier__tol': (1e-3, 1e-4, 1e-5),
-                'classifier__l1_ratio': (0.15,),
+                'classifier__random_state': (42, ),
+                'classifier__penalty': ('elasticnet', ),
+                'classifier__l1_ratio': (0.15, ),
                 'classifier__loss': ('log',),
-                'classifier__max_iter': (30000,),
+                'classifier__max_iter': (40000,),
+                'classifier__verbose': (0,),
             }
 
             # ignores CnvergenceWarnings during model selection
@@ -102,7 +105,7 @@ if __name__ == "__main__":
 
             # find the best parameters for both the feature extraction and the
             # classifier
-            grid_search = GridSearchCV(pipeline, cv=3,
+            grid_search = GridSearchCV(pipeline, parameters, cv=3,
                                        n_jobs=-1, verbose=1,)
 
             print("Performing grid search for language '{0}' started at {1}...".format(lang, datetime.datetime.now()))
