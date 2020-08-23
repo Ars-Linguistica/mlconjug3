@@ -54,7 +54,7 @@ for lang in langs:
 
     # Initialize Data Set
     dataset = mlconjug3.DataSet(mlconjug3.Verbiste(language=lang).verbs)
-    dataset.split_data(proportion=0.95)
+    dataset.split_data(proportion=1)
 
     # Initialize Conjugator
     model = mlconjug3.Model(vectorizer, feature_reductor, classifier)
