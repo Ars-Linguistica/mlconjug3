@@ -6,7 +6,7 @@ from sklearn.pipeline import Pipeline
 # I am commenting out the sklearn imports because they have yet no stub files.
 # from sklearn.feature_extraction.text import CountVectorizer
 # from sklearn.base import BaseEstimator
-from typing import Optional, Text, Mapping, List, Sequence, DefaultDict, Any, Type, AbstractSet
+from typing import Optional, Text, Mapping, List, Sequence, DefaultDict, Any, Type, AbstractSet, Union
 
 
 _RESOURCE_PACKAGE: Text = __name__
@@ -65,7 +65,7 @@ class DataSet:
 
     def split_data(self,
                    threshold: int = ...,
-                   proportion: float = ...
+                   proportion: Union[float, int] = ...
                    ) -> None: ...
 
 class Model:
