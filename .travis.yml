@@ -27,7 +27,7 @@ deploy:
   user: SekouDiaoNlp
   on:
     python: 3.7-dev
-    repo: DiaoSekouNlp/mlconjug3
+    repo: SekouDiaoNlp/mlconjug3
     tags: true
     branch: master
   password:
