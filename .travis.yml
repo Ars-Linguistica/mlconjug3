@@ -3,17 +3,18 @@ dist: xenial
 cache: pip
 language: python
 python:
+- 3.9-dev
 - 3.8-dev
 - 3.8
 - 3.7-dev
 - 3.7
 - 3.6
-- 3.5
 #  PyPy versions
 - pypy3
 matrix:
   allow_failures:
   - python: pypy3
+  - python: 3.9-dev
 branches:
   only:
   - master
@@ -26,7 +27,7 @@ deploy:
   user: SekouDiaoNlp
   on:
     python: 3.7-dev
-    repo: DiaoSekouNlp/mlconjug3
+    repo: SekouDiaoNlp/mlconjug3
     tags: true
     branch: master
   password:
