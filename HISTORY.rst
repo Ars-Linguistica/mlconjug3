@@ -2,6 +2,15 @@
 History
 =======
 
+3.7.7 (2020-24-08)
+------------------
+
+* Fixed issue #65 : Infinitive inserted before some conjugated English verbs.
+* Fixed issue #66 : Some spanish verbs were not conjugated correctly.
+* Retrained all models with scikit-learn 0.23.2.
+* Updated dependencies.
+* Optimized code to train and predict faster.
+
 3.7.6 (2020-17-05)
 ------------------
 
