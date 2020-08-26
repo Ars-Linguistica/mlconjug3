@@ -73,8 +73,7 @@ _IMPERATIVE_PRONOUNS = {'fr': {'abbrev': ("2s", "1p", "2p"),
 _AUXILIARIES = {'fr': None,
                 'it': 'non',
                 'es': 'no',
-                'en': {'abbrev': _ABBREVS,
-                       'pronoun': ('am', 'are', 'is', 'are', 'are', 'are')},
+                'en': None,
                 'pt': 'não',
                 'ro': 'nu'}
 
@@ -483,10 +482,7 @@ class VerbEn(Verb):
                 if isinstance(persons, list):
                     persons_dict = OrderedDict()
                     for pers, term in persons:
-                        if tense_name == 'indicative present continuous':
-                            key = " ".join((_PRONOUNS[self.language][self.subject][pers],
-                                            _AUXILIARIES[self.language][self.subject][pers],))
-                        elif len(persons) == 6:
+                        if len(persons) == 6:
                             key = _PRONOUNS[self.language][self.subject][pers]
                         elif tense_name == 'imperative present':
                             key = _IMPERATIVE_PRONOUNS[self.language][self.subject][pers]
