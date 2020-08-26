@@ -2,6 +2,12 @@
 History
 =======
 
+3.7.8 (2020-26-08)
+------------------
+
+* Fixed issue #79: Repeated person keys in English present continuous.
+* Now the 'person' key of the conjugated forms dictionary can be consistently accessed by [person] for all moods and tenses for a more consistent API.
+
 3.7.7 (2020-24-08)
 ------------------
 
