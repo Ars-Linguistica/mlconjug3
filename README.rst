@@ -83,16 +83,12 @@ Features
 - Easily integrate MLConjug in your own projects.
 - Can be used as a command line tool.
 
-Credits
--------
 
-This package was created with the help of Verbiste_ and scikit-learn_.
+Academic publications citing mlconjug
+-------------------------------------
 
-The logo was designed by Zuur_.
+`Generative Grading Neural Approximate Parsing for Automated Student Feedback`_. Under review in Proceedings of the 34th AAAI conference on Artificial Intelligence, 2019
 
-.. _Verbiste: https://perso.b2b2c.ca/~sarrazip/dev/verbiste.html
-.. _scikit-learn: http://scikit-learn.org/stable/index.html
-.. _Zuur: https://github.com/zuuritaly
 
 BibTeX
 ------
@@ -107,3 +103,17 @@ If you want to cite mlconjug3 in an academic publication use this citation forma
      journal={GitHub. Note: https://github.com/SekouDiaoNlp/mlconjug3 Cited by},
      year={2020}
    }
+
+
+Credits
+-------
+
+This package was created with the help of Verbiste_ and scikit-learn_.
+
+The logo was designed by Zuur_.
+
+.. _Verbiste: https://perso.b2b2c.ca/~sarrazip/dev/verbiste.html
+.. _scikit-learn: http://scikit-learn.org/stable/index.html
+.. _Zuur: https://github.com/zuuritaly
+.. _`Generative Grading Neural Approximate Parsing for Automated Student Feedback`: https://arxiv.org/abs/1905.09916
+
