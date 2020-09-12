@@ -2,6 +2,18 @@
 History
 =======
 
+3.7.10 (2020-12-09)
+-------------------
+
+* Fixed errors in English training corpus.
+* Retrained English model.
+* Updated dependencies.
+
+3.7.9 (2020-30-08)
+------------------
+
+* Added Bibtex entry for easier citation in academeic publication.
+
 3.7.8 (2020-26-08)
 ------------------
 
