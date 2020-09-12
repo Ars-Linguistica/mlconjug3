@@ -3,7 +3,7 @@ History
 =======
 
 3.7.10 (2020-12-09)
-------------------
+-------------------
 
 * Fixed errors in English training corpus.
 * Retrained English model.
