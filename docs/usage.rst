@@ -5,7 +5,9 @@ Usage
 .. NOTE:: The default language is French.
     When called without specifying a language, the library will try to conjugate the verb in French.
 
-To use MLConjug3 in a project with the provided pre-trained conjugation models::
+To use MLConjug3 in a project with the provided pre-trained conjugation models:
+
+.. code-block:: python
 
     import mlconjug3
 
@@ -30,7 +32,9 @@ To use MLConjug3 in a project with the provided pre-trained conjugation models::
     all_conjugated_forms = test_verb.iterate()
     print(all_conjugated_forms)
 
-To use MLConjug3 in a project and train a new model::
+To use MLConjug3 in a project and train a new model:
+
+.. code-block:: python
 
     # Set a language to train the Conjugator on
     lang = 'fr'
