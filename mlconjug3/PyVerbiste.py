@@ -377,7 +377,8 @@ class Verb:
     def iterate(self):
         """
         Iterates over all conjugated forms and returns a list of tuples of those conjugated forms.
-        :return:
+        :return: list.
+            List of conjugated forms.
         """
         iterate_results = []
         for mood, tenses in self.conjug_info.items():
