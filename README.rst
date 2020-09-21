@@ -87,9 +87,9 @@ Features
 Academic publications citing mlconjug
 -------------------------------------
 
-| Ali Malik and Mike Wu and Vrinda Vasavada and Jinpeng Song and John Mitchell and Noah D. Goodman and Chris Piech.
-| "`Generative Grading Neural Approximate Parsing for Automated Student Feedback`_".
-| CoRR abs/1905.09916 (2019).
+- | Ali Malik and Mike Wu and Vrinda Vasavada and Jinpeng Song and John Mitchell and Noah D. Goodman and Chris Piech.
+  | "`Generative Grading Neural Approximate Parsing for Automated Student Feedback`_".
+  | Proceedings of the 34th AAAI conference on Artificial Intelligence, 2019.
 
 BibTeX
 ------
