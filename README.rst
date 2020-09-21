@@ -91,6 +91,30 @@ Academic publications citing mlconjug
   | "`Generative Grading Neural Approximate Parsing for Automated Student Feedback`_".
   | Proceedings of the 34th AAAI conference on Artificial Intelligence, 2019.
 
+Software projects using mlconjug
+--------------------------------
+
+- | `Gender Bias Visualization`_
+  | This project offers tools to visualize the gender bias in pre-trained language models to better understand the prejudices in the data.
+- | `Text Adaptation To Context`_
+  | This project uses language models to generate text that is well suited to the type of publication.
+- | `Facemask Detection`_
+  | This project offers a model which recognizes covid-19 masks.
+- | `Bad Excuses for Zoom Abuses`_
+  | Need an excuse for why you can't show up in your Zoom lectures? Just generate one here!
+- | NLP_
+  | Repository to store Natural Language Processing models.
+- | `Virtual Assistant`_
+  | This is a simple virtual assistant. With it, you can search the Internet, access websites, open programs, and more using just your voice.
+  | This virtual assistant supports the English and Portuguese languages and has many settings that you can adjust to your liking.
+- | `Bad Advice`_
+  | This python module responds to yes or no questions. It dishes out its advice at random.
+  | Disclaimer: Do not actually act on this advice ;)
+- | `Spanish Conjugations Quiz`_
+  | Python+Flask web app that uses mlconjug to dynamically generate foreign language conjugation questions.
+- | `Silver Rogue DF`_
+  | A dwarf-fortress adventure mode-inspired rogue-like Pygame Python3 game
+
 BibTeX
 ------
 
@@ -117,4 +141,12 @@ The logo was designed by Zuur_.
 .. _scikit-learn: http://scikit-learn.org/stable/index.html
 .. _Zuur: https://github.com/zuuritaly
 .. _`Generative Grading Neural Approximate Parsing for Automated Student Feedback`: https://arxiv.org/abs/1905.09916
-
+.. _`Gender Bias Visualization`: https://github.com/GesaJo/Gender-Bias-Visualization
+.. _`Text Adaptation To Context`: https://github.com/lzontar/Text_Adaptation_To_Context
+.. _`Facemask Detection`: https://github.com/samuel-karanja/facemask-derection
+.. _`Bad Excuses for Zoom Abuses`: https://github.com/tyxchen/bad-excuses-for-zoom-abuses
+.. _NLP: https://github.com/pskshyam/NLP
+.. _`Virtual Assistant`: https://github.com/JeanExtreme002/Virtual-Assistant
+.. _`Bad Advice`: https://github.com/matthew-cheney/bad-advice
+.. _`Spanish Conjugations Quiz`: https://github.com/williammortimer/Spanish-Conjugations-Quiz
+.. _`Silver Rogue DF`: https://github.com/FranchuFranchu/silver-rogue-df
