@@ -55,8 +55,9 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'MLConjug'
-copyright = u"2017, SekouDiaoNlp"
+project = u'MLConjug3'
+author = u'SekouDiaoNlp'
+copyright = u"2020, SekouDiaoNlp"
 
 # The version info for the project you're documenting, acts as replacement
 # for |version| and |release|, also used in various other places throughout
@@ -186,7 +187,7 @@ html_static_path = ['_static']
 # If true, an OpenSearch description file will be output, and all pages
 # will contain a <link> tag referring to it.  The value of this option
 # must be the base URL from which the finished HTML is served.
-#html_use_opensearch = ''
+html_use_opensearch = 'https://mlconjug3.readthedocs.io/en/latest/'
 
 # This is the file name suffix for HTML files (e.g. ".xhtml").
 #html_file_suffix = None
@@ -259,7 +260,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
     ('index', 'mlconjug3',
-     u'MLConjug Documentation',
+     u'MLConjug3 Documentation',
      u'SekouDiaoNlp',
      'mlconjug3',
      'One line description of project.',
