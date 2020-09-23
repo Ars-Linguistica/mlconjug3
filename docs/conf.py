@@ -245,7 +245,7 @@ latex_documents = [
 # (source start file, name, description, authors, manual section).
 man_pages = [
     ('index', 'mlconjug3',
-     u'MLConjug Documentation',
+     u'MLConjug3 Documentation',
      [u'SekouDiaoNlp'], 1)
 ]
 
