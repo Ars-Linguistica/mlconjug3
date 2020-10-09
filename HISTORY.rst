@@ -2,6 +2,14 @@
 History
 =======
 
+3.7.12 (2020-08-10)
+-------------------
+
+* Updated documentation.
+* Added code highnliting for examples.
+* Added more examples
+* Updated dependencies.
+
 3.7.11 (2020-21-09)
 -------------------
 
