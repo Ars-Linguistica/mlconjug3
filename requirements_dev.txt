@@ -1,9 +1,9 @@
 pip>=20.1
-bump2version==1.0.0
+bump2version==1.0.1
 wheel==0.35.1
 watchdog==0.10.3
 flake8==3.8.4
-tox==3.20.0
+tox==3.20.1
 coverage==5.3
 Sphinx==3.2.1
 docutils==0.16
