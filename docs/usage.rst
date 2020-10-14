@@ -94,3 +94,12 @@ To use MLConjug3 from the command line::
 
     $ mlconjug3 gallofar --language es
 
+    $ mlconjug3 -o, --output (Path of the filename for storing the conjugation tables.)
+
+    $ mlconjug3 -s, --subject (The subject format type for the conjugated forms). The
+                       values can be 'abbrev' or 'pronoun'. The default value
+                       is 'abbrev'.
+
+    $ mlconjug3 -h Show the help menu
+
+
