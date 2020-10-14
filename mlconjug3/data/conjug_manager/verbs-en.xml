@@ -1801,7 +1801,7 @@
 <v><i>flick</i>		<t>turn:</t></v>
 <v><i>flicker</i>		<t>turn:</t></v>
 <v><i>flinch</i>		<t>touch:</t></v>
-<v><i>fling</i>		<t>cl:ing_to</t></v>
+<v><i>fling</i>		<t>s:ing</t></v>
 <v><i>flip</i>		<t>stop:</t></v>
 <v><i>flirt</i>		<t>turn:</t></v>
 <v><i>flit</i>		<t>permit:</t></v>
@@ -2054,7 +2054,7 @@
 <v><i>halve</i>		<t>lov:e</t></v>
 <v><i>hammer</i>		<t>turn:</t></v>
 <v><i>hamper</i>		<t>turn:</t></v>
-<v><i>hamstring</i>		<t>cl:ing_to</t></v>
+<v><i>hamstring</i>		<t>s:ing</t></v>
 <v><i>hand</i>		<t>turn:</t></v>
 <v><i>handicap</i>		<t>stop:</t></v>
 <v><i>handle</i>		<t>lov:e</t></v>
@@ -3987,7 +3987,7 @@
 <v><i>slide</i>		<t>slid:e</t></v>
 <v><i>slight</i>		<t>turn:</t></v>
 <v><i>slim</i>		<t>slim:</t></v>
-<v><i>sling</i>		<t>cl:ing_to</t></v>
+<v><i>sling</i>		<t>s:ing</t></v>
 <v><i>slink (off/away)</i>		<t>sl:ink (off/away)</t></v>
 <v><i>slip</i>		<t>stop:</t></v>
 <v><i>slit</i>		<t>set:</t></v>
@@ -4181,7 +4181,7 @@
 <v><i>stiffen</i>		<t>turn:</t></v>
 <v><i>stifle</i>		<t>lov:e</t></v>
 <v><i>still</i>		<t>turn:</t></v>
-<v><i>sting</i>		<t>cl:ing_to</t></v>
+<v><i>sting</i>		<t>s:ing</t></v>
 <v><i>stink</i>		<t>st:ink</t></v>
 <v><i>stint</i>		<t>turn:</t></v>
 <v><i>stir</i>		<t>star:</t></v>
@@ -4217,7 +4217,7 @@
 <v><i>strew</i>		<t>strew:</t></v>
 <v><i>stride</i>		<t>bestr:ide</t></v>
 <v><i>strike</i>		<t>str:ike</t></v>
-<v><i>string</i>		<t>cl:ing_to</t></v>
+<v><i>string</i>		<t>s:ing</t></v>
 <v><i>strip</i>		<t>stop:</t></v>
 <v><i>strive</i>		<t>dr:ive</t></v>
 <v><i>stroke</i>		<t>lov:e</t></v>
@@ -4312,7 +4312,7 @@
 <v><i>swill</i>		<t>turn:</t></v>
 <v><i>swim</i>		<t>sw:im</t></v>
 <v><i>swindle</i>		<t>lov:e</t></v>
-<v><i>swing</i>		<t>cl:ing_to</t></v>
+<v><i>swing</i>		<t>s:ing</t></v>
 <v><i>swipe</i>		<t>lov:e</t></v>
 <v><i>swirl</i>		<t>turn:</t></v>
 <v><i>swish</i>		<t>touch:</t></v>
@@ -4723,7 +4723,7 @@
 <v><i>wrest</i>		<t>turn:</t></v>
 <v><i>wrestle</i>		<t>lov:e</t></v>
 <v><i>wriggle</i>		<t>lov:e</t></v>
-<v><i>wring</i>		<t>cl:ing_to</t></v>
+<v><i>wring</i>		<t>s:ing</t></v>
 <v><i>wrinkle</i>		<t>lov:e</t></v>
 <v><i>write</i>		<t>wr:ite</t></v>
 <v><i>writhe</i>		<t>lov:e</t></v>
