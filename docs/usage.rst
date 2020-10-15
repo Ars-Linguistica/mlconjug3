@@ -5,6 +5,24 @@ Usage
 .. NOTE:: The default language is French.
     When called without specifying a language, the library will try to conjugate the verb in French.
 
+
+To use MLConjug3 from the command line::
+
+    $ mlconjug3 manger
+
+    $ mlconjug3 bring -l en
+
+    $ mlconjug3 gallofar --language es
+
+    $ mlconjug3 -o, --output (Path of the filename for storing the conjugation tables.)
+
+    $ mlconjug3 -s, --subject (The subject format type for the conjugated forms). The
+                       values can be 'abbrev' or 'pronoun'. The default value
+                       is 'abbrev'.
+
+    $ mlconjug3 -h Show the help menu
+
+
 To use MLConjug3 in a project with the provided pre-trained conjugation models:
 
 .. code-block:: python
@@ -84,22 +102,5 @@ To use MLConjug3 in a project and train a new model:
     # Save trained model
     with open('path/to/save/data/trained_model-fr.pickle', 'wb') as file:
         pickle.dump(conjugator.model, file)
-
-
-To use MLConjug3 from the command line::
-
-    $ mlconjug3 manger
-
-    $ mlconjug3 bring -l en
-
-    $ mlconjug3 gallofar --language es
-
-    $ mlconjug3 -o, --output (Path of the filename for storing the conjugation tables.)
-
-    $ mlconjug3 -s, --subject (The subject format type for the conjugated forms). The
-                       values can be 'abbrev' or 'pronoun'. The default value
-                       is 'abbrev'.
-
-    $ mlconjug3 -h Show the help menu
 
 
