@@ -53,18 +53,18 @@ To install MLConjug3, run this command in your terminal:
 
 This is the preferred method to install MLConjug, as it will always install the most recent stable release.
 
-If you don't have `pip`_ installed, this `Python installation guide`_ can guide
+If you don't have `Pip`_ installed, this `Python Installation Guide`_ can guide
 you through the process.
 
-.. _pip: https://pip.pypa.io
-.. _Python installation guide: http://docs.python-guide.org/en/latest/starting/installation/
+.. _Pip: https://pip.pypa.io
+.. _Python Installation guide: http://docs.python-guide.org/en/latest/starting/installation/
 
 
 ===================
 Install From Source
 ===================
 
-The sources for MLConjug can be downloaded from the `Github repo`_.
+The sources for MLConjug can be downloaded from the `Github_repo`_.
 
 You can either clone the public repository:
 
@@ -72,7 +72,7 @@ You can either clone the public repository:
 
     $ git clone git://github.com/SekouDiaoNlp/mlconjug3
 
-Or download the `tarball`_:
+Or download the `Tarball`_:
 
 .. code-block:: console
 
@@ -85,8 +85,8 @@ Once you have a copy of the source, you can install it with:
     $ python setup.py install
 
 
-.. _Github repo: https://github.com/SekouDiaoNlp/mlconjug
-.. _tarball: https://github.com/SekouDiaoNlp/mlconjug/tarball/master
+.. _Github_repo: https://github.com/SekouDiaoNlp/mlconjug
+.. _Tarball: https://github.com/SekouDiaoNlp/mlconjug/tarball/master
 
 | A Python library to conjugate verbs in French, English, Spanish, Italian, Portuguese and Romanian (more soon)
     using Machine Learning techniques.
