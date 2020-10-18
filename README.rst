@@ -56,8 +56,8 @@ This is the preferred method to install MLConjug, as it will always install the 
 If you don't have `pip`__ installed, this `python installation guide`__ can guide
 you through the process.
 
-.. _pip: https://pip.pypa.io
-.. _Python installation guide: http://docs.python-guide.org/en/latest/starting/installation/
+.. __pip: https://pip.pypa.io
+.. __Python installation guide: http://docs.python-guide.org/en/latest/starting/installation/
 
 
 ===================
@@ -85,8 +85,8 @@ Once you have a copy of the source, you can install it with:
     $ python setup.py install
 
 
-.. _Github repo: https://github.com/SekouDiaoNlp/mlconjug
-.. _tarball: https://github.com/SekouDiaoNlp/mlconjug/tarball/master
+.. __Github repo: https://github.com/SekouDiaoNlp/mlconjug
+.. __tarball: https://github.com/SekouDiaoNlp/mlconjug/tarball/master
 
 | A Python library to conjugate verbs in French, English, Spanish, Italian, Portuguese and Romanian (more soon)
     using Machine Learning techniques.
