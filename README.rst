@@ -137,7 +137,7 @@ Academic publications citing mlconjug
 -------------------------------------
 
 - | Ali Malik and Mike Wu and Vrinda Vasavada and Jinpeng Song and John Mitchell and Noah D. Goodman and Chris Piech.
-  | "`Generative Grading: Neural Approximate Parsing for Automated Student Feedback`_".
+  | "`Generative Grading Neural Approximate Parsing for Automated Student Feedback`_".
   | Proceedings of the 34th AAAI conference on Artificial Intelligence, 2019.
 
 Software projects using mlconjug
@@ -189,7 +189,7 @@ The logo was designed by Zuur_.
 .. _Verbiste: https://perso.b2b2c.ca/~sarrazip/dev/verbiste.html
 .. _scikit-learn: http://scikit-learn.org/stable/index.html
 .. _Zuur: https://github.com/zuuritaly
-.. _`Generative Grading: Neural Approximate Parsing for Automated Student Feedback`: https://arxiv.org/abs/1905.09916
+.. _`Generative Grading Neural Approximate Parsing for Automated Student Feedback`: https://arxiv.org/abs/1905.09916
 .. _`Gender Bias Visualization`: https://github.com/GesaJo/Gender-Bias-Visualization
 .. _`Text Adaptation To Context`: https://github.com/lzontar/Text_Adaptation_To_Context
 .. _`Facemask Detection`: https://github.com/samuel-karanja/facemask-derection
