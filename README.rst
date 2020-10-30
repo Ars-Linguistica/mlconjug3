@@ -40,6 +40,7 @@ MLCONJUG3
         :alt: Code Vulnerability Status
 
 
+
 | A Python library to conjugate verbs in French, English, Spanish, Italian, Portuguese and Romanian (more soon)
     using Machine Learning techniques.
 | Any verb in one of the supported language can be conjugated, as the module contains a Machine Learning model of how the verbs behave.
@@ -62,6 +63,7 @@ MLCONJUG3
 
 * Free software: MIT license
 * Documentation: https://mlconjug3.readthedocs.io.
+
 
 Supported Languages
 -------------------
@@ -88,7 +90,7 @@ Academic publications citing mlconjug
 -------------------------------------
 
 - | Ali Malik and Mike Wu and Vrinda Vasavada and Jinpeng Song and John Mitchell and Noah D. Goodman and Chris Piech.
-  | "`Generative Grading: Neural Approximate Parsing for Automated Student Feedback`_".
+  | "`Generative Grading Neural Approximate Parsing for Automated Student Feedback`_".
   | Proceedings of the 34th AAAI conference on Artificial Intelligence, 2019.
 
 Software projects using mlconjug
@@ -140,7 +142,7 @@ The logo was designed by Zuur_.
 .. _Verbiste: https://perso.b2b2c.ca/~sarrazip/dev/verbiste.html
 .. _scikit-learn: http://scikit-learn.org/stable/index.html
 .. _Zuur: https://github.com/zuuritaly
-.. _`Generative Grading: Neural Approximate Parsing for Automated Student Feedback`: https://arxiv.org/abs/1905.09916
+.. _`Generative Grading Neural Approximate Parsing for Automated Student Feedback`: https://arxiv.org/abs/1905.09916
 .. _`Gender Bias Visualization`: https://github.com/GesaJo/Gender-Bias-Visualization
 .. _`Text Adaptation To Context`: https://github.com/lzontar/Text_Adaptation_To_Context
 .. _`Facemask Detection`: https://github.com/samuel-karanja/facemask-derection
