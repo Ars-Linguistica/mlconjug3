@@ -8,7 +8,7 @@ coverage==5.3
 Sphinx==3.3.0
 docutils==0.16
 cryptography==3.4.6
-PyYAML==5.3.1
+PyYAML==5.4.1
 pytest==6.1.2
 pytest-runner==5.2
 cython==0.29.21
