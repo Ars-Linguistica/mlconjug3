@@ -24,7 +24,7 @@ joblib = "==0.17.0"
 progressbar2 = "==3.53.1"
 pathlib2 = "==2.3.5"
 Sphinx = "==3.3.0"
-PyYAML = "==5.3.1"
+PyYAML = "==5.4"
 Cython = "==0.29.21"
 
 [dev-packages]
