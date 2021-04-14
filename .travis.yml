@@ -1,20 +1,23 @@
 sudo: required
-dist: xenial
+dist: focal
 cache: pip
 language: python
 python:
 - 3.9-dev
-- 3.8-dev
 - 3.8
 - 3.7-dev
 - 3.7
 - 3.6
 #  PyPy versions
 - pypy3
+before_install:
+  -  if [ "TRAVIS_PYTHON_VERSION" = "3.6" ]; then sudo apt-get update; fi
+  -  if [ "TRAVIS_PYTHON_VERSION" = "3.6" ]; then  sudo apt-get -y install rustc; fi
 matrix:
   allow_failures:
   - python: pypy3
   - python: 3.9-dev
+  - python: nightly
 branches:
   only:
   - master

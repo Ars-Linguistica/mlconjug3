@@ -2,6 +2,13 @@
 History
 =======
 
+3.7.14 (2020-14-04)
+-------------------
+
+* Updated documentation.
+* Retrained all models with scikit-learn 0.24.1
+* Updated dependencies.
+
 3.7.13 (2020-14-10)
 -------------------
 
