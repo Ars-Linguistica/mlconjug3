@@ -20,10 +20,10 @@ with open('docs/usage.rst') as usage_file:
 requirements = [
     'defusedxml',
     'cython',
-    'Click>=6.0',
+    'Click>=7.1',
     'numpy',
     'scipy',
-    'scikit-learn>=0.20.2',
+    'scikit-learn>=0.21.4',
     'colorama',
     'joblib',
 ]
@@ -93,6 +93,7 @@ setup(
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
     ],
     test_suite='tests',
     tests_require=test_requirements,
