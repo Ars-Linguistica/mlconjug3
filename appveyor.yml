@@ -1,3 +1,7 @@
+image:
+  - Visual Studio 2019
+  - macOS
+
 environment:
 
   matrix:
