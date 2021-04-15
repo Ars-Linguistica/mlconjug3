@@ -2,6 +2,12 @@
 History
 =======
 
+3.7.15 (2020-15-04)
+-------------------
+
+* Updated documentation.
+* Updated dependencies.
+
 3.7.14 (2020-14-04)
 -------------------
 
