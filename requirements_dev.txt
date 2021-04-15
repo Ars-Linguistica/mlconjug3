@@ -11,8 +11,6 @@ cryptography==3.4.7
 PyYAML==5.4.1
 pytest==6.2.3
 pytest-runner==5.3.0
-pytest-cov==2.11.1
-codecov==2.1.11
 cython==0.29.22
 scikit-learn==0.24.1
 click==7.1.2
