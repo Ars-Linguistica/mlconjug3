@@ -21,7 +21,6 @@ branches:
   only:
   - master
   - dev
-  - enhancements
   - "/v\\d+\\.\\d+[a-z]*.\\d+[a-z]*/"
 #deploy:
 #  provider: pypi
