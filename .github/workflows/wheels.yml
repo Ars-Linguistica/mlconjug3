@@ -25,10 +25,6 @@ jobs:
         # env:
         #   CIBW_SOME_OPTION: value
 
-      - uses: actions/upload-artifact@v2
-        with:
-          path: ./wheelhouse/*.whl
-
   build:
 
       runs-on: ${{ matrix.os }}
