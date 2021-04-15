@@ -24,6 +24,6 @@ colorama==0.4.4
 joblib==1.0.1
 progressbar2==3.53.1
 pathlib2==2.3.5
-grayskull==0.8.5
+# grayskull==0.8.5
 #MonkeyType==19.5.0
 #wily==1.12.4
