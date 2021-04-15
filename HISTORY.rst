@@ -2,13 +2,13 @@
 History
 =======
 
-3.7.15 (2020-15-04)
+3.7.15 (2021-15-04)
 -------------------
 
 * Updated documentation.
 * Updated dependencies.
 
-3.7.14 (2020-14-04)
+3.7.14 (2021-14-04)
 -------------------
 
 * Updated documentation.
