@@ -12,7 +12,7 @@ MLCONJUG3
         :alt: Package Maintenance Status
 
 .. image:: https://github.com/mlconjug3/.github/workflows/wheels.yml/badge.svg
-        :target: https://github.com/mlconjug3
+        :target: https://github.com/SekouDiaoNlp/mlconjug3
         :alt: Build status on Windows, MacOs and Linux
 
 .. image:: https://img.shields.io/pypi/v/mlconjug3.svg
