@@ -20,4 +20,15 @@ schedule: "every day"
 # search for requirement files
 # default: True
 # allowed: True, False
-search: True
+search: False
+
+# Specify requirement files by hand, default is empty
+# default: empty
+# allowed: list
+requirements:
+  - requirements.txt:
+      # update all insecure dependencies
+      update: insecure
+  - requirements_dev.txt:
+      # update all insecure dependencies
+      update: insecure
