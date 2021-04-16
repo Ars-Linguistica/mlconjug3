@@ -19,6 +19,7 @@ you through the process.
 
 
 You can also install mlconjug3 by using Anaconda_ or Miniconda_.
+
 To install Anaconda_ or Miniconda_, please follow the installation instructions on their respective websites.
 After having installed Anaconda_ or Miniconda_, run this command in your terminal:
 
