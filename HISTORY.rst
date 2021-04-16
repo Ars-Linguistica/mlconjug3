@@ -8,9 +8,11 @@ History
 * Added support for pipenv environments.
 * Added mlconjug3 to conda-forge. It is especially useful if you want to install mlconjug3 on a MacBook with an Apple M1 processor.
 * Now mlconjug3 can be installed using:
+
 .. code-block:: console
 
     $  conda install -c conda-forge mlconjug3
+
 * Updated documentation.
 * Updated dependencies.
 
