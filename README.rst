@@ -19,6 +19,10 @@ MLCONJUG3
         :target: https://pypi.python.org/pypi/mlconjug3
         :alt: Pypi Python Package Index Status
 
+.. image:: https://pyup.io/repos/github/SekouDiaoNlp/mlconjug3/python-3-shield.svg
+     :target: https://pyup.io/repos/github/SekouDiaoNlp/mlconjug3/
+     :alt: Compatible with Python 3 only
+
 .. image:: https://readthedocs.org/projects/mlconjug3/badge/?version=latest
         :target: https://mlconjug3.readthedocs.io/en/latest
         :alt: Documentation Status
