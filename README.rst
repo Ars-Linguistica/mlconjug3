@@ -11,7 +11,7 @@ MLCONJUG3
         :target: https://GitHub.com/SekouDiaoNlp/mlconjug3/graphs/commit-activity
         :alt: Package Maintenance Status
 
-.. image:: https://github.com/mlconjug3/.github/workflows/wheels.yml/badge.svg
+.. image:: https://github.com/mlconjug3/actions/workflows/wheels.yml/badge.svg
         :target: https://github.com/SekouDiaoNlp/mlconjug3
         :alt: Build status on Windows, MacOs and Linux
 
