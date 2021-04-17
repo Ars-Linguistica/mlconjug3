@@ -11,6 +11,9 @@
 #
 name: "CodeQL"
 
+paths:
+  - mlconjug3
+
 on:
   push:
     branches: [ master ]
