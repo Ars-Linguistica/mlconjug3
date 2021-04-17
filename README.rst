@@ -35,7 +35,7 @@ MLCONJUG3
         :target: https://codecov.io/gh/SekouDiaoNlp/mlconjug3
         :alt: Code Coverage Status
 
-.. image:: https://snyk.io/test/github/SekouDiaoNlp/mlconjug3/badge.svg?targetFile=requirements.txt
+.. image:: https://snyk-widget.herokuapp.com/badge/pip/mlconjug3/badge.svg
         :target: https://snyk.io/test/github/SekouDiaoNlp/mlconjug3?targetFile=requirements.txt
         :alt: Code Vulnerability Status
 
