@@ -22,7 +22,6 @@ on:
         description: 'location'
         required: false
         default: 'The Multiverse'
-
   push:
     branches: [ master ]
     paths:
