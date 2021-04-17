@@ -29,6 +29,3 @@ requirements:
   - requirements.txt:
       # update all insecure dependencies
       update: insecure
-  - requirements_dev.txt:
-      # update all insecure dependencies
-      update: insecure
