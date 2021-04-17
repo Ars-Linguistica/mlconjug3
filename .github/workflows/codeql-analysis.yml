@@ -12,16 +12,6 @@
 name: "CodeQL"
 
 on:
-  workflow_dispatch:
-    inputs:
-      name:
-        description: 'Person to greet'
-        required: true
-        default: 'Yo SekouDiaoNlp'
-      home:
-        description: 'location'
-        required: false
-        default: 'The Multiverse'
   push:
     branches: [ master ]
     paths:
