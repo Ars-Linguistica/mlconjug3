@@ -31,6 +31,10 @@ MLCONJUG3
      :target: https://pyup.io/repos/github/SekouDiaoNlp/mlconjug3/
      :alt: Compatible with Python 3 only
 
+.. image:: https://anaconda.org/conda-forge/mlconjug3/badges/license.svg
+        :target: https://anaconda.org/conda-forge/mlconjug3
+        :alt: Open Source MIT Licence
+
 .. image:: https://readthedocs.org/projects/mlconjug3/badge/?version=latest
         :target: https://mlconjug3.readthedocs.io/en/latest
         :alt: Documentation Status
