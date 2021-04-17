@@ -12,8 +12,8 @@
 name: "CodeQL"
 
 on:
-    workflow_dispatch:
-     inputs:
+  workflow_dispatch:
+    inputs:
       name:
         description: 'Person to greet'
         required: true
