@@ -1,6 +1,6 @@
 # .github/workflows/manual_codeql_workflow_trigger.yml
 
-name: Manual CodeQl-Analysis Workflow
+name: "Manual CodeQl-Analysis Workflow"
 on: [workflow_dispatch]
 jobs:
   analyze:
