@@ -40,4 +40,4 @@ Cython = "==0.29.22"
 mlconjug3 = {editable = true, path = "."}
 
 [requires]
-python_version = "3.8"
+python_version = "3"

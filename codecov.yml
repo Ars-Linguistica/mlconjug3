@@ -1,3 +1,7 @@
+coverage:
+  status:
+    project: false
+
 steps:
   # (Other steps go here)
   - name: "Upload coverage to Codecov"
