@@ -19,6 +19,14 @@ MLCONJUG3
         :target: https://pypi.python.org/pypi/mlconjug3
         :alt: Pypi Python Package Index Status
 
+.. image:: https://anaconda.org/conda-forge/mlconjug3/badges/version.svg
+        :target: https://anaconda.org/conda-forge/mlconjug3
+        :alt: Anaconda Package Index Status
+
+.. image:: https://anaconda.org/conda-forge/mlconjug3/badges/platforms.svg
+        :target: https://anaconda.org/conda-forge/mlconjug3
+        :alt: Supported platforms
+
 .. image:: https://pyup.io/repos/github/SekouDiaoNlp/mlconjug3/python-3-shield.svg
      :target: https://pyup.io/repos/github/SekouDiaoNlp/mlconjug3/
      :alt: Compatible with Python 3 only
