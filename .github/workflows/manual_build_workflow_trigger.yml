@@ -27,7 +27,7 @@ jobs:
         # to supply options, put them in 'env', like:
         # env:
         #   CIBW_SOME_OPTION: value
-      - name: Test with pytest, mypy, coverage, bandit and restructuredtext
+      - name: Run tests with pytest, mypy, coverage, bandit and restructuredtext checck
         run: |
             py.test --cov=./mlconjug3/
             mypy --strict --ignore-missing-imports  mlconjug3/
@@ -36,7 +36,7 @@ jobs:
             python setup.py check --restructuredtext -s
 
   build:
-
+      name: Build source package on ${{ matrix.os }}
       runs-on: ${{ matrix.os }}
       strategy:
           matrix:
@@ -55,7 +55,7 @@ jobs:
                   pip install flake8 pytest pytest-cov codecov
                   pip install -r requirements.txt
                   pip install -r requirements_dev.txt
-          -   name: Test with pytest, mypy, coverage, bandit and restructuredtext
+          -   name: Run tests with pytest, mypy, coverage, bandit and restructuredtext checck
               run: |
                   py.test --cov=./mlconjug3/
                   mypy --strict --ignore-missing-imports  mlconjug3/
