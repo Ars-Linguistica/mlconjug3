@@ -23,7 +23,7 @@ MLCONJUG3
         :target: https://github.com/SekouDiaoNlp/mlconjug3/actions
         :alt: Build status on Windows, MacOs and Linux
 
-.. image:: https://badge.fury.io/py/ansicolortags.svg
+.. image:: https://img.shields.io/pypi/v/mlconjug3.svg
         :target: https://pypi.python.org/pypi/mlconjug3
         :alt: Pypi Python Package Index Status
 
