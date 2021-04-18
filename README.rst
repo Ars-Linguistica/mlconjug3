@@ -7,10 +7,6 @@ MLCONJUG3
 =========
 
 
-.. image:: https://anaconda.org/conda-forge/mlconjug3/badges/license.svg
-        :target: https://anaconda.org/conda-forge/mlconjug3
-        :alt: Open Source MIT Licence
-
 .. image:: https://img.shields.io/badge/Maintained%3F-yes-green.svg
         :target: https://GitHub.com/SekouDiaoNlp/mlconjug3/graphs/commit-activity
         :alt: Package Maintenance Status
@@ -35,8 +31,7 @@ MLCONJUG3
      :target: https://pyup.io/repos/github/SekouDiaoNlp/mlconjug3/
      :alt: Compatible with Python 3 only
 
-.. image:: https://img.shields.io/pypi/pyversions/ansicolortags.svg
-     :target: https://pypi.python.org/pypi/ansicolortags/
+.. image:: https://img.shields.io/pypi/pyversions/mlconjug3
      :alt: Compatible Python versions
 
 .. image:: https://anaconda.org/conda-forge/mlconjug3/badges/platforms.svg
