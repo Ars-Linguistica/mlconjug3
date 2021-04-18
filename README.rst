@@ -15,11 +15,15 @@ MLCONJUG3
         :target: https://GitHub.com/SekouDiaoNlp/mlconjug3/graphs/commit-activity
         :alt: Package Maintenance Status
 
+.. image:: https://img.shields.io/badge/maintainer-SekouDiaoNlp-blue
+        :target: https://GitHub.com/SekouDiaoNlp/mlconjug3
+        :alt: Package Maintener
+
 .. image:: https://github.com/SekouDiaoNlp/mlconjug3/workflows/mlconjug3/badge.svg
         :target: https://github.com/SekouDiaoNlp/mlconjug3/actions
         :alt: Build status on Windows, MacOs and Linux
 
-.. image:: https://img.shields.io/pypi/v/mlconjug3.svg
+.. image:: https://badge.fury.io/py/ansicolortags.svg
         :target: https://pypi.python.org/pypi/mlconjug3
         :alt: Pypi Python Package Index Status
 
@@ -30,6 +34,10 @@ MLCONJUG3
 .. image:: https://pyup.io/repos/github/SekouDiaoNlp/mlconjug3/python-3-shield.svg
      :target: https://pyup.io/repos/github/SekouDiaoNlp/mlconjug3/
      :alt: Compatible with Python 3 only
+
+.. image:: https://img.shields.io/pypi/pyversions/ansicolortags.svg
+     :target: https://pypi.python.org/pypi/ansicolortags/
+     :alt: Compatible Python versions
 
 .. image:: https://anaconda.org/conda-forge/mlconjug3/badges/platforms.svg
         :target: https://anaconda.org/conda-forge/mlconjug3
