@@ -57,7 +57,7 @@ master_doc = 'index'
 # General information about the project.
 project = u'MLConjug3'
 author = u'SekouDiaoNlp'
-copyright = u"2020, SekouDiaoNlp"
+copyright = u"2021, SekouDiaoNlp"
 
 # The version info for the project you're documenting, acts as replacement
 # for |version| and |release|, also used in various other places throughout
@@ -76,7 +76,7 @@ release = mlconjug3.__version__
 # some non-false value, then it is used:
 #today = ''
 # Else, today_fmt is used as the format for a strftime call.
-#today_fmt = '%B %d, %Y'
+today_fmt = '%B %d, %Y'
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -95,10 +95,10 @@ exclude_patterns = ['_build']
 
 # If true, sectionauthor and moduleauthor directives will be shown in the
 # output. They are ignored by default.
-#show_authors = False
+show_authors = True
 
 # The name of the Pygments (syntax highlighting) style to use.
-pygments_style = 'sphinx'
+pygments_style = 'native'
 
 # A list of ignored prefixes for module index sorting.
 #modindex_common_prefix = []
@@ -116,7 +116,7 @@ gettext_compact = False
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'default'
+html_theme = 'bizstyle'
 
 # Theme options are theme-specific and customize the look and feel of a
 # theme further.  For a list of options available for each theme, see the
@@ -132,7 +132,7 @@ html_theme = 'default'
 
 # A shorter title for the navigation bar.  Default is the same as
 # html_title.
-#html_short_title = None
+html_short_title = 'mlconjug3'
 
 # The name of an image file (relative to this directory) to place at the
 # top of the sidebar.
@@ -151,7 +151,7 @@ html_static_path = ['_static']
 
 # If not '', a 'Last updated on:' timestamp is inserted at every page
 # bottom, using the given strftime format.
-#html_last_updated_fmt = '%b %d, %Y'
+html_last_updated_fmt = '%b %d, %Y'
 
 # If true, SmartyPants will be used to convert quotes and dashes to
 # typographically correct entities.
@@ -182,7 +182,7 @@ html_static_path = ['_static']
 
 # If true, "(C) Copyright ..." is shown in the HTML footer.
 # Default is True.
-#html_show_copyright = True
+html_show_copyright = True
 
 # If true, an OpenSearch description file will be output, and all pages
 # will contain a <link> tag referring to it.  The value of this option
@@ -193,7 +193,7 @@ html_use_opensearch = 'https://mlconjug3.readthedocs.io/en/latest/'
 #html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'mlconjugdoc'
+htmlhelp_basename = 'mlconjug3doc'
 
 
 # -- Options for LaTeX output ------------------------------------------

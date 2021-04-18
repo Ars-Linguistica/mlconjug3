@@ -140,7 +140,7 @@ If you want to cite mlconjug3 in an academic publication use this citation forma
      title={mlconjug3},
      author={Sekou Diao},
      journal={GitHub. Note: https://github.com/SekouDiaoNlp/mlconjug3 Cited by},
-     year={2020}
+     year={2021}
    }
 
 
