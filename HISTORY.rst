@@ -2,11 +2,27 @@
 History
 =======
 
+3.7.17 (2021-18-04)
+-------------------
+
+* | Added new GitHub workflow to automatically build, install and test mlconjug3
+  | on Windows-x64, MacOs-x64 and Linux-x64 for maximum copmatibilty.
+  | The package should build and install even on the newest MacBook with an Apple ARM M1 processor
+  | by installing mlconjug3 through conda_ instead of pip_:
+
+.. code-block:: console
+
+    $  conda install -c conda-forge mlconjug3
+
+* Updated the documentation to make it clearer.
+* Updated dependencies.
+
 3.7.16 (2021-16-04)
 -------------------
 
 * Added support for pipenv environments.
-* Added mlconjug3 to conda-forge. It is especially useful if you want to install mlconjug3 on a MacBook with an Apple M1 processor.
+* | Added mlconjug3 to conda-forge_.
+  | It is especially useful if you want to install mlconjug3 on a MacBook with an Apple M1 processor.
 * Now mlconjug3 can be installed using:
 
 .. code-block:: console
@@ -15,6 +31,12 @@ History
 
 * Updated documentation.
 * Updated dependencies.
+
+
+.. _conda: https://docs.conda.io/projects/conda/en/latest/user-guide/getting-started.html
+.. _conda-forge: https://anaconda.org/conda-forge/
+.. _pip: https://pypi.org/project/pip/
+
 
 3.7.15 (2021-15-04)
 -------------------
