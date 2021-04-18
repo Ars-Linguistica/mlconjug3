@@ -1,0 +1,881 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Package Api Documentation for mlconjug &#8212; MLConjug3 3.7.17 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within MLConjug3 3.7.17 documentation"
+          href="_static/opensearch.xml"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Contributing" href="contributing.html" />
+    <link rel="prev" title="Usage" href="usage.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="contributing.html" title="Contributing"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="usage.html" title="Usage"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">MLConjug3 3.7.17 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Package Api Documentation for mlconjug</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="package-api-documentation-for-mlconjug">
+<h1>Package Api Documentation for mlconjug<a class="headerlink" href="#package-api-documentation-for-mlconjug" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-mlconjug3.mlconjug">
+<span id="api-reference-for-the-classes-in-mlconjug3-mlconjug-py"></span><h2>API Reference for the classes in mlconjug3.mlconjug.py<a class="headerlink" href="#module-mlconjug3.mlconjug" title="Permalink to this headline">¶</a></h2>
+<p>MLConjug Main module.</p>
+<div class="line-block">
+<div class="line">This module declares the main classes the user interacts with.</div>
+</div>
+<div class="line-block">
+<div class="line">The module defines the classes needed to interface with Machine Learning models.</div>
+</div>
+<dl class="py function">
+<dt id="mlconjug3.mlconjug.extract_verb_features">
+<code class="sig-prename descclassname">mlconjug3.mlconjug.</code><code class="sig-name descname">extract_verb_features</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">verb</span></em>, <em class="sig-param"><span class="n">lang</span></em>, <em class="sig-param"><span class="n">ngram_range</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlconjug3/mlconjug.html#extract_verb_features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mlconjug3.mlconjug.extract_verb_features" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Custom Vectorizer optimized for extracting verbs features.</div>
+<div class="line">The Vectorizer subclasses sklearn.feature_extraction.text.CountVectorizer .</div>
+<div class="line">As in Indo-European languages verbs are inflected by adding a morphological suffix,
+the vectorizer extracts verb endings and produces a vector representation of the verb with binary features.</div>
+</div>
+<div class="line-block">
+<div class="line">To enhance the results of the feature extration, several other features have been included:</div>
+</div>
+<div class="line-block">
+<div class="line">The features are the verb’s ending n-grams, starting n-grams, length of the verb, number of vowels,
+number of consonants and the ratio of vowels over consonants.</div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>verb</strong> – string.
+Verb to vectorize.</p></li>
+<li><p><strong>lang</strong> – string.
+Language to analyze.</p></li>
+<li><p><strong>ngram_range</strong> – tuple.
+The range of the ngram sliding window.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list.
+List of the most salient features of the verb for the task of finding it’s conjugation’s class.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt id="mlconjug3.mlconjug.Conjugator">
+<em class="property">class </em><code class="sig-prename descclassname">mlconjug3.mlconjug.</code><code class="sig-name descname">Conjugator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">language</span><span class="o">=</span><span class="default_value">'fr'</span></em>, <em class="sig-param"><span class="n">model</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlconjug3/mlconjug.html#Conjugator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mlconjug3.mlconjug.Conjugator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<div class="line-block">
+<div class="line">This is the main class of the project.</div>
+<div class="line">The class manages the Verbiste data set and provides an interface with the scikit-learn pipeline.</div>
+<div class="line">If no parameters are provided, the default language is set to french and the pre-trained french conjugation pipeline is used.</div>
+<div class="line">The class defines the method conjugate(verb, language) which is the main method of the module.</div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>language</strong> – string.
+Language of the conjugator. The default language is ‘fr’ for french.</p></li>
+<li><p><strong>model</strong> – mlconjug3.Model or scikit-learn Pipeline or Classifier implementing the fit() and predict() methods.
+A user provided pipeline if the user has trained his own pipeline.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="mlconjug3.mlconjug.Conjugator.conjugate">
+<code class="sig-name descname">conjugate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">verb</span></em>, <em class="sig-param"><span class="n">subject</span><span class="o">=</span><span class="default_value">'abbrev'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlconjug3/mlconjug.html#Conjugator.conjugate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mlconjug3.mlconjug.Conjugator.conjugate" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">This is the main method of this class.</div>
+<div class="line">It first checks to see if the verb is in Verbiste.</div>
+<div class="line">If it is not, and a pre-trained scikit-learn pipeline has been supplied, the method then calls the pipeline
+to predict the conjugation class of the provided verb.</div>
+</div>
+<div class="line-block">
+<div class="line">Returns a Verb object or None.</div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>verb</strong> – string.
+Verb to conjugate.</p></li>
+<li><p><strong>subject</strong> – string.
+Toggles abbreviated or full pronouns.
+The default value is ‘abbrev’.
+Select ‘pronoun’ for full pronouns.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Verb object or None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mlconjug3.mlconjug.Conjugator.set_model">
+<code class="sig-name descname">set_model</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">model</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlconjug3/mlconjug.html#Conjugator.set_model"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mlconjug3.mlconjug.Conjugator.set_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assigns the provided pre-trained scikit-learn pipeline to be able to conjugate unknown verbs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>model</strong> – scikit-learn Classifier or Pipeline.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="mlconjug3.mlconjug.DataSet">
+<em class="property">class </em><code class="sig-prename descclassname">mlconjug3.mlconjug.</code><code class="sig-name descname">DataSet</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">verbs_dict</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlconjug3/mlconjug.html#DataSet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mlconjug3.mlconjug.DataSet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<div class="line-block">
+<div class="line">This class holds and manages the data set.</div>
+<div class="line">Defines helper methodss for managing Machine Learning tasks like constructing a training and testing set.</div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>verbs_dict</strong> – A dictionary of verbs and their corresponding conjugation class.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="mlconjug3.mlconjug.DataSet.construct_dict_conjug">
+<code class="sig-name descname">construct_dict_conjug</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlconjug3/mlconjug.html#DataSet.construct_dict_conjug"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mlconjug3.mlconjug.DataSet.construct_dict_conjug" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Populates the dictionary containing the conjugation templates.</div>
+<div class="line">Populates the lists containing the verbs and their templates.</div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mlconjug3.mlconjug.DataSet.split_data">
+<code class="sig-name descname">split_data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">threshold</span><span class="o">=</span><span class="default_value">8</span></em>, <em class="sig-param"><span class="n">proportion</span><span class="o">=</span><span class="default_value">0.5</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlconjug3/mlconjug.html#DataSet.split_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mlconjug3.mlconjug.DataSet.split_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Splits the data into a training and a testing set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>threshold</strong> – int.
+Minimum size of conjugation class to be split.</p></li>
+<li><p><strong>proportion</strong> – float.
+Proportion of samples in the training set.
+Must be between 0 and 1.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="mlconjug3.mlconjug.Model">
+<em class="property">class </em><code class="sig-prename descclassname">mlconjug3.mlconjug.</code><code class="sig-name descname">Model</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">vectorizer</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">feature_selector</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">classifier</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">language</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlconjug3/mlconjug.html#Model"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mlconjug3.mlconjug.Model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<div class="line-block">
+<div class="line">This class manages the scikit-learn pipeline.</div>
+<div class="line">The Pipeline includes a feature vectorizer, a feature selector and a classifier.</div>
+<div class="line">If any of the vectorizer, feature selector or classifier is not supplied at instance declaration,
+the __init__ method will provide good default values that get more than 92% prediction accuracy.</div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vectorizer</strong> – scikit-learn Vectorizer.</p></li>
+<li><p><strong>feature_selector</strong> – scikit-learn Classifier with a fit_transform() method</p></li>
+<li><p><strong>classifier</strong> – scikit-learn Classifier with a predict() method</p></li>
+<li><p><strong>language</strong> – language of the corpus of verbs to be analyzed.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="mlconjug3.mlconjug.Model.train">
+<code class="sig-name descname">train</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">samples</span></em>, <em class="sig-param"><span class="n">labels</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlconjug3/mlconjug.html#Model.train"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mlconjug3.mlconjug.Model.train" title="Permalink to this definition">¶</a></dt>
+<dd><p>Trains the pipeline on the supplied samples and labels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>samples</strong> – list.
+List of verbs.</p></li>
+<li><p><strong>labels</strong> – list.
+List of verb templates.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mlconjug3.mlconjug.Model.predict">
+<code class="sig-name descname">predict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">verbs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlconjug3/mlconjug.html#Model.predict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mlconjug3.mlconjug.Model.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Predicts the conjugation class of the provided list of verbs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>verbs</strong> – list.
+List of verbs.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list.
+List of predicted conjugation groups.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mlconjug3.PyVerbiste">
+<span id="api-reference-for-the-classes-in-mlconjug3-pyverbiste-py"></span><h2>API Reference for the classes in mlconjug3.PyVerbiste.py<a class="headerlink" href="#module-mlconjug3.PyVerbiste" title="Permalink to this headline">¶</a></h2>
+<p>PyVerbiste.</p>
+<div class="line-block">
+<div class="line">A Python library for conjugating verbs in French, English, Spanish, Italian, Portuguese and Romanian (more soon).</div>
+<div class="line">It contains conjugation data generated by machine learning models using the python library mlconjug3.</div>
+<div class="line">More information about mlconjug3 at <a class="reference external" href="https://pypi.org/project/mlconjug3/">https://pypi.org/project/mlconjug3/</a></div>
+</div>
+<div class="line-block">
+<div class="line">The conjugation data conforms to the XML schema defined by Verbiste.</div>
+<div class="line">More information on Verbiste at <a class="reference external" href="https://perso.b2b2c.ca/~sarrazip/dev/conjug_manager.html">https://perso.b2b2c.ca/~sarrazip/dev/conjug_manager.html</a></div>
+</div>
+<dl class="py class">
+<dt id="mlconjug3.PyVerbiste.ConjugManager">
+<em class="property">class </em><code class="sig-prename descclassname">mlconjug3.PyVerbiste.</code><code class="sig-name descname">ConjugManager</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">language</span><span class="o">=</span><span class="default_value">'default'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlconjug3/PyVerbiste.html#ConjugManager"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mlconjug3.PyVerbiste.ConjugManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This is the class handling the mlconjug3 json files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>language</strong> – string.
+| The language of the conjugator. The default value is fr for French.
+| The allowed values are: fr, en, es, it, pt, ro.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="mlconjug3.PyVerbiste.ConjugManager._load_verbs">
+<code class="sig-name descname">_load_verbs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">verbs_file</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlconjug3/PyVerbiste.html#ConjugManager._load_verbs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mlconjug3.PyVerbiste.ConjugManager._load_verbs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load and parses the verbs from the json file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>verbs_file</strong> – string or path object.
+Path to the verbs json file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mlconjug3.PyVerbiste.ConjugManager._load_conjugations">
+<code class="sig-name descname">_load_conjugations</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">conjugations_file</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlconjug3/PyVerbiste.html#ConjugManager._load_conjugations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mlconjug3.PyVerbiste.ConjugManager._load_conjugations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load and parses the conjugations from the json file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>conjugations_file</strong> – string or path object.
+Path to the conjugation json file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mlconjug3.PyVerbiste.ConjugManager._detect_allowed_endings">
+<code class="sig-name descname">_detect_allowed_endings</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlconjug3/PyVerbiste.html#ConjugManager._detect_allowed_endings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mlconjug3.PyVerbiste.ConjugManager._detect_allowed_endings" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Detects the allowed endings for verbs in the supported languages.</div>
+<div class="line">All the supported languages except for English restrict the form a verb can take.</div>
+<div class="line">As English is much more productive and varied in the morphology of its verbs, any word is allowed as a verb.</div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>set.
+A set containing the allowed endings of verbs in the target language.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mlconjug3.PyVerbiste.ConjugManager.is_valid_verb">
+<code class="sig-name descname">is_valid_verb</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">verb</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlconjug3/PyVerbiste.html#ConjugManager.is_valid_verb"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mlconjug3.PyVerbiste.ConjugManager.is_valid_verb" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Checks if the verb is a valid verb in the given language.</div>
+<div class="line">English words are always treated as possible verbs.</div>
+<div class="line">Verbs in other languages are filtered by their endings.</div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>verb</strong> – string.
+The verb to conjugate.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>bool.
+True if the verb is a valid verb in the language. False otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mlconjug3.PyVerbiste.ConjugManager.get_verb_info">
+<code class="sig-name descname">get_verb_info</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">verb</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlconjug3/PyVerbiste.html#ConjugManager.get_verb_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mlconjug3.PyVerbiste.ConjugManager.get_verb_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets verb information and returns a VerbInfo instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>verb</strong> – string.
+Verb to conjugate.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>VerbInfo object or None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mlconjug3.PyVerbiste.ConjugManager.get_conjug_info">
+<code class="sig-name descname">get_conjug_info</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">template</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlconjug3/PyVerbiste.html#ConjugManager.get_conjug_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mlconjug3.PyVerbiste.ConjugManager.get_conjug_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets conjugation information corresponding to the given template.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>template</strong> – string.
+Name of the verb ending pattern.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>OrderedDict or None.
+OrderedDict containing the conjugated suffixes of the template.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="mlconjug3.PyVerbiste.Verbiste">
+<em class="property">class </em><code class="sig-prename descclassname">mlconjug3.PyVerbiste.</code><code class="sig-name descname">Verbiste</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">language</span><span class="o">=</span><span class="default_value">'default'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlconjug3/PyVerbiste.html#Verbiste"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mlconjug3.PyVerbiste.Verbiste" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mlconjug3.PyVerbiste.ConjugManager" title="mlconjug3.PyVerbiste.ConjugManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">mlconjug3.PyVerbiste.ConjugManager</span></code></a></p>
+<p>This is the class handling the Verbiste xml files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>language</strong> – string.
+| The language of the conjugator. The default value is fr for French.
+| The allowed values are: fr, en, es, it, pt, ro.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="mlconjug3.PyVerbiste.Verbiste._load_verbs">
+<code class="sig-name descname">_load_verbs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">verbs_file</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlconjug3/PyVerbiste.html#Verbiste._load_verbs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mlconjug3.PyVerbiste.Verbiste._load_verbs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load and parses the verbs from the xml file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>verbs_file</strong> – string or path object.
+Path to the verbs xml file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mlconjug3.PyVerbiste.Verbiste._parse_verbs">
+<em class="property">static </em><code class="sig-name descname">_parse_verbs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">file</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlconjug3/PyVerbiste.html#Verbiste._parse_verbs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mlconjug3.PyVerbiste.Verbiste._parse_verbs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parses the XML file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>file</strong> – FileObject.
+XML file containing the verbs.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>OrderedDict.
+An OrderedDict containing the verb and its template for all verbs in the file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mlconjug3.PyVerbiste.Verbiste._load_conjugations">
+<code class="sig-name descname">_load_conjugations</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">conjugations_file</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlconjug3/PyVerbiste.html#Verbiste._load_conjugations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mlconjug3.PyVerbiste.Verbiste._load_conjugations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load and parses the conjugations from the xml file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>conjugations_file</strong> – string or path object.
+Path to the conjugation xml file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mlconjug3.PyVerbiste.Verbiste._parse_conjugations">
+<code class="sig-name descname">_parse_conjugations</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">file</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlconjug3/PyVerbiste.html#Verbiste._parse_conjugations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mlconjug3.PyVerbiste.Verbiste._parse_conjugations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parses the XML file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>file</strong> – FileObject.
+XML file containing the conjugation templates.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>OrderedDict.
+An OrderedDict containing all the conjugation templates in the file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mlconjug3.PyVerbiste.Verbiste._load_tense">
+<em class="property">static </em><code class="sig-name descname">_load_tense</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tense</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlconjug3/PyVerbiste.html#Verbiste._load_tense"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mlconjug3.PyVerbiste.Verbiste._load_tense" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load and parses the inflected forms of the tense from xml file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tense</strong> – list of xml tags containing inflected forms.
+The list of inflected forms for the current tense being processed.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list.
+List of inflected forms.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mlconjug3.PyVerbiste.Verbiste._detect_allowed_endings">
+<code class="sig-name descname">_detect_allowed_endings</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mlconjug3.PyVerbiste.Verbiste._detect_allowed_endings" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Detects the allowed endings for verbs in the supported languages.</div>
+<div class="line">All the supported languages except for English restrict the form a verb can take.</div>
+<div class="line">As English is much more productive and varied in the morphology of its verbs, any word is allowed as a verb.</div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>set.
+A set containing the allowed endings of verbs in the target language.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mlconjug3.PyVerbiste.Verbiste.get_conjug_info">
+<code class="sig-name descname">get_conjug_info</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">template</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mlconjug3.PyVerbiste.Verbiste.get_conjug_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets conjugation information corresponding to the given template.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>template</strong> – string.
+Name of the verb ending pattern.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>OrderedDict or None.
+OrderedDict containing the conjugated suffixes of the template.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mlconjug3.PyVerbiste.Verbiste.get_verb_info">
+<code class="sig-name descname">get_verb_info</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">verb</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mlconjug3.PyVerbiste.Verbiste.get_verb_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets verb information and returns a VerbInfo instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>verb</strong> – string.
+Verb to conjugate.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>VerbInfo object or None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mlconjug3.PyVerbiste.Verbiste.is_valid_verb">
+<code class="sig-name descname">is_valid_verb</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">verb</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mlconjug3.PyVerbiste.Verbiste.is_valid_verb" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Checks if the verb is a valid verb in the given language.</div>
+<div class="line">English words are always treated as possible verbs.</div>
+<div class="line">Verbs in other languages are filtered by their endings.</div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>verb</strong> – string.
+The verb to conjugate.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>bool.
+True if the verb is a valid verb in the language. False otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="mlconjug3.PyVerbiste.VerbInfo">
+<em class="property">class </em><code class="sig-prename descclassname">mlconjug3.PyVerbiste.</code><code class="sig-name descname">VerbInfo</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">infinitive</span></em>, <em class="sig-param"><span class="n">root</span></em>, <em class="sig-param"><span class="n">template</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlconjug3/PyVerbiste.html#VerbInfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mlconjug3.PyVerbiste.VerbInfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class defines the Verbiste verb information structure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>infinitive</strong> – string.
+Infinitive form of the verb.</p></li>
+<li><p><strong>root</strong> – string.
+Lexical root of the verb.</p></li>
+<li><p><strong>template</strong> – string.
+Name of the verb ending pattern.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt id="mlconjug3.PyVerbiste.Verb">
+<em class="property">class </em><code class="sig-prename descclassname">mlconjug3.PyVerbiste.</code><code class="sig-name descname">Verb</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">verb_info</span></em>, <em class="sig-param"><span class="n">conjug_info</span></em>, <em class="sig-param"><span class="n">subject</span><span class="o">=</span><span class="default_value">'abbrev'</span></em>, <em class="sig-param"><span class="n">predicted</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlconjug3/PyVerbiste.html#Verb"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mlconjug3.PyVerbiste.Verb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class defines the Verb Object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>verb_info</strong> – VerbInfo Object.</p></li>
+<li><p><strong>conjug_info</strong> – OrderedDict.</p></li>
+<li><p><strong>subject</strong> – string.
+Toggles abbreviated or full pronouns.
+The default value is ‘abbrev’.
+Select ‘pronoun’ for full pronouns.</p></li>
+<li><p><strong>predicted</strong> – bool.
+Indicates if the conjugation information was predicted by the model or retrieved from the dataset.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="mlconjug3.PyVerbiste.Verb.iterate">
+<code class="sig-name descname">iterate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlconjug3/PyVerbiste.html#Verb.iterate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mlconjug3.PyVerbiste.Verb.iterate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterates over all conjugated forms and returns a list of tuples of those conjugated forms.
+:return: list.</p>
+<blockquote>
+<div><p>List of conjugated forms.</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mlconjug3.PyVerbiste.Verb._load_conjug">
+<code class="sig-name descname">_load_conjug</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlconjug3/PyVerbiste.html#Verb._load_conjug"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mlconjug3.PyVerbiste.Verb._load_conjug" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Populates the inflected forms of the verb.</div>
+<div class="line">This is the generic version of this method.</div>
+<div class="line">It does not add personal pronouns to the conjugated forms.</div>
+<div class="line">This method can handle any new language if the conjugation structure conforms to the Verbiste XML Schema.</div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mlconjug3.PyVerbiste.Verb.conjugate_person">
+<code class="sig-name descname">conjugate_person</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">key</span></em>, <em class="sig-param"><span class="n">persons_dict</span></em>, <em class="sig-param"><span class="n">term</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlconjug3/PyVerbiste.html#Verb.conjugate_person"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mlconjug3.PyVerbiste.Verb.conjugate_person" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the conjugated form of the person specified by the key argument.
+:param key: string.
+:param persons_dict: OrderedDict
+:param term: string.
+:return: None.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="mlconjug3.PyVerbiste.VerbFr">
+<em class="property">class </em><code class="sig-prename descclassname">mlconjug3.PyVerbiste.</code><code class="sig-name descname">VerbFr</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">verb_info</span></em>, <em class="sig-param"><span class="n">conjug_info</span></em>, <em class="sig-param"><span class="n">subject</span><span class="o">=</span><span class="default_value">'abbrev'</span></em>, <em class="sig-param"><span class="n">predicted</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlconjug3/PyVerbiste.html#VerbFr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mlconjug3.PyVerbiste.VerbFr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mlconjug3.PyVerbiste.Verb" title="mlconjug3.PyVerbiste.Verb"><code class="xref py py-class docutils literal notranslate"><span class="pre">mlconjug3.PyVerbiste.Verb</span></code></a></p>
+<p>This class defines the French Verb Object.</p>
+<dl class="py method">
+<dt id="mlconjug3.PyVerbiste.VerbFr._load_conjug">
+<code class="sig-name descname">_load_conjug</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlconjug3/PyVerbiste.html#VerbFr._load_conjug"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mlconjug3.PyVerbiste.VerbFr._load_conjug" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Populates the inflected forms of the verb.</div>
+<div class="line">Adds personal pronouns to the inflected verbs.</div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mlconjug3.PyVerbiste.VerbFr.conjugate_person">
+<code class="sig-name descname">conjugate_person</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">key</span></em>, <em class="sig-param"><span class="n">persons_dict</span></em>, <em class="sig-param"><span class="n">term</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mlconjug3.PyVerbiste.VerbFr.conjugate_person" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the conjugated form of the person specified by the key argument.
+:param key: string.
+:param persons_dict: OrderedDict
+:param term: string.
+:return: None.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mlconjug3.PyVerbiste.VerbFr.iterate">
+<code class="sig-name descname">iterate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mlconjug3.PyVerbiste.VerbFr.iterate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterates over all conjugated forms and returns a list of tuples of those conjugated forms.
+:return: list.</p>
+<blockquote>
+<div><p>List of conjugated forms.</p>
+</div></blockquote>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="mlconjug3.PyVerbiste.VerbEn">
+<em class="property">class </em><code class="sig-prename descclassname">mlconjug3.PyVerbiste.</code><code class="sig-name descname">VerbEn</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">verb_info</span></em>, <em class="sig-param"><span class="n">conjug_info</span></em>, <em class="sig-param"><span class="n">subject</span><span class="o">=</span><span class="default_value">'abbrev'</span></em>, <em class="sig-param"><span class="n">predicted</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlconjug3/PyVerbiste.html#VerbEn"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mlconjug3.PyVerbiste.VerbEn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mlconjug3.PyVerbiste.Verb" title="mlconjug3.PyVerbiste.Verb"><code class="xref py py-class docutils literal notranslate"><span class="pre">mlconjug3.PyVerbiste.Verb</span></code></a></p>
+<p>This class defines the English Verb Object.</p>
+<dl class="py method">
+<dt id="mlconjug3.PyVerbiste.VerbEn._load_conjug">
+<code class="sig-name descname">_load_conjug</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlconjug3/PyVerbiste.html#VerbEn._load_conjug"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mlconjug3.PyVerbiste.VerbEn._load_conjug" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Populates the inflected forms of the verb.</div>
+<div class="line">Adds personal pronouns to the inflected verbs.</div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mlconjug3.PyVerbiste.VerbEn.conjugate_person">
+<code class="sig-name descname">conjugate_person</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">key</span></em>, <em class="sig-param"><span class="n">persons_dict</span></em>, <em class="sig-param"><span class="n">term</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mlconjug3.PyVerbiste.VerbEn.conjugate_person" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the conjugated form of the person specified by the key argument.
+:param key: string.
+:param persons_dict: OrderedDict
+:param term: string.
+:return: None.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mlconjug3.PyVerbiste.VerbEn.iterate">
+<code class="sig-name descname">iterate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mlconjug3.PyVerbiste.VerbEn.iterate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterates over all conjugated forms and returns a list of tuples of those conjugated forms.
+:return: list.</p>
+<blockquote>
+<div><p>List of conjugated forms.</p>
+</div></blockquote>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="mlconjug3.PyVerbiste.VerbEs">
+<em class="property">class </em><code class="sig-prename descclassname">mlconjug3.PyVerbiste.</code><code class="sig-name descname">VerbEs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">verb_info</span></em>, <em class="sig-param"><span class="n">conjug_info</span></em>, <em class="sig-param"><span class="n">subject</span><span class="o">=</span><span class="default_value">'abbrev'</span></em>, <em class="sig-param"><span class="n">predicted</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlconjug3/PyVerbiste.html#VerbEs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mlconjug3.PyVerbiste.VerbEs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mlconjug3.PyVerbiste.Verb" title="mlconjug3.PyVerbiste.Verb"><code class="xref py py-class docutils literal notranslate"><span class="pre">mlconjug3.PyVerbiste.Verb</span></code></a></p>
+<p>This class defines the Spanish Verb Object.</p>
+<dl class="py method">
+<dt id="mlconjug3.PyVerbiste.VerbEs._load_conjug">
+<code class="sig-name descname">_load_conjug</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlconjug3/PyVerbiste.html#VerbEs._load_conjug"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mlconjug3.PyVerbiste.VerbEs._load_conjug" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Populates the inflected forms of the verb.</div>
+<div class="line">Adds personal pronouns to the inflected verbs.</div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mlconjug3.PyVerbiste.VerbEs.conjugate_person">
+<code class="sig-name descname">conjugate_person</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">key</span></em>, <em class="sig-param"><span class="n">persons_dict</span></em>, <em class="sig-param"><span class="n">term</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mlconjug3.PyVerbiste.VerbEs.conjugate_person" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the conjugated form of the person specified by the key argument.
+:param key: string.
+:param persons_dict: OrderedDict
+:param term: string.
+:return: None.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mlconjug3.PyVerbiste.VerbEs.iterate">
+<code class="sig-name descname">iterate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mlconjug3.PyVerbiste.VerbEs.iterate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterates over all conjugated forms and returns a list of tuples of those conjugated forms.
+:return: list.</p>
+<blockquote>
+<div><p>List of conjugated forms.</p>
+</div></blockquote>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="mlconjug3.PyVerbiste.VerbIt">
+<em class="property">class </em><code class="sig-prename descclassname">mlconjug3.PyVerbiste.</code><code class="sig-name descname">VerbIt</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">verb_info</span></em>, <em class="sig-param"><span class="n">conjug_info</span></em>, <em class="sig-param"><span class="n">subject</span><span class="o">=</span><span class="default_value">'abbrev'</span></em>, <em class="sig-param"><span class="n">predicted</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlconjug3/PyVerbiste.html#VerbIt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mlconjug3.PyVerbiste.VerbIt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mlconjug3.PyVerbiste.Verb" title="mlconjug3.PyVerbiste.Verb"><code class="xref py py-class docutils literal notranslate"><span class="pre">mlconjug3.PyVerbiste.Verb</span></code></a></p>
+<p>This class defines the Italian Verb Object.</p>
+<dl class="py method">
+<dt id="mlconjug3.PyVerbiste.VerbIt._load_conjug">
+<code class="sig-name descname">_load_conjug</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlconjug3/PyVerbiste.html#VerbIt._load_conjug"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mlconjug3.PyVerbiste.VerbIt._load_conjug" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Populates the inflected forms of the verb.</div>
+<div class="line">Adds personal pronouns to the inflected verbs.</div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mlconjug3.PyVerbiste.VerbIt.conjugate_person">
+<code class="sig-name descname">conjugate_person</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">key</span></em>, <em class="sig-param"><span class="n">persons_dict</span></em>, <em class="sig-param"><span class="n">term</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mlconjug3.PyVerbiste.VerbIt.conjugate_person" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the conjugated form of the person specified by the key argument.
+:param key: string.
+:param persons_dict: OrderedDict
+:param term: string.
+:return: None.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mlconjug3.PyVerbiste.VerbIt.iterate">
+<code class="sig-name descname">iterate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mlconjug3.PyVerbiste.VerbIt.iterate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterates over all conjugated forms and returns a list of tuples of those conjugated forms.
+:return: list.</p>
+<blockquote>
+<div><p>List of conjugated forms.</p>
+</div></blockquote>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="mlconjug3.PyVerbiste.VerbPt">
+<em class="property">class </em><code class="sig-prename descclassname">mlconjug3.PyVerbiste.</code><code class="sig-name descname">VerbPt</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">verb_info</span></em>, <em class="sig-param"><span class="n">conjug_info</span></em>, <em class="sig-param"><span class="n">subject</span><span class="o">=</span><span class="default_value">'abbrev'</span></em>, <em class="sig-param"><span class="n">predicted</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlconjug3/PyVerbiste.html#VerbPt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mlconjug3.PyVerbiste.VerbPt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mlconjug3.PyVerbiste.Verb" title="mlconjug3.PyVerbiste.Verb"><code class="xref py py-class docutils literal notranslate"><span class="pre">mlconjug3.PyVerbiste.Verb</span></code></a></p>
+<p>This class defines the Portuguese Verb Object.</p>
+<dl class="py method">
+<dt id="mlconjug3.PyVerbiste.VerbPt._load_conjug">
+<code class="sig-name descname">_load_conjug</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlconjug3/PyVerbiste.html#VerbPt._load_conjug"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mlconjug3.PyVerbiste.VerbPt._load_conjug" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Populates the inflected forms of the verb.</div>
+<div class="line">Adds personal pronouns to the inflected verbs.</div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mlconjug3.PyVerbiste.VerbPt.conjugate_person">
+<code class="sig-name descname">conjugate_person</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">key</span></em>, <em class="sig-param"><span class="n">persons_dict</span></em>, <em class="sig-param"><span class="n">term</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mlconjug3.PyVerbiste.VerbPt.conjugate_person" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the conjugated form of the person specified by the key argument.
+:param key: string.
+:param persons_dict: OrderedDict
+:param term: string.
+:return: None.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mlconjug3.PyVerbiste.VerbPt.iterate">
+<code class="sig-name descname">iterate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mlconjug3.PyVerbiste.VerbPt.iterate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterates over all conjugated forms and returns a list of tuples of those conjugated forms.
+:return: list.</p>
+<blockquote>
+<div><p>List of conjugated forms.</p>
+</div></blockquote>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="mlconjug3.PyVerbiste.VerbRo">
+<em class="property">class </em><code class="sig-prename descclassname">mlconjug3.PyVerbiste.</code><code class="sig-name descname">VerbRo</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">verb_info</span></em>, <em class="sig-param"><span class="n">conjug_info</span></em>, <em class="sig-param"><span class="n">subject</span><span class="o">=</span><span class="default_value">'abbrev'</span></em>, <em class="sig-param"><span class="n">predicted</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlconjug3/PyVerbiste.html#VerbRo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mlconjug3.PyVerbiste.VerbRo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mlconjug3.PyVerbiste.Verb" title="mlconjug3.PyVerbiste.Verb"><code class="xref py py-class docutils literal notranslate"><span class="pre">mlconjug3.PyVerbiste.Verb</span></code></a></p>
+<p>This class defines the Romanian Verb Object.</p>
+<dl class="py method">
+<dt id="mlconjug3.PyVerbiste.VerbRo._load_conjug">
+<code class="sig-name descname">_load_conjug</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlconjug3/PyVerbiste.html#VerbRo._load_conjug"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mlconjug3.PyVerbiste.VerbRo._load_conjug" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Populates the inflected forms of the verb.</div>
+<div class="line">Adds personal pronouns to the inflected verbs.</div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mlconjug3.PyVerbiste.VerbRo.conjugate_person">
+<code class="sig-name descname">conjugate_person</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">key</span></em>, <em class="sig-param"><span class="n">persons_dict</span></em>, <em class="sig-param"><span class="n">term</span></em><span class="sig-paren">)</span><a class="headerlink" href="#mlconjug3.PyVerbiste.VerbRo.conjugate_person" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the conjugated form of the person specified by the key argument.
+:param key: string.
+:param persons_dict: OrderedDict
+:param term: string.
+:return: None.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mlconjug3.PyVerbiste.VerbRo.iterate">
+<code class="sig-name descname">iterate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mlconjug3.PyVerbiste.VerbRo.iterate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterates over all conjugated forms and returns a list of tuples of those conjugated forms.
+:return: list.</p>
+<blockquote>
+<div><p>List of conjugated forms.</p>
+</div></blockquote>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Package Api Documentation for mlconjug</a><ul>
+<li><a class="reference internal" href="#module-mlconjug3.mlconjug">API Reference for the classes in mlconjug3.mlconjug.py</a></li>
+<li><a class="reference internal" href="#module-mlconjug3.PyVerbiste">API Reference for the classes in mlconjug3.PyVerbiste.py</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="usage.html"
+                        title="previous chapter">Usage</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="contributing.html"
+                        title="next chapter">Contributing</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/modules.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="contributing.html" title="Contributing"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="usage.html" title="Usage"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">MLConjug3 3.7.17 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Package Api Documentation for mlconjug</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, SekouDiaoNlp.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+    </div>
+  </body>
+</html>
