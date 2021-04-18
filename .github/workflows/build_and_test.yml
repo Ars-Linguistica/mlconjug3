@@ -1,4 +1,4 @@
-name: mlconjug3
+name: "Build and run multiple tests"
 
 on: [push, pull_request]
 
