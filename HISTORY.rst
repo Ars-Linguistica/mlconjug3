@@ -5,7 +5,7 @@ History
 3.7.17 (2021-18-04)
 -------------------
 
-* | Added new GitHub workflow to automatically build, install and test mlconjug3
+* | Added new `GitHub Actions Workflows`_ to automatically build, install and test mlconjug3
   | on Windows-x64, MacOs-x64 and Linux-x64 for maximum copmatibilty.
   | The package should build and install even on the newest MacBook with an Apple ARM M1 processor
   | by installing mlconjug3 through conda_ instead of pip_:
@@ -15,7 +15,7 @@ History
     $  conda install -c conda-forge mlconjug3
 
 * Updated the documentation to make it clearer.
-* Updated dependencies.
+* Updated development dependencies.
 
 3.7.16 (2021-16-04)
 -------------------
@@ -33,6 +33,7 @@ History
 * Updated dependencies.
 
 
+.. _`GitHub Actions Workflows`: https://github.com/SekouDiaoNlp/mlconjug3/actions
 .. _conda: https://docs.conda.io/projects/conda/en/latest/user-guide/getting-started.html
 .. _conda-forge: https://anaconda.org/conda-forge/
 .. _pip: https://pypi.org/project/pip/
