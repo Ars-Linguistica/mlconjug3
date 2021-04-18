@@ -7,13 +7,13 @@ MLCONJUG3
 =========
 
 
-.. image:: https://anaconda.org/conda-forge/mlconjug3/badges/license.svg
-        :target: https://anaconda.org/conda-forge/mlconjug3
-        :alt: Open Source MIT Licence
-
 .. image:: https://img.shields.io/badge/Maintained%3F-yes-green.svg
         :target: https://GitHub.com/SekouDiaoNlp/mlconjug3/graphs/commit-activity
         :alt: Package Maintenance Status
+
+.. image:: https://img.shields.io/badge/maintainer-SekouDiaoNlp-blue
+        :target: https://GitHub.com/SekouDiaoNlp/mlconjug3
+        :alt: Package Maintener
 
 .. image:: https://github.com/SekouDiaoNlp/mlconjug3/workflows/mlconjug3/badge.svg
         :target: https://github.com/SekouDiaoNlp/mlconjug3/actions
@@ -27,11 +27,11 @@ MLCONJUG3
         :target: https://anaconda.org/conda-forge/mlconjug3
         :alt: Anaconda Package Index Status
 
-.. image:: https://pyup.io/repos/github/SekouDiaoNlp/mlconjug3/python-3-shield.svg
-     :target: https://pyup.io/repos/github/SekouDiaoNlp/mlconjug3/
-     :alt: Compatible with Python 3 only
+.. image:: https://img.shields.io/pypi/pyversions/mlconjug3
+        :target: https://pypi.python.org/pypi/mlconjug3
+        :alt: Compatible Python versions
 
-.. image:: https://anaconda.org/conda-forge/mlconjug3/badges/platforms.svg
+.. image:: https://img.shields.io/conda/pn/conda-forge/mlconjug3?color=dark%20green&label=Supported%20platforms
         :target: https://anaconda.org/conda-forge/mlconjug3
         :alt: Supported platforms
 
