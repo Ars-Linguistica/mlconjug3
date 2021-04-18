@@ -31,7 +31,7 @@ MLCONJUG3
         :target: https://pypi.python.org/pypi/mlconjug3
         :alt: Compatible Python versions
 
-.. image:: https://img.shields.io/conda/pn/conda-forge/mlconjug3?color=green&label=Supported%20platforms
+.. image:: https://img.shields.io/conda/pn/conda-forge/mlconjug3?color=dark%20green&label=Supported%20platforms
         :target: https://anaconda.org/conda-forge/mlconjug3
         :alt: Supported platforms
 
