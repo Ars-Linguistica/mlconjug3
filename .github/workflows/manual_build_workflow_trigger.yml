@@ -33,7 +33,10 @@ jobs:
             mypy --strict --ignore-missing-imports  mlconjug3/
             codecov --token=06406f4a-05a0-4974-a902-20fd09de8b50
             bandit -r mlconjug3/
-            python setup.py check --restructuredtext -s
+#           python setup.py check --restructuredtext -s
+            # This command has been deprecated. Use `twine check` instead.
+            python setup.py sdist bdist_wheel
+            twine check dist/*
 
   build:
       name: Build source package on ${{ matrix.os }}
@@ -61,4 +64,7 @@ jobs:
                   mypy --strict --ignore-missing-imports  mlconjug3/
                   codecov --token=06406f4a-05a0-4974-a902-20fd09de8b50
                   bandit -r mlconjug3/
-                  python setup.py check --restructuredtext -s
+#                 python setup.py check --restructuredtext -s
+                  # This command has been deprecated. Use `twine check` instead.
+                  python setup.py sdist bdist_wheel
+                  twine check dist/*
