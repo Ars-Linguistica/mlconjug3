@@ -27,7 +27,7 @@ jobs:
         # to supply options, put them in 'env', like:
         # env:
         #   CIBW_SOME_OPTION: value
-      - name: Run tests with pytest, mypy, coverage, bandit and restructuredtext checck
+      - name: Run tests with pytest, mypy, coverage, bandit and restructuredtext check
         run: |
             py.test --cov=./mlconjug3/
             mypy --strict --ignore-missing-imports  mlconjug3/
@@ -35,6 +35,8 @@ jobs:
             bandit -r mlconjug3/
             python setup.py sdist bdist_wheel
             twine check dist/*
+        #   python setup.py check --restructuredtext -s
+        #   This command has been deprecated. Use `twine check` instead.
 
   build:
       name: Build source package on ${{ matrix.os }}
@@ -56,7 +58,7 @@ jobs:
                   pip install flake8 pytest pytest-cov codecov
                   pip install -r requirements.txt
                   pip install -r requirements_dev.txt
-          -   name: Run tests with pytest, mypy, coverage, bandit and restructuredtext checck
+          -   name: Run tests with pytest, mypy, coverage, bandit and restructuredtext check
               run: |
                   py.test --cov=./mlconjug3/
                   mypy --strict --ignore-missing-imports  mlconjug3/
@@ -64,3 +66,5 @@ jobs:
                   bandit -r mlconjug3/
                   python setup.py sdist bdist_wheel
                   twine check dist/*
+              #   python setup.py check --restructuredtext -s
+              #   This command has been deprecated. Use `twine check` instead.
