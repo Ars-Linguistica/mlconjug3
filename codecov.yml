@@ -1,6 +1,10 @@
 coverage:
   status:
-    project: false
+    project:
+      default:
+        # Do not fail PRs if the code coverage drops.
+        target: 0%
+        threshold: 10%
 
 steps:
   # (Other steps go here)

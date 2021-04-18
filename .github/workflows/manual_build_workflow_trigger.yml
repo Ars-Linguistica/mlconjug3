@@ -1,7 +1,7 @@
-name: mlconjug3
+# .github/workflows/manual_build_workflow_trigger.yml
 
-on: [push, pull_request]
-
+name: "Manual Build Workflow"
+on: [workflow_dispatch]
 jobs:
   build_wheels:
     name: Build wheels on ${{ matrix.os }}
