@@ -5,7 +5,7 @@ coverage:
         # Do not fail PRs if the code coverage drops.
         target: 0%
         threshold: 40%
-        if_ci_failed: ignore
+        if_ci_failed: success
         informational: true
 
 steps:
@@ -13,7 +13,7 @@ steps:
   - name: "Upload coverage to Codecov"
     uses: codecov/codecov-action@v1
     with:
-      fail_ci_if_error: false
+      if_ci_failed: success
 
 ignore:
   - "**/*.yaml"
