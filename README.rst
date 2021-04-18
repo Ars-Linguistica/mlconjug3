@@ -27,12 +27,9 @@ MLCONJUG3
         :target: https://anaconda.org/conda-forge/mlconjug3
         :alt: Anaconda Package Index Status
 
-.. image:: https://pyup.io/repos/github/SekouDiaoNlp/mlconjug3/python-3-shield.svg
-     :target: https://pyup.io/repos/github/SekouDiaoNlp/mlconjug3/
-     :alt: Compatible with Python 3 only
-
 .. image:: https://img.shields.io/pypi/pyversions/mlconjug3
-     :alt: Compatible Python versions
+        :target: https://pypi.python.org/pypi/mlconjug3
+        :alt: Compatible Python versions
 
 .. image:: https://anaconda.org/conda-forge/mlconjug3/badges/platforms.svg
         :target: https://anaconda.org/conda-forge/mlconjug3
