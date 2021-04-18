@@ -8,7 +8,7 @@ History
 * | Added new `GitHub Actions Workflows`_ to automatically build, install and test mlconjug3
   | on Windows-x64, MacOs-x64 and Linux-x64 for maximum copmatibilty.
   | The package should build and install even on the newest MacBook with an Apple ARM M1 processor
-  | by installing mlconjug3 through conda_ instead of pip_:
+  | by installing mlconjug3 through conda_ instead of pip:
 
 .. code-block:: console
 
@@ -36,8 +36,6 @@ History
 .. _`GitHub Actions Workflows`: https://github.com/SekouDiaoNlp/mlconjug3/actions
 .. _conda: https://docs.conda.io/projects/conda/en/latest/user-guide/getting-started.html
 .. _conda-forge: https://anaconda.org/conda-forge/
-.. _pip: https://pypi.org/project/pip/
-
 
 3.7.15 (2021-15-04)
 -------------------
