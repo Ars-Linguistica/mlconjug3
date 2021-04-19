@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+  <ShortName>MLConjug3</ShortName>
+  <Description>Search MLConjug3 3.7.17 documentation</Description>
+  <InputEncoding>utf-8</InputEncoding>
+  <Url type="text/html" method="get"
+       template="https://mlconjug3.readthedocs.io/en/latest//search.html?q={searchTerms}"/>
+  <LongName>MLConjug3 3.7.17 documentation</LongName>
+  
+</OpenSearchDescription>
