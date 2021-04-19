@@ -17,7 +17,7 @@ Cython = "*"
 [dev-packages]
 bump2version = "==1.0.1"
 watchdog = "==2.0.2"
-flake8 = "==3.9.0"
+flake8 = "==3.9.1"
 tox = "==3.23.0"
 coverage = "==5.5"
 docutils = "<0.17"
@@ -36,8 +36,9 @@ progressbar2 = "==3.53.1"
 pathlib2 = "==2.3.5"
 Sphinx = "==3.5.4"
 PyYAML = "==5.4.1"
-Cython = "==0.29.22"
+Cython = "==0.29.23"
 mlconjug3 = {editable = true, path = "."}
+twine = "==3.4.1"
 
 [requires]
 python_version = "3"
