@@ -57,7 +57,7 @@ master_doc = 'index'
 # General information about the project.
 project = u'MLConjug3'
 author = u'SekouDiaoNlp'
-copyright = u"2020, SekouDiaoNlp"
+copyright = u"2021, SekouDiaoNlp"
 
 # The version info for the project you're documenting, acts as replacement
 # for |version| and |release|, also used in various other places throughout
@@ -193,7 +193,7 @@ html_use_opensearch = 'https://mlconjug3.readthedocs.io/en/latest/'
 #html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'mlconjugdoc'
+htmlhelp_basename = 'mlconjug3doc'
 
 
 # -- Options for LaTeX output ------------------------------------------
