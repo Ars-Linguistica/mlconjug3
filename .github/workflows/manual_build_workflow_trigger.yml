@@ -1,6 +1,6 @@
 # .github/workflows/manual_build_workflow_trigger.yml
 
-name: "Manual Build Workflow"
+name: "Manual Build and test Workflow"
 on: [workflow_dispatch]
 jobs:
   build_wheels:
