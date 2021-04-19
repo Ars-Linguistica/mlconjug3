@@ -1,0 +1,448 @@
+
+
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mlconjug3.mlconjug &#8212; MLConjug3 3.7.17 documentation</title>
+    <link rel="stylesheet" href="../../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../_static/bizstyle.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within MLConjug3 3.7.17 documentation"
+          href="../../_static/opensearch.xml"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">mlconjug3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">mlconjug3.mlconjug</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for mlconjug3.mlconjug</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">MLConjug Main module.</span>
+
+<span class="sd">| This module declares the main classes the user interacts with.</span>
+
+<span class="sd">| The module defines the classes needed to interface with Machine Learning models.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">.PyVerbiste</span> <span class="kn">import</span> <span class="n">Verbiste</span><span class="p">,</span> <span class="n">VerbInfo</span><span class="p">,</span> <span class="n">Verb</span><span class="p">,</span> <span class="n">VerbEn</span><span class="p">,</span> <span class="n">VerbEs</span><span class="p">,</span> <span class="n">VerbFr</span><span class="p">,</span> <span class="n">VerbIt</span><span class="p">,</span> <span class="n">VerbPt</span><span class="p">,</span> <span class="n">VerbRo</span><span class="p">,</span> <span class="n">ConjugManager</span>
+
+<span class="kn">from</span> <span class="nn">.__init__</span> <span class="kn">import</span> <span class="n">Pipeline</span><span class="p">,</span> <span class="n">SelectFromModel</span><span class="p">,</span> <span class="n">CountVectorizer</span><span class="p">,</span> <span class="n">LinearSVC</span><span class="p">,</span> <span class="n">SGDClassifier</span>
+
+<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">logger</span>
+
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">Random</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="kn">import</span> <span class="nn">joblib</span>
+<span class="kn">import</span> <span class="nn">pkg_resources</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">zipfile</span> <span class="kn">import</span> <span class="n">ZipFile</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+
+<span class="n">_RESOURCE_PACKAGE</span> <span class="o">=</span> <span class="s1">&#39;mlconjug3&#39;</span>
+
+<span class="n">_LANGUAGE_FULL</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;fr&#39;</span><span class="p">:</span> <span class="s1">&#39;Français&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;en&#39;</span><span class="p">:</span> <span class="s1">&#39;English&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;es&#39;</span><span class="p">:</span> <span class="s1">&#39;Español&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;it&#39;</span><span class="p">:</span> <span class="s1">&#39;Italiano&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;pt&#39;</span><span class="p">:</span> <span class="s1">&#39;Português&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;ro&#39;</span><span class="p">:</span> <span class="s1">&#39;Română&#39;</span><span class="p">,</span>
+                  <span class="p">}</span>
+
+<span class="n">_VERBS</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;fr&#39;</span><span class="p">:</span> <span class="n">VerbFr</span><span class="p">,</span>
+          <span class="s1">&#39;en&#39;</span><span class="p">:</span> <span class="n">VerbEn</span><span class="p">,</span>
+          <span class="s1">&#39;es&#39;</span><span class="p">:</span> <span class="n">VerbEs</span><span class="p">,</span>
+          <span class="s1">&#39;it&#39;</span><span class="p">:</span> <span class="n">VerbIt</span><span class="p">,</span>
+          <span class="s1">&#39;pt&#39;</span><span class="p">:</span> <span class="n">VerbPt</span><span class="p">,</span>
+          <span class="s1">&#39;ro&#39;</span><span class="p">:</span> <span class="n">VerbRo</span><span class="p">,</span>
+          <span class="p">}</span>
+
+<span class="n">_PRE_TRAINED_MODEL_PATH</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;fr&#39;</span><span class="p">:</span> <span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="s1">&#39;models&#39;</span><span class="p">,</span> <span class="s1">&#39;trained_model-fr-final.zip&#39;</span><span class="p">)),</span>
+    <span class="s1">&#39;it&#39;</span><span class="p">:</span> <span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="s1">&#39;models&#39;</span><span class="p">,</span> <span class="s1">&#39;trained_model-it-final.zip&#39;</span><span class="p">)),</span>
+    <span class="s1">&#39;es&#39;</span><span class="p">:</span> <span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="s1">&#39;models&#39;</span><span class="p">,</span> <span class="s1">&#39;trained_model-es-final.zip&#39;</span><span class="p">)),</span>
+    <span class="s1">&#39;en&#39;</span><span class="p">:</span> <span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="s1">&#39;models&#39;</span><span class="p">,</span> <span class="s1">&#39;trained_model-en-final.zip&#39;</span><span class="p">)),</span>
+    <span class="s1">&#39;pt&#39;</span><span class="p">:</span> <span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="s1">&#39;models&#39;</span><span class="p">,</span> <span class="s1">&#39;trained_model-pt-final.zip&#39;</span><span class="p">)),</span>
+    <span class="s1">&#39;ro&#39;</span><span class="p">:</span> <span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="s1">&#39;models&#39;</span><span class="p">,</span> <span class="s1">&#39;trained_model-ro-final.zip&#39;</span><span class="p">)),</span>
+<span class="p">}</span>
+
+<span class="n">_ALPHABET</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;fr&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;vowels&#39;</span><span class="p">:</span> <span class="s1">&#39;aáàâeêéèiîïoôöœuûùy&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;consonants&#39;</span><span class="p">:</span> <span class="s1">&#39;bcçdfghjklmnpqrstvwxyz&#39;</span><span class="p">},</span>
+             <span class="s1">&#39;en&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;vowels&#39;</span><span class="p">:</span> <span class="s1">&#39;aeiouy&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;consonants&#39;</span><span class="p">:</span> <span class="s1">&#39;bcdfghjklmnpqrstvwxyz&#39;</span><span class="p">},</span>
+             <span class="s1">&#39;es&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;vowels&#39;</span><span class="p">:</span> <span class="s1">&#39;aáeiíoóuúy&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;consonants&#39;</span><span class="p">:</span> <span class="s1">&#39;bcdfghjklmnñpqrstvwxyz&#39;</span><span class="p">},</span>
+             <span class="s1">&#39;it&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;vowels&#39;</span><span class="p">:</span> <span class="s1">&#39;aàeéèiìîoóòuùy&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;consonants&#39;</span><span class="p">:</span> <span class="s1">&#39;bcdfghjklmnpqrstvwxyz&#39;</span><span class="p">},</span>
+             <span class="s1">&#39;pt&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;vowels&#39;</span><span class="p">:</span> <span class="s1">&#39;aàãááeêéiíoóõuúy&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;consonants&#39;</span><span class="p">:</span> <span class="s1">&#39;bcçdfghjklmnpqrstvwxyz&#39;</span><span class="p">},</span>
+             <span class="s1">&#39;ro&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;vowels&#39;</span><span class="p">:</span> <span class="s1">&#39;aăâeiîouy&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;consonants&#39;</span><span class="p">:</span> <span class="s1">&#39;bcdfghjklmnpqrsșştțţvwxyz&#39;</span><span class="p">},</span>
+             <span class="p">}</span>
+
+
+<div class="viewcode-block" id="extract_verb_features"><a class="viewcode-back" href="../../modules.html#mlconjug3.mlconjug.extract_verb_features">[docs]</a><span class="k">def</span> <span class="nf">extract_verb_features</span><span class="p">(</span><span class="n">verb</span><span class="p">,</span> <span class="n">lang</span><span class="p">,</span> <span class="n">ngram_range</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    | Custom Vectorizer optimized for extracting verbs features.</span>
+<span class="sd">    | The Vectorizer subclasses sklearn.feature_extraction.text.CountVectorizer .</span>
+<span class="sd">    | As in Indo-European languages verbs are inflected by adding a morphological suffix,</span>
+<span class="sd">     the vectorizer extracts verb endings and produces a vector representation of the verb with binary features.</span>
+
+<span class="sd">    | To enhance the results of the feature extration, several other features have been included:</span>
+
+<span class="sd">    | The features are the verb&#39;s ending n-grams, starting n-grams, length of the verb, number of vowels,</span>
+<span class="sd">     number of consonants and the ratio of vowels over consonants.</span>
+
+<span class="sd">    :param verb: string.</span>
+<span class="sd">        Verb to vectorize.</span>
+<span class="sd">    :param lang: string.</span>
+<span class="sd">        Language to analyze.</span>
+<span class="sd">    :param ngram_range: tuple.</span>
+<span class="sd">        The range of the ngram sliding window.</span>
+<span class="sd">    :return: list.</span>
+<span class="sd">        List of the most salient features of the verb for the task of finding it&#39;s conjugation&#39;s class.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_white_spaces</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\s\s+&quot;</span><span class="p">)</span>
+    <span class="n">verb</span> <span class="o">=</span> <span class="n">_white_spaces</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">verb</span><span class="p">)</span>
+    <span class="n">verb</span> <span class="o">=</span> <span class="n">verb</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="n">verb_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">verb</span><span class="p">)</span>
+    <span class="n">length_feature</span> <span class="o">=</span> <span class="s1">&#39;LEN=</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">verb_len</span><span class="p">))</span>
+    <span class="n">min_n</span><span class="p">,</span> <span class="n">max_n</span> <span class="o">=</span> <span class="n">ngram_range</span>
+    <span class="n">final_ngrams</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;END=</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">verb</span><span class="p">[</span><span class="o">-</span><span class="n">n</span><span class="p">:])</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">min_n</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="n">max_n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">verb_len</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))]</span>
+    <span class="n">initial_ngrams</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;START=</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">verb</span><span class="p">[:</span><span class="n">n</span><span class="p">])</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">min_n</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="n">max_n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">verb_len</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))]</span>
+    <span class="k">if</span> <span class="n">lang</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_ALPHABET</span><span class="p">:</span>
+        <span class="n">lang</span> <span class="o">=</span> <span class="s1">&#39;en&#39;</span>  <span class="c1"># We chose &#39;en&#39; as the default alphabet because english is more standard, without accents or diactrics.</span>
+    <span class="n">vowels</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">verb</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">_ALPHABET</span><span class="p">[</span><span class="n">lang</span><span class="p">][</span><span class="s1">&#39;vowels&#39;</span><span class="p">])</span>
+    <span class="n">vowels_number</span> <span class="o">=</span> <span class="s1">&#39;VOW_NUM=</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">vowels</span><span class="p">)</span>
+    <span class="n">consonants</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">verb</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">_ALPHABET</span><span class="p">[</span><span class="n">lang</span><span class="p">][</span><span class="s1">&#39;consonants&#39;</span><span class="p">])</span>
+    <span class="n">consonants_number</span> <span class="o">=</span> <span class="s1">&#39;CONS_NUM=</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">consonants</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">consonants</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">vow_cons_ratio</span> <span class="o">=</span> <span class="s1">&#39;V/C=N/A&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">vow_cons_ratio</span> <span class="o">=</span> <span class="s1">&#39;V/C=</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">vowels</span> <span class="o">/</span> <span class="n">consonants</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="n">final_ngrams</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">initial_ngrams</span><span class="p">)</span>
+    <span class="n">final_ngrams</span><span class="o">.</span><span class="n">extend</span><span class="p">((</span><span class="n">length_feature</span><span class="p">,</span> <span class="n">vowels_number</span><span class="p">,</span> <span class="n">consonants_number</span><span class="p">,</span> <span class="n">vow_cons_ratio</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">final_ngrams</span></div>
+
+
+<div class="viewcode-block" id="Conjugator"><a class="viewcode-back" href="../../modules.html#mlconjug3.mlconjug.Conjugator">[docs]</a><span class="k">class</span> <span class="nc">Conjugator</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    | This is the main class of the project.</span>
+<span class="sd">    | The class manages the Verbiste data set and provides an interface with the scikit-learn pipeline.</span>
+<span class="sd">    | If no parameters are provided, the default language is set to french and the pre-trained french conjugation pipeline is used.</span>
+<span class="sd">    | The class defines the method conjugate(verb, language) which is the main method of the module.</span>
+
+<span class="sd">    :param language: string.</span>
+<span class="sd">        Language of the conjugator. The default language is &#39;fr&#39; for french.</span>
+<span class="sd">    :param model: mlconjug3.Model or scikit-learn Pipeline or Classifier implementing the fit() and predict() methods.</span>
+<span class="sd">        A user provided pipeline if the user has trained his own pipeline.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">language</span><span class="o">=</span><span class="s1">&#39;fr&#39;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">language</span> <span class="o">=</span> <span class="n">language</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conjug_manager</span> <span class="o">=</span> <span class="n">Verbiste</span><span class="p">(</span><span class="n">language</span><span class="o">=</span><span class="n">language</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">model</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">ZipFile</span><span class="p">(</span><span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_stream</span><span class="p">(</span>
+                    <span class="n">_RESOURCE_PACKAGE</span><span class="p">,</span> <span class="n">_PRE_TRAINED_MODEL_PATH</span><span class="p">[</span><span class="n">language</span><span class="p">]))</span> <span class="k">as</span> <span class="n">content</span><span class="p">:</span>
+                <span class="k">with</span> <span class="n">content</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;trained_model-</span><span class="si">{0}</span><span class="s1">-final.pickle&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">language</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">archive</span><span class="p">:</span>
+                    <span class="n">model</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">archive</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">model</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_model</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+        <span class="k">return</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">.</span><span class="si">{1}</span><span class="s1">(language=</span><span class="si">{2}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">language</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Conjugator.conjugate"><a class="viewcode-back" href="../../modules.html#mlconjug3.mlconjug.Conjugator.conjugate">[docs]</a>    <span class="k">def</span> <span class="nf">conjugate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">verb</span><span class="p">,</span> <span class="n">subject</span><span class="o">=</span><span class="s1">&#39;abbrev&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        | This is the main method of this class.</span>
+<span class="sd">        | It first checks to see if the verb is in Verbiste.</span>
+<span class="sd">        | If it is not, and a pre-trained scikit-learn pipeline has been supplied, the method then calls the pipeline</span>
+<span class="sd">         to predict the conjugation class of the provided verb.</span>
+
+<span class="sd">        | Returns a Verb object or None.</span>
+
+<span class="sd">        :param verb: string.</span>
+<span class="sd">            Verb to conjugate.</span>
+<span class="sd">        :param subject: string.</span>
+<span class="sd">            Toggles abbreviated or full pronouns.</span>
+<span class="sd">            The default value is &#39;abbrev&#39;.</span>
+<span class="sd">            Select &#39;pronoun&#39; for full pronouns.</span>
+<span class="sd">        :return: Verb object or None.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">verb</span> <span class="o">=</span> <span class="n">verb</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="n">prediction_score</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">conjug_manager</span><span class="o">.</span><span class="n">is_valid_verb</span><span class="p">(</span><span class="n">verb</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="n">_</span><span class="p">(</span><span class="s1">&#39;The supplied word: </span><span class="si">{0}</span><span class="s1"> is not a valid verb in </span><span class="si">{1}</span><span class="s1">.&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">verb</span><span class="p">,</span> <span class="n">_LANGUAGE_FULL</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">language</span><span class="p">]))</span>
+        <span class="k">if</span> <span class="n">verb</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">conjug_manager</span><span class="o">.</span><span class="n">verbs</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;Please provide an instance of a mlconjug3.mlconjug3.Model&#39;</span><span class="p">))</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="n">_</span><span class="p">(</span><span class="s1">&#39;The supplied word: </span><span class="si">{0}</span><span class="s1"> is not in the conjugation </span><span class="si">{1}</span><span class="s1"> table and no Conjugation Model was provided.&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">verb</span><span class="p">,</span> <span class="n">_LANGUAGE_FULL</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">language</span><span class="p">]))</span>
+            <span class="n">prediction</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">([</span><span class="n">verb</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">prediction_score</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">pipeline</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">([</span><span class="n">verb</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="n">prediction</span><span class="p">]</span>
+            <span class="n">predicted</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">template</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conjug_manager</span><span class="o">.</span><span class="n">templates</span><span class="p">[</span><span class="n">prediction</span><span class="p">]</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">template</span><span class="p">[</span><span class="n">template</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:])</span>
+            <span class="n">root</span> <span class="o">=</span> <span class="n">verb</span> <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">verb</span><span class="p">[:</span><span class="n">index</span><span class="p">]</span>
+            <span class="n">verb_info</span> <span class="o">=</span> <span class="n">VerbInfo</span><span class="p">(</span><span class="n">verb</span><span class="p">,</span> <span class="n">root</span><span class="p">,</span> <span class="n">template</span><span class="p">)</span>
+            <span class="n">conjug_info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conjug_manager</span><span class="o">.</span><span class="n">get_conjug_info</span><span class="p">(</span><span class="n">verb_info</span><span class="o">.</span><span class="n">template</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">predicted</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">infinitive</span> <span class="o">=</span> <span class="n">verb</span>
+            <span class="n">verb_info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conjug_manager</span><span class="o">.</span><span class="n">get_verb_info</span><span class="p">(</span><span class="n">infinitive</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">verb_info</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">None</span>
+            <span class="n">conjug_info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conjug_manager</span><span class="o">.</span><span class="n">get_conjug_info</span><span class="p">(</span><span class="n">verb_info</span><span class="o">.</span><span class="n">template</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">conjug_info</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">predicted</span><span class="p">:</span>
+            <span class="n">verb_object</span> <span class="o">=</span> <span class="n">_VERBS</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">language</span><span class="p">](</span><span class="n">verb_info</span><span class="p">,</span> <span class="n">conjug_info</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="n">predicted</span><span class="p">)</span>
+            <span class="n">verb_object</span><span class="o">.</span><span class="n">confidence_score</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">prediction_score</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">verb_object</span> <span class="o">=</span> <span class="n">_VERBS</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">language</span><span class="p">](</span><span class="n">verb_info</span><span class="p">,</span> <span class="n">conjug_info</span><span class="p">,</span> <span class="n">subject</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">verb_object</span></div>
+
+<div class="viewcode-block" id="Conjugator.set_model"><a class="viewcode-back" href="../../modules.html#mlconjug3.mlconjug.Conjugator.set_model">[docs]</a>    <span class="k">def</span> <span class="nf">set_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Assigns the provided pre-trained scikit-learn pipeline to be able to conjugate unknown verbs.</span>
+
+<span class="sd">        :param model: scikit-learn Classifier or Pipeline.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">Model</span><span class="p">):</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;Please provide an instance of a mlconjug3.mlconjug3.Model&#39;</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+        <span class="k">return</span></div></div>
+
+
+<div class="viewcode-block" id="DataSet"><a class="viewcode-back" href="../../modules.html#mlconjug3.mlconjug.DataSet">[docs]</a><span class="k">class</span> <span class="nc">DataSet</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    | This class holds and manages the data set.</span>
+<span class="sd">    | Defines helper methodss for managing Machine Learning tasks like constructing a training and testing set.</span>
+
+<span class="sd">    :param verbs_dict:</span>
+<span class="sd">        A dictionary of verbs and their corresponding conjugation class.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">verbs_dict</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verbs_dict</span> <span class="o">=</span> <span class="n">verbs_dict</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verbs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbs_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">templates</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span>
+            <span class="p">{</span><span class="n">verb</span><span class="p">[</span><span class="s1">&#39;template&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">verb</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbs_dict</span><span class="o">.</span><span class="n">values</span><span class="p">()}</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">verbs_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">templates_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dict_conjug</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">min_threshold</span> <span class="o">=</span> <span class="mi">8</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">split_proportion</span> <span class="o">=</span> <span class="mf">0.5</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">train_input</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">train_labels</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">test_input</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">test_labels</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">construct_dict_conjug</span><span class="p">()</span>
+        <span class="k">return</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">.</span><span class="si">{1}</span><span class="s1">()&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+
+<div class="viewcode-block" id="DataSet.construct_dict_conjug"><a class="viewcode-back" href="../../modules.html#mlconjug3.mlconjug.DataSet.construct_dict_conjug">[docs]</a>    <span class="k">def</span> <span class="nf">construct_dict_conjug</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        | Populates the dictionary containing the conjugation templates.</span>
+<span class="sd">        | Populates the lists containing the verbs and their templates.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">conjug</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+        <span class="n">verb_items</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">verbs_dict</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+        <span class="n">Random</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">verb_items</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">verb</span><span class="p">,</span> <span class="n">info_verb</span> <span class="ow">in</span> <span class="n">verb_items</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">verbs_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">verb</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">templates_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">templates</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">info_verb</span><span class="p">[</span><span class="s2">&quot;template&quot;</span><span class="p">]))</span>
+            <span class="n">conjug</span><span class="p">[</span><span class="n">info_verb</span><span class="p">[</span><span class="s2">&quot;template&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">verb</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dict_conjug</span> <span class="o">=</span> <span class="n">conjug</span>
+        <span class="k">return</span></div>
+
+<div class="viewcode-block" id="DataSet.split_data"><a class="viewcode-back" href="../../modules.html#mlconjug3.mlconjug.DataSet.split_data">[docs]</a>    <span class="k">def</span> <span class="nf">split_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">proportion</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Splits the data into a training and a testing set.</span>
+
+<span class="sd">        :param threshold: int.</span>
+<span class="sd">            Minimum size of conjugation class to be split.</span>
+<span class="sd">        :param proportion: float.</span>
+<span class="sd">            Proportion of samples in the training set.</span>
+<span class="sd">            Must be between 0 and 1.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">proportion</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">proportion</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">_</span><span class="p">(</span><span class="s1">&#39;The split proportion must be between 0 and 1.&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">min_threshold</span> <span class="o">=</span> <span class="n">threshold</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">split_proportion</span> <span class="o">=</span> <span class="n">proportion</span>
+        <span class="n">train_set</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">test_set</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">template</span><span class="p">,</span> <span class="n">lverbs</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dict_conjug</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">lverbs</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">threshold</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">verbe</span> <span class="ow">in</span> <span class="n">lverbs</span><span class="p">:</span>
+                    <span class="n">train_set</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">verbe</span><span class="p">,</span> <span class="n">template</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">index</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lverbs</span><span class="p">)</span> <span class="o">*</span> <span class="n">proportion</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">verbe</span> <span class="ow">in</span> <span class="n">lverbs</span><span class="p">[:</span><span class="n">index</span><span class="p">]:</span>
+                    <span class="n">train_set</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">verbe</span><span class="p">,</span> <span class="n">template</span><span class="p">))</span>
+                <span class="k">for</span> <span class="n">verbe</span> <span class="ow">in</span> <span class="n">lverbs</span><span class="p">[</span><span class="n">index</span><span class="p">:]:</span>
+                    <span class="n">test_set</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">verbe</span><span class="p">,</span> <span class="n">template</span><span class="p">))</span>
+        <span class="n">Random</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">train_set</span><span class="p">)</span>
+        <span class="n">Random</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">test_set</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">train_input</span> <span class="o">=</span> <span class="p">[</span><span class="n">elmt</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">elmt</span> <span class="ow">in</span> <span class="n">train_set</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">train_labels</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">templates</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">elmt</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">elmt</span> <span class="ow">in</span> <span class="n">train_set</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">test_input</span> <span class="o">=</span> <span class="p">[</span><span class="n">elmt</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">elmt</span> <span class="ow">in</span> <span class="n">test_set</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">test_labels</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">templates</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">elmt</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">elmt</span> <span class="ow">in</span> <span class="n">test_set</span><span class="p">]</span>
+        <span class="k">return</span></div></div>
+
+
+<div class="viewcode-block" id="Model"><a class="viewcode-back" href="../../modules.html#mlconjug3.mlconjug.Model">[docs]</a><span class="k">class</span> <span class="nc">Model</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    | This class manages the scikit-learn pipeline.</span>
+<span class="sd">    | The Pipeline includes a feature vectorizer, a feature selector and a classifier.</span>
+<span class="sd">    | If any of the vectorizer, feature selector or classifier is not supplied at instance declaration,</span>
+<span class="sd">     the __init__ method will provide good default values that get more than 92% prediction accuracy.</span>
+
+<span class="sd">    :param vectorizer: scikit-learn Vectorizer.</span>
+<span class="sd">    :param feature_selector: scikit-learn Classifier with a fit_transform() method</span>
+<span class="sd">    :param classifier: scikit-learn Classifier with a predict() method</span>
+<span class="sd">    :param language: language of the corpus of verbs to be analyzed.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vectorizer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">feature_selector</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">classifier</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">language</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">vectorizer</span><span class="p">:</span>
+            <span class="n">vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">analyzer</span><span class="o">=</span><span class="n">partial</span><span class="p">(</span><span class="n">extract_verb_features</span><span class="p">,</span> <span class="n">lang</span><span class="o">=</span><span class="n">language</span><span class="p">,</span> <span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">)),</span>
+                                         <span class="n">binary</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">feature_selector</span><span class="p">:</span>
+            <span class="n">feature_selector</span> <span class="o">=</span> <span class="n">SelectFromModel</span><span class="p">(</span><span class="n">LinearSVC</span><span class="p">(</span><span class="n">penalty</span><span class="o">=</span><span class="s1">&#39;l1&#39;</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">12000</span><span class="p">,</span> <span class="n">dual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">classifier</span><span class="p">:</span>
+            <span class="n">classifier</span> <span class="o">=</span> <span class="n">SGDClassifier</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">,</span> <span class="n">penalty</span><span class="o">=</span><span class="s1">&#39;elasticnet&#39;</span><span class="p">,</span> <span class="n">l1_ratio</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span>
+                                       <span class="n">max_iter</span><span class="o">=</span><span class="mi">4000</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([(</span><span class="s1">&#39;vectorizer&#39;</span><span class="p">,</span> <span class="n">vectorizer</span><span class="p">),</span>
+                                  <span class="p">(</span><span class="s1">&#39;feature_selector&#39;</span><span class="p">,</span> <span class="n">feature_selector</span><span class="p">),</span>
+                                  <span class="p">(</span><span class="s1">&#39;classifier&#39;</span><span class="p">,</span> <span class="n">classifier</span><span class="p">)])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">language</span> <span class="o">=</span> <span class="n">language</span>
+        <span class="k">return</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">.</span><span class="si">{1}</span><span class="s1">(</span><span class="si">{2}</span><span class="s1">, </span><span class="si">{3}</span><span class="s1">, </span><span class="si">{4}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="o">*</span><span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pipeline</span><span class="o">.</span><span class="n">named_steps</span><span class="p">))</span>
+
+<div class="viewcode-block" id="Model.train"><a class="viewcode-back" href="../../modules.html#mlconjug3.mlconjug.Model.train">[docs]</a>    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">samples</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Trains the pipeline on the supplied samples and labels.</span>
+
+<span class="sd">        :param samples: list.</span>
+<span class="sd">            List of verbs.</span>
+<span class="sd">        :param labels: list.</span>
+<span class="sd">            List of verb templates.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pipeline</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pipeline</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+        <span class="k">return</span></div>
+
+<div class="viewcode-block" id="Model.predict"><a class="viewcode-back" href="../../modules.html#mlconjug3.mlconjug.Model.predict">[docs]</a>    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">verbs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Predicts the conjugation class of the provided list of verbs.</span>
+
+<span class="sd">        :param verbs: list.</span>
+<span class="sd">            List of verbs.</span>
+<span class="sd">        :return: list.</span>
+<span class="sd">            List of predicted conjugation groups.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pipeline</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">verbs</span><span class="p">)</span></div></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="k">pass</span>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">mlconjug3</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">mlconjug3.mlconjug</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, SekouDiaoNlp.
+      Last updated on Apr 18, 2021.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+    </div>
+  </body>
+</html>

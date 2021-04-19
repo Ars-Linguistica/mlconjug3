@@ -1,0 +1,383 @@
+# TRANSLATION TEMPLATE FOR history.rst.
+# Copyright (C) 2018, SekouDiaoNlp
+# This file is distributed under the same license as the MLConjug package.
+# SekouDiaoNlp <diao.sekou.nlp@gmail.com>, 2018.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: MLConjug 2.1.5\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-06-27 11:51+0200\n"
+"PO-Revision-Date: 2018-06-16 18:14+0000\n"
+"Last-Translator: SekouDiaoNlp <diao.sekou.nlp@gmail.com>.\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../../HISTORY.rst:3
+msgid "History"
+msgstr "Storia"
+
+#: ../../../HISTORY.rst:7
+#, fuzzy
+msgid "3.1.2 (2018-06-27)"
+msgstr "2.1.2 (2018-06-15)"
+
+#: ../../../HISTORY.rst:9
+msgid ""
+"Updated `Type annotations`_ to the whole library for PEP-561 compliance."
+msgstr ""
+"Aggiornato `Scrivi annotazioni`_ sull'intera libreria per la conformità "
+"PEP-561."
+
+#: ../../../HISTORY.rst:13
+#, fuzzy
+msgid "3.1.1 (2018-06-26)"
+msgstr "2.1.5 (2018-06-15)"
+
+#: ../../../HISTORY.rst:15 ../../../HISTORY.rst:24
+msgid "Minor Api enhancement (see `API documentation`_)"
+msgstr "Miglioramento di Api minori (vedere `Documentazione API`_)"
+
+#: ../../../HISTORY.rst:19
+#, fuzzy
+msgid "3.1.0 (2018-06-24)"
+msgstr "2.1.0 (2018-06-15)"
+
+#: ../../../HISTORY.rst:21
+msgid "Updated the conjugation models for Spanish and Portuguese."
+msgstr "Aggiornati i modelli di coniugazione per lo spagnolo e il portoghese."
+
+#: ../../../HISTORY.rst:22
+msgid ""
+"Internal changes to the format of the verbiste data from xml to json for "
+"better handling of unicode characters."
+msgstr ""
+"Modifiche interne al formato dei dati verbiste da xml a json per una "
+"migliore gestione dei caratteri Unicode."
+
+#: ../../../HISTORY.rst:23
+msgid "New class ConjugManager to more easily add new languages to mlconjug."
+msgstr ""
+"ConjugManager di nuova classe per aggiungere più facilmente nuove lingue a "
+"mlconjug."
+
+#: ../../../HISTORY.rst:28
+#, fuzzy
+msgid "3.0.1 (2018-06-22)"
+msgstr "2.0.0 (2018-06-14)"
+
+#: ../../../HISTORY.rst:33
+msgid "Updated all provided pre-trained prediction models:"
+msgstr "Aggiornati tutti i modelli di previsione pre-formati forniti:"
+
+#: ../../../HISTORY.rst:31
+msgid "Implemented a new vectrorizer extracting more meaningful features."
+msgstr ""
+"Implementato un nuovo vectrorizer che estrae funzionalità più significative."
+
+#: ../../../HISTORY.rst:32
+msgid ""
+"As a result the performance of the models has gone through the roof in all "
+"languages."
+msgstr ""
+"Di conseguenza, le prestazioni dei modelli hanno attraversato il tetto in "
+"tutte le lingue."
+
+#: ../../../HISTORY.rst:33
+msgid ""
+"Recall and Precision are intesimally close to 100 %. English being the anly "
+"to achieve a perfect score at both Recall and Precision."
+msgstr ""
+"Recall e Precision sono intimamente vicini al 100%. L'inglese è l'unico a "
+"ottenere un punteggio perfetto sia in Recall che in Precision."
+
+#: ../../../HISTORY.rst:42
+msgid "Major API changes:"
+msgstr "Principali modifiche API:"
+
+#: ../../../HISTORY.rst:36
+msgid ""
+"I removed the class EndingCustomVectorizer and refactored it's "
+"functionnality in a top level function called extract_verb_features()"
+msgstr ""
+"Ho rimosso la classe EndingCustomVectorizer e ho rifattorizzato la sua "
+"funzionalità in una funzione di livello superiore chiamata "
+"extract_verb_features ()"
+
+#: ../../../HISTORY.rst:37
+msgid ""
+"The provided new improved model are now being zip compressed before release "
+"because the feature space has so much grown that their size made them "
+"impractical to distribute with the package."
+msgstr ""
+"Il nuovo modello migliorato fornito viene ora compresso tramite zip prima "
+"del rilascio perché lo spazio delle funzioni è cresciuto così tanto che le "
+"loro dimensioni li hanno resi poco pratici da distribuire con il pacchetto."
+
+#: ../../../HISTORY.rst:38
+msgid "Renamed \"Model.model\" to \"Model.pipeline\""
+msgstr "Rinominato \"Model.model\" in \"Model.pipeline\""
+
+#: ../../../HISTORY.rst:39
+msgid ""
+"Renamed \"DataSet.liste_verbes\" and \"DataSet.liste_templates\" to "
+"\"DataSet.verbs_list\" and \"DataSet.templates_list\" respectively. (Pardon "
+"my french ;-) )"
+msgstr ""
+"Rinominati \"DataSet.liste_verbes\" e \"DataSet.liste_templates\" "
+"rispettivamente in \"DataSet.verbs_list\" e \"DataSet.templates_list\". "
+"(Perdona il mio francese ;-) )"
+
+#: ../../../HISTORY.rst:40
+msgid "Added the attributes \"predicted\" and \"confidence_score\" to the class Verb."
+msgstr "Aggiunti gli attributi \"predetto\" e \"confidence_score\" alla classe Verb."
+
+#: ../../../HISTORY.rst:41
+msgid ""
+"The whole package have been typed check. I will soon add mlconjug's type "
+"stubs to typeshed."
+msgstr ""
+"L'intero pacchetto è stato controllato a macchina. Presto aggiungerò gli "
+"stub del tipo di mlconjug a typeshed."
+
+#: ../../../HISTORY.rst:45
+#, fuzzy
+msgid "2.1.11 (2018-06-21)"
+msgstr "2.1.5 (2018-06-15)"
+
+#: ../../../HISTORY.rst:54
+msgid "Updated all provided pre-trained prediction models"
+msgstr "Aggiornato tutti i modelli di previsione pre-formati forniti"
+
+#: ../../../HISTORY.rst:48
+#, python-format
+msgid ""
+"The French Conjugator has accuracy of about 99.94% in predicting the correct"
+" conjugation class of a French verb. This is the baseline as i have been "
+"working on it for some time now."
+msgstr ""
+"Il coniugatore francese ha una precisione di circa il 99,94% nel predire la "
+"corretta classe di coniugazione di un verbo francese. Questa è la linea di "
+"base, come ho lavorato su di esso per qualche tempo."
+
+#: ../../../HISTORY.rst:49
+#, python-format
+msgid ""
+"The English Conjugator has accuracy of about 99.78% in predicting the "
+"correct conjugation class of an English verb. This is one of the biggest "
+"improvement since version 2.0.0"
+msgstr ""
+"Il coniugatore inglese ha una precisione di circa il 99,78% nel predire la "
+"corretta classe di coniugazione di un verbo inglese. Questo è uno dei "
+"maggiori miglioramenti dalla versione 2.0.0"
+
+#: ../../../HISTORY.rst:50
+#, python-format
+msgid ""
+"The Spanish Conjugator has accuracy of about 99.65% in predicting the "
+"correct conjugation class of a Spanish verb. It has also seen a sizable "
+"improvement since version 2.0.0"
+msgstr ""
+"Il coniugatore spagnolo ha una precisione di circa il 99,65% nel predire la "
+"corretta classe di coniugazione di un verbo spagnolo. Ha anche visto un "
+"notevole miglioramento dalla versione 2.0.0"
+
+#: ../../../HISTORY.rst:51
+#, python-format
+msgid ""
+"The Romanian Conjugator has accuracy of about 99.06% in predicting the "
+"correct conjugation class of a Romanian verb.This is by far the bigger gain."
+" I modified the vectorizer to better take into account the morphological "
+"features or romanian verbs. (the previous score was about 86%, so it wil be "
+"nice for our romanian friends to have a trusted conjugator)"
+msgstr ""
+"Il coniugatore rumeno ha una precisione di circa il 99,06% nel predire la "
+"corretta classe di coniugazione di un verbo rumeno. Questo è di gran lunga "
+"il guadagno maggiore. Ho modificato il vettore per meglio tenere conto delle"
+" caratteristiche morfologiche o dei verbi rumeni. (il punteggio precedente "
+"era circa l'86%, quindi sarà bello per i nostri amici rumeni avere un "
+"coniuge affidabile)"
+
+#: ../../../HISTORY.rst:52
+#, python-format
+msgid ""
+"The Portuguese Conjugator has accuracy of about 96.73% in predicting the "
+"correct conjugation class of a Portuguese verb."
+msgstr ""
+"Il coniugatore portoghese ha una precisione di circa il 96,73% nel predire "
+"la corretta classe di coniugazione di un verbo portoghese."
+
+#: ../../../HISTORY.rst:53
+#, python-format
+msgid ""
+"The Italian Conjugator has accuracy of about 94.05% in predicting the "
+"correct conjugation class of a Italian verb."
+msgstr ""
+"Il coniugatore italiano ha una precisione di circa il 94,05% nel predire la "
+"corretta classe di coniugazione di un verbo italiano."
+
+#: ../../../HISTORY.rst:57
+#, fuzzy
+msgid "2.1.9 (2018-06-21)"
+msgstr "2.1.5 (2018-06-15)"
+
+#: ../../../HISTORY.rst:60
+msgid ""
+"Now the Conjugator adds additional information to the Verb object returned."
+msgstr ""
+"Ora il coniugatore aggiunge ulteriori informazioni all'oggetto Verb "
+"restituito."
+
+#: ../../../HISTORY.rst:60
+msgid ""
+"If the verb under consideration is already in Verbiste, the conjugation for "
+"the verb is retrieved directly from memory."
+msgstr ""
+"Se il verbo preso in considerazione è già in Verbiste, la coniugazione per "
+"il verbo viene recuperata direttamente dalla memoria."
+
+#: ../../../HISTORY.rst:61
+msgid ""
+"If the verb under consideration is unknown in Verbiste, the Conjugator class"
+" now sets the boolean attribute 'predicted' and the float attribute "
+"confidence score to the instance of the Verb object the "
+"Conjugator.conjugate(verb) returns."
+msgstr ""
+"Se il verbo in considerazione è sconosciuto in Verbiste, la classe "
+"Coniugatore imposta ora l'attributo booleano 'predetto' e il punteggio di "
+"confidenza dell'attributo float sull'istanza dell'oggetto Verb che "
+"restituisce il coniugatore.conjugato (verbo)."
+
+#: ../../../HISTORY.rst:62
+msgid ""
+"Added `Type annotations`_ to the whole library for robustness and ease of "
+"scaling-out."
+msgstr ""
+"Aggiunte le annotazioni di tipo su tutta la libreria per robustezza e "
+"facilità di ridimensionamento."
+
+#: ../../../HISTORY.rst:63
+msgid ""
+"The performance of the Engish and Romanian Models have improved "
+"significantly lately. I guess in a few more iteration they will be on par "
+"with the French Model which is the best performing at the moment as i have "
+"been tuning its parameters for a caouple of year now. Not so much with the "
+"other languages, but if you update regularly you will see nice improvents in"
+" the 2.2 release."
+msgstr ""
+"Le prestazioni dei modelli engish e rumeni sono migliorate "
+"significativamente negli ultimi tempi. Immagino che in qualche altra "
+"versione saranno alla pari con il modello francese che al momento è il "
+"migliore in quanto ho messo a punto i suoi parametri per un anno intero. Non"
+" così tanto con le altre lingue, ma se aggiorni regolarmente vedrai dei bei "
+"improvvisi nella versione 2.2."
+
+#: ../../../HISTORY.rst:64
+msgid "Enhanced the localization of the program."
+msgstr "Migliorata la localizzazione del programma."
+
+#: ../../../HISTORY.rst:65 ../../../HISTORY.rst:78
+msgid ""
+"Now the user interface of mlconjug is avalaible in French, Spanish, Italian,"
+" Portuguese and Romanian, in addition to English."
+msgstr ""
+"Ora l'interfaccia utente di mlconjug è disponibile in francese, spagnolo, "
+"italiano, portoghese e rumeno, oltre all'inglese."
+
+#: ../../../HISTORY.rst:66
+msgid ""
+"`All the documentation of the project`_ have been translated in the "
+"supported languages."
+msgstr ""
+"`Tutta la documentazione del progetto`_ è stata tradotta nelle lingue "
+"supportate."
+
+#: ../../../HISTORY.rst:75
+msgid "2.1.5 (2018-06-15)"
+msgstr "2.1.5 (2018-06-15)"
+
+#: ../../../HISTORY.rst:77
+msgid "Added localization."
+msgstr "Aggiunta localizzazione."
+
+#: ../../../HISTORY.rst:82
+msgid "2.1.2 (2018-06-15)"
+msgstr "2.1.2 (2018-06-15)"
+
+#: ../../../HISTORY.rst:84
+msgid "Added invalid verb detection."
+msgstr "Aggiunto riconoscimento verbo non valido."
+
+#: ../../../HISTORY.rst:88
+msgid "2.1.0 (2018-06-15)"
+msgstr "2.1.0 (2018-06-15)"
+
+#: ../../../HISTORY.rst:90
+msgid ""
+"Updated all language models for compatibility with scikit-learn 0.19.1."
+msgstr ""
+"Aggiornamento di tutti i modelli linguistici per compatibilità con scikit-"
+"learn 0.19.1."
+
+#: ../../../HISTORY.rst:94
+msgid "2.0.0 (2018-06-14)"
+msgstr "2.0.0 (2018-06-14)"
+
+#: ../../../HISTORY.rst:96
+msgid "Includes English conjugation model."
+msgstr "Include il modello di coniugazione inglese."
+
+#: ../../../HISTORY.rst:97
+msgid "Includes Spanish conjugation model."
+msgstr "Include il modello di coniugazione spagnolo."
+
+#: ../../../HISTORY.rst:98
+msgid "Includes Italian conjugation model."
+msgstr "Include il modello di coniugazione italiano."
+
+#: ../../../HISTORY.rst:99
+msgid "Includes Portuguese conjugation model."
+msgstr "Include il modello di coniugazione portoghese."
+
+#: ../../../HISTORY.rst:100
+msgid "Includes Romanian conjugation model."
+msgstr "Include il modello di coniugazione rumeno."
+
+#: ../../../HISTORY.rst:104
+msgid "1.2.0 (2018-06-12)"
+msgstr "1.2.0 (2018-06-12)"
+
+#: ../../../HISTORY.rst:106 ../../../HISTORY.rst:114
+msgid ""
+"Refactored the API. Now a Single class Conjugator is needed to interface "
+"with the module."
+msgstr ""
+"Rifattorizzato l'API. Ora è necessario un coniugatore di classe singola per "
+"interfacciarsi con il modulo."
+
+#: ../../../HISTORY.rst:107 ../../../HISTORY.rst:115
+msgid "Includes improved french conjugation model."
+msgstr "Include un modello di coniugazione francese migliorato."
+
+#: ../../../HISTORY.rst:108
+msgid "Added support for multiple languages."
+msgstr "Aggiunto supporto per più lingue."
+
+#: ../../../HISTORY.rst:112
+msgid "1.1.0 (2018-06-11)"
+msgstr "1.1.0 (2018-06-11)"
+
+#: ../../../HISTORY.rst:119
+msgid "1.0.0 (2018-06-10)"
+msgstr "1.0.0 (2018-06-10)"
+
+#: ../../../HISTORY.rst:121
+msgid "First release on PyPI."
+msgstr "Prima versione su PyPI."
+
+#~ msgid "./../../HISTORY.rst:4"
+#~ msgstr "./../../HISTORY.rst:4"

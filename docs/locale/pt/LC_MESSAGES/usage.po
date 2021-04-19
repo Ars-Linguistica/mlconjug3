@@ -1,0 +1,37 @@
+# TRANSLATION TEMPLATE FOR usage.rst.
+# Copyright (C) 2018, SekouDiaoNlp
+# This file is distributed under the same license as the MLConjug package.
+# SekouDiaoNlp <diao.sekou.nlp@gmail.com>, 2018.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: MLConjug 2.1.5\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-06-16 21:18+0200\n"
+"PO-Revision-Date: 2018-06-16 18:14\n"
+"Last-Translator: SekouDiaoNlp <diao.sekou.nlp@gmail.com>.\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../usage.rst:3
+msgid "Usage"
+msgstr "Uso"
+
+#: ../../usage.rst:5
+msgid "The default language is French. When called without specifying a language, the library will try to conjugate the verb in French."
+msgstr "O idioma padrão é o francês. Quando chamado sem especificar um idioma, a biblioteca tentará conjugar o verbo em francês."
+
+#: ../../usage.rst:8
+msgid "To use MLConjug in a project with the provided pre-trained conjugation models::"
+msgstr "Usar o MLConjug em um projeto com os modelos de conjugação pré-treinados fornecidos ::"
+
+#: ../../usage.rst:28
+msgid "To use MLConjug in a project and train a new model::"
+msgstr "Para usar o MLConjug em um projeto e treinar um novo modelo ::"
+
+#: ../../usage.rst:73
+msgid "To use MLConjug from the command line::"
+msgstr "Para usar o MLConjug na linha de comando ::"
+

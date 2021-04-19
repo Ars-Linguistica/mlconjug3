@@ -1,0 +1,240 @@
+# TRANSLATION TEMPLATE FOR contributing.rst.
+# Copyright (C) 2018, SekouDiaoNlp
+# This file is distributed under the same license as the MLConjug package.
+# SekouDiaoNlp <diao.sekou.nlp@gmail.com>, 2018.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: MLConjug 2.1.5\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-06-27 11:51+0200\n"
+"PO-Revision-Date: 2018-06-16 18:14+0000\n"
+"Last-Translator: SekouDiaoNlp <diao.sekou.nlp@gmail.com>.\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../../CONTRIBUTING.rst:5
+msgid "Contributing"
+msgstr "Contribuire"
+
+#: ../../../CONTRIBUTING.rst:7
+msgid ""
+"Contributions are welcome, and they are greatly appreciated! Every little "
+"bit helps, and credit will always be given."
+msgstr ""
+"I contributi sono ben accetti e sono molto apprezzati! Ogni piccolo aiuto e "
+"il credito verrà sempre dato\""
+
+#: ../../../CONTRIBUTING.rst:10
+msgid "You can contribute in many ways:"
+msgstr "Puoi contribuire in molti modi:"
+
+#: ../../../CONTRIBUTING.rst:13
+msgid "Types of Contributions"
+msgstr "Tipi di contributi"
+
+#: ../../../CONTRIBUTING.rst:16
+msgid "Report Bugs"
+msgstr "Segnala bug"
+
+#: ../../../CONTRIBUTING.rst:18
+msgid "Report bugs at https://github.com/SekouDiaoNlp/mlconjug3/issues."
+msgstr "Segnala bug a https://github.com/SekouDiaoNlp/mlconjug3/issues."
+
+#: ../../../CONTRIBUTING.rst:20
+msgid "If you are reporting a bug, please include:"
+msgstr "Se stai segnalando un bug, includi:"
+
+#: ../../../CONTRIBUTING.rst:22
+msgid "Your operating system name and version."
+msgstr "Nome e versione del tuo sistema operativo."
+
+#: ../../../CONTRIBUTING.rst:23
+msgid ""
+"Any details about your local setup that might be helpful in troubleshooting."
+msgstr ""
+"Qualsiasi dettaglio sulla configurazione locale che potrebbe essere utile "
+"nella risoluzione dei problemi."
+
+#: ../../../CONTRIBUTING.rst:24
+msgid "Detailed steps to reproduce the bug."
+msgstr "Passaggi dettagliati per riprodurre il bug."
+
+#: ../../../CONTRIBUTING.rst:27
+msgid "Fix Bugs"
+msgstr "Bug corretti"
+
+#: ../../../CONTRIBUTING.rst:29
+msgid ""
+"Look through the GitHub issues for bugs. Anything tagged with \"bug\" and "
+"\"help wanted\" is open to whoever wants to implement it."
+msgstr ""
+"Cerca tra i problemi di GitHub per i bug. Qualsiasi cosa taggata con \" bug "
+"\\ \"e \" help wanted \\ \"è aperta a chiunque voglia implementarla."
+
+#: ../../../CONTRIBUTING.rst:33
+msgid "Implement Features"
+msgstr "Implementa funzionalità"
+
+#: ../../../CONTRIBUTING.rst:35
+msgid ""
+"Look through the GitHub issues for features. Anything tagged with "
+"\"enhancement\" and \"help wanted\" is open to whoever wants to implement "
+"it."
+msgstr ""
+"Cerca tra i problemi di GitHub per le funzionalità. Qualsiasi cosa taggata "
+"con \" enhancement \\ \"e \" help wanted \\ \"è aperta a chiunque voglia "
+"implementarla."
+
+#: ../../../CONTRIBUTING.rst:39
+msgid "Write Documentation"
+msgstr "Scrivi documentazione"
+
+#: ../../../CONTRIBUTING.rst:41
+msgid ""
+"MLConjug could always use more documentation, whether as part of the "
+"official MLConjug docs, in docstrings, or even on the web in blog posts, "
+"articles, and such."
+msgstr ""
+"MLConjug potrebbe sempre usare più documentazione, sia come parte dei "
+"documenti ufficiali di MLConjug, in docstrings, o anche sul Web in post di "
+"blog, articoli e simili."
+
+#: ../../../CONTRIBUTING.rst:46
+msgid "Submit Feedback"
+msgstr "Invia feedback"
+
+#: ../../../CONTRIBUTING.rst:48
+msgid ""
+"The best way to send feedback is to file an issue at "
+"https://github.com/SekouDiaoNlp/mlconjug3/issues."
+msgstr ""
+"Il modo migliore per inviare feedback è presentare un problema su "
+"https://github.com/SekouDiaoNlp/mlconjug3/issues."
+
+#: ../../../CONTRIBUTING.rst:50
+msgid "If you are proposing a feature:"
+msgstr "Se stai proponendo una funzione:"
+
+#: ../../../CONTRIBUTING.rst:52
+msgid "Explain in detail how it would work."
+msgstr "Spiega in dettaglio come funzionerebbe."
+
+#: ../../../CONTRIBUTING.rst:53
+msgid "Keep the scope as narrow as possible, to make it easier to implement."
+msgstr ""
+"Tieni l'ambito il più stretto possibile, per renderlo più facile da "
+"implementare."
+
+#: ../../../CONTRIBUTING.rst:54
+msgid ""
+"Remember that this is a volunteer-driven project, and that contributions are"
+" welcome :)"
+msgstr ""
+"Ricorda che questo è un progetto guidato dai volontari e che i contributi "
+"sono i benvenuti :)"
+
+#: ../../../CONTRIBUTING.rst:58
+msgid "Get Started!"
+msgstr "Iniziare!"
+
+#: ../../../CONTRIBUTING.rst:60
+msgid ""
+"Ready to contribute? Here's how to set up `mlconjug3` for local development."
+msgstr ""
+"Pronto a contribuire? Ecco come impostare` mlconjug3` per lo sviluppo locale."
+" "
+
+#: ../../../CONTRIBUTING.rst:62
+msgid "Fork the `mlconjug3` repo on GitHub."
+msgstr "Prepara il repo 'mlconjug3` su GitHub."
+
+#: ../../../CONTRIBUTING.rst:63
+msgid "Clone your fork locally::"
+msgstr "Clona la tua forcella localmente ::"
+
+#: ../../../CONTRIBUTING.rst:67
+msgid ""
+"Install your local copy into a virtualenv. Assuming you have "
+"virtualenvwrapper installed, this is how you set up your fork for local "
+"development::"
+msgstr ""
+"Installa la tua copia locale in un virtualenv. Supponendo che hai "
+"virtualenvwrapper installato, questo è il modo in cui imposti la tua "
+"forcella per lo sviluppo locale ::"
+
+#: ../../../CONTRIBUTING.rst:73
+msgid "Create a branch for local development::"
+msgstr "Crea un ramo per lo sviluppo locale ::"
+
+#: ../../../CONTRIBUTING.rst:77
+msgid "Now you can make your changes locally."
+msgstr "Ora puoi apportare le modifiche localmente."
+
+#: ../../../CONTRIBUTING.rst:79
+msgid ""
+"When you're done making changes, check that your changes pass flake8 and the"
+" tests, including testing other Python versions with tox::"
+msgstr ""
+"Quando hai finito di fare modifiche, controlla che le tue modifiche superino"
+" flake8 e i test, incluso testare altre versioni di Python con tox ::"
+
+#: ../../../CONTRIBUTING.rst:85
+msgid "To get flake8 and tox, just pip install them into your virtualenv."
+msgstr "Per ottenere flake8 e tox, basta installarli nel tuo virtualenv."
+
+#: ../../../CONTRIBUTING.rst:87
+msgid "Commit your changes and push your branch to GitHub::"
+msgstr "Confida le tue modifiche e invia il tuo ramo a GitHub ::"
+
+#: ../../../CONTRIBUTING.rst:93
+msgid "Submit a pull request through the GitHub website."
+msgstr "Invia una richiesta di pull tramite il sito Web GitHub."
+
+#: ../../../CONTRIBUTING.rst:96
+msgid "Pull Request Guidelines"
+msgstr "Pull Request Guidelines"
+
+#: ../../../CONTRIBUTING.rst:98
+msgid ""
+"Before you submit a pull request, check that it meets these guidelines:"
+msgstr ""
+"Prima di inviare una richiesta di pull, controlla che soddisfi le seguenti "
+"linee guida:"
+
+#: ../../../CONTRIBUTING.rst:100
+msgid "The pull request should include tests."
+msgstr "La richiesta di pull dovrebbe includere test."
+
+#: ../../../CONTRIBUTING.rst:101
+msgid ""
+"If the pull request adds functionality, the docs should be updated. Put your"
+" new functionality into a function with a docstring, and add the feature to "
+"the list in README.rst."
+msgstr ""
+"Se la richiesta pull aggiunge funzionalità, i documenti dovrebbero essere "
+"aggiornati. Inserisci la tua nuova funzionalità in una funzione con una "
+"docstring e aggiungi la funzione all'elenco in README.rst."
+
+#: ../../../CONTRIBUTING.rst:104
+#, fuzzy
+msgid ""
+"The pull request should work for Python 3.3, 3.4, 3.5 and 3.6. Check https"
+"://travis-ci.org/SekouDiaoNlp/mlconjug3/pull_requests and make sure that the tests "
+"pass for all supported Python versions."
+msgstr ""
+"La richiesta pull dovrebbe funzionare per Python 2.6, 2.7, 3.3, 3.4 e 3.5 e "
+"per PyPy. Controlla https://travis-ci.org/SekouDiaoNlp/mlconjug3/pull_requests e "
+"assicurati che i test passino per tutte le versioni di Python supportate \""
+
+#: ../../../CONTRIBUTING.rst:109
+msgid "Tips"
+msgstr "Suggerimenti"
+
+#: ../../../CONTRIBUTING.rst:111
+msgid "To run a subset of tests::"
+msgstr "Per eseguire un sottoinsieme di test ::"

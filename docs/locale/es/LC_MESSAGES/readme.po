@@ -1,0 +1,175 @@
+# TRANSLATION TEMPLATE FOR readme.rst.
+# Copyright (C) 2018, SekouDiaoNlp
+# This file is distributed under the same license as the MLConjug package.
+# SekouDiaoNlp <diao.sekou.nlp@gmail.com>, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: MLConjug 2.1.5\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-06-27 11:51+0200\n"
+"PO-Revision-Date: 2018-06-27 13:35+0200\n"
+"Last-Translator: SekouDiaoNlp <diao.sekou.nlp@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+"Language-Team: \n"
+"Language: es\n"
+"X-Generator: Poedit 2.0.8\n"
+
+#: ../../../README.rst:7
+msgid "mlconjug"
+msgstr "mlconjug"
+
+#: ../../../README.rst:40
+msgid ""
+"A Python library to conjugate verbs in French, English, Spanish, Italian, "
+"Portuguese and Romanian (more soon) using Machine Learning techniques."
+msgstr ""
+"Una biblioteca de Python para conjugar verbos en francés, inglés, español, "
+"italiano, portugués y rumano (más pronto) usando técnicas de Machine "
+"Learning."
+
+#: ../../../README.rst:41
+msgid ""
+"Any verb in one of the supported language can be conjugated, as the module "
+"contains a Machine Learning model of how the verbs behave."
+msgstr ""
+"Cualquier verbo en uno de los idiomas soportados puede ser conjugado, ya "
+"que el módulo contiene un modelo de Aprendizaje automático sobre cómo se "
+"comportan los verbos."
+
+#: ../../../README.rst:42
+msgid ""
+"Even completely new or made-up verbs can be successfully conjugated in this "
+"manner."
+msgstr ""
+"Incluso los verbos completamente nuevos o inventados pueden conjugarse "
+"exitosamente de esta manera."
+
+#: ../../../README.rst:43
+msgid "The supplied pre-trained models are composed of:"
+msgstr "Los modelos preentrenados suministrados se componen de:"
+
+#: ../../../README.rst:45
+msgid "a binary feature extractor,"
+msgstr "un extractor de funciones binarias,"
+
+#: ../../../README.rst:46
+msgid "a feature selector using Linear Support Vector Classification,"
+msgstr "un selector de funciones usando Linear Support Vector Classification,"
+
+#: ../../../README.rst:47
+msgid "a classifier using Stochastic Gradient Descent."
+msgstr "un clasificador que usa el Gradiente de Gradiente Estocástico."
+
+#: ../../../README.rst:49
+msgid ""
+"MLConjug uses scikit-learn to implement the Machine Learning algorithms."
+msgstr ""
+"MLConjug usa scikit-learn para implementar los algoritmos de Machine "
+"Learning."
+
+#: ../../../README.rst:50
+msgid ""
+"Users of the library can use any compatible classifiers from scikit-learn "
+"to modify and retrain the models."
+msgstr ""
+"Los usuarios de la biblioteca pueden usar cualquier clasificador compatible "
+"de scikit-learn para modificar y volver a entrenar el modelo."
+
+#: ../../../README.rst:52
+msgid ""
+"The training data for the french model is based on Verbiste https://perso."
+"b2b2c.ca/~sarrazip/dev/verbiste.html ."
+msgstr ""
+"Los datos de capacitación se basan en Verbiste https://perso.b2b2c.ca/"
+"~sarrazip/dev/conjug_manager.html."
+
+#: ../../../README.rst:54
+msgid ""
+"The training data for English, Spanish, Italian, Portuguese and Romanian "
+"was generated using unsupervised learning techniques using the French model "
+"as a model to query during the training."
+msgstr ""
+"Los datos de entrenamiento para inglés, español, italiano, portugués y "
+"rumano se generaron utilizando técnicas de aprendizaje no supervisadas "
+"utilizando el modelo francés como modelo para consultar durante el "
+"entrenamiento."
+
+#: ../../../README.rst:57
+msgid "Free software: MIT license"
+msgstr "Software libre: licencia MIT"
+
+#: ../../../README.rst:58
+msgid "Documentation: https://mlconjug.readthedocs.io."
+msgstr "Documentación: https://mlconjug.readthedocs.io"
+
+#: ../../../README.rst:61
+msgid "Supported Languages"
+msgstr "Idiomas admitidos"
+
+#: ../../../README.rst:63
+msgid "French"
+msgstr "Francés"
+
+#: ../../../README.rst:64
+msgid "English"
+msgstr "Inglés"
+
+#: ../../../README.rst:65
+msgid "Spanish"
+msgstr "Español"
+
+#: ../../../README.rst:66
+msgid "Italian"
+msgstr "Italiano"
+
+#: ../../../README.rst:67
+msgid "Portuguese"
+msgstr "Portugués"
+
+#: ../../../README.rst:68
+msgid "Romanian"
+msgstr "Rumano"
+
+#: ../../../README.rst:72
+msgid "Features"
+msgstr "Caracteristicas"
+
+#: ../../../README.rst:74
+msgid "Easy to use API."
+msgstr "API fácil de usar."
+
+#: ../../../README.rst:75
+msgid ""
+"Includes pre-trained models with 99% + accuracy in predicting conjugation "
+"class of unknown verbs."
+msgstr ""
+"Incluye modelos pre-entrenados con un 99% de precisión en la predicción de "
+"la conjugación de verbos desconocidos."
+
+#: ../../../README.rst:76
+msgid "Easily train new models or add new languages."
+msgstr "Entrene fácilmente nuevos modelos o agregue nuevos idiomas."
+
+#: ../../../README.rst:77
+msgid "Easily integrate MLConjug in your own projects."
+msgstr "Integre fácilmente MLConjug en sus propios proyectos."
+
+#: ../../../README.rst:78
+msgid "Can be used as a command line tool."
+msgstr "Se puede usar como una herramienta de línea de commandos."
+
+#: ../../../README.rst:81
+msgid "Credits"
+msgstr "Créditos"
+
+#: ../../../README.rst:83
+msgid "This package was created with the help of Verbiste_ and scikit-learn_."
+msgstr "Este paquete fue creado con la ayuda de Verbiste_ y scikit-learn_."
+
+#: ../../../README.rst:85
+msgid "The logo was designed by Zuur_."
+msgstr "El logo fue diseñado por Zuur_."

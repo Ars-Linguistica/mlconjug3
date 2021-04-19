@@ -1,0 +1,243 @@
+# TRANSLATION TEMPLATE FOR contributing.rst.
+# Copyright (C) 2018, SekouDiaoNlp
+# This file is distributed under the same license as the MLConjug package.
+# SekouDiaoNlp <diao.sekou.nlp@gmail.com>, 2018.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: MLConjug 2.1.5\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-06-27 11:51+0200\n"
+"PO-Revision-Date: 2018-06-16 18:14+0000\n"
+"Last-Translator: SekouDiaoNlp <diao.sekou.nlp@gmail.com>.\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.6.0\n"
+
+#: ../../../CONTRIBUTING.rst:5
+msgid "Contributing"
+msgstr "Contribuind"
+
+#: ../../../CONTRIBUTING.rst:7
+msgid ""
+"Contributions are welcome, and they are greatly appreciated! Every little "
+"bit helps, and credit will always be given."
+msgstr ""
+"Contribuțiile sunt binevenite și sunt foarte apreciate! Fiecare ajutor mic "
+"și creditul vor fi întotdeauna acordate\""
+
+#: ../../../CONTRIBUTING.rst:10
+msgid "You can contribute in many ways:"
+msgstr "Puteți contribui în multe feluri:"
+
+#: ../../../CONTRIBUTING.rst:13
+msgid "Types of Contributions"
+msgstr "Tipuri de contribuții"
+
+#: ../../../CONTRIBUTING.rst:16
+msgid "Report Bugs"
+msgstr "Raportează bug-uri"
+
+#: ../../../CONTRIBUTING.rst:18
+msgid "Report bugs at https://github.com/SekouDiaoNlp/mlconjug3/issues."
+msgstr "Raportați bug-uri la adresa https://github.com/SekouDiaoNlp/mlconjug3/issues\""
+
+#: ../../../CONTRIBUTING.rst:20
+msgid "If you are reporting a bug, please include:"
+msgstr "Dacă raportați un bug, vă rugăm să includeți:"
+
+#: ../../../CONTRIBUTING.rst:22
+msgid "Your operating system name and version."
+msgstr "Numele și versiunea sistemului de operare."
+
+#: ../../../CONTRIBUTING.rst:23
+msgid ""
+"Any details about your local setup that might be helpful in troubleshooting."
+msgstr ""
+"Orice detalii despre configurația dvs. locală care ar putea fi de ajutor în "
+"rezolvarea problemelor."
+
+#: ../../../CONTRIBUTING.rst:24
+msgid "Detailed steps to reproduce the bug."
+msgstr "Pași detaliați pentru a reproduce bug-ul."
+
+#: ../../../CONTRIBUTING.rst:27
+msgid "Fix Bugs"
+msgstr "Fix Bugs"
+
+#: ../../../CONTRIBUTING.rst:29
+msgid ""
+"Look through the GitHub issues for bugs. Anything tagged with \"bug\" and "
+"\"help wanted\" is open to whoever wants to implement it."
+msgstr ""
+"Uita-te prin problemele GitHub pentru bug-uri. Orice etichetat cu \" bug \\ "
+"\"si \" help wanted \\ \"este deschis oricui vrea sa o implementeze."
+
+#: ../../../CONTRIBUTING.rst:33
+msgid "Implement Features"
+msgstr "Caracteristicile implementării"
+
+#: ../../../CONTRIBUTING.rst:35
+msgid ""
+"Look through the GitHub issues for features. Anything tagged with "
+"\"enhancement\" and \"help wanted\" is open to whoever wants to implement "
+"it."
+msgstr ""
+"Uitați-vă la problemele GitHub pentru caracteristici. Orice etichetat cu \" "
+"îmbunătățire \\ \"și \" help wanted \\ \"este deschis oricui dorește să îl "
+"implementeze."
+
+#: ../../../CONTRIBUTING.rst:39
+msgid "Write Documentation"
+msgstr "Scrierea documentației"
+
+#: ../../../CONTRIBUTING.rst:41
+msgid ""
+"MLConjug could always use more documentation, whether as part of the "
+"official MLConjug docs, in docstrings, or even on the web in blog posts, "
+"articles, and such."
+msgstr ""
+"MLConjug ar putea folosi întotdeauna mai multă documentație, fie ca parte a "
+"documentelor oficiale MLConjug, în docstrings, sau chiar pe web în bloguri, "
+"articole și altele."
+
+#: ../../../CONTRIBUTING.rst:46
+msgid "Submit Feedback"
+msgstr "Trimite parerea ta"
+
+#: ../../../CONTRIBUTING.rst:48
+msgid ""
+"The best way to send feedback is to file an issue at "
+"https://github.com/SekouDiaoNlp/mlconjug3/issues."
+msgstr ""
+"Cea mai bună modalitate de a trimite feedback este să trimiteți o problemă "
+"la adresa https://github.com/SekouDiaoNlp/mlconjug3/issues."
+
+#: ../../../CONTRIBUTING.rst:50
+msgid "If you are proposing a feature:"
+msgstr "Dacă propui o caracteristică:"
+
+#: ../../../CONTRIBUTING.rst:52
+msgid "Explain in detail how it would work."
+msgstr "Explicați în detaliu modul în care ar funcționa."
+
+#: ../../../CONTRIBUTING.rst:53
+msgid "Keep the scope as narrow as possible, to make it easier to implement."
+msgstr ""
+"Țineți cât mai restrâns domeniul de aplicare, pentru a facilita "
+"implementarea acestuia\""
+
+#: ../../../CONTRIBUTING.rst:54
+msgid ""
+"Remember that this is a volunteer-driven project, and that contributions are"
+" welcome :)"
+msgstr ""
+"Amintiți-vă că acesta este un proiect bazat pe voluntari și că contribuțiile"
+" sunt binevenite :)"
+
+#: ../../../CONTRIBUTING.rst:58
+msgid "Get Started!"
+msgstr "Incepe!"
+
+#: ../../../CONTRIBUTING.rst:60
+msgid ""
+"Ready to contribute? Here's how to set up `mlconjug3` for local development."
+msgstr ""
+"Ați venit să contribuiți? Iată cum puteți crea\" mlconjug3 \"pentru "
+"dezvoltarea locală."
+
+#: ../../../CONTRIBUTING.rst:62
+msgid "Fork the `mlconjug3` repo on GitHub."
+msgstr "Reportați repo-ul\" mlconjug3 \"pe GitHub."
+
+#: ../../../CONTRIBUTING.rst:63
+msgid "Clone your fork locally::"
+msgstr "Clonează-ți furca pe plan local"
+
+#: ../../../CONTRIBUTING.rst:67
+msgid ""
+"Install your local copy into a virtualenv. Assuming you have "
+"virtualenvwrapper installed, this is how you set up your fork for local "
+"development::"
+msgstr ""
+"Instalați-vă copia locală într-o virtualenv. Presupunând că aveți instalat "
+"virtualenvwrapper, acesta este modul în care vă configurați furculița pentru"
+" dezvoltarea locală:"
+
+#: ../../../CONTRIBUTING.rst:73
+msgid "Create a branch for local development::"
+msgstr "Creați o sucursală pentru dezvoltarea locală:"
+
+#: ../../../CONTRIBUTING.rst:77
+msgid "Now you can make your changes locally."
+msgstr "Acum puteți face schimbările la nivel local."
+
+#: ../../../CONTRIBUTING.rst:79
+msgid ""
+"When you're done making changes, check that your changes pass flake8 and the"
+" tests, including testing other Python versions with tox::"
+msgstr ""
+"Când ați terminat de făcut modificări, verificați dacă modificările dvs. "
+"trec prin flake8 și testele, inclusiv testarea altor versiuni Python cu tox "
+"::"
+
+#: ../../../CONTRIBUTING.rst:85
+msgid "To get flake8 and tox, just pip install them into your virtualenv."
+msgstr ""
+"Pentru a obține flake8 și tox, pur și simplu instalați-le în virtualenv."
+
+#: ../../../CONTRIBUTING.rst:87
+msgid "Commit your changes and push your branch to GitHub::"
+msgstr "Comutați modificările și împingeți sucursala dvs. în GitHub ::"
+
+#: ../../../CONTRIBUTING.rst:93
+msgid "Submit a pull request through the GitHub website."
+msgstr "Trimiteți o solicitare de tragere prin intermediul site-ului GitHub."
+
+#: ../../../CONTRIBUTING.rst:96
+msgid "Pull Request Guidelines"
+msgstr "Instrucțiuni de solicitare trageți"
+
+#: ../../../CONTRIBUTING.rst:98
+msgid ""
+"Before you submit a pull request, check that it meets these guidelines:"
+msgstr ""
+"Înainte de a trimite o solicitare de tragere, verificați dacă respectă "
+"aceste linii directoare:"
+
+#: ../../../CONTRIBUTING.rst:100
+msgid "The pull request should include tests."
+msgstr "Cererea de tragere ar trebui să includă teste."
+
+#: ../../../CONTRIBUTING.rst:101
+msgid ""
+"If the pull request adds functionality, the docs should be updated. Put your"
+" new functionality into a function with a docstring, and add the feature to "
+"the list in README.rst."
+msgstr ""
+"Dacă cererea de trasare adaugă funcționalitate, documentele trebuie să fie "
+"actualizate. Puneți noua funcție într-o funcție cu un docstring și adăugați "
+"caracteristica în lista în README.rst."
+
+#: ../../../CONTRIBUTING.rst:104
+#, fuzzy
+msgid ""
+"The pull request should work for Python 3.3, 3.4, 3.5 and 3.6. Check https"
+"://travis-ci.org/SekouDiaoNlp/mlconjug3/pull_requests and make sure that the tests "
+"pass for all supported Python versions."
+msgstr ""
+"Cererea de tragere ar trebui să funcționeze pentru Python 2.6, 2.7, 3.3, 3.4"
+" și 3.5 și pentru PyPy. Verificați https://travis-"
+"ci.org/SekouDiaoNlp/mlconjug3/pull_requests și asigurați-vă că trece testul pentru "
+"toate versiunile Python acceptate ."
+
+#: ../../../CONTRIBUTING.rst:109
+msgid "Tips"
+msgstr "Sfaturi"
+
+#: ../../../CONTRIBUTING.rst:111
+msgid "To run a subset of tests::"
+msgstr "Pentru a rula un subset de teste ::"
