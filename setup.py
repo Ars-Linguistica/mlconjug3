@@ -23,7 +23,7 @@ requirements = [
     'Click>=7.1',
     'numpy',
     'scipy',
-    'scikit-learn>=0.21.4',
+    'scikit-learn>=0.24.1',
     'colorama',
     'joblib',
 ]
@@ -40,7 +40,7 @@ test_requirements = [
     'docutils',
     'pytest',
     'pytest-cov',
-    'Click>=6.0',
+    'Click>=7.1',
     'lxml',
     'mypy',
 ]
