@@ -17,16 +17,9 @@ with open('INSTALL.rst') as installation_file:
 with open('docs/usage.rst') as usage_file:
     usage = usage_file.read()
 
-requirements = [
-    'defusedxml',
-    'cython',
-    'Click>=7.1',
-    'numpy',
-    'scipy',
-    'scikit-learn>=0.24.1',
-    'colorama',
-    'joblib',
-]
+with open('requirements.txt') as f:
+    requirements = f.read().splitlines()
+
 
 setup_requirements = [
     'pytest-runner',

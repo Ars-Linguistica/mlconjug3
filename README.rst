@@ -118,20 +118,20 @@ Academic publications citing mlconjug
 Software projects using mlconjug
 --------------------------------
 
-- | NLP-Suite_
+- | `NLP-Suite`_
   | NLP Suite is a package of tools designed for non-specialists, for scholars with no knowledge or little knowledge of Natural Language Processing.
 - | `Gender Bias Visualization`_
   | This project offers tools to visualize the gender bias in pre-trained language models to better understand the prejudices in the data.
 - | `Text Adaptation To Context`_
   | This project uses language models to generate text that is well suited to the type of publication.
-- | verbecc-svc_
+- | `verbecc-svc`_
   | Dockerized microservice with REST API for conjugation of any verb in French and Spanish.
-- | nvhtml_
+- | `nvhtml`_
   | A tool to Manage and tansform HTML documents.
-- | twitter-bot_
+- | `twitter-bot`_
   | Tweets the words of the French language. Largely inspired by the @botducul (identical lexicon, but code in Python) and the @botsupervnr.
   | Posts on @botduslip. Stores the position of the last tweeted word in a Redis database.
-- | verb-form-helper_
+- | `verb-form-helper`_
   | This project offers a tool to help learn differnt verbal forms.
 - | `NLP Tasks`_
   | A collection of common NLP tasks such as dataset parsing and explicit semantic extraction.
@@ -139,7 +139,7 @@ Software projects using mlconjug
   | This project offers a model which recognizes covid-19 masks.
 - | `Bad Excuses for Zoom Abuses`_
   | Need an excuse for why you can't show up in your Zoom lectures? Just generate one here!
-- | NLP_
+- | `NLP`_
   | Repository to store Natural Language Processing models.
 - | `Virtual Assistant`_
   | This is a simple virtual assistant. With it, you can search the Internet, access websites, open programs, and more using just your voice.
@@ -187,9 +187,9 @@ The logo was designed by Zuur_.
 .. _`Bad Advice`: https://github.com/matthew-cheney/bad-advice
 .. _`Spanish Conjugations Quiz`: https://github.com/williammortimer/Spanish-Conjugations-Quiz
 .. _`Silver Rogue DF`: https://github.com/FranchuFranchu/silver-rogue-df
-.. _NLP-Suite: https://github.com/NLP-Suite/NLP-Suite
-.. _twitter-bot: https://github.com/arthurcouyere/twitter-bot
-.. _verb-form-helper: https://github.com/gittymutt/verb-form-helper
+.. _`NLP-Suite`: https://github.com/NLP-Suite/NLP-Suite
+.. _`twitter-bot`: https://github.com/arthurcouyere/twitter-bot
+.. _`verb-form-helper`: https://github.com/gittymutt/verb-form-helper
 .. _`NLP Tasks`: https://github.com/ai-systems/poly-nlp
-.. _verbecc-svc: https://pypi.org/project/verbecc/
-.. _nvhtml: https://pypi.org/project/nvhtml/
+.. _`verbecc-svc`: https://pypi.org/project/verbecc/
+.. _`nvhtml`: https://pypi.org/project/nvhtml/
