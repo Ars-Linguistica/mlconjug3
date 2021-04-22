@@ -51,6 +51,16 @@ MLCONJUG3
         :target: https://snyk.io/test/github/SekouDiaoNlp/mlconjug3?targetFile=requirements.txt
         :alt: Code Vulnerability Status
 
+.. image:: https://img.shields.io/pypi/dm/mlconjug3?label=PyPi%20Downloads
+        :target: https://pypi.python.org/pypi/mlconjug3
+        :alt: PyPI Downloads
+
+.. image:: https://img.shields.io/conda/dn/conda-forge/mlconjug?label=Anaconda%20Total%20Downloads
+        :target: https://anaconda.org/conda-forge/mlconjug3
+        :alt: Conda
+
+
+
 
 
 | A Python library to conjugate verbs in French, English, Spanish, Italian, Portuguese and Romanian (more soon)
@@ -108,10 +118,23 @@ Academic publications citing mlconjug
 Software projects using mlconjug
 --------------------------------
 
+- | NLP-Suite_
+  | NLP Suite is a package of tools designed for non-specialists, for scholars with no knowledge or little knowledge of Natural Language Processing.
 - | `Gender Bias Visualization`_
   | This project offers tools to visualize the gender bias in pre-trained language models to better understand the prejudices in the data.
 - | `Text Adaptation To Context`_
   | This project uses language models to generate text that is well suited to the type of publication.
+- | verbecc-svc_
+  | Dockerized microservice with REST API for conjugation of any verb in French and Spanish.
+- | nvhtml_
+  | A tool to Manage and tansform HTML documents.
+- | twitter-bot_
+  | Tweets the words of the French language. Largely inspired by the @botducul (identical lexicon, but code in Python) and the @botsupervnr.
+  | Posts on @botduslip. Stores the position of the last tweeted word in a Redis database.
+- | verb-form-helper_
+  | This project offers a tool to help learn differnt verbal forms.
+- | `NLP Tasks`_
+  | A collection of common NLP tasks such as dataset parsing and explicit semantic extraction.
 - | `Facemask Detection`_
   | This project offers a model which recognizes covid-19 masks.
 - | `Bad Excuses for Zoom Abuses`_
@@ -127,7 +150,7 @@ Software projects using mlconjug
 - | `Spanish Conjugations Quiz`_
   | Python+Flask web app that uses mlconjug to dynamically generate foreign language conjugation questions.
 - | `Silver Rogue DF`_
-  | A dwarf-fortress adventure mode-inspired rogue-like Pygame Python3 game
+  | A dwarf-fortress adventure mode-inspired rogue-like Pygame Python3 game.
 
 BibTeX
 ------
@@ -164,3 +187,9 @@ The logo was designed by Zuur_.
 .. _`Bad Advice`: https://github.com/matthew-cheney/bad-advice
 .. _`Spanish Conjugations Quiz`: https://github.com/williammortimer/Spanish-Conjugations-Quiz
 .. _`Silver Rogue DF`: https://github.com/FranchuFranchu/silver-rogue-df
+.. _NLP-Suite: https://github.com/NLP-Suite/NLP-Suite
+.. _twitter-bot: https://github.com/arthurcouyere/twitter-bot
+.. _verb-form-helper: https://github.com/gittymutt/verb-form-helper
+.. _`NLP Tasks`: https://github.com/ai-systems/poly-nlp
+.. _verbecc-svc: https://pypi.org/project/verbecc/
+.. _nvhtml: https://pypi.org/project/nvhtml/
