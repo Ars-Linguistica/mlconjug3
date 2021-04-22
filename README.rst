@@ -52,7 +52,7 @@ MLCONJUG3
         :alt: Code Vulnerability Status
 
 .. image:: https://img.shields.io/pypi/dm/mlconjug3?label=PyPi%20Downloads
-        :alt: PyPI - Downloads
+        :alt: PyPI Downloads
 
 .. image:: https://img.shields.io/conda/dn/conda-forge/mlconjug?label=Anaconda%20Total%20Downloads
         :alt: Conda
