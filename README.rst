@@ -51,11 +51,12 @@ MLCONJUG3
         :target: https://snyk.io/test/github/SekouDiaoNlp/mlconjug3?targetFile=requirements.txt
         :alt: Code Vulnerability Status
 
+.. image:: https://img.shields.io/conda/dn/conda-forge/mlconjug?label=Anaconda%20Total%20Downloads
+        :alt: Conda
+
 .. image:: https://img.shields.io/pypi/dm/mlconjug3?label=PyPi%20Downloads
         :alt: PyPI Downloads
 
-.. image:: https://img.shields.io/conda/dn/conda-forge/mlconjug?label=Anaconda%20Total%20Downloads
-        :alt: Conda
 
 
 
