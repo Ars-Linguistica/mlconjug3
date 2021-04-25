@@ -17,11 +17,37 @@ with open('INSTALL.rst') as installation_file:
 with open('docs/usage.rst') as usage_file:
     usage = usage_file.read()
 
-with open('requirements.txt') as f:
-    requirements = f.read().splitlines()
+try:
+    with open('requirements.txt') as f:
+        requirements = f.read().splitlines()
+except FileNotFoundError:
+    requirements = [
+        'defusedxml',
+        'cython',
+        'Click>=7.1',
+        'numpy',
+        'scipy',
+        'scikit-learn>=0.24.1',
+        'colorama',
+        'joblib',
+    ]
 
-with open('requirements_test.txt') as f:
-    test_requirements = f.read().splitlines()
+try:
+    with open('requirements_test.txt') as f:
+        test_requirements = f.read().splitlines()
+except FileNotFoundError:
+    test_requirements = [
+        'defusedxml',
+        'pytest',
+        'Sphinx',
+        'twine',
+        'docutils',
+        'pytest',
+        'pytest-cov',
+        'Click>=7.1',
+        'lxml',
+        'mypy',
+    ]
 
 
 setup_requirements = [
@@ -51,7 +77,11 @@ setup(
                   'tests': ['tests/*'],
                   'trained_models': ['mlconjug3/data/models/*'],
                   'translations': ['mlconjug3/locale/*'],
-                  'type_stubs': ['mlconjug3/py.typed', 'mlconjug3/*']},
+                  'type_stubs': ['mlconjug3/py.typed', 'mlconjug3/*']
+                  'requirements': ['requirements.txt',
+                                   'requirements_dev.txt',
+                                   'requirements_test.txt']
+                  },
     include_package_data=True,
     install_requires=requirements,
     license="MIT license",
