@@ -20,23 +20,16 @@ with open('docs/usage.rst') as usage_file:
 with open('requirements.txt') as f:
     requirements = f.read().splitlines()
 
+with open('requirements_tests.txt') as f:
+    test_requirements = f.read().splitlines()
+
 
 setup_requirements = [
     'pytest-runner',
-]
-
-test_requirements = [
-    'defusedxml',
-    'pytest',
-    'Sphinx',
-    'twine',
-    'docutils',
     'pytest',
     'pytest-cov',
-    'Click>=7.1',
-    'lxml',
-    'mypy',
 ]
+
 
 setup(
     name='mlconjug3',
