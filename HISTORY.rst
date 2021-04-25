@@ -2,7 +2,7 @@
 History
 =======
 
-3.7.18 (2021-25-04)
+3.7.19 (2021-25-04)
 -------------------
 
 * Unknown verb inference is now faster.
