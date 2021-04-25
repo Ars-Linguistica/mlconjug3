@@ -2,6 +2,15 @@
 History
 =======
 
+3.7.18 (2021-25-04)
+-------------------
+
+* Unknown verb inference is now faster.
+* Added more tests to the test suite.
+* Automated setup.py dependency injection.
+* Updated documentation.
+* Updated dependencies.
+
 3.7.17 (2021-18-04)
 -------------------
 

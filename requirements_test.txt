@@ -1,0 +1,10 @@
+defusedxml
+pytest
+Sphinx
+twine
+docutils
+pytest
+pytest-cov
+Click>=7.1
+lxml
+mypy

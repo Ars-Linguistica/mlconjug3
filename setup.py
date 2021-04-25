@@ -20,27 +20,20 @@ with open('docs/usage.rst') as usage_file:
 with open('requirements.txt') as f:
     requirements = f.read().splitlines()
 
+with open('requirements_test.txt') as f:
+    test_requirements = f.read().splitlines()
+
 
 setup_requirements = [
     'pytest-runner',
-]
-
-test_requirements = [
-    'defusedxml',
-    'pytest',
-    'Sphinx',
-    'twine',
-    'docutils',
     'pytest',
     'pytest-cov',
-    'Click>=7.1',
-    'lxml',
-    'mypy',
 ]
+
 
 setup(
     name='mlconjug3',
-    version='3.7.17',
+    version='3.7.18',
     description="A Python library to conjugate French, English, Spanish, Italian, Portuguese and Romanian verbs using Machine Learning techniques.",
     long_description=readme + '\n\n' + installation + '\n\n' + usage + '\n\n' + history,
     long_description_content_type="text/x-rst",
