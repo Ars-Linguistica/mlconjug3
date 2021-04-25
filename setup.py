@@ -77,7 +77,7 @@ setup(
                   'tests': ['tests/*'],
                   'trained_models': ['mlconjug3/data/models/*'],
                   'translations': ['mlconjug3/locale/*'],
-                  'type_stubs': ['mlconjug3/py.typed', 'mlconjug3/*']
+                  'type_stubs': ['mlconjug3/py.typed', 'mlconjug3/*'],
                   'requirements': ['requirements.txt',
                                    'requirements_dev.txt',
                                    'requirements_test.txt']
