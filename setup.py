@@ -20,7 +20,7 @@ with open('docs/usage.rst') as usage_file:
 with open('requirements.txt') as f:
     requirements = f.read().splitlines()
 
-with open('requirements_tests.txt') as f:
+with open('requirements_test.txt') as f:
     test_requirements = f.read().splitlines()
 
 
