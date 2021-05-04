@@ -2,6 +2,14 @@
 History
 =======
 
+3.7.20 (2021-04-05)
+-------------------
+
+* Retrained all models with scikit-learn 0.24.2
+* The Portuguese model has improved and is now also at 99%+ accuracy.
+* Updated documentation.
+* Updated dependencies.
+
 3.7.19 (2021-25-04)
 -------------------
 
