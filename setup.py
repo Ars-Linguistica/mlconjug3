@@ -27,7 +27,7 @@ except FileNotFoundError:
         'Click>=7.1',
         'numpy',
         'scipy',
-        'scikit-learn>=0.24.1',
+        'scikit-learn>=0.24.2',
         'colorama',
         'joblib',
     ]
