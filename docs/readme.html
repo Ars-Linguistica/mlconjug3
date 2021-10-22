@@ -4,15 +4,18 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>MLCONJUG3 &mdash; MLConjug3 3.7.19 documentation</title>
+  <title>MLCONJUG3 &mdash; MLConjug3 3.7.22 documentation</title>
   
 
   
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
 
   
   
@@ -29,6 +32,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
@@ -37,7 +41,7 @@
 
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within MLConjug3 3.7.19 documentation"
+          title="Search within MLConjug3 3.7.22 documentation"
           href="_static/opensearch.xml"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -66,7 +70,7 @@
             
             
               <div class="version">
-                3.7.19
+                3.7.22
               </div>
             
           
@@ -103,6 +107,10 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">Package Api Documentation for mlconjug</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authors.html">Credits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="history.html">History</a></li>
 </ul>
 
             
@@ -171,7 +179,7 @@
            <div itemprop="articleBody">
             
   <a class="reference external image-reference" href="https://pypi.python.org/pypi/mlconjug3"><img alt="mlconjug3 PyPi Home Page" src="https://raw.githubusercontent.com/SekouDiaoNlp/mlconjug3/master/logo/logotype2%20mlconjug.png" /></a>
-<div class="section" id="mlconjug3">
+<section id="mlconjug3">
 <h1>MLCONJUG3<a class="headerlink" href="#mlconjug3" title="Permalink to this headline">¶</a></h1>
 <a class="reference external image-reference" href="https://GitHub.com/SekouDiaoNlp/mlconjug3/graphs/commit-activity"><img alt="Package Maintenance Status" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" /></a>
 <a class="reference external image-reference" href="https://GitHub.com/SekouDiaoNlp/mlconjug3"><img alt="Package Maintener" src="https://img.shields.io/badge/maintainer-SekouDiaoNlp-blue" /></a>
@@ -184,6 +192,8 @@
 <a class="reference external image-reference" href="https://pyup.io/repos/github/SekouDiaoNlp/mlconjug3/"><img alt="Dependencies status" src="https://pyup.io/repos/github/SekouDiaoNlp/mlconjug3/shield.svg" /></a>
 <a class="reference external image-reference" href="https://codecov.io/gh/SekouDiaoNlp/mlconjug3"><img alt="Code Coverage Status" src="https://codecov.io/gh/SekouDiaoNlp/mlconjug3/branch/master/graph/badge.svg" /></a>
 <a class="reference external image-reference" href="https://snyk.io/test/github/SekouDiaoNlp/mlconjug3?targetFile=requirements.txt"><img alt="Code Vulnerability Status" src="https://snyk-widget.herokuapp.com/badge/pip/mlconjug3/badge.svg" /></a>
+<a class="reference external image-reference" href="https://pypi.python.org/pypi/mlconjug3"><img alt="PyPI Downloads" src="https://img.shields.io/pypi/dm/mlconjug3?label=PyPi%20Downloads" /></a>
+<a class="reference external image-reference" href="https://anaconda.org/conda-forge/mlconjug3"><img alt="Conda" src="https://img.shields.io/conda/dn/conda-forge/mlconjug?label=Anaconda%20Total%20Downloads" /></a>
 <div class="line-block">
 <div class="line">A Python library to conjugate verbs in French, English, Spanish, Italian, Portuguese and Romanian (more soon)
 using Machine Learning techniques.</div>
@@ -213,7 +223,7 @@ using the French model as a model to query during the training.</div>
 <li><p>Free software: MIT license</p></li>
 <li><p>Documentation: <a class="reference external" href="https://mlconjug3.readthedocs.io">https://mlconjug3.readthedocs.io</a>.</p></li>
 </ul>
-<div class="section" id="supported-languages">
+<section id="supported-languages">
 <h2>Supported Languages<a class="headerlink" href="#supported-languages" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>French</p></li>
@@ -223,8 +233,8 @@ using the French model as a model to query during the training.</div>
 <li><p>Portuguese</p></li>
 <li><p>Romanian</p></li>
 </ul>
-</div>
-<div class="section" id="features">
+</section>
+<section id="features">
 <h2>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Easy to use API.</p></li>
@@ -233,8 +243,8 @@ using the French model as a model to query during the training.</div>
 <li><p>Easily integrate MLConjug in your own projects.</p></li>
 <li><p>Can be used as a command line tool.</p></li>
 </ul>
-</div>
-<div class="section" id="academic-publications-citing-mlconjug">
+</section>
+<section id="academic-publications-citing-mlconjug">
 <h2>Academic publications citing mlconjug<a class="headerlink" href="#academic-publications-citing-mlconjug" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><div class="line-block">
@@ -244,10 +254,15 @@ using the French model as a model to query during the training.</div>
 </div>
 </li>
 </ul>
-</div>
-<div class="section" id="software-projects-using-mlconjug">
+</section>
+<section id="software-projects-using-mlconjug">
 <h2>Software projects using mlconjug<a class="headerlink" href="#software-projects-using-mlconjug" title="Permalink to this headline">¶</a></h2>
 <ul>
+<li><div class="line-block">
+<div class="line"><a class="reference external" href="https://github.com/NLP-Suite/NLP-Suite">NLP-Suite</a></div>
+<div class="line">NLP Suite is a package of tools designed for non-specialists, for scholars with no knowledge or little knowledge of Natural Language Processing.</div>
+</div>
+</li>
 <li><div class="line-block">
 <div class="line"><a class="reference external" href="https://github.com/GesaJo/Gender-Bias-Visualization">Gender Bias Visualization</a></div>
 <div class="line">This project offers tools to visualize the gender bias in pre-trained language models to better understand the prejudices in the data.</div>
@@ -256,6 +271,32 @@ using the French model as a model to query during the training.</div>
 <li><div class="line-block">
 <div class="line"><a class="reference external" href="https://github.com/lzontar/Text_Adaptation_To_Context">Text Adaptation To Context</a></div>
 <div class="line">This project uses language models to generate text that is well suited to the type of publication.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><a class="reference external" href="https://pypi.org/project/verbecc/">verbecc-svc</a></div>
+<div class="line">Dockerized microservice with REST API for conjugation of any verb in French and Spanish.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><a class="reference external" href="https://pypi.org/project/nvhtml/">nvhtml</a></div>
+<div class="line">A tool to Manage and tansform HTML documents.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><a class="reference external" href="https://github.com/arthurcouyere/twitter-bot">twitter-bot</a></div>
+<div class="line">Tweets the words of the French language. Largely inspired by the &#64;botducul (identical lexicon, but code in Python) and the &#64;botsupervnr.</div>
+<div class="line">Posts on &#64;botduslip. Stores the position of the last tweeted word in a Redis database.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><a class="reference external" href="https://github.com/gittymutt/verb-form-helper">verb-form-helper</a></div>
+<div class="line">This project offers a tool to help learn differnt verbal forms.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><a class="reference external" href="https://github.com/ai-systems/poly-nlp">NLP Tasks</a></div>
+<div class="line">A collection of common NLP tasks such as dataset parsing and explicit semantic extraction.</div>
 </div>
 </li>
 <li><div class="line-block">
@@ -292,12 +333,12 @@ using the French model as a model to query during the training.</div>
 </li>
 <li><div class="line-block">
 <div class="line"><a class="reference external" href="https://github.com/FranchuFranchu/silver-rogue-df">Silver Rogue DF</a></div>
-<div class="line">A dwarf-fortress adventure mode-inspired rogue-like Pygame Python3 game</div>
+<div class="line">A dwarf-fortress adventure mode-inspired rogue-like Pygame Python3 game.</div>
 </div>
 </li>
 </ul>
-</div>
-<div class="section" id="bibtex">
+</section>
+<section id="bibtex">
 <h2>BibTeX<a class="headerlink" href="#bibtex" title="Permalink to this headline">¶</a></h2>
 <p>If you want to cite mlconjug3 in an academic publication use this citation format:</p>
 <div class="highlight-bibtex notranslate"><div class="highlight"><pre><span></span><span class="nc">@article</span><span class="p">{</span><span class="nl">mlconjug3</span><span class="p">,</span>
@@ -308,13 +349,13 @@ using the French model as a model to query during the training.</div>
 <span class="p">}</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="credits">
+</section>
+<section id="credits">
 <h2>Credits<a class="headerlink" href="#credits" title="Permalink to this headline">¶</a></h2>
 <p>This package was created with the help of <a class="reference external" href="https://perso.b2b2c.ca/~sarrazip/dev/verbiste.html">Verbiste</a> and <a class="reference external" href="http://scikit-learn.org/stable/index.html">scikit-learn</a>.</p>
 <p>The logo was designed by <a class="reference external" href="https://github.com/zuuritaly">Zuur</a>.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -332,7 +373,7 @@ using the French model as a model to query during the training.</div>
     <p>
         &#169; Copyright 2021, SekouDiaoNlp.
       <span class="lastupdated">
-        Last updated on Apr 25, 2021.
+        Last updated on Oct 22, 2021.
       </span>
 
     </p>
