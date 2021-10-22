@@ -1,6 +1,6 @@
-======================================
-Package Api Documentation for mlconjug
-======================================
+=======================================
+Package Api Documentation for mlconjug3
+=======================================
 
 
 API Reference for the classes in mlconjug3.mlconjug.py
