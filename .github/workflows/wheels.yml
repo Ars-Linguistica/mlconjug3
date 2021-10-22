@@ -1,0 +1,54 @@
+name: Build source and wheels packages and upload them to PyPI
+
+# Build on every branch push, tag push, and pull request change:
+on: [workflow_dispatch]
+# Alternatively, to publish when a (published) GitHub Release is created, use the following:
+# on:
+#   push:
+#   pull_request:
+#   release:
+#     types:
+#       - published
+
+jobs:
+  build_wheels:
+    name: Build wheels on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-20.04, windows-2019, macos-10.15]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-python@v2
+        name: Install Python
+        with:
+          python-version: '3.8'
+
+      - name: Build wheels
+        uses: pypa/cibuildwheel@v2.2.0
+
+      - uses: actions/upload-artifact@v2
+        with:
+          path: ./wheelhouse/*.whl
+
+
+  upload_pypi:
+    needs: [build_wheels]
+    runs-on: ubuntu-latest
+    # upload to PyPI on every tag starting with 'v'
+    if: github.event_name == 'workflow_dispatch'
+    # alternatively, to publish when a GitHub Release is created, use the following rule:
+    # if: github.event_name == 'release' && github.event.action == 'published'
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: artifact
+          path: dist
+
+      - uses: pypa/gh-action-pypi-publish@v1.4.2
+        with:
+          user: __token__
+          password: ${{ secrets.PYPI_TOKEN }}
+          # To test: repository_url: https://test.pypi.org/legacy/
