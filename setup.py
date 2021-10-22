@@ -38,7 +38,6 @@ try:
 except FileNotFoundError:
     test_requirements = [
         'defusedxml',
-        'pytest',
         'Sphinx',
         'twine',
         'docutils',
