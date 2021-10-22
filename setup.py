@@ -24,10 +24,10 @@ except FileNotFoundError:
     requirements = [
         'defusedxml',
         'cython',
-        'Click>=7.1',
+        'Click>=8.0.3',
         'numpy',
         'scipy',
-        'scikit-learn>=0.24.2',
+        'scikit-learn>=1.O',
         'colorama',
         'joblib',
     ]
@@ -38,13 +38,12 @@ try:
 except FileNotFoundError:
     test_requirements = [
         'defusedxml',
-        'pytest',
         'Sphinx',
         'twine',
         'docutils',
         'pytest',
         'pytest-cov',
-        'Click>=7.1',
+        'Click>=8.0.3',
         'lxml',
         'mypy',
     ]
@@ -59,7 +58,7 @@ setup_requirements = [
 
 setup(
     name='mlconjug3',
-    version='3.7.20',
+    version='3.7.21',
     description="A Python library to conjugate French, English, Spanish, Italian, Portuguese and Romanian verbs using Machine Learning techniques.",
     long_description=readme + '\n\n' + installation + '\n\n' + usage + '\n\n' + history,
     long_description_content_type="text/x-rst",
@@ -108,10 +107,10 @@ setup(
         'Natural Language :: Romanian',
         'Operating System :: OS Independent',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
+        # 'Programming Language :: Python :: 3.10',
     ],
     test_suite='tests',
     tests_require=test_requirements,

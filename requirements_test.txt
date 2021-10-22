@@ -5,6 +5,6 @@ twine
 docutils
 pytest
 pytest-cov
-Click>=7.1
+Click>=8.0.3
 lxml
 mypy

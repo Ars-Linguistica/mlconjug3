@@ -2,6 +2,14 @@
 History
 =======
 
+3.7.21 (2021-22-10)
+-------------------
+
+* Retrained all models with scikit-learn 1.0.
+* Updated documentation.
+* Updated dependencies.
+* Removed support for python 3.6.
+
 3.7.20 (2021-04-05)
 -------------------
 
