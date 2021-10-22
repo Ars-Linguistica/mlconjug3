@@ -24,10 +24,10 @@ except FileNotFoundError:
     requirements = [
         'defusedxml',
         'cython',
-        'Click>=7.1',
+        'Click>=8.0.3',
         'numpy',
         'scipy',
-        'scikit-learn>=0.24.2',
+        'scikit-learn>=1.O',
         'colorama',
         'joblib',
     ]
@@ -44,7 +44,7 @@ except FileNotFoundError:
         'docutils',
         'pytest',
         'pytest-cov',
-        'Click>=7.1',
+        'Click>=8.0.3',
         'lxml',
         'mypy',
     ]
@@ -112,6 +112,7 @@ setup(
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
     ],
     test_suite='tests',
     tests_require=test_requirements,
