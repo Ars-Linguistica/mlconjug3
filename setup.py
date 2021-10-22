@@ -27,7 +27,7 @@ except FileNotFoundError:
         'Click>=8.0.3',
         'numpy',
         'scipy',
-        'scikit-learn>=1.O',
+        'scikit-learn>=1.0',
         'colorama',
         'joblib',
     ]
@@ -58,7 +58,7 @@ setup_requirements = [
 
 setup(
     name='mlconjug3',
-    version='3.7.21',
+    version='3.7.22',
     description="A Python library to conjugate French, English, Spanish, Italian, Portuguese and Romanian verbs using Machine Learning techniques.",
     long_description=readme + '\n\n' + installation + '\n\n' + usage + '\n\n' + history,
     long_description_content_type="text/x-rst",
