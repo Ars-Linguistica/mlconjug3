@@ -14,7 +14,7 @@ authors = ["SekouDiaoNlp <diao.sekou.nlp@gmail.com>"]
 readme = "README.rst"
 
 [tool.poetry.dependencies]
-python = "^3.6"
+python = "^3.7"
 click = "==8.0.3"
 colorama = "==0.4.4"
 cython = "==0.29.24"
