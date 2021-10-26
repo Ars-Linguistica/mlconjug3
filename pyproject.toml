@@ -13,6 +13,9 @@ homepage = "https://github.com/SekouDiaoNlp/mlconjug3"
 authors = ["SekouDiaoNlp <diao.sekou.nlp@gmail.com>"]
 readme = "README.rst"
 
+[tool.poetry.scripts]
+mlconjug3 = 'mlconjug3.cli:main'
+
 [tool.poetry.dependencies]
 python = "^3.7"
 click = "==8.0.3"
