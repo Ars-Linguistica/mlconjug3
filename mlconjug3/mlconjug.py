@@ -311,7 +311,7 @@ class Model(object):
     def __init__(self, vectorizer=None, feature_selector=None, classifier=None, language=None):
         if not vectorizer:
             vectorizer = CountVectorizer(analyzer=partial(extract_verb_features, lang=language, ngram_range=(2, 7)),
-                                         binary=True)
+                                         binary=True, lowercase=False)
         if not feature_selector:
             feature_selector = SelectFromModel(LinearSVC(penalty='l1', max_iter=12000, dual=False, verbose=2))
         if not classifier:
