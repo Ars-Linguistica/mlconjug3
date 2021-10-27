@@ -50,4 +50,4 @@ jobs:
                     poetry run pip install types-setuptools
                     poetry run mypy
             -   name: Run Pytest
-                run: poetry run pytest
+                run: poetry run pytest --cov=./mlconjug3/
