@@ -51,3 +51,5 @@ jobs:
                     poetry run mypy
             -   name: Run Pytest
                 run: poetry run pytest --cov=./mlconjug3/
+            -   name: Upload coverage artifacts to codecov
+                    run: codecov --token=370386ee-28d7-441f-b4eb-7f63f8c5c3e9
