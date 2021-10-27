@@ -27,7 +27,7 @@ mlconjug
 * FIXED: investigate the quality of predicted verbs like 'flabbergast' => 'run' 'rob' => 'mob' from issue#82.
 * TODO: add more magic methods following Python data model.
 * TODO: investigate the use of None.
-* TODO: Raise error indicating that the verb is unknown and that no model has been provided.
+* DONE: Raise error indicating that the verb is unknown and that no model has been provided.
 
 PyVerbiste
 ----------
