@@ -17,7 +17,7 @@ maintainers = ["SekouDiaoNlp <diao.sekou.nlp@gmail.com>"]
 readme = "README.rst"
 packages = [
     { include = 'mlconjug3' },
-    { include = 'tests' }
+    { include = 'tests' },
 ]
 include = [
     { path = '*.rst', format = 'sdist' },
