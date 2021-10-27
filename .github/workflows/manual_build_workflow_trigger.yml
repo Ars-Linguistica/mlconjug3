@@ -48,7 +48,7 @@ jobs:
             -   name: Run bandit
                 run: bandit -r mlconjug3/ -c .bandit.yml
             -   name: Run Typechecker
-                run:  mypy --strict --ignore-missing-imports --show-error-codes mlconjug3/
+                run:  mypy
             -   name: Run PyTest with coverage
                 run: |
                     py.test -rP --cov=./mlconjug3/

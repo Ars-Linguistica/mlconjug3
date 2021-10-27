@@ -46,6 +46,6 @@ jobs:
             -   name: Run Type Checker
                 run: |
                     poetry run pip install types-setuptools
-                    poetry run mypy --strict --ignore-missing-imports --show-error-codes mlconjug3/
+                    poetry run mypy
             -   name: Run Pytest
                 run: poetry run pytest
