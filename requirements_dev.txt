@@ -20,7 +20,7 @@ asq==1.3
 defusedxml==0.7.1
 colorama==0.4.4
 joblib==1.1.0
-progressbar2==3.55.0
+progressbar2==3.53.1
 pathlib2==2.3.6
 twine==3.4.2
 # grayskull==0.8.5
