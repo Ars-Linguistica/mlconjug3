@@ -21,10 +21,6 @@ jobs:
                 include:
                     -   os: ubuntu-latest
                         path: ~/.cache/pip
-                    -   os: macos-latest
-                        path: ~/Library/Caches/pip
-                    -   os: windows-latest
-                        path: ~\AppData\Local\pip\Cache
                 python-version: [ 3.9 ]
 
         steps:
