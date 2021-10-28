@@ -38,9 +38,9 @@ cython = "==0.29.24"
 defusedxml = "==0.7.1"
 joblib = "==1.1.0"
 numpy = "*"
-scikit-learn = "==1.0,>=1.0"
+scikit-learn = "==1.0.1,>=1.0.1"
 scipy = "*"
-progressbar2 = "==3.55.0"
+progressbar2 = "==3.53.1"
 
 [tool.poetry.dev-dependencies]
 asq = "==1.3"
