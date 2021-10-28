@@ -2,6 +2,16 @@
 History
 =======
 
+3.8.0 (2021-28-10)
+------------------
+
+* Fixed bug that would silently skip uppercase characters in the CountVectorizer. See: https://github.com/scikit-learn/scikit-learn/pull/19401
+* Retrained all models with fixed CountVectorizer.
+* Added full support for pyproject.toml file for building the package from source.
+* Migrated build system to poetry.
+* Updated dependencies.
+* Updated documentation.
+
 3.7.22 (2021-22-10)
 -------------------
 

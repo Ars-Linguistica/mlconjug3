@@ -68,7 +68,6 @@ _ALPHABET = {'fr': {'vowels': 'aáàâeêéèiîïoôöœuûùy',
 def extract_verb_features(verb, lang, ngram_range):
     """
     | Custom Vectorizer optimized for extracting verbs features.
-    | The Vectorizer subclasses sklearn.feature_extraction.text.CountVectorizer .
     | As in Indo-European languages verbs are inflected by adding a morphological suffix,
      the vectorizer extracts verb endings and produces a vector representation of the verb with binary features.
 
@@ -121,6 +120,9 @@ class Conjugator:
         Language of the conjugator. The default language is 'fr' for french.
     :param model: mlconjug3.Model or scikit-learn Pipeline or Classifier implementing the fit() and predict() methods.
         A user provided pipeline if the user has trained his own pipeline.
+    :ivar language: string. Language of the conjugator.
+    :ivar model: mlconjug3.Model or scikit-learn Pipeline or Classifier implementing the fit() and predict() methods.
+    :ivar conjug_manager: Verbiste object.
 
     """
 
@@ -157,6 +159,7 @@ class Conjugator:
             The default value is 'abbrev'.
             Select 'pronoun' for full pronouns.
         :return: Verb object or None.
+        :raises: ValueError.
 
         """
         verb = verb.lower()
@@ -200,6 +203,7 @@ class Conjugator:
         Assigns the provided pre-trained scikit-learn pipeline to be able to conjugate unknown verbs.
 
         :param model: scikit-learn Classifier or Pipeline.
+        :raises: ValueError.
 
         """
         if not isinstance(model, Model):
@@ -267,6 +271,7 @@ class DataSet:
         :param proportion: float.
             Proportion of samples in the training set.
             Must be between 0 and 1.
+        :raises: ValueError.
 
         """
         if proportion <= 0 or proportion > 1:
@@ -304,7 +309,9 @@ class Model(object):
     :param vectorizer: scikit-learn Vectorizer.
     :param feature_selector: scikit-learn Classifier with a fit_transform() method
     :param classifier: scikit-learn Classifier with a predict() method
-    :param language: language of the corpus of verbs to be analyzed.
+    :param language: Language of the corpus of verbs to be analyzed.
+    :ivar pipeline: scikit-learn Pipeline Object.
+    :ivar language: Language of the corpus of verbs to be analyzed.
 
     """
 
