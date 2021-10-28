@@ -100,6 +100,9 @@ class ConjugManager:
         :param language: string.
             | The language of the conjugator. The default value is fr for French.
             | The allowed values are: fr, en, es, it, pt, ro.
+        :ivar language: Language of the conjugator.
+        :ivar verbs: Dictionary where the keys are verbs and the values are conjugation patterns.
+        :ivar conjugations: Dictionary where the keys are conjugation patterns and the values are inflected forms.
 
         """
 
@@ -213,6 +216,9 @@ class Verbiste(ConjugManager):
     :param language: string.
         | The language of the conjugator. The default value is fr for French.
         | The allowed values are: fr, en, es, it, pt, ro.
+    :ivar language: Language of the conjugator.
+    :ivar verbs: Dictionary where the keys are verbs and the values are conjugation patterns.
+    :ivar conjugations: Dictionary where the keys are conjugation patterns and the values are inflected forms.
 
     """
 
@@ -321,6 +327,12 @@ class VerbInfo:
         Lexical root of the verb.
     :param template: string.
         Name of the verb ending pattern.
+    :ivar infinitive: string.
+        Infinitive form of the verb.
+    :ivar root: string.
+        Lexical root of the verb.
+    :ivar template: string.
+        Name of the verb ending pattern.
 
     """
     __slots__ = ('infinitive', 'root', 'template')
@@ -355,6 +367,12 @@ class Verb:
         Select 'pronoun' for full pronouns.
     :param predicted: bool.
         Indicates if the conjugation information was predicted by the model or retrieved from the dataset.
+    :ivar verb_info: VerbInfo Object.
+    :ivar conjug_info: OrderedDict.
+    :ivar confidence_score: float. Confidence score of the prediction accuracy.
+    :ivar subject: string. Either 'abbrev' or 'pronoun'
+    :ivar predicted: bool.
+        Indicates if the conjugation information was predicted by the model or retrieved from the dataset.
 
     """
     __slots__ = ('name', 'verb_info', 'conjug_info', 'subject', 'predicted', 'confidence_score')
@@ -377,7 +395,7 @@ class Verb:
     def iterate(self):
         """
         Iterates over all conjugated forms and returns a list of tuples of those conjugated forms.
-        
+
         :return: list.
             List of conjugated forms.
 
