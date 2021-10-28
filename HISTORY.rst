@@ -2,6 +2,11 @@
 History
 =======
 
+3.8.1 (2021-28-10)
+------------------
+
+* Updated documentation and Package metadata.
+
 3.8.0 (2021-28-10)
 ------------------
 
