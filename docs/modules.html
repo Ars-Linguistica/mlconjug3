@@ -8,7 +8,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Package Api Documentation for mlconjug &mdash; MLConjug3 3.7.22 documentation</title>
+  <title>API Documentation for mlconjug3 &mdash; MLConjug3 3.8.0 documentation</title>
   
 
   
@@ -41,7 +41,7 @@
 
     
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within MLConjug3 3.7.22 documentation"
+          title="Search within MLConjug3 3.8.0 documentation"
           href="_static/opensearch.xml"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -70,7 +70,7 @@
             
             
               <div class="version">
-                3.7.22
+                3.8.0
               </div>
             
           
@@ -99,7 +99,7 @@
 <li class="toctree-l1"><a class="reference internal" href="readme.html">MLCONJUG3</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Package Api Documentation for mlconjug</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API Documentation for mlconjug3</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#module-mlconjug3.mlconjug">API Reference for the classes in mlconjug3.mlconjug.py</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-mlconjug3.PyVerbiste">API Reference for the classes in mlconjug3.PyVerbiste.py</a></li>
 </ul>
@@ -155,7 +155,7 @@
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Package Api Documentation for mlconjug</li>
+      <li>API Documentation for mlconjug3</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -174,8 +174,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <section id="package-api-documentation-for-mlconjug">
-<h1>Package Api Documentation for mlconjug<a class="headerlink" href="#package-api-documentation-for-mlconjug" title="Permalink to this headline">¶</a></h1>
+  <section id="api-documentation-for-mlconjug3">
+<h1>API Documentation for mlconjug3<a class="headerlink" href="#api-documentation-for-mlconjug3" title="Permalink to this headline">¶</a></h1>
 <section id="module-mlconjug3.mlconjug">
 <span id="api-reference-for-the-classes-in-mlconjug3-mlconjug-py"></span><h2>API Reference for the classes in mlconjug3.mlconjug.py<a class="headerlink" href="#module-mlconjug3.mlconjug" title="Permalink to this headline">¶</a></h2>
 <p>MLConjug Main module.</p>
@@ -190,7 +190,6 @@
 <span class="sig-prename descclassname"><span class="pre">mlconjug3.mlconjug.</span></span><span class="sig-name descname"><span class="pre">extract_verb_features</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verb</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lang</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ngram_range</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mlconjug3/mlconjug.html#extract_verb_features"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mlconjug3.mlconjug.extract_verb_features" title="Permalink to this definition">¶</a></dt>
 <dd><div class="line-block">
 <div class="line">Custom Vectorizer optimized for extracting verbs features.</div>
-<div class="line">The Vectorizer subclasses sklearn.feature_extraction.text.CountVectorizer .</div>
 <div class="line">As in Indo-European languages verbs are inflected by adding a morphological suffix,
 the vectorizer extracts verb endings and produces a vector representation of the verb with binary features.</div>
 </div>
@@ -238,6 +237,13 @@ Language of the conjugator. The default language is ‘fr’ for french.</p></li
 A user provided pipeline if the user has trained his own pipeline.</p></li>
 </ul>
 </dd>
+<dt class="field-even">Variables</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>language</strong> – string. Language of the conjugator.</p></li>
+<li><p><strong>model</strong> – mlconjug3.Model or scikit-learn Pipeline or Classifier implementing the fit() and predict() methods.</p></li>
+<li><p><strong>conjug_manager</strong> – Verbiste object.</p></li>
+</ul>
+</dd>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="mlconjug3.mlconjug.Conjugator.conjugate">
@@ -265,6 +271,9 @@ Select ‘pronoun’ for full pronouns.</p></li>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Verb object or None.</p>
 </dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p>ValueError.</p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -275,6 +284,9 @@ Select ‘pronoun’ for full pronouns.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>model</strong> – scikit-learn Classifier or Pipeline.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p>ValueError.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -317,6 +329,9 @@ Proportion of samples in the training set.
 Must be between 0 and 1.</p></li>
 </ul>
 </dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p>ValueError.</p>
+</dd>
 </dl>
 </dd></dl>
 
@@ -338,7 +353,13 @@ the __init__ method will provide good default values that get more than 92% pred
 <li><p><strong>vectorizer</strong> – scikit-learn Vectorizer.</p></li>
 <li><p><strong>feature_selector</strong> – scikit-learn Classifier with a fit_transform() method</p></li>
 <li><p><strong>classifier</strong> – scikit-learn Classifier with a predict() method</p></li>
-<li><p><strong>language</strong> – language of the corpus of verbs to be analyzed.</p></li>
+<li><p><strong>language</strong> – Language of the corpus of verbs to be analyzed.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Variables</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>pipeline</strong> – scikit-learn Pipeline Object.</p></li>
+<li><p><strong>language</strong> – Language of the corpus of verbs to be analyzed.</p></li>
 </ul>
 </dd>
 </dl>
@@ -399,6 +420,13 @@ List of predicted conjugation groups.</p>
 <dd class="field-odd"><p><strong>language</strong> – string.
 | The language of the conjugator. The default value is fr for French.
 | The allowed values are: fr, en, es, it, pt, ro.</p>
+</dd>
+<dt class="field-even">Variables</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>language</strong> – Language of the conjugator.</p></li>
+<li><p><strong>verbs</strong> – Dictionary where the keys are verbs and the values are conjugation patterns.</p></li>
+<li><p><strong>conjugations</strong> – Dictionary where the keys are conjugation patterns and the values are inflected forms.</p></li>
+</ul>
 </dd>
 </dl>
 <dl class="py method">
@@ -504,6 +532,13 @@ OrderedDict containing the conjugated suffixes of the template.</p>
 <dd class="field-odd"><p><strong>language</strong> – string.
 | The language of the conjugator. The default value is fr for French.
 | The allowed values are: fr, en, es, it, pt, ro.</p>
+</dd>
+<dt class="field-even">Variables</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>language</strong> – Language of the conjugator.</p></li>
+<li><p><strong>verbs</strong> – Dictionary where the keys are verbs and the values are conjugation patterns.</p></li>
+<li><p><strong>conjugations</strong> – Dictionary where the keys are conjugation patterns and the values are inflected forms.</p></li>
+</ul>
 </dd>
 </dl>
 <dl class="py method">
@@ -663,6 +698,16 @@ Lexical root of the verb.</p></li>
 Name of the verb ending pattern.</p></li>
 </ul>
 </dd>
+<dt class="field-even">Variables</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>infinitive</strong> – string.
+Infinitive form of the verb.</p></li>
+<li><p><strong>root</strong> – string.
+Lexical root of the verb.</p></li>
+<li><p><strong>template</strong> – string.
+Name of the verb ending pattern.</p></li>
+</ul>
+</dd>
 </dl>
 </dd></dl>
 
@@ -680,6 +725,16 @@ Name of the verb ending pattern.</p></li>
 Toggles abbreviated or full pronouns.
 The default value is ‘abbrev’.
 Select ‘pronoun’ for full pronouns.</p></li>
+<li><p><strong>predicted</strong> – bool.
+Indicates if the conjugation information was predicted by the model or retrieved from the dataset.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Variables</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>verb_info</strong> – VerbInfo Object.</p></li>
+<li><p><strong>conjug_info</strong> – OrderedDict.</p></li>
+<li><p><strong>confidence_score</strong> – float. Confidence score of the prediction accuracy.</p></li>
+<li><p><strong>subject</strong> – string. Either ‘abbrev’ or ‘pronoun’</p></li>
 <li><p><strong>predicted</strong> – bool.
 Indicates if the conjugation information was predicted by the model or retrieved from the dataset.</p></li>
 </ul>
@@ -967,7 +1022,7 @@ List of conjugated forms.</p>
     <p>
         &#169; Copyright 2021, SekouDiaoNlp.
       <span class="lastupdated">
-        Last updated on Oct 22, 2021.
+        Last updated on Oct 28, 2021.
       </span>
 
     </p>

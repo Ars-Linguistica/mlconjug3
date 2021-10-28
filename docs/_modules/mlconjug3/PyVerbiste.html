@@ -96,7 +96,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../readme.html">MLCONJUG3</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Package Api Documentation for mlconjug</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Api Documentation for mlconjug3</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../authors.html">Credits</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../history.html">History</a></li>
@@ -268,6 +268,9 @@
 <span class="sd">        :param language: string.</span>
 <span class="sd">            | The language of the conjugator. The default value is fr for French.</span>
 <span class="sd">            | The allowed values are: fr, en, es, it, pt, ro.</span>
+<span class="sd">        :ivar language: Language of the conjugator.</span>
+<span class="sd">        :ivar verbs: Dictionary where the keys are verbs and the values are conjugation patterns.</span>
+<span class="sd">        :ivar conjugations: Dictionary where the keys are conjugation patterns and the values are inflected forms.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -381,6 +384,9 @@
 <span class="sd">    :param language: string.</span>
 <span class="sd">        | The language of the conjugator. The default value is fr for French.</span>
 <span class="sd">        | The allowed values are: fr, en, es, it, pt, ro.</span>
+<span class="sd">    :ivar language: Language of the conjugator.</span>
+<span class="sd">    :ivar verbs: Dictionary where the keys are verbs and the values are conjugation patterns.</span>
+<span class="sd">    :ivar conjugations: Dictionary where the keys are conjugation patterns and the values are inflected forms.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -489,6 +495,12 @@
 <span class="sd">        Lexical root of the verb.</span>
 <span class="sd">    :param template: string.</span>
 <span class="sd">        Name of the verb ending pattern.</span>
+<span class="sd">    :ivar infinitive: string.</span>
+<span class="sd">        Infinitive form of the verb.</span>
+<span class="sd">    :ivar root: string.</span>
+<span class="sd">        Lexical root of the verb.</span>
+<span class="sd">    :ivar template: string.</span>
+<span class="sd">        Name of the verb ending pattern.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;infinitive&#39;</span><span class="p">,</span> <span class="s1">&#39;root&#39;</span><span class="p">,</span> <span class="s1">&#39;template&#39;</span><span class="p">)</span>
@@ -523,6 +535,12 @@
 <span class="sd">        Select &#39;pronoun&#39; for full pronouns.</span>
 <span class="sd">    :param predicted: bool.</span>
 <span class="sd">        Indicates if the conjugation information was predicted by the model or retrieved from the dataset.</span>
+<span class="sd">    :ivar verb_info: VerbInfo Object.</span>
+<span class="sd">    :ivar conjug_info: OrderedDict.</span>
+<span class="sd">    :ivar confidence_score: float. Confidence score of the prediction accuracy.</span>
+<span class="sd">    :ivar subject: string. Either &#39;abbrev&#39; or &#39;pronoun&#39;</span>
+<span class="sd">    :ivar predicted: bool.</span>
+<span class="sd">        Indicates if the conjugation information was predicted by the model or retrieved from the dataset.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;verb_info&#39;</span><span class="p">,</span> <span class="s1">&#39;conjug_info&#39;</span><span class="p">,</span> <span class="s1">&#39;subject&#39;</span><span class="p">,</span> <span class="s1">&#39;predicted&#39;</span><span class="p">,</span> <span class="s1">&#39;confidence_score&#39;</span><span class="p">)</span>
@@ -545,7 +563,7 @@
 <div class="viewcode-block" id="Verb.iterate"><a class="viewcode-back" href="../../modules.html#mlconjug3.PyVerbiste.Verb.iterate">[docs]</a>    <span class="k">def</span> <span class="nf">iterate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Iterates over all conjugated forms and returns a list of tuples of those conjugated forms.</span>
-<span class="sd">        </span>
+
 <span class="sd">        :return: list.</span>
 <span class="sd">            List of conjugated forms.</span>
 
@@ -860,7 +878,7 @@
     <p>
         &#169; Copyright 2021, SekouDiaoNlp.
       <span class="lastupdated">
-        Last updated on Oct 22, 2021.
+        Last updated on Oct 28, 2021.
       </span>
 
     </p>

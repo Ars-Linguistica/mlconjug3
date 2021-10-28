@@ -96,7 +96,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../readme.html">MLCONJUG3</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Package Api Documentation for mlconjug</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Api Documentation for mlconjug3</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../authors.html">Credits</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../history.html">History</a></li>
@@ -236,7 +236,6 @@
 <div class="viewcode-block" id="extract_verb_features"><a class="viewcode-back" href="../../modules.html#mlconjug3.mlconjug.extract_verb_features">[docs]</a><span class="k">def</span> <span class="nf">extract_verb_features</span><span class="p">(</span><span class="n">verb</span><span class="p">,</span> <span class="n">lang</span><span class="p">,</span> <span class="n">ngram_range</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    | Custom Vectorizer optimized for extracting verbs features.</span>
-<span class="sd">    | The Vectorizer subclasses sklearn.feature_extraction.text.CountVectorizer .</span>
 <span class="sd">    | As in Indo-European languages verbs are inflected by adding a morphological suffix,</span>
 <span class="sd">     the vectorizer extracts verb endings and produces a vector representation of the verb with binary features.</span>
 
@@ -289,6 +288,9 @@
 <span class="sd">        Language of the conjugator. The default language is &#39;fr&#39; for french.</span>
 <span class="sd">    :param model: mlconjug3.Model or scikit-learn Pipeline or Classifier implementing the fit() and predict() methods.</span>
 <span class="sd">        A user provided pipeline if the user has trained his own pipeline.</span>
+<span class="sd">    :ivar language: string. Language of the conjugator.</span>
+<span class="sd">    :ivar model: mlconjug3.Model or scikit-learn Pipeline or Classifier implementing the fit() and predict() methods.</span>
+<span class="sd">    :ivar conjug_manager: Verbiste object.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -325,6 +327,7 @@
 <span class="sd">            The default value is &#39;abbrev&#39;.</span>
 <span class="sd">            Select &#39;pronoun&#39; for full pronouns.</span>
 <span class="sd">        :return: Verb object or None.</span>
+<span class="sd">        :raises: ValueError.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">verb</span> <span class="o">=</span> <span class="n">verb</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
@@ -368,6 +371,7 @@
 <span class="sd">        Assigns the provided pre-trained scikit-learn pipeline to be able to conjugate unknown verbs.</span>
 
 <span class="sd">        :param model: scikit-learn Classifier or Pipeline.</span>
+<span class="sd">        :raises: ValueError.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">Model</span><span class="p">):</span>
@@ -435,6 +439,7 @@
 <span class="sd">        :param proportion: float.</span>
 <span class="sd">            Proportion of samples in the training set.</span>
 <span class="sd">            Must be between 0 and 1.</span>
+<span class="sd">        :raises: ValueError.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">proportion</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">proportion</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
@@ -472,14 +477,16 @@
 <span class="sd">    :param vectorizer: scikit-learn Vectorizer.</span>
 <span class="sd">    :param feature_selector: scikit-learn Classifier with a fit_transform() method</span>
 <span class="sd">    :param classifier: scikit-learn Classifier with a predict() method</span>
-<span class="sd">    :param language: language of the corpus of verbs to be analyzed.</span>
+<span class="sd">    :param language: Language of the corpus of verbs to be analyzed.</span>
+<span class="sd">    :ivar pipeline: scikit-learn Pipeline Object.</span>
+<span class="sd">    :ivar language: Language of the corpus of verbs to be analyzed.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vectorizer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">feature_selector</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">classifier</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">language</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">vectorizer</span><span class="p">:</span>
             <span class="n">vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">analyzer</span><span class="o">=</span><span class="n">partial</span><span class="p">(</span><span class="n">extract_verb_features</span><span class="p">,</span> <span class="n">lang</span><span class="o">=</span><span class="n">language</span><span class="p">,</span> <span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">)),</span>
-                                         <span class="n">binary</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                                         <span class="n">binary</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">lowercase</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">feature_selector</span><span class="p">:</span>
             <span class="n">feature_selector</span> <span class="o">=</span> <span class="n">SelectFromModel</span><span class="p">(</span><span class="n">LinearSVC</span><span class="p">(</span><span class="n">penalty</span><span class="o">=</span><span class="s1">&#39;l1&#39;</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">12000</span><span class="p">,</span> <span class="n">dual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">classifier</span><span class="p">:</span>
@@ -535,7 +542,7 @@
     <p>
         &#169; Copyright 2021, SekouDiaoNlp.
       <span class="lastupdated">
-        Last updated on Oct 22, 2021.
+        Last updated on Oct 28, 2021.
       </span>
 
     </p>
