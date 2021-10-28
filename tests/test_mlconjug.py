@@ -183,7 +183,7 @@ class TestDataSet:
 class TestModel:
     extract_verb_features = extract_verb_features
     vectorizer = CountVectorizer(analyzer=partial(extract_verb_features, lang='fr', ngram_range=(2, 7)), binary=True,
-                                 ngram_range=(2, 7))
+                                 ngram_range=(2, 7), lowercase=False)
     # Feature reduction
     feature_reductor = SelectFromModel(
         LinearSVC(penalty="l1", max_iter=3000, dual=False, verbose=2))
