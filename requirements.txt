@@ -6,4 +6,4 @@ scipy
 click
 colorama
 joblib
-# progressbar2
+progressbar2==3.53.1
