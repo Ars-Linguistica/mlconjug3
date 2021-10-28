@@ -2,6 +2,11 @@
 History
 =======
 
+3.8.2 (2021-28-10)
+------------------
+
+* Fixed issue with the pyproject.toml file which caused the dependency solver to fail on install when using pip instead of poetry.
+
 3.8.1 (2021-28-10)
 ------------------
 
