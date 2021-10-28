@@ -19,6 +19,7 @@ SelectFromModel: Any
 CountVectorizer: Any
 LinearSVC: Any
 SGDClassifier: Any
+Pipeline: Any
 logger: Logger
 _RESOURCE_PACKAGE: Text = __name__
 _TRANSLATIONS_PATH: Text
