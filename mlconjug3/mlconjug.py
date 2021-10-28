@@ -120,7 +120,7 @@ class Conjugator:
         Language of the conjugator. The default language is 'fr' for french.
     :param model: mlconjug3.Model or scikit-learn Pipeline or Classifier implementing the fit() and predict() methods.
         A user provided pipeline if the user has trained his own pipeline.
-    :ivar language: string.
+    :ivar language: string. Language of the conjugator.
     :ivar model: mlconjug3.Model or scikit-learn Pipeline or Classifier implementing the fit() and predict() methods.
     :ivar conjug_manager: Verbiste object.
 
@@ -309,9 +309,9 @@ class Model(object):
     :param vectorizer: scikit-learn Vectorizer.
     :param feature_selector: scikit-learn Classifier with a fit_transform() method
     :param classifier: scikit-learn Classifier with a predict() method
-    :param language: language of the corpus of verbs to be analyzed.
+    :param language: Language of the corpus of verbs to be analyzed.
     :ivar pipeline: scikit-learn Pipeline Object.
-    :ivar language: language of the corpus of verbs to be analyzed.
+    :ivar language: Language of the corpus of verbs to be analyzed.
 
     """
 
