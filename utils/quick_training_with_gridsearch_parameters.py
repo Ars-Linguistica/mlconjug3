@@ -46,7 +46,7 @@ for lang in langs:
     vectorizer = mlconjug3.CountVectorizer(analyzer=partial(mlconjug3.extract_verb_features,
                                                             lang=lang,
                                                             ngram_range=ngrange),
-                                           binary=True)
+                                           binary=True, lowercaase=False)
 
     # Feature reduction
     feature_reductor = mlconjug3.SelectFromModel(mlconjug3.LinearSVC(penalty="l1",
