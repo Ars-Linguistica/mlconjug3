@@ -1,1 +1,0 @@
-- Manage past participle in pyverbiste.py
