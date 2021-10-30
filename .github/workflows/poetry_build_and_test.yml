@@ -31,9 +31,9 @@ jobs:
                 with:
                     virtualenvs-create: true
                     virtualenvs-in-project: true
-#            -   name: Clear corrupted cache
-#                run: poetry cache clear pypi --all --no-interaction
-#                if: ${{ matrix.os == 'ubuntu-latest' }} # Clear Linux cache
+            -   name: Clear corrupted cache
+                run: poetry cache clear pypi --all --no-interaction
+                if: ${{ matrix.os == 'ubuntu-latest' }} # Clear Linux cache
             -   name: Load cached venv
                 id: cached-pip-wheels
                 uses: actions/cache@v2
