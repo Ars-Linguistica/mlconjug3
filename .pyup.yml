@@ -26,6 +26,6 @@ search: False
 # default: empty
 # allowed: list
 requirements:
-  - requirements.txt:
+  - poetry.lock:
       # update all insecure dependencies
       update: insecure
