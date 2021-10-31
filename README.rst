@@ -118,6 +118,9 @@ Academic publications citing mlconjug
 Software projects using mlconjug
 --------------------------------
 
+
+- | `Machine Translation Service`_
+  | Translation flask API for the Helsinki NLP models available in the Huggingface Transformers library.
 - | `NLP-Suite`_
   | NLP Suite is a package of tools designed for non-specialists, for scholars with no knowledge or little knowledge of Natural Language Processing.
 - | `Gender Bias Visualization`_
@@ -128,6 +131,8 @@ Software projects using mlconjug
   | Dockerized microservice with REST API for conjugation of any verb in French and Spanish.
 - | `nvhtml`_
   | A tool to Manage and tansform HTML documents.
+- | `Tux`_
+  | A Tux bot.
 - | `twitter-bot`_
   | Tweets the words of the French language. Largely inspired by the @botducul (identical lexicon, but code in Python) and the @botsupervnr.
   | Posts on @botduslip. Stores the position of the last tweeted word in a Redis database.
@@ -151,6 +156,10 @@ Software projects using mlconjug
   | Python+Flask web app that uses mlconjug to dynamically generate foreign language conjugation questions.
 - | `Silver Rogue DF`_
   | A dwarf-fortress adventure mode-inspired rogue-like Pygame Python3 game.
+- | `learn-spanish-react`_
+  | A WebApp to learn Spanish.
+- | `Learn_vocab`_
+  | Application for German-French vocabulary with simple GUI.
 
 BibTeX
 ------
@@ -193,3 +202,7 @@ The logo was designed by Zuur_.
 .. _`NLP Tasks`: https://github.com/ai-systems/poly-nlp
 .. _`verbecc-svc`: https://pypi.org/project/verbecc/
 .. _`nvhtml`: https://pypi.org/project/nvhtml/
+.. _`Machine Translation Service`: https://github.com/pauchai/machine-translation-service
+.. _`Tux`: https://github.com/amirkasraa/Tux
+.. _`learn-spanish-react`: https://github.com/advay168/learn-spanish-react
+.. _`Learn_vocab`: https://github.com/MilaimKas/Learn_vocab
