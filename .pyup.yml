@@ -10,7 +10,7 @@ pin: True
 
 # set the default branch
 # default: empty, the default branch on GitHub
-branch: dev
+branch: master
 
 # update schedule
 # default: empty
@@ -26,6 +26,6 @@ search: False
 # default: empty
 # allowed: list
 requirements:
-  - requirements.txt:
+  - poetry.lock:
       # update all insecure dependencies
       update: insecure
