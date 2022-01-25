@@ -11,7 +11,7 @@ __author__: str
 __email__: str
 __version__: str
 __copyright__: str
-__credits__: Tuple[str]
+__credits__: Tuple[str, ...]
 __license__: str
 __maintainer__: str
 __status__: str
