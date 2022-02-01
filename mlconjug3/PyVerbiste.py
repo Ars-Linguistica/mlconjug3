@@ -159,7 +159,7 @@ class ConjugManager:
 
         """
         if self.language == 'en':
-            return True
+            return set()
         return {verb.split(' ')[0][-2:] for verb in self.verbs if len(verb) >= 2}
 
     def is_valid_verb(self, verb):
