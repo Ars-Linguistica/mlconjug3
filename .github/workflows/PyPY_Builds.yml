@@ -36,7 +36,7 @@ jobs:
                     pip install -r requirements_dev.txt
             -   name: Run bandit
                 run: bandit -r mlconjug3/ -c .bandit.yml
-            -   name: Skip Typechecker
+#            -   name: Skip Typechecker
 #                run:  mypy
             -   name: Run PyTest with coverage
                 run: |
