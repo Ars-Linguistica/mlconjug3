@@ -1,4 +1,4 @@
-name: "Use setuptools to build package and run multiple tests"
+name: "Use setuptools to build package and run multiple PyPy tests"
 
 on: [ push, pull_request ]
 
