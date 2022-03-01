@@ -17,7 +17,7 @@ jobs:
                         path: ~/Library/Caches/pip
                     -   os: windows-latest
                         path: ~\AppData\Local\pip\Cache
-                python-version: [ 'pypy-2.7', 'pypy-3.7', 'pypy-3.8' ]
+                python-version: [ 'pypy-3.8' ]
 
         steps:
             -   uses: actions/checkout@v2
