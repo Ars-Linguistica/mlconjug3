@@ -4,7 +4,7 @@ on: [ push, pull_request ]
 
 jobs:
     build_wheels_with_poetry:
-        name: Build poetry packages on ${{ matrix.os }}
+        name: Build poetry packages on ${{ matrix.os }} on ${{ matrix.python-version }}
         runs-on: ${{ matrix.os }}
         strategy:
             fail-fast: false
@@ -17,7 +17,7 @@ jobs:
                         path: ~/Library/Caches/pip
                     -   os: windows-latest
                         path: ~\AppData\Local\pip\Cache
-                python-version: [ 3.7, 3.8, 3.9 ]
+                python-version: [ 3.8, 3.9, '3.10' ]
 
         steps:
             -   uses: actions/checkout@v2
@@ -45,8 +45,6 @@ jobs:
                 run: poetry install --no-interaction --no-root
             -   name: Install Package
                 run: poetry install --no-interaction
-            -   name: Build Package
-                run: poetry build
             -   name: Run Bandit
                 run: poetry run bandit -r mlconjug3/ -c .bandit.yml
             -   name: Run Type Checker
@@ -55,5 +53,7 @@ jobs:
                     poetry run mypy
             -   name: Run Pytest with coverage
                 run: poetry run pytest --cov=./mlconjug3/
+            -   name: Build Package
+                run: poetry build
             -   name: Upload coverage artifacts to codecov
                 run: poetry run codecov --token=370386ee-28d7-441f-b4eb-7f63f8c5c3e9
