@@ -8,7 +8,7 @@ History
 * Tweaked optimal learning parameters for the various language models.
 * Project Metadata in pyproject.toml file for building the package from source is 100% compliant.
 * Migrated build system to poetry/ PyPa build.
-* Updated dependencies to sikit-leqrn 1.0.2 with a noticeable speed inrease in training and inference performance.
+* Updated dependencies to scikit-learn 1.0.2 with a noticeable speed inrease in training and inference performance.
 * Updated documentation.
 
 3.8.2 (2021-28-10)
