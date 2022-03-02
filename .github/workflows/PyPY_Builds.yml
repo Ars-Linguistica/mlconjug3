@@ -1,6 +1,6 @@
 name: "Use setuptools to build package and run multiple PyPy tests"
 
-on: [ push, pull_request ]
+on: [ push ]
 
 jobs:
     build_wheels_with_setuptools:
