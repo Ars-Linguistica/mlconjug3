@@ -27,7 +27,7 @@ importlib-metadata==4.11.2; python_version < "3.8" and python_version >= "3.7" a
 iniconfig==1.1.1; python_version >= "3.6"
 jeepney==0.7.1; sys_platform == "linux" and python_version >= "3.7"
 jinja2==3.0.3; python_version >= "3.6"
-joblib==1.1.0; python_version >= "3.6"
+joblib==1.2.0; python_version >= "3.6"
 keyring==23.5.0; python_version >= "3.7"
 markupsafe==2.1.0; python_version >= "3.7"
 mypy-extensions==0.4.3; python_version >= "3.5"
