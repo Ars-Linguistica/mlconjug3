@@ -26,3 +26,4 @@ twine==3.4.2
 # grayskull==0.8.5
 #MonkeyType==19.5.0
 #wily==1.12.4
+setuptools>=65.5.1 # not directly required, pinned by Snyk to avoid a vulnerability
