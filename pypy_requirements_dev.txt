@@ -1,6 +1,6 @@
 pip>=21.0.1
 bump2version==1.0.1
-wheel==0.36.2
+wheel==0.38.0
 watchdog==2.0.2
 flake8==3.9.0
 tox==3.23.0
@@ -27,3 +27,4 @@ pathlib2==2.3.5
 # grayskull==0.8.5
 #MonkeyType==19.5.0
 #wily==1.12.4
+setuptools>=65.5.1 # not directly required, pinned by Snyk to avoid a vulnerability
