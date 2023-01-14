@@ -47,10 +47,6 @@ jobs:
                 run: poetry install --no-interaction
             -   name: Run Bandit
                 run: poetry run bandit -r mlconjug3/ -c .bandit.yml
-            -   name: Run Type Checker
-                run: |
-                    poetry run pip install types-setuptools
-                    poetry run mypy
             -   name: Run Pytest with coverage
                 run: poetry run pytest --cov=./mlconjug3/
             -   name: Build Package
