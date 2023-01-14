@@ -2,6 +2,12 @@ _RESOURCE_PACKAGE = 'mlconjug3'
 
 _LANGUAGES = ('default', 'fr', 'en', 'es', 'it', 'pt', 'ro')
 
+# Sets up the automatic translation of annotated strings displayed to the user.
+_TRANSLATIONS_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'locale')
+
+_SUPPORTED_LANGUAGES = ('default', 'en', 'es', 'fr', 'it', 'pt', 'ro')
+_TRANSLATED_LANGUAGES = _SUPPORTED_LANGUAGES[2:]
+
 _LANGUAGE_FULL = {'fr': 'Français',
                   'en': 'English',
                   'es': 'Español',
