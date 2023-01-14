@@ -73,5 +73,44 @@ def handle_subject_select(self, subject):
 self.handle_submit(self.prompt.get_value())
 self.app.focus(self.subject_selector)
 
+    ##################
+    def display_conjugations_in_table(self, conjugations):
+    self.conjugation_tables.clear()
+    headers = ["Person", "Singular", "Plural"]
+    rows = []
+    for person, conjugation in conjugations.items():
+        rows.append([person, conjugation["singular"], conjugation["plural"]])
+    table = textual.Table(headers=headers, rows=rows)
+    self.conjugation_tables.add(table)
+    
+    def change_verb_tense(self):
+self.tense_selector = self.right_section.add(textual.Select(options=["present", "past", "future", "subjunctive", "conditional"]))
+self.tense_selector.on_select(self.handle_tense_change)
+
+    def handle_tense_change(self, selection):
+    self.tense = selection
+    self.handle_submit(self.verb_input.value)
+    
+    def compare_multiple_conjugations(self):
+self.multiple_verb_input = self.left_section.add(textual.Prompt(placeholder="Enter multiple verbs separated by commas"))
+self.multiple_verb_input.on_submit(self.handle_multiple_submit)
+
+    def handle_multiple_submit(self, input_text):
+    verbs = input_text.split(',')
+    results = {}
+    for verb in verbs:
+        result = self.conjugator.conjugate(verb.strip(), self.subject)
+        results[verb.strip()] = result.conjug_info
+    self.conjugation_tables.clear()
+    for verb, conjugations in results.items():
+        verb_table = self.conjugation_tables.add(textual.Table(flex=1))
+        verb_table.add_column("Tense/Person", flex=1)
+        verb_table.add_column(verb, flex=1)
+        for tense, conjugation in conjugations.items():
+            verb_table.add_row(tense, conjugation)
+    self.verb_history.append(input_text)
+
+
+
 def run(self):
 self.app.run()
