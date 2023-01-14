@@ -34,7 +34,12 @@ __maintainer__ = "SekouDiaoNlp"
 __status__ = "Production"
 
 from .mlconjug import *
-from .PyVerbiste import *
+from .constants import *
+from .verbs import *
+from .PyVerbiste import Verbiste
+from .conjug_manager import ConjugManager
+from .feature_extractor import extract_verb_features
+from .utils import logger
 
 from sklearn.feature_selection import SelectFromModel
 from sklearn.feature_extraction.text import CountVectorizer
@@ -47,13 +52,6 @@ import platform
 from locale import windows_locale, getdefaultlocale
 import gettext
 import inspect
-
-# Sets up the automatic translation of annotated strings displayed to the user.
-_RESOURCE_PACKAGE = 'mlconjug3'
-_TRANSLATIONS_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'locale')
-
-_SUPPORTED_LANGUAGES = ('default', 'en', 'es', 'fr', 'it', 'pt', 'ro')
-_TRANSLATED_LANGUAGES = _SUPPORTED_LANGUAGES[2:]
 
 
 def _get_user_locale():
