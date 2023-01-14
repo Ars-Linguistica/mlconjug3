@@ -75,3 +75,7 @@ for lang, prediction in predictions.items():
         f"The score of the {lang} model is {score} with {misses} misses out of {entries} entries."
     )
 
+for lang in langs:
+    # Save trained model
+    with open('raw_data/experiments/trained_model-{0}-final.pickle'.format(lang), 'wb') as file:
+        pickle.dump(conjugator.model, file)
