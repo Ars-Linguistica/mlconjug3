@@ -1,6 +1,44 @@
 import json
 from collections import OrderedDict
 
+class VerbInfo:
+    """
+    This class defines the Verbiste verb information structure.
+
+    :param infinitive: string.
+        Infinitive form of the verb.
+    :param root: string.
+        Lexical root of the verb.
+    :param template: string.
+        Name of the verb ending pattern.
+    :ivar infinitive: string.
+        Infinitive form of the verb.
+    :ivar root: string.
+        Lexical root of the verb.
+    :ivar template: string.
+        Name of the verb ending pattern.
+
+    """
+    __slots__ = ('infinitive', 'root', 'template')
+
+    def __init__(self, infinitive, root, template):
+        self.infinitive = infinitive
+        if not root:
+            self.root = '' if template[0] == ':' else template[:template.index(':')]
+        else:
+            self.root = root
+        self.template = template
+        return
+
+    def __repr__(self):
+        return '{0}.{1}({2}, {3}, {4})'.format(__name__, self.__class__.__name__, self.infinitive, self.root, self.template)
+
+    def __eq__(self, other):
+        if not isinstance(other, VerbInfo):
+            return NotImplemented
+        return self.infinitive == other.infinitive and self.root == other.root and self.template == other.template
+
+
 class Verb:
     """
     This class defines the Verb Object.
