@@ -14,6 +14,7 @@ from .PyVerbiste import Verbiste, ConjugManager
 from .verbs import *
 from .utils import logger
 from .constants import *
+from .feature_extractor import extract_verb_features
 
 from random import Random
 from collections import defaultdict
