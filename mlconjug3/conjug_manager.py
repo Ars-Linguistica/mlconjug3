@@ -1,30 +1,31 @@
+import json
+import re
+from collections import defaultdict
+from functools import partial
+from typing import Tuple
+from joblib import Memory
+
 class ConjugManager:
     """
-        This is the class handling the mlconjug3 json files.
-
+    This is the class handling the mlconjug3 json files.
         :param language: string.
             | The language of the conjugator. The default value is fr for French.
             | The allowed values are: fr, en, es, it, pt, ro.
         :ivar language: Language of the conjugator.
         :ivar verbs: Dictionary where the keys are verbs and the values are conjugation patterns.
         :ivar conjugations: Dictionary where the keys are conjugation patterns and the values are inflected forms.
+    """
 
-        """
-
-    def __init__(self, language='default'):
+    def __init__(self, language='fr', pre_trained_models, extract_verb_features):
         if language not in _LANGUAGES:
             raise ValueError(_('Unsupported language.\nThe allowed languages are fr, en, es, it, pt, ro.'))
-        self.language = 'fr' if language == 'default' else language
+        self.language = language
         self.verbs = {}
         self.conjugations = OrderedDict()
-        verbs_file = pkg_resources.resource_filename(_RESOURCE_PACKAGE, _VERBS_RESOURCE_PATH[self.language])
-        self._load_verbs(verbs_file)
         self._allowed_endings = self._detect_allowed_endings()
-        conjugations_file = pkg_resources.resource_filename(_RESOURCE_PACKAGE,
-                                                            _CONJUGATIONS_RESOURCE_PATH[self.language])
-        self._load_conjugations(conjugations_file)
-        self.templates = sorted(self.conjugations.keys())
-        return
+        self.pre_trained_models = pre_trained_models
+        self.extract_verb_features = extract_verb_features
+        self.cache = Memory(cachedir='/path/to/cache', verbose=0)
 
     def __repr__(self):
         return '{0}.{1}(language={2})'.format(__name__, self.__class__.__name__, self.language)
@@ -70,45 +71,99 @@ class ConjugManager:
     def is_valid_verb(self, verb):
         """
         | Checks if the verb is a valid verb in the given language.
-        | English words are always treated as possible verbs.
-        | Verbs in other languages are filtered by their endings.
+        | If the verb is invalid, returns alse, otherwise returns the base form of the verb.
+            :param verb: string.
+        The verb to be checked.
+    :return: string or bool.
+        Returns the base form of the verb if valid, False otherwise.
+
+    """
+    if self.language == 'en':
+        return verb
+    base_form = self.verbs.get(verb, None)
+    if not base_form:
+        logger.warning("The verb '{}' is not a valid verb in the {} language.".format(verb, _LANGUAGE_FULL[self.language]))
+        return False
+    return base_form
+
+def conjugate(self, verb, subject='abbrev'):
+    """
+    | Conjugates a given verb in the target language.
+    | The conjugation is done using a pre-trained machine learning model, based on the verb's base form.
+    | The result is a ConjugationInfo object, containing the conjugated forms of the verb.
+
+    :param verb: string.
+        The verb to be conjugated.
+    :param subject: string.
+        The subject format type for the conjugated forms.
+        The values can be 'abbrev' or 'pronoun'. The default value is 'abbrev'.
+    :return: ConjugationInfo.
+        A ConjugationInfo object, containing the conjugated forms of the verb.
+
+    """
+    base_form = self.cache.cache(is_valid_verb)(self, verb)
+    if not base_form:
+        return False
+    conjug_pattern = self.verbs[base_form]
+    conjug_info = self.conjugations.get(conjug_pattern, None)
+    if not conjug_info:
+        logger.warning("The conjugation pattern '{}' is not supported by the {} language.".format(conjug_pattern, _LANGUAGE_FULL[self.language]))
+        return False
+    conjug_info = ConjugationInfo(base_form, conjug_info, subject)
+    return conjug_info
+    
+    def conjugate(self, verb, subject='abbrev'):
+        """
+        | Conjugates a given verb in the target language.
+        | The conjugation is done using a pre-trained machine learning model, based on the verb's base form.
+        | The result is a ConjugationInfo object, containing the conjugated forms of the verb.
 
         :param verb: string.
-            The verb to conjugate.
-        :return: bool.
-            True if the verb is a valid verb in the language. False otherwise.
+            The verb to be conjugated.
+        :param subject: string.
+            The subject format type for the conjugated forms.
+            The values can be 'abbrev' or 'pronoun'. The default value is 'abbrev'.
+        :return: ConjugationInfo.
+            A ConjugationInfo object, containing the conjugated forms of the verb.
 
         """
-        if self.language == 'en':
-            return True  # LOL!
-        return verb[-2:] in self._allowed_endings
+        base_form = self.cache.cache(is_valid_verb)(self, verb)
+        if not base_form:
+            return False
+        conjug_pattern = self.verbs[base_form]
+        conjug_info = self.conjugations.get(conjug_pattern, None)
+        if not conjug_info:
+            logger.warning("The conjugation pattern '{}' is not supported by the {} language.".format(conjug_pattern, _LANGUAGE_FULL[self.language]))
+            return False
+        conjug_info = ConjugationInfo(base_form, conjug_info, subject)
+        return conjug_info
 
-    def get_verb_info(self, verb):
+    def conjugate_multiple(self, verbs, subject='abbrev'):
         """
-        Gets verb information and returns a VerbInfo instance.
-
-        :param verb: string.
-            Verb to conjugate.
-        :return: VerbInfo object or None.
-
-        """
-        if verb not in self.verbs.keys():
-            return None
-        infinitive = verb
-        root = self.verbs[verb]['root']
-        template = self.verbs[verb]['template']
-        return VerbInfo(infinitive, root, template)
-
-    def get_conjug_info(self, template):
-        """
-        Gets conjugation information corresponding to the given template.
-
-        :param template: string.
-            Name of the verb ending pattern.
-        :return: OrderedDict or None.
-            OrderedDict containing the conjugated suffixes of the template.
+        | Conjugates multiple verbs at once.
+        :param verbs: list of strings.
+            The verbs to be conjugated.
+        :param subject: string.
+            The subject format type for the conjugated forms.
+            The values can be 'abbrev' or 'pronoun'. The default value is 'abbrev'.
+        :return: dict of ConjugationInfo objects.
+            A dictionary where the keys are the base forms of the verbs, and the values are ConjugationInfo objects.
 
         """
-        if template not in self.conjugations.keys():
-            return None
-        return copy.deepcopy(self.conjugations[template])
+        conjugations = self.cache.cache(map, ignore=['subject'])(self.conjugate, verbs, [subject]*len(verbs))
+        return {base_form: conjug_info for base_form, conjug_info in zip(verbs, conjugations) if conjug_info}
+
+    def conjugate_random(self, subject='abbrev', sample_size=10):
+        """
+        | Conjugates a random set of verbs.
+        :param subject: string.
+            The subject format type for the conjugated forms.
+            The values can be 'abbrev' or 'pronoun'. The default value is 'abbrev'.
+        :param sample_size: int.
+            The number of verbs to be conjugated.
+        :return: dict.
+            A dictionary where the keys are the infinitive forms of the verbs and the values are the conjugated forms.
+        """
+        rnd = Random()
+        verbs = rnd.sample(self.verbs.keys(), sample_size)
+        return self.conjugate_batch(verbs, subject)
