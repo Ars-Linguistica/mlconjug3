@@ -10,10 +10,11 @@ MLConjug Main module.
 """
 
 from .__init__ import Pipeline, SelectFromModel, CountVectorizer, LinearSVC, SGDClassifier
-from .PyVerbiste import Verbiste, ConjugManager
+from .constants import *
+from .PyVerbiste import Verbiste
+from .conjug_manager import ConjugManager
 from .verbs import *
 from .utils import logger
-from .constants import *
 from .feature_extractor import extract_verb_features
 
 from random import Random
