@@ -9,7 +9,8 @@ MLConjug Main module.
 
 """
 
-from .PyVerbiste import Verbiste, VerbInfo, Verb, VerbEn, VerbEs, VerbFr, VerbIt, VerbPt, VerbRo, ConjugManager
+from .PyVerbiste import Verbiste, ConjugManager
+from .verbs import *
 
 from .__init__ import Pipeline, SelectFromModel, CountVectorizer, LinearSVC, SGDClassifier
 
