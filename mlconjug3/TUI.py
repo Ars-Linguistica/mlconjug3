@@ -1,3 +1,5 @@
+# type: ignore
+
 import textual
 from .mlconjug import Conjugator
 import json
