@@ -1,0 +1,53 @@
+/* Set the font and background color for the entire TUI */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #F0F0F0;
+}
+
+/* Set the font color and background color for the prompt input */
+.prompt-input {
+    color: #333333;
+    background-color: #FFFFFF;
+}
+
+/* Set the font color and background color for the conjugation table */
+.conjugation-table {
+    color: #333333;
+    background-color: #FFFFFF;
+}
+
+/* Set the font color and background color for the verb history list */
+.verb-history-list {
+    color: #333333;
+    background-color: #FFFFFF;
+}
+
+/* Set the font color and background color for the sample verbs list */
+.sample-verbs-list {
+    color: #333333;
+    background-color: #FFFFFF;
+}
+
+/* Set the font color and background color for the export button */
+.export-button {
+    color: #FFFFFF;
+    background-color: #3366CC;
+}
+
+/* Set the font color and background color for the language selector */
+.language-selector {
+    color: #333333;
+    background-color: #FFFFFF;
+}
+
+/* Set the font color and background color for the subject selector */
+.subject-selector {
+    color: #333333;
+    background-color: #FFFFFF;
+}
+
+/* Set the font color and background color for the help section */
+.help-section {
+    color: #333333;
+    background-color: #FFFFFF;
+}
