@@ -3,6 +3,22 @@ from .mlconjug import Conjugator
 import json
 import logging
 
+import requests
+from bs4 import BeautifulSoup
+
+def get_verb_examples_in_context(verb):
+    """
+    Retrieves examples of the provided verb used in context from an external website.
+    :param verb: string. The verb to retrieve examples for.
+    :return: list of strings. A list of examples of the verb used in context.
+    """
+    url = f"https://context.reverso.net/translation/{verb}-examples"
+    page = requests.get(url)
+    soup = BeautifulSoup(page.content, "html.parser")
+    examples = soup.find_all("a", class_="example-sentence")
+    return [example.get_text() for example in examples]
+
+
 class TUI:
 def init(self):
     self.app = textual.Application(title="Verb Conjugator")
@@ -229,3 +245,43 @@ conjugations = self.conjugator.conjugate(verb, self.subject_selector.value)
 self.conjugation_tables.add(textual.Text(f"Conjugations for {verb} in {language}:"))
 for key, value in conjugations.items():
 self.conjugation_tables.add(textual.Text(f"{key}: {value}"))
+
+    def switch_layout_styles_themes(self):
+"""
+Allows users to switch between different layout styles and themes
+"""
+self.app.add(textual.Select(options=["Layout Style 1", "Layout Style 2", "Layout Style 3"]))
+self.app.add(textual.Select(options=["Theme 1", "Theme 2", "Theme 3"]))
+
+   def handle_layout_change(self, layout_style):
+    """
+    handle the change event of the layout style selector by changing the layout style of the application
+    """
+    if layout_style == "Layout Style 1":
+        self.app.layout_style = "layout_style_1"
+    elif layout_style == "Layout Style 2":
+        self.app.layout_style = "layout_style_2"
+    elif layout_style == "Layout Style 3":
+        self.app.layout_style = "layout_style_3"
+
+def handle_theme_change(self, theme):
+    """
+    handle the change event of the theme selector by changing the theme of the application
+    """
+    if theme == "Theme 1":
+        self.app.theme = "theme_1"
+    elif theme == "Theme 2":
+        self.app.theme = "theme_2"
+    elif theme == "Theme 3":
+        self.app.theme = "theme_3"
+
+self.app.on_layout_change(handle_layout_change)
+self.app.on_theme_change(handle_theme_change)
+
+    def display_verb_examples_in_context(self, verb):
+"""
+Display examples of the verb in context in the sample_verbs widget
+"""
+examples = get_verb_examples_in_context(verb)
+self.sample_verbs.items = examples
+self.app.focus(self.sample_verbs)
