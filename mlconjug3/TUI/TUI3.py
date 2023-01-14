@@ -285,3 +285,31 @@ Display examples of the verb in context in the sample_verbs widget
 examples = get_verb_examples_in_context(verb)
 self.sample_verbs.items = examples
 self.app.focus(self.sample_verbs)
+
+    def provide_feedback_on_conjugation_results(self):
+"""
+This method allows users to provide feedback on the conjugation results by adding a button next to each conjugated form.
+When the button is clicked, a prompt will appear for the user to enter their feedback.
+The feedback will be logged in a separate file for later analysis.
+"""
+for form in self.conjugation_tables.children:
+feedback_button = form.add(textual.Button("Provide Feedback"))
+feedback_button.on_click(self.handle_feedback_submit)
+
+def handle_feedback_submit(self, form):
+"""
+Handles the event when the user clicks the feedback button by displaying a prompt for the user to enter their feedback.
+The feedback is then logged in a separate file for later analysis.
+"""
+feedback_prompt = form.add(textual.Prompt(placeholder="Enter your feedback"))
+feedback_prompt.on_submit(self.log_feedback)
+
+def log_feedback(self, feedback, form):
+"""
+Logs the user's feedback in a separate file for later analysis.
+The feedback is associated with the conjugated form that the user provided feedback on.
+"""
+with open("feedback.log", "a") as feedback_log:
+feedback_log.write("{} - {}\n".format(form, feedback))
+feedback_prompt.remove()
+form.add(textual.Text("Thank you for your feedback!"))
