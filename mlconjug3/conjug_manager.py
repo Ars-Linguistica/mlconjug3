@@ -78,11 +78,11 @@ class ConjugManager:
         Returns the base form of the verb if valid, False otherwise.
 
     """
-    if self.language == 'en':
-        return verb
-    base_form = self.verbs.get(verb, None)
-    if not base_form:
-        logger.warning("The verb '{}' is not a valid verb in the {} language.".format(verb, _LANGUAGE_FULL[self.language]))
-        return False
-    return base_form
+        if self.language == 'en':
+            return verb
+        base_form = self.verbs.get(verb, None)
+        if not base_form:
+            logger.warning("The verb '{}' is not a valid verb in the {} language.".format(verb, _LANGUAGE_FULL[self.language]))
+            return False
+        return base_form
 
