@@ -46,20 +46,54 @@ class Conjugator:
     def __init__(self, language='fr', model=None):
         self.language = language
         self.conjug_manager = Verbiste(language=language)
-        if not model:
-            with ZipFile(pkg_resources.resource_stream(
-                    _RESOURCE_PACKAGE, _PRE_TRAINED_MODEL_PATH[language])) as content:
-                with content.open('trained_model-{0}-final.pickle'.format(self.language), 'r') as archive:
-                    model = joblib.load(archive)
-        if model:
-            self.set_model(model)
-        else:
-            self.model = model
-        return
+        self.model = model if model else self._load_default_model()
+
+    def _load_default_model(self):
+        with ZipFile(pkg_resources.resource_stream(
+                _RESOURCE_PACKAGE, _PRE_TRAINED_MODEL_PATH[self.language])) as content:
+            with content.open('trained_model-{0}-final.pickle'.format(self.language), 'r') as archive:
+                return joblib.load(archive)
 
     def __repr__(self):
         return '{0}.{1}(language={2})'.format(__name__, self.__class__.__name__, self.language)
 
+    def set_model(self, model):
+        self.model = model
+    
+    def conjugate(self, verb, subject='abbrev'):
+        verb_info = self.load_verb(verb)
+        conjug_info = self.conjugate_verb(verb_info)
+        return Verb(verb_info, conjug_info, subject)
+
+    def load_verb(self, verb):
+        return self.conjug_manager.get_verb_info(verb)
+
+    def conjugate_verb(self, verb_info):
+        features = extract_verb_features(verb_info)
+        conjug_info = self.model.predict(features)
+        return conjug_info
+    
+    def conjugate(self, verb, subject='abbrev'):
+        verb = verb.lower()
+        verb_info = self.conjug_manager.get_verb(verb)
+        if not verb_info:
+            return None
+        
+        if self.model:
+            verb_features = extract_verb_features(verb_info)
+            conjug_class = self.model.predict([verb_features])[0]
+            conjug_info = self.conjug_manager.get_conjug(verb_info.infinitive, conjug_class)
+            predicted = True
+        else:
+            conjug_info = self.conjug_manager.get_conjug(verb_info.infinitive)
+            predicted = False
+
+        if self.language == 'fr':
+            verb_obj = VerbFr(verb_info, conjug_info, subject, predicted)
+        else:
+            verb_obj = Verb(verb_info, conjug_info, subject, predicted)
+        return verb_obj
+    
     def conjugate(self, verb, subject='abbrev'):
         """
         | This is the main method of this class.
