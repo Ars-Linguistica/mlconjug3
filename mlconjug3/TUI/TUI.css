@@ -1,53 +1,175 @@
 /* Set the font and background color for the entire TUI */
 body {
     font-family: Arial, sans-serif;
-    background-color: #F0F0F0;
+    background-color: #F7F7F7;
 }
 
 /* Set the font color and background color for the prompt input */
 .prompt-input {
     color: #333333;
     background-color: #FFFFFF;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px #D3D3D3;
+    padding: 10px;
+    transition: all 0.2s ease-in-out;
+}
+
+.prompt-input:focus {
+    box-shadow: 0px 0px 10px #D3D3D3;
 }
 
 /* Set the font color and background color for the conjugation table */
 .conjugation-table {
     color: #333333;
     background-color: #FFFFFF;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px #D3D3D3;
+    padding: 10px;
+    margin-top: 10px;
+    transition: all 0.2s ease-in-out;
+}
+
+.conjugation-table:hover {
+    box-shadow: 0px 0px 10px #D3D3D3;
 }
 
 /* Set the font color and background color for the verb history list */
 .verb-history-list {
     color: #333333;
     background-color: #FFFFFF;
+border-radius: 5px;
+box-shadow: 0px 0px 5px #D3D3D3;
+padding: 10px;
+margin-top: 10px;
+transition: all 0.2s ease-in-out;
+}
+
+.verb-history-list:hover {
+box-shadow: 0px 0px 10px #D3D3D3;
 }
 
 /* Set the font color and background color for the sample verbs list */
 .sample-verbs-list {
-    color: #333333;
-    background-color: #FFFFFF;
+color: #333333;
+background-color: #FFFFFF;
+border-radius: 5px;
+box-shadow: 0px 0px 5px #D3D3D3;
+padding: 10px;
+margin-top: 10px;
+transition: all 0.2s ease-in-out;
+}
+
+.sample-verbs-list:hover {
+box-shadow: 0px 0px 10px #D3D3D3;
 }
 
 /* Set the font color and background color for the export button */
 .export-button {
-    color: #FFFFFF;
-    background-color: #3366CC;
+color: #FFFFFF;
+background-color: #3366CC;
+border-radius: 5px;
+box-shadow: 0px 0px 5px #D3D3D3;
+padding: 10px;
+margin-top: 10px;
+transition: all 0.2s ease-in-out;
+}
+
+.export-button:hover {
+background-color: #5588EE;
+box-shadow: 0px 0px 10px #D3D3D3;
 }
 
 /* Set the font color and background color for the language selector */
 .language-selector {
-    color: #333333;
-    background-color: #FFFFFF;
+color: #333333;
+background-color: #FFFFFF;
+border-radius: 5px;
+box-shadow: 0px 0px 5px #D3D3D3;
+padding: 10px;
+margin-top: 10px;
+transition: all 0.2s ease-in-out;
+}
+
+.language-selector:hover {
+box-shadow: 0px 0px 10px #D3D3D3;
 }
 
 /* Set the font color and background color for the subject selector */
 .subject-selector {
-    color: #333333;
-    background-color: #FFFFFF;
+color: #333333;
+background-color: #FFFFFF;
+border-radius: 5px;
+box-shadow: 0px 0px 5px #D3D3D3;
+padding: 10px;
+margin-top: 10px;
+transition: all 0.2s ease-in-out;
+}
+
+.subject-selector:hover {
+box-shadow: 0px 0px 10px #D3D3D3;
 }
 
 /* Set the font color and background color for the help section */
 .help-section {
-    color: #333333;
-    background-color: #FFFFFF;
+color: #333333;
+background-color: #FFFFFF;
+border-radius: 5px;
+box-shadow: 0px 0px 5px #D3D3D3;
+padding: 10px;
+margin-top: 10px;
+transition: all 0.2s ease-in-out;
 }
+
+.help-section:hover {box-shadow: 0px 0px 10px #D3D3D3;
+}
+
+/* Add css for layout styles and themes /
+/ Layout style 1 /
+.layout_style_1 {
+/ Add css for layout style 1 /
+}
+/ Layout style 2 /
+.layout_style_2 {
+/ Add css for layout style 2 /
+}
+/ Layout style 3 /
+.layout_style_3 {
+/ Add css for layout style 3 /
+} */
+
+/* Theme 1 /
+.theme_1 {
+/ Add css for theme 1 /
+}
+/ Theme 2 /
+.theme_2 {
+/ Add css for theme 2 /
+}
+/ Theme 3 /
+.theme_3 {
+/ Add css for theme 3 /
+} */
+
+/* Add css for responsive design /
+@media (max-width: 768px) {
+/ Add css for design when screen width is less than or equal to 768px /
+} 
+
+@media (min-width: 769px) {
+/* Add css for design when screen width is greater than 768px /
+} */
+
+/* Add css for print style /
+@media print {
+/ Add css for design when the TUI is printed /
+} */
+
+/* Add css for accessibility /
+/ Add css for high contrast mode /
+.high-contrast-mode {
+/ Add css for high contrast mode /
+}
+/ Add css for large font size /
+.large-font-size {
+/ Add css for large font size /
+} */
