@@ -46,7 +46,7 @@ class Conjugator:
 
     """
 
-        def __init__(self, language='fr', model=None, feature_extractor=None):
+    def __init__(self, language='fr', model=None, feature_extractor=None):
         self.language = language
         self.conjug_manager = Verbiste(language=language)
         if model:
@@ -55,15 +55,18 @@ class Conjugator:
             self.model = self._load_default_model(feature_extractor)
         else:
             self.model = self._load_default_model()
-    
-        def _load_default_model(self, feature_extractor=None):
-        with ZipFile(pkg_resources.resource_stream(
+
+    def _load_default_model(self, feature_extractor=None):
+        if self.model:
+            return self.model
+        else:
+            with ZipFile(pkg_resources.resource_stream(
                 _RESOURCE_PACKAGE, _PRE_TRAINED_MODEL_PATH[self.language])) as content:
-            with content.open('trained_model-{0}-final.pickle'.format(self.language), 'r') as archive:
-                model = joblib.load(archive)
-                if feature_extractor:
-                    model.steps[0][1] = feature_extractor
-                return model
+                    with content.open('trained_model-{0}-final.pickle'.format(self.language), 'r') as archive:
+                        model = joblib.load(archive)
+        if feature_extractor:
+            model.steps[0][1] = feature_extractor
+        return model
 
     def __repr__(self):
         return '{0}.{1}(language={2})'.format(__name__, self.__class__.__name__, self.language)
