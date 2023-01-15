@@ -17,45 +17,45 @@ class VerbFeatures(TransformerMixin, BaseEstimator):
     self.morph_features = morph_features
     self.language = language
 
-def fit(self, X, y=None):
-    return self
+    def fit(self, X, y=None):
+        return self
 
-def transform(self, X, y=None):
-    features = []
-    for verb in X:
-        feature_vector = []
-        
-        # Extract character n-grams
-        if self.char_ngrams:
-            char_ngrams = [verb[i:i+n] for n in self.char_ngrams for i in range(len(verb)-n+1)]
-            feature_vector.extend(char_ngrams)
-        
-        # Extract Word2Vec embeddings
-        if self.w2v_model:
-            try:
-                embeddings = self.w2v_model[verb]
-                feature_vector.extend(embeddings)
-            except KeyError:
-                pass
-        
-        # Extract morphological features
-        if self.morph_features:
-            if self.language == 'fr':
-                morph_extractor = VerbMorphologyFr()
-            elif self.language == 'en':
-                morph_extractor = VerbMorphologyEn()
-            elif self.language == 'es':
-                morph_extractor = VerbMorphologyEs()
-            elif self.language == 'it':
-                morph_extractor = VerbMorphologyIt()
-            elif self.language == 'pt':
-                morph_extractor = VerbMorphologyPt()
-            elif self.language == 'ro':
-                morph_extractor = VerbMorphologyRo()
-            feature_vector.extend(morph_extractor.transform([verb]))
-        
-        features.append(feature_vector)
-    return np.array(features)
+    def transform(self, X, y=None):
+        features = []
+        for verb in X:
+            feature_vector = []
+            
+            # Extract character n-grams
+            if self.char_ngrams:
+                char_ngrams = [verb[i:i+n] for n in self.char_ngrams for i in range(len(verb)-n+1)]
+                feature_vector.extend(char_ngrams)
+            
+            # Extract Word2Vec embeddings
+            if self.w2v_model:
+                try:
+                    embeddings = self.w2v_model[verb]
+                    feature_vector.extend(embeddings)
+                except KeyError:
+                    pass
+            
+            # Extract morphological features
+            if self.morph_features:
+                if self.language == 'fr':
+                    morph_extractor = VerbMorphologyFr()
+                elif self.language == 'en':
+                    morph_extractor = VerbMorphologyEn()
+                elif self.language == 'es':
+                    morph_extractor = VerbMorphologyEs()
+                elif self.language == 'it':
+                    morph_extractor = VerbMorphologyIt()
+                elif self.language == 'pt':
+                    morph_extractor = VerbMorphologyPt()
+                elif self.language == 'ro':
+                    morph_extractor = VerbMorphologyRo()
+                feature_vector.extend(morph_extractor.transform([verb]))
+            
+            features.append(feature_vector)
+        return np.array(features)
 
 
 class VerbMorphologyFr(TransformerMixin, BaseEstimator):
