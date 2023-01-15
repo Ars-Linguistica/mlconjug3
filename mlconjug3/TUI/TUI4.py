@@ -20,6 +20,8 @@ class TUI:
         self.language_selector = self.right_section.add(textual.Select(options=["fr", "en", "es", "it", "pt", "ro"]))
         self.subject_selector = self.right_section.add(textual.Select(options=["abbrev", "pronoun"]))
         self.help_section = self.right_section.add(textual.Container(flex=1))
+        self.app.add_stylesheet("dark.css")
+        self.add_dark_mode_button()
 
         self.conjugator = Conjugator()
         self.prompt.on_submit(self.handle_submit)
@@ -247,6 +249,24 @@ class TUI:
         elif theme == "Theme 3":
             self.app.theme = "theme_3"
         self.app.on_theme_change(handle_theme_change)
+        
+    def add_dark_mode_button(self):
+        """
+        Add a button to toggle between dark mode and light mode
+        """
+        self.dark_mode_button = self.right_section.add(textual.Button("Dark Mode"))
+        self.dark_mode_button.on_click(self.handle_dark_mode_toggle)
+    
+    def handle_dark_mode_toggle(self):
+        """
+        Handle the on_click event for the dark mode button by toggling between dark mode and light mode
+        """
+        current_mode = self.app.get_stylesheet()
+        if current_mode == "dark":
+            self.app.set_stylesheet("light")
+        else:
+            self.app.set_stylesheet("dark")
+
 
     def display_verb_examples_in_context(self, verb):
         """
