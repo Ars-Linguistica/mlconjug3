@@ -115,9 +115,37 @@ class VerbMorphology(TransformerMixin, BaseEstimator):
     
 class VerbMorphologyFr(VerbMorphology):
     def extract_verb_root(self, verb):
-        pass
+        """
+        This function takes in a verb and returns the root of the verb.
+        The root of the verb is the base form of the verb, from which all other forms are derived.
+        :param verb: string.
+            The verb to extract the root from.
+        :return: string.
+            The root of the verb.
+        """
+        # Regular expression to match the root of the verb
+        pattern = r"^(.*?)(?:er|ir|re)$"
+        match = re.match(pattern, verb)
+        if match:
+            return match.group(1)
+        return None
+
     def extract_verb_suffix(self, verb):
-        pass
+        """
+        This function takes in a verb and returns the suffix of the verb.
+        The suffix of the verb is the part of the verb that indicates the conjugation group.
+        :param verb: string.
+            The verb to extract the suffix from.
+        :return: string.
+            The suffix of the verb.
+        """
+        # Regular expression to match the suffix of the verb
+        pattern = r"^.*?(er|ir|re)$"
+        match = re.match(pattern, verb)
+        if match:
+            return match.group(1)
+        return None
+
 
     
 class VerbMorphologyEn(VerbMorphology):
@@ -126,4 +154,223 @@ class VerbMorphologyEn(VerbMorphology):
     def extract_verb_suffix(self, verb):
         pass
 
-# And so on for the other languages
+class VerbMorphologyEs(VerbMorphology):
+    """
+    Transformer to extract morphological features of Spanish verbs.
+    
+    Example use:
+    from sklearn.pipeline import Pipeline
+    from sklearn.linear_model import SGDClassifier
+    from .VerbMorphologyEs import VerbMorphologyEs
+    
+    # Instantiate the morphological feature extractor
+    morph_features = VerbMorphologyEs(root=True, suffix=True)
+    
+    # Create a pipeline with the morphological feature extractor and a classifier
+    pipe = Pipeline([
+        ('morph_features', morph_features),
+        ('classifier', SGDClassifier()),
+    ])
+    
+    # Fit the pipeline to the training data
+    pipe.fit(X_train, y_train)
+    
+    # Make predictions on the test data
+    predictions = pipe.predict(X_test)
+    
+    """
+    def extract_verb_root(self, verb):
+        """
+        This function takes in a verb and returns the root of the verb.
+        The root of the verb is the base form of the verb, from which all other forms are derived.
+        :param verb: string.
+            The verb to extract the root from.
+        :return: string.
+            The root of the verb.
+        """
+        # Regular expression to match the root of the verb
+        pattern = r"^(.*?)(?:ar|er|ir)$"
+        match = re.match(pattern, verb)
+        if match:
+            return match.group(1)
+        else:
+            return verb
+        
+    def extract_verb_suffix(self, verb):
+        """
+        This function takes in a verb and returns the suffix of the verb.
+        The suffix of the verb is the part of the verb that changes to indicate its grammatical function.
+        :param verb: string.
+            The verb to extract the suffix from.
+        :return: string.
+            The suffix of the verb.
+        """
+        # Regular expression to match the suffix of the verb
+        pattern = r"^.*?(ar|er|ir)$"
+        match = re.match(pattern, verb)
+        if match:
+            return match.group(1)
+        else:
+            return ""
+
+
+class VerbMorphologyIt(VerbMorphology):
+    """
+    Transformer to extract morphological features of Italian verbs.
+    Example use:
+    from sklearn.pipeline import Pipeline
+    from sklearn.linear_model import SGDClassifier
+    from .VerbMorphologyIt import VerbMorphologyIt
+    # Instantiate the morphological feature extractor
+    morph_features = VerbMorphologyIt(root=True, suffix=True)
+    # Create a pipeline with the morphological feature extractor and a classifier
+    pipe = Pipeline([
+        ('morph_features', morph_features),
+        ('classifier', SGDClassifier()),
+    ])
+    # Fit the pipeline to the training data
+    pipe.fit(X_train, y_train)
+    # Make predictions on the test data
+    predictions = pipe.predict(X_test)
+    """
+    def extract_verb_root(self, verb):
+        """
+        This function takes in a verb and returns the root of the verb.
+        The root of the verb is the base form of the verb, from which all other forms are derived.
+        :param verb: string.
+            The verb to extract the root from.
+        :return: string.
+            The root of the verb.
+        """
+        # Regular expression to match the root of the verb
+        pattern = r"^(.*?)(?:are|ere|ire)$"
+        match = re.match(pattern, verb)
+        if match:
+            return match.group(1)
+        return None
+
+    def extract_verb_suffix(self, verb):
+        """
+        This function takes in a verb and returns the suffix of the verb.
+        The suffix of the verb is the part that is added to the root to form different tenses, moods, etc.
+        :param verb: string.
+            The verb to extract the suffix from.
+        :return: string.
+            The suffix of the verb.
+        """
+        # Regular expression to match the suffix of the verb
+        pattern = r"^.*?(?:are|ere|ire)$"
+        match = re.match(pattern, verb)
+        if match:
+            return match.group(1)
+        return None
+
+
+class VerbMorphologyPt(VerbMorphology):
+    """
+    Transformer to extract morphological features of Portuguese verbs.
+    Example use:
+    from sklearn.pipeline import Pipeline
+    from sklearn.linear_model import SGDClassifier
+    from .VerbMorphologyPt import VerbMorphologyPt
+    # Instantiate the morphological feature extractor
+    morph_features = VerbMorphologyPt(root=True, suffix=True)
+    # Create a pipeline with the morphological feature extractor and a classifier
+    pipe = Pipeline([
+        ('morph_features', morph_features),
+        ('classifier', SGDClassifier()),
+    ])
+    # Fit the pipeline to the training data
+    pipe.fit(X_train, y_train)
+    # Make predictions on the test data
+    predictions = pipe.predict(X_test)
+    """
+    def extract_verb_root(self, verb):
+        """
+        This function takes in a verb and returns the root of the verb.
+        The root of the verb is the base form of the verb, from which all other forms are derived.
+        :param verb: string.
+            The verb to extract the root from.
+        :return: string.
+            The root of the verb.
+        """
+        # Regular expression to match the root of the verb
+        pattern = r"^(.*?)(?:ar|er|ir)$"
+        match = re.match(pattern, verb)
+        if match:
+            return match.group(1)
+        return None
+
+    def extract_verb_suffix(self, verb):
+        """
+        This function takes in a verb and returns the suffix of the verb.
+        The suffix of the verb is the part of the verb that is added to the root to indicate its grammatical function.
+        :param verb: string.
+            The verb to extract the suffix from.
+        :return: string.
+            The suffix of the verb.
+        """
+        # Regular expression to match the suffix of the verb
+        pattern = r"^.*?([ar|er|ir])$"
+        match = re.match(pattern, verb)
+        if match:
+            return match.group(1)
+        return None
+
+
+class VerbMorphologyRo(VerbMorphology)
+    """
+    Example use:
+    from sklearn.pipeline import Pipeline
+    from sklearn.linear_model import SGDClassifier
+    from .VerbMorphologyRo import VerbMorphologyRo
+    
+    # Instantiate the morphological feature extractor
+    morph_features = VerbMorphologyRo(root=True, suffix=True)
+    
+    # Create a pipeline with the morphological feature extractor and a classifier
+    pipe = Pipeline([
+        ('morph_features', morph_features),
+        ('classifier', SGDClassifier()),
+    ])
+    
+    # Fit the pipeline to the training data
+    pipe.fit(X_train, y_train)
+    
+    # Make predictions on the test data
+    predictions = pipe.predict(X_test)
+    
+    """
+    def extract_verb_root(self, verb):
+        """
+        This function takes in a verb and returns the root of the verb.
+        The root of the verb is the base form of the verb, from which all other forms are derived.
+        :param verb: string.
+            The verb to extract the root from.
+        :return: string.
+            The root of the verb.
+        """
+        # Regular expression to match the root of the verb
+        pattern = r"^(.*?)a$"
+        match = re.match(pattern, verb)
+        if match:
+            return match.group(1)
+        else:
+            return None
+    
+    def extract_verb_suffix(self, verb):
+        """
+        This function takes in a verb and returns the suffix of the verb.
+        :param verb: string.
+            The verb to extract the suffix from.
+        :return: string.
+            The suffix of the verb.
+        """
+        # Regular expression to match the suffix of the verb
+        pattern = r"^.*?(a)$"
+        match = re.match(pattern, verb)
+        if match:
+            return match.group(1)
+        else:
+            return None
+
