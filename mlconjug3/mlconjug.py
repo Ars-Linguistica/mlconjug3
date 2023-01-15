@@ -15,7 +15,7 @@ from .PyVerbiste import Verbiste
 from .conjug_manager import ConjugManager
 from .verbs import *
 from .utils import logger
-from .feature_extractor import extract_verb_features
+from .feature_extractor import VerbFeatures
 
 from random import Random
 from collections import defaultdict
@@ -24,6 +24,9 @@ import pkg_resources
 import re
 from zipfile import ZipFile
 from functools import partial
+
+# Added for backward compatibility.
+extract_verb_features = VerbFeatures.extract_verb_features
 
 
 class Conjugator:
