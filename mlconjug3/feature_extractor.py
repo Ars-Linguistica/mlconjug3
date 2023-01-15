@@ -135,121 +135,121 @@ class VerbMorphologyFr(TransformerMixin, BaseEstimator):
 
 
 class VerbMorphologyEn(TransformerMixin, BaseEstimator):
-"""
-Transformer to extract morphological features of English verbs.
-Example use:
-from sklearn.pipeline import Pipeline
-from sklearn.linear_model import SGDClassifier
-from .VerbMorphologyEn import VerbMorphologyEn
-
-# Instantiate the morphological feature extractor
-morph_features = VerbMorphologyEn(root=True, suffix=True)
-
-# Create a pipeline with the morphological feature extractor and a classifier
-pipe = Pipeline([
-    ('morph_features', morph_features),
-    ('classifier', SGDClassifier()),
-])
-
-# Fit the pipeline to the training data
-pipe.fit(X_train, y_train)
-
-# Make predictions on the test data
-predictions = pipe.predict(X_test)
-
-"""
-def __init__(self, root=True, suffix=True):
-    self.root = root
-    self.suffix = suffix
+    """
+    Transformer to extract morphological features of English verbs.
+    Example use:
+    from sklearn.pipeline import Pipeline
+    from sklearn.linear_model import SGDClassifier
+    from .VerbMorphologyEn import VerbMorphologyEn
     
-def fit(self, X, y=None):
-    return self
-
-def transform(self, X, y=None):
-    features = []
-    for verb in X:
-        feature_vector = []
-        if self.root:
-            feature_vector.append(self.extract_verb_root(verb))
-        if self.suffix:
-            feature_vector.append(self.extract_verb_suffix(verb))
-        features.append(feature_vector)
-    return np.array(features)
+    # Instantiate the morphological feature extractor
+    morph_features = VerbMorphologyEn(root=True, suffix=True)
+    
+    # Create a pipeline with the morphological feature extractor and a classifier
+    pipe = Pipeline([
+        ('morph_features', morph_features),
+        ('classifier', SGDClassifier()),
+    ])
+    
+    # Fit the pipeline to the training data
+    pipe.fit(X_train, y_train)
+    
+    # Make predictions on the test data
+    predictions = pipe.predict(X_test)
+    
+    """
+    def __init__(self, root=True, suffix=True):
+        self.root = root
+        self.suffix = suffix
+        
+    def fit(self, X, y=None):
+        return self
+    
+    def transform(self, X, y=None):
+        features = []
+        for verb in X:
+            feature_vector = []
+            if self.root:
+                feature_vector.append(self.extract_verb_root(verb))
+            if self.suffix:
+                feature_vector.append(self.extract_verb_suffix(verb))
+            features.append(feature_vector)
+        return np.array(features)
 
 
 class VerbMorphologyEs(TransformerMixin, BaseEstimator):
-"""
-Transformer to extract morphological features of Spanish verbs.
-
-Example use:
-from sklearn.pipeline import Pipeline
-from sklearn.linear_model import SGDClassifier
-from .VerbMorphologyEs import VerbMorphologyEs
-
-# Instantiate the morphological feature extractor
-morph_features = VerbMorphologyEs(root=True, suffix=True)
-
-# Create a pipeline with the morphological feature extractor and a classifier
-pipe = Pipeline([
-    ('morph_features', morph_features),
-    ('classifier', SGDClassifier()),
-])
-
-# Fit the pipeline to the training data
-pipe.fit(X_train, y_train)
-
-# Make predictions on the test data
-predictions = pipe.predict(X_test)
-
-"""
+    """
+    Transformer to extract morphological features of Spanish verbs.
+    
+    Example use:
+    from sklearn.pipeline import Pipeline
+    from sklearn.linear_model import SGDClassifier
+    from .VerbMorphologyEs import VerbMorphologyEs
+    
+    # Instantiate the morphological feature extractor
+    morph_features = VerbMorphologyEs(root=True, suffix=True)
+    
+    # Create a pipeline with the morphological feature extractor and a classifier
+    pipe = Pipeline([
+        ('morph_features', morph_features),
+        ('classifier', SGDClassifier()),
+    ])
+    
+    # Fit the pipeline to the training data
+    pipe.fit(X_train, y_train)
+    
+    # Make predictions on the test data
+    predictions = pipe.predict(X_test)
+    
+    """
     def init(self):
         pass
-
-    def fit(self, X, y=None):
-    return self
-
-def transform(self, X, y=None):
-    features = []
-    for verb in X:
-        feature_vector = []
-        feature_vector.append(self.extract_verb_root(verb))
-        feature_vector.append(self.extract_verb_suffix(verb))
-        features.append(feature_vector)
-    return np.array(features)
-
-def extract_verb_root(self, verb):
-    """
-    This function takes in a verb and returns the root of the verb.
-    The root of the verb is the base form of the verb, from which all other forms are derived.
-    :param verb: string.
-        The verb to extract the root from.
-    :return: string.
-        The root of the verb.
-    """
-    # Regular expression to match the root of the verb
-    pattern = r"^(.*?)(?:ar|er|ir)$"
-    match = re.match(pattern, verb)
-    if match:
-        return match.group(1)
-    else:
-        return verb
     
-def extract_verb_suffix(self, verb):
-    """
-    This function takes in a verb and returns the suffix of the verb.
-    The suffix of the verb is the part of the verb that changes to indicate its grammatical function.
-    :param verb: string.
-        The verb to extract the suffix from.
-    :return: string.
-        The suffix of the verb.
-    """
-    # Regular expression to match the suffix of the verb
-    pattern = r"^.*?(ar|er|ir)$"
-    match = re.match(pattern, verb)
-    if match:
-        return match.group(1)
-    else:
-        return ""
+    def fit(self, X, y=None):
+        return self
+    
+    def transform(self, X, y=None):
+        features = []
+        for verb in X:
+            feature_vector = []
+            feature_vector.append(self.extract_verb_root(verb))
+            feature_vector.append(self.extract_verb_suffix(verb))
+            features.append(feature_vector)
+        return np.array(features)
+    
+    def extract_verb_root(self, verb):
+        """
+        This function takes in a verb and returns the root of the verb.
+        The root of the verb is the base form of the verb, from which all other forms are derived.
+        :param verb: string.
+            The verb to extract the root from.
+        :return: string.
+            The root of the verb.
+        """
+        # Regular expression to match the root of the verb
+        pattern = r"^(.*?)(?:ar|er|ir)$"
+        match = re.match(pattern, verb)
+        if match:
+            return match.group(1)
+        else:
+            return verb
+        
+    def extract_verb_suffix(self, verb):
+        """
+        This function takes in a verb and returns the suffix of the verb.
+        The suffix of the verb is the part of the verb that changes to indicate its grammatical function.
+        :param verb: string.
+            The verb to extract the suffix from.
+        :return: string.
+            The suffix of the verb.
+        """
+        # Regular expression to match the suffix of the verb
+        pattern = r"^.*?(ar|er|ir)$"
+        match = re.match(pattern, verb)
+        if match:
+            return match.group(1)
+        else:
+            return ""
 
 
 class VerbMorphologyIt(TransformerMixin, BaseEstimator):
@@ -407,77 +407,77 @@ class VerbMorphologyPt(TransformerMixin, BaseEstimator):
 class VerbMorphologyRo(TransformerMixin, BaseEstimator):
     """
 
-Example use:
-from sklearn.pipeline import Pipeline
-from sklearn.linear_model import SGDClassifier
-from .VerbMorphologyRo import VerbMorphologyRo
-
-# Instantiate the morphological feature extractor
-morph_features = VerbMorphologyRo(root=True, suffix=True)
-
-# Create a pipeline with the morphological feature extractor and a classifier
-pipe = Pipeline([
-    ('morph_features', morph_features),
-    ('classifier', SGDClassifier()),
-])
-
-# Fit the pipeline to the training data
-pipe.fit(X_train, y_train)
-
-# Make predictions on the test data
-predictions = pipe.predict(X_test)
-
-"""
-def __init__(self, root=False, suffix=False):
-    self.root = root
-    self.suffix = suffix
-
-def fit(self, X, y=None):
-    return self
-
-def transform(self, X, y=None):
-    features = []
-    for verb in X:
-        feature_vector = []
-        if self.root:
-            feature_vector.append(self.extract_verb_root(verb))
-        if self.suffix:
-            feature_vector.append(self.extract_verb_suffix(verb))
-        features.append(feature_vector)
-    return np.array(features)
-
-def extract_verb_root(self, verb):
+    Example use:
+    from sklearn.pipeline import Pipeline
+    from sklearn.linear_model import SGDClassifier
+    from .VerbMorphologyRo import VerbMorphologyRo
+    
+    # Instantiate the morphological feature extractor
+    morph_features = VerbMorphologyRo(root=True, suffix=True)
+    
+    # Create a pipeline with the morphological feature extractor and a classifier
+    pipe = Pipeline([
+        ('morph_features', morph_features),
+        ('classifier', SGDClassifier()),
+    ])
+    
+    # Fit the pipeline to the training data
+    pipe.fit(X_train, y_train)
+    
+    # Make predictions on the test data
+    predictions = pipe.predict(X_test)
+    
     """
-    This function takes in a verb and returns the root of the verb.
-    The root of the verb is the base form of the verb, from which all other forms are derived.
-    :param verb: string.
-        The verb to extract the root from.
-    :return: string.
-        The root of the verb.
-    """
-    # Regular expression to match the root of the verb
-    pattern = r"^(.*?)a$"
-    match = re.match(pattern, verb)
-    if match:
-        return match.group(1)
-    else:
-        return None
-
-def extract_verb_suffix(self, verb):
-    """
-    This function takes in a verb and returns the suffix of the verb.
-    :param verb: string.
-        The verb to extract the suffix from.
-    :return: string.
-        The suffix of the verb.
-    """
-    # Regular expression to match the suffix of the verb
-    pattern = r"^.*?(a)$"
-    match = re.match(pattern, verb)
-    if match:
-        return match.group(1)
-    else:
-        return None
+    def __init__(self, root=False, suffix=False):
+        self.root = root
+            self.suffix = suffix
+    
+    def fit(self, X, y=None):
+        return self
+    
+    def transform(self, X, y=None):
+        features = []
+        for verb in X:
+            feature_vector = []
+            if self.root:
+                feature_vector.append(self.extract_verb_root(verb))
+            if self.suffix:
+                feature_vector.append(self.extract_verb_suffix(verb))
+            features.append(feature_vector)
+        return np.array(features)
+    
+    def extract_verb_root(self, verb):
+        """
+        This function takes in a verb and returns the root of the verb.
+        The root of the verb is the base form of the verb, from which all other forms are derived.
+        :param verb: string.
+            The verb to extract the root from.
+        :return: string.
+            The root of the verb.
+        """
+        # Regular expression to match the root of the verb
+        pattern = r"^(.*?)a$"
+        match = re.match(pattern, verb)
+        if match:
+            return match.group(1)
+        else:
+            return None
+    
+    def extract_verb_suffix(self, verb):
+        """
+        This function takes in a verb and returns the suffix of the verb.
+        :param verb: string.
+            The verb to extract the suffix from.
+        :return: string.
+            The suffix of the verb.
+        """
+        # Regular expression to match the suffix of the verb
+        pattern = r"^.*?(a)$"
+        match = re.match(pattern, verb)
+        if match:
+            return match.group(1)
+        else:
+            return None
 
 # Example usage:
 # char_ngrams_pipe = Pipeline([
