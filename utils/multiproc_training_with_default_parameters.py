@@ -27,32 +27,6 @@ for dataset in datasets.values():
 conjugators = {
     lang: mlconjug3.Conjugator(
         lang,
-        mlconjug3.Model(
-            mlconjug3.CountVectorizer(
-                analyzer=partial(
-                    mlconjug3.extract_verb_features, lang=lang, ngram_range=(2, 7)
-                ),
-                binary=True,
-            ),
-            mlconjug3.SelectFromModel(
-                mlconjug3.LinearSVC(penalty="l1", max_iter=12000, dual=False, verbose=0)
-            ),
-            mlconjug3.SGDClassifier(
-                loss="log",
-                penalty="elasticnet",
-                l1_ratio=0.15,
-                max_iter=40000,
-                alpha=1e-5,
-                verbose=0,
-            ),
-        ),
-    )
-    for lang in langs
-}
-
-conjugators = {
-    lang: mlconjug3.Conjugator(
-        lang,
         feature_extractor=datasets[lang].feature_extractor,
         model=mlconjug3.Model(
             mlconjug3.SelectFromModel(
