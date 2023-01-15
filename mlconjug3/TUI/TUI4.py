@@ -4,7 +4,7 @@ import json
 import logging
 import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
-
+from PIL import Image, ImageDraw, ImageFont
 import requests
 from bs4 import BeautifulSoup
 
@@ -89,7 +89,35 @@ class TUI:
             self.conjugation_table_view.on_select(self.handle_conjugation_table_view)
             
     def handle_image_view(self):
-        pass
+        self.conjugation_tables.clear()
+        for tense, conjugations in conjugation_result.items():
+            tense_container = self.conjugation_tables.add(textual.Container())
+            tense_container.add(textual.Label(tense))
+            for subject, conjugation in conjugations.items():
+                image = self.generate_image_for_conjugation(tense, subject, conjugation)
+                tense_container.add(textual.Image(image))
+                
+    def generate_image_for_conjugation(self, tense, subject, conjugation):
+        """
+        Generates an image of the conjugation using a charting library
+        :param tense: str, the tense of the conjugation
+        :param subject: str, the subject of the conjugation
+        :param conjugation: str, the conjugation itself
+        :return: PIL Image, an image of the conjugation
+        """
+        # Create a blank image with a white background
+        image = Image.new("RGB", (600, 100), color=(255, 255, 255))
+
+        # Create a draw object to draw on the image
+        draw = ImageDraw.Draw(image)
+
+        # Add the tense, subject, and conjugation to the image
+        font = ImageFont.truetype("arial.ttf", 40)
+        draw.text((10, 10), tense, font=font, fill=(0, 0, 0))
+        draw.text((10, 50), subject, font=font, fill=(0, 0, 0))
+        draw.text((300, 50), conjugation, font=font, fill=(0, 0, 0))
+
+        return image
     
     def handle_conjugation_table_view(self, selected_index):
         """
@@ -135,14 +163,14 @@ class TUI:
             self.conjugation_tables.add(textual.Text("The verb is not in the dataset. The conjugation was not possible."))
         
     def handle_export(self):
-        conjugations = {}
-        for item in self.verb_history.get_items():
-            conjugation_result = self.conjugator.conjugate(item, self.subject_selector.get_value())
-            conjugations[item] = conjugation_result
-        filename = self.prompt.get_value() + '.json'
-        with open(filename, 'w', encoding='utf-8') as file:
-            json.dump(conjugations, file, ensure_ascii=False, indent=4)
-        self.app.alert("Conjugations exported to " + filename)
+        export_format = textual.dialog.ask("What format do you want to export?", ["JSON", "CSV"])
+        if export_format:
+            export_path = textual.dialog.ask("Where do you want to save the file?", "file")
+        if export_path:
+            with open(export_path, 'w', encoding='utf-8') as file:
+                json.dump(self.conjugation_tables, file, ensure_ascii=False, indent=4)
+                textual.alert("The conjugations have been succesfully saved to {0}.".format(export_path))
+        self.app.focus(self.export_button)
 
     def handle_language_select(self, language):
         self.conjugator.set_language(language)
@@ -158,16 +186,6 @@ class TUI:
         self.prompt.set_value(verb)
         self.handle_submit(verb)
         self.app.focus(self.prompt)
-        
-    def handle_export(self):
-        export_format = textual.dialog.ask("What format do you want to export?", ["JSON", "CSV"])
-        if export_format:
-            export_path = textual.dialog.ask("Where do you want to save the file?", "file")
-        if export_path:
-            with open(export_path, 'w', encoding='utf-8') as file:
-                json.dump(self.conjugation_tables, file, ensure_ascii=False, indent=4)
-                textual.alert("The conjugations have been succesfully saved to {0}.".format(export_path))
-        self.app.focus(self.export_button)
             
     def display_conjugations_in_table(self, conjugations):
         self.conjugation_tables.clear()
@@ -268,23 +286,6 @@ class TUI:
         self.conjugation_tables.style.font_size = font_size
         self.conjugation_tables.style.font_type = font_type
         self.app.refresh()
-    
-    def display_conjugations_chart(self, conjugations):
-        """
-        Displays a chart of the conjugated verbs using the provided conjugations.
-        :param conjugations: dict. The conjugations to display in the chart.
-        """
-        # Prepare the data for the chart
-        tenses = list(conjugations.keys())
-        subjects = list(conjugations[tenses[0]].keys())
-        data = {tense: [conjugations[tense][subject] for subject in subjects] for tense in tenses}
-
-        # Create the chart
-        fig, ax = plt.subplots()
-        ax.set_xticklabels(tenses)
-        ax.set_yticklabels(subjects)
-        ax.imshow(data)
-        plt.show()
         
     def save_conjugation_history(self, verb, conjugations):
         """
