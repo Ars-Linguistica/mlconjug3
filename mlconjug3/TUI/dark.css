@@ -1,0 +1,12 @@
+/* Add a class for dark mode */
+.dark-mode {
+    background-color: #2b2b2b;
+    color: white;
+}
+
+/* Add a class for light mode */
+.light-mode {
+    background-color: white;
+    color: black;
+}
+
