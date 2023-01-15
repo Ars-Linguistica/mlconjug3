@@ -109,115 +109,115 @@ class Conjugator:
 
 
 class DataSet:
-"""
-| This class loads and prepares the dataset for training.
-| The class loads the dataset from a JSON file and prepares the data for training.
-:param language: string.
-    Language of the dataset. The default language is 'fr' for french.
-:param split_ratio: float.
-    Ratio of the dataset to be used for training. The remaining data is used for testing. Default value is 0.8.
-:param random_state: int.
-    Seed for the random generator. Default value is 42.
-:param verb_class: string.
-    The class of the verb to be used. Default value is 'verb'.
-:param verb_info_class: string.
-    The class of the verb information to be used. Default value is 'verb_info'.
-:ivar data: list.
-    List of tuples of verb information, conjugation class and conjugation information.
-:ivar X: list.
-    List of verb information used as input for the model.
-:ivar y: list.
-    List of conjugation classes used as output for the model.
-
-"""
-
-def __init__(self, language='fr', split_ratio=0.8, random_state=42, verb_class='verb', verb_info_class='verb_info'):
-    self.language = language
-    self.split_ratio = split_ratio
-    self.random_state = random_state
-    self.verb_class = verb_class
-    self.verb_info_class = verb_info_class
-    self.data = self._load_data()
-    self.X, self.y = self._prepare_data()
-
-def _load_data(self):
+    class DataSet:
     """
-    | Loads the dataset from a JSON file.
-    | Returns a list of tuples of verb information, conjugation class and conjugation information.
-
-    :return: list.
+    | This class loads and prepares the dataset for training.
+    | The class loads the dataset from a JSON file and prepares the data for training.
+    :param language: string.
+        Language of the dataset. The default language is 'fr' for french.
+    :param split_ratio: float.
+        Ratio of the dataset to be used for training. The remaining data is used for testing. Default value is 0.8.
+    :param random_state: int.
+        Seed for the random generator. Default value is 42.
+    :param verb_class: string.
+        The class of the verb to be used. Default value is 'verb'.
+    :param verb_info_class: string.
+        The class of the verb information to be used. Default value is 'verb_info'.
+    :ivar data: list.
         List of tuples of verb information, conjugation class and conjugation information.
-
-    """
-    data = []
-    with open(_DATASET_PATH[self.language], 'r') as f:
-        dataset = json.load(f)
-        for verb_info, conjugations in dataset.items():
-            for conjugation_class, conjugation_info in conjugations.items():
-                data.append((verb_info, conjugation_class, conjugation_info))
-    return data
-
-def _prepare_data(self):
-    """
-    | Prepares the data for training.
-        | Returns X, the input data and y, the output data.
-
-    :return: tuple.
-        Tuple of X, the input data and y, the output data.
-
-    """
-    random = Random(self.random_state)
-    random.shuffle(self.data)
-    split_index = int(len(self.data) * self.split_ratio)
-    X, y = [], []
-    for verb_info, conjugation_class, conjugation_info in self.data:
-        X.append(verb_info)
-        y.append(conjugation_class)
-    return X, y
-
-def get_train_test_data(self):
-    """
-    | Returns the training and testing data
+    :ivar X: list.
+        List of verb information used as input for the model.
+    :ivar y: list.
+        List of conjugation classes used as output for the model.
     
-    :return: tuple.
-    A tuple of numpy arrays containing the train and test data respectively.
-   """
-    train_data = self.data.sample(frac=0.8, random_state=1)
-    test_data = self.data.drop(train_data.index)
-    return train_data[self.feature_cols], train_data[self.target_col], test_data[self.feature_cols], test_data[self.target_col]
-
-def get_data(self):
-"""
-Retrieves the entire dataset.
-:return: pandas DataFrame.
-    The entire dataset.
-"""
-return self.data
-
-def get_feature_cols(self):
-"""
-Retrieves the feature columns of the dataset.
-:return: list.
-    List of feature column names.
-"""
-return self.feature_cols
-
-def get_target_col(self):
-"""
-Retrieves the target column of the dataset.
-:return: string.
-    Name of the target column.
-"""
-return self.target_col
-
-def get_class_labels(self):
-"""
-Retrieves the class labels of the dataset.
-:return: list.
-    List of class labels.
-"""
-return self.class_labels
-
+    """
+    
+    def __init__(self, language='fr', split_ratio=0.8, random_state=42, verb_class='verb', verb_info_class='verb_info'):
+        self.language = language
+        self.split_ratio = split_ratio
+        self.random_state = random_state
+        self.verb_class = verb_class
+        self.verb_info_class = verb_info_class
+        self.data = self._load_data()
+        self.X, self.y = self._prepare_data()
+    
+    def _load_data(self):
+        """
+        | Loads the dataset from a JSON file.
+        | Returns a list of tuples of verb information, conjugation class and conjugation information.
+    
+        :return: list.
+            List of tuples of verb information, conjugation class and conjugation information.
+    
+        """
+        data = []
+        with open(_DATASET_PATH[self.language], 'r') as f:
+            dataset = json.load(f)
+            for verb_info, conjugations in dataset.items():
+                for conjugation_class, conjugation_info in conjugations.items():
+                    data.append((verb_info, conjugation_class, conjugation_info))
+        return data
+    
+    def _prepare_data(self):
+        """
+        | Prepares the data for training.
+            | Returns X, the input data and y, the output data.
+    
+        :return: tuple.
+            Tuple of X, the input data and y, the output data.
+    
+        """
+        random = Random(self.random_state)
+        random.shuffle(self.data)
+        split_index = int(len(self.data) * self.split_ratio)
+        X, y = [], []
+        for verb_info, conjugation_class, conjugation_info in self.data:
+            X.append(verb_info)
+            y.append(conjugation_class)
+        return X, y
+    
+    def get_train_test_data(self):
+        """
+        | Returns the training and testing data
+        
+        :return: tuple.
+        A tuple of numpy arrays containing the train and test data respectively.
+       """
+        train_data = self.data.sample(frac=0.8, random_state=1)
+        test_data = self.data.drop(train_data.index)
+        return train_data[self.feature_cols], train_data[self.target_col], test_data[self.feature_cols], test_data[self.target_col]
+    
+    def get_data(self):
+        """
+        Retrieves the entire dataset.
+        :return: pandas DataFrame.
+            The entire dataset.
+        """
+        return self.data
+        
+    def get_feature_cols(self):
+        """
+        Retrieves the feature columns of the dataset.
+        :return: list.
+            List of feature column names.
+        """
+        return self.feature_cols
+        
+    def get_target_col(self):
+        """
+        Retrieves the target column of the dataset.
+        :return: string.
+            Name of the target column.
+        """
+        return self.target_col
+        
+    def get_class_labels(self):
+        """
+        Retrieves the class labels of the dataset.
+        :return: list.
+            List of class labels.
+        """
+        return self.class_labels
 
 
 class Model:
