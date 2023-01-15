@@ -38,7 +38,7 @@ from .constants import *
 from .verbs import *
 from .PyVerbiste import Verbiste
 from .conjug_manager import ConjugManager
-from .feature_extractor import extract_verb_features
+from .feature_extractor import VerbFeatures
 from .utils import logger
 
 from sklearn.feature_selection import SelectFromModel
@@ -53,6 +53,7 @@ from locale import windows_locale, getdefaultlocale
 import gettext
 import inspect
 
+extract_verb_features = VerbFeatures
 
 def _get_user_locale():
     """
