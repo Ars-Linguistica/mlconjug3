@@ -19,6 +19,8 @@ class TUI:
         self.export_button = self.right_section.add(textual.Button("Export"))
         self.language_selector = self.right_section.add(textual.Select(options=["fr", "en", "es", "it", "pt", "ro"]))
         self.subject_selector = self.right_section.add(textual.Select(options=["abbrev", "pronoun"]))
+        self.template_selector = self.right_section.add(textual.Select(options=DataSet.templates))
+        self.template_selector.on_select(self.handle_template_select)
         self.help_section = self.right_section.add(textual.Container(flex=1))
         self.app.add_stylesheet("dark.css")
         self.add_dark_mode_button()
@@ -135,6 +137,28 @@ class TUI:
     def handle_tense_change(self, selection):
         self.tense = selection
         self.handle_submit(self.verb_input.value)
+    
+    def handle_template_select(self, new_template):
+        """
+        Method to handle when user selects a new template to re-conjugate the current verb.
+        :param new_template: string. The new template selected by the user
+        """
+        current_verb = self.verb_history.get_selected()
+        current_verb.verb_info.template = new_template
+        self.conjugator.set_language(self.language_selector.get_value())
+        conjugation_result = self.conjugator.conjugate(current_verb, self.subject_selector.get_value())
+        if conjugation_result:
+            self.conjugation_tables.clear()
+            for tense, conjugations in conjugation_result.items():
+                tense_container = self.conjugation_tables.add(textual.Container())
+                tense_container.add(textual.Label(tense))
+                conjugation_table = tense_container.add(textual.Table(headers=["Subject", "Conjugation"]))
+                for subject, conjugation in conjugations.items():
+                    conjugation_table.add_row([subject, conjugation])
+        else:
+            self.conjugation_tables.clear()
+            self.conjugation_tables.add(textual.Text("The verb is not in the dataset. The conjugation was not possible."))
+        
     
     def compare_multiple_conjugations(self):
         self.multiple_verb_input = self.left_section.add(textual.Prompt(placeholder="Enter multiple verbs separated by commas"))
