@@ -14,11 +14,14 @@ langs = ("ro", "it", "en", "es", "fr", "pt")
 datasets = {
     lang: mlconjug3.DataSet(
         mlconjug3.Verbiste(language=lang).verbs,
-                            feature_extractor=mlconjug3.CountVectorizer(
-                                analyzer=partial(mlconjug3.extract_verb_features,
-                                                 lang=lang,
-                                                 ngram_range=(2, 7)),
-                                binary=True)) for lang in langs
+        feature_extractor=mlconjug3.CountVectorizer(
+            analyzer=partial(
+                mlconjug3.extract_verb_features, lang=lang, ngram_range=(2, 7)
+            ),
+            binary=True,
+        ),
+    )
+    for lang in langs
 }
 for dataset in datasets.values():
     dataset.split_data(proportion=1)
@@ -31,14 +34,14 @@ conjugators = {
         model=mlconjug3.Model(
             mlconjug3.SelectFromModel(
                 mlconjug3.LinearSVC(penalty="l1", max_iter=12000, dual=False, verbose=0)
-        ),
-        mlconjug3.SGDClassifier(
-            loss="log",
-            penalty="elasticnet",
-            l1_ratio=0.15,
-            max_iter=40000,
-            alpha=1e-5,
-            verbose=0,
+            ),
+            mlconjug3.SGDClassifier(
+                loss="log",
+                penalty="elasticnet",
+                l1_ratio=0.15,
+                max_iter=40000,
+                alpha=1e-5,
+                verbose=0,
             ),
         ),
     )
@@ -78,5 +81,8 @@ for lang, prediction in predictions.items():
 
 for lang in langs:
     # Save trained model
-    with open('raw_data/experiments/trained_model-{0}-final.pickle'.format(lang), 'wb') as file:
+    with open(
+        "raw_data/experiments/trained_model-{0}-final.pickle".format(lang), "wb"
+    ) as file:
         pickle.dump(conjugator.model, file)
+
