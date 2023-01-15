@@ -46,16 +46,24 @@ class Conjugator:
 
     """
 
-    def __init__(self, language='fr', model=None):
+        def __init__(self, language='fr', model=None, feature_extractor=None):
         self.language = language
         self.conjug_manager = Verbiste(language=language)
-        self.model = model if model else self._load_default_model()
-
-    def _load_default_model(self):
+        if model:
+            self.model = model 
+        elif feature_extractor:
+            self.model = self._load_default_model(feature_extractor)
+        else:
+            self.model = self._load_default_model()
+    
+        def _load_default_model(self, feature_extractor=None):
         with ZipFile(pkg_resources.resource_stream(
                 _RESOURCE_PACKAGE, _PRE_TRAINED_MODEL_PATH[self.language])) as content:
             with content.open('trained_model-{0}-final.pickle'.format(self.language), 'r') as archive:
-                return joblib.load(archive)
+                model = joblib.load(archive)
+                if feature_extractor:
+                    model.steps[0][1] = feature_extractor
+                return model
 
     def __repr__(self):
         return '{0}.{1}(language={2})'.format(__name__, self.__class__.__name__, self.language)
@@ -237,11 +245,8 @@ class Model:
     def extract_verb_features(verb, lang, ngram_range):
         """
         | Custom Vectorizer optimized for extracting verbs features.
-        | As in Indo-European languages verbs are inflected by adding a morphological suffix,
-        the vector
-
-
-    
+        """
+        return extract_verb_features(verb, lang, ngram_range)
 
 
 if __name__ == "__main__":
