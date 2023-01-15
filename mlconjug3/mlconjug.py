@@ -109,88 +109,115 @@ class Conjugator:
 
 
 class DataSet:
+"""
+| This class loads and prepares the dataset for training.
+| The class loads the dataset from a JSON file and prepares the data for training.
+:param language: string.
+    Language of the dataset. The default language is 'fr' for french.
+:param split_ratio: float.
+    Ratio of the dataset to be used for training. The remaining data is used for testing. Default value is 0.8.
+:param random_state: int.
+    Seed for the random generator. Default value is 42.
+:param verb_class: string.
+    The class of the verb to be used. Default value is 'verb'.
+:param verb_info_class: string.
+    The class of the verb information to be used. Default value is 'verb_info'.
+:ivar data: list.
+    List of tuples of verb information, conjugation class and conjugation information.
+:ivar X: list.
+    List of verb information used as input for the model.
+:ivar y: list.
+    List of conjugation classes used as output for the model.
+
+"""
+
+def __init__(self, language='fr', split_ratio=0.8, random_state=42, verb_class='verb', verb_info_class='verb_info'):
+    self.language = language
+    self.split_ratio = split_ratio
+    self.random_state = random_state
+    self.verb_class = verb_class
+    self.verb_info_class = verb_info_class
+    self.data = self._load_data()
+    self.X, self.y = self._prepare_data()
+
+def _load_data(self):
     """
-    | This class holds and manages the data set.
-    | Defines helper methodss for managing Machine Learning tasks like constructing a training and testing set.
+    | Loads the dataset from a JSON file.
+    | Returns a list of tuples of verb information, conjugation class and conjugation information.
 
-    :param verbs_dict:
-        A dictionary of verbs and their corresponding conjugation class.
+    :return: list.
+        List of tuples of verb information, conjugation class and conjugation information.
 
     """
+    data = []
+    with open(_DATASET_PATH[self.language], 'r') as f:
+        dataset = json.load(f)
+        for verb_info, conjugations in dataset.items():
+            for conjugation_class, conjugation_info in conjugations.items():
+                data.append((verb_info, conjugation_class, conjugation_info))
+    return data
 
-    def __init__(self, verbs_dict):
-        self.verbs_dict = verbs_dict
-        self.verbs = self.verbs_dict.keys()
-        self.templates = sorted(
-            {verb['template'] for verb in self.verbs_dict.values()}
-        )
+def _prepare_data(self):
+    """
+    | Prepares the data for training.
+        | Returns X, the input data and y, the output data.
 
-        self.verbs_list = []
-        self.templates_list = []
-        self.dict_conjug = None
-        self.min_threshold = 8
-        self.split_proportion = 0.5
-        self.train_input = []
-        self.train_labels = []
-        self.test_input = []
-        self.test_labels = []
-        self.construct_dict_conjug()
-        return
+    :return: tuple.
+        Tuple of X, the input data and y, the output data.
 
-    def __repr__(self):
-        return '{0}.{1}()'.format(__name__, self.__class__.__name__)
+    """
+    random = Random(self.random_state)
+    random.shuffle(self.data)
+    split_index = int(len(self.data) * self.split_ratio)
+    X, y = [], []
+    for verb_info, conjugation_class, conjugation_info in self.data:
+        X.append(verb_info)
+        y.append(conjugation_class)
+    return X, y
 
-    def construct_dict_conjug(self):
-        """
-        | Populates the dictionary containing the conjugation templates.
-        | Populates the lists containing the verbs and their templates.
+def get_train_test_data(self):
+    """
+    | Returns the training and testing data
+    
+    :return: tuple.
+    A tuple of numpy arrays containing the train and test data respectively.
+   """
+    train_data = self.data.sample(frac=0.8, random_state=1)
+    test_data = self.data.drop(train_data.index)
+    return train_data[self.feature_cols], train_data[self.target_col], test_data[self.feature_cols], test_data[self.target_col]
 
-        """
-        conjug = defaultdict(list)
-        verb_items = list(self.verbs_dict.items())
-        Random(42).shuffle(verb_items)
-        for verb, info_verb in verb_items:
-            self.verbs_list.append(verb)
-            self.templates_list.append(self.templates.index(info_verb["template"]))
-            conjug[info_verb["template"]].append(verb)
-        self.dict_conjug = conjug
-        return
+def get_data(self):
+"""
+Retrieves the entire dataset.
+:return: pandas DataFrame.
+    The entire dataset.
+"""
+return self.data
 
-    def split_data(self, threshold=8, proportion=0.5):
-        """
-        Splits the data into a training and a testing set.
+def get_feature_cols(self):
+"""
+Retrieves the feature columns of the dataset.
+:return: list.
+    List of feature column names.
+"""
+return self.feature_cols
 
-        :param threshold: int.
-            Minimum size of conjugation class to be split.
-        :param proportion: float.
-            Proportion of samples in the training set.
-            Must be between 0 and 1.
-        :raises: ValueError.
+def get_target_col(self):
+"""
+Retrieves the target column of the dataset.
+:return: string.
+    Name of the target column.
+"""
+return self.target_col
 
-        """
-        if proportion <= 0 or proportion > 1:
-            raise ValueError(_('The split proportion must be between 0 and 1.'))
-        self.min_threshold = threshold
-        self.split_proportion = proportion
-        train_set = []
-        test_set = []
-        for template, lverbs in self.dict_conjug.items():
-            if len(lverbs) <= threshold:
-                for verbe in lverbs:
-                    train_set.append((verbe, template))
-            else:
-                index = round(len(lverbs) * proportion)
-                for verbe in lverbs[:index]:
-                    train_set.append((verbe, template))
-                for verbe in lverbs[index:]:
-                    test_set.append((verbe, template))
-        Random(42).shuffle(train_set)
-        Random(42).shuffle(test_set)
-        self.train_input = [elmt[0] for elmt in train_set]
-        self.train_labels = [self.templates.index(elmt[1]) for elmt in train_set]
-        self.test_input = [elmt[0] for elmt in test_set]
-        self.test_labels = [self.templates.index(elmt[1]) for elmt in test_set]
-        return
+def get_class_labels(self):
+"""
+Retrieves the class labels of the dataset.
+:return: list.
+    List of class labels.
+"""
+return self.class_labels
+
 
 
 class Model:
