@@ -193,46 +193,55 @@ class Model:
     |   - a feature extractor,
     |   - a feature selector using Linear Support Vector Classification,
     |   - a classifier using Stochastic Gradient Descent.
+    :param feature_extractor: a class that implements the fit and transform methods.
+    Instance of a class that implements the fit and transform methods.
+    :param pipeline: scikit-learn pipeline.
+        Pipeline containing the feature extraction and the classification steps.
+    :param feature_extractor_params: dict.
+        Parameters for the feature extractor.
+    :param pipeline_params: dict.
+        Parameters for the pipeline.
+    :param lang: string.
+        Language of the conjugator. The default language is 'fr' for french.
+    :param ngram_range: tuple.
+        The range of the ngram sliding window.
+    
     """
-
-    def __init__(self, language='fr', char_ngrams=None, w2v_model=None, morph_features=None):
-        self.language = language
-        self.char_ngrams = char_ngrams
-        self.w2v_model = w2v_model
-        self.morph_features = morph_features
-        self.pipeline = Pipeline([
-            ('features', VerbFeatures(char_ngrams=self.char_ngrams, w2v_model=self.w2v_model, morph_features=self.morph_features, language=self.language)),
-            ('feature_selection', SelectFromModel(LinearSVC(penalty="l1", dual=False, max_iter=10000))),
-            ('classification', SGDClassifier(random_state=42)),
+    def __init__(self, feature_extractor=None, pipeline=None, feature_extractor_params=None, pipeline_params=None, lang='fr', ngram_range=(1, 2)):
+        self.feature_extractor = feature_extractor if feature_extractor else VerbFeatures
+        self.feature_extractor_params = feature_extractor_params if feature_extractor_params else {'char_ngrams': (3, 4, 5), 'w2v_model': None, 'morph_features': None, 'language': lang}
+        self.pipeline = pipeline if pipeline else Pipeline([
+            ('feature_extractor', self.feature_extractor(**self.feature_extractor_params)),
+            ('classifier', LinearSVC())
         ])
-
-    def __repr__(self):
-        return '{0}.{1}({2}, {3}, {4})'.format(__name__, self.__class__.__name__, *sorted(self.pipeline.named_steps))
-
-    def train(self, samples, labels):
+        self.pipeline_params = pipeline_params if pipeline_params else {'classifier__C': 1.0}
+        self.ngram_range = ngram_range
+        self.lang = lang
+    
+    def fit(self, X, y):
+        self.pipeline.fit(X, y)
+    
+    def predict(self, X):
+        return self.pipeline.predict(X)
+    
+    def evaluate(self, X, y):
+        return self.pipeline.score(X, y)
+    
+    def save(self, filepath):
+        joblib.dump(self, filepath)
+    
+    def load(self, filepath):
+        return joblib.load(filepath)
+    
+    @staticmethod
+    def extract_verb_features(verb, lang, ngram_range):
         """
-        Trains the pipeline on the supplied samples and labels.
+        | Custom Vectorizer optimized for extracting verbs features.
+        | As in Indo-European languages verbs are inflected by adding a morphological suffix,
+        the vector
 
-        :param samples: list.
-            List of verbs.
-        :param labels: list.
-            List of verb templates.
 
-        """
-        self.pipeline = self.pipeline.fit(samples, labels)
-        return
-
-    def predict(self, verbs):
-        """
-        Predicts the conjugation class of the provided list of verbs.
-
-        :param verbs: list.
-            List of verbs.
-        :return: list.
-            List of predicted conjugation groups.
-
-        """
-        return self.pipeline.predict(verbs)
+    
 
 
 if __name__ == "__main__":
