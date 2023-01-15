@@ -1,35 +1,3 @@
-class VerbMorphology(TransformerMixin, BaseEstimator):
-    def __init__(self, root=False, suffix=False):
-        self.root = root
-        self.suffix = suffix
-
-    def fit(self, X, y=None):
-        return self
-
-    def transform(self, X, y=None):
-        features = []
-        for verb in X:
-            feature_vector = []
-            if self.root:
-                feature_vector.append(self.extract_verb_root(verb))
-            if self.suffix:
-                feature_vector.append(self.extract_verb_suffix(verb))
-            features.append(feature_vector)
-        return np.array(features)
-
-class VerbMorphologyFr(VerbMorphology):
-    def extract_verb_root(self, verb):
-        pass
-    def extract_verb_suffix(self, verb):
-        pass
-
-class VerbMorphologyEn(VerbMorphology):
-    def extract_verb_root(self, verb):
-        pass
-    def extract_verb_suffix(self, verb):
-        pass
-
-# And so on for the other languages
 
 class VerbFeatures(TransformerMixin, BaseEstimator):
     """
@@ -75,7 +43,8 @@ def transform(self, X, y=None):
             # And so on for the other languages
             feature_vector.extend(morph_extractor.transform([verb]))
         
-        features.
+        features.features.append(feature_vector)
+    return np.array(features)
         
     @staticmethod   
     def extract_verb_features(verb, lang, ngram_range):
@@ -116,3 +85,37 @@ def transform(self, X, y=None):
     final_ngrams.extend(initial_ngrams)
     final_ngrams.extend((length_feature, vowels_number, consonants_number, vow_cons_ratio))
     return final_ngrams
+
+
+class VerbMorphology(TransformerMixin, BaseEstimator):
+    def __init__(self, root=False, suffix=False):
+        self.root = root
+        self.suffix = suffix
+
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X, y=None):
+        features = []
+        for verb in X:
+            feature_vector = []
+            if self.root:
+                feature_vector.append(self.extract_verb_root(verb))
+            if self.suffix:
+                feature_vector.append(self.extract_verb_suffix(verb))
+            features.append(feature_vector)
+        return np.array(features)
+
+class VerbMorphologyFr(VerbMorphology):
+    def extract_verb_root(self, verb):
+        pass
+    def extract_verb_suffix(self, verb):
+        pass
+
+class VerbMorphologyEn(VerbMorphology):
+    def extract_verb_root(self, verb):
+        pass
+    def extract_verb_suffix(self, verb):
+        pass
+
+# And so on for the other languages
