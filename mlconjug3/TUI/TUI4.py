@@ -120,16 +120,11 @@ class TUI:
         return image
     
     def handle_conjugation_table_view(self, selected_index):
-        """
-        Handles the user's selection of either the grid view or the image view of the conjugation table.
-        :param selected_index: int, the index of the selected option in the toggle button.
-        """
         if selected_index == 0:
-            # Show the grid view
-            pass
-        else:
-            # Show the image view
-            pass
+            self.handle_grid_view(verb, conjugation_result)
+        elif selected_index == 1:
+            self.handle_image_view(verb, conjugation_result)
+
             
     def show_grid_view(self):
         self.conjugation_tables.clear()
