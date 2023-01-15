@@ -132,16 +132,22 @@ class TUI:
             pass
             
     def show_grid_view(self):
-        """
-        Displays the conjugation table in a grid view.
-        """
-        pass
-
+        self.conjugation_tables.clear()
+        for tense, conjugations in conjugation_result.items():
+            tense_container = self.conjugation_tables.add(textual.Container())
+            tense_container.add(textual.Label(tense))
+            conjugation_table = tense_container.add(textual.Table(headers=["Subject", "Conjugation"]))
+            for subject, conjugation in conjugations.items():
+                conjugation_table.add_row([subject, conjugation])
+    
     def show_image_view(self):
-        """
-        Displays the conjugation table in an image view, using a charting library.
-        """
-        pass
+        self.conjugation_tables.clear()
+        for tense, conjugations in conjugation_result.items():
+            tense_container = self.conjugation_tables.add(textual.Container())
+            tense_container.add(textual.Label(tense))
+            for subject, conjugation in conjugations.items():
+                image = self.generate_image_for_conjugation(tense, subject, conjugation)
+                tense_container.add(textual.Image(image))
     
     def handle_history_select(self, verb):
         """
