@@ -2,6 +2,8 @@ import textual
 from .mlconjug import Conjugator
 import json
 import logging
+import matplotlib.pyplot as plt
+from matplotlib.figure import Figure
 
 import requests
 from bs4 import BeautifulSoup
@@ -21,6 +23,10 @@ class TUI:
         self.subject_selector = self.right_section.add(textual.Select(options=["abbrev", "pronoun"]))
         self.template_selector = self.right_section.add(textual.Select(options=DataSet.templates))
         self.template_selector.on_select(self.handle_template_select)
+        self.grid_view_button = self.right_section.add(textual.Button("Grid View"))
+        self.image_view_button = self.right_section.add(textual.Button("Image View"))
+        self.grid_view_button.on_click(self.handle_grid_view)
+        self.image_view_button.on_click(self.handle_image_view)
         self.help_section = self.right_section.add(textual.Container(flex=1))
         self.app.add_stylesheet("dark.css")
         self.add_dark_mode_button()
@@ -52,21 +58,63 @@ class TUI:
         if conjugation_result:
             self.verb_history.add_item(verb)
             self.conjugation_tables.clear()
-            for tense, conjugations in conjugation_result.items():
-                tense_container = self.conjugation_tables.add(textual.Container())
-                tense_container.add(textual.Label(tense))
-                conjugation_table = tense_container.add(textual.Table(headers=["Subject", "Conjugation"]))
-                for subject, conjugation in conjugations.items():
-                    conjugation_table.add_row([subject, conjugation])
-                examples = get_verb_examples_in_context(verb)
-                if examples:
-                    self.sample_verbs.clear()
-                    for example in examples:
-                        self.sample_verbs.add_item(example)
-                else:
-                    self.conjugation_tables.clear()
-                    self.conjugation_tables.add(textual.Text("The verb is not in the dataset. The conjugation was not possible."))
+            
+            self.grid_button = self.right_section.add(textual.Button("Grid View"))
+            self.grid_button.on_click(self.handle_grid_view)
+            
+            self.image_button = self.right_section.add(textual.Button("Image View"))
+            self.image_button.on_click(self.handle_image_view)
+            
+            self.both_button = self.right_section.add(textual.Button("Both View"))
+            self.both_button.on_click(self.handle_both_view)
+            
+            self.handle_grid_view(verb, conjugation_result)
+            
+    def handle_grid_view(self, verb, conjugation_result):
+        """
+        Displays the conjugations in a grid view
+        """
+        for tense, conjugations in conjugation_result.items():
+            tense_container = self.conjugation_tables.add(textual.Container())
+            tense_container.add(textual.Label(tense))
+            conjugation_table = tense_container.add(textual.Table(headers=["Subject", "Conjugation"]))
+            for subject, conjugation in conjugations.items():
+                conjugation_table.add_row([subject, conjugation])
+            examples = get_verb_examples_in_context(verb)
+            if examples:
+                self.sample_verbs.clear()
+                for example in examples:
+                    self.sample_verbs.add_item(example)
+                self.conjugation_table_view = self.left_section.add(textual.ToggleButton(options=["Grid View", "Image View"], selected_index=0))
+            self.conjugation_table_view.on_select(self.handle_conjugation_table_view)
+            
+    def handle_image_view(self):
+        pass
+    
+    def handle_conjugation_table_view(self, selected_index):
+        """
+        Handles the user's selection of either the grid view or the image view of the conjugation table.
+        :param selected_index: int, the index of the selected option in the toggle button.
+        """
+        if selected_index == 0:
+            # Show the grid view
+            pass
+        else:
+            # Show the image view
+            pass
+            
+    def show_grid_view(self):
+        """
+        Displays the conjugation table in a grid view.
+        """
+        pass
 
+    def show_image_view(self):
+        """
+        Displays the conjugation table in an image view, using a charting library.
+        """
+        pass
+    
     def handle_history_select(self, verb):
         """
         Handles the verb history list select event.
@@ -220,6 +268,23 @@ class TUI:
         self.conjugation_tables.style.font_size = font_size
         self.conjugation_tables.style.font_type = font_type
         self.app.refresh()
+    
+    def display_conjugations_chart(self, conjugations):
+        """
+        Displays a chart of the conjugated verbs using the provided conjugations.
+        :param conjugations: dict. The conjugations to display in the chart.
+        """
+        # Prepare the data for the chart
+        tenses = list(conjugations.keys())
+        subjects = list(conjugations[tenses[0]].keys())
+        data = {tense: [conjugations[tense][subject] for subject in subjects] for tense in tenses}
+
+        # Create the chart
+        fig, ax = plt.subplots()
+        ax.set_xticklabels(tenses)
+        ax.set_yticklabels(subjects)
+        ax.imshow(data)
+        plt.show()
         
     def save_conjugation_history(self, verb, conjugations):
         """
