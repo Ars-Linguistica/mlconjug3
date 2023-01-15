@@ -40,10 +40,17 @@ def transform(self, X, y=None):
                 morph_extractor = VerbMorphologyFr()
             elif self.language == 'en':
                 morph_extractor = VerbMorphologyEn()
-            # And so on for the other languages
+            elif self.language == 'es':
+                morph_extractor = VerbMorphologyEs()
+            elif self.language == 'it':
+                morph_extractor = VerbMorphologyIt()
+            elif self.language == 'pt':
+                morph_extractor = VerbMorphologyPt()
+            elif self.language == 'ro':
+                morph_extractor = VerbMorphologyRo()
             feature_vector.extend(morph_extractor.transform([verb]))
         
-        features.features.append(feature_vector)
+        features.append(feature_vector)
     return np.array(features)
         
     @staticmethod   
