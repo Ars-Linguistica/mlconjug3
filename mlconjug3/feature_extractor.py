@@ -1,42 +1,106 @@
-def extract_verb_features(verb, lang, ngram_range):
+import numpy as np
+from sklearn.base import TransformerMixin, BaseEstimator
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.pipeline import Pipeline
+
+class VerbFeatures(TransformerMixin, BaseEstimator):
     """
-    | Custom Vectorizer optimized for extracting verbs features.
-    | As in Indo-European languages verbs are inflected by adding a morphological suffix,
-     the vectorizer extracts verb endings and produces a vector representation of the verb with binary features.
+    Transformer to extract verb features using multiple techniques:
+    - Character n-grams
+    - Word2Vec embeddings
+    - Morphological features
+    """
 
-    | To enhance the results of the feature extration, several other features have been included:
+    def __init__(self, char_ngrams=None, w2v_model=None, morph_features=None):
+        self.char_ngrams = char_ngrams
+        self.w2v_model = w2v_model
+        self.morph_features = morph_features
 
-    | The features are the verb's ending n-grams, starting n-grams, length of the verb, number of vowels,
-     number of consonants and the ratio of vowels over consonants.
+    def fit(self, X, y=None):
+        return self
 
+    def transform(self, X, y=None):
+        features = []
+        for verb in X:
+            feature_vector = []
+            
+            # Extract character n-grams
+            if self.char_ngrams:
+                char_ngrams = [verb[i:i+n] for n in self.char_ngrams for i in range(len(verb)-n+1)]
+                feature_vector.extend(char_ngrams)
+            
+            # Extract Word2Vec embeddings
+            if self.w2v_model:
+                try:
+                    embeddings = self.w2v_model[verb]
+                    feature_vector.extend(embeddings)
+                except KeyError:
+                    pass
+            
+            # Extract morphological features
+            if self.morph_features:
+                for feature in self.morph_features:
+                    feature_vector.append(extract_morph_feature(verb, feature))
+            
+            features.append(feature_vector)
+        return np.array(features)
+
+def extract_morph_feature(verb, feature):
+    """
+    Function to extract specific morphological feature from a verb
+    """
+    if feature == 'root':
+        # Extract root of the verb
+        return extract_verb_root(verb)
+    elif feature == 'suffix':
+        # Extract suffix of the verb
+        return extract_verb_suffix(verb)
+    # Add other feature extraction methods as necessary
+    return None
+
+
+# ToDo: indent properly
+class VerbMorphologyFr:
+def extract_verb_root(verb):
+    """
+    This function takes in a verb and returns the root of the verb.
+    The root of the verb is the base form of the verb, from which all other forms are derived.
     :param verb: string.
-        Verb to vectorize.
-    :param lang: string.
-        Language to analyze.
-    :param ngram_range: tuple.
-        The range of the ngram sliding window.
-    :return: list.
-        List of the most salient features of the verb for the task of finding it's conjugation's class.
-
+        The verb to extract the root from.
+    :return: string.
+        The root of the verb.
     """
-    _white_spaces = re.compile(r"\s\s+")
-    verb = _white_spaces.sub(" ", verb)
-    verb = verb.lower()
-    verb_len = len(verb)
-    length_feature = 'LEN={0}'.format(str(verb_len))
-    min_n, max_n = ngram_range
-    final_ngrams = ['END={0}'.format(verb[-n:]) for n in range(min_n, min(max_n + 1, verb_len + 1))]
-    initial_ngrams = ['START={0}'.format(verb[:n]) for n in range(min_n, min(max_n + 1, verb_len + 1))]
-    if lang not in _ALPHABET:
-        lang = 'en'  # We chose 'en' as the default alphabet because english is more standard, without accents or diactrics.
-    vowels = sum(verb.count(c) for c in _ALPHABET[lang]['vowels'])
-    vowels_number = 'VOW_NUM={0}'.format(vowels)
-    consonants = sum(verb.count(c) for c in _ALPHABET[lang]['consonants'])
-    consonants_number = 'CONS_NUM={0}'.format(consonants)
-    if consonants == 0:
-        vow_cons_ratio = 'V/C=N/A'
+    # Regular expression to match the root of the verb
+    pattern = r"^(.*?)(?:er|ir|re|[^aeiou]ir|[^aeiou]ir[^aeiou]ir)$"
+    match = re.match(pattern, verb)
+    if match:
+        return match.group(1)
     else:
-        vow_cons_ratio = 'V/C={0}'.format(round(vowels / consonants, 2))
-    final_ngrams.extend(initial_ngrams)
-    final_ngrams.extend((length_feature, vowels_number, consonants_number, vow_cons_ratio))
-    return final_ngrams
+        return verb
+
+def extract_verb_suffix(verb):
+    """
+    This function takes in a verb and returns the suffix of the verb.
+    The suffix of the verb is the part of the verb that changes to indicate its grammatical function.
+    :param verb: string.
+        The verb to extract the suffix from.
+    :return: string.
+        The suffix of the verb.
+    """
+    # Regular expression to match the suffix of the verb
+    pattern = r"^.*?(er|ir|re|[^aeiou]ir|[^aeiou]ir[^aeiou]ir)$"
+    match = re.match(pattern, verb)
+    if match:
+        return match.group(1)
+    else:
+        return ""
+
+# Example usage:
+# char_ngrams_pipe = Pipeline([
+#     ('char_ngrams', TfidfVectorizer(analyzer='char', ngram_range=(3,5))),
+# ])
+# w2v_model = load_w2v_model('path/to/model')
+# morph_features = ['root', 'suffix']
+# feature_extractor = Pipeline([
+#     ('features', VerbFeatures(char_ngrams_pipe, w2v_model, morph_features))
+# ])
