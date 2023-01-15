@@ -7,7 +7,7 @@ from matplotlib.figure import Figure
 from PIL import Image, ImageDraw, ImageFont
 import requests
 from bs4 import BeautifulSoup
-
+# TODO fix interface inconsistencies.
 
 class TUI:
     def init(self):
@@ -70,6 +70,18 @@ class TUI:
             
             self.handle_grid_view(verb, conjugation_result)
             
+    def handle_submit(self, verb):
+        self.conjugator.language = self.language
+        self.conjugator.subject = self.subject
+        self.conjugation_tables.clear()
+        verb_info = self.conjugator.conjugate(verb)
+        if verb_info:
+            self.display_verb_conjugations(verb, verb_info)
+            self.verb_history.append(verb)
+        else:
+            self.conjugation_tables.add(textual.Text(f"The verb {verb} is not in the {self.conjugator.language} verb database"))
+    
+            
     def handle_grid_view(self, verb, conjugation_result):
         """
         Displays the conjugations in a grid view
@@ -87,6 +99,7 @@ class TUI:
                     self.sample_verbs.add_item(example)
                 self.conjugation_table_view = self.left_section.add(textual.ToggleButton(options=["Grid View", "Image View"], selected_index=0))
             self.conjugation_table_view.on_select(self.handle_conjugation_table_view)
+
             
     def handle_image_view(self):
         self.conjugation_tables.clear()
@@ -234,9 +247,9 @@ class TUI:
     def handle_multiple_submit(self, input_text):
         verbs = input_text.split(',')
         results = {}
-            for verb in verbs:
-                result = self.conjugator.conjugate(verb.strip(), self.subject)
-                results[verb.strip()] = result.conjug_info
+        for verb in verbs:
+            result = self.conjugator.conjugate(verb.strip(), self.subject)
+            results[verb.strip()] = result.conjug_info
         self.conjugation_tables.clear()
         for verb, conjugations in results.items():
             verb_table = self.conjugation_tables.add(textual.Table(flex=1))
@@ -248,45 +261,26 @@ class TUI:
     
     def filter_conjugations_by_person_number_mood(self, verb_info, person, number, mood):
         filtered_conjugations = {}
-            for key, value in verb_info.conjug_info.items():
-                if key.endswith(person + number + mood):
-                    filtered_conjugations[key] = value
+        for key, value in verb_info.conjug_info.items():
+            if key.endswith(person + number + mood):
+                filtered_conjugations[key] = value
         return filtered_conjugations
-        
-        self.mood_selector = self.right_section.add(textual.Select(options=["indicative", "subjunctive", "conditional", "imperative"]))
-        
-        # Handle the user's selections for person, number, and mood
-        
-        self.person_selector.on_select(partial(self.handle_filter_select, person=self.person_selector.get_selected()))
-        self.number_selector.on_select(partial(self.handle_filter_select, number=self.number_selector.get_selected()))
-        self.mood_selector.on_select(partial(self.handle_filter_select, mood=self.mood_selector.get_selected()))
-        
-        # Add a "Filter" button for the user to initiate the filtering process
-        
-        self.filter_button = self.right_section.add(textual.Button("Filter"))
-        self.filter_button.on_click(partial(self.handle_filter_select, person=self.person_selector.get_selected(), number=self.number_selector.get_selected(), mood=self.mood_selector.get_selected()))
-        
-        # Add a "Clear Filter" button for the user to clear any applied filters and view the full conjugation table again
-        
-        self.clear_filter_button = self.right_section.add(textual.Button("Clear Filter"))
-        self.clear_filter_button.on_click(self.handle_clear_filter)
     
     def handle_clear_filter(self):
-        verb_info = self.verb_history.get_selected()
+        self.person_selector.clear_value()
+        self.number_selector.clear_value()
+        self.mood_selector.clear_value()
         self.conjugation_tables.clear()
-        self.conjugation_tables.add(textual.Text(json.dumps(verb_info.conjug_info, ensure_ascii=False, indent=4)))
-        self.app.render()            self.app.render()
+        verb = self.verb_history.get_selected()
+        if verb:
+            verb_info = self.conjugator.conjugate(verb)
+            self.display_verb_conjugations(verb, verb_info)
 
-    def change_font_size_and_type(self, font_size, font_type):
-        """
-        Allows users to change the font size and type for the conjugations.
-        This would make it easier for users with visual impairments to read the conjugations.
-        :param font_size: int. The desired font size for the conjugations
-        :param font_type: string. The desired font type for the conjugations
-        """
-        self.conjugation_tables.style.font_size = font_size
-        self.conjugation_tables.style.font_type = font_type
-        self.app.refresh()
+
+    def change_font_size_and_type(self, size, font_type):
+    self.app.renders()
+    self.app.add_stylesheet(f"{font_type}-{size}.css")
+
         
     def save_conjugation_history(self, verb, conjugations):
         """
