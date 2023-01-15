@@ -12,10 +12,10 @@ class VerbFeatures(TransformerMixin, BaseEstimator):
     """
 
     def __init__(self, char_ngrams=None, w2v_model=None, morph_features=None, language='fr'):
-    self.char_ngrams = char_ngrams
-    self.w2v_model = w2v_model
-    self.morph_features = morph_features
-    self.language = language
+        self.char_ngrams = char_ngrams
+        self.w2v_model = w2v_model
+        self.morph_features = morph_features
+        self.language = language
 
     def fit(self, X, y=None):
         return self
