@@ -152,7 +152,172 @@ class TUI:
                 verb_table.add_row(tense, conjugation)
         self.verb_history.append(input_text)
     
-    
+    def filter_conjugations_by_person_number_mood(self, verb_info, person, number, mood):
+filtered_conjugations = {}
+for key, value in verb_info.conjug_info.items():
+if key.endswith(person + number + mood):
+filtered_conjugations[key] = value
+return filtered_conjugations
+
+def handle_filter_select(self, person, number, mood):
+verb_info = self.verb_history.get_selected()
+filtered_conjugations = self.filter_conjugations_by_person_number_mood(verb_info, person, number, mood)
+self.conjugation_tables.clear()
+self.conjugation_tables.add(textual.Text(json.dumps(filtered_conjugations, ensure_ascii=False, indent=4)))
+self.app.render()
+
+Add the filter selections to the user interface, such as dropdown menus for person, number, and mood
+
+self.person_selector = self.right_section.add(textual.Select(options=["1st", "2nd", "3rd"]))
+self.number_selector = self.right_section.add(textual.Select(options=["singular", "plural"]))
+self.mood_selector = self.right_section.add(textual.Select(options=["indicative", "subjunctive", "conditional", "imperative"]))
+
+Handle the user's selections for person, number, and mood
+
+self.person_selector.on_select(partial(self.handle_filter_select, person=self.person_selector.get_selected()))
+self.number_selector.on_select(partial(self.handle_filter_select, number=self.number_selector.get_selected()))
+self.mood_selector.on_select(partial(self.handle_filter_select, mood=self.mood_selector.get_selected()))
+
+Add a "Filter" button for the user to initiate the filtering process
+
+self.filter_button = self.right_section.add(textual.Button("Filter"))
+self.filter_button.on_click(partial(self.handle_filter_select, person=self.person_selector.get_selected(), number=self.number_selector.get_selected(), mood=self.mood_selector.get_selected()))
+
+Add a "Clear Filter" button for the user to clear any applied filters and view the full conjugation table again
+
+self.clear_filter_button = self.right_section.add(textual.Button("Clear Filter"))
+self.clear_filter_button.on_click(self.handle_clear_filter)
+
+def handle_clear_filter(self):
+verb_info = self.verb_history.get_selected()
+self.conjugation_tables.clear()
+self.conjugation_tables.add(textual.Text(json.dumps(verb_info.conjug_info, ensure_ascii=False, indent=4)))
+self.app.render()
+
+    def change_font_size_and_type(self, font_size, font_type):
+"""
+Allows users to change the font size and type for the conjugations.
+This would make it easier for users with visual impairments to read the conjugations.
+:param font_size: int. The desired font size for the conjugations
+:param font_type: string. The desired font type for the conjugations
+"""
+self.conjugation_tables.style.font_size = font_size
+self.conjugation_tables.style.font_type = font_type
+self.app.refresh()
+
+    def save_conjugation_history(self, verb, conjugations):
+"""
+Save the conjugation history in a list and display it in the verb history section of the TUI
+:param verb: str, the verb that was conjugated
+:param conjugations: dict, the conjugations of the verb
+"""
+self.verb_history.append(verb)
+self.conjugation_history[verb] = conjugations
+self.verb_history.update()
+
+    def compare_conjugations_multiple_languages(self, verb):
+"""
+Compares the conjugations of the given verb in multiple languages by conjugating the verb for all languages and displaying the conjugations in the conjugation_tables widget
+"""
+self.conjugation_tables.clear()
+for language in self.language_selector.options:
+self.conjugator.set_language(language)
+conjugations = self.conjugator.conjugate(verb, self.subject_selector.value)
+self.conjugation_tables.add(textual.Text(f"Conjugations for {verb} in {language}:"))
+for key, value in conjugations.items():
+self.conjugation_tables.add(textual.Text(f"{key}: {value}"))
+
+    def switch_layout_styles_themes(self):
+"""
+Allows users to switch between different layout styles and themes
+"""
+self.app.add(textual.Select(options=["Layout Style 1", "Layout Style 2", "Layout Style 3"]))
+self.app.add(textual.Select(options=["Theme 1", "Theme 2", "Theme 3"]))
+
+   def handle_layout_change(self, layout_style):
+    """
+    handle the change event of the layout style selector by changing the layout style of the application
+    """
+    if layout_style == "Layout Style 1":
+        self.app.layout_style = "layout_style_1"
+    elif layout_style == "Layout Style 2":
+        self.app.layout_style = "layout_style_2"
+    elif layout_style == "Layout Style 3":
+        self.app.layout_style = "layout_style_3"
+
+def handle_theme_change(self, theme):
+    """
+    handle the change event of the theme selector by changing the theme of the application
+    """
+    if theme == "Theme 1":
+        self.app.theme = "theme_1"
+    elif theme == "Theme 2":
+        self.app.theme = "theme_2"
+    elif theme == "Theme 3":
+        self.app.theme = "theme_3"
+
+self.app.on_layout_change(handle_layout_change)
+self.app.on_theme_change(handle_theme_change)
+
+    def display_verb_examples_in_context(self, verb):
+"""
+Display examples of the verb in context in the sample_verbs widget
+"""
+examples = get_verb_examples_in_context(verb)
+self.sample_verbs.items = examples
+self.app.focus(self.sample_verbs)
+
+    def provide_feedback_on_conjugation_results(self):
+"""
+This method allows users to provide feedback on the conjugation results by adding a button next to each conjugated form.
+When the button is clicked, a prompt will appear for the user to enter their feedback.
+The feedback will be logged in a separate file for later analysis.
+"""
+for form in self.conjugation_tables.children:
+feedback_button = form.add(textual.Button("Provide Feedback"))
+feedback_button.on_click(self.handle_feedback_submit)
+
+def handle_feedback_submit(self, form):
+"""
+Handles the event when the user clicks the feedback button by displaying a prompt for the user to enter their feedback.
+The feedback is then logged in a separate file for later analysis.
+"""
+feedback_prompt = form.add(textual.Prompt(placeholder="Enter your feedback"))
+feedback_prompt.on_submit(self.log_feedback)
+
+def log_feedback(self, feedback, form):
+"""
+Logs the user's feedback in a separate file for later analysis.
+The feedback is associated with the conjugated form that the user provided feedback on.
+"""
+with open("feedback.log", "a") as feedback_log:
+feedback_log.write("{} - {}\n".format(form, feedback))
+feedback_prompt.remove()
+form.add(textual.Text("Thank you for your feedback!"))
+    def init_help_section(self):
+"""
+Initialize the help section with instructions on how to use the TUI
+"""
+self.help_section.add(textual.Text("Enter a verb in the prompt to conjugate it."))
+self.help_section.add(textual.Text("Use the export button to save the conjugations."))
+self.help_section.add(textual.Text("Use the language selector to choose the language for conjugation."))
+self.help_section.add(textual.Text("Use the subject selector to choose between abbrev or pronoun for conjugations"))
+self.help_section.add(textual.Text("Use the verb history section to view previous conjugations"))
+self.help_section.update()
+
+def run(self):
+"""
+Start the TUI
+"""
+self.app.run()
+
+def init(self):
+self.conjugation_history = {}
+self.init()
+
+def del(self):
+self.app.exit()
+
 
     
         
