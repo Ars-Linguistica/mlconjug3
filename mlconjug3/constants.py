@@ -1,3 +1,5 @@
+import pkg_resources
+
 _RESOURCE_PACKAGE = 'mlconjug3'
 
 _LANGUAGES = ('default', 'fr', 'en', 'es', 'it', 'pt', 'ro')
