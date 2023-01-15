@@ -1,0 +1,192 @@
+/* Set the font and background color for the entire TUI */
+body {
+    font-family: "Open Sans", sans-serif;
+    background-color: #2b2b2b;
+    color: white;
+}
+
+/* Set the font color and background color for the prompt input */
+.prompt-input {
+    background-color: #3d3d3d;
+    border-radius: 5px;
+    padding: 10px;
+    transition: all 0.2s ease-in-out;
+}
+
+.prompt-input:focus {
+    background-color: #5f5f5f;
+}
+
+/* Set the font color and background color for the conjugation table */
+.conjugation-table {
+    background-color: #3d3d3d;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 10px;
+    transition: all 0.2s ease-in-out;
+}
+
+.conjugation-table:hover {
+    background-color: #5f5f5f;
+}
+
+/* Set the font color and background color for the verb history list */
+.verb-history-list {
+    background-color: #3d3d3d;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 10px;
+    transition: all 0.2s ease-in-out;
+}
+
+.verb-history-list:hover {
+    background-color: #5f5f5f;
+}
+
+/* Set the font color and background color for the sample verbs list */
+.sample-verbs-list {
+    background-color: #3d3d3d;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 10px;
+    transition: all 0.2s ease-in-out;
+}
+
+.sample-verbs-list:hover {
+    background-color: #5f5f5f;
+}
+
+/* Set the font color and background color for the export button */
+.export-button {
+    background-color: #3366CC;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 10px;
+    transition: all 0.2s ease-in-out;
+    color: white;
+}
+
+.export-button:hover {
+    background-color: #5588EE;
+}
+
+/* Set the font color and background color for the language selector */
+.language-selector {
+    background-color: #3d3d3d;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 10px;
+    transition: all 0.2s ease-in-out;
+}
+
+.language-selector:hover {
+    background-color: #5f5f5f;
+}
+
+/* Set the font color and background color for the subject selector */
+.subject-selector {
+    background-color: #3d3d3d;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 10px;
+    transition: all 0.2s ease-in-out;
+}
+
+.subject-selector:hover {
+background-color: #5588EE;
+box-shadow: 0px 0px 10px #D3D3D3;
+}
+
+/* Set the font color and background color for the layout style selector */
+.layout-style-selector {
+color: #333333;
+background-color: #FFFFFF;
+border-radius: 5px;
+box-shadow: 0px 0px 5px #D3D3D3;
+padding: 10px;
+margin-top: 10px;
+transition: all 0.2s ease-in-out;
+}
+
+.layout-style-selector:hover {
+background-color: #5588EE;
+box-shadow: 0px 0px 10px #D3D3D3;
+}
+
+/* Set the font color and background color for the theme selector */
+.theme-selector {
+color: #333333;
+background-color: #FFFFFF;
+border-radius: 5px;
+box-shadow: 0px 0px 5px #D3D3D3;
+padding: 10px;
+margin-top: 10px;
+transition: all 0.2s ease-in-out;
+}
+
+.theme-selector:hover {
+background-color: #5588EE;
+box-shadow: 0px 0px 10px #D3D3D3;
+}
+
+/* Use CSS flexbox to create a responsive and dynamic layout */
+.container {
+display: flex;
+}
+
+/* Use CSS grid to create a consistent layout throughout the application */
+.grid {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+grid-template-rows: repeat(3, 1fr);
+grid-gap: 20px;
+padding: 20px;
+}
+
+/* Use CSS variables to handle different layout styles and themes */
+:root {
+--background-color: #F7F7F7;
+--text-color: #333333;
+--main-color: #3366CC;
+--border-radius: 5px;
+--box-shadow: 0px 0px 5px #D3D3D3;
+--font-size: 16px;
+--font-type: Open Sans, sans-serif;
+}
+
+/* Use CSS to make the TUI more accessible for users with visual impairments */
+.accessibility {
+font-size: 20px;
+color: #000000;
+background-color: #FFFFFF;
+border-radius: 10px;
+padding: 10px;
+margin-top: 10px;
+transition: all 0.2s ease-in-out;
+}
+
+/* Add alternative text for images */
+img {
+alt: "image";
+}
+
+/* Add a touch of animation to elements */
+.animation {
+transition: all 0.2s ease-in-out;
+}
+
+.animation:hover {
+transform: scale(1.1);
+}
+
+/* Add hover and active states to buttons and other interactive elements */
+.button {
+transition: all 0.2s ease-in-out;
+}
+
+button:hover, button:active {
+background-color: #5588EE;
+box-shadow: 0px 0px 10px #D3D3D3;
+cursor: pointer;
+}
+
