@@ -100,6 +100,46 @@ def main(verbs, language, output, subject, theme):
             print(f"[bold yellow]Conjugation of the verb {verb}[/bold yellow]")
             print(table)
 
+def main(verbs, language, output, subject, theme):
+    setup_logging(logger)
+    if theme == 'light':
+        from rich.style import Style
+        from rich.theme import Theme
+        theme = Theme(
+            {
+                "table_header": Style(fg="white", bg="darkblue"),
+                "table_row": Style(fg="black"),
+                "table_footer": Style(fg="white", bg="darkblue"),
+            }
+        )
+    
+    if theme == 'dark':
+        from rich.style import Style
+        from rich.theme import Theme
+        theme = Theme(
+            {
+                "table_header": Style(fg="white", bg="darkgray"),
+                "table_row": Style(fg="white"),
+                "table_footer": Style(fg="white", bg="darkgray"),
+            }
+        )
+    
+    results = conjugate_verbs(verbs, language, subject)
+    
+    for verb in results:
+        table = Table(title=verb, show_footer=True, header_style="bold", theme=theme)
+        table.add_column("Person", justify="center", style="dim")
+        table.add_column("Tense", justify="center", style="dim")
+        table.add_column("Form", justify="center", style="dim")
+    
+        for person in results[verb]:
+            for tense in results[verb][person]:
+                table.add_row(person, tense, results[verb][person][tense])
+        pprint(table)
+    
+    if output:
+        write_conjugations_to_file(results, output)
+
 
 if name == 'main':
     main()
