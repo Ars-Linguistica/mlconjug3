@@ -72,6 +72,21 @@ _ALPHABET = {'fr': {'vowels': 'aáàâeêéèiîïoôöœuûùy',
                     'consonants': 'bcdfghjklmnpqrsșştțţvwxyz'},
              }
 
+
+_VERBS_RESOURCE_PATH = {'fr': '/'.join(('data', 'conjug_manager', 'verbs-fr.json')),
+                        'it': '/'.join(('data', 'conjug_manager', 'verbs-it.json')),
+                        'es': '/'.join(('data', 'conjug_manager', 'verbs-es.json')),
+                        'en': '/'.join(('data', 'conjug_manager', 'verbs-en.json')),
+                        'pt': '/'.join(('data', 'conjug_manager', 'verbs-pt.json')),
+                        'ro': '/'.join(('data', 'conjug_manager', 'verbs-ro.json')),}
+
+_CONJUGATIONS_RESOURCE_PATH = {'fr': '/'.join(('data', 'conjug_manager', 'conjugation-fr.json')),
+                               'it': '/'.join(('data', 'conjug_manager', 'conjugation-it.json')),
+                               'es': '/'.join(('data', 'conjug_manager', 'conjugation-es.json')),
+                               'en': '/'.join(('data', 'conjug_manager', 'conjugation-en.json')),
+                               'pt': '/'.join(('data', 'conjug_manager', 'conjugation-pt.json')),
+                               'ro': '/'.join(('data', 'conjug_manager', 'conjugation-ro.json')),}
+
 class Conjugator:
     """
     | This is the main class of the project.
@@ -245,7 +260,7 @@ class DataSet:
     
         """
         data = []
-        with open(_DATASET_PATH[self.language], 'r') as f:
+        with open(_CONJUGATIONS_RESOURCE_PATH[self.language], 'r') as f:
             dataset = json.load(f)
             for verb_info, conjugations in dataset.items():
                 for conjugation_class, conjugation_info in conjugations.items():
