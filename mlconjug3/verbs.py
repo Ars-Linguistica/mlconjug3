@@ -75,6 +75,48 @@ class Verb:
 
     def __repr__(self):
         return '{0}.{1}({2})'.format(__name__, self.__class__.__name__, self.name)
+    
+    def __len__(self):
+        return sum(len(tenses) for tenses in self.conjug_info.values())
+
+    
+    def __getitem__(self, key):
+        try:
+            return self.conjug_info[key]
+        except KeyError:
+            raise KeyError(f"{key} not found in conjugation information")
+            
+    def __iter__(self):
+        """
+        Iterates over all conjugated forms and returns a lazy generator of tuples of those conjugated forms.
+        :return: generator.
+            Lazy generator of conjugated forms.
+        """
+        for mood, tenses in self.conjug_info.items():
+            for tense, persons in tenses.items():
+                if isinstance(persons, str):
+                    yield (mood, tense, persons)
+                else:
+                    for pers, form in persons.items():
+                        yield (mood, tense, pers, form)
+
+    
+    def __eq__(self, other):
+        if not isinstance(other, Verb):
+            return NotImplemented
+        return (self.name == other.name and 
+                self.verb_info == other.verb_info and 
+                self.conjug_info == other.conjug_info and 
+                self.subject == other.subject and
+                self.predicted == other.predicted)
+    
+    def __call__(self, mood, tense, person):
+        try:
+            return self.conjug_info[mood][tense][person]
+        except KeyError:
+            raise KeyError(f"{mood} {tense} {person} not found in conjugation information")
+
+
 
     def iterate(self):
         """
