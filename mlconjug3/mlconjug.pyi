@@ -33,6 +33,9 @@ class Conjugator:
     
     def conjugate(self, verb:str, subject:str='abbrev') -> Verb:
         pass
+    
+    def conjugate_multi(self, verbs:List[str], subject='abbrev'):
+        pass
 
 
 class Model:
@@ -57,6 +60,7 @@ class Model:
     def test(self, verb_data:List[str], verb_classes:List[str]) -> Union[str, dict]:
         pass
 
+    
 class DataSet:
     def init(self, language: str, data: Union[str, List[str]]):
         pass
