@@ -1,3 +1,5 @@
+# Stubs for mlconjug3.mlconjug (Python 3)
+
 from .__init__ import Pipeline, SelectFromModel, CountVectorizer, LinearSVC, SGDClassifier
 from .constants import *
 from .PyVerbiste import Verbiste
