@@ -55,8 +55,8 @@ TEST_VERBS = {'fr': ('manger', 'man:ger'),
 
 
 class TestPyVerbiste:
-    verbiste = Verbiste(language='fr', extract_verb_features)
-    verbiste_en = Verbiste(language='en', extract_verb_features)
+    verbiste = Verbiste(extract_verb_features, language='fr')
+    verbiste_en = Verbiste(extract_verb_features, language='en')
 
     def test_init_verbiste(self):
         assert len(self.verbiste.templates) == len(self.verbiste.conjugations) == 149
