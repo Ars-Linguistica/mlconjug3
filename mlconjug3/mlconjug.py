@@ -70,7 +70,7 @@ class Conjugator:
         if feature_extractor:
             model.steps[0][1] = feature_extractor
         if classifier:
-        model.steps[-1][1] = classifier
+            model.steps[-1][1] = classifier
         return model
 
     def set_model(self, model):
