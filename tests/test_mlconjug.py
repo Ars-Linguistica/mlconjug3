@@ -21,7 +21,7 @@ from mlconjug3 import Conjugator, DataSet, Model, extract_verb_features, \
     LinearSVC, SGDClassifier, SelectFromModel, CountVectorizer
 
 from mlconjug3 import Verbiste, VerbInfo, Verb, VerbEn, \
-    VerbEs, VerbFr, VerbIt, VerbPt, VerbRo, ConjugManager
+    VerbEs, VerbFr, VerbIt, VerbPt, VerbRo, ConjugManager, VerbFeatures
 
 from mlconjug3 import cli
 
