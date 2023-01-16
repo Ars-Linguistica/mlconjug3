@@ -55,8 +55,8 @@ class Conjugator:
             self.model = self._load_default_model(feature_extractor)
         else:
             self.model = self._load_default_model()
-
-    def _load_default_model(self, feature_extractor=None):
+    
+    def _load_default_model(self, feature_extractor=None, classifier=None):
         if self.model:
             return self.model
         else:
@@ -66,11 +66,28 @@ class Conjugator:
                         model = joblib.load(archive)
         if feature_extractor:
             model.steps[0][1] = feature_extractor
+        if classifier:
+        model.steps[-1][1] = classifier
         return model
 
+    def set_model(self, model):
+        self.model = model
+    
+    def conjugate(self, verb, subject='abbrev'):
+        if not self.model:
+            raise ValueError('Model has not been set')
+        base_form = self.conjug_manager.is_valid_verb(verb)
+        if not base_form:
+            return None
+        if subject not in _SUBJECTS:
+            raise ValueError(_('Invalid subject.\nThe allowed subjects are abbrev, pronoun, name, you, he, she, it, we, they.'))
+        if subject == 'abbrev':
+            subject = _SUBJECTS.get(self.language)
+        prediction = self.model.predict([verb])
+        return _conjugate_verb(prediction[0], base_form, subject)
 
-    def __repr__(self):
-        return '{0}.{1}(language={2})'.format(__name__, self.__class__.__name__, self.language)
+
+    
 
     def set_model(self, model):
         self.model = model
