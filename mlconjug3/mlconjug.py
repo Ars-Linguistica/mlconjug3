@@ -218,7 +218,7 @@ class Conjugator:
         return results
     
 
-DataSet:
+class DataSet:
     """
     | This class loads and prepares the dataset for training.
     | The class loads the dataset from a JSON file and prepares the data for training.
