@@ -56,6 +56,9 @@ class Conjugator:
         else:
             self.model = self._load_default_model()
     
+    def __repr__(self):
+        return '{0}.{1}(language={2})'.format(__name__, self.__class__.__name__, self.language)
+    
     def _load_default_model(self, feature_extractor=None, classifier=None):
         if self.model:
             return self.model
@@ -69,25 +72,6 @@ class Conjugator:
         if classifier:
         model.steps[-1][1] = classifier
         return model
-
-    def set_model(self, model):
-        self.model = model
-    
-    def conjugate(self, verb, subject='abbrev'):
-        if not self.model:
-            raise ValueError('Model has not been set')
-        base_form = self.conjug_manager.is_valid_verb(verb)
-        if not base_form:
-            return None
-        if subject not in _SUBJECTS:
-            raise ValueError(_('Invalid subject.\nThe allowed subjects are abbrev, pronoun, name, you, he, she, it, we, they.'))
-        if subject == 'abbrev':
-            subject = _SUBJECTS.get(self.language)
-        prediction = self.model.predict([verb])
-        return _conjugate_verb(prediction[0], base_form, subject)
-
-
-    
 
     def set_model(self, model):
         self.model = model
@@ -143,23 +127,7 @@ class Conjugator:
             verb_object = _VERBS[self.language](verb_info, conjug_info, subject)
 
         return verb_object
-
-
-    def set_model(self, model):
-        """
-        Assigns the provided pre-trained scikit-learn pipeline to be able to conjugate unknown verbs.
-
-        :param model: scikit-learn Classifier or Pipeline.
-        :raises: ValueError.
-
-        """
-        if not isinstance(model, Model):
-            logger.warning(_('Please provide an instance of a mlconjug3.mlconjug3.Model'))
-            raise ValueError
-        else:
-            self.model = model
-        return
-
+    
 
 class DataSet:
     """
