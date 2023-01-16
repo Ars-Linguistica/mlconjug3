@@ -352,8 +352,24 @@ class Model:
         """
         | Custom Vectorizer optimized for extracting verbs features.
         """
-        return extract_verb_features(verb, lang, ngram_range)
+        return extract_verb_features(verb, lang, ngram_range
+    
+                                     
+class ConjugationEvaluator:
+    def __init__(self, model, test_data):
+        self.model = model
+        self.test_data = test_data
+        self.accuracy = None
 
-
+    def evaluate(self):
+        predictions = self.model.predict(self.test_data.X)
+        correct = 0
+        for i in range(len(predictions)):
+            if predictions[i] == self.test_data.y[i]:
+                correct += 1
+        self.accuracy = correct / len(predictions)
+        return self.accuracy
+                                     
+                                     
 if __name__ == "__main__":
     pass
