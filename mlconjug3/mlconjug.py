@@ -52,10 +52,10 @@ class Conjugator:
         if model:
             self.model = model 
         elif feature_extractor:
-            self.conjug_manager = Verbiste(feature_extractor, language=language)
+            self.conjug_manager = Verbiste(language=language, feature_extractor)
             self.model = self._load_default_model(feature_extractor)
         else:
-            self.conjug_manager = Verbiste(extract_verb_features, language=language)
+            self.conjug_manager = Verbiste(language=language, extract_verb_features)
             self.model = self._load_default_model()
     
     def __repr__(self):
