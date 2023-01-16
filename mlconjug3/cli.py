@@ -67,34 +67,33 @@ def main(verbs, language, output, subject):
 
         $ mlconjug3 gallofar --language es
     """
-
-# Set up logging
-logger = logging.getLogger(__name__)
-console_handler = logging.StreamHandler(sys.stdout)
-error_handler = logging.StreamHandler(sys.stderr)
-console_handler.setLevel(logging.INFO)
-error_handler.setLevel(logging.ERROR)
-logger.addHandler(console_handler)
-logger.addHandler(error_handler)
-logger.setLevel(logging.INFO)
-
-# Create a conjugator instance
-conjugator = Conjugator(language)
-
-# Conjugate verbs
-results = {}
-for verb in verbs:
-    result = conjugator.conjugate(verb, subject)
-    results[verb] = result.conjug_info
+    # Set up logging
+    logger = logging.getLogger(__name__)
+    console_handler = logging.StreamHandler(sys.stdout)
+    error_handler = logging.StreamHandler(sys.stderr)
+    console_handler.setLevel(logging.INFO)
+    error_handler.setLevel(logging.ERROR)
+    logger.addHandler(console_handler)
+    logger.addHandler(error_handler)
+    logger.setLevel(logging.INFO)
     
-# Write to file if output is provided, otherwise print to console
-if output:
-    with open(output, 'w', encoding='utf-8') as file:
-        json.dump(results, file, ensure_ascii=False, indent=4)
-        print('The conjugations have been succesfully saved to {0}.'.format(output))
-else:
-    print(json.dumps(results, ensure_ascii=False, indent=4))
-    return
+    # Create a conjugator instance
+    conjugator = Conjugator(language)
+    
+    # Conjugate verbs
+    results = {}
+    for verb in verbs:
+        result = conjugator.conjugate(verb, subject)
+        results[verb] = result.conjug_info
+        
+    # Write to file if output is provided, otherwise print to console
+    if output:
+        with open(output, 'w', encoding='utf-8') as file:
+            json.dump(results, file, ensure_ascii=False, indent=4)
+            print('The conjugations have been succesfully saved to {0}.'.format(output))
+    else:
+        print(json.dumps(results, ensure_ascii=False, indent=4))
+        return
 
 if name == "main":
     main()
