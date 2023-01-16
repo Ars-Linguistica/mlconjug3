@@ -48,10 +48,9 @@ class Conjugator:
 
     def __init__(self, language='fr', feature_extractor=None, model=None):
         self.language = language
-        
-        if model:
-            self.model = model 
-        elif feature_extractor:
+        self.model = model
+             
+        if feature_extractor:
             self.conjug_manager = Verbiste(language=language, extract_verb_features=feature_extractor)
             self.model = self._load_default_model(feature_extractor)
         else:
