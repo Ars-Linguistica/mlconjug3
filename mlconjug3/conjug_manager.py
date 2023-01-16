@@ -6,6 +6,10 @@ from typing import Tuple
 from joblib import Memory
 from .constants import *
 
+
+_LANGUAGES = ('default', 'fr', 'en', 'es', 'it', 'pt', 'ro')
+
+
 class ConjugManager:
     """
     This is the class handling the mlconjug3 json files.
