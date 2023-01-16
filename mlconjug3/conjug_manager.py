@@ -30,7 +30,7 @@ class ConjugManager:
         self._allowed_endings = self._detect_allowed_endings()
         self.pre_trained_models = pre_trained_models
         self.extract_verb_features = extract_verb_features
-        self.cache = Memory(cachedir='/path/to/cache', verbose=0)
+        self.cache = Memory(location=='./cachedir', verbose=0)
 
     def __repr__(self):
         return '{0}.{1}(language={2})'.format(__name__, self.__class__.__name__, self.language)
