@@ -95,5 +95,5 @@ def main(verbs, language, output, subject):
         print(json.dumps(results, ensure_ascii=False, indent=4))
         return
 
-if name == "main":
+if __name__ == "main":
     main()
