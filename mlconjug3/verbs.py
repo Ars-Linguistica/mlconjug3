@@ -38,7 +38,21 @@ class VerbInfo:
             return NotImplemented
         return self.infinitive == other.infinitive and self.root == other.root and self.template == other.template
 
+    
+class ParallelVerb(Verb):
+    def _load_conjugation(self):
+        if self.verb_info.infinitive not in self._conjug_cache:
+            with concurrent.futures.ThreadPoolExecutor() as executor:
+                future = executor.submit(self._load_conjugation_thread, self.verb_info.infinitive)
+                self._conjug_cache[self.verb_info.infinitive] = future.result()
+            return self._conjug_cache[self.verb_info.infinitive]
+    
+    def _load_conjugation_thread(self, verb_infinitive):
+        with open("conjugation_data/{}_conjugations.json".format(verb_infinitive), "r") as conjug_file:
+            conjug_info = json.load(conjug_file)
+        return conjug_info
 
+    
 class Verb:
     """
     This class defines the Verb Object.
@@ -102,20 +116,6 @@ class Verb:
         """
         conjug_info = self._load_conjugation()
         return conjug_info[mood][tense][person]
-
-    
-class ParallelVerb(Verb):
-    def _load_conjugation(self):
-        if self.verb_info.infinitive not in self._conjug_cache:
-            with concurrent.futures.ThreadPoolExecutor() as executor:
-                future = executor.submit(self._load_conjugation_thread, self.verb_info.infinitive)
-                self._conjug_cache[self.verb_info.infinitive] = future.result()
-            return self._conjug_cache[self.verb_info.infinitive]
-    
-    def _load_conjugation_thread(self, verb_infinitive):
-        with open("conjugation_data/{}_conjugations.json".format(verb_infinitive), "r") as conjug_file:
-            conjug_info = json.load(conjug_file)
-        return conjug_info
     
     
 class Verb:
