@@ -430,7 +430,7 @@ class VerbMorphologyRo(TransformerMixin, BaseEstimator):
     """
     def __init__(self, root=False, suffix=False):
         self.root = root
-            self.suffix = suffix
+        self.suffix = suffix
     
     def fit(self, X, y=None):
         return self
