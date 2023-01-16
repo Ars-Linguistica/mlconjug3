@@ -78,21 +78,18 @@ class Verb:
 
     def iterate(self):
         """
-        Iterates over all conjugated forms and returns a list of tuples of those conjugated forms.
-
-        :return: list.
-            List of conjugated forms.
-
+        Iterates over all conjugated forms and returns a lazy generator of tuples of those conjugated forms.
+        :return: generator.
+            Lazy generator of conjugated forms.
         """
-        iterate_results = []
         for mood, tenses in self.conjug_info.items():
             for tense, persons in tenses.items():
                 if isinstance(persons, str):
-                    iterate_results.append((mood, tense, persons))
+                    yield (mood, tense, persons)
                 else:
                     for pers, form in persons.items():
-                        iterate_results.append((mood, tense, pers, form))
-        return iterate_results
+                        yield (mood, tense, pers, form)
+
 
     def _load_conjug(self):
         """
