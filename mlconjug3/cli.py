@@ -94,7 +94,7 @@ if output:
         print('The conjugations have been succesfully saved to {0}.'.format(output))
 else:
     print(json.dumps(results, ensure_ascii=False, indent=4))
-return
+    return
 
 if name == "main":
     main()
