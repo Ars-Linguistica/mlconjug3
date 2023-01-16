@@ -39,18 +39,7 @@ class VerbInfo:
         return self.infinitive == other.infinitive and self.root == other.root and self.template == other.template
 
     
-class ParallelVerb(Verb):
-    def _load_conjugation(self):
-        if self.verb_info.infinitive not in self._conjug_cache:
-            with concurrent.futures.ThreadPoolExecutor() as executor:
-                future = executor.submit(self._load_conjugation_thread, self.verb_info.infinitive)
-                self._conjug_cache[self.verb_info.infinitive] = future.result()
-            return self._conjug_cache[self.verb_info.infinitive]
-    
-    def _load_conjugation_thread(self, verb_infinitive):
-        with open("conjugation_data/{}_conjugations.json".format(verb_infinitive), "r") as conjug_file:
-            conjug_info = json.load(conjug_file)
-        return conjug_info
+
 
     
 class Verb:
@@ -118,30 +107,21 @@ class Verb:
         return conjug_info[mood][tense][person]
     
     
-class Verb:
-    """
-    This class defines the Verb Object.
-
-    :param verb_info: VerbInfo Object.
-    :param conjug_info: OrderedDict.
-    :param subject: string.
-        Toggles abbreviated or full pronouns.
-        The default value is 'abbrev'.
-        Select 'pronoun' for full pronouns.
-    :param predicted: bool.
-        Indicates if the conjugation information was predicted by the model or retrieved from the dataset.
-    :ivar verb_info: VerbInfo Object.
-    :ivar conjug_info: OrderedDict.
-    :ivar confidence_score: float. Confidence score of the prediction accuracy.
-    :ivar subject: string. Either 'abbrev' or 'pronoun'
-    :ivar predicted: bool.
-        Indicates if the conjugation information was predicted by the model or retrieved from the dataset.
-
-    """
-    __slots__ = ('name', 'verb_info', 'conjug_info', 'subject', 'predicted', 'confidence_score')
+class ParallelVerb(Verb):
+    def _load_conjugation(self):
+        if self.verb_info.infinitive not in self._conjug_cache:
+            with concurrent.futures.ThreadPoolExecutor() as executor:
+                future = executor.submit(self._load_conjugation_thread, self.verb_info.infinitive)
+                self._conjug_cache[self.verb_info.infinitive] = future.result()
+            return self._conjug_cache[self.verb_info.infinitive]
+    
+    def _load_conjugation_thread(self, verb_infinitive):
+        with open("conjugation_data/{}_conjugations.json".format(verb_infinitive), "r") as conjug_file:
+            conjug_info = json.load(conjug_file)
+        return conjug_info
 
 
-class VerbFr(Verb):
+class VerbFr(ParallelVerb):
     """
     This class defines the French Verb Object.
 
@@ -179,7 +159,7 @@ class VerbFr(Verb):
         return
 
 
-class VerbEn(Verb):
+class VerbEn(ParallelVerb):
     """
     This class defines the English Verb Object.
 
@@ -219,7 +199,7 @@ class VerbEn(Verb):
         return
 
 
-class VerbEs(Verb):
+class VerbEs(ParallelVerb):
     """
     This class defines the Spanish Verb Object.
 
@@ -271,7 +251,7 @@ class VerbEs(Verb):
         return
 
 
-class VerbIt(Verb):
+class VerbIt(ParallelVerb):
     """
     This class defines the Italian Verb Object.
 
@@ -310,7 +290,7 @@ class VerbIt(Verb):
         return
 
 
-class VerbPt(Verb):
+class VerbPt(ParallelVerb):
     """
     This class defines the Portuguese Verb Object.
 
@@ -349,7 +329,7 @@ class VerbPt(Verb):
         return
 
 
-class VerbRo(Verb):
+class VerbRo(ParallelVerb):
     """
     This class defines the Romanian Verb Object.
 
