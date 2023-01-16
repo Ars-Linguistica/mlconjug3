@@ -127,6 +127,36 @@ class Conjugator:
             verb_object = _VERBS[self.language](verb_info, conjug_info, subject)
 
         return verb_object
+        
+    def conjugate_multi(self, verbs, subject='abbrev'):
+        """
+        | This is the main method of this class.
+        | It first checks to see if the verb is in Verbiste.
+        | If it is not, and a pre-trained scikit-learn pipeline has been supplied, the method then calls the pipeline
+         to predict the conjugation class of the provided verb.
+        | Returns a list of Verb objects.
+        :param verbs: list of strings.
+            Verbs to conjugate.
+        :param subject: string.
+            Toggles abbreviated or full pronouns.
+            The default value is 'abbrev'.
+            Select 'pronoun' for full pronouns.
+        """
+        # Check if the verbs are valid
+        base_forms = [self.conjug_manager.is_valid_verb(verb) for verb in verbs]
+        if any(base_forms):
+            base_forms = [base for base in base_forms if base]
+        else:
+            base_forms = verbs
+        # Predict conjugation class
+        conjugations = self.model.predict(base_forms)
+        conjugations = [self.conjug_manager.conjugations[c] for c in conjugations]
+        # Conjugate
+        pool = multiprocessing.Pool()
+        results = pool.map(partial(conjugate_verb, conjugations, subject), zip(verbs, base_forms, conjugations))
+        pool.close()
+        pool.join()
+        return results
     
 
 class DataSet:
