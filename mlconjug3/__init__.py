@@ -55,6 +55,10 @@ import inspect
 
 extract_verb_features = VerbFeatures
 
+_RESOURCE_PACKAGE = 'mlconjug3'
+
+_LANGUAGES = ('default', 'fr', 'en', 'es', 'it', 'pt', 'ro')
+
 # Sets up the automatic translation of annotated strings displayed to the user.
 _TRANSLATIONS_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'locale')
 
