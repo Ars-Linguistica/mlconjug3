@@ -4,23 +4,29 @@ from collections import defaultdict
 from functools import partial
 from typing import Tuple
 from joblib import Memory
-from .constants import *
+import hashlib
+import os
+import pickle
 
 
-_LANGUAGES = ('default', 'fr', 'en', 'es', 'it', 'pt', 'ro')
+class Singleton(type):
+    _instances = {}
+    def __call__(cls, *args, **kwargs):
+        if cls not in cls._instances:
+            cls._instances[cls] = super(Singleton, cls).__call__(*args, **kwargs)
+        return cls._instances[cls]
 
 
-class ConjugManager:
+class ConjugManager(metaclass=Singleton):
     """
     This is the class handling the mlconjug3 json files.
-        :param language: string.
-            | The language of the conjugator. The default value is fr for French.
-            | The allowed values are: fr, en, es, it, pt, ro.
-        :ivar language: Language of the conjugator.
-        :ivar verbs: Dictionary where the keys are verbs and the values are conjugation patterns.
-        :ivar conjugations: Dictionary where the keys are conjugation patterns and the values are inflected forms.
+    :param language: string.
+    | The language of the conjugator. The default value is fr for French.
+    | The allowed values are: fr, en, es, it, pt, ro.
+    :ivar language: Language of the conjugator.
+    :ivar verbs: Dictionary where the keys are verbs and the values are conjugation patterns.
+    :ivar conjugations: Dictionary where the keys are conjugation patterns and the values are inflected forms.
     """
-
     def __init__(self, language='fr', extract_verb_features=None, pre_trained_models=None):
         if language not in _LANGUAGES:
             raise ValueError(_('Unsupported language.\nThe allowed languages are fr, en, es, it, pt, ro.'))
@@ -31,11 +37,13 @@ class ConjugManager:
         self.pre_trained_models = pre_trained_models
         self.extract_verb_features = extract_verb_features
         self.cache = Memory(location= './cachedir', verbose=0)
+        self._load_verbs()
+        self._load_conjugations()
 
     def __repr__(self):
         return '{0}.{1}(language={2})'.format(__name__, self.__class__.__name__, self.language)
 
-    def _load_verbs(self, verbs_file):
+    def _load_verbs(self):
         """
         Load and parses the verbs from the json file.
 
@@ -43,51 +51,65 @@ class ConjugManager:
             Path to the verbs json file.
 
         """
-        with open(verbs_file, 'r', encoding='utf-8') as file:
-            self.verbs = json.load(file)
+        json_file = "conjugation_data/{}_verbs.json".format(self.language)
+        json_hash = hashlib.sha1(open(json_file, "rb").read()).hexdigest()
+
+        if os.path.isfile("conjugation_data/{}_verbs.pkl".format(self.language)):
+            with open("conjugation_data/{}_verbs.pkl".format(self.language), 'rb') as f:
+                stored_hash, self.verbs = pickle.load(f)
+                if stored_hash != json_hash:
+                    with open(json_file, 'r', encoding='utf-8') as file:
+                        self.verbs = json.load(file)
+                        with open("conjugation_data/{}_verbs.pkl".format(self.language), 'wb') as f:
+                            pickle.dump((json_hash, self.verbs), f)
+        else:
+            with open(json_file, 'r', encoding='utf-8') as file:
+                self.verbs = json.load(file)
+                with open("conjugation_data/{}_verbs.pkl".format(self.language), 'wb') as f:
+                    pickle.dump((json_hash, self.verbs), f)
         return
 
-    def _load_conjugations(self, conjugations_file):
+    def _load_conjugations(self):
         """
         Load and parses the conjugations from the json file.
-
-        :param conjugations_file: string or path object.
-            Path to the conjugation json file.
-
         """
-        with open(conjugations_file, 'r', encoding='utf-8') as file:
-            self.conjugations = json.load(file)
+        json_file = "conjugation_data/{}_conjugations.json".format(self.language)
+        json_hash = hashlib.sha1(open(json_file, "rb").read()).hexdigest()
+
+        if os.path.isfile("conjugation_data/{}_conjugations.pkl".format(self.language)):
+            with open("conjugation_data/{}_conjugations.pkl".format(self.language), 'rb') as f:
+                stored_hash, self.conjugations = pickle.load(f)
+                if stored_hash != json_hash:
+                    with open(json_file, 'r', encoding='utf-8') as file:
+                        self.conjugations = json.load(file)
+                        with open("conjugation_data/{}_conjugations.pkl".format(self.language), 'wb') as f:
+                            pickle.dump((json_hash, self.conjugations), f)
+        else:
+            with open(json_file, 'r', encoding='utf-8') as file:
+                self.conjugations = json.load(file)
+                with open("conjugation_data/{}_conjugations.pkl".format(self.language), 'wb') as f:
+                    pickle.dump((json_hash, self.conjugations), f)
         return
 
     def _detect_allowed_endings(self):
         """
-        | Detects the allowed endings for verbs in the supported languages.
-        | All the supported languages except for English restrict the form a verb can take.
-        | As English is much more productive and varied in the morphology of its verbs, any word is allowed as a verb.
-
-        :return: set.
-            A set containing the allowed endings of verbs in the target language.
-
+        Detects the allowed verb endings from the conjugations json file.
         """
-        if self.language == 'en':
-            return True
-        return {verb.split(' ')[0][-2:] for verb in self.verbs if len(verb) >= 2}
-
-    def is_valid_verb(self, verb):
+        allowed_endings = set()
+        for conj in self.conjugations.values():
+            for ending in conj['allowed_endings']:
+                allowed_endings.add(ending)
+        return allowed_endings
+    
+    def _get_verb_template(self, infinitive):
         """
-        | Checks if the verb is a valid verb in the given language.
-        | If the verb is invalid, returns alse, otherwise returns the base form of the verb.
-            :param verb: string.
-        The verb to be checked.
-    :return: string or bool.
-        Returns the base form of the verb if valid, False otherwise.
-
-    """
-        if self.language == 'en':
-            return verb
-        base_form = self.verbs.get(verb, None)
-        if not base_form:
-            logger.warning("The verb '{}' is not a valid verb in the {} language.".format(verb, _LANGUAGE_FULL[self.language]))
-            return False
-        return base_form
-
+        Returns the conjugation pattern of a verb.
+        """
+        infinitive = infinitive.lower()
+        if infinitive in self.verbs:
+            return self.verbs[infinitive]['template']
+        else:
+            for ending in self._allowed_endings:
+                if infinitive.endswith(ending):
+                    return self._detect_verb_template(infinitive)
+        return None
