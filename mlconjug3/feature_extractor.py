@@ -318,7 +318,7 @@ class VerbMorphologyPt(VerbMorphology):
         return None
 
 
-class VerbMorphologyRo(VerbMorphology)
+class VerbMorphologyRo(VerbMorphology):
     """
     Example use:
     from sklearn.pipeline import Pipeline
