@@ -25,7 +25,7 @@ import pkg_resources
 from .verbs import *
 from .constants import *
 from .conjug_manager import ConjugManager
-
+from .utils import logger
 
 class Verbiste(ConjugManager):
     """
