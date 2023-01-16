@@ -374,3 +374,29 @@ class VerbRo(Verb):
                     prefix = 'a ' if tense_name == 'Infinitiv Afirmativ' else ''
                     self.conjug_info[mood][tense_name] = prefix + self.verb_info.root + persons
         return
+    
+
+class VerbFactory:
+    def create_verb(language, infinitive, root, template):
+        if language not in _VERBS:
+            raise ValueError(f"Invalid language: {language}")
+        return _VERBS[language](infinitive, root, template)
+
+    
+class ConjugationDecorator:
+    def __init__(self, verb):
+        self._verb = verb
+
+    def add_conjugation(self, mood, tense, person, form):
+        self._verb.conjug_info[mood][tense][person] = form
+
+        
+class LanguageDetector:
+    def __init__(self, model_path):
+        self.model = joblib.load(model_path)
+        
+    def detect(self, infinitive: str):
+        features = VerbFeatures.extract_verb_features(infinitive)
+        return self.model.predict([features])
+
+    
