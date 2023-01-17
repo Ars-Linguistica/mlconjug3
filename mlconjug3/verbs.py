@@ -1,5 +1,6 @@
 import json
 from collections import OrderedDict
+from .constants import *
 
 class VerbInfo:
     """
