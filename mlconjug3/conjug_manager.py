@@ -36,7 +36,7 @@ class ConjugManager(metaclass=Singleton):
     :ivar verbs: Dictionary where the keys are verbs and the values are conjugation patterns.
     :ivar conjugations: Dictionary where the keys are conjugation patterns and the values are inflected forms.
     """
-    def init(self, language='fr', extract_verb_features=None, pre_trained_models=None):
+    def __init__(self, language='fr', extract_verb_features=None, pre_trained_models=None):
         if language not in LANGUAGES:
             raise ValueError(('Unsupported language.\nThe allowed languages are fr, en, es, it, pt, ro.'))
         self.language = language
