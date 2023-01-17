@@ -29,64 +29,6 @@ from concurrent.futures import ThreadPoolExecutor
 # Added for backward compatibility.
 extract_verb_features = VerbFeatures.extract_verb_features
 
-_RESOURCE_PACKAGE = 'mlconjug3'
-
-_LANGUAGES = ('default', 'fr', 'en', 'es', 'it', 'pt', 'ro')
-
-_VERBS = {'fr': VerbFr,
-          'en': VerbEn,
-          'es': VerbEs,
-          'it': VerbIt,
-          'pt': VerbPt,
-          'ro': VerbRo,
-          }
-
-_PRE_TRAINED_MODEL_PATH = {
-    'fr': '/'.join(('data', 'models', 'trained_model-fr-final.zip')),
-    'it': '/'.join(('data', 'models', 'trained_model-it-final.zip')),
-    'es': '/'.join(('data', 'models', 'trained_model-es-final.zip')),
-    'en': '/'.join(('data', 'models', 'trained_model-en-final.zip')),
-    'pt': '/'.join(('data', 'models', 'trained_model-pt-final.zip')),
-    'ro': '/'.join(('data', 'models', 'trained_model-ro-final.zip')),
-}
-
-_LANGUAGE_FULL = {'fr': 'Français',
-                  'en': 'English',
-                  'es': 'Español',
-                  'it': 'Italiano',
-                  'pt': 'Português',
-                  'ro': 'Română',
-                  }
-
-
-_ALPHABET = {'fr': {'vowels': 'aáàâeêéèiîïoôöœuûùy',
-                    'consonants': 'bcçdfghjklmnpqrstvwxyz'},
-             'en': {'vowels': 'aeiouy',
-                    'consonants': 'bcdfghjklmnpqrstvwxyz'},
-             'es': {'vowels': 'aáeiíoóuúy',
-                    'consonants': 'bcdfghjklmnñpqrstvwxyz'},
-             'it': {'vowels': 'aàeéèiìîoóòuùy',
-                    'consonants': 'bcdfghjklmnpqrstvwxyz'},
-             'pt': {'vowels': 'aàãááeêéiíoóõuúy',
-                    'consonants': 'bcçdfghjklmnpqrstvwxyz'},
-             'ro': {'vowels': 'aăâeiîouy',
-                    'consonants': 'bcdfghjklmnpqrsșştțţvwxyz'},
-             }
-
-
-_VERBS_RESOURCE_PATH = {'fr': '/'.join(('data', 'conjug_manager', 'verbs-fr.json')),
-                        'it': '/'.join(('data', 'conjug_manager', 'verbs-it.json')),
-                        'es': '/'.join(('data', 'conjug_manager', 'verbs-es.json')),
-                        'en': '/'.join(('data', 'conjug_manager', 'verbs-en.json')),
-                        'pt': '/'.join(('data', 'conjug_manager', 'verbs-pt.json')),
-                        'ro': '/'.join(('data', 'conjug_manager', 'verbs-ro.json')),}
-
-_CONJUGATIONS_RESOURCE_PATH = {'fr': '/'.join(('data', 'conjug_manager', 'conjugation-fr.json')),
-                               'it': '/'.join(('data', 'conjug_manager', 'conjugation-it.json')),
-                               'es': '/'.join(('data', 'conjug_manager', 'conjugation-es.json')),
-                               'en': '/'.join(('data', 'conjug_manager', 'conjugation-en.json')),
-                               'pt': '/'.join(('data', 'conjug_manager', 'conjugation-pt.json')),
-                               'ro': '/'.join(('data', 'conjug_manager', 'conjugation-ro.json')),}
 
 class Conjugator:
     """
@@ -124,7 +66,7 @@ class Conjugator:
             return self.model
         else:
             with ZipFile(pkg_resources.resource_stream(
-                _RESOURCE_PACKAGE, _PRE_TRAINED_MODEL_PATH[self.language])) as content:
+                RESOURCE_PACKAGE, PRE_TRAINED_MODEL_PATH[self.language])) as content:
                     with content.open('trained_model-{0}-final.pickle'.format(self.language), 'r') as archive:
                         model = joblib.load(archive)
         if feature_extractor:
@@ -156,7 +98,7 @@ class Conjugator:
         prediction_score = 0
         if not self.conjug_manager.is_valid_verb(verb):
             raise ValueError(
-                _('The supplied word: {0} is not a valid verb in {1}.').format(verb, _LANGUAGE_FULL[self.language]))
+                _('The supplied word: {0} is not a valid verb in {1}.').format(verb, LANGUAGE_FULL[self.language]))
         if verb not in self.conjug_manager.verbs.keys():
             if self.model is None:
                 logger.warning(_('Please provide an instance of a mlconjug3.mlconjug3.Model'))
@@ -165,10 +107,10 @@ class Conjugator:
                     prediction_score, conjug_class = self.model.predict_verb(verb)
                 except ValueError:
                     raise ValueError(
-                        _('The supplied word: {0} is not a valid verb in {1}.').format(verb, _LANGUAGE_FULL[self.language]))
+                        _('The supplied word: {0} is not a valid verb in {1}.').format(verb, LANGUAGE_FULL[self.language]))
                 if prediction_score < 0.5:
                     raise ValueError(
-                        _('The supplied word: {0} is not a valid verb in {1}.').format(verb, _LANGUAGE_FULL[self.language]))
+                        _('The supplied word: {0} is not a valid verb in {1}.').format(verb, LANGUAGE_FULL[self.language]))
                 self.conjug_manager.populate_verb(verb, conjug_class)
         return self.conjug_manager.get_verb(verb, subject, predicted=True)
 
