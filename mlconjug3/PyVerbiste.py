@@ -17,6 +17,13 @@ __author__ = 'SekouDiaoNlp'
 __author_email__ = 'diao.sekou.nlp@gmail.com'
 
 
+import re
+from collections import defaultdict
+from functools import partial
+from typing import Tuple
+from joblib import Memory
+import hashlib
+import os
 import copy
 import defusedxml.ElementTree as ET
 import json
@@ -26,6 +33,7 @@ from .verbs import *
 from .constants import *
 from .conjug_manager import ConjugManager
 from .utils import logger
+
 
 class Verbiste(ConjugManager):
     """
@@ -48,7 +56,14 @@ class Verbiste(ConjugManager):
             Path to the verbs xml file.
 
         """
-        self.verbs = self._parse_verbs(verbs_file.replace('json', 'xml'))
+        json_file = verbs_file.replace('xml', 'json')
+        json_hash = hashlib.sha1(open(json_file, "rb").read()).hexdigest()
+        
+        if self.cache.get(json_file) and json_hash == self.cache.get(json_file)["hash"]:
+            self.verbs = self.cache.get(json_file)["data"]
+        else:
+            self.verbs = self._parse_verbs(verbs_file)
+            self.cache.set(json_file, {"hash":json_hash, "data":self.verbs})
         return
 
     @staticmethod
@@ -80,7 +95,13 @@ class Verbiste(ConjugManager):
             Path to the conjugation xml file.
 
         """
-        self.conjugations = self._parse_conjugations(conjugations_file.replace('json', 'xml'))
+        json_file = conjugations_file.replace('xml', 'json')
+        json_hash = hashlib.sha1(open(json_file, "rb").read()).hexdigest()
+        if self.cache.get(json_file) and json_hash == self.cache.get(json_file)["hash"]:
+            self.conjugations = self.cache.get(json_file)["data"]
+        else:
+            self.conjugations = self._parse_conjugations(conjugations_file)
+            self.cache.set(json_file, {"hash":json_hash, "data":self.conjugations})
         return
 
     def _parse_conjugations(self, file):
