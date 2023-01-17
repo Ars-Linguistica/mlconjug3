@@ -11,10 +11,16 @@ import re
 
 class Singleton(type):
     _instances = {}
-    def call(cls, *args, **kwargs):
+    def __call__(cls, *args, **kwargs):
         if cls not in cls._instances:
-            cls._instances[cls] = super(Singleton, cls).call(*args, **kwargs)
+            cls._instances[cls] = super(Singleton, cls).__call__(*args, **kwargs)
+        else:
+            json_file = "conjugation_data/{}_verbs.json".format(cls._instances[cls].language)
+            json_hash = hashlib.sha256(open(json_file, "rb").read()).hexdigest()
+            if json_hash != cls._instances[cls].cache.get(json_file)["hash"]:
+                cls._instances[cls] = super(Singleton, cls).__call__(*args, **kwargs)
         return cls._instances[cls]
+
 
 class ConjugManager(metaclass=Singleton):
     """
