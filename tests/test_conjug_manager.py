@@ -10,7 +10,7 @@ import pickle
 
 import pytest
 
-from conjug_manager import ConjugManager
+from mlconjug3 import *
 
 @pytest.fixture(scope="module")
 def conjug_manager():
