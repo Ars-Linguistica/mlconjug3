@@ -135,58 +135,6 @@ class Conjugator:
 
     def set_model(self, model):
         self.model = model
-    
-    def conjugate(self, verb, subject='abbrev'):
-        """
-        | This is the main method of this class.
-        | It first checks to see if the verb is in Verbiste.
-        | If it is not, and a pre-trained scikit-learn pipeline has been supplied, the method then calls the pipeline
-         to predict the conjugation class of the provided verb.
-        | Returns a Verb object or None.
-        :param verb: string.
-            Verb to conjugate.
-        :param subject: string.
-            Toggles abbreviated or full pronouns.
-            The default value is 'abbrev'.
-            Select 'pronoun' for full pronouns.
-        :return: Verb object or None.
-        :raises: ValueError.
-        """
-        verb = verb.lower()
-        prediction_score = 0
-        if not self.conjug_manager.is_valid_verb(verb):
-            raise ValueError(
-                _('The supplied word: {0} is not a valid verb in {1}.').format(verb, _LANGUAGE_FULL[self.language]))
-        if verb not in self.conjug_manager.verbs.keys():
-            if self.model is None:
-                logger.warning(_('Please provide an instance of a mlconjug3.mlconjug3.Model'))
-                raise ValueError(
-                _('The supplied word: {0} is not in the conjugation {1} table and no Conjugation Model was provided.').format(
-                    verb, _LANGUAGE_FULL[self.language]))
-            prediction = self.model.predict([verb])[0]
-            prediction_score = self.model.pipeline.predict_proba([verb])[0][prediction]
-            predicted = True
-            template = self.conjug_manager.templates[prediction]
-            index = - len(template[template.index(":") + 1:])
-            root = verb if index == 0 else verb[:index]
-            verb_info = VerbInfo(verb, root, template)
-            conjug_info = self.conjug_manager.get_conjug_info(verb_info.template)
-        else:
-            predicted = False
-            infinitive = verb
-            verb_info = self.conjug_manager.get_verb_info(infinitive)
-            if verb_info is None:
-                return None
-            conjug_info = self.conjug_manager.get_conjug_info(verb_info.template)
-            if conjug_info is None:
-                return None
-        if predicted:
-            verb_object = _VERBS[self.language](verb_info, conjug_info, subject, predicted)
-            verb_object.confidence_score = round(prediction_score, 3)
-        else:
-            verb_object = _VERBS[self.language](verb_info, conjug_info, subject)
-
-        return verb_object
         
     def _conjugate(self, verb, subject):
         """
@@ -249,8 +197,6 @@ class Conjugator:
             with ThreadPoolExecutor() as executor:
                 results = [executor.submit(self._conjugate, v, subject) for v in verb]
             return [r.result() for r in results]
-
-
     
 
 class DataSet:
