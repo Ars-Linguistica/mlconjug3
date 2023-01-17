@@ -1,5 +1,6 @@
 from sklearn.base import BaseEstimator, TransformerMixin
-
+from .verbs import *
+from .constants import *
 
 class VerbFeatures(TransformerMixin, BaseEstimator):
     """
@@ -82,9 +83,9 @@ class VerbFeatures(TransformerMixin, BaseEstimator):
         initial_ngrams = ['START={0}'.format(verb[:n]) for n in range(min_n, min(max_n + 1, verb_len + 1))]
         if lang not in _ALPHABET:
             lang = 'en'  # We chose 'en' as the default alphabet because english is more standard, without accents or diactrics.
-        vowels = sum(verb.count(c) for c in _ALPHABET[lang]['vowels'])
+        vowels = sum(verb.count(c) for c in ALPHABET[lang]['vowels'])
         vowels_number = 'VOW_NUM={0}'.format(vowels)
-        consonants = sum(verb.count(c) for c in _ALPHABET[lang]['consonants'])
+        consonants = sum(verb.count(c) for c in ALPHABET[lang]['consonants'])
         consonants_number = 'CONS_NUM={0}'.format(consonants)
         if consonants == 0:
             vow_cons_ratio = 'V/C=N/A'
