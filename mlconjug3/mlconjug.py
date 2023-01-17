@@ -23,7 +23,8 @@ import joblib
 import pkg_resources
 import re
 from zipfile import ZipFile
-from functools import partial
+from functools import partial, lru_cache
+from concurrent.futures import ThreadPoolExecutor
 
 # Added for backward compatibility.
 extract_verb_features = VerbFeatures.extract_verb_features
@@ -187,35 +188,69 @@ class Conjugator:
 
         return verb_object
         
-    def conjugate_multi(self, verbs, subject='abbrev'):
+    def _conjugate(self, verb, subject):
+        """
+        | Private method that performs the actual conjugation.
+        | It first checks to see if the verb is in Verbiste.
+        | If it is not, and a pre-trained scikit-learn pipeline has been supplied, the method then calls the pipeline
+         to predict the conjugation class of the provided verb.
+        | Returns a Verb object or None.
+        :param verb: string.
+            Verb to conjugate.
+        :param subject: string.
+            Toggles abbreviated or full pronouns.
+            The default value is 'abbrev'.
+            Select 'pronoun' for full pronouns.
+        :return: Verb object or None.
+        :raises: ValueError.
+        """
+        verb = verb.lower()
+        prediction_score = 0
+        if not self.conjug_manager.is_valid_verb(verb):
+            raise ValueError(
+                _('The supplied word: {0} is not a valid verb in {1}.').format(verb, _LANGUAGE_FULL[self.language]))
+        if verb not in self.conjug_manager.verbs.keys():
+            if self.model is None:
+                logger.warning(_('Please provide an instance of a mlconjug3.mlconjug3.Model'))
+            else:
+                try:
+                    prediction_score, conjug_class = self.model.predict_verb(verb)
+                except ValueError:
+                    raise ValueError(
+                        _('The supplied word: {0} is not a valid verb in {1}.').format(verb, _LANGUAGE_FULL[self.language]))
+                if prediction_score < 0.5:
+                    raise ValueError(
+                        _('The supplied word: {0} is not a valid verb in {1}.').format(verb, _LANGUAGE_FULL[self.language]))
+                self.conjug_manager.populate_verb(verb, conjug_class)
+        return self.conjug_manager.get_verb(verb, subject, predicted=True)
+
+    def conjugate(self, verb, subject='abbrev'):
         """
         | This is the main method of this class.
         | It first checks to see if the verb is in Verbiste.
         | If it is not, and a pre-trained scikit-learn pipeline has been supplied, the method then calls the pipeline
          to predict the conjugation class of the provided verb.
-        | Returns a list of Verb objects.
-        :param verbs: list of strings.
-            Verbs to conjugate.
+        | Returns a Verb object or None.
+        :param verb: string or iterable of strings.
+            Verb or verbs to conjugate.
         :param subject: string.
             Toggles abbreviated or full pronouns.
             The default value is 'abbrev'.
             Select 'pronoun' for full pronouns.
-        """
-        # Check if the verbs are valid
-        base_forms = [self.conjug_manager.is_valid_verb(verb) for verb in verbs]
-        if any(base_forms):
-            base_forms = [base for base in base_forms if base]
+        :return: Verb object or list of Verb objects.
+"""
+        if isinstance(verb, str):
+            return self._conjugate(verb, subject)
         else:
-            base_forms = verbs
-        # Predict conjugation class
-        conjugations = self.model.predict(base_forms)
-        conjugations = [self.conjug_manager.conjugations[c] for c in conjugations]
-        # Conjugate
-        pool = multiprocessing.Pool()
-        results = pool.map(partial(conjugate_verb, conjugations, subject), zip(verbs, base_forms, conjugations))
-        pool.close()
-        pool.join()
-        return results
+            try:
+                iter(verb)
+            except TypeError:
+                    raise ValueError("The input must be a string or an iterable of strings")
+            with ThreadPoolExecutor() as executor:
+                results = [executor.submit(self._conjugate, v, subject) for v in verb]
+            return [r.result() for r in results]
+
+
     
 
 class DataSet:
