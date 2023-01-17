@@ -104,7 +104,7 @@ class Verb:
                 if isinstance(persons, list):
                     persons_dict = OrderedDict()
                     for pers, term in persons:
-                        key = _ABBREVS[pers] if len(persons) == 6 else ''
+                        key = ABBREVS[pers] if len(persons) == 6 else ''
                         if term is not None:
                             self.conjugate_person(key, persons_dict, term)
                         else:
@@ -147,11 +147,11 @@ class VerbFr(Verb):
                     persons_dict = OrderedDict()
                     for pers, term in persons:
                         if len(persons) == 6:
-                            key = _PRONOUNS[self.language][self.subject][pers]
+                            key = PRONOUNS[self.language][self.subject][pers]
                         elif tense_name == 'Participe Passé':
-                            key = _GENDER[self.language][self.subject][pers]
+                            key = GENDER[self.language][self.subject][pers]
                         elif tense_name == 'Imperatif Présent':
-                            key = _IMPERATIVE_PRONOUNS[self.language][self.subject][pers]
+                            key = IMPERATIVE_PRONOUNS[self.language][self.subject][pers]
                         else:
                             key = term
                         if term is not None:
@@ -185,9 +185,9 @@ class VerbEn(Verb):
                     persons_dict = OrderedDict()
                     for pers, term in persons:
                         if len(persons) == 6:
-                            key = _PRONOUNS[self.language][self.subject][pers]
+                            key = PRONOUNS[self.language][self.subject][pers]
                         elif tense_name == 'imperative present':
-                            key = _IMPERATIVE_PRONOUNS[self.language][self.subject][pers]
+                            key = IMPERATIVE_PRONOUNS[self.language][self.subject][pers]
                         else:
                             key = 'to'
                         if term is not None:
@@ -228,12 +228,12 @@ class VerbEs(Verb):
                         if len(persons) == 5 and not tense_name.startswith('Imperativo'):
                             continue
                         if len(persons) == 6:
-                            key = _PRONOUNS[self.language][self.subject][pers]
+                            key = PRONOUNS[self.language][self.subject][pers]
                         elif tense_name == 'Imperativo Afirmativo':
-                            key = _IMPERATIVE_PRONOUNS[self.language][self.subject][pers]
+                            key = IMPERATIVE_PRONOUNS[self.language][self.subject][pers]
                         elif tense_name == 'Imperativo non':
-                            key = ' '.join((_IMPERATIVE_PRONOUNS[self.language][self.subject][pers],
-                                            _NEGATION[self.language]))
+                            key = ' '.join((IMPERATIVE_PRONOUNS[self.language][self.subject][pers],
+                                            NEGATION[self.language]))
                         elif tense_name == 'Gerundio Gerondio':
                             if term.endswith('ndo'):
                                 key = ''
@@ -277,9 +277,9 @@ class VerbIt(Verb):
                     persons_dict = OrderedDict()
                     for pers, term in persons:
                         if len(persons) == 6 and not tense_name.startswith('Imperativo'):
-                            key = _PRONOUNS[self.language][self.subject][pers]
+                            key = PRONOUNS[self.language][self.subject][pers]
                         elif tense_name.startswith('Imperativo'):
-                            key = _PRONOUNS[self.language]['abbrev'][pers]
+                            key = PRONOUNS[self.language]['abbrev'][pers]
                         else:
                             key = pers
                         if term is not None and term != '-':
@@ -316,9 +316,9 @@ class VerbPt(Verb):
                     persons_dict = OrderedDict()
                     for pers, term in persons:
                         if len(persons) == 6 and not tense_name.startswith('Imperativo'):
-                            key = _PRONOUNS[self.language][self.subject][pers]
+                            key = PRONOUNS[self.language][self.subject][pers]
                         elif tense_name.startswith('Imperativo'):
-                            key = _PRONOUNS[self.language]['abbrev'][pers]
+                            key = PRONOUNS[self.language]['abbrev'][pers]
                         else:
                             key = pers
                         if term is not None and term != '-':
@@ -355,11 +355,11 @@ class VerbRo(Verb):
                     persons_dict = OrderedDict()
                     for pers, term in persons:
                         if len(persons) == 6:
-                            key = _PRONOUNS[self.language][self.subject][pers]
+                            key = PRONOUNS[self.language][self.subject][pers]
                         elif tense_name.startswith('Imperativ Imperativ'):
-                            key = _IMPERATIVE_PRONOUNS[self.language][self.subject][pers]
+                            key = IMPERATIVE_PRONOUNS[self.language][self.subject][pers]
                         elif tense_name == 'Imperativ Negativ':
-                            key = _NEGATION[self.language]
+                            key = NEGATION[self.language]
                         else:
                             key = pers
                         if term is not None and term != '-':
