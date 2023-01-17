@@ -2,7 +2,7 @@ import os
 import json
 import defusedxml.ElementTree as ET
 import pytest
-from PyVerbiste import Verbiste
+from mlconjug3 import *
 
 # fixture to load the verbiste data
 @pytest.fixture
