@@ -11,6 +11,7 @@ import re
 from .mlconjug import *
 from .constants import *
 from .verbs import *
+from .utils import logger
 
 class Singleton(type):
     _instances = {}
