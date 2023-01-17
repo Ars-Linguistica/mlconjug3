@@ -5,6 +5,8 @@ from typing import Tuple
 from joblib import Memory
 import hashlib
 import os
+import json
+import re
 
 
 class Singleton(type):
