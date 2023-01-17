@@ -25,4 +25,5 @@ def test_parse_conjugations(verbiste):
 
 def test_load_verbs(verbiste, monkeypatch):
     # test that the load verbs function correctly loads the verbs from the file
-    def mock_parse_verbs
+    # TODO
+    # def mock_parse_verbs
