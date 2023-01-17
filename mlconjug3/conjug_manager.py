@@ -1,4 +1,3 @@
-import json
 import re
 from collections import defaultdict
 from functools import partial
@@ -6,16 +5,14 @@ from typing import Tuple
 from joblib import Memory
 import hashlib
 import os
-import pickle
 
 
 class Singleton(type):
     _instances = {}
-    def __call__(cls, *args, **kwargs):
+    def call(cls, *args, **kwargs):
         if cls not in cls._instances:
-            cls._instances[cls] = super(Singleton, cls).__call__(*args, **kwargs)
+            cls._instances[cls] = super(Singleton, cls).call(*args, **kwargs)
         return cls._instances[cls]
-
 
 class ConjugManager(metaclass=Singleton):
     """
@@ -27,9 +24,9 @@ class ConjugManager(metaclass=Singleton):
     :ivar verbs: Dictionary where the keys are verbs and the values are conjugation patterns.
     :ivar conjugations: Dictionary where the keys are conjugation patterns and the values are inflected forms.
     """
-    def __init__(self, language='fr', extract_verb_features=None, pre_trained_models=None):
-        if language not in _LANGUAGES:
-            raise ValueError(_('Unsupported language.\nThe allowed languages are fr, en, es, it, pt, ro.'))
+    def init(self, language='fr', extract_verb_features=None, pre_trained_models=None):
+        if language not in LANGUAGES:
+            raise ValueError(('Unsupported language.\nThe allowed languages are fr, en, es, it, pt, ro.'))
         self.language = language
         self.verbs = {}
         self.conjugations = OrderedDict()
@@ -42,55 +39,40 @@ class ConjugManager(metaclass=Singleton):
 
     def __repr__(self):
         return '{0}.{1}(language={2})'.format(__name__, self.__class__.__name__, self.language)
-
+    
     def _load_verbs(self):
         """
         Load and parses the verbs from the json file.
-
+    
         :param verbs_file: string or path object.
             Path to the verbs json file.
-
+    
         """
         json_file = "conjugation_data/{}_verbs.json".format(self.language)
         json_hash = hashlib.sha1(open(json_file, "rb").read()).hexdigest()
-
-        if os.path.isfile("conjugation_data/{}_verbs.pkl".format(self.language)):
-            with open("conjugation_data/{}_verbs.pkl".format(self.language), 'rb') as f:
-                stored_hash, self.verbs = pickle.load(f)
-                if stored_hash != json_hash:
-                    with open(json_file, 'r', encoding='utf-8') as file:
-                        self.verbs = json.load(file)
-                        with open("conjugation_data/{}_verbs.pkl".format(self.language), 'wb') as f:
-                            pickle.dump((json_hash, self.verbs), f)
+        
+        if self.cache.get(json_file) and json_hash == self.cache.get(json_file)["hash"]:
+            self.verbs = self.cache.get(json_file)["data"]
         else:
             with open(json_file, 'r', encoding='utf-8') as file:
                 self.verbs = json.load(file)
-                with open("conjugation_data/{}_verbs.pkl".format(self.language), 'wb') as f:
-                    pickle.dump((json_hash, self.verbs), f)
+                self.cache.set(json_file, {"hash":json_hash, "data":self.verbs})
         return
-
+    
     def _load_conjugations(self):
         """
         Load and parses the conjugations from the json file.
         """
         json_file = "conjugation_data/{}_conjugations.json".format(self.language)
         json_hash = hashlib.sha1(open(json_file, "rb").read()).hexdigest()
-
-        if os.path.isfile("conjugation_data/{}_conjugations.pkl".format(self.language)):
-            with open("conjugation_data/{}_conjugations.pkl".format(self.language), 'rb') as f:
-                stored_hash, self.conjugations = pickle.load(f)
-                if stored_hash != json_hash:
-                    with open(json_file, 'r', encoding='utf-8') as file:
-                        self.conjugations = json.load(file)
-                        with open("conjugation_data/{}_conjugations.pkl".format(self.language), 'wb') as f:
-                            pickle.dump((json_hash, self.conjugations), f)
+        if self.cache.get(json_file) and json_hash == self.cache.get(json_file)["hash"]:
+            self.conjugations = self.cache.get(json_file)["data"]
         else:
             with open(json_file, 'r', encoding='utf-8') as file:
                 self.conjugations = json.load(file)
-                with open("conjugation_data/{}_conjugations.pkl".format(self.language), 'wb') as f:
-                    pickle.dump((json_hash, self.conjugations), f)
+                self.cache.set(json_file, {"hash":json_hash, "data":self.conjugations})
         return
-
+    
     def _detect_allowed_endings(self):
         """
         Detects the allowed verb endings from the conjugations json file.
@@ -113,3 +95,5 @@ class ConjugManager(metaclass=Singleton):
                 if infinitive.endswith(ending):
                     return self._detect_verb_template(infinitive)
         return None
+
+    
