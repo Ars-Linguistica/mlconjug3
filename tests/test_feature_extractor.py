@@ -1,6 +1,6 @@
 import pytest
 import numpy as np
-from feature_extractor import VerbFeatures
+from mlconjug3 import *
 
 @pytest.fixture(scope="module")
 def feature_extractor():
