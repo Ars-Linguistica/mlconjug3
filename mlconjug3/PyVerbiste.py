@@ -57,7 +57,7 @@ class Verbiste(ConjugManager):
 
         """
         json_file = verbs_file.replace('xml', 'json')
-        json_hash = hashlib.sha1(open(json_file, "rb").read()).hexdigest()
+        json_hash = hashlib.sha256(open(json_file, "rb").read()).hexdigest()
         
         if self.cache.get(json_file) and json_hash == self.cache.get(json_file)["hash"]:
             self.verbs = self.cache.get(json_file)["data"]
@@ -96,7 +96,7 @@ class Verbiste(ConjugManager):
 
         """
         json_file = conjugations_file.replace('xml', 'json')
-        json_hash = hashlib.sha1(open(json_file, "rb").read()).hexdigest()
+        json_hash = hashlib.sha256(open(json_file, "rb").read()).hexdigest()
         if self.cache.get(json_file) and json_hash == self.cache.get(json_file)["hash"]:
             self.conjugations = self.cache.get(json_file)["data"]
         else:
