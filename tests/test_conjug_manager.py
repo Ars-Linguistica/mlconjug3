@@ -25,16 +25,16 @@ def test_load_conjugations(conjug_manager):
     assert len(conjug_manager.conjugations) > 0
 
 def test_get_conjug(conjugmanager):
-# Test getting the conjugation of a verb in the present tense
-verb = "parler"
-conjugation = conjug_manager.get_conjug(verb, tense="present", subject="je")
-assert isinstance(conjugation, str)
-assert conjugation == "parle"
-# Test getting the conjugation of a verb in the past tense
-verb = "parler"
-conjugation = conjug_manager.get_conjug(verb, tense="past", subject="je")
-assert isinstance(conjugation, str)
-assert conjugation == "ai parlé"
+    # Test getting the conjugation of a verb in the present tense
+    verb = "parler"
+    conjugation = conjug_manager.get_conjug(verb, tense="present", subject="je")
+    assert isinstance(conjugation, str)
+    assert conjugation == "parle"
+    # Test getting the conjugation of a verb in the past tense
+    verb = "parler"
+    conjugation = conjug_manager.get_conjug(verb, tense="past", subject="je")
+    assert isinstance(conjugation, str)
+    assert conjugation == "ai parlé"
 
 # Test getting the conjugation of a verb that doesn't exist
 with pytest.raises(ValueError) as excinfo:
