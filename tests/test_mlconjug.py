@@ -4,6 +4,7 @@
 """Tests for `mlconjug3` package."""
 
 import pytest
+from mlconjug3 import *
 
 def test_mlconjug():
     """
