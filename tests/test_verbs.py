@@ -1,6 +1,6 @@
 import pytest
 
-from mlconjug import *
+from mlconjug3 import *
 
 # Fixtures
 @pytest.fixture
