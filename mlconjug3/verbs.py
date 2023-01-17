@@ -1,6 +1,8 @@
 import json
 from collections import OrderedDict
 from .constants import *
+from .utils import logger
+
 
 class VerbInfo:
     """
