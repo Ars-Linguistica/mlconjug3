@@ -36,10 +36,10 @@ def test_get_conjug(conjugmanager):
     assert isinstance(conjugation, str)
     assert conjugation == "ai parlé"
 
-# Test getting the conjugation of a verb that doesn't exist
-with pytest.raises(ValueError) as excinfo:
-    conjug_manager.get_conjug("fakeverb", tense="present", subject="je")
-assert str(excinfo.value) == "Verb not found in conjugation data."
+    # Test getting the conjugation of a verb that doesn't exist
+    with pytest.raises(ValueError) as excinfo:
+        conjug_manager.get_conjug("fakeverb", tense="present", subject="je")
+    assert str(excinfo.value) == "Verb not found in conjugation data."
 
 def test_get_verb_root(conjug_manager):
     verb = "parler"
@@ -70,7 +70,7 @@ def test_get_conjug_template(conjug_manager):
     
 def test_get_conjug_template_missing_verb(conjug_manager):
     with pytest.raises(ValueError) as excinfo:
-    conjug_manager.get_conjug_template("fakeverb")
+        conjug_manager.get_conjug_template("fakeverb")
     assert str(excinfo.value) == "Verb not found in conjugation data."
     
 def test_detect_allowed_endings(conjug_manager):
