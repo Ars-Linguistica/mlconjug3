@@ -73,7 +73,7 @@ class VerbFeatures(TransformerMixin, BaseEstimator):
         :param ngram_range: tuple. Range of n-grams to extract.
             :return: list.
         List of extracted verb features.
-    """
+        """
         verb_endings = []
         verb_starts = []
         length = len(verb)
