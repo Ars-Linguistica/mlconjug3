@@ -1,6 +1,8 @@
 from sklearn.base import BaseEstimator, TransformerMixin
 from .verbs import *
 from .constants import *
+from .utils import logger
+
 
 class VerbFeatures(TransformerMixin, BaseEstimator):
     """
