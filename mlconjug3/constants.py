@@ -6,10 +6,10 @@ RESOURCE_PACKAGE = 'mlconjug3'
 LANGUAGES = ('default', 'fr', 'en', 'es', 'it', 'pt', 'ro')
 
 # Sets up the automatic translation of annotated strings displayed to the user.
-TRANSLATIONS_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'locale')
+TRANSLATIONS_PATH = pkg_resources.resource_filename(RESOURCE_PACKAGE, 'locale')
 
 SUPPORTED_LANGUAGES = ('default', 'en', 'es', 'fr', 'it', 'pt', 'ro')
-TRANSLATED_LANGUAGES = _SUPPORTED_LANGUAGES[2:]
+TRANSLATED_LANGUAGES = SUPPORTED_LANGUAGES[2:]
 
 LANGUAGE_FULL = {'fr': 'Français',
                   'en': 'English',
@@ -66,17 +66,17 @@ CONJUGATIONS_RESOURCE_PATH = {'fr': '/'.join(('data', 'conjug_manager', 'conjuga
 
 ABBREVS = ("1s", "2s", "3s", "1p", "2p", "3p")
 
-PRONOUNS = {'fr': {'abbrev': _ABBREVS,
+PRONOUNS = {'fr': {'abbrev': ABBREVS,
                     'pronoun': ("je", "tu", "il (elle, on)", "nous", "vous", "ils (elles)")},
-             'it': {'abbrev': _ABBREVS,
+             'it': {'abbrev': ABBREVS,
                     'pronoun': ('io', 'tu', 'egli/ella', 'noi', 'voi', 'essi/esse')},
-             'es': {'abbrev': _ABBREVS,
+             'es': {'abbrev': ABBREVS,
                     'pronoun': ('yo', 'tú', 'él', 'nosotros', 'vosotros', 'ellos')},
-             'en': {'abbrev': _ABBREVS,
+             'en': {'abbrev': ABBREVS,
                     'pronoun': ('I', 'you', 'he/she/it', 'you', 'we', 'they')},
-             'pt': {'abbrev': _ABBREVS,
+             'pt': {'abbrev': ABBREVS,
                     'pronoun': ('eu', 'tu', 'ele', 'nós', 'vós', 'eles')},
-             'ro': {'abbrev': _ABBREVS,
+             'ro': {'abbrev': ABBREVS,
                     'pronoun': ('eu', 'tu', 'el/ea', 'noi', 'voi', 'ei/ele')}
              }
 
