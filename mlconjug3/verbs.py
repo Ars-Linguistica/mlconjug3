@@ -30,7 +30,7 @@ class VerbInfo:
             self.root = '' if template[0] == ':' else template[:template.index(':')]
         else:
             self.root = root
-        self.template = template
+        self.template = frozenset(template)
         return
 
     def __repr__(self):
@@ -41,41 +41,37 @@ class VerbInfo:
             return NotImplemented
         return self.infinitive == other.infinitive and self.root == other.root and self.template == other.template
 
-
 class Verb:
     """
     This class defines the Verb Object.
 
     :param verb_info: VerbInfo Object.
-    :param conjug_info: OrderedDict.
+    :param conjug_info: ChainMap.
     :param subject: string.
         Toggles abbreviated or full pronouns.
         The default value is 'abbrev'.
         Select 'pronoun' for full pronouns.
     :param predicted: bool.
         Indicates if the conjugation information was predicted by the model or retrieved from the dataset.
-    :param language: string.
-        Language of the conjugator.
     :ivar verb_info: VerbInfo Object.
-    :ivar conjug_info: OrderedDict.
+    :ivar conjug_info: ChainMap.
     :ivar confidence_score: float. Confidence score of the prediction accuracy.
     :ivar subject: string. Either 'abbrev' or 'pronoun'
     :ivar predicted: bool.
         Indicates if the conjugation information was predicted by the model or retrieved from the dataset.
-    :ivar language: string.
-        Language of the conjugator.
 
     """
-    __slots__ = ('name', 'verb_info', 'conjug_info', 'subject', 'predicted', 'confidence_score', 'language')
+    __slots__ = ('name', 'verb_info', 'conjug_info', 'subject', 'predicted', 'confidence_score')
 
-    def __init__(self, verb_info, conjug_info, subject='abbrev', predicted=False, language='fr'):
+    language = 'default'
+
+    def __init__(self, verb_info, conjug_info, subject='abbrev', predicted=False):
         self.name = verb_info.infinitive
         self.verb_info = verb_info
-        self.conjug_info = conjug_info
+        self.conjug_info = collections.ChainMap(conjug_info)
         self.subject = subject
         self.predicted = predicted
         self.confidence_score = None
-        self.language = language
         self._load_conjug()
         return
 
@@ -88,41 +84,27 @@ class Verb:
         :return: generator.
             Lazy generator of conjugated forms.
         """
-        conjugator = {
-            'fr': FrenchConjugator(),
-            'en': EnglishConjugator(),
-            'es': SpanishConjugator(),
-            'it': ItalianConjugator(),
-            'pt': PortugueseConjugator(),
-            'ro': RomanianConjugator()
-        }.get(self.language)
-        for mood, tenses in conjugator.conjug_info.items():
+        for mood, tenses in self.conjug_info.items():
             for tense, persons in tenses.items():
-                if self.subject == 'abbrev':
+                if isinstance(persons, dict):
                     for person, conjugation in persons.items():
                         yield (mood, tense, person, conjugation)
-                elif self.subject == 'pronoun':
-                    for person, conjugation in persons.items():
-                        yield (mood, tense, conjugator.full_pronouns[person], conjugation)
                 else:
-                    raise ValueError(f"Invalid value for subject: {self.subject}. Must be either 'abbrev' or 'pronoun'.")
-                    
+                    for conjugation in persons:
+                        yield (mood, tense, conjugation)
+                        
     def _load_conjug(self):
         """
-        Method to load the conjugation information for the verb.
+        Loads and parses the conjugated forms from the json file.
         """
-        conjugator = {
-            'fr': FrenchConjugator(),
-            'en': EnglishConjugator(),
-            'es': SpanishConjugator(),
-            'it': ItalianConjugator(),
-            'pt': PortugueseConjugator(),
-            'ro': RomanianConjugator(),
-        }.get(self.language)
-        self.conjug_info = conjugator.conjugate(self.verb_info)
-        self.confidence_score = conjugator.confidence_score
-
-
+        for mood, tenses in self.conjug_info.items():
+            for tense, persons in tenses.items():
+                if isinstance(persons, dict):
+                    for person, conjugation in persons.items():
+                        persons[person] = frozenset(conjugation)
+                else:
+                    tenses[tense] = frozenset(persons)
+        self.conjug_info = self.conjug_info.maps
 
 
 class VerbFr(Verb):
