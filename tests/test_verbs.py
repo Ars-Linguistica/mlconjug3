@@ -1,6 +1,6 @@
 import pytest
 
-from verbs import VerbFr, VerbEn, VerbInfo
+from mlconjug import *
 
 # Fixtures
 @pytest.fixture
