@@ -51,7 +51,7 @@ class ConjugManager(metaclass=Singleton):
     
         """
         json_file = "conjugation_data/{}_verbs.json".format(self.language)
-        json_hash = hashlib.sha1(open(json_file, "rb").read()).hexdigest()
+        json_hash = hashlib.sha256(open(json_file, "rb").read()).hexdigest()
         
         if self.cache.get(json_file) and json_hash == self.cache.get(json_file)["hash"]:
             self.verbs = self.cache.get(json_file)["data"]
@@ -66,7 +66,7 @@ class ConjugManager(metaclass=Singleton):
         Load and parses the conjugations from the json file.
         """
         json_file = "conjugation_data/{}_conjugations.json".format(self.language)
-        json_hash = hashlib.sha1(open(json_file, "rb").read()).hexdigest()
+        json_hash = hashlib.sha256(open(json_file, "rb").read()).hexdigest()
         if self.cache.get(json_file) and json_hash == self.cache.get(json_file)["hash"]:
             self.conjugations = self.cache.get(json_file)["data"]
         else:
