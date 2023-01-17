@@ -2,7 +2,7 @@ import click
 import json
 import logging
 import sys
-from conjugator import Conjugator
+from mlconjug3 import *
 
 def test_main(mocker):
     mock_conjugator = mocker.Mock(spec=Conjugator)
