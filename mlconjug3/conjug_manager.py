@@ -8,6 +8,9 @@ import os
 import json
 import re
 
+from .mlconjug import *
+from .constants import *
+from .verbs import *
 
 class Singleton(type):
     _instances = {}
