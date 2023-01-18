@@ -1,6 +1,6 @@
 import json
 from collections import OrderedDict
-from .constants import *
+from constants import *
 from .utils import logger
 
 # from immutabledict import immutabledict, ImmutableOrderedDict
