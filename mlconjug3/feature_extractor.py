@@ -2,6 +2,7 @@ from sklearn.base import BaseEstimator, TransformerMixin
 from .verbs import *
 from .constants import *
 from .utils import logger
+import numpy as np
 
 class VerbFeatures(TransformerMixin, BaseEstimator):
     """
