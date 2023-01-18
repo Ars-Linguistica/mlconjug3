@@ -50,7 +50,7 @@ class TestDataSet:
         assert len(dataset.X) == len(dataset.y)
     
     def test_get_train_test_data(self):
-        dataset = DataSet(Verbiste().verbs
+        dataset = DataSet(Verbiste().verbs)
         dataset._load_data()
         dataset._prepare_data()
         X_train, X_test, y_train, y_test = dataset.get_train_test_data()
