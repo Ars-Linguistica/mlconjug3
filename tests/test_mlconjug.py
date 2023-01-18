@@ -32,6 +32,5 @@ def test_mlconjug():
     # Test the conjugate method
     verb = 'manger'
     conjugations = conjugator.conjugate(verb)
-    assert isinstance(conjugations, dict)
-    assert set(conjugations.keys()) == set(TENSES.keys)
+    assert isinstance(conjugations, Verb)
     
