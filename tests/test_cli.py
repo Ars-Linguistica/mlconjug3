@@ -4,6 +4,7 @@ import logging
 import sys
 from mlconjug3 import *
 import pytest
+from click.testing import CliRunner
 
 class TestCLI:
     verbiste = Verbiste(language='fr')
