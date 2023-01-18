@@ -1,5 +1,8 @@
 import pkg_resources
 from .verbs import *
+import os.path
+import sys
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 RESOURCE_PACKAGE = 'mlconjug3'
 
