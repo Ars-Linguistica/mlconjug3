@@ -75,7 +75,7 @@ class TestDataSet:
 class TestModel:
     def setup(self):
         self.dataset = DataSet(Verbiste().verbs)
-        self.dataset.load_data()
+        self.dataset._load_data()
         self.test_verb = "parler"
         self.test_conjugator = Conjugator()
         self.test_model = Model()
