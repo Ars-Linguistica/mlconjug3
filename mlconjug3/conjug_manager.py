@@ -7,6 +7,7 @@ import hashlib
 import os
 import json
 import re
+import copy
 
 from .mlconjug import *
 from .constants import *
