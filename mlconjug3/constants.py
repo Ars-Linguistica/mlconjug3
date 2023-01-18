@@ -11,7 +11,7 @@ LANGUAGES = ('default', 'fr', 'en', 'es', 'it', 'pt', 'ro')
 # Sets up the automatic translation of annotated strings displayed to the user.
 TRANSLATIONS_PATH = pkg_resources.resource_filename(RESOURCE_PACKAGE, 'locale')
 
-SUPPORTED_LANGUAGES = ('default', 'en', 'es', 'fr', 'it', 'pt', 'ro')
+SUPPORTED_LANGUAGES = ('en', 'es', 'fr', 'it', 'pt', 'ro')
 TRANSLATED_LANGUAGES = SUPPORTED_LANGUAGES[2:]
 
 LANGUAGE_FULL = {'fr': 'Français',
