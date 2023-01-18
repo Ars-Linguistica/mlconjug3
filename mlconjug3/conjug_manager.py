@@ -79,13 +79,15 @@ class ConjugManager(metaclass=Singleton):
     
     def _detect_allowed_endings(self):
         """
-        Detects the allowed verb endings from the conjugations json file.
+        | Detects the allowed endings for verbs in the supported languages.
+        | All the supported languages except for English restrict the form a verb can take.
+        | As English is much more productive and varied in the morphology of its verbs, any word is allowed as a verb.
+        :return: set.
+            A set containing the allowed endings of verbs in the target language.
         """
-        allowed_endings = set()
-        for conj in self.conjugations.values():
-            for ending in conj['allowed_endings']:
-                allowed_endings.add(ending)
-        return allowed_endings
+        if self.language == 'en':
+            return True
+        return {verb.split(' ')[0][-2:] for verb in self.verbs if len(verb) >= 2}
     
     def is_valid_verb(self, verb):
         """
