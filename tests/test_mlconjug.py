@@ -36,13 +36,13 @@ def test_mlconjug():
     
 class TestDataSet:
     def test_load_data(self):
-        dataset = DataSet(language='fr')
+        dataset = DataSet(Verbiste().verbs)
         dataset._load_data()
         assert dataset.data is not None
         assert len(dataset.data) > 0
 
     def test_prepare_data(self):
-        dataset = DataSet(language='fr')
+        dataset = DataSet(Verbiste().verbs)
         dataset._load_data()
         dataset._prepare_data()
         assert len(dataset.X) > 0
@@ -50,7 +50,7 @@ class TestDataSet:
         assert len(dataset.X) == len(dataset.y)
     
     def test_get_train_test_data(self):
-        dataset = DataSet(language='fr')
+        dataset = DataSet(Verbiste().verbs
         dataset._load_data()
         dataset._prepare_data()
         X_train, X_test, y_train, y_test = dataset.get_train_test_data()
@@ -60,7 +60,7 @@ class TestDataSet:
         assert len(y_test) > 0
     
     def test_get_data(self):
-        dataset = DataSet(language='fr')
+        dataset = DataSet(Verbiste().verbs)
         dataset._load_data()
         dataset._prepare_data()
         X, y = dataset.get_data()
@@ -69,7 +69,8 @@ class TestDataSet:
         assert len(X) == len(y)
     
     def test_repr(self):
-        assert 'mlconjug3.mlconjug.DataSet' in self.data_set.__repr__()
+        dataset = DataSet(Verbiste().verbs)
+        assert 'mlconjug3.mlconjug.DataSet' in data_set.__repr__()
 
         
 class TestModel:
@@ -79,10 +80,10 @@ class TestModel:
         self.test_verb = "parler"
         self.test_conjugator = Conjugator()
         self.test_model = Model()
-        self.test_model.fit(self.dataset.data)
+        self.test_model.fit(self.dataset.X, self.dataset.y)
 
     def test_fit(self):
-        self.test_model.fit(self.dataset.data)
+        self.test_model.fit(self.dataset.X, self.dataset.y)
         assert self.test_model.is_fitted == True
     
     def test_predict(self):
@@ -108,6 +109,6 @@ class TestModel:
         assert result is not None and isinstance(result, list)
     
     def test_repr(self):
-        assert 'mlconjug3.mlconjug.Model' in self.model.__repr__()
+        assert 'mlconjug3.mlconjug.Model' in self.test_model.__repr__()
 
 
