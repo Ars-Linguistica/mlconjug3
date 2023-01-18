@@ -3,11 +3,12 @@ from collections import OrderedDict
 from .constants import *
 from .utils import logger
 
+from immutabledict import immutabledict, ImmutableOrderedDict
+
 
 class VerbInfo:
     """
     This class defines the Verbiste verb information structure.
-
     :param infinitive: string.
         Infinitive form of the verb.
     :param root: string.
@@ -20,7 +21,6 @@ class VerbInfo:
         Lexical root of the verb.
     :ivar template: string.
         Name of the verb ending pattern.
-
     """
     __slots__ = ('infinitive', 'root', 'template')
 
@@ -30,7 +30,7 @@ class VerbInfo:
             self.root = '' if template[0] == ':' else template[:template.index(':')]
         else:
             self.root = root
-        self.template = frozenset(template)
+        self.template = template
         return
 
     def __repr__(self):
@@ -41,12 +41,12 @@ class VerbInfo:
             return NotImplemented
         return self.infinitive == other.infinitive and self.root == other.root and self.template == other.template
 
+
 class Verb:
     """
     This class defines the Verb Object.
-
     :param verb_info: VerbInfo Object.
-    :param conjug_info: ChainMap.
+    :param conjug_info: OrderedDict.
     :param subject: string.
         Toggles abbreviated or full pronouns.
         The default value is 'abbrev'.
@@ -54,12 +54,11 @@ class Verb:
     :param predicted: bool.
         Indicates if the conjugation information was predicted by the model or retrieved from the dataset.
     :ivar verb_info: VerbInfo Object.
-    :ivar conjug_info: ChainMap.
+    :ivar conjug_info: OrderedDict.
     :ivar confidence_score: float. Confidence score of the prediction accuracy.
     :ivar subject: string. Either 'abbrev' or 'pronoun'
     :ivar predicted: bool.
         Indicates if the conjugation information was predicted by the model or retrieved from the dataset.
-
     """
     __slots__ = ('name', 'verb_info', 'conjug_info', 'subject', 'predicted', 'confidence_score')
 
@@ -68,7 +67,7 @@ class Verb:
     def __init__(self, verb_info, conjug_info, subject='abbrev', predicted=False):
         self.name = verb_info.infinitive
         self.verb_info = verb_info
-        self.conjug_info = collections.ChainMap(conjug_info)
+        self.conjug_info = conjug_info
         self.subject = subject
         self.predicted = predicted
         self.confidence_score = None
@@ -80,37 +79,57 @@ class Verb:
 
     def iterate(self):
         """
-        Iterates over all conjugated forms and returns a lazy generator of tuples of those conjugated forms.
-        :return: generator.
-            Lazy generator of conjugated forms.
+        Iterates over all conjugated forms and returns a list of tuples of those conjugated forms.
+        :return: list.
+            List of conjugated forms.
         """
+        iterate_results = []
         for mood, tenses in self.conjug_info.items():
             for tense, persons in tenses.items():
-                if isinstance(persons, dict):
-                    for person, conjugation in persons.items():
-                        yield (mood, tense, person, conjugation)
+                if isinstance(persons, str):
+                    iterate_results.append((mood, tense, persons))
                 else:
-                    for conjugation in persons:
-                        yield (mood, tense, conjugation)
-                        
+                    for pers, form in persons.items():
+                        iterate_results.append((mood, tense, pers, form))
+        return iterate_results
+
     def _load_conjug(self):
         """
-        Loads and parses the conjugated forms from the json file.
+        | Populates the inflected forms of the verb.
+        | This is the generic version of this method.
+        | It does not add personal pronouns to the conjugated forms.
+        | This method can handle any new language if the conjugation structure conforms to the Verbiste XML Schema.
         """
-        for mood, tenses in self.conjug_info.items():
-            for tense, persons in tenses.items():
-                if isinstance(persons, dict):
-                    for person, conjugation in persons.items():
-                        persons[person] = frozenset(conjugation)
-                else:
-                    tenses[tense] = frozenset(persons)
-        self.conjug_info = self.conjug_info.maps
+        for mood, tense in self.conjug_info.items():
+            for tense_name, persons in tense.items():
+                if isinstance(persons, list):
+                    persons_dict = OrderedDict()
+                    for pers, term in persons:
+                        key = ABBREVS[pers] if len(persons) == 6 else ''
+                        if term is not None:
+                            self.conjugate_person(key, persons_dict, term)
+                        else:
+                            persons_dict[key] = None
+                    self.conjug_info[mood][tense_name] = persons_dict
+                elif isinstance(persons, str):
+                    self.conjug_info[mood][tense_name] = self.verb_info.root + persons
+        return
+
+    def conjugate_person(self, key, persons_dict, term):
+        """
+        Creates the conjugated form of the person specified by the key argument.
+        :param key: string.
+        :param persons_dict: OrderedDict
+        :param term: string.
+        :return: None.
+        """
+        persons_dict[key] = self.verb_info.root + term
+        return
 
 
 class VerbFr(Verb):
     """
     This class defines the French Verb Object.
-
     """
     __slots__ = ()
 
@@ -120,7 +139,6 @@ class VerbFr(Verb):
         """
         | Populates the inflected forms of the verb.
         | Adds personal pronouns to the inflected verbs.
-
         """
         for mood, tense in self.conjug_info.items():
             for tense_name, persons in tense.items():
