@@ -37,7 +37,7 @@ class TestVerb:
         test_verb = Verb(test_verb_info, test_conjug_info)
         assert isinstance(test_verb, Verb)
         assert isinstance(test_verb.conjug_info, OrderedDict)
-
+        
     def test_repr(self):
         verbiste = Verbiste(language='fr')
         test_verb_info = verbiste.get_verb_info(TEST_VERBS[verbiste.language][0])
@@ -46,7 +46,7 @@ class TestVerb:
         assert test_verb.__repr__() == 'mlconjug3.verbs.VerbFr(manger)'
 
     @pytest.mark.parametrize('lang', LANGUAGES)
-    def test_iterate(self):
+    def test_iterate(self, lang):
         verbiste = Verbiste(language=lang)
         test_verb_info = verbiste.get_verb_info(TEST_VERBS[verbiste.language][0])
         test_conjug_info = verbiste.get_conjug_info(TEST_VERBS[verbiste.language][1])
