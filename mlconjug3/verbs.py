@@ -3,7 +3,7 @@ from collections import OrderedDict
 from .constants import *
 from .utils import logger
 
-from immutabledict import immutabledict, ImmutableOrderedDict
+# from immutabledict import immutabledict, ImmutableOrderedDict
 
 
 class VerbInfo:
