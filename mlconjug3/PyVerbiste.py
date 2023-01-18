@@ -38,44 +38,31 @@ from .utils import logger
 class Verbiste(ConjugManager):
     """
     This is the class handling the Verbiste xml files.
-
     :param language: string.
         | The language of the conjugator. The default value is fr for French.
         | The allowed values are: fr, en, es, it, pt, ro.
     :ivar language: Language of the conjugator.
     :ivar verbs: Dictionary where the keys are verbs and the values are conjugation patterns.
     :ivar conjugations: Dictionary where the keys are conjugation patterns and the values are inflected forms.
-
     """
 
     def _load_verbs(self, verbs_file):
         """
         Load and parses the verbs from the xml file.
-
         :param verbs_file: string or path object.
             Path to the verbs xml file.
-
         """
-        json_file = verbs_file.replace('xml', 'json')
-        json_hash = hashlib.sha256(open(json_file, "rb").read()).hexdigest()
-        
-        if self.cache.get(json_file) and json_hash == self.cache.get(json_file)["hash"]:
-            self.verbs = self.cache.get(json_file)["data"]
-        else:
-            self.verbs = self._parse_verbs(verbs_file)
-            self.cache.set(json_file, {"hash":json_hash, "data":self.verbs})
+        self.verbs = self._parse_verbs(verbs_file.replace('json', 'xml'))
         return
 
     @staticmethod
     def _parse_verbs(file):
         """
         Parses the XML file.
-
         :param file: FileObject.
             XML file containing the verbs.
         :return: OrderedDict.
             An OrderedDict containing the verb and its template for all verbs in the file.
-
         """
         verbs_dic = {}
         xml = ET.parse(file)
@@ -90,29 +77,19 @@ class Verbiste(ConjugManager):
     def _load_conjugations(self, conjugations_file):
         """
         Load and parses the conjugations from the xml file.
-
         :param conjugations_file: string or path object.
             Path to the conjugation xml file.
-
         """
-        json_file = conjugations_file.replace('xml', 'json')
-        json_hash = hashlib.sha256(open(json_file, "rb").read()).hexdigest()
-        if self.cache.get(json_file) and json_hash == self.cache.get(json_file)["hash"]:
-            self.conjugations = self.cache.get(json_file)["data"]
-        else:
-            self.conjugations = self._parse_conjugations(conjugations_file)
-            self.cache.set(json_file, {"hash":json_hash, "data":self.conjugations})
+        self.conjugations = self._parse_conjugations(conjugations_file.replace('json', 'xml'))
         return
 
     def _parse_conjugations(self, file):
         """
         Parses the XML file.
-
         :param file: FileObject.
             XML file containing the conjugation templates.
         :return: OrderedDict.
             An OrderedDict containing all the conjugation templates in the file.
-
         """
         conjugations_dic = {}
         xml = ET.parse(file)
@@ -129,12 +106,10 @@ class Verbiste(ConjugManager):
     def _load_tense(tense):
         """
         Load and parses the inflected forms of the tense from xml file.
-
         :param tense: list of xml tags containing inflected forms.
             The list of inflected forms for the current tense being processed.
         :return: list.
             List of inflected forms.
-
         """
         persons = list(tense)
         if not persons:
@@ -154,7 +129,3 @@ class Verbiste(ConjugManager):
                 else:
                     conjug.append((pers, None))
         return conjug
-
-
-if __name__ == "__main__":
-    pass
