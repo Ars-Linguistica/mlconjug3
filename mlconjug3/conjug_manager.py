@@ -87,6 +87,20 @@ class ConjugManager(metaclass=Singleton):
                 allowed_endings.add(ending)
         return allowed_endings
     
+    def is_valid_verb(self, verb):
+        """
+        | Checks if the verb is a valid verb in the given language.
+        | English words are always treated as possible verbs.
+        | Verbs in other languages are filtered by their endings.
+        :param verb: string.
+            The verb to conjugate.
+        :return: bool.
+            True if the verb is a valid verb in the language. False otherwise.
+        """
+        if self.language == 'en':
+            return True  # LOL!
+        return verb[-2:] in self._allowed_endings
+    
     def _get_verb_template(self, infinitive):
         """
         Returns the conjugation pattern of a verb.
