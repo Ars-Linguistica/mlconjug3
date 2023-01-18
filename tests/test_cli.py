@@ -3,6 +3,7 @@ import json
 import logging
 import sys
 from mlconjug3 import *
+import pytest
 
 class TestCLI:
     verbiste = Verbiste(language='fr')
