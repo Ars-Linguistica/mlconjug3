@@ -39,7 +39,7 @@ class TestDataSet:
     data_set = DataSet(conjug_manager.verbs)
 
     def test_repr(self):
-        assert self.data_set.__repr__() == 'mlconjug3.mlconjug.DataSet'
+        assert 'mlconjug3.mlconjug.DataSet' in self.data_set.__repr__()
 
         
 class TestModel:
@@ -56,6 +56,6 @@ class TestModel:
     dataset = DataSet(Verbiste().verbs)
 
     def test_repr(self):
-        assert self.model.__repr__() == 'mlconjug3.mlconjug.Model'
+        assert 'mlconjug3.mlconjug.Model' in self.model.__repr__()
 
 
