@@ -109,5 +109,31 @@ class ConjugManager(metaclass=Singleton):
                 if infinitive.endswith(ending):
                     return self._detect_verb_template(infinitive)
         return None
+    
+    def get_verb_info(self, verb):
+        """
+        Gets verb information and returns a VerbInfo instance.
+        :param verb: string.
+            Verb to conjugate.
+        :return: VerbInfo object or None.
+        """
+        if verb not in self.verbs.keys():
+            return None
+        infinitive = verb
+        root = self.verbs[verb]['root']
+        template = self.verbs[verb]['template']
+        return VerbInfo(infinitive, root, template)
+
+    def get_conjug_info(self, template):
+        """
+        Gets conjugation information corresponding to the given template.
+        :param template: string.
+            Name of the verb ending pattern.
+        :return: OrderedDict or None.
+            OrderedDict containing the conjugated suffixes of the template.
+        """
+        if template not in self.conjugations.keys():
+            return None
+        return copy.deepcopy(self.conjugations[template])
 
     
