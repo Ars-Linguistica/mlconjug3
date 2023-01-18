@@ -10,6 +10,6 @@ def verb_fr():
     return VerbFr(verb_info, conjug_info)
 
 # Test functions
-def test_verb_info(verb_fr, verb_en):
+def test_verb_info(verb_fr:
     assert verb_fr.verb_info.infinitive == "manger"
     assert verb_fr.verb_info.root == "mang"
