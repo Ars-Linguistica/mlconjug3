@@ -41,18 +41,22 @@ class ConjugManager(metaclass=Singleton):
             raise ValueError(('Unsupported language.\nThe allowed languages are fr, en, es, it, pt, ro.'))
         self.language = language
         self.verbs = {}
+        verbs_file = pkg_resources.resource_filename(RESOURCE_PACKAGE, VERBS_RESOURCE_PATH[self.language])
+        conjugations_file = pkg_resources.resource_filename(RESOURCE_PACKAGE,
+                                                            CONJUGATIONS_RESOURCE_PATH[self.language])
         self.conjugations = OrderedDict()
-        self._allowed_endings = self._detect_allowed_endings()
         self.pre_trained_models = pre_trained_models
         self.extract_verb_features = extract_verb_features
         self.cache = Memory(location= './cachedir', verbose=0)
         self._load_verbs()
+        self._allowed_endings = self._detect_allowed_endings()
         self._load_conjugations()
+        self.templates = sorted(self.conjugations.keys())
 
     def __repr__(self):
         return '{0}.{1}(language={2})'.format(__name__, self.__class__.__name__, self.language)
     
-    def _load_verbs(self):
+    def _load_verbs(self, verbs_file):
         """
         Load and parses the verbs from the json file.
     
@@ -60,8 +64,7 @@ class ConjugManager(metaclass=Singleton):
             Path to the verbs json file.
     
         """
-        json_file = "conjugation_data/{}_verbs.json".format(self.language)
-        json_hash = hashlib.sha256(open(json_file, "rb").read()).hexdigest()
+        json_hash = hashlib.sha256(open(verbs_file, "rb").read()).hexdigest()
         
         if self.cache.get(json_file) and json_hash == self.cache.get(json_file)["hash"]:
             self.verbs = self.cache.get(json_file)["data"]
@@ -71,12 +74,11 @@ class ConjugManager(metaclass=Singleton):
                 self.cache.set(json_file, {"hash":json_hash, "data":self.verbs})
         return
     
-    def _load_conjugations(self):
+    def _load_conjugations(self, conjugations_file):
         """
         Load and parses the conjugations from the json file.
         """
-        json_file = "conjugation_data/{}_conjugations.json".format(self.language)
-        json_hash = hashlib.sha256(open(json_file, "rb").read()).hexdigest()
+        json_hash = hashlib.sha256(open(conjugations_file, "rb").read()).hexdigest()
         if self.cache.get(json_file) and json_hash == self.cache.get(json_file)["hash"]:
             self.conjugations = self.cache.get(json_file)["data"]
         else:
