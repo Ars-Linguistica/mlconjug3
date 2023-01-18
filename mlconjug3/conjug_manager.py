@@ -28,7 +28,7 @@ class Singleton(type):
         return cls._instances[cls]
 
 
-class ConjugManager(metaclass=Singleton):
+class ConjugManager:
     """
     This is the class handling the mlconjug3 json files.
     :param language: string.
