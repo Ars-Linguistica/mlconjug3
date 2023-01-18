@@ -60,32 +60,21 @@ class ConjugManager(metaclass=Singleton):
     def _load_verbs(self, verbs_file):
         """
         Load and parses the verbs from the json file.
-    
         :param verbs_file: string or path object.
             Path to the verbs json file.
-    
         """
-        json_hash = hashlib.sha256(open(verbs_file, "rb").read()).hexdigest()
-        
-        if self.cache.get(json_file) and json_hash == self.cache.get(json_file)["hash"]:
-            self.verbs = self.cache.get(json_file)["data"]
-        else:
-            with open(json_file, 'r', encoding='utf-8') as file:
-                self.verbs = json.load(file)
-                self.cache.set(json_file, {"hash":json_hash, "data":self.verbs})
+        with open(verbs_file, 'r', encoding='utf-8') as file:
+            self.verbs = json.load(file)
         return
-    
+
     def _load_conjugations(self, conjugations_file):
         """
         Load and parses the conjugations from the json file.
+        :param conjugations_file: string or path object.
+            Path to the conjugation json file.
         """
-        json_hash = hashlib.sha256(open(conjugations_file, "rb").read()).hexdigest()
-        if self.cache.get(json_file) and json_hash == self.cache.get(json_file)["hash"]:
-            self.conjugations = self.cache.get(json_file)["data"]
-        else:
-            with open(json_file, 'r', encoding='utf-8') as file:
-                self.conjugations = json.load(file)
-                self.cache.set(json_file, {"hash":json_hash, "data":self.conjugations})
+        with open(conjugations_file, 'r', encoding='utf-8') as file:
+            self.conjugations = json.load(file)
         return
     
     def _detect_allowed_endings(self):
