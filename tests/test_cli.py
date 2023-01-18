@@ -7,6 +7,11 @@ from mlconjug3 import cli
 import pytest
 from click.testing import CliRunner
 
+try:
+    from pathlib import Path
+except ImportError:
+    from pathlib2 import Path
+
 class TestCLI:
     verbiste = Verbiste(language='fr')
     conjugator = Conjugator()
