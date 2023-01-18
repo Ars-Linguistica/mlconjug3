@@ -31,7 +31,7 @@ class TestVerb:
         assert isinstance(test_verb.conjug_info, OrderedDict)
 
     def test_default_verb(self):
-        verbiste = Verbiste(language='default')
+        verbiste = Verbiste()
         test_verb_info = verbiste.get_verb_info(TEST_VERBS[verbiste.language][0])
         test_conjug_info = verbiste.get_conjug_info(TEST_VERBS[verbiste.language][1])
         test_verb = Verb(test_verb_info, test_conjug_info)
