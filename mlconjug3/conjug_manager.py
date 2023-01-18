@@ -50,7 +50,7 @@ class ConjugManager(metaclass=Singleton):
         self.cache = Memory(location= './cachedir', verbose=0)
         self._load_verbs(verbs_file)
         self._allowed_endings = self._detect_allowed_endings()
-        self._load_conjugations(conjugatins_file)
+        self._load_conjugations(conjugations_file)
         self.templates = sorted(self.conjugations.keys())
 
     def __repr__(self):
