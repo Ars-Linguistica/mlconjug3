@@ -54,8 +54,6 @@ class TestModel:
     # Initialize Model
     model = Model(vectorizer, feature_reductor, classifier)
     dataset = DataSet(Verbiste().verbs)
-    dataset.construct_dict_conjug()
-    dataset.split_data(proportion=0.9)
 
     def test_repr(self):
         assert self.model.__repr__() == 'mlconjug3.mlconjug.Model(classifier, feature_selector, vectorizer)'
