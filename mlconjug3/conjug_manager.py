@@ -14,6 +14,8 @@ from .constants import *
 from .verbs import *
 from .utils import logger
 
+LANGUAGES = ('default', 'fr', 'en', 'es', 'it', 'pt', 'ro')
+
 class Singleton(type):
     _instances = {}
     def __call__(cls, *args, **kwargs):
