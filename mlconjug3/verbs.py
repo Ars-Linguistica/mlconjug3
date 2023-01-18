@@ -351,7 +351,7 @@ class VerbIt(Verb):
                             key = pers
                         if term is not None and term != '-':
                             if tense_name == 'Imperativo non':
-                                persons_dict[key] = ' '.join((_NEGATION[self.language], self.verb_info.root + term))
+                                persons_dict[key] = ' '.join((NEGATION[self.language], self.verb_info.root + term))
                             else:
                                 self.conjugate_person(key, persons_dict, term)
                         else:
@@ -390,7 +390,7 @@ class VerbPt(Verb):
                             key = pers
                         if term is not None and term != '-':
                             if tense_name == 'Imperativo Negativo':
-                                persons_dict[key] = ' '.join((_NEGATION[self.language], self.verb_info.root + term))
+                                persons_dict[key] = ' '.join((NEGATION[self.language], self.verb_info.root + term))
                             else:
                                 self.conjugate_person(key, persons_dict, term)
                         else:
@@ -431,7 +431,7 @@ class VerbRo(Verb):
                             key = pers
                         if term is not None and term != '-':
                             if tense_name == 'Imperativ Negativ':
-                                persons_dict[key] = ' '.join((_NEGATION[self.language], self.verb_info.root + term))
+                                persons_dict[key] = ' '.join((NEGATION[self.language], self.verb_info.root + term))
                             else:
                                 self.conjugate_person(key, persons_dict, term)
                         else:
