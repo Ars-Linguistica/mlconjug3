@@ -14,19 +14,19 @@ def test_mlconjug():
     conjugator = Conjugator()
     assert conjugator.language == 'fr'
     assert isinstance(conjugator.conjug_manager, Verbiste)
-    assert isinstance(conjugator.model, Pipeline)
+    assert isinstance(conjugator.model, Model)
     # Test the behavior when a language is provided
     conjugator = Conjugator(language='en')
     assert conjugator.language == 'en'
     assert isinstance(conjugator.conjug_manager, Verbiste)
-    assert isinstance(conjugator.model, Pipeline)
+    assert isinstance(conjugator.model, Model)
     
     # Test the behavior when a model is provided
     model = Pipeline([('vectorizer', CountVectorizer()), ('classifier', LinearSVC())])
     conjugator = Conjugator(model=model)
     assert conjugator.language == 'fr'
     assert isinstance(conjugator.conjug_manager, Verbiste)
-    assert isinstance(conjugator.model, Pipeline)
+    assert isinstance(conjugator.model, Model)
     assert conjugator.model == model
     
     # Test the conjugate method
