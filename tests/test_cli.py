@@ -3,6 +3,7 @@ import json
 import logging
 import sys
 from mlconjug3 import *
+from mlconjug3 import cli
 import pytest
 from click.testing import CliRunner
 
