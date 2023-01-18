@@ -26,7 +26,7 @@ def test_mlconjug():
     conjugator = Conjugator(model=model)
     assert conjugator.language == 'fr'
     assert isinstance(conjugator.conjug_manager, Verbiste)
-    assert isinstance(conjugator.model, Model)
+    assert isinstance(conjugator.model, Pipeline)
     assert conjugator.model == model
     
     # Test the conjugate method
