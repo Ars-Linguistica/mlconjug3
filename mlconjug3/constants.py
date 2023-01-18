@@ -12,7 +12,7 @@ LANGUAGES = ('default', 'fr', 'en', 'es', 'it', 'pt', 'ro')
 TRANSLATIONS_PATH = pkg_resources.resource_filename(RESOURCE_PACKAGE, 'locale')
 
 SUPPORTED_LANGUAGES = ('en', 'es', 'fr', 'it', 'pt', 'ro')
-TRANSLATED_LANGUAGES = SUPPORTED_LANGUAGES[2:]
+TRANSLATED_LANGUAGES = SUPPORTED_LANGUAGES[1:]
 
 LANGUAGE_FULL = {'fr': 'Français',
                   'en': 'English',
