@@ -17,7 +17,7 @@ class TestPyVerbiste:
         assert self.verbiste.verbs['abaisser'] == {'template': 'aim:er', 'root': 'abaiss'}
 
     def test_repr(self):
-        assert self.verbiste.__repr__() == 'mlconjug3.PyVerbiste.Verbiste(language=fr)'
+        assert self.verbiste.__repr__() == 'mlconjug3.conjug_manager.Verbiste(language=fr)'
 
     def test_unsupported_language(self):
         with pytest.raises(ValueError) as excinfo:
