@@ -173,10 +173,13 @@ class Conjugator:
                 raise ValueError(
                 _('The supplied word: {0} is not in the conjugation {1} table and no Conjugation Model was provided.').format(
                     verb, _LANGUAGE_FULL[self.language]))
+            
             prediction = self.model.predict([verb])[0]
             prediction_score = self.model.pipeline.predict_proba([verb])[0][prediction]
             predicted = True
             template = self.conjug_manager.templates[prediction]
+            if verb.endswith("ize") or verb.endswith("ise"):
+                template = "lov:e"
             index = - len(template[template.index(":") + 1:])
             root = verb if index == 0 else verb[:index]
             verb_info = VerbInfo(verb, root, template)
