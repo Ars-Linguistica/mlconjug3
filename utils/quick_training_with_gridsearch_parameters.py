@@ -19,6 +19,7 @@ import numpy as np
 from functools import partial
 from time import time
 import joblib
+import zipfile
 
 from pathlib2 import Path
 
