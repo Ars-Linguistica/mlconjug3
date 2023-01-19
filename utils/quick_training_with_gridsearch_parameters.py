@@ -102,4 +102,8 @@ for lang in langs:
     # Save trained model
     with open('raw_data/experiments/trained_model-{0}-final.pickle'.format(lang), 'wb') as file:
         pickle.dump(conjugator.model, file)
+        
+    with zipfile.ZipFile('data/models/trained_model-{0}-final.zip'.format(lang), mode="w") as archive:
+        archive.write('raw_data/experiments/trained_model-{0}-final.pickle'.format(lang))
+        
 pprint.pprint(results)
