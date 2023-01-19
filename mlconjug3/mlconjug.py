@@ -47,44 +47,32 @@ class Conjugator:
 
     """
 
-    def __init__(self, language='fr', feature_extractor=None, model=None):
+    def __init__(self, language='fr', model=None):
         self.language = language
-        self.model = model
-             
-        if feature_extractor:
-            self.conjug_manager = Verbiste(language=language, extract_verb_features=feature_extractor)
-            self.model = self._load_default_model(feature_extractor)
+        self.conjug_manager = Verbiste(language=language)
+        if not model:
+            with ZipFile(pkg_resources.resource_stream(
+                    _RESOURCE_PACKAGE, _PRE_TRAINED_MODEL_PATH[language])) as content:
+                with content.open('trained_model-{0}-final.pickle'.format(self.language), 'r') as archive:
+                    model = joblib.load(archive)
+        if model:
+            self.set_model(model)
         else:
-            self.conjug_manager = Verbiste(language=language, extract_verb_features=extract_verb_features)
-            self.model = self._load_default_model()
-    
+            self.model = model
+        return
+
     def __repr__(self):
         return '{0}.{1}(language={2})'.format(__name__, self.__class__.__name__, self.language)
-    
-    def _load_default_model(self, feature_extractor=None, classifier=None):
-        if self.model:
-            return self.model
-        else:
-            with ZipFile(pkg_resources.resource_stream(
-                RESOURCE_PACKAGE, PRE_TRAINED_MODEL_PATH[self.language])) as content:
-                    with content.open('trained_model-{0}-final.pickle'.format(self.language), 'r') as archive:
-                        model = joblib.load(archive)
-        if feature_extractor:
-            model.steps[0][1] = feature_extractor
-        if classifier:
-            model.steps[-1][1] = classifier
-        return model
 
-    def set_model(self, model):
-        self.model = model
-        
     def conjugate(self, verb, subject='abbrev'):
         """
         | This is the main method of this class.
         | It first checks to see if the verb is in Verbiste.
         | If it is not, and a pre-trained scikit-learn pipeline has been supplied, the method then calls the pipeline
          to predict the conjugation class of the provided verb.
+
         | Returns a Verb object or None.
+
         :param verb: string.
             Verb to conjugate.
         :param subject: string.
@@ -93,18 +81,19 @@ class Conjugator:
             Select 'pronoun' for full pronouns.
         :return: Verb object or None.
         :raises: ValueError.
+
         """
         verb = verb.lower()
         prediction_score = 0
         if not self.conjug_manager.is_valid_verb(verb):
             raise ValueError(
-                _('The supplied word: {0} is not a valid verb in {1}.').format(verb, LANGUAGE_FULL[self.language]))
+                _('The supplied word: {0} is not a valid verb in {1}.').format(verb, _LANGUAGE_FULL[self.language]))
         if verb not in self.conjug_manager.verbs.keys():
             if self.model is None:
                 logger.warning(_('Please provide an instance of a mlconjug3.mlconjug3.Model'))
                 raise ValueError(
                 _('The supplied word: {0} is not in the conjugation {1} table and no Conjugation Model was provided.').format(
-                    verb, LANGUAGE_FULL[self.language]))
+                    verb, _LANGUAGE_FULL[self.language]))
             prediction = self.model.predict([verb])[0]
             prediction_score = self.model.pipeline.predict_proba([verb])[0][prediction]
             predicted = True
@@ -123,149 +112,172 @@ class Conjugator:
             if conjug_info is None:
                 return None
         if predicted:
-            verb_object = VERBS[self.language](verb_info, conjug_info, subject, predicted)
+            verb_object = _VERBS[self.language](verb_info, conjug_info, subject, predicted)
             verb_object.confidence_score = round(prediction_score, 3)
         else:
-            verb_object = VERBS[self.language](verb_info, conjug_info, subject)
+            verb_object = _VERBS[self.language](verb_info, conjug_info, subject)
 
         return verb_object
-    
+
+    def set_model(self, model):
+        """
+        Assigns the provided pre-trained scikit-learn pipeline to be able to conjugate unknown verbs.
+
+        :param model: scikit-learn Classifier or Pipeline.
+        :raises: ValueError.
+
+        """
+        if not isinstance(model, Model):
+            logger.warning(_('Please provide an instance of a mlconjug3.mlconjug3.Model'))
+            raise ValueError
+        else:
+            self.model = model
+        return
+
 
 class DataSet:
     """
-    | This class loads and prepares the dataset for training.
-    | The class loads the dataset from a JSON file and prepares the data for training.
-    :param verbs_dict: dict.
-    Dictionary of verbs and their conjugation class.
-    :param split_ratio: float.
-    Ratio of the dataset to be used for training. The remaining data is used for testing. Default value is 0.8.
-    :param random_state: int.
-    Seed for the random generator. Default value is 42.
-    :param verb_class: string.
-    The class of the verb to be used. Default value is 'verb'.
-    :param verb_info_class: string.
-    The class of the verb information to be used. Default value is 'verb_info'.
-    :ivar data: list.
-    List of tuples of verb information, conjugation class and conjugation information.
-    :ivar X: list.
-    List of verb information used as input for the model.
-    :ivar y: list.
-    List of conjugation classes used as output for the model.
+    | This class holds and manages the data set.
+    | Defines helper methodss for managing Machine Learning tasks like constructing a training and testing set.
+
+    :param verbs_dict:
+        A dictionary of verbs and their corresponding conjugation class.
+
     """
-    def __init__(self, verbs_dict: dict, split_ratio=0.8, random_state=42, verb_class='verb', verb_info_class='verb_info'):
+
+    def __init__(self, verbs_dict):
         self.verbs_dict = verbs_dict
-        self.split_ratio = split_ratio
-        self.random_state = random_state
-        self.verb_class = verb_class
-        self.verb_info_class = verb_info_class
-        self.data = self._load_data()
-        self.X, self.y = self._prepare_data()
-    
-    def _load_data(self):
+        self.verbs = self.verbs_dict.keys()
+        self.templates = sorted(
+            {verb['template'] for verb in self.verbs_dict.values()}
+        )
+
+        self.verbs_list = []
+        self.templates_list = []
+        self.dict_conjug = None
+        self.min_threshold = 8
+        self.split_proportion = 0.5
+        self.train_input = []
+        self.train_labels = []
+        self.test_input = []
+        self.test_labels = []
+        self.construct_dict_conjug()
+        return
+
+    def __repr__(self):
+        return '{0}.{1}()'.format(__name__, self.__class__.__name__)
+
+    def construct_dict_conjug(self):
         """
-        | Loads the dataset from a JSON file.
-        | Returns a list of tuples of verb information, conjugation class and conjugation information.
-    
+        | Populates the dictionary containing the conjugation templates.
+        | Populates the lists containing the verbs and their templates.
+
+        """
+        conjug = defaultdict(list)
+        verb_items = list(self.verbs_dict.items())
+        Random(42).shuffle(verb_items)
+        for verb, info_verb in verb_items:
+            self.verbs_list.append(verb)
+            self.templates_list.append(self.templates.index(info_verb["template"]))
+            conjug[info_verb["template"]].append(verb)
+        self.dict_conjug = conjug
+        return
+
+    def split_data(self, threshold=8, proportion=0.5):
+        """
+        Splits the data into a training and a testing set.
+
+        :param threshold: int.
+            Minimum size of conjugation class to be split.
+        :param proportion: float.
+            Proportion of samples in the training set.
+            Must be between 0 and 1.
+        :raises: ValueError.
+
+        """
+        if proportion <= 0 or proportion > 1:
+            raise ValueError(_('The split proportion must be between 0 and 1.'))
+        self.min_threshold = threshold
+        self.split_proportion = proportion
+        train_set = []
+        test_set = []
+        for template, lverbs in self.dict_conjug.items():
+            if len(lverbs) <= threshold:
+                for verbe in lverbs:
+                    train_set.append((verbe, template))
+            else:
+                index = round(len(lverbs) * proportion)
+                for verbe in lverbs[:index]:
+                    train_set.append((verbe, template))
+                for verbe in lverbs[index:]:
+                    test_set.append((verbe, template))
+        Random(42).shuffle(train_set)
+        Random(42).shuffle(test_set)
+        self.train_input = [elmt[0] for elmt in train_set]
+        self.train_labels = [self.templates.index(elmt[1]) for elmt in train_set]
+        self.test_input = [elmt[0] for elmt in test_set]
+        self.test_labels = [self.templates.index(elmt[1]) for elmt in test_set]
+        return
+
+
+class Model(object):
+    """
+    | This class manages the scikit-learn pipeline.
+    | The Pipeline includes a feature vectorizer, a feature selector and a classifier.
+    | If any of the vectorizer, feature selector or classifier is not supplied at instance declaration,
+     the __init__ method will provide good default values that get more than 92% prediction accuracy.
+
+    :param vectorizer: scikit-learn Vectorizer.
+    :param feature_selector: scikit-learn Classifier with a fit_transform() method
+    :param classifier: scikit-learn Classifier with a predict() method
+    :param language: Language of the corpus of verbs to be analyzed.
+    :ivar pipeline: scikit-learn Pipeline Object.
+    :ivar language: Language of the corpus of verbs to be analyzed.
+
+    """
+
+    def __init__(self, vectorizer=None, feature_selector=None, classifier=None, language=None):
+        if not vectorizer:
+            vectorizer = CountVectorizer(analyzer=partial(extract_verb_features, lang=language, ngram_range=(2, 7)),
+                                         binary=True, lowercase=False)
+        if not feature_selector:
+            feature_selector = SelectFromModel(LinearSVC(penalty='l1', max_iter=12000, dual=False, verbose=2))
+        if not classifier:
+            classifier = SGDClassifier(loss='log', penalty='elasticnet', l1_ratio=0.15,
+                                       max_iter=4000, alpha=1e-5, random_state=42, verbose=2)
+        self.pipeline = Pipeline([('vectorizer', vectorizer),
+                                  ('feature_selector', feature_selector),
+                                  ('classifier', classifier)])
+        self.language = language
+        return
+
+    def __repr__(self):
+        return '{0}.{1}({2}, {3}, {4})'.format(__name__, self.__class__.__name__, *sorted(self.pipeline.named_steps))
+
+    def train(self, samples, labels):
+        """
+        Trains the pipeline on the supplied samples and labels.
+
+        :param samples: list.
+            List of verbs.
+        :param labels: list.
+            List of verb templates.
+
+        """
+        self.pipeline = self.pipeline.fit(samples, labels)
+        return
+
+    def predict(self, verbs):
+        """
+        Predicts the conjugation class of the provided list of verbs.
+
+        :param verbs: list.
+            List of verbs.
         :return: list.
-            List of tuples of verb information, conjugation class and conjugation information.
-    
-        """
-        data = []
-        for verb, conjugations_class in self.verbs_dict.items():
-            for conjugation_class, conjugation_info in conjugations_class.items():
-                data.append((verb, conjugation_class, conjugation_info))
-        return data
-    
-    def _prepare_data(self):
-        """
-        | Prepares the data for training.
-            | Returns X, the input data and y, the output data.
-    
-        :return: tuple.
-            Tuple of X, the input data and y, the output data.
-    
-        """
-        random = Random(self.random_state)
-        random.shuffle(self.data)
-        split_index = int(len(self.data) * self.split_ratio)
-        X, y = [], []
-        for verb, conjugation_class, conjugation_info in self.data:
-            X.append(verb)
-            y.append(conjugation_class)
-        return X, y
-    
-    def get_train_test_data(self):
-        """
-        | Returns the training and testing data
-        :return: tuple
-        A tuple of numpy arrays containing the train and test data respectively.
-        """
-        train_data = self.data.sample(frac=0.8, random_state=1)
-        test_data = self.data.drop(train_data.index)
-        return train_data[self.feature_cols], train_data[self.target_col], test_data[self.feature_cols], test_data[self.target_col]
-            
-    def get_data(self):
-        """
-        Retrieves the entire dataset.
-        """
-        return self.data
+            List of predicted conjugation groups.
 
-
-
-class Model:
-    """
-    | This class wraps the scikit-learn pipeline.
-    | The pipeline is used to train the model and predict the conjugation class of a verb.
-    | The pipeline is composed of:
-    |   - a feature extractor,
-    |   - a feature selector using Linear Support Vector Classification,
-    |   - a classifier using Stochastic Gradient Descent.
-    :param feature_extractor: a class that implements the fit and transform methods.
-    Instance of a class that implements the fit and transform methods.
-    :param pipeline: scikit-learn pipeline.
-        Pipeline containing the feature extraction and the classification steps.
-    :param feature_extractor_params: dict.
-        Parameters for the feature extractor.
-    :param pipeline_params: dict.
-        Parameters for the pipeline.
-    :param lang: string.
-        Language of the conjugator. The default language is 'fr' for french.
-    :param ngram_range: tuple.
-        The range of the ngram sliding window.
-    
-    """
-    def __init__(self, feature_extractor=None, pipeline=None, feature_extractor_params=None, pipeline_params=None, lang='fr', ngram_range=(1, 2)):
-        self.feature_extractor = feature_extractor if feature_extractor else VerbFeatures
-        self.feature_extractor_params = feature_extractor_params if feature_extractor_params else {'char_ngrams': (3, 4, 5), 'w2v_model': None, 'morph_features': None, 'language': lang}
-        self.pipeline = pipeline if pipeline else Pipeline([
-            ('feature_extractor', self.feature_extractor(**self.feature_extractor_params)),
-            ('classifier', LinearSVC())
-        ])
-        self.pipeline_params = pipeline_params if pipeline_params else {'classifier__C': 1.0}
-        self.ngram_range = ngram_range
-        self.lang = lang
-    
-    def fit(self, X, y):
-        self.pipeline.fit(X, y)
-    
-    def predict(self, X):
-        return self.pipeline.predict(X)
-    
-    def evaluate(self, X, y):
-        return self.pipeline.score(X, y)
-    
-    def save(self, filepath):
-        joblib.dump(self, filepath)
-    
-    def load(self, filepath):
-        return joblib.load(filepath)
-    
-    @staticmethod
-    def extract_verb_features(verb, lang, ngram_range):
         """
-        | Custom Vectorizer optimized for extracting verbs features.
-        """
-        return extract_verb_features(verb, lang, ngram_range)
+        return self.pipeline.predict(verbs)
 
 
 if __name__ == "__main__":
