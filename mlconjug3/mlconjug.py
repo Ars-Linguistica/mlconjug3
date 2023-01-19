@@ -52,7 +52,7 @@ class Conjugator:
         self.conjug_manager = Verbiste(language=language)
         if not model:
             with ZipFile(pkg_resources.resource_stream(
-                    _RESOURCE_PACKAGE, _PRE_TRAINED_MODEL_PATH[language])) as content:
+                    RESOURCE_PACKAGE, PRE_TRAINED_MODEL_PATH[language])) as content:
                 with content.open('trained_model-{0}-final.pickle'.format(self.language), 'r') as archive:
                     model = joblib.load(archive)
         if model:
@@ -87,13 +87,13 @@ class Conjugator:
         prediction_score = 0
         if not self.conjug_manager.is_valid_verb(verb):
             raise ValueError(
-                _('The supplied word: {0} is not a valid verb in {1}.').format(verb, _LANGUAGE_FULL[self.language]))
+                _('The supplied word: {0} is not a valid verb in {1}.').format(verb, LANGUAGE_FULL[self.language]))
         if verb not in self.conjug_manager.verbs.keys():
             if self.model is None:
                 logger.warning(_('Please provide an instance of a mlconjug3.mlconjug3.Model'))
                 raise ValueError(
                 _('The supplied word: {0} is not in the conjugation {1} table and no Conjugation Model was provided.').format(
-                    verb, _LANGUAGE_FULL[self.language]))
+                    verb, LANGUAGE_FULL[self.language]))
             prediction = self.model.predict([verb])[0]
             prediction_score = self.model.pipeline.predict_proba([verb])[0][prediction]
             predicted = True
@@ -112,10 +112,10 @@ class Conjugator:
             if conjug_info is None:
                 return None
         if predicted:
-            verb_object = _VERBS[self.language](verb_info, conjug_info, subject, predicted)
+            verb_object = VERBS[self.language](verb_info, conjug_info, subject, predicted)
             verb_object.confidence_score = round(prediction_score, 3)
         else:
-            verb_object = _VERBS[self.language](verb_info, conjug_info, subject)
+            verb_object = VERBS[self.language](verb_info, conjug_info, subject)
 
         return verb_object
 
