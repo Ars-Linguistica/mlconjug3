@@ -64,7 +64,7 @@ def main(verbs, language, output, subject):
     results = {}
     for verb in verbs:
         result = conjugator.conjugate(verb, subject)
-        results[verb] = result.verb_info, result.conjug_info
+        results[verb] = result.verb_info.template, result.conjug_info
     if output:
         with open(output, 'w', encoding='utf-8') as file:
             json.dump(results, file, ensure_ascii=False, indent=4)
