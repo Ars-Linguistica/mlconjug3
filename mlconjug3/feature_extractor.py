@@ -51,8 +51,6 @@ class VerbFeatures(TransformerMixin, BaseEstimator):
                     'it': VerbMorphologyIt(),
                     'pt': VerbMorphologyPt(),
                     'ro': VerbMorphologyRo(),
-                    'ar': ArabicVerbMorphology(), # added support for Arabic
-                    'zh': ChineseVerbMorphology() # added support for Chinese
                 }.get(self.language)
                 feature_vector.extend(morph_extractor.transform([verb]))
 
@@ -61,41 +59,41 @@ class VerbFeatures(TransformerMixin, BaseEstimator):
         
     @staticmethod   
     def extract_verb_features(verb, lang, ngram_range):
-        """
-        | Custom Vectorizer optimized for extracting verbs features.
-        | As in Indo-European languages verbs are inflected by adding a morphological suffix,
-         the vectorizer extracts verb endings and produces a vector representation of the verb with binary features.
-        | To enhance the results of the feature extration, several other features have been included:
-        | The features are the verb's ending n-grams, starting n-grams, length of the verb, number of vowels,
-         number of consonants and the ratio of vowels over consonants.
-        :param verb: string.
-            Verb to vectorize.
-        :param lang: string. Language to analyze.
-        :param ngram_range: tuple. Range of n-grams to extract.
-            :return: list.
-        List of extracted verb features.
-        """
-        verb_endings = []
-        verb_starts = []
-        length = len(verb)
-        vowels = sum(1 for char in verb if char in 'aeiou')
-        consonants = sum(1 for char in verb if char not in 'aeiou')
-        
-        # Extract verb endings and starting n-grams
-        if lang == 'fr':
-            # French verb inflection patterns
-            verb_endings = [verb[-n:] for n in range(ngram_range[0], ngram_range[1]+1)]
-            verb_starts = [verb[:n] for n in range(ngram_range[0], ngram_range[1]+1)]
-        elif lang == 'ar':
-            # Arabic verb inflection patterns
-            pass # add code to extract arabic verb endings
-        elif lang == 'ch':
-            # Chinese verb inflection patterns
-            pass # add code to extract chinese verb endings
-        else:
-            pass # add code to handle other languages inflection patterns
-        
-        # Other features
-        features = verb_endings + verb_starts + [length, vowels, consonants, vowels/consonants if consonants else 0]
-        return features
+    """
+    | Custom Vectorizer optimized for extracting verbs features.
+    | As in Indo-European languages verbs are inflected by adding a morphological suffix,
+     the vectorizer extracts verb endings and produces a vector representation of the verb with binary features.
+    | To enhance the results of the feature extration, several other features have been included:
+    | The features are the verb's ending n-grams, starting n-grams, length of the verb, number of vowels,
+     number of consonants and the ratio of vowels over consonants.
+    :param verb: string.
+        Verb to vectorize.
+    :param lang: string.
+        Language to analyze.
+    :param ngram_range: tuple.
+        The range of the ngram sliding window.
+    :return: list.
+        List of the most salient features of the verb for the task of finding it's conjugation's class.
+    """
+    _white_spaces = re.compile(r"\s\s+")
+    verb = _white_spaces.sub(" ", verb)
+    verb = verb.lower()
+    verb_len = len(verb)
+    length_feature = 'LEN={0}'.format(str(verb_len))
+    min_n, max_n = ngram_range
+    final_ngrams = ['END={0}'.format(verb[-n:]) for n in range(min_n, min(max_n + 1, verb_len + 1))]
+    initial_ngrams = ['START={0}'.format(verb[:n]) for n in range(min_n, min(max_n + 1, verb_len + 1))]
+    if lang not in _ALPHABET:
+        lang = 'en'  # We chose 'en' as the default alphabet because english is more standard, without accents or diactrics.
+    vowels = sum(verb.count(c) for c in _ALPHABET[lang]['vowels'])
+    vowels_number = 'VOW_NUM={0}'.format(vowels)
+    consonants = sum(verb.count(c) for c in _ALPHABET[lang]['consonants'])
+    consonants_number = 'CONS_NUM={0}'.format(consonants)
+    if consonants == 0:
+        vow_cons_ratio = 'V/C=N/A'
+    else:
+        vow_cons_ratio = 'V/C={0}'.format(round(vowels / consonants, 2))
+    final_ngrams.extend(initial_ngrams)
+    final_ngrams.extend((length_feature, vowels_number, consonants_number, vow_cons_ratio))
+    return final_ngrams
 
