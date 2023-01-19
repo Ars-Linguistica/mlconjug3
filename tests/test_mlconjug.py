@@ -188,7 +188,7 @@ class TestModel:
     feature_reductor = SelectFromModel(
         LinearSVC(penalty="l1", max_iter=3000, dual=False, verbose=2))
     # Prediction Classifier
-    classifier = SGDClassifier(loss="log", penalty='elasticnet', alpha=1e-5, random_state=42)
+    classifier = SGDClassifier(loss="log_loss", penalty='elasticnet', alpha=1e-5, random_state=
     # Initialize Model
     model = Model(vectorizer, feature_reductor, classifier)
     dataset = DataSet(Verbiste().verbs)
