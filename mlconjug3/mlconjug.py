@@ -322,7 +322,7 @@ class Model(object):
         if not feature_selector:
             feature_selector = SelectFromModel(LinearSVC(penalty='l1', max_iter=12000, dual=False, verbose=2))
         if not classifier:
-            classifier = SGDClassifier(loss='log', penalty='elasticnet', l1_ratio=0.15,
+            classifier = SGDClassifier(loss='log_loss', penalty='elasticnet', l1_ratio=0.15,
                                        max_iter=4000, alpha=1e-5, random_state=42, verbose=2)
         self.pipeline = Pipeline([('vectorizer', vectorizer),
                                   ('feature_selector', feature_selector),
