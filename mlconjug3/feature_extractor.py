@@ -3,6 +3,7 @@ from .verbs import *
 from .constants import *
 from .utils import logger
 import numpy as np
+import re
 
 class VerbFeatures(TransformerMixin, BaseEstimator):
     """
