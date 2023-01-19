@@ -1,4 +1,4 @@
-name: "Use poetry to build package and run multiple tests"
+name: "Use poetry to build PyPy packages"
 
 on: [ push, pull_request ]
 
@@ -20,7 +20,7 @@ jobs:
                         path: ~/Library/Caches/pip
                     -   os: windows-latest
                         path: ~\AppData\Local\pip\Cache
-                python-version: [ pypy3.8 ]
+                python-version: [ pypy3.9 ]
 
         steps:
             -   uses: actions/checkout@v3
