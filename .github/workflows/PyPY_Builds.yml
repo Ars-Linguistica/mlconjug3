@@ -17,12 +17,12 @@ jobs:
                         path: ~/Library/Caches/pip
                     -   os: windows-latest
                         path: ~\AppData\Local\pip\Cache
-                python-version: [ 'pypy-3.8' ]
+                python-version: [ 'pypy-3.9', 'pypy-3.8' ]
 
         steps:
-            -   uses: actions/checkout@v2
+            -   uses: actions/checkout@v3
 
-            -   uses: actions/setup-python@v2
+            -   uses: actions/setup-python@v4
                 with:
                     python-version: ${{ matrix.python-version }}
 
