@@ -1,7 +1,3 @@
-Updating dependencies
-Resolving dependencies...
-
-Writing lock file
 click==8.1.3 ; python_full_version >= "3.8.0" and python_version < "3.12"
 colorama==0.4.6 ; python_full_version >= "3.8.0" and python_version < "3.12"
 cython==0.29.33 ; python_full_version >= "3.8.0" and python_version < "3.12"
