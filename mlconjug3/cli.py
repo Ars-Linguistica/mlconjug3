@@ -67,20 +67,22 @@ def main(verbs, language, output, subject, file_format):
         conjugator = Conjugator(language)
         conjugations = {}
         for verb in verbs:
-            conjugations[verb] = conjugator.conjugate(verb, subject)
-        if file_format == 'json':
-            with open(output, 'w') as outfile:
-                json.dump(conjugations, outfile)
-        elif file_format == 'csv':
-            pass # code to write to csv file
-        else:
-            raise ValueError("Invalid output format. Please choose 'json', 'csv' or 'pdf'.")
+            conjugations[verb] = conjugator.conjugate(verb, subject).conjug_info
+        
         table = Table(title="Conjugations", show_header=True)
         table.add_column("Verb", style="cyan", width=20)
         table.add_column("Conjugation", style="green", width=20)
         for verb, conjugation in conjugations.items():
             table.add_row(verb, conjugation)
         pprint(table)
+        if output:
+            if file_format == 'json':
+                with open(output, 'w') as outfile:
+                    json.dump(conjugations, outfile)
+            elif file_format == 'csv':
+                pass # code to write to csv file
+            else:
+                raise ValueError("Invalid output format. Please choose 'json', 'csv' or 'pdf'.")
     except Exception as e:
         logging.error("An error occurred: {}".format(e))
         if output:
