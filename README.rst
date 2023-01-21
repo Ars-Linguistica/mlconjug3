@@ -115,6 +115,10 @@ Academic publications citing mlconjug
   | "`Generative Grading Neural Approximate Parsing for Automated Student Feedback`_".
   | Proceedings of the 34th AAAI conference on Artificial Intelligence, 2019.
 
+- | Spencer Ng, Lucy Teaford, Andy Yang, and Isaiah Zwick-Schachter.
+  | "`Fluorescing Questions: Effects of Semantic Perturbations on BERT Performance in SQuAD 1.1`_".
+  | CMSC 25610: Computational Linguistics University of Chicago.
+
 Software projects using mlconjug
 --------------------------------
 
@@ -172,7 +176,7 @@ If you want to cite mlconjug3 in an academic publication use this citation forma
      title={mlconjug3},
      author={Sekou Diao},
      journal={GitHub. Note: https://github.com/SekouDiaoNlp/mlconjug3 Cited by},
-     year={2021}
+     year={2023}
    }
 
 
@@ -187,6 +191,7 @@ The logo was designed by Zuur_.
 .. _scikit-learn: http://scikit-learn.org/stable/index.html
 .. _Zuur: https://github.com/zuuritaly
 .. _`Generative Grading Neural Approximate Parsing for Automated Student Feedback`: https://arxiv.org/abs/1905.09916
+.. _`Fluorescing Questions: Effects of Semantic Perturbations on BERT Performance in SQuAD 1.1`: https://github.com/spencerng/squad-sentiment/blob/87b42a41ba7f4f3f8d4e6c478f746d6cdf9f5515/assets/semantic-perturbations-bert-performance.pdf
 .. _`Gender Bias Visualization`: https://github.com/GesaJo/Gender-Bias-Visualization
 .. _`Text Adaptation To Context`: https://github.com/lzontar/Text_Adaptation_To_Context
 .. _`Facemask Detection`: https://github.com/samuel-karanja/facemask-derection
