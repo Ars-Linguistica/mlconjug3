@@ -27,9 +27,10 @@ except FileNotFoundError:
         'Click>=8.0.3',
         'numpy',
         'scipy',
-        'scikit-learn>=1.0.2',
+        'scikit-learn>=1.2.0',
         'colorama',
         'joblib',
+        'rich',
     ]
 
 try:
@@ -111,6 +112,7 @@ setup(
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.11',
     ],
     test_suite='tests',
     tests_require=test_requirements,
