@@ -73,8 +73,10 @@ def main(verbs, language, output, subject, file_format):
         table.add_column("Verb", style="cyan", width=20)
         table.add_column("Conjugation", style="green", width=20)
         for verb, conjugation in conjugations.items():
-            table.add_row(verb, Pretty(conjugation))
+            for key, value in conjugation.items():
+                table.add_row(verb, f"{key}: {value}")
         pprint(table)
+        pprint(conjugations)
         if output:
             if file_format == 'json':
                 with open(output, 'w') as outfile:
