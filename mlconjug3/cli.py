@@ -33,7 +33,7 @@ import rich
               help=("The output format for storing the conjugation tables."
               " The values can be 'json', 'csv'. The default value is 'json'."),
               type=click.STRING)
-def main(verbs, language, output, subject, file_format, features):
+def main(verbs, language, output, subject, file_format):
     """
     MLConjug is a Python library to conjugate verbs of in French, English, Spanish, Italian, Portuguese and Romanian (mores soon) using Machine Learning techniques.
     Any verb in one of the supported language can be conjugated as the module contains a Machine Learning pipeline of how the verbs behave.
