@@ -64,19 +64,26 @@ def main(verbs, language, output, subject, file_format):
         logger.addHandler(console_handler)
         logger.addHandler(error_handler)
         logger.setLevel(logging.INFO)
+        console = Console()
         conjugator = Conjugator(language)
         conjugations = {}
         for verb in verbs:
             conjugations[verb] = conjugator.conjugate(verb, subject).conjug_info
         
-        table = Table(title="Conjugations", show_header=True)
-        table.add_column("Verb", style="cyan", width=20)
-        table.add_column("Conjugation", style="green", width=20)
+        table = Table(show_header=True, header_style="bold magenta")
+        table.add_column("Verb")
+        table.add_column("Mood")
+        table.add_column("Tense")
+        table.add_column("Person")
+        table.add_column("Conjugation")
+        
         for verb, conjugation in conjugations.items():
-            for key, value in conjugation.items():
-                table.add_row(verb, f"{key}: {value}")
-        pprint(table)
-        pprint(conjugations)
+            for mood, tenses in conjugation.items():
+                for tense, persons in tenses.items():
+                    for person, form in persons.items():
+                        table.add_row(verb, mood, tense, person, form)
+        
+        console.print(table)
         if output:
             if file_format == 'json':
                 with open(output, 'w') as outfile:
