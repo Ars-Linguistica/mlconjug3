@@ -2,6 +2,7 @@
 
 """Console script for mlconjug3."""
 
+import sys
 import click
 from .mlconjug import Conjugator
 import json
