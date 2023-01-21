@@ -80,8 +80,7 @@ def main(verbs, language, output, subject, file_format):
         for verb, conjugation in conjugations.items():
             for mood, tenses in conjugation.items():
                 for tense, persons in tenses.items():
-                    for person, form in persons.items():
-                        table.add_row(verb, mood, tense, person, form)
+                        table.add_row(verb, mood, tense, person)
         
         console.print(table)
         if output:
