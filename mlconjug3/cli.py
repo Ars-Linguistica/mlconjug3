@@ -73,22 +73,27 @@ def main(verbs, language, output, subject, file_format):
         for verb in verbs:
             conjugations[verb] = conjugator.conjugate(verb, subject).conjug_info
         
-        table = Table(show_header=True, header_style="bold")
-        table.add_column("Verb")
-        table.add_column("Mood")
-        table.add_column("Tense")
-        table.add_column("Person")
+        table = Table(title="Conjugations", show_header=True, header_style="bold magenta")
+        table.add_column("Verb", style="cyan")
+        table.add_column("Mood", style="bold yellow")
+        table.add_column("Tense", style="bold green")
+        table.add_column("Person", style="bold red")
         table.add_column("Conjugation")
         
+        last_tense = None
         for verb, conjugation in conjugations.items():
             for mood, tenses in conjugation.items():
                 for tense, persons in tenses.items():
+                    if tense != last_tense:
+                        console.print()
+                        console.print(f"[bold blue]{tense}[/bold blue]")
+                        last_tense = tense
                     if isinstance(persons, dict):
                         for person, form in persons.items():
-                            table.add_row(verb, termcolor.colored(mood, 'magenta'), termcolor.colored(tense, 'blue'), person, form)
+                            table.add_row(verb, mood, tense, person, form)
                     else:
-                        table.add_row(verb, termcolor.colored(mood, 'magenta'), termcolor.colored(tense, 'blue'), '', persons)
-                    table.add_row("", "", "", "", "") 
+                        table.add_row(verb, mood, tense, '', persons)
+        
         console.print(table)
 
         if output:
