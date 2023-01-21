@@ -12,7 +12,6 @@ from rich.table import Table
 from rich.columns import Columns
 from rich.console import Console
 import rich
-import termcolor
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
 @click.argument('verbs', nargs=-1)
@@ -80,19 +79,15 @@ def main(verbs, language, output, subject, file_format):
         table.add_column("Person", style="bold red")
         table.add_column("Conjugation")
         
-        last_tense = None
         for verb, conjugation in conjugations.items():
             for mood, tenses in conjugation.items():
                 for tense, persons in tenses.items():
-                    if tense != last_tense:
-                        console.print()
-                        console.print(f"[bold blue]{tense}[/bold blue]")
-                        last_tense = tense
                     if isinstance(persons, dict):
                         for person, form in persons.items():
                             table.add_row(verb, mood, tense, person, form)
                     else:
                         table.add_row(verb, mood, tense, '', persons)
+                    table.add_section()
         
         console.print(table)
 
