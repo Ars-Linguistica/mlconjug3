@@ -72,7 +72,7 @@ def main(verbs, language, output, subject, file_format):
             conjugations[verb] = conjugator.conjugate(verb, subject).conjug_info
         
         for verb, conjugation in conjugations.items():
-            table = Table(title="Conjugations for {verb}", show_header=True, header_style="bold magenta")
+            table = Table(title=f"Conjugations for {verb}", show_header=True, header_style="bold magenta")
             table.add_column("Verb", style="cyan")
             table.add_column("Mood", style="bold yellow")
             table.add_column("Tense", style="bold green")
