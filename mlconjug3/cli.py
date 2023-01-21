@@ -10,6 +10,7 @@ import logging
 from rich.pretty import pprint, Pretty
 from rich.table import Table
 from rich.columns import Columns
+from rich.console import Console
 import rich
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
@@ -55,7 +56,7 @@ def main(verbs, language, output, subject, file_format):
     """
     try:
         logger = logging.getLogger(__name__)
-    
+        console = Console()
         # create console handler and set level to debug
         console_handler = logging.StreamHandler(sys.stdout)
         error_handler = logging.StreamHandler(sys.stderr)
@@ -64,7 +65,6 @@ def main(verbs, language, output, subject, file_format):
         logger.addHandler(console_handler)
         logger.addHandler(error_handler)
         logger.setLevel(logging.INFO)
-        console = Console()
         conjugator = Conjugator(language)
         conjugations = {}
         for verb in verbs:
