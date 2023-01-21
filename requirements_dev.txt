@@ -23,6 +23,7 @@ joblib==1.1.1
 progressbar2==3.53.1
 pathlib2==2.3.6
 twine==3.4.2
+rich==13.2.0
 # grayskull==0.8.5
 #MonkeyType==19.5.0
 #wily==1.12.4
