@@ -63,7 +63,7 @@ def main(verbs, language, output, subject, file_format, features):
         logger.addHandler(console_handler)
         logger.addHandler(error_handler)
         logger.setLevel(logging.INFO)
-        conjugator = Conjugator(language, features)
+        conjugator = Conjugator(language)
         conjugations = {}
         for verb in verbs:
             conjugations[verb] = conjugator.conjugate(verb, subject)
