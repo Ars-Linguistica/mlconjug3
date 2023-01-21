@@ -31,6 +31,7 @@ except FileNotFoundError:
         'colorama',
         'joblib',
         'rich',
+        'termcolor',
     ]
 
 try:
