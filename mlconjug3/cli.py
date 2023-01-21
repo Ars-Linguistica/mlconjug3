@@ -12,6 +12,7 @@ from rich.table import Table
 from rich.columns import Columns
 from rich.console import Console
 import rich
+import termcolor
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
 @click.argument('verbs', nargs=-1)
@@ -65,12 +66,14 @@ def main(verbs, language, output, subject, file_format):
         logger.addHandler(console_handler)
         logger.addHandler(error_handler)
         logger.setLevel(logging.INFO)
+        
+
         conjugator = Conjugator(language)
         conjugations = {}
         for verb in verbs:
             conjugations[verb] = conjugator.conjugate(verb, subject).conjug_info
         
-        table = Table(show_header=True, header_style="bold magenta")
+        table = Table(show_header=True, header_style="bold")
         table.add_column("Verb")
         table.add_column("Mood")
         table.add_column("Tense")
@@ -80,10 +83,14 @@ def main(verbs, language, output, subject, file_format):
         for verb, conjugation in conjugations.items():
             for mood, tenses in conjugation.items():
                 for tense, persons in tenses.items():
-                    for person in persons:
-                        table.add_row(verb, mood, tense, person)
-        
+                    if isinstance(persons, dict):
+                        for person, form in persons.items():
+                            table.add_row(verb, termcolor.colored(mood, 'magenta'), termcolor.colored(tense, 'blue'), person, form)
+                    else:
+                        table.add_row(verb, termcolor.colored(mood, 'magenta'), termcolor.colored(tense, 'blue'), '', persons)
+                    table.add_row("", "", "", "", "") 
         console.print(table)
+
         if output:
             if file_format == 'json':
                 with open(output, 'w') as outfile:
