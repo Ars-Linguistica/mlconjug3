@@ -2,6 +2,13 @@
 History
 =======
 
+3.8.4 (2022-01-03)
+------------------
+
+* Updated dependencies to scikit-learn 1.2.0 with a noticeable speed inrease in training and inference performance.
+* Fixed issue #328 with certain English verbs ending in "-ize" / "-ise".
+* Updated documentation.
+
 3.8.3 (2022-01-03)
 ------------------
 
