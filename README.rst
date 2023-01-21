@@ -119,6 +119,11 @@ Academic publications citing mlconjug
   | "`Fluorescing Questions: Effects of Semantic Perturbations on BERT Performance in SQuAD 1.1`_".
   | CMSC 25610: Computational Linguistics University of Chicago.
 
+- | Mike Hongfei Wu.
+  | "`Extensions and Applications of Deep Probabilistic Inference for Generative Models`_".
+  | A DISSERTATION SUBMITTED TO THE DEPARTMENT OF COMPUTER SCIENCE AND THE COMMITTEE ON GRADUATE STUDIES OF STANFORD UNIVERSITY IN PARTIAL FULFILLMENT OF THE REQUIREMENTS FOR THE DEGREE OF DOCTOR OF PHILOSOPHY. May 2022.
+
+
 Software projects using mlconjug
 --------------------------------
 
