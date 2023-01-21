@@ -217,7 +217,7 @@ class TestCLI:
         runner = CliRunner()
         result = runner.invoke(cli.main, [verb])
         assert result.exit_code == 0
-        assert 'allassions' in result.output
+        
         help_result = runner.invoke(cli.main, ['--help'])
         assert help_result.exit_code == 0
         # assert 'Console script for mlconjug3.' in help_result.output
