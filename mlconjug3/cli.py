@@ -7,7 +7,7 @@ import click
 from .mlconjug import Conjugator
 import json
 import logging
-from rich.pretty import pprint
+from rich.pretty import pprint, Pretty
 from rich.table import Table
 from rich.columns import Columns
 import rich
@@ -73,7 +73,7 @@ def main(verbs, language, output, subject, file_format):
         table.add_column("Verb", style="cyan", width=20)
         table.add_column("Conjugation", style="green", width=20)
         for verb, conjugation in conjugations.items():
-            table.add_row(verb, conjugation)
+            table.add_row(verb, Pretty(conjugation))
         pprint(table)
         if output:
             if file_format == 'json':
