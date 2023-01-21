@@ -80,13 +80,13 @@ def main(verbs, language, output, subject, file_format, features):
         for verb, conjugation in conjugations.items():
             table.add_row(verb, conjugation)
         pprint(table)
-        except Exception as e:
-            logging.error("An error occurred: {}".format(e))
-            if output:
-                click.echo("Conjugations not saved. Please check the output file path and permissions.")
-            else:
-                click.echo("Conjugations not displayed. Please check the input verbs and language.")
-            sys.exit(1)
+    except Exception as e:
+        logging.error("An error occurred: {}".format(e))
+        if output:
+            click.echo("Conjugations not saved. Please check the output file path and permissions.")
+        else:
+            click.echo("Conjugations not displayed. Please check the input verbs and language.")
+        sys.exit(1)
     
 if __name__ == "__main__":
     main()
