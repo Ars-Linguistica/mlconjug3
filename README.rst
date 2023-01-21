@@ -111,17 +111,21 @@ Features
 Academic publications citing mlconjug
 -------------------------------------
 
-- | Ali Malik and Mike Wu and Vrinda Vasavada and Jinpeng Song and John Mitchell and Noah D. Goodman and Chris Piech.
-  | "`Generative Grading Neural Approximate Parsing for Automated Student Feedback`_".
-  | Proceedings of the 34th AAAI conference on Artificial Intelligence, 2019.
-
-- | Spencer Ng, Lucy Teaford, Andy Yang, and Isaiah Zwick-Schachter.
-  | "`Fluorescing Questions: Effects of Semantic Perturbations on BERT Performance in SQuAD 1.1`_".
-  | CMSC 25610: Computational Linguistics University of Chicago.
+- | Gerard Canal,Senka Krivic ́, Paul Luff, Andrew Coles.
+  | "`PlanVerb: Domain-Independent Verbalization and Summary of Task Plans`_".
+  | Thirty-Sixth AAAI Conference on Artificial Intelligence (AAAI-22), 2022.
 
 - | Mike Hongfei Wu.
   | "`Extensions and Applications of Deep Probabilistic Inference for Generative Models`_".
   | A DISSERTATION SUBMITTED TO THE DEPARTMENT OF COMPUTER SCIENCE AND THE COMMITTEE ON GRADUATE STUDIES OF STANFORD UNIVERSITY IN PARTIAL FULFILLMENT OF THE REQUIREMENTS FOR THE DEGREE OF DOCTOR OF PHILOSOPHY. May 2022.
+
+- | Spencer Ng, Lucy Teaford, Andy Yang, and Isaiah Zwick-Schachter.
+  | "`Fluorescing Questions: Effects of Semantic Perturbations on BERT Performance in SQuAD 1.1`_".
+  | CMSC 25610: Computational Linguistics University of Chicago, 2021.
+
+- | Ali Malik and Mike Wu and Vrinda Vasavada and Jinpeng Song and John Mitchell and Noah D. Goodman and Chris Piech.
+  | "`Generative Grading Neural Approximate Parsing for Automated Student Feedback`_".
+  | Proceedings of the 34th AAAI conference on Artificial Intelligence, 2019.
 
 
 Software projects using mlconjug
@@ -195,6 +199,7 @@ The logo was designed by Zuur_.
 .. _Verbiste: https://perso.b2b2c.ca/~sarrazip/dev/verbiste.html
 .. _scikit-learn: http://scikit-learn.org/stable/index.html
 .. _Zuur: https://github.com/zuuritaly
+.. _`PlanVerb: Domain-Independent Verbalization and Summary of Task Plans`: https://ojs.aaai.org/index.php/AAAI/article/download/21204/version/19491/20953
 .. _`Generative Grading Neural Approximate Parsing for Automated Student Feedback`: https://arxiv.org/abs/1905.09916
 .. _`Fluorescing Questions: Effects of Semantic Perturbations on BERT Performance in SQuAD 1.1`: https://github.com/spencerng/squad-sentiment/blob/87b42a41ba7f4f3f8d4e6c478f746d6cdf9f5515/assets/semantic-perturbations-bert-performance.pdf
 .. _`Extensions and Applications of Deep Probabilistic Inference for Generative Models`: https://drive.google.com/file/d/10IXi-RleFoG9L6G70TEKbAGd-v29R2Zz/view?usp=sharing
