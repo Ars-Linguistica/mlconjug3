@@ -33,7 +33,6 @@ import joblib
 import pkg_resources
 import re
 from zipfile import ZipFile
-from functools import partial
 
 
 VERBS = {'fr': VerbFr,
