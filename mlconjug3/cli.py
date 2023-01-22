@@ -72,9 +72,9 @@ def main(verbs, language, output, subject, file_format):
         for verb, conjugation in conjugations.items():
             table = Table(title=f"Conjugations for '{verb}'", show_header=True, header_style="bold magenta")
             table.add_column("Verb", style="cyan")
-            table.add_column("Mood", style="bold orange")
+            table.add_column("Mood", style="bold magenta")
             table.add_column("Tense", style="bold yellow")
-            table.add_column("Person", style="bold magenta")
+            table.add_column("Person", style="bold blue")
             table.add_column("Conjugation", style="bold green")
             for mood, tenses in conjugation.items():
                 for tense, persons in tenses.items():
