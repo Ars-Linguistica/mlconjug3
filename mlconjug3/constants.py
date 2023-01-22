@@ -104,3 +104,6 @@ ALPHABET = {'fr': {'vowels': 'aáàâeêéèiîïoôöœuûùy',
              'ro': {'vowels': 'aăâeiîouy',
                     'consonants': 'bcdfghjklmnpqrsșştțţvwxyz'},
              }
+
+if __name__ == "__main__":
+    pass
