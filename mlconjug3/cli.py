@@ -76,7 +76,7 @@ def main(verbs, language, output, subject, file_format):
         else:
             results = conjugator.conjugate(verbs, subject)
             conjugations = {verb.name: verb.conjug_info for verb in  results if verb}
-            missing = [verb for verb, result in zip(verbs, results) if not result}
+            missing = [verb for verb, result in zip(verbs, results) if not result]
         
         for verb, conjugation in conjugations.items():
             table = Table(title=f"Conjugations for '{verb}'", show_header=True, header_style="bold #0D47A1")
