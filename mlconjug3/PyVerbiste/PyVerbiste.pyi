@@ -4,8 +4,8 @@ from lib2to3.pgen2.token import OP
 from typing import Sequence, Mapping, Dict, Tuple, Optional, Union, Set, TextIO
 from collections import OrderedDict
 from xml.etree.ElementTree import Element
-from .conjug_manager import ConjugManager
-from .constants import *
+from mlconjug3.conjug_manager import ConjugManager
+from mlconjug3.constants import *
 
 __author__: str
 __author_email__: str
