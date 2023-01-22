@@ -65,7 +65,7 @@ class TestPyVerbiste:
         assert self.verbiste.verbs['abaisser'] == {'template': 'aim:er', 'root': 'abaiss'}
 
     def test_repr(self):
-        assert self.verbiste.__repr__() == 'mlconjug3.PyVerbiste.Verbiste(language=fr)'
+        assert self.verbiste.__repr__() == 'mlconjug3.conjug_manager.Verbiste(language=fr)'
 
     def test_unsupported_language(self):
         with pytest.raises(ValueError) as excinfo:
@@ -163,7 +163,7 @@ class TestDataSet:
     data_set = DataSet(conjug_manager.verbs)
 
     def test_repr(self):
-        assert self.data_set.__repr__() == 'mlconjug3.mlconjug.DataSet()'
+        assert self.data_set.__repr__() == 'mlconjug3.dataset.DataSet()'
 
     def test_construct_dict_conjug(self):
         self.data_set.construct_dict_conjug()
