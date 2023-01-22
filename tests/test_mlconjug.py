@@ -196,7 +196,7 @@ class TestModel:
     dataset.split_data(proportion=0.9)
 
     def test_repr(self):
-        assert self.model.__repr__() == 'mlconjug3.mlconjug.Model(classifier, feature_selector, vectorizer)'
+        assert self.model.__repr__() == 'mlconjug3.mlconjug.models.Model(classifier, feature_selector, vectorizer)'
 
     def test_train(self):
         self.model.train(self.dataset.test_input, self.dataset.test_labels)
