@@ -2,7 +2,6 @@ from collections import OrderedDict
 from .constants import *
 
 
-
 class VerbInfo:
     """
     This class defines the Verbiste verb information structure.
@@ -360,3 +359,6 @@ class VerbRo(Verb):
                     prefix = 'a ' if tense_name == 'Infinitiv Afirmativ' else ''
                     self.conjug_info[mood][tense_name] = prefix + self.verb_info.root + persons
         return
+
+if __name__ == "__main__":
+    pass
