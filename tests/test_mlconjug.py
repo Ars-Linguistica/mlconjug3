@@ -149,9 +149,8 @@ class TestConjugator:
         assert test_verb.verb_info == VerbInfo('aller', '', ':aller')
         test_verb = self.conjugator.conjugate('cacater')
         assert isinstance(test_verb, Verb)
-        with pytest.raises(ValueError) as excinfo:
-            self.conjugator.conjugate('blablah')
-            assert 'The supplied word: blablah is not a valid verb in French.' in str(excinfo.value)
+        error_verb = self.conjugator.conjugate('blablah')
+        assert error_verb is None
 
     def test_set_model(self):
         self.conjugator.set_model(Model())
