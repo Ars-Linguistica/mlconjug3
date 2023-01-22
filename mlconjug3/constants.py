@@ -1,3 +1,4 @@
+import pkg_resources
 from .verbs import *
 
 RESOURCE_PACKAGE = 'mlconjug3'
