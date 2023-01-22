@@ -1,4 +1,4 @@
-from mlconjug3. import Pipeline, SelectFromModel, CountVectorizer, LinearSVC, SGDClassifier
+from mlconjug3 import Pipeline, SelectFromModel, CountVectorizer, LinearSVC, SGDClassifier
 
 from mlconjug3.constants import *
 
