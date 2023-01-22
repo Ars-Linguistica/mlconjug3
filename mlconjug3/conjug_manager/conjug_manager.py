@@ -15,8 +15,8 @@ import defusedxml.ElementTree as ET
 import json
 from collections import OrderedDict
 import pkg_resources
-from .constants import *
-from .verbs import *
+from constants import *
+from verbs import *
 
 
 class ConjugManager:
