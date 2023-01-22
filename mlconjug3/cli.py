@@ -72,10 +72,10 @@ def main(verbs, language, output, subject, file_format):
         for verb, conjugation in conjugations.items():
             table = Table(title=f"Conjugations for '{verb}'", show_header=True, header_style="bold magenta")
             table.add_column("Verb", style="cyan")
-            table.add_column("Mood", style="bold yellow")
-            table.add_column("Tense", style="bold green")
-            table.add_column("Person", style="bold red")
-            table.add_column("Conjugation")
+            table.add_column("Mood", style="bold orange")
+            table.add_column("Tense", style="bold yellow")
+            table.add_column("Person", style="bold magenta")
+            table.add_column("Conjugation", style="bold green")
             for mood, tenses in conjugation.items():
                 for tense, persons in tenses.items():
                     if isinstance(persons, dict):
@@ -92,9 +92,19 @@ def main(verbs, language, output, subject, file_format):
                 with open(output, 'w') as outfile:
                     json.dump(conjugations, outfile)
             elif file_format == 'csv':
-                pass # code to write to csv file
+                with open(output, 'w') as outfile:
+                    writer = csv.writer(outfile)
+                    writer.writerow(["Verb", "Mood", "Tense", "Person", "Conjugation"])
+                    for verb, conjugation in conjugations.items():
+                        for mood, tenses in conjugation.items():
+                            for tense, persons in tenses.items():
+                                if isinstance(persons, dict):
+                                    for person, form in persons.items():
+                                        writer.writerow([verb, mood, tense, person, form])
+                                else:
+                                    writer.writerow([verb, mood, tense, '', persons])
             else:
-                raise ValueError("Invalid output format. Please choose 'json', 'csv' or 'pdf'.")
+                raise ValueError("Invalid output format. Please choose 'json' or 'csv'.")
     except Exception as e:
         logging.error("An error occurred: {}".format(e))
         if output:
