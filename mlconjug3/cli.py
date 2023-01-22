@@ -67,10 +67,9 @@ def main(verbs, language, output, subject, file_format):
         conjugator = Conjugator(language)
         conjugations = {}
         if len(verbs) == 1:
-            results = conjugator.conjugate(verbs[0], subject)
+            conjugations[verbs[0]] = conjugator.conjugate(verbs[0], subject)
         else:
-            results = conjugator.conjugate(verbs, subject)
-        conjugations = {verb.name: verb.conjug_info for verb in results}
+            conjugations = {verb.name: verb.conjug_info for verb in conjugator.conjugate(verbs, subject)}
         
         for verb, conjugation in conjugations.items():
             table = Table(title=f"Conjugations for '{verb}'", show_header=True, header_style="bold magenta")
