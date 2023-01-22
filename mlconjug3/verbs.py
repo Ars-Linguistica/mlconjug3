@@ -1,38 +1,41 @@
-_RESOURCE_PACKAGE = 'mlconjug3'
+from collections import OrderedDict
+from .constants import *
 
-_LANGUAGES = ('default', 'fr', 'en', 'es', 'it', 'pt', 'ro')
+RESOURCE_PACKAGE = 'mlconjug3'
 
-_VERBS_RESOURCE_PATH = {'fr': '/'.join(('data', 'conjug_manager', 'verbs-fr.json')),
+LANGUAGES = ('default', 'fr', 'en', 'es', 'it', 'pt', 'ro')
+
+VERBS_RESOURCE_PATH = {'fr': '/'.join(('data', 'conjug_manager', 'verbs-fr.json')),
                         'it': '/'.join(('data', 'conjug_manager', 'verbs-it.json')),
                         'es': '/'.join(('data', 'conjug_manager', 'verbs-es.json')),
                         'en': '/'.join(('data', 'conjug_manager', 'verbs-en.json')),
                         'pt': '/'.join(('data', 'conjug_manager', 'verbs-pt.json')),
                         'ro': '/'.join(('data', 'conjug_manager', 'verbs-ro.json')),}
 
-_CONJUGATIONS_RESOURCE_PATH = {'fr': '/'.join(('data', 'conjug_manager', 'conjugation-fr.json')),
+CONJUGATIONS_RESOURCE_PATH = {'fr': '/'.join(('data', 'conjug_manager', 'conjugation-fr.json')),
                                'it': '/'.join(('data', 'conjug_manager', 'conjugation-it.json')),
                                'es': '/'.join(('data', 'conjug_manager', 'conjugation-es.json')),
                                'en': '/'.join(('data', 'conjug_manager', 'conjugation-en.json')),
                                'pt': '/'.join(('data', 'conjug_manager', 'conjugation-pt.json')),
                                'ro': '/'.join(('data', 'conjug_manager', 'conjugation-ro.json')),}
 
-_ABBREVS = ("1s", "2s", "3s", "1p", "2p", "3p")
+ABBREVS = ("1s", "2s", "3s", "1p", "2p", "3p")
 
-_PRONOUNS = {'fr': {'abbrev': _ABBREVS,
+PRONOUNS = {'fr': {'abbrev': ABBREVS,
                     'pronoun': ("je", "tu", "il (elle, on)", "nous", "vous", "ils (elles)")},
-             'it': {'abbrev': _ABBREVS,
+             'it': {'abbrev': ABBREVS,
                     'pronoun': ('io', 'tu', 'egli/ella', 'noi', 'voi', 'essi/esse')},
-             'es': {'abbrev': _ABBREVS,
+             'es': {'abbrev': ABBREVS,
                     'pronoun': ('yo', 'tú', 'él', 'nosotros', 'vosotros', 'ellos')},
-             'en': {'abbrev': _ABBREVS,
+             'en': {'abbrev': ABBREVS,
                     'pronoun': ('I', 'you', 'he/she/it', 'you', 'we', 'they')},
-             'pt': {'abbrev': _ABBREVS,
+             'pt': {'abbrev': ABBREVS,
                     'pronoun': ('eu', 'tu', 'ele', 'nós', 'vós', 'eles')},
-             'ro': {'abbrev': _ABBREVS,
+             'ro': {'abbrev': ABBREVS,
                     'pronoun': ('eu', 'tu', 'el/ea', 'noi', 'voi', 'ei/ele')}
              }
 
-_IMPERATIVE_PRONOUNS = {'fr': {'abbrev': ("2s", "1p", "2p"),
+IMPERATIVE_PRONOUNS = {'fr': {'abbrev': ("2s", "1p", "2p"),
                                'pronoun': ("", "", "")},
                         'it': None,
                         'es': {'abbrev': ("2s", "3s", "1p", "2p", "3p"),
@@ -44,14 +47,14 @@ _IMPERATIVE_PRONOUNS = {'fr': {'abbrev': ("2s", "1p", "2p"),
                                'pronoun': ("tu", "voi")},
                         }
 
-_AUXILIARIES = {'fr': None,
+AUXILIARIES = {'fr': None,
                 'it': 'non',
                 'es': 'no',
                 'en': None,
                 'pt': 'não',
                 'ro': 'nu'}
 
-_GENDER = {'fr': {'abbrev': ("ms", "mp", "fs", "fp"),
+GENDER = {'fr': {'abbrev': ("ms", "mp", "fs", "fp"),
                   'pronoun': ("masculin singulier", "masculin pluriel", "feminin singulier", "feminin pluriel")},
            'it': None,
            'es': None,
@@ -59,7 +62,7 @@ _GENDER = {'fr': {'abbrev': ("ms", "mp", "fs", "fp"),
            'pt': None,
            'ro': None}
 
-_NEGATION = {'fr': 'ne',
+NEGATION = {'fr': 'ne',
              'it': 'non',
              'es': 'no',
              'en': "don't",
@@ -166,7 +169,7 @@ class Verb:
                 if isinstance(persons, list):
                     persons_dict = OrderedDict()
                     for pers, term in persons:
-                        key = _ABBREVS[pers] if len(persons) == 6 else ''
+                        key = ABBREVS[pers] if len(persons) == 6 else ''
                         if term is not None:
                             self.conjugate_person(key, persons_dict, term)
                         else:
@@ -207,11 +210,11 @@ class VerbFr(Verb):
                     persons_dict = OrderedDict()
                     for pers, term in persons:
                         if len(persons) == 6:
-                            key = _PRONOUNS[self.language][self.subject][pers]
+                            key = PRONOUNS[self.language][self.subject][pers]
                         elif tense_name == 'Participe Passé':
-                            key = _GENDER[self.language][self.subject][pers]
+                            key = GENDER[self.language][self.subject][pers]
                         elif tense_name == 'Imperatif Présent':
-                            key = _IMPERATIVE_PRONOUNS[self.language][self.subject][pers]
+                            key = IMPERATIVE_PRONOUNS[self.language][self.subject][pers]
                         else:
                             key = term
                         if term is not None:
@@ -243,9 +246,9 @@ class VerbEn(Verb):
                     persons_dict = OrderedDict()
                     for pers, term in persons:
                         if len(persons) == 6:
-                            key = _PRONOUNS[self.language][self.subject][pers]
+                            key = PRONOUNS[self.language][self.subject][pers]
                         elif tense_name == 'imperative present':
-                            key = _IMPERATIVE_PRONOUNS[self.language][self.subject][pers]
+                            key = IMPERATIVE_PRONOUNS[self.language][self.subject][pers]
                         else:
                             key = 'to'
                         if term is not None:
@@ -284,12 +287,12 @@ class VerbEs(Verb):
                         if len(persons) == 5 and not tense_name.startswith('Imperativo'):
                             continue
                         if len(persons) == 6:
-                            key = _PRONOUNS[self.language][self.subject][pers]
+                            key = PRONOUNS[self.language][self.subject][pers]
                         elif tense_name == 'Imperativo Afirmativo':
-                            key = _IMPERATIVE_PRONOUNS[self.language][self.subject][pers]
+                            key = IMPERATIVE_PRONOUNS[self.language][self.subject][pers]
                         elif tense_name == 'Imperativo non':
-                            key = ' '.join((_IMPERATIVE_PRONOUNS[self.language][self.subject][pers],
-                                            _NEGATION[self.language]))
+                            key = ' '.join((IMPERATIVE_PRONOUNS[self.language][self.subject][pers],
+                                            NEGATION[self.language]))
                         elif tense_name == 'Gerundio Gerondio':
                             if term.endswith('ndo'):
                                 key = ''
@@ -331,14 +334,14 @@ class VerbIt(Verb):
                     persons_dict = OrderedDict()
                     for pers, term in persons:
                         if len(persons) == 6 and not tense_name.startswith('Imperativo'):
-                            key = _PRONOUNS[self.language][self.subject][pers]
+                            key = PRONOUNS[self.language][self.subject][pers]
                         elif tense_name.startswith('Imperativo'):
-                            key = _PRONOUNS[self.language]['abbrev'][pers]
+                            key = PRONOUNS[self.language]['abbrev'][pers]
                         else:
                             key = pers
                         if term is not None and term != '-':
                             if tense_name == 'Imperativo non':
-                                persons_dict[key] = ' '.join((_NEGATION[self.language], self.verb_info.root + term))
+                                persons_dict[key] = ' '.join((NEGATION[self.language], self.verb_info.root + term))
                             else:
                                 self.conjugate_person(key, persons_dict, term)
                         else:
@@ -368,14 +371,14 @@ class VerbPt(Verb):
                     persons_dict = OrderedDict()
                     for pers, term in persons:
                         if len(persons) == 6 and not tense_name.startswith('Imperativo'):
-                            key = _PRONOUNS[self.language][self.subject][pers]
+                            key = PRONOUNS[self.language][self.subject][pers]
                         elif tense_name.startswith('Imperativo'):
-                            key = _PRONOUNS[self.language]['abbrev'][pers]
+                            key = PRONOUNS[self.language]['abbrev'][pers]
                         else:
                             key = pers
                         if term is not None and term != '-':
                             if tense_name == 'Imperativo Negativo':
-                                persons_dict[key] = ' '.join((_NEGATION[self.language], self.verb_info.root + term))
+                                persons_dict[key] = ' '.join((NEGATION[self.language], self.verb_info.root + term))
                             else:
                                 self.conjugate_person(key, persons_dict, term)
                         else:
@@ -405,16 +408,16 @@ class VerbRo(Verb):
                     persons_dict = OrderedDict()
                     for pers, term in persons:
                         if len(persons) == 6:
-                            key = _PRONOUNS[self.language][self.subject][pers]
+                            key = PRONOUNS[self.language][self.subject][pers]
                         elif tense_name.startswith('Imperativ Imperativ'):
-                            key = _IMPERATIVE_PRONOUNS[self.language][self.subject][pers]
+                            key = IMPERATIVE_PRONOUNS[self.language][self.subject][pers]
                         elif tense_name == 'Imperativ Negativ':
-                            key = _NEGATION[self.language]
+                            key = NEGATION[self.language]
                         else:
                             key = pers
                         if term is not None and term != '-':
                             if tense_name == 'Imperativ Negativ':
-                                persons_dict[key] = ' '.join((_NEGATION[self.language], self.verb_info.root + term))
+                                persons_dict[key] = ' '.join((NEGATION[self.language], self.verb_info.root + term))
                             else:
                                 self.conjugate_person(key, persons_dict, term)
                         else:
