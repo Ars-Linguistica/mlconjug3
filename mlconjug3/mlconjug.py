@@ -20,6 +20,7 @@ from .feature_extractor import extract_verb_features
 from .utils import logger
 
 from functools import lru_cache
+from concurrent.futures import ProcessPoolExecutor
 from random import Random
 from collections import defaultdict
 import joblib
@@ -72,8 +73,27 @@ class Conjugator:
     def __repr__(self):
         return '{}.{}(language={})'.format(__name__, self.__class__.__name__, self.language)
 
+    def conjugate(self, verbs, subject='abbrev'):
+        """
+        Conjugate multiple verbs using multi-processing.
+        :param verbs: list of strings or string.
+            Verbs to conjugate.
+        :param subject: string.
+            Toggles abbreviated or full pronouns.
+            The default value is 'abbrev'.
+            Select 'pronoun' for full pronouns.
+        :return: list of Verb objects or None.
+        """
+        if isinstance(verbs, str):
+            # If only a single verb is passed, call the _conjugate method directly
+            return self._conjugate(verbs, subject)
+        else:
+            with ProcessPoolExecutor() as executor:
+                results = list(executor.map(self._conjugate, verbs, [subject]*len(verbs)))
+            return results
+    
     @lru_cache(maxsize=1024)
-    def conjugate(self, verb, subject='abbrev'):
+    def _conjugate(self, verb, subject='abbrev'):
         """
         | This is the main method of this class.
         | It first checks to see if the verb is in Verbiste.
