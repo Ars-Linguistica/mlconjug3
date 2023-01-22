@@ -77,7 +77,7 @@ def main(verbs, language, output, subject, file_format):
             table.add_column("Mood", style="bold #2E7D32")
             table.add_column("Tense", style="bold #F9A825")
             table.add_column("Person", style="bold #283593")
-            table.add_column("Conjugation", style="bold #4CAF50")
+            table.add_column("Conjugation", style="bold bright_magenta")
             for mood, tenses in conjugation.items():
                 for tense, persons in tenses.items():
                     if isinstance(persons, dict):
