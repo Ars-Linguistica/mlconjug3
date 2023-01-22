@@ -38,7 +38,7 @@ class Verbiste(ConjugManager):
     
     def _parse_template(self,
                         template: Element
-                        ) -> OrderedDict: ...
+                        ) -> _Conjugations: ...
 
     def _load_tense(self,
                     tense: Element
