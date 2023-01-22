@@ -1,4 +1,4 @@
-# Stubs for mlconjug3.PyVerbiste (Python 3)
+# Stubs for mlconjug3.conjug_manager.py (Python 3)
 
 from lib2to3.pgen2.token import OP
 from typing import Sequence, Mapping, Dict, Tuple, Optional, Union, Set, TextIO
