@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """
 MLConjug Main module.
 
@@ -90,20 +88,20 @@ def extract_verb_features(verb, lang, ngram_range):
     verb = _white_spaces.sub(" ", verb)
     verb = verb.lower()
     verb_len = len(verb)
-    length_feature = 'LEN={0}'.format(str(verb_len))
+    length_feature = 'LEN={}'.format(str(verb_len))
     min_n, max_n = ngram_range
-    final_ngrams = ['END={0}'.format(verb[-n:]) for n in range(min_n, min(max_n + 1, verb_len + 1))]
-    initial_ngrams = ['START={0}'.format(verb[:n]) for n in range(min_n, min(max_n + 1, verb_len + 1))]
+    final_ngrams = ['END={}'.format(verb[-n:]) for n in range(min_n, min(max_n + 1, verb_len + 1))]
+    initial_ngrams = ['START={}'.format(verb[:n]) for n in range(min_n, min(max_n + 1, verb_len + 1))]
     if lang not in _ALPHABET:
         lang = 'en'  # We chose 'en' as the default alphabet because english is more standard, without accents or diactrics.
     vowels = sum(verb.count(c) for c in _ALPHABET[lang]['vowels'])
-    vowels_number = 'VOW_NUM={0}'.format(vowels)
+    vowels_number = 'VOW_NUM={}'.format(vowels)
     consonants = sum(verb.count(c) for c in _ALPHABET[lang]['consonants'])
-    consonants_number = 'CONS_NUM={0}'.format(consonants)
+    consonants_number = 'CONS_NUM={}'.format(consonants)
     if consonants == 0:
         vow_cons_ratio = 'V/C=N/A'
     else:
-        vow_cons_ratio = 'V/C={0}'.format(round(vowels / consonants, 2))
+        vow_cons_ratio = 'V/C={}'.format(round(vowels / consonants, 2))
     final_ngrams.extend(initial_ngrams)
     final_ngrams.extend((length_feature, vowels_number, consonants_number, vow_cons_ratio))
     return final_ngrams
@@ -132,7 +130,7 @@ class Conjugator:
         if not model:
             with ZipFile(pkg_resources.resource_stream(
                     _RESOURCE_PACKAGE, _PRE_TRAINED_MODEL_PATH[language])) as content:
-                with content.open('trained_model-{0}-final.pickle'.format(self.language), 'r') as archive:
+                with content.open('trained_model-{}-final.pickle'.format(self.language), 'r') as archive:
                     model = joblib.load(archive)
         if model:
             self.set_model(model)
@@ -141,7 +139,7 @@ class Conjugator:
         return
 
     def __repr__(self):
-        return '{0}.{1}(language={2})'.format(__name__, self.__class__.__name__, self.language)
+        return '{}.{}(language={})'.format(__name__, self.__class__.__name__, self.language)
 
     def conjugate(self, verb, subject='abbrev'):
         """
@@ -247,7 +245,7 @@ class DataSet:
         return
 
     def __repr__(self):
-        return '{0}.{1}()'.format(__name__, self.__class__.__name__)
+        return '{}.{}()'.format(__name__, self.__class__.__name__)
 
     def construct_dict_conjug(self):
         """
@@ -302,7 +300,7 @@ class DataSet:
         return
 
 
-class Model(object):
+class Model:
     """
     | This class manages the scikit-learn pipeline.
     | The Pipeline includes a feature vectorizer, a feature selector and a classifier.
@@ -334,7 +332,7 @@ class Model(object):
         return
 
     def __repr__(self):
-        return '{0}.{1}({2}, {3}, {4})'.format(__name__, self.__class__.__name__, *sorted(self.pipeline.named_steps))
+        return '{}.{}({}, {}, {})'.format(__name__, self.__class__.__name__, *sorted(self.pipeline.named_steps))
 
     def train(self, samples, labels):
         """

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """
 PyVerbiste.
 
@@ -122,7 +120,7 @@ class ConjugManager:
         return
 
     def __repr__(self):
-        return '{0}.{1}(language={2})'.format(__name__, self.__class__.__name__, self.language)
+        return '{}.{}(language={})'.format(__name__, self.__class__.__name__, self.language)
 
     def _load_verbs(self, verbs_file):
         """
@@ -132,7 +130,7 @@ class ConjugManager:
             Path to the verbs json file.
 
         """
-        with open(verbs_file, 'r', encoding='utf-8') as file:
+        with open(verbs_file, encoding='utf-8') as file:
             self.verbs = json.load(file)
         return
 
@@ -144,7 +142,7 @@ class ConjugManager:
             Path to the conjugation json file.
 
         """
-        with open(conjugations_file, 'r', encoding='utf-8') as file:
+        with open(conjugations_file, encoding='utf-8') as file:
             self.conjugations = json.load(file)
         return
 
@@ -347,7 +345,7 @@ class VerbInfo:
         return
 
     def __repr__(self):
-        return '{0}.{1}({2}, {3}, {4})'.format(__name__, self.__class__.__name__, self.infinitive, self.root, self.template)
+        return '{}.{}({}, {}, {})'.format(__name__, self.__class__.__name__, self.infinitive, self.root, self.template)
 
     def __eq__(self, other):
         if not isinstance(other, VerbInfo):
@@ -390,7 +388,7 @@ class Verb:
         return
 
     def __repr__(self):
-        return '{0}.{1}({2})'.format(__name__, self.__class__.__name__, self.name)
+        return '{}.{}({})'.format(__name__, self.__class__.__name__, self.name)
 
     def iterate(self):
         """
