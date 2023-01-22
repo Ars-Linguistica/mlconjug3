@@ -1,8 +1,8 @@
-from mlconjug import Pipeline, SelectFromModel, CountVectorizer, LinearSVC, SGDClassifier
+from .mlconjug import Pipeline, SelectFromModel, CountVectorizer, LinearSVC, SGDClassifier
 
-from constants import *
+from .constants import *
 
-from feature_extractor import extract_verb_features
+from .feature_extractor import extract_verb_features
 
 from functools import partial
 
