@@ -41,3 +41,5 @@ def extract_verb_features(verb, lang, ngram_range):
     final_ngrams.extend((length_feature, vowels_number, consonants_number, vow_cons_ratio))
     return final_ngrams
   
+if __name__ == "__main__":
+    pass
