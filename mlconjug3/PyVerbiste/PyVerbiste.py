@@ -18,8 +18,7 @@ __author_email__ = 'diao.sekou.nlp@gmail.com'
 import copy
 import defusedxml.ElementTree as ET
 import json
-from concurrent.futures import ThreadPoolExecutor
-from collections import OrderedDict, defaultdict
+from collections import OrderedDict
 import pkg_resources
 from mlconjug3.constants import *
 from mlconjug3.verbs import *
@@ -54,30 +53,21 @@ class Verbiste(ConjugManager):
     def _parse_verbs(file):
         """
         Parses the XML file.
-    
+
         :param file: FileObject.
             XML file containing the verbs.
-        :return: defaultdict.
-            An defaultdict containing the verb and its template for all verbs in the file.
-    
+        :return: OrderedDict.
+            An OrderedDict containing the verb and its template for all verbs in the file.
+
         """
-        def get_verb_data(verb):
+        verbs_dic = {}
+        xml = ET.parse(file)
+        for verb in xml.findall("v"):
+            verb_name = verb.find("i").text
             template = verb.find("t").text
             index = - len(template[template.index(":") + 1:])
             root = verb_name if index == 0 else verb_name[:index]
-            return {"template": template, "root": root}
-        
-        verbs_dic = defaultdict(lambda: defaultdict(str))
-        tree = ET.parse(file)
-        root = tree.getroot()
-        with ThreadPoolExecutor() as executor:
-            for verb in root.iter("v"):
-                verb_name = verb.find("i").text
-                template = verb.find("t").text
-                index = - len(template[template.index(":") + 1:])
-                root = verb_name if index == 0 else verb_name[:index]
-                future = executor.submit(get_verb_data, verb)
-                verbs_dic[verb_name] = future.result()
+            verbs_dic[verb_name] = {"template": template, "root": root}
         return verbs_dic
 
     def _load_conjugations(self, conjugations_file):
@@ -93,7 +83,7 @@ class Verbiste(ConjugManager):
 
     def _parse_conjugations(self, file):
         """
-        Parses the XML file using multithreading.
+        Parses the XML file.
 
         :param file: FileObject.
             XML file containing the conjugation templates.
@@ -103,30 +93,14 @@ class Verbiste(ConjugManager):
         """
         conjugations_dic = {}
         xml = ET.parse(file)
-        templates = xml.findall("template")
-        with ThreadPoolExecutor() as executor:
-            for template, conjugation_template in zip(templates, executor.map(self._parse_template, templates)):
-                template_name = template.get("name")
-                conjugations_dic[template_name] = conjugation_template
+        for template in xml.findall("template"):
+            template_name = template.get("name")
+            conjugations_dic[template_name] = OrderedDict()
+            for mood in list(template):
+                conjugations_dic[template_name][mood.tag] = OrderedDict()
+                for tense in list(mood):
+                    conjugations_dic[template_name][mood.tag][tense.tag.replace('-', ' ')] = self._load_tense(tense)
         return conjugations_dic
-    
-    def _parse_template(self, template):
-        """
-        Parses a single template in the XML file.
-
-        :param template: Element.
-            XML element representing a single conjugation template.
-        :return: OrderedDict.
-            An OrderedDict containing the conjugation template.
-
-        """
-        conjugation_template = OrderedDict()
-        template_name = template.get("name")
-        for mood in list(template):
-            conjugation_template[mood.tag] = OrderedDict()
-            for tense in list(mood):
-                conjugation_template[mood.tag][tense.tag.replace('-', ' ')] = self._load_tense(tense)
-        return conjugation_template
 
     @staticmethod
     def _load_tense(tense):
