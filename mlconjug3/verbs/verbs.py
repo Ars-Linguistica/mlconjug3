@@ -1,5 +1,5 @@
 from collections import OrderedDict
-from .constants import *
+from mlconjug3.constants import *
 
 
 class VerbInfo:
