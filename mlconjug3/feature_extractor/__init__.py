@@ -1,3 +1,3 @@
 from .feature_extractor import extract_verb_features
 
-from constants import *
+from mlconjug3.constants import *
