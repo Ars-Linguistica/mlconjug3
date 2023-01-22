@@ -1,4 +1,4 @@
-import .constants
+from mlconjug3 import constants
 import tomlkit
 
 def save_to_toml(file_path):
