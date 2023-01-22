@@ -1,5 +1,5 @@
 from typing import Optional, Mapping, List, Sequence, DefaultDict, Any, Tuple, Type, AbstractSet, Union
-from feature_extractor import extract_verb_features
+from .feature_extractor import extract_verb_features
 from sklearn.pipeline import Pipeline
 
 
