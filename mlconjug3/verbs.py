@@ -1,5 +1,5 @@
 from collections import OrderedDict
-from mlconjug3 import *
+from .constants import *
 
 ABBREVS = ("1s", "2s", "3s", "1p", "2p", "3p")
 
@@ -16,6 +16,40 @@ PRONOUNS = {'fr': {'abbrev': ABBREVS,
              'ro': {'abbrev': ABBREVS,
                     'pronoun': ('eu', 'tu', 'el/ea', 'noi', 'voi', 'ei/ele')}
              }
+
+IMPERATIVE_PRONOUNS = {'fr': {'abbrev': ("2s", "1p", "2p"),
+                               'pronoun': ("", "", "")},
+                        'it': None,
+                        'es': {'abbrev': ("2s", "3s", "1p", "2p", "3p"),
+                               'pronoun': ('tú', 'él', 'nosotros', 'vosotros', 'ellos')},
+                        'en': {'abbrev': ("2s", "1p", "2p"),
+                               'pronoun': ("", "let's", "")},
+                        'pt': None,
+                        'ro': {'abbrev': ("2s", "2p"),
+                               'pronoun': ("tu", "voi")},
+                        }
+
+AUXILIARIES = {'fr': None,
+                'it': 'non',
+                'es': 'no',
+                'en': None,
+                'pt': 'não',
+                'ro': 'nu'}
+
+GENDER = {'fr': {'abbrev': ("ms", "mp", "fs", "fp"),
+                  'pronoun': ("masculin singulier", "masculin pluriel", "feminin singulier", "feminin pluriel")},
+           'it': None,
+           'es': None,
+           'en': None,
+           'pt': None,
+           'ro': None}
+
+NEGATION = {'fr': 'ne',
+             'it': 'non',
+             'es': 'no',
+             'en': "don't",
+             'pt': 'não',
+             'ro': 'nu'}
 
 
 class VerbInfo:
