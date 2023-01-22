@@ -13,3 +13,7 @@ NEGATION: Mapping[str, str]
 LANGUAGE_FULL: Mapping[str, str]
 VERBS: Mapping[str, Type[Verb]]
 PRE_TRAINED_MODEL_PATH: Mapping[str, str]
+TRANSLATIONS_PATH: str
+SUPPORTED_LANGUAGES: Tuple[str, ...]
+TRANSLATED_LANGUAGES: Tuple[str]
+MLCONJUG_TRANSLATIONS: Union[gettext.GNUTranslations, gettext.NullTranslations]
