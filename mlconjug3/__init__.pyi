@@ -1,8 +1,8 @@
 # Stubs for mlconjug3 (Python 3)
 
 
-from mlconjug import *
-from PyVerbiste import *
+from .mlconjug import *
+from .PyVerbiste import *
 from typing import Tuple, Any, Union
 from logging import Logger
 import gettext
