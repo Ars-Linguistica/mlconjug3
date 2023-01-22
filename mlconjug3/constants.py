@@ -1,5 +1,5 @@
 import pkg_resources
-from .verbs import *
+from .verbs import VerbFr, VerbEn, VerbEs, VerbIt, VerbPt, VerbRo
 
 RESOURCE_PACKAGE = 'mlconjug3'
 
