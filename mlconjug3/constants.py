@@ -1,5 +1,4 @@
 import pkg_resources
-from .verbs import VerbFr, VerbEn, VerbEs, VerbIt, VerbPt, VerbRo
 
 RESOURCE_PACKAGE = 'mlconjug3'
 
@@ -16,14 +15,6 @@ LANGUAGE_FULL = {'fr': 'Français',
                   'pt': 'Português',
                   'ro': 'Română',
                   }
-
-VERBS = {'fr': VerbFr,
-          'en': VerbEn,
-          'es': VerbEs,
-          'it': VerbIt,
-          'pt': VerbPt,
-          'ro': VerbRo,
-          }
 
 TRANSLATIONS_PATH = pkg_resources.resource_filename(RESOURCE_PACKAGE, 'locale')
 
