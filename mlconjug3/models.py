@@ -4,6 +4,8 @@ from .constants import *
 
 from .feature_extractor import extract_verb_features
 
+from functools import partial
+
 
 class Model:
     """
