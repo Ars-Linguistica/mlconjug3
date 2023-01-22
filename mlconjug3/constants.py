@@ -4,6 +4,10 @@ RESOURCE_PACKAGE = 'mlconjug3'
 
 LANGUAGES = ('default', 'fr', 'en', 'es', 'it', 'pt', 'ro')
 
+SUPPORTED_LANGUAGES = ('default', 'en', 'es', 'fr', 'it', 'pt', 'ro')
+
+TRANSLATED_LANGUAGES = SUPPORTED_LANGUAGES[2:]
+
 LANGUAGE_FULL = {'fr': 'Français',
                   'en': 'English',
                   'es': 'Español',
@@ -19,6 +23,8 @@ VERBS = {'fr': VerbFr,
           'pt': VerbPt,
           'ro': VerbRo,
           }
+
+TRANSLATIONS_PATH = pkg_resources.resource_filename(RESOURCE_PACKAGE, 'locale')
 
 VERBS_RESOURCE_PATH = {'fr': '/'.join(('data', 'conjug_manager', 'verbs-fr.json')),
                         'it': '/'.join(('data', 'conjug_manager', 'verbs-it.json')),
