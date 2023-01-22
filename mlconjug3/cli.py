@@ -66,10 +66,17 @@ def main(verbs, language, output, subject, file_format):
 
         conjugator = Conjugator(language)
         conjugations = {}
+        missing = []
         if len(verbs) == 1:
-            conjugations[verbs[0]] = conjugator.conjugate(verbs[0], subject).conjug_info
+            result = conjugator.conjugate(verbs[0], subject)
+            if result:
+                conjugations[verbs[0]] = result.conjug_info
+            else:
+                missing.append(verbs[0])
         else:
-            conjugations = {verb.name: verb.conjug_info for verb in conjugator.conjugate(verbs, subject)}
+            results = conjugator.conjugate(verbs, subject)
+            conjugations = {verb.name: verb.conjug_info for verb in  results if verb}
+            missing = [verb for verb, result in zip(verbs, results) if not result}
         
         for verb, conjugation in conjugations.items():
             table = Table(title=f"Conjugations for '{verb}'", show_header=True, header_style="bold #0D47A1")
@@ -89,6 +96,10 @@ def main(verbs, language, output, subject, file_format):
                 table.add_section()
             console.print(table)
 
+        if missing:
+            for verb in missing:
+                console.print(f"The verb {verb} could not be conjugated")
+        
         if output:
             if file_format == 'json':
                 with open(output, 'w') as outfile:
