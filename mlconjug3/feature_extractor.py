@@ -1,18 +1,5 @@
 import re
-
-ALPHABET = {'fr': {'vowels': 'aáàâeêéèiîïoôöœuûùy',
-                    'consonants': 'bcçdfghjklmnpqrstvwxyz'},
-             'en': {'vowels': 'aeiouy',
-                    'consonants': 'bcdfghjklmnpqrstvwxyz'},
-             'es': {'vowels': 'aáeiíoóuúy',
-                    'consonants': 'bcdfghjklmnñpqrstvwxyz'},
-             'it': {'vowels': 'aàeéèiìîoóòuùy',
-                    'consonants': 'bcdfghjklmnpqrstvwxyz'},
-             'pt': {'vowels': 'aàãááeêéiíoóõuúy',
-                    'consonants': 'bcçdfghjklmnpqrstvwxyz'},
-             'ro': {'vowels': 'aăâeiîouy',
-                    'consonants': 'bcdfghjklmnpqrsșştțţvwxyz'},
-             }
+from .constants import ALPHABET
 
 
 def extract_verb_features(verb, lang, ngram_range):
