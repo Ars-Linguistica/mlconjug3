@@ -5,18 +5,10 @@ from typing import Sequence, Mapping, Dict, Tuple, Optional, Union, Set, TextIO
 from collections import OrderedDict
 from xml.etree.ElementTree import Element
 from .conjug_manager import ConjugManager
+from .constants import *
 
 __author__: str
 __author_email__: str
-_RESOURCE_PACKAGE: str = __name__
-_LANGUAGES: Tuple[str, ...]
-_VERBS_RESOURCE_PATH: Mapping[str, str]
-_CONJUGATIONS_RESOURCE_PATH: Mapping[str, str]
-_ABBREVS: Tuple[str, ...]
-_PRONOUNS: Mapping[str, Mapping[str, Tuple[str]]]
-_IMPERATIVE_PRONOUNS: Mapping[str, Optional[Mapping[str, Tuple[str]]]]
-_GENDER: Mapping[str, Optional[Mapping[str, Tuple[str]]]]
-_NEGATION: Mapping[str, str]
 
 # Declare Complex types for clarity.
 _VerbsDict = Mapping[str, Mapping[str, str]]
