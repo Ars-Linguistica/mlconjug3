@@ -1,6 +1,20 @@
 from collections import OrderedDict
 from .constants import *
 
+PRONOUNS = {'fr': {'abbrev': ABBREVS,
+                    'pronoun': ("je", "tu", "il (elle, on)", "nous", "vous", "ils (elles)")},
+             'it': {'abbrev': ABBREVS,
+                    'pronoun': ('io', 'tu', 'egli/ella', 'noi', 'voi', 'essi/esse')},
+             'es': {'abbrev': ABBREVS,
+                    'pronoun': ('yo', 'tú', 'él', 'nosotros', 'vosotros', 'ellos')},
+             'en': {'abbrev': ABBREVS,
+                    'pronoun': ('I', 'you', 'he/she/it', 'you', 'we', 'they')},
+             'pt': {'abbrev': ABBREVS,
+                    'pronoun': ('eu', 'tu', 'ele', 'nós', 'vós', 'eles')},
+             'ro': {'abbrev': ABBREVS,
+                    'pronoun': ('eu', 'tu', 'el/ea', 'noi', 'voi', 'ei/ele')}
+             }
+
 
 class VerbInfo:
     """
