@@ -1,6 +1,8 @@
 from collections import OrderedDict
 from .constants import *
 
+ABBREVS = ("1s", "2s", "3s", "1p", "2p", "3p")
+
 PRONOUNS = {'fr': {'abbrev': ABBREVS,
                     'pronoun': ("je", "tu", "il (elle, on)", "nous", "vous", "ils (elles)")},
              'it': {'abbrev': ABBREVS,
