@@ -33,9 +33,9 @@ __license__ = "MIT"
 __maintainer__ = "SekouDiaoNlp"
 __status__ = "Production"
 
-from constants import *
+from .constants import *
 from .mlconjug import *
-from PyVerbiste import *
+from .PyVerbiste import *
 
 from sklearn.feature_selection import SelectFromModel
 from sklearn.feature_extraction.text import CountVectorizer
