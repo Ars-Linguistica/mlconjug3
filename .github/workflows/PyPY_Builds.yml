@@ -2,6 +2,10 @@ name: "Use setuptools to build package and run multiple PyPy tests"
 
 on: [ push ]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+  
 jobs:
     build_wheels_with_setuptools:
         name: Build setuptool packages on ${{ matrix.os }} on ${{ matrix.python-version }}
