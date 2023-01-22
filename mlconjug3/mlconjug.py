@@ -112,20 +112,21 @@ class Conjugator:
             The default value is 'abbrev'.
             Select 'pronoun' for full pronouns.
         :return: Verb object or None.
-        :raises: ValueError.
 
         """
         verb = verb.lower()
         prediction_score = 0
         if not self.conjug_manager.is_valid_verb(verb):
-            raise ValueError(
+            logger.warning(
                 _('The supplied word: {0} is not a valid verb in {1}.').format(verb, LANGUAGE_FULL[self.language]))
+            return None
         if verb not in self.conjug_manager.verbs.keys():
             if self.model is None:
                 logger.warning(_('Please provide an instance of a mlconjug3.mlconjug3.Model'))
-                raise ValueError(
+                logger.warning(
                 _('The supplied word: {0} is not in the conjugation {1} table and no Conjugation Model was provided.').format(
                     verb, LANGUAGE_FULL[self.language]))
+                return None
             
             prediction = self.model.predict([verb])[0]
             prediction_score = self.model.pipeline.predict_proba([verb])[0][prediction]
