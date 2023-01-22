@@ -29,6 +29,15 @@ from zipfile import ZipFile
 from functools import partial
 
 
+VERBS = {'fr': VerbFr,
+          'en': VerbEn,
+          'es': VerbEs,
+          'it': VerbIt,
+          'pt': VerbPt,
+          'ro': VerbRo,
+          }
+
+
 class Conjugator:
     """
     | This is the main class of the project.
