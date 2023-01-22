@@ -1,6 +1,6 @@
 from random import Random
 from collections import defaultdict
-from constants import *
+from .constants import *
 
 class DataSet:
     """
