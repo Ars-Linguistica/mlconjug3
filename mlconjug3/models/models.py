@@ -1,4 +1,8 @@
-from mlconjug3 import Pipeline, SelectFromModel, CountVectorizer, LinearSVC, SGDClassifier
+from sklearn.feature_selection import SelectFromModel
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.svm import LinearSVC
+from sklearn.linear_model import SGDClassifier
+from sklearn.pipeline import Pipeline
 
 from mlconjug3.constants import *
 
