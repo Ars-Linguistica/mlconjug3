@@ -121,3 +121,5 @@ class ConjugManager:
         return copy.deepcopy(self.conjugations[template])
       
       
+if __name__ == "__main__":
+    pass
