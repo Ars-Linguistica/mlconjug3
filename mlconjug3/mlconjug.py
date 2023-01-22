@@ -13,6 +13,7 @@ from .__init__ import Pipeline, SelectFromModel, CountVectorizer, LinearSVC, SGD
 
 from .utils import logger
 
+from functools import lru_cache
 from random import Random
 from collections import defaultdict
 import joblib
@@ -141,6 +142,7 @@ class Conjugator:
     def __repr__(self):
         return '{}.{}(language={})'.format(__name__, self.__class__.__name__, self.language)
 
+    @lru_cache(maxsize=1024)
     def conjugate(self, verb, subject='abbrev'):
         """
         | This is the main method of this class.
@@ -176,8 +178,6 @@ class Conjugator:
             prediction_score = self.model.pipeline.predict_proba([verb])[0][prediction]
             predicted = True
             template = self.conjug_manager.templates[prediction]
-            if verb.endswith("ize") or verb.endswith("ise"):
-                template = "lov:e"
             index = - len(template[template.index(":") + 1:])
             root = verb if index == 0 else verb[:index]
             verb_info = VerbInfo(verb, root, template)
