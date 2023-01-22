@@ -1,5 +1,5 @@
 import re
-from .constants import ALPHABET
+from constants import ALPHABET
 
 
 def extract_verb_features(verb, lang, ngram_range):
