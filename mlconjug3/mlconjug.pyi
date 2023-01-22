@@ -1,6 +1,9 @@
-# Stubs for mlconjug3.mlconjug3 (Python 3)
+# Stubs for mlconjug3.mlconjug (Python 3)
 
-from .PyVerbiste import Verb, ConjugManager
+from .constants import *
+from .PyVerbiste import Verb
+from .conjug_manager import ConjugManager
+from .feature_extractor import extract_verb_features
 from sklearn.pipeline import Pipeline
 
 # I am commenting out the sklearn imports because they have yet no stub files.
@@ -13,13 +16,6 @@ _RESOURCE_PACKAGE: str = __name__
 _LANGUAGE_FULL: Mapping[str, str]
 _VERBS: Mapping[str, Type[Verb]]
 _PRE_TRAINED_MODEL_PATH: Mapping[str, str]
-
-
-def extract_verb_features(verb: str,
-                              lang: str,
-                              ngram_range: Tuple[int, int]
-                              ) -> Sequence[str]: ...
-
 
 class Conjugator:
     language: str = ...
