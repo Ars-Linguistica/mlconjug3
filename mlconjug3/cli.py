@@ -66,7 +66,7 @@ def main(verbs, language, output, subject, file_format):
 
         conjugator = Conjugator(language)
         conjugations = {}
-        if len verbs == 1:
+        if len(verbs) == 1:
             results = conjugator.conjugate(verbs[0], subject)
         else:
             results = conjugator.conjugate(verbs, subject)
