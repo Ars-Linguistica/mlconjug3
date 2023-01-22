@@ -13,6 +13,8 @@ from .__init__ import Pipeline, SelectFromModel, CountVectorizer, LinearSVC, SGD
 
 from .constants import *
 
+from .verbs import *
+
 from .feature_extractor import extract_verb_features
 
 from .utils import logger
