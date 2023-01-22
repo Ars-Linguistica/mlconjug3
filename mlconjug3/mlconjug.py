@@ -7,23 +7,21 @@ MLConjug Main module.
 
 """
 
-from .PyVerbiste import Verbiste
+from PyVerbiste import Verbiste
 
-from .conjug_manager import ConjugManager
+from conjug_manager import ConjugManager
 
-from .__init__ import Pipeline, SelectFromModel, CountVectorizer, LinearSVC, SGDClassifier
+from constants import *
 
-from .constants import *
+from verbs import *
 
-from .verbs import *
+from feature_extractor import extract_verb_features
 
-from .feature_extractor import extract_verb_features
+from dataset import DataSet
 
-from .dataset import DataSet
+from models import Model
 
-from .models import Model
-
-from .utils import logger
+from utils import logger
 
 from functools import lru_cache
 from concurrent.futures import ProcessPoolExecutor
