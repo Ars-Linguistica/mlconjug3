@@ -1,5 +1,5 @@
 from collections import OrderedDict
-from .constants import *
+from mlconjug3 import *
 
 ABBREVS = ("1s", "2s", "3s", "1p", "2p", "3p")
 
