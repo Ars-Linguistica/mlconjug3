@@ -79,7 +79,7 @@ def main(verbs, language, output, subject, file_format):
             missing = [verb for verb, result in zip(verbs, results) if not result]
         
         for verb, conjugation in conjugations.items():
-            table = Table(title=f"Conjugations for '{verb}'", show_header=True, header_style="bold #0D47A1")
+            table = Table(title=f"Conjugation table for '{verb.capitalize()}'", show_header=True, header_style="bold #0D47A1")
             table.add_column("Verb", style="cyan")
             table.add_column("Mood", style="bold #2E7D32")
             table.add_column("Tense", style="bold #F9A825")
@@ -89,9 +89,9 @@ def main(verbs, language, output, subject, file_format):
                 for tense, persons in tenses.items():
                     if isinstance(persons, dict):
                         for person, form in persons.items():
-                            table.add_row(verb, mood, tense, person, form)
+                            table.add_row(verb.capitalize(), mood, tense, person, form)
                     else:
-                        table.add_row(verb, mood, tense, '', persons)
+                        table.add_row(verb.capitalize(), mood, tense, '', persons)
                     table.add_section()
                 table.add_section()
             console.print(table)
