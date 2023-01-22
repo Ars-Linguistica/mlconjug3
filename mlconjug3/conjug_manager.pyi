@@ -4,6 +4,7 @@ from lib2to3.pgen2.token import OP
 from typing import Sequence, Mapping, Dict, Tuple, Optional, Union, Set, TextIO
 from collections import OrderedDict
 from xml.etree.ElementTree import Element
+from .verbs import VerbInfo
 
 __author__: str
 __author_email__: str
