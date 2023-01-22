@@ -1,6 +1,6 @@
 from random import Random
 from collections import defaultdict
-from .constants import *
+from mlconjug3.constants import *
 
 class DataSet:
     """
