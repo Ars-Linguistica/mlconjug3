@@ -1,3 +1,3 @@
 from .models import Model
 
-__all__ ['Model', ]
+__all__ = ['Model', ]
