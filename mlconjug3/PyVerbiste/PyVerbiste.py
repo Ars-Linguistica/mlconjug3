@@ -93,7 +93,7 @@ class Verbiste(ConjugManager):
 
     def _parse_conjugations(self, file):
         """
-        Parses the XML file.
+        Parses the XML file using multithreading.
 
         :param file: FileObject.
             XML file containing the conjugation templates.
@@ -103,14 +103,30 @@ class Verbiste(ConjugManager):
         """
         conjugations_dic = {}
         xml = ET.parse(file)
-        for template in xml.findall("template"):
-            template_name = template.get("name")
-            conjugations_dic[template_name] = OrderedDict()
-            for mood in list(template):
-                conjugations_dic[template_name][mood.tag] = OrderedDict()
-                for tense in list(mood):
-                    conjugations_dic[template_name][mood.tag][tense.tag.replace('-', ' ')] = self._load_tense(tense)
+        templates = xml.findall("template")
+        with ThreadPoolExecutor() as executor:
+            for template, conjugation_template in zip(templates, executor.map(self._parse_template, templates)):
+                template_name = template.get("name")
+                conjugations_dic[template_name] = conjugation_template
         return conjugations_dic
+    
+    def _parse_template(self, template):
+        """
+        Parses a single template in the XML file.
+
+        :param template: Element.
+            XML element representing a single conjugation template.
+        :return: OrderedDict.
+            An OrderedDict containing the conjugation template.
+
+        """
+        conjugation_template = OrderedDict()
+        template_name = template.get("name")
+        for mood in list(template):
+            conjugation_template[mood.tag] = OrderedDict()
+            for tense in list(mood):
+                conjugation_template[mood.tag][tense.tag.replace('-', ' ')] = self._load_tense(tense)
+        return conjugation_template
 
     @staticmethod
     def _load_tense(tense):
