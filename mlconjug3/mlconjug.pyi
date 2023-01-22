@@ -1,8 +1,9 @@
 # Stubs for mlconjug3.mlconjug (Python 3)
 
 from .constants import *
-from .PyVerbiste import Verb
+from .verbs import Verb
 from .conjug_manager import ConjugManager
+from .models import Model
 from .feature_extractor import extract_verb_features
 from sklearn.pipeline import Pipeline
 
