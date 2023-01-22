@@ -72,12 +72,12 @@ def main(verbs, language, output, subject, file_format):
             conjugations = {verb.name: verb.conjug_info for verb in conjugator.conjugate(verbs, subject)}
         
         for verb, conjugation in conjugations.items():
-            table = Table(title=f"Conjugations for '{verb}'", show_header=True, header_style="bold magenta")
+            table = Table(title=f"Conjugations for '{verb}'", show_header=True, header_style="bold #0D47A1")
             table.add_column("Verb", style="cyan")
-            table.add_column("Mood", style="bold magenta")
-            table.add_column("Tense", style="bold yellow")
-            table.add_column("Person", style="bold blue")
-            table.add_column("Conjugation", style="bold green")
+            table.add_column("Mood", style="bold #2E7D32")
+            table.add_column("Tense", style="bold #F9A825")
+            table.add_column("Person", style="bold #283593")
+            table.add_column("Conjugation", style="bold #4CAF50")
             for mood, tenses in conjugation.items():
                 for tense, persons in tenses.items():
                     if isinstance(persons, dict):
