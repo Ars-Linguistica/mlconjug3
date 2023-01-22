@@ -95,7 +95,7 @@ class Conjugator:
                 results = list(executor.map(self._conjugate, verbs, [subject]*len(verbs)))
             return results
     
-    @lru_cache(maxsize=1024)
+    # @lru_cache(maxsize=1024)
     def _conjugate(self, verb, subject='abbrev'):
         """
         | This is the main method of this class.
