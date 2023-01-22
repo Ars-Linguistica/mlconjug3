@@ -98,7 +98,7 @@ def main(verbs, language, output, subject, file_format):
 
         if missing:
             for verb in missing:
-                console.print(f"The verb {verb} could not be conjugated")
+                console.print(f"The verb '{verb}' could not be conjugated.")
         
         if output:
             if file_format == 'json':
