@@ -1,6 +1,7 @@
 from lib2to3.pgen2.token import OP
 from typing import Sequence, Mapping, Dict, Tuple, Optional, Union, Set, TextIO, Type
 import gettext
+from .verbs import Verb
 
 RESOURCE_PACKAGE: str = __name__
 LANGUAGES: Tuple[str, ...]
