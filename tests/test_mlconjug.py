@@ -65,7 +65,7 @@ class TestPyVerbiste:
         assert self.verbiste.verbs['abaisser'] == {'template': 'aim:er', 'root': 'abaiss'}
 
     def test_repr(self):
-        assert self.verbiste.__repr__() == 'mlconjug3.conjug_manager.Verbiste(language=fr)'
+        assert self.verbiste.__repr__() == 'mlconjug3.conjug_manager.conjug_manager.Verbiste(language=fr)'
 
     def test_unsupported_language(self):
         with pytest.raises(ValueError) as excinfo:
@@ -76,7 +76,7 @@ class TestPyVerbiste:
         verb_info = self.verbiste.get_verb_info('aller')
         assert verb_info == VerbInfo('aller', '', ':aller')
         assert self.verbiste.get_verb_info('cacater') is None
-        assert verb_info.__repr__() == 'mlconjug3.verbs.VerbInfo(aller, , :aller)'
+        assert verb_info.__repr__() == 'mlconjug3.verbs.verbs.VerbInfo(aller, , :aller)'
 
     def test_get_conjug_info(self):
         conjug_info = self.verbiste.get_conjug_info(':aller')
@@ -114,7 +114,7 @@ class TestVerb:
         test_verb_info = verbiste.get_verb_info(TEST_VERBS[verbiste.language][0])
         test_conjug_info = verbiste.get_conjug_info(TEST_VERBS[verbiste.language][1])
         test_verb = VerbFr(test_verb_info, test_conjug_info)
-        assert test_verb.__repr__() == 'mlconjug3.verbs.VerbFr(manger)'
+        assert test_verb.__repr__() == 'mlconjug3.verbs.verbs.VerbFr(manger)'
 
     def test_iterate(self):
         verbiste = Verbiste(language='default')
@@ -163,7 +163,7 @@ class TestDataSet:
     data_set = DataSet(conjug_manager.verbs)
 
     def test_repr(self):
-        assert self.data_set.__repr__() == 'mlconjug3.dataset.DataSet()'
+        assert self.data_set.__repr__() == 'mlconjug3.dataset.dataset.DataSet()'
 
     def test_construct_dict_conjug(self):
         self.data_set.construct_dict_conjug()
@@ -196,7 +196,7 @@ class TestModel:
     dataset.split_data(proportion=0.9)
 
     def test_repr(self):
-        assert self.model.__repr__() == 'mlconjug3.models.Model(classifier, feature_selector, vectorizer)'
+        assert self.model.__repr__() == 'mlconjug3.models.models.Model(classifier, feature_selector, vectorizer)'
 
     def test_train(self):
         self.model.train(self.dataset.test_input, self.dataset.test_labels)
