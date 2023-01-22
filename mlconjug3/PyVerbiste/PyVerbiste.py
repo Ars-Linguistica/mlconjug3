@@ -15,7 +15,7 @@ __author__ = 'SekouDiaoNlp'
 __author_email__ = 'diao.sekou.nlp@gmail.com'
 
 
-from .conjug_manager import *
+from mlconjug3.conjug_manager import *
 
 
 class Verbiste(ConjugManager):
