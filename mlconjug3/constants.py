@@ -26,3 +26,17 @@ PRE_TRAINED_MODEL_PATH = {
     'pt': '/'.join(('data', 'models', 'trained_model-pt-final.zip')),
     'ro': '/'.join(('data', 'models', 'trained_model-ro-final.zip')),
 }
+
+ALPHABET = {'fr': {'vowels': 'aáàâeêéèiîïoôöœuûùy',
+                    'consonants': 'bcçdfghjklmnpqrstvwxyz'},
+             'en': {'vowels': 'aeiouy',
+                    'consonants': 'bcdfghjklmnpqrstvwxyz'},
+             'es': {'vowels': 'aáeiíoóuúy',
+                    'consonants': 'bcdfghjklmnñpqrstvwxyz'},
+             'it': {'vowels': 'aàeéèiìîoóòuùy',
+                    'consonants': 'bcdfghjklmnpqrstvwxyz'},
+             'pt': {'vowels': 'aàãááeêéiíoóõuúy',
+                    'consonants': 'bcçdfghjklmnpqrstvwxyz'},
+             'ro': {'vowels': 'aăâeiîouy',
+                    'consonants': 'bcdfghjklmnpqrsșştțţvwxyz'},
+             }
