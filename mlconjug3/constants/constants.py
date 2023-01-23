@@ -1,6 +1,10 @@
 import pkg_resources
 import os
-import yaml
+from yaml import load, dump
+try:
+    from yaml import CLoader as Loader, CDumper as Dumper
+except ImportError:
+    from yaml import Loader, Dumper
 
 path = os.path.join( os.getcwd(), 'mlconjug3/config/constants.yaml' )
 
@@ -8,7 +12,7 @@ import yaml
 
 with open(path, 'r') as stream:
     try:
-        constants = yaml.load(stream)
+        constants = load(stream)
         ABBREVS = constants['ABBREVS']
         ALPHABET = constants['ALPHABET']
         AUXILIARIES = constants['AUXILIARIES']
