@@ -1,5 +1,5 @@
 import pkg_resources
-iport os
+import os
 import tomlkit
 
 path = os.path.join( os.getcwd(), '..', 'config/constants.yaml' )
