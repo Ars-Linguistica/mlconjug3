@@ -3,10 +3,20 @@ API Documentation for mlconjug3
 ===============================
 
 
-API Reference for the classes mlconjug.py
------------------------------------------
+API Reference for the classes in mlconjug.py
+--------------------------------------------
 
 .. automodule:: mlconjug3.mlconjug
+    :member-order: bysource
+    :members:
+    :private-members:
+    :show-inheritance:
+
+
+API Reference for the in classes verbs.verbs.py
+-----------------------------------------------
+
+.. automodule:: mlconjug3.verbs.verbs
     :member-order: bysource
     :members:
     :private-members:
@@ -24,8 +34,8 @@ API Reference for the classes in PyVerbiste.PyVerbiste.py
     :show-inheritance:
 
 
-API Reference for the classes conjug_manager.conjug_manager.py
---------------------------------------------------------------
+API Reference for the classes in conjug_manager.conjug_manager.py
+-----------------------------------------------------------------
 
 .. automodule:: mlconjug3.conjug_manager.conjug_manager
     :member-order: bysource
@@ -34,8 +44,8 @@ API Reference for the classes conjug_manager.conjug_manager.py
     :show-inheritance:
 
 
-API Reference for the classes dataset.dataset.py
-------------------------------------------------
+API Reference for the classes in dataset.dataset.py
+---------------------------------------------------
 
 .. automodule:: mlconjug3.dataset.dataset
     :member-order: bysource
@@ -44,8 +54,8 @@ API Reference for the classes dataset.dataset.py
     :show-inheritance:
 
 
-API Reference for the classes feature_extractor.feature_extractor.py
---------------------------------------------------------------------
+API Reference for the classes in feature_extractor.feature_extractor.py
+-----------------------------------------------------------------------
 
 .. automodule:: mlconjug3.feature_extractor.feature_extractor
     :member-order: bysource
@@ -54,30 +64,10 @@ API Reference for the classes feature_extractor.feature_extractor.py
     :show-inheritance:
 
 
-API Reference for the classes models.models.py
-----------------------------------------------
+API Reference for the classes in models.models.py
+-------------------------------------------------
 
 .. automodule:: mlconjug3.models.models
-    :member-order: bysource
-    :members:
-    :private-members:
-    :show-inheritance:
-
-
-API Reference for the classes conjug_manager.conjug_manager.py
------------------------------------------
-
-.. automodule:: mlconjug3.conjug_manager.conjug_manager
-    :member-order: bysource
-    :members:
-    :private-members:
-    :show-inheritance:
-
-
-API Reference for the classes verbs.verbs.py
---------------------------------------------
-
-.. automodule:: mlconjug3.verbs.verbs
     :member-order: bysource
     :members:
     :private-members:
