@@ -1,27 +1,32 @@
 import pkg_resources
 import os
-import tomlkit
+import yaml
 
 path = os.path.join( os.getcwd(), 'mlconjug3/config/constants.yaml' )
-with open(path, "r") as file:
-    config = tomlkit.loads(file.read())
 
-ABBREVS = tuple(config["ABBREVS"])
-ALPHABET = config["ALPHABET"]
-AUXILIARIES = config["AUXILIARIES"]
-CONJUGATIONS_RESOURCE_PATH = config["CONJUGATIONS_RESOURCE_PATH"]
-GENDER = config["GENDER"]
-IMPERATIVE_PRONOUNS = config["IMPERATIVE_PRONOUNS"]
-LANGUAGE_FULL = config["LANGUAGE_FULL"]
-LANGUAGES = tuple(config["LANGUAGES"])
-NEGATION = config["NEGATION"]
-PRE_TRAINED_MODEL_PATH = config["PRE_TRAINED_MODEL_PATH"]
-PRONOUNS = config["PRONOUNS"]
-RESOURCE_PACKAGE = config["RESOURCE_PACKAGE"]
-SUPPORTED_LANGUAGES = tuple(config["SUPPORTED_LANGUAGES"])
-TRANSLATED_LANGUAGES = tuple(config["TRANSLATED_LANGUAGES"])
-TRANSLATIONS_PATH = config["TRANSLATIONS_PATH"]
-VERBS_RESOURCE_PATH = config["VERBS_RESOURCE_PATH"]
+import yaml
+
+with open(path, 'r') as stream:
+    try:
+        constants = yaml.safe_load(stream)
+        ABBREVS = constants['ABBREVS']
+        ALPHABET = constants['ALPHABET']
+        AUXILIARIES = constants['AUXILIARIES']
+        CONJUGATIONS_RESOURCE_PATH = constants['CONJUGATIONS_RESOURCE_PATH']
+        GENDER = constants['GENDER']
+        IMPERATIVE_PRONOUNS = constants['IMPERATIVE_PRONOUNS']
+        LANGUAGE_FULL = constants['LANGUAGE_FULL']
+        LANGUAGES = constants['LANGUAGES']
+        NEGATION = constants['NEGATION']
+        PRE_TRAINED_MODEL_PATH = constants['PRE_TRAINED_MODEL_PATH']
+        PRONOUNS = constants['PRONOUNS']
+        SUPPORTED_LANGUAGES = constants['SUPPORTED_LANGUAGES']
+        RESOURCE_PACKAGE = constants['RESOURCE_PACKAGE']
+        TRANSLATED_LANGUAGES = constants['TRANSLATED_LANGUAGES']
+        TRANSLATIONS_PATH = constants['TRANSLATIONS_PATH']
+        VERBS_RESOURCE_PATH = constants['VERBS_RESOURCE_PATH']
+    except yaml.YAMLError as exc:
+        print(exc)
 
 
 if __name__ == "__main__":
