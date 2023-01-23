@@ -206,8 +206,6 @@ TRANSLATED_LANGUAGES: !!python/tuple
 - pt
 - ro
 
-TRANSLATIONS_PATH: /home/ubuntu/mlconjug3/mlconjug3/locale
-
 VERBS_RESOURCE_PATH:
   en: data/conjug_manager/verbs-en.json
   es: data/conjug_manager/verbs-es.json
