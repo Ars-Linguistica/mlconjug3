@@ -8,7 +8,7 @@ import yaml
 
 with open(path, 'r') as stream:
     try:
-        constants = yaml.safe_load(stream)
+        constants = yaml.load(stream)
         ABBREVS = constants['ABBREVS']
         ALPHABET = constants['ALPHABET']
         AUXILIARIES = constants['AUXILIARIES']
