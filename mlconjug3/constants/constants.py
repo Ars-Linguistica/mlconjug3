@@ -2,7 +2,7 @@ import pkg_resources
 import os
 import tomlkit
 
-path = os.path.join( os.getcwd(), '..', 'config/constants.yaml' )
+path = os.path.join( os.getcwd(), 'config/constants.yaml' )
 with open(path, "r") as file:
     config = tomlkit.loads(file.read())
 
