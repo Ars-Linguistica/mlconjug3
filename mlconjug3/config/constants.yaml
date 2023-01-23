@@ -1,4 +1,4 @@
-ABBREVS: &id002 !!python/tuple
+ABBREVS:
 - 1s
 - 2s
 - 3s
@@ -51,7 +51,7 @@ GENDER:
     - mp
     - fs
     - fp
-    pronoun: !!python/tuple
+    pronoun:
     - masculin singulier
     - masculin pluriel
     - feminin singulier
@@ -62,44 +62,44 @@ GENDER:
 
 IMPERATIVE_PRONOUNS:
   en:
-    abbrev: &id001 !!python/tuple
+    abbrev:
     - 2s
     - 1p
     - 2p
-    pronoun: !!python/tuple
+    pronoun:
     - ''
     - let's
     - ''
   es:
-    abbrev: !!python/tuple
+    abbrev:
     - 2s
     - 3s
     - 1p
     - 2p
     - 3p
-    pronoun: !!python/tuple
+    pronoun:
     - "t\xFA"
     - "\xE9l"
     - nosotros
     - vosotros
     - ellos
   fr:
-    abbrev: *id001
-    pronoun: !!python/tuple
+    abbrev:
+    pronoun:
     - ''
     - ''
     - ''
   it: null
   pt: null
   ro:
-    abbrev: !!python/tuple
+    abbrev:
     - 2s
     - 2p
-    pronoun: !!python/tuple
+    pronoun:
     - tu
     - voi
 
-LANGUAGES: !!python/tuple
+LANGUAGES:
 - default
 - fr
 - en
@@ -134,8 +134,8 @@ PRE_TRAINED_MODEL_PATH:
 
 PRONOUNS:
   en:
-    abbrev: *id002
-    pronoun: !!python/tuple
+    abbrev:
+    pronoun:
     - I
     - you
     - he/she/it
@@ -143,8 +143,8 @@ PRONOUNS:
     - we
     - they
   es:
-    abbrev: *id002
-    pronoun: !!python/tuple
+    abbrev:
+    pronoun:
     - yo
     - "t\xFA"
     - "\xE9l"
@@ -152,8 +152,8 @@ PRONOUNS:
     - vosotros
     - ellos
   fr:
-    abbrev: *id002
-    pronoun: !!python/tuple
+    abbrev:
+    pronoun:
     - je
     - tu
     - il (elle, on)
@@ -161,8 +161,8 @@ PRONOUNS:
     - vous
     - ils (elles)
   it:
-    abbrev: *id002
-    pronoun: !!python/tuple
+    abbrev:
+    pronoun:
     - io
     - tu
     - egli/ella
@@ -170,8 +170,8 @@ PRONOUNS:
     - voi
     - essi/esse
   pt:
-    abbrev: *id002
-    pronoun: !!python/tuple
+    abbrev:
+    pronoun:
     - eu
     - tu
     - ele
@@ -179,8 +179,8 @@ PRONOUNS:
     - "v\xF3s"
     - eles
   ro:
-    abbrev: *id002
-    pronoun: !!python/tuple
+    abbrev:
+    pronoun:
     - eu
     - tu
     - el/ea
@@ -190,7 +190,7 @@ PRONOUNS:
 
 RESOURCE_PACKAGE: mlconjug3
 
-SUPPORTED_LANGUAGES: !!python/tuple
+SUPPORTED_LANGUAGES:
 - default
 - en
 - es
@@ -199,7 +199,7 @@ SUPPORTED_LANGUAGES: !!python/tuple
 - pt
 - ro
 
-TRANSLATED_LANGUAGES: !!python/tuple
+TRANSLATED_LANGUAGES:
 - es
 - fr
 - it
