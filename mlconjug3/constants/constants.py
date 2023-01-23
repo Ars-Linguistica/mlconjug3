@@ -1,8 +1,9 @@
 import pkg_resources
-
+iport os
 import tomlkit
 
-with open("../config/constants.yaml", "r") as file:
+path = os.path.join( os.getcwd(), '..', 'config/constants.yaml' )
+with open(path, "r") as file:
     config = tomlkit.loads(file.read())
 
 ABBREVS = tuple(config["ABBREVS"])
