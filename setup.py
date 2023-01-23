@@ -31,7 +31,7 @@ except FileNotFoundError:
         'colorama',
         'joblib',
         'rich',
-        'tomlkit',
+        'pyyaml',
     ]
 
 try:
