@@ -27,7 +27,7 @@ with open(path, 'r') as stream:
         SUPPORTED_LANGUAGES = constants['SUPPORTED_LANGUAGES']
         RESOURCE_PACKAGE = constants['RESOURCE_PACKAGE']
         TRANSLATED_LANGUAGES = constants['TRANSLATED_LANGUAGES']
-        TRANSLATIONS_PATH = constants['TRANSLATIONS_PATH']
+        TRANSLATIONS_PATH = pkg_resources.resource_filename(RESOURCE_PACKAGE, 'locale')
         VERBS_RESOURCE_PATH = constants['VERBS_RESOURCE_PATH']
     except yaml.YAMLError as exc:
         print(exc)
