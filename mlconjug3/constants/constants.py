@@ -12,7 +12,7 @@ import yaml
 
 with open(path, 'r') as stream:
     try:
-        constants = load(stream)
+        constants = load(stream, Loader=Loader)
         ABBREVS = constants['ABBREVS']
         ALPHABET = constants['ALPHABET']
         AUXILIARIES = constants['AUXILIARIES']
