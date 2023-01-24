@@ -6,42 +6,32 @@ output_folder: models
 
 split_proportion: 0.8
 
-dataset:
-  class: mlconjug3.DataSet
-  args:
-    -
-      class: mlconjug3.Verbiste
-      args:
-        - fr
-
-model:
-  class: mlconjug3.Model
-  args:
-    - fr
-    -
-      class: mlconjug3.CountVectorizer
-      args:
-        -
-          class: mlconjug3.feature_extractor.extract_verb_features
-          args:
-            - fr
-            - (2, 7)
-      kwargs:
+vectorizer:
+    type: mlconjug3.CountVectorizer
+    kwargs:
+        analyzer: 
+            type: functools.partial
+            kwargs:
+                func: mlconjug3.feature_extractor.extract_verb_features
+                lang: fr
+                ngram_range: [2, 7]
         binary: true
         lowercase: false
-    -
-      class: mlconjug3.SelectFromModel
-      args:
-        -
-          class: mlconjug3.LinearSVC
-          kwargs:
-            penalty: l1
-            max_iter: 12000
-            dual: false
-            verbose: 0
-    -
-      class: mlconjug3.SGDClassifier
-      kwargs:
+
+feature_selector:
+    type: mlconjug3.SelectFromModel
+    kwargs:
+        estimator:
+            type: mlconjug3.LinearSVC
+            kwargs:
+                penalty: l1
+                max_iter: 12000
+                dual: false
+                verbose: 0
+
+classifier:
+    type: mlconjug3.SGDClassifier
+    kwargs:
         loss: log
         penalty: elasticnet
         l1_ratio: 0.15
