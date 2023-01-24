@@ -158,3 +158,7 @@ We recommend experimenting with different parameters and evaluating the model's 
     ct.save()
 
 
+
+In conclusion, the mlconjug3 library provides a simple interface for conjugating verbs using machine learning models, with support for multiple languages and the ability to train custom models.
+
+The main class of the library is the Conjugator, which can be used to conjugate verbs in the supported languages using the pre-trained models, or custom models trained using the ConjugatorTrainer class.
