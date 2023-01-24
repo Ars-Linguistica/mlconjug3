@@ -1,3 +1,11 @@
+"""
+This module declares the feature extractors for verbs.
+
+A custom vectorizer optimized for extracting verb features,
+including n-grams of verb endings and beginnings, verb length,
+number of vowels and consonants, and ratio of vowels to consonants.
+"""
+
 import re
 from mlconjug3.constants import ALPHABET
 
