@@ -21,7 +21,14 @@ params = {'lang': lang,
 
 ct = mlconjug3.utils.ConjugatorTrainer(**params)
 
+print("training model...")
 ct.train()
+print("model has benn trained.")
+
 ct.predict()
+
+print("evaluating model")
 ct.evaluate()
+
+print("saving model")
 ct.save()
