@@ -64,7 +64,7 @@ class ConjugatorTrainer:
         Returns:
             list: A list of predictions for the conjugated verbs.
         """
-        return self.conjugator.model.predict(self.dataset.verbs_list)
+        return self.model.predict(self.dataset.verbs_list)
 
     def evaluate(self):
         """
@@ -72,7 +72,7 @@ class ConjugatorTrainer:
 
         Prints the score of the model, with the number of misses out of the total number of entries.
         """
-        predictions = self.conjugator.model.predict(self.dataset.verbs_list)
+        predictions = self.model.predict(self.dataset.verbs_list)
         score = len(
             [a == b for a, b in zip(predictions, self.dataset.templates_list) if a == b]
         ) / len(predictions)
@@ -90,5 +90,5 @@ class ConjugatorTrainer:
         Save the trained conjugator model to the specified output folder.
         """
         with open(f"{self.output_folder}/trained_model-{self.lang}.pickle", "wb") as file:
-            pickle.dump(self.conjugator.model, file)
+            pickle.dump(self.model, file)
         return
