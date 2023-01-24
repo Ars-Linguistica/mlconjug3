@@ -35,22 +35,19 @@ import rich
               type=click.STRING)
 def main(verbs, language, output, subject, file_format):
     """
-    MLConjug is a Python library to conjugate verbs of in French, English, Spanish, Italian, Portuguese and Romanian (mores soon) using Machine Learning techniques.
-    Any verb in one of the supported language can be conjugated as the module contains a Machine Learning pipeline of how the verbs behave.
-    Even completely new or made-up verbs can be successfully conjugated in this manner.
-    The supplied pre-trained models are composed of: - a binary feature extractor,
-    
-    - a feature selector using Linear Support Vector Classification,
-    
-    - a classifier using Stochastic Gradient Descent.
-    
-    MLConjug uses scikit-learn to implement the Machine Learning algorithms.
-    Users of the library can use any compatible classifiers from scikit-learn to modify and retrain the pipeline.
-    
-    Usage example:
-        $ mlconjug3 -l en -s abbrev 'have' 'be' 'go'
-        $ mlconjug3 -l fr -s pronoun 'aimer' 'être' 'aller'
-    
+    Examples of how to use mlconjug3 from the terminal
+
+    To conjugate a verb in English, abbreviated subject format :
+    $ mlconjug3 -l en -s abbrev 'have'
+
+    To conjugate multiple verbs in French, full subject format :
+    $ mlconjug3 -l fr -s pronoun 'aimer' 'être' 'aller'
+
+    To conjugate a verb in Spanish, full subject format and save the conjugation table in a json file:
+    $ mlconjug3 -l es -s pronoun -f json 'hablar' -o 'conjugation_table.json'
+
+    To conjugate multiple verbs in Italian, abbreviated subject format and save the conjugation table in a csv file:
+    $ mlconjug3 -l it -s abbrev -f csv 'parlare' 'avere' 'essere' -o 'conjugation_table.csv'
     """
     try:
         logger = logging.getLogger(__name__)
