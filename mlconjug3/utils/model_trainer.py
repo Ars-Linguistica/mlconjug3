@@ -26,11 +26,10 @@ class ConjugatorTrainer:
         DataSet (class): The DataSet class from the mlconjug3 library.
         Model (obj): The model to be trained.
     """
-    def __init__(self, lang, output_folder, split_proportion, feature_extractor, dataset, model):
+    def __init__(self, lang, output_folder, split_proportion, dataset, model):
         self.lang = lang
         self.output_folder = output_folder
         self.split_proportion = split_proportion
-        self.feature_extractor = feature_extractor
         self.dataset = dataset
         self.model = model
         return
@@ -48,7 +47,6 @@ class ConjugatorTrainer:
         # Initialize Conjugator
         conjugator = mlconjug3.Conjugator(
             self.lang,
-            feature_extractor=self.feature_extractor,
             model=self.model,
         )
 
