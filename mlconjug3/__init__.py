@@ -26,7 +26,7 @@ Usage example:
 
 __author__ = """SekouDiaoNlp"""
 __email__ = 'diao.sekou.nlp@gmail.com'
-__version__ = '3.8.4'
+__version__ = '3.9.0'
 __copyright__ = "Copyright (c) 2021, SekouDiaoNlp"
 __credits__ = ("Sekou Diao", "Pierre Sarrazin",)
 __license__ = "MIT"
