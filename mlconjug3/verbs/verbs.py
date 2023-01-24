@@ -1,3 +1,14 @@
+"""
+This module defines the VerbInfo and Verb classes for representing verb conjugation information.
+
+The VerbInfo class defines the structure for storing information about a verb, including its infinitive form,
+lexical root, and ending pattern template.
+
+The Verb class represents a verb with information from a VerbInfo object, a dictionary of conjugation information,
+and options for subject pronoun format and whether or not the conjugation information was predicted by a model.
+The class also has methods for iterating through the conjugated forms and loading pronoun conjugations.
+"""
+
 from collections import OrderedDict
 from mlconjug3.constants import *
 
