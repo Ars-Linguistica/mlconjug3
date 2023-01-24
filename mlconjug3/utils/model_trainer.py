@@ -39,15 +39,16 @@ class ConjugatorTrainer:
         print(f"{self.lang} model trained on full data set in {result} seconds.")
         return
 
-    def predict(self, verbs_list):
-        return self.conjugator.model.predict(verbs_list)
+    def predict(self):
+        return self.conjugator.model.predict(self.dataset.verbs_list)
 
-    def evaluate(self, predictions, templates_list):
+    def evaluate(self):
+        predictions = self.conjugator.model.predict(self.dataset.verbs_list)
         score = len(
-            [a == b for a, b in zip(predictions, templates_list) if a == b]
+            [a == b for a, b in zip(predictions, self.dataset.templates_list) if a == b]
         ) / len(predictions)
         misses = len(
-            [a != b for a, b in zip(predictions, templates_list) if a != b]
+            [a != b for a, b in zip(predictions, self.dataset.templates_list) if a != b]
         )
         entries = len(predictions)
         print(
