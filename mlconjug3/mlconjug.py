@@ -1,10 +1,17 @@
 """
-MLConjug Main module.
+mlconjug3 Main module.
 
-| This module declares the main classes the user interacts with.
+This module provides an easy-to-use interface for conjugating verbs using machine learning models.
+It includes a pre-trained model for French, English, Spanish, Italian, Portuguese and Romanian verbs,
+as well as interfaces for training custom models and conjugating verbs in multiple languages.
 
-| The module defines the classes needed to interface with Machine Learning models.
+The main class of the module is Conjugator, which provides the conjugate() method for conjugating verbs.
+The class also manages the Verbiste data set and provides an interface with the scikit-learn pipeline.
+The class can be initialized with a specific language and a custom model, otherwise the default language is French
+and the pre-trained French conjugation pipeline is used.
 
+The module also includes helper classes for managing verb data, such as VerbInfo and Verb, as well as utility
+functions for feature extraction and evaluation.
 """
 
 from .PyVerbiste import Verbiste
