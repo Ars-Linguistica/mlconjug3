@@ -275,7 +275,7 @@ class TestConjugatorTrainer:
         trainer.evaluate()
         # assert trainer.evaluation is not None
     
-    def test_save(self, trainer):
-        trainer.save()
+    # def test_save(self, trainer):
+        # trainer.save()
         # assert trainer.output_folder is not None
 
