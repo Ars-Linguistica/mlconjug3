@@ -4,10 +4,12 @@ from functools import partial
 
 lang = "fr"
 
+verbiste = mlconjug3.Verbiste(lang)
+
 params = {'lang': lang,
           'output_folder': "models", 
           'split_proportion': 0.8,
-          'dataset': mlconjug3.DataSet, 
+          'dataset': mlconjug3.DataSet(verbiste.verbs), 
           'model': mlconjug3.Model(
               language=lang,
               vectorizer=mlconjug3.CountVectorizer(analyzer=partial(extract_verb_features, lang=lang, ngram_range=(2, 7)),
