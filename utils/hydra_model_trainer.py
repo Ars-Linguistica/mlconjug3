@@ -1,9 +1,21 @@
 import mlconjug3
 from mlconjug3.feature_extractor import extract_verb_features
 from functools import partial
-import hydra
 
-params = hydra.compose(config_name = "config")
+from hydra import compose, initialize
+from omegaconf import OmegaConf
+
+
+# context initialization
+with initialize(version_base=None, config_path="config.yaml", job_name="train_model"):
+    params = compose(config_name="config")
+    print(OmegaConf.to_yaml(params))
+
+# global initialization
+initialize(version_base=None, config_path="config.yaml", job_name="train_model")
+params = compose(config_name="config")
+print(OmegaConf.to_yaml(params))
+
 
 lang = params["language"]
 output_folder = params["output_folder"]
