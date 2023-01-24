@@ -71,5 +71,14 @@ Once you have a copy of the source, you can install it with:
     $ python setup.py install
 
 
+Alternatively, you can use poetry to install the software:
+
+.. code-block:: console
+
+    $ pip install poetry
+    
+    $ poetry install
+
+
 .. _Github repo: https://github.com/SekouDiaoNlp/mlconjug
 .. _tarball: https://github.com/SekouDiaoNlp/mlconjug/tarball/master
