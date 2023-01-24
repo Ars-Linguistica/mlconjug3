@@ -1,3 +1,8 @@
+"""
+This module contains the DataSet class, which holds and manages the data set for conjugating verbs.
+It defines helper methods for managing Machine Learning tasks like constructing a training and testing set.
+"""
+
 from random import Random
 from collections import defaultdict
 from mlconjug3.constants import *
