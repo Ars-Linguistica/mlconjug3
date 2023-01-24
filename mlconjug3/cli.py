@@ -85,9 +85,9 @@ def main(verbs, language, output, subject, file_format):
                 for tense, persons in tenses.items():
                     if isinstance(persons, dict):
                         for person, form in persons.items():
-                            table.add_row(mood, tense, person, form)
+                            table.add_row(mood.capitalize(), tense.capitalize(), person, form)
                     else:
-                        table.add_row(mood, tense, '', persons)
+                        table.add_row(mood.capitalize(), tense.capitalize(), '', persons)
                     table.add_section()
                 table.add_section()
             console.print(table)
