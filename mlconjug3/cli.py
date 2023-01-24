@@ -80,8 +80,8 @@ def main(verbs, language, output, subject, file_format):
         
         for verb, conjugation in conjugations.items():
             table = Table(title=f"Conjugation table for '{verb.capitalize()}'", show_header=True, header_style="bold #0D47A1")
-            table.add_column("Verb", style="cyan")
-            table.add_column("Mood", style="bold #2E7D32")
+            table.add_column("Verb", style="bold cyan")
+            table.add_column("Mood", style="bold dark_magenta")
             table.add_column("Tense", style="bold #F9A825")
             table.add_column("Person", style="bold bright_magenta")
             table.add_column("Conjugation", style="bold #4CAF50")
