@@ -52,7 +52,7 @@ class ConjugatorTrainer:
         self.conjugator.model.train(self.dataset.verbs_list, self.dataset.templates_list)
 
         # Print training duration
-        print(f"{self.lang} model trained on full data set in {result} seconds.")
+        print(f"{self.lang} model succesfully trained.")
         return
 
     def predict(self):
