@@ -8,19 +8,17 @@ Usage
 
 To use MLConjug3 from the command line::
 
-    $ mlconjug3 manger
-
-    $ mlconjug3 bring -l en
-
-    $ mlconjug3 gallofar --language es
-
-    $ mlconjug3 -o, --output (Path of the filename for storing the conjugation tables.)
-
-    $ mlconjug3 -s, --subject (The subject format type for the conjugated forms). The
-                       values can be 'abbrev' or 'pronoun'. The default value
-                       is 'abbrev'.
-
-    $ mlconjug3 -h Show the help menu
+    To conjugate a verb in English, abbreviated subject format :
+    $ mlconjug3 -l en -s abbrev 'have'
+    
+    To conjugate multiple verbs in French, full subject format :
+    $ mlconjug3 -l fr -s pronoun 'aimer' 'être' 'aller'
+    
+    To conjugate a verb in Spanish, full subject format and save the conjugation table in a json file:
+    $ mlconjug3 -l es -s pronoun -f json 'hablar' -o 'conjugation_table.json'
+    
+    To conjugate multiple verbs in Italian, abbreviated subject format and save the conjugation table in a csv file:
+    $ mlconjug3 -l it -s abbrev -f csv 'parlare' 'avere' 'essere' -o 'conjugation_table.csv'
 
 
 To use MLConjug3 in a project with the provided pre-trained conjugation models:
