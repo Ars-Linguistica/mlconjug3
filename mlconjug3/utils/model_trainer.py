@@ -32,6 +32,11 @@ class ConjugatorTrainer:
         self.split_proportion = split_proportion
         self.dataset = dataset
         self.model = model
+        # Initialize Conjugator
+        self.conjugator = mlconjug3.Conjugator(
+            self.lang,
+            model=self.model,
+        )
         return
 
     def train(self):
@@ -41,17 +46,10 @@ class ConjugatorTrainer:
         np.random.seed(42)
 
         # Initialize Data Set
-        dataset = self.dataset(mlconjug3.Verbiste(language=self.lang).verbs)
-        dataset.split_data(proportion=self.split_proportion)
-
-        # Initialize Conjugator
-        conjugator = mlconjug3.Conjugator(
-            self.lang,
-            model=self.model,
-        )
+        self.dataset.split_data(proportion=self.split_proportion)
 
         # Train Conjugator
-        result = conjugator.model.train(dataset.verbs_list, dataset.templates_list)
+        self.conjugator.model.train(dataset.verbs_list, dataset.templates_list)
 
         # Print training duration
         print(f"{self.lang} model trained on full data set in {result} seconds.")
