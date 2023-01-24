@@ -3,30 +3,24 @@ from mlconjug3.feature_extractor import extract_verb_features
 from functools import partial
 import hydra
 
-@hydra.main(config_name="config")
-def main(cfg):
-    lang = cfg.language
-    params = {'lang': lang,
-              'output_folder': cfg.output_folder,
-              'split_proportion': cfg.split_proportion,
-              'dataset': mlconjug3.DataSet(mlconjug3.Verbiste(lang).verbs),
-              'model': cfg.model
-             }
+params = hydra.experimental.compose(config_path = "config.yaml")
 
-    ct = mlconjug3.utils.ConjugatorTrainer(**params)
+lang = params["language"]
+output_folder = params["output_folder"]
+split_proportion = params["split_proportion"]
+dataset = mlconjug3.DataSet(mlconjug3.Verbiste(lang).verbs, vectorizer=params["vectorizer"])
+model = mlconjug3.Model(language=lang, feature_selector=params["feature_selector"], classifier=params["classifier"])
 
-    print("training model...")
-    ct.train()
-    print("model has benn trained.")
+ct = mlconjug3.utils.ConjugatorTrainer(lang=lang, output_folder=output_folder, split_proportion=split_proportion, dataset=dataset, model=model)
 
-    ct.predict()
+print("training model...")
+ct.train()
+print("model has benn trained.")
 
-    print("evaluating model")
-    ct.evaluate()
+ct.predict()
 
-    print("saving model")
-    ct.save()
+print("evaluating model")
+ct.evaluate()
 
-if __name__ == "__main__":
-    main()
-
+print("saving model")
+ct.save()
