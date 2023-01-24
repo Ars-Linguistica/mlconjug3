@@ -49,7 +49,7 @@ class ConjugatorTrainer:
         self.dataset.split_data(proportion=self.split_proportion)
 
         # Train Conjugator
-        self.conjugator.model.train(dataset.verbs_list, dataset.templates_list)
+        self.conjugator.model.train(self.dataset.verbs_list, self.dataset.templates_list)
 
         # Print training duration
         print(f"{self.lang} model trained on full data set in {result} seconds.")
