@@ -9,6 +9,11 @@ Usage
 Command Line Interface
 ----------------------
 
+Example of using mlconjug3 through a remote ssh connection:
+
+.. image:: https://raw.githubusercontent.com/SekouDiaoNlp/mlconjug3/dev2/docs/images/to_be.png
+        :alt: Conjugation for the verb to be.
+
 To use mlconjug3 from the command line::
 
     To conjugate a verb in English, abbreviated subject format :
