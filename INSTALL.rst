@@ -6,13 +6,13 @@ Installation
 Stable release
 --------------
 
-To install MLConjug3, run this command in your terminal:
+To install mlconjug3, run this command in your terminal:
 
 .. code-block:: console
 
     $ pip install mlconjug3
 
-This is the preferred method to install MLConjug3, as it will always install the most recent stable release.
+This is the preferred method to install mlconjug3, as it will always install the most recent stable release.
 
 If you don't have `pip`_ installed, this `Python installation guide`_ can guide
 you through the process.
@@ -47,7 +47,7 @@ If you already have Anaconda_ or Miniconda_ available on your system, just type 
 From sources
 ------------
 
-The sources for MLConjug3 can be downloaded from the `Github repo`_.
+The sources for mlconjug3 can be downloaded from the `Github repo`_.
 
 You can either clone the public repository:
 
