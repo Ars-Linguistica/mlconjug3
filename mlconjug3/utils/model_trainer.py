@@ -42,7 +42,7 @@ class ConjugatorTrainer:
         np.random.seed(42)
 
         # Initialize Data Set
-        dataset = self.dataset(mlconjug3.Verbiste(language=self.lang)
+        dataset = self.dataset(mlconjug3.Verbiste(language=self.lang))
         dataset.split_data(proportion=self.split_proportion)
 
         # Initialize Conjugator
