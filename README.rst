@@ -52,6 +52,11 @@
         :target: https://anaconda.org/conda-forge/mlconjug3
         :alt: Conda
 
+.. image:: https://img.shields.io/mastodon/follow/109313632815812004?domain=https%3A%2F%2Ffosstodon.org&style=plastic
+        :target: https://fosstodon.org/@SekouDiao
+        :alt: Follow me on Mastodon
+
+
 ----
 
 =========
@@ -102,8 +107,10 @@ Features
 - Easy to use API.
 - Includes pre-trained models with 99% + accuracy in predicting conjugation class of unknown verbs.
 - Easily train new models or add new languages.
+- Uses caching and multiprocessing for maximum performance.
 - Easily integrate MLConjug in your own projects.
 - Can be used as a command line tool.
+- Intuitive interface.
 
 
 Installation
