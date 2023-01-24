@@ -3,7 +3,7 @@
         :alt: mlconjug3 PyPi Home Page
 
 =========
-MLCONJUG3
+mlconjug3
 =========
 
 
@@ -51,16 +51,12 @@ MLCONJUG3
         :target: https://snyk.io/test/github/SekouDiaoNlp/mlconjug3?targetFile=requirements.txt
         :alt: Code Vulnerability Status
 
-.. image:: https://img.shields.io/pypi/dm/mlconjug3?label=PyPi%20Downloads
-        :target: https://pypi.python.org/pypi/mlconjug3
-        :alt: PyPI Downloads
-
 .. image:: https://img.shields.io/conda/dn/conda-forge/mlconjug?label=Anaconda%20Total%20Downloads
         :target: https://anaconda.org/conda-forge/mlconjug3
         :alt: Conda
 
 
-
+-----
 
 
 | A Python library to conjugate verbs in French, English, Spanish, Italian, Portuguese and Romanian (more soon)
@@ -73,15 +69,20 @@ MLCONJUG3
 - a feature selector using Linear Support Vector Classification,
 - a classifier using Stochastic Gradient Descent.
 
-| MLConjug3 uses scikit-learn to implement the Machine Learning algorithms.
+| mlconjug3 uses scikit-learn to implement the Machine Learning algorithms.
 | Users of the library can use any compatible classifiers from scikit-learn to modify and retrain the models.
 
 | The training data for the french model is based on Verbiste https://perso.b2b2c.ca/~sarrazip/dev/verbiste.html .
-| The training data for English, Spanish, Italian, Portuguese and Romanian was generated using unsupervised learning techniques
-  using the French model as a model to query during the training.
+| The training data for English, Spanish, Italian, Portuguese and Romanian was generated using unsupervised learning techniques using the French model as a model to query during the training.
+  
+-----
+
+.. image:: https://raw.githubusercontent.com/SekouDiaoNlp/mlconjug3/dev2/docs/images/to_be.png
+        :alt: Conjugation for the verb to be.
+
 
 .. warning::
-    MLCONJUG3 now only supports Python 3.x as Python 2.x has been deprecated in 2020.
+    mlconjug3 now only supports Python 3.x as Python 2.x has been deprecated in 2020.
 
 * Free software: MIT license
 * Documentation: https://mlconjug3.readthedocs.io/en/latest/.
@@ -182,8 +183,8 @@ Once you have a copy of the source, you can install it with:
 
 
 
-Academic publications citing mlconjug
--------------------------------------
+Academic publications citing mlconjug3
+--------------------------------------
 
 - | Gerard Canal, Senka Krivic ́, Paul Luff, Andrew Coles.
   | "`PlanVerb: Domain-Independent Verbalization and Summary of Task Plans`_".
@@ -217,8 +218,8 @@ If you want to cite mlconjug3 in an academic publication use this citation forma
    }
 
 
-Software projects using mlconjug
---------------------------------
+Software projects using mlconjug3
+---------------------------------
 
 
 - | `Machine Translation Service`_
