@@ -12,7 +12,7 @@ params = {'lang': "fr",
           )
          }
 
-ct = mlconjug3.utils.model_trainer.ConjugatorTrainer(**params)
+ct = mlconjug3.utils.ConjugatorTrainer(**params)
 
 ct.train()
 ct.predict()
