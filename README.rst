@@ -2,10 +2,7 @@
         :target: https://pypi.python.org/pypi/mlconjug3
         :alt: mlconjug3 PyPi Home Page
 
-=========
-mlconjug3
-=========
-
+----
 
 .. image:: https://img.shields.io/badge/Maintained%3F-yes-green.svg
         :target: https://GitHub.com/SekouDiaoNlp/mlconjug3/graphs/commit-activity
@@ -55,8 +52,11 @@ mlconjug3
         :target: https://anaconda.org/conda-forge/mlconjug3
         :alt: Conda
 
+----
 
------
+=========
+mlconjug3
+=========
 
 
 | A Python library to conjugate verbs in French, English, Spanish, Italian, Portuguese and Romanian (more soon)
@@ -69,20 +69,17 @@ mlconjug3
 - a feature selector using Linear Support Vector Classification,
 - a classifier using Stochastic Gradient Descent.
 
-| mlconjug3 uses scikit-learn to implement the Machine Learning algorithms.
+| The library mlconjug3 uses scikit-learn to implement the Machine Learning algorithms.
 | Users of the library can use any compatible classifiers from scikit-learn to modify and retrain the models.
 
 | The training data for the french model is based on Verbiste https://perso.b2b2c.ca/~sarrazip/dev/verbiste.html .
 | The training data for English, Spanish, Italian, Portuguese and Romanian was generated using unsupervised learning techniques using the French model as a model to query during the training.
-  
------
+
+----
 
 .. image:: https://raw.githubusercontent.com/SekouDiaoNlp/mlconjug3/dev2/docs/images/to_be.png
         :alt: Conjugation for the verb to be.
-
-
-.. warning::
-    mlconjug3 now only supports Python 3.x as Python 2.x has been deprecated in 2020.
+----
 
 * Free software: MIT license
 * Documentation: https://mlconjug3.readthedocs.io/en/latest/.
@@ -157,7 +154,7 @@ If you already have Anaconda_ or Miniconda_ available on your system, just type 
 From sources
 ~~~~~~~~~~~~
 
-The sources for MLConjug3 can be downloaded from the `Github repo`_.
+The sources for mlconjug3 can be downloaded from the `Github repo`_.
 
 You can either clone the public repository:
 
@@ -171,11 +168,19 @@ Or download the `tarball`_:
 
     $ curl  -OL https://github.com/SekouDiaoNlp/mlconjug3/tarball/master
 
-Once you have a copy of the source, you can install it with:
+Once you have a copy of the source, get in the source directory and you can install it with:
 
 .. code-block:: console
 
     $ python setup.py install
+
+Alternatively, you can use poetry to install the software:
+
+.. code-block:: console
+
+    $ pip install poetry
+    
+    $ poetry install
 
 
 .. _Github repo: https://github.com/SekouDiaoNlp/mlconjug3
