@@ -25,6 +25,8 @@ from mlconjug3 import Verbiste, VerbInfo, Verb, VerbEn, \
 
 from mlconjug3 import cli
 
+from mlconjug3.utils import ConjugatorTrainer
+
 try:
     from pathlib import Path
 except ImportError:
@@ -239,3 +241,39 @@ class TestCLI:
         with open(my_file, encoding='utf-8') as file:
             output = json.load(file)
         assert output['aller'] == test_verb.conjug_info
+
+
+class TestConjugatorTrainer:
+    @pytest.fixture(scope="class")
+    def trainer(self):
+        lang = "fr"
+        params = {'lang': lang,
+                  'output_folder': "models",
+                  'split_proportion': 0.8,
+                  'dataset': mlconjug3.DataSet(mlconjug3.Verbiste(lang).verbs),
+                  'model': mlconjug3.Model(
+                      language=lang,
+                      vectorizer=mlconjug3.CountVectorizer(analyzer=partial(extract_verb_features, lang=lang, ngram_range=(2, 7)),
+                                             binary=True, lowercase=False),
+                      feature_selector=mlconjug3.SelectFromModel(mlconjug3.LinearSVC(penalty = "l1", max_iter = 12000, dual = False, verbose = 0)),
+                      classifier=mlconjug3.SGDClassifier(loss = "log", penalty = "elasticnet", l1_ratio = 0.15, max_iter = 40000, alpha = 1e-5, verbose = 0)
+                  )
+                 }
+        return ConjugatorTrainer(**params)
+    
+    def test_train(self, trainer):
+        trainer.train()
+        assert trainer.is_trained == True
+    
+    def test_predict(self, trainer):
+        trainer.predict()
+        assert trainer.predictions is not None
+    
+    def test_evaluate(self, trainer):
+        trainer.evaluate()
+        assert trainer.evaluation is not None
+    
+    def test_save(self, trainer):
+        trainer.save()
+        assert trainer.output_folder is not None
+
