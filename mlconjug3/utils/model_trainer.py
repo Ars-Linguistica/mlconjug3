@@ -63,7 +63,7 @@ class ConjugatorTrainer:
         return
 
     def predict(self):
-         """
+        """
         Make predictions using the trained model.
 
         Returns:
