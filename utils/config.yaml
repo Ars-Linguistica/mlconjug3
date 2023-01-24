@@ -1,0 +1,33 @@
+# config.yaml
+
+lang: "fr"
+output_folder: "models"
+split_proportion: 0.8
+feature_extractor:
+    type: "mlconjug3.CountVectorizer"
+    analyzer:
+        type: "functools.partial"
+        func: "mlconjug3.extract_verb_features"
+        args:
+            lang: "fr"
+            ngram_range: [2, 7]
+    binary: true
+dataset: "mlconjug3.DataSet"
+model:
+    type: "mlconjug3.Model"
+    estimator:
+        type: "mlconjug3.SelectFromModel"
+        estimator:
+            type: "mlconjug3.LinearSVC"
+            penalty: "l1"
+            max_iter: 12000
+            dual: false
+            verbose: 0
+    classifier:
+        type: "mlconjug3.SGDClassifier"
+        loss: "log"
+        penalty: "elasticnet"
+        l1_ratio: 0.15
+        max_iter: 40000
+        alpha: 1e-5
+        verbose: 0
