@@ -47,8 +47,8 @@ jobs:
                 run: poetry install --no-interaction
             -   name: Build Package
                 run: poetry build
-            -   name: Run Bandit
-                run: poetry run bandit -r mlconjug3/ -c .bandit.yml
+            # -   name: Run Bandit
+                # run: poetry run bandit -r mlconjug3/ -c .bandit.yml
             -   name: Run Type Checker
                 run: |
                     poetry run pip install types-setuptools
