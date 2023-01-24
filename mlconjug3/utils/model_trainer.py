@@ -48,7 +48,7 @@ class ConjugatorTrainer:
         # Initialize Conjugator
         conjugator = mlconjug3.Conjugator(
             self.lang,
-            feature_extractor=dataset.feature_extractor,
+            feature_extractor=self.feature_extractor,
             model=self.model,
         )
 
