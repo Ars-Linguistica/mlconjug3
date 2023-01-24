@@ -5,6 +5,8 @@ import numpy as np
 from functools import partial
 from time import time
 
+from typing import Sequence, Mapping, Dict, Tuple, Optional, Union, Set, TextIO, Text
+
 class ConjugatorTrainer:
     def __init__(self, lang: str,
                  output_folder: str,
@@ -17,7 +19,7 @@ class ConjugatorTrainer:
     def train(self) -> None:
         ...
 
-    def predict(self) -> list:
+    def predict(self) -> Sequence[Text]:
         ...
 
     def evaluate(self) -> None:
