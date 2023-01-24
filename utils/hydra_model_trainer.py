@@ -3,7 +3,7 @@ from mlconjug3.feature_extractor import extract_verb_features
 from functools import partial
 import hydra
 
-@hydra.main(config_path="config.yaml")
+@hydra.main(config_name="config")
 def main(cfg):
     lang = cfg.language
     params = {'lang': lang,
