@@ -64,7 +64,7 @@ class ConjugatorTrainer:
         Returns:
             list: A list of predictions for the conjugated verbs.
         """
-        return self.model.predict(self.dataset.verbs_list)
+        return self.model.predict(self.dataset.verbs)
 
     def evaluate(self):
         """
@@ -72,7 +72,7 @@ class ConjugatorTrainer:
 
         Prints the score of the model, with the number of misses out of the total number of entries.
         """
-        predictions = self.model.predict(self.dataset.verbs_list)
+        predictions = self.model.predict(self.dataset.verbs)
         score = len(
             [a == b for a, b in zip(predictions, self.dataset.templates_list) if a == b]
         ) / len(predictions)
