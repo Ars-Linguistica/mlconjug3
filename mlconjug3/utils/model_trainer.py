@@ -42,7 +42,7 @@ class ConjugatorTrainer:
         np.random.seed(42)
 
         # Initialize Data Set
-        dataset = self.DataSet(
+        dataset = self.dataset(
             mlconjug3.Verbiste(language=self.lang).verbs,
             feature_extractor=self.feature_extractor,
         )
@@ -52,7 +52,7 @@ class ConjugatorTrainer:
         conjugator = mlconjug3.Conjugator(
             self.lang,
             feature_extractor=dataset.feature_extractor,
-            model=self.Model,
+            model=self.model,
         )
 
         # Train Conjugator
