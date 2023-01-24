@@ -1,5 +1,6 @@
 """
-This module defines the VerbInfo and Verb classes for representing verb conjugation information.
+This module defines the VerbInfo and the Verb, VerbFr, VerbEn, VerbEs, VerbIt, VerbPt, VerbRo classes
+for representing verb conjugation information.
 
 The VerbInfo class defines the structure for storing information about a verb, including its infinitive form,
 lexical root, and ending pattern template.
