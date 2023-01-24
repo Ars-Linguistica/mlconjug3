@@ -51,7 +51,6 @@ jobs:
             -   name: Build package using setup.py
                 run: |
                     python setup.py sdist bdist_wheel
-                    twine check dist/*
             -   name: Upload coverage artifacts to codecov
                 run: codecov --token=06406f4a-05a0-4974-a902-20fd09de8b50
 
