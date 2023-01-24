@@ -10,7 +10,7 @@ params = {'lang': lang,
           'dataset': mlconjug3.DataSet, 
           'model': mlconjug3.Model(
               language=lang,
-              vectorizer=CountVectorizer(analyzer=partial(extract_verb_features, lang=lang, ngram_range=(2, 7)),
+              vectorizer=mlconjug3.CountVectorizer(analyzer=partial(extract_verb_features, lang=lang, ngram_range=(2, 7)),
                                          binary=True, lowercase=False),
               feature_selector=mlconjug3.SelectFromModel(mlconjug3.LinearSVC(penalty = "l1", max_iter = 12000, dual = False, verbose = 0)), 
               classifier=mlconjug3.SGDClassifier(loss = "log", penalty = "elasticnet", l1_ratio = 0.15, max_iter = 40000, alpha = 1e-5, verbose = 0)
