@@ -27,6 +27,8 @@ from mlconjug3 import cli
 
 from mlconjug3.utils import ConjugatorTrainer
 
+import mlcnjug3
+
 try:
     from pathlib import Path
 except ImportError:
