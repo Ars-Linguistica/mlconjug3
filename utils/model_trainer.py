@@ -1,5 +1,5 @@
 import mlconjug3
-from mlconjug.feature_extractor import extract_verv_features
+from mlconjug3.feature_extractor import extract_verv_features
 from functools import partial
 
 lang = "fr"
