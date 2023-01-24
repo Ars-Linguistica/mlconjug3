@@ -108,10 +108,84 @@ Features
 - Can be used as a command line tool.
 
 
+Installation
+------------
+
+
+Stable release
+~~~~~~~~~~~~~~
+
+To install mlconjug3, run this command in your terminal:
+
+.. code-block:: console
+
+    $ pip install mlconjug3
+
+This is the preferred method to install mlconjug3, as it will always install the most recent stable release.
+
+If you don't have `pip`_ installed, this `Python installation guide`_ can guide
+you through the process.
+
+
+You can also install mlconjug3 by using Anaconda_ or Miniconda_ instead of `pip`_ .
+
+To install Anaconda_ or Miniconda_, please follow the installation instructions on their respective websites.
+After having installed Anaconda_ or Miniconda_, run these commands in your terminal:
+
+.. code-block:: console
+
+    $ conda config --add channels conda-forge
+    $ conda config --set channel_priority strict
+    $ conda install mlconjug3
+
+If you already have Anaconda_ or Miniconda_ available on your system, just type this in your terminal:
+
+.. code-block:: console
+
+    $ conda install -c conda-forge mlconjug3
+.. warning::
+    If you intend to install mlconjug3 on a Apple Macbook with an Apple M1 or M2 processor or newer,
+    it is advised that you install mlconjug3 by using the conda installation method as all dependencies will be pre-compiled.
+
+.. _pip: https://pip.pypa.io
+.. _Python installation guide: http://docs.python-guide.org/en/latest/starting/installation/
+.. _Anaconda: https://www.anaconda.com/products/individual
+.. _Miniconda: https://docs.conda.io/en/latest/miniconda.html
+
+
+From sources
+~~~~~~~~~~~~
+
+The sources for MLConjug3 can be downloaded from the `Github repo`_.
+
+You can either clone the public repository:
+
+.. code-block:: console
+
+    $ git clone git://github.com/SekouDiaoNlp/mlconjug3
+
+Or download the `tarball`_:
+
+.. code-block:: console
+
+    $ curl  -OL https://github.com/SekouDiaoNlp/mlconjug3/tarball/master
+
+Once you have a copy of the source, you can install it with:
+
+.. code-block:: console
+
+    $ python setup.py install
+
+
+.. _Github repo: https://github.com/SekouDiaoNlp/mlconjug3
+.. _tarball: https://github.com/SekouDiaoNlp/mlconjug3/tarball/master
+
+
+
 Academic publications citing mlconjug
 -------------------------------------
 
-- | Gerard Canal,Senka Krivic ́, Paul Luff, Andrew Coles.
+- | Gerard Canal, Senka Krivic ́, Paul Luff, Andrew Coles.
   | "`PlanVerb: Domain-Independent Verbalization and Summary of Task Plans`_".
   | Thirty-Sixth AAAI Conference on Artificial Intelligence (AAAI-22), 2022.
 
@@ -126,6 +200,21 @@ Academic publications citing mlconjug
 - | Ali Malik and Mike Wu and Vrinda Vasavada and Jinpeng Song and John Mitchell and Noah D. Goodman and Chris Piech.
   | "`Generative Grading Neural Approximate Parsing for Automated Student Feedback`_".
   | Proceedings of the 34th AAAI conference on Artificial Intelligence, 2019.
+
+
+BibTeX
+------
+
+If you want to cite mlconjug3 in an academic publication use this citation format:
+
+.. code:: bibtex
+
+   @article{mlconjug3,
+     title={mlconjug3},
+     author={Sekou Diao},
+     journal={GitHub. Note: https://github.com/SekouDiaoNlp/mlconjug3 Cited by},
+     year={2023}
+   }
 
 
 Software projects using mlconjug
@@ -173,20 +262,6 @@ Software projects using mlconjug
   | A WebApp to learn Spanish.
 - | `Learn_vocab`_
   | Application for German-French vocabulary with simple GUI.
-
-BibTeX
-------
-
-If you want to cite mlconjug3 in an academic publication use this citation format:
-
-.. code:: bibtex
-
-   @article{mlconjug3,
-     title={mlconjug3},
-     author={Sekou Diao},
-     journal={GitHub. Note: https://github.com/SekouDiaoNlp/mlconjug3 Cited by},
-     year={2023}
-   }
 
 
 Credits
