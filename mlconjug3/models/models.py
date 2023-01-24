@@ -1,3 +1,12 @@
+"""
+This module declares the Model class.
+
+It provides a Model class that wraps around scikit-learn's pipeline,
+and offers a simple train, predict, and evaluate interface for training conjugation models.
+The Model class also provides default values for the vectorizer, feature selector and classifier,
+which work well for many languages and can be overridden as needed.
+"""
+
 from sklearn.feature_selection import SelectFromModel
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.svm import LinearSVC
