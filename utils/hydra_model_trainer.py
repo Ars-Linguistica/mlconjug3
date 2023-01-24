@@ -3,7 +3,7 @@ from mlconjug3.feature_extractor import extract_verb_features
 from functools import partial
 import hydra
 
-params = hydra.experimental.compose(config_path = "config.yaml")
+params = hydra.compose(config_path = "config.yaml")
 
 lang = params["language"]
 output_folder = params["output_folder"]
