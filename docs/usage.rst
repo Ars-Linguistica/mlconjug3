@@ -104,41 +104,45 @@ To use the Conjugator class, you need to first import the class.
     
     from mlconjug3.conjugator import Conjugator
     
-    #initialize the conjugator
+    # initialize the conjugator
     conjugator = Conjugator()
     
-    #conjugate the verb "parler"
+    # conjugate the verb "parler"
     verb = conjugator.conjugate("parler")
     
-    #print all the conjugated forms
+    # print all the conjugated forms as a list of tuples.
     print(verb.iterate())
     
-    #print all the conjugations for the indicative mood
+    # You can access the conjugated forms in the attribute conjug_info
+    
+    # print all the conjugations for the indicative mood
     print(verb.conjug_info["indicatif"])
     
-    #print the conjugation for the indicative mood, present tense, first person singular
+    # print the conjugation for the indicative mood, present tense, first person singular
     print(verb.conjug_info["indicatif"]["présent"]["1s"])
     
-    #print the conjugation for the indicative mood, present tense
+    # print the conjugation for the indicative mood, present tense
     print(verb.conjug_info["indicatif"]["présent"])
     
-    #print the conjugation for the indicative mood
+    # print the conjugation for the indicative mood
     print(verb.conjug_info["indicatif"])
     
-    #check if the form "je parle" is in the conjugated forms
-    print("je parle" in verb)
+    # The class Verb and it's children adhere to the Python Data Model and can be accessed as a dictionary.
     
-    #check if the form "tu parles" is in the conjugated forms
-    print("tu parles" in verb)
-    
-    #get the conjugation for the indicative mood, present tense, first person singular
+    # get the conjugation for the indicative mood, present tense, first person singular
     print(verb["indicatif"]["présent"]["1s"])
     
-    #get the conjugation for the indicative mood, present tense
+    # get the conjugation for the indicative mood, present tense
     print(verb["indicatif"]["présent"])
     
-    #get the conjugation for the indicative mood
+    # get the conjugation for the indicative mood
     print(verb["indicatif"])
+    
+    # check if the form "je parle" is in the conjugated forms
+    print("je parle" in verb)
+    
+    # check if the form "tu parles" is in the conjugated forms
+    print("tu parles" in verb)
 
 
 
