@@ -68,7 +68,7 @@ class ConjugatorTrainer:
         """
         Make predictions using the trained model.
 
-        Returns:
+        Returns predictions:
             list predictions: A list of predictions for the conjugated verbs.
         """
         return self.model.predict(self.dataset.verbs_list)
