@@ -18,13 +18,14 @@ def extract_verb_features(verb, lang, ngram_range):
     | To enhance the results of the feature extration, several other features have been included:
     | The features are the verb's ending n-grams, starting n-grams, length of the verb, number of vowels,
      number of consonants and the ratio of vowels over consonants.
+     
     :param verb: string.
         Verb to vectorize.
     :param lang: string.
         Language to analyze.
     :param ngram_range: tuple.
         The range of the ngram sliding window.
-    :return: list.
+    :return features: list.
         List of the most salient features of the verb for the task of finding it's conjugation's class.
     """
     _white_spaces = re.compile(r"\s\s+")
