@@ -2,8 +2,8 @@
 History
 =======
 
-3.9 (2023-24-01)
-----------------
+3.9.0 (2023-24-01)
+------------------
 
 * Added support for Python 3.11
 * Updated dependencies to scikit-learn 1.2.0 with a noticeable speed inrease in training and inference performance.
