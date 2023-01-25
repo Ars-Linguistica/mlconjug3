@@ -35,7 +35,10 @@ class Verbiste(ConjugManager):
     :ivar language: Language of the conjugator.
     :ivar verbs: Dictionary where the keys are verbs and the values are conjugation patterns.
     :ivar conjugations: Dictionary where the keys are conjugation patterns and the values are inflected forms.
-
+    :ivar _allowed_endings: set.
+        | A set containing the allowed endings of verbs in the target language.
+    :ivar templates: list of strings.
+        List of the conjugation patterns.
     """
 
     def _load_verbs(self, verbs_file):
