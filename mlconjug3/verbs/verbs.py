@@ -305,7 +305,7 @@ class VerbEs(Verb):
 
     language = 'es'
 
-    def _load_conjug(self, sibject):
+    def _load_conjug(self, subject):
         """
         | Populates the inflected forms of the verb.
         | Adds personal pronouns to the inflected verbs.
