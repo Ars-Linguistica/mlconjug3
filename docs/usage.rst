@@ -14,18 +14,66 @@ Example of using mlconjug3 through a remote ssh connection:
 .. image:: https://raw.githubusercontent.com/SekouDiaoNlp/mlconjug3/master/docs/images/to_be.png
         :alt: Conjugation for the verb to be.
 
-To use mlconjug3 from the command line::
+To use mlconjug3 from the command line:
 
-    To conjugate a verb in English, abbreviated subject format :
+.. code-block:: console
+
+    $ mlconjug3 -h
+    Usage: mlconjug3 [OPTIONS] [VERBS]...
+
+    Examples of how to use mlconjug3 from the terminal
+  
+    To conjugate a verb in English, abbreviated subject format : $ mlconjug3 -l
+    en -s abbrev 'have'
+  
+    To conjugate multiple verbs in French, full subject format : $ mlconjug3 -l
+    fr -s pronoun 'aimer' 'être' 'aller'
+  
+    To conjugate a verb in Spanish, full subject format and save the conjugation
+    table in a json file: $ mlconjug3 -l es -s pronoun -f json 'hablar' -o
+    'conjugation_table.json'
+  
+    To conjugate multiple verbs in Italian, abbreviated subject format and save
+    the conjugation table in a csv file: $ mlconjug3 -l it -s abbrev -f csv
+    'parlare' 'avere' 'essere' -o 'conjugation_table.csv'
+  
+  Options:
+    -l, --language TEXT     The language for the conjugation pipeline. The
+                            values can be 'fr', 'en', 'es', 'it', 'pt' or 'ro'.
+                            The default value is fr.
+    -o, --output TEXT       Path of the filename for storing the conjugation
+                            tables.
+    -s, --subject TEXT      The subject format type for the conjugated forms.
+                            The values can be 'abbrev' or 'pronoun'. The default
+                            value is 'abbrev'.
+    -f, --file_format TEXT  The output format for storing the conjugation
+                            tables. The values can be 'json', 'csv'. The default
+                            value is 'json'.
+    -h, --help              Show this message and exit.
+
+    
+To conjugate a verb in English, abbreviated subject format :
+
+.. code-block:: console
+
     $ mlconjug3 -l en -s abbrev 'have'
     
-    To conjugate multiple verbs in French, full subject format :
+To conjugate multiple verbs in French, full subject format :
+
+.. code-block:: console
+
     $ mlconjug3 -l fr -s pronoun 'aimer' 'être' 'aller'
     
-    To conjugate a verb in Spanish, full subject format and save the conjugation table in a json file:
+To conjugate a verb in Spanish, full subject format and save the conjugation table in a json file:
+
+.. code-block:: console
+
     $ mlconjug3 -l es -s pronoun -f json 'hablar' -o 'conjugation_table.json'
     
-    To conjugate multiple verbs in Italian, abbreviated subject format and save the conjugation table in a csv file:
+To conjugate multiple verbs in Italian, abbreviated subject format and save the conjugation table in a csv file:
+
+.. code-block:: console
+
     $ mlconjug3 -l it -s abbrev -f csv 'parlare' 'avere' 'essere' -o 'conjugation_table.csv'
 
 
@@ -101,13 +149,9 @@ The script starts by importing the necessary modules and setting the parameters 
     
 The parameters are:
     * lang: the language of the conjugator. The default language is 'fr' for French.
-    
     * output_folder: the location where the trained model will be saved.
-    
     * split_proportion: the proportion of the data that will be used for training. The remaining data will be used for testing.
-    
     * dataset: the dataset object which contains the data for the model.
-    
     * model: the model object which wraps the classifier, feature selector and vectorizer.
     
 Once the parameters are set, the script creates an instance of the ConjugatorTrainer class, passing the parameters as keyword arguments.
