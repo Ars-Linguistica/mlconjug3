@@ -101,7 +101,7 @@ class Verb:
             mood, tense = key
             return self.conjug_info[mood][tense]
         else:
-            return self.conjug_info[key[0]]
+            return self.conjug_info[key]
     
     def __setitem__(self, key, value):
         """
@@ -118,7 +118,7 @@ class Verb:
             mood, tense = key
             self.conjug_info[mood][tense] = value
         else:
-            self.conjug_info[key[0]] = value
+            self.conjug_info[key] = value
         return
     
     def __contains__(self, item):
