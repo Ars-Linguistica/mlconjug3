@@ -166,7 +166,7 @@ class Verb:
         :return conjugated_forms: generator.
             Lazy generator of conjugated forms.
         """
-        self.__iter__()
+        return [item for item in self]
 
     def _load_conjug(self):
         """
