@@ -29,7 +29,9 @@ class ConjugManager:
         :ivar language: Language of the conjugator.
         :ivar verbs: Dictionary where the keys are verbs and the values are conjugation patterns.
         :ivar conjugations: Dictionary where the keys are conjugation patterns and the values are inflected forms.
-        """
+        :ivar templates: list of string representing the conjugation templates.
+        :ivar _allowed_endings: set containing the allowed endings of verbs in the target language.
+    """
 
     def __init__(self, language='default'):
         if language not in LANGUAGES:
