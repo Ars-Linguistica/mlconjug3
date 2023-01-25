@@ -137,9 +137,9 @@ class TestVerb:
         test_verb = VerbFr(test_verb_info, test_conjug_info)
         # Test setitem
         test_verb["Indicatif", "Présent", "2s"] = "manges"
-        assert test_verb.conjug_info["Indicatif", "Présent", "2s"] == "manges"
+        assert test_verb.conjug_info["Indicatif"]["Présent"]["2s"] == "manges"
         # Test getitem
-        assert test_verb["Indicatif", "Présent", "2s"] == "manges"
+        assert test_verb["Indicatif"]["Présent"]["2s"] == "manges"
         # Test contains using string
         assert "tu manges" in test_verb
         assert "tu mangeras" not in test_verb
