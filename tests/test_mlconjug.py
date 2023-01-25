@@ -135,11 +135,16 @@ class TestVerb:
         test_verb_info = verbiste.get_verb_info(TEST_VERBS[verbiste.language][0])
         test_conjug_info = verbiste.get_conjug_info(TEST_VERBS[verbiste.language][1])
         test_verb = VerbFr(test_verb_info, test_conjug_info)
-        # Test setitem
+        # Test setitem with tuple
         test_verb["Indicatif", "Présent", "2s"] = "manges"
         assert test_verb.conjug_info["Indicatif"]["Présent"]["2s"] == "manges"
-        # Test getitem
+        # Test nested setitem
+        test_verb["Indicatif"]["Présent"]["2s"] = "manges"
+        assert test_verb.conjug_info["Indicatif"]["Présent"]["2s"] == "manges"
+        # Test nested getitem
         assert test_verb["Indicatif"]["Présent"]["2s"] == "manges"
+        # Test getitem with tuple
+        assert test_verb["Indicatif", "Présent", "2s"] == "manges"
         # Test contains using string
         assert "tu manges" in test_verb
         assert "manges" in test_verb
