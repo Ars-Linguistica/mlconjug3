@@ -142,7 +142,7 @@ class TestVerb:
         assert test_verb["Indicatif"]["Présent"]["2s"] == "manges"
         # Test contains using string
         assert "tu manges" in test_verb
-        assert "tu mangeras" not in test_verb
+        assert "tu parles" not in test_verb
 
 
 class TestEndingCountVectorizer:
