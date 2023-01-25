@@ -100,15 +100,46 @@ To use the Conjugator class, you need to first import the class.
 
 .. code-block:: python
 
+    #example script
+    
     from mlconjug3.conjugator import Conjugator
+    
+    #initialize the conjugator
+    conjugator = Conjugator()
+    
+    #conjugate the verb "parler"
+    verb = conjugator.conjugate("parler")
+    
+    #print all the conjugated forms
+    print(verb.iterate())
+    
+    #print all the conjugations for the indicative mood
+    print(verb.conjug_info["indicatif"])
+    
+    #print the conjugation for the indicative mood, present tense, first person singular
+    print(verb.conjug_info["indicatif"]["présent"]["1s"])
+    
+    #print the conjugation for the indicative mood, present tense
+    print(verb.conjug_info["indicatif"]["présent"])
+    
+    #print the conjugation for the indicative mood
+    print(verb.conjug_info["indicatif"])
+    
+    #check if the form "je parle" is in the conjugated forms
+    print("je parle" in verb)
+    
+    #check if the form "tu parles" is in the conjugated forms
+    print("tu parles" in verb)
+    
+    #get the conjugation for the indicative mood, present tense, first person singular
+    print(verb["indicatif"]["présent"]["1s"])
+    
+    #get the conjugation for the indicative mood, present tense
+    print(verb["indicatif"]["présent"])
+    
+    #get the conjugation for the indicative mood
+    print(verb["indicatif"])
 
-    conjugator = Conjugator(language='fr')
-
-    conjugations = conjugator.conjugate("aimer")
-
-    conjugations = conjugator.conjugate(["aimer", "aller", "être"])
-
-    conjugations = conjugator.conjugate("aimer", subject='pronoun')
 
 
 You can also provide your own trained model to the Conjugator class if you have trained a model using the ConjugatorTrainer class. To do this, pass the trained model object as the second argument to the Conjugator class.
