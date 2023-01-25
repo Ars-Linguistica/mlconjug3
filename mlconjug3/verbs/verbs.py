@@ -131,7 +131,7 @@ class Verb:
         :param item: tuple of (mood, tense, person, form) or a string in the format 'pronoun form' like 'you talk'.
         :return: bool
         """
-        if isinstance(item, str):
+        try:
             form = item.split()[-1]
             for mood, tenses in self.conjug_info.items():
                 for tense, persons in tenses.items():
@@ -142,12 +142,9 @@ class Verb:
                         for pers, form_ in persons.items():
                             if form_ == form:
                                 return True
-        else:
-            mood, tense, person, form = item
-            try:
-                return self.conjug_info[mood][tense][person] == form
-            except KeyError:
-                return False
+        except:
+            return False
+        
         return False
 
     
