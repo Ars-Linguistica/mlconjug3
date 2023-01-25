@@ -70,7 +70,7 @@ class Verb:
     :ivar predicted: bool.
         Indicates if the conjugation information was predicted by the model or retrieved from the dataset.
     """
-    __slots__ = ('name', 'verb_info', 'conjug_info', 'subject', 'predicted', 'confidence_score')
+    __slots__ = ('name', 'verb_info', 'conjug_info', 'full_forms', 'subject', 'predicted', 'confidence_score')
 
     language = 'default'
 
