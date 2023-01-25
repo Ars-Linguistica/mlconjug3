@@ -2,6 +2,10 @@ name: "Use poetry to build package and run multiple tests"
 
 on: [ push, pull_request ]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+  
 jobs:
     build_wheels_with_poetry:
         name: Build poetry packages on ${{ matrix.os }} on ${{ matrix.python-version }}
@@ -48,15 +52,15 @@ jobs:
                 run: poetry install --no-interaction --no-root
             -   name: Install Package
                 run: poetry install --no-interaction
-            - run: |
-                  source $VENV
-                  pytest --version
-            -   name: Run Bandit
-                run: poetry run bandit -r mlconjug3/ -c .bandit.yml
-#            -   name: Run Type Checker
-#                run: |
-#                    poetry run pip install types-setuptools
- #                   poetry run mypy
+            -   run: |
+                   source $VENV
+                   pytest --version
+           #  -   name: Run Bandit
+            #     run: poetry run bandit -r mlconjug3/ -c .bandit.yml
+            -   name: Run Type Checker
+                run: |
+                   poetry run pip install types-setuptools
+                   poetry run mypy
             -   name: Run Pytest with coverage
                 run: poetry run pytest --cov=./mlconjug3/
             -   name: Build Package

@@ -2,6 +2,18 @@
 History
 =======
 
+3.9.0 (2023-24-01)
+------------------
+
+* Added support for Python 3.11
+* Updated dependencies to scikit-learn 1.2.0 with a noticeable speed inrease in training and inference performance.
+* Added ConjugatorTrainer class to easily and flexibly train new conjugators.
+* Added support for the rich library for better visuals. Now the conjugation tables are pretty printed and formatted.
+* Added multi-processing conjugation of multiple verbs for better performance on server applications using mlconjug3.
+* Added LRU cache to the the Conjugator.conjugate() method for better performance on applications with long running time.
+* Updated documentation with the new classes and more detailed information and visuals.
+* Refactor of internal classes, but keeping the same public interface in preparation for mlconjug3 v4.
+
 3.8.3 (2022-01-03)
 ------------------
 

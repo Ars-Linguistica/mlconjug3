@@ -2,10 +2,7 @@
         :target: https://pypi.python.org/pypi/mlconjug3
         :alt: mlconjug3 PyPi Home Page
 
-=========
-MLCONJUG3
-=========
-
+----
 
 .. image:: https://img.shields.io/badge/Maintained%3F-yes-green.svg
         :target: https://GitHub.com/SekouDiaoNlp/mlconjug3/graphs/commit-activity
@@ -51,16 +48,20 @@ MLCONJUG3
         :target: https://snyk.io/test/github/SekouDiaoNlp/mlconjug3?targetFile=requirements.txt
         :alt: Code Vulnerability Status
 
-.. image:: https://img.shields.io/pypi/dm/mlconjug3?label=PyPi%20Downloads
-        :target: https://pypi.python.org/pypi/mlconjug3
-        :alt: PyPI Downloads
-
 .. image:: https://img.shields.io/conda/dn/conda-forge/mlconjug?label=Anaconda%20Total%20Downloads
         :target: https://anaconda.org/conda-forge/mlconjug3
         :alt: Conda
 
+.. image:: https://img.shields.io/mastodon/follow/109313632815812004?domain=https%3A%2F%2Ffosstodon.org&style=plastic
+        :target: https://fosstodon.org/@SekouDiao
+        :alt: Follow me on Mastodon
 
 
+----
+
+=========
+mlconjug3
+=========
 
 
 | A Python library to conjugate verbs in French, English, Spanish, Italian, Portuguese and Romanian (more soon)
@@ -73,15 +74,17 @@ MLCONJUG3
 - a feature selector using Linear Support Vector Classification,
 - a classifier using Stochastic Gradient Descent.
 
-| MLConjug3 uses scikit-learn to implement the Machine Learning algorithms.
+| The library mlconjug3 uses scikit-learn to implement the Machine Learning algorithms.
 | Users of the library can use any compatible classifiers from scikit-learn to modify and retrain the models.
 
 | The training data for the french model is based on Verbiste https://perso.b2b2c.ca/~sarrazip/dev/verbiste.html .
-| The training data for English, Spanish, Italian, Portuguese and Romanian was generated using unsupervised learning techniques
-  using the French model as a model to query during the training.
+| The training data for English, Spanish, Italian, Portuguese and Romanian was generated using unsupervised learning techniques using the French model as a model to query during the training.
 
-.. warning::
-    MLCONJUG3 now only supports Python 3.x as Python 2.x has been deprecated in 2020.
+----
+
+.. image:: https://raw.githubusercontent.com/SekouDiaoNlp/mlconjug3/dev2/docs/images/to_be.png
+        :alt: Conjugation for the verb to be.
+----
 
 * Free software: MIT license
 * Documentation: https://mlconjug3.readthedocs.io/en/latest/.
@@ -104,19 +107,131 @@ Features
 - Easy to use API.
 - Includes pre-trained models with 99% + accuracy in predicting conjugation class of unknown verbs.
 - Easily train new models or add new languages.
+- Uses caching and multiprocessing for maximum performance.
 - Easily integrate MLConjug in your own projects.
 - Can be used as a command line tool.
+- Intuitive interface.
 
 
-Academic publications citing mlconjug
--------------------------------------
+Installation
+------------
+
+
+Stable release
+~~~~~~~~~~~~~~
+
+To install mlconjug3, run this command in your terminal:
+
+.. code-block:: console
+
+    $ pip install mlconjug3
+
+This is the preferred method to install mlconjug3, as it will always install the most recent stable release.
+
+If you don't have `pip`_ installed, this `Python installation guide`_ can guide
+you through the process.
+
+
+You can also install mlconjug3 by using Anaconda_ or Miniconda_ instead of `pip`_ .
+
+To install Anaconda_ or Miniconda_, please follow the installation instructions on their respective websites.
+After having installed Anaconda_ or Miniconda_, run these commands in your terminal:
+
+.. code-block:: console
+
+    $ conda config --add channels conda-forge
+    $ conda config --set channel_priority strict
+    $ conda install mlconjug3
+
+If you already have Anaconda_ or Miniconda_ available on your system, just type this in your terminal:
+
+.. code-block:: console
+
+    $ conda install -c conda-forge mlconjug3
+.. warning::
+    If you intend to install mlconjug3 on a Apple Macbook with an Apple M1 or M2 processor or newer,
+    it is advised that you install mlconjug3 by using the conda installation method as all dependencies will be pre-compiled.
+
+.. _pip: https://pip.pypa.io
+.. _Python installation guide: http://docs.python-guide.org/en/latest/starting/installation/
+.. _Anaconda: https://www.anaconda.com/products/individual
+.. _Miniconda: https://docs.conda.io/en/latest/miniconda.html
+
+
+From sources
+~~~~~~~~~~~~
+
+The sources for mlconjug3 can be downloaded from the `Github repo`_.
+
+You can either clone the public repository:
+
+.. code-block:: console
+
+    $ git clone git://github.com/SekouDiaoNlp/mlconjug3
+
+Or download the `tarball`_:
+
+.. code-block:: console
+
+    $ curl  -OL https://github.com/SekouDiaoNlp/mlconjug3/tarball/master
+
+Once you have a copy of the source, get in the source directory and you can install it with:
+
+.. code-block:: console
+
+    $ python setup.py install
+
+Alternatively, you can use poetry to install the software:
+
+.. code-block:: console
+
+    $ pip install poetry
+    
+    $ poetry install
+
+
+.. _Github repo: https://github.com/SekouDiaoNlp/mlconjug3
+.. _tarball: https://github.com/SekouDiaoNlp/mlconjug3/tarball/master
+
+
+
+Academic publications citing mlconjug3
+--------------------------------------
+
+- | Gerard Canal, Senka Krivic ́, Paul Luff, Andrew Coles.
+  | "`PlanVerb: Domain-Independent Verbalization and Summary of Task Plans`_".
+  | Thirty-Sixth AAAI Conference on Artificial Intelligence (AAAI-22), 2022.
+
+- | Mike Hongfei Wu.
+  | "`Extensions and Applications of Deep Probabilistic Inference for Generative Models`_".
+  | A DISSERTATION SUBMITTED TO THE DEPARTMENT OF COMPUTER SCIENCE AND THE COMMITTEE ON GRADUATE STUDIES OF STANFORD UNIVERSITY IN PARTIAL FULFILLMENT OF THE REQUIREMENTS FOR THE DEGREE OF DOCTOR OF PHILOSOPHY. May 2022.
+
+- | Spencer Ng, Lucy Teaford, Andy Yang, and Isaiah Zwick-Schachter.
+  | "`Fluorescing Questions: Effects of Semantic Perturbations on BERT Performance in SQuAD 1.1`_".
+  | CMSC 25610: Computational Linguistics University of Chicago, 2021.
 
 - | Ali Malik and Mike Wu and Vrinda Vasavada and Jinpeng Song and John Mitchell and Noah D. Goodman and Chris Piech.
   | "`Generative Grading Neural Approximate Parsing for Automated Student Feedback`_".
   | Proceedings of the 34th AAAI conference on Artificial Intelligence, 2019.
 
-Software projects using mlconjug
---------------------------------
+
+BibTeX
+------
+
+If you want to cite mlconjug3 in an academic publication use this citation format:
+
+.. code:: bibtex
+
+   @article{mlconjug3,
+     title={mlconjug3},
+     author={Sekou Diao},
+     journal={GitHub. Note: https://github.com/SekouDiaoNlp/mlconjug3 Cited by},
+     year={2023}
+   }
+
+
+Software projects using mlconjug3
+---------------------------------
 
 
 - | `Machine Translation Service`_
@@ -161,20 +276,6 @@ Software projects using mlconjug
 - | `Learn_vocab`_
   | Application for German-French vocabulary with simple GUI.
 
-BibTeX
-------
-
-If you want to cite mlconjug3 in an academic publication use this citation format:
-
-.. code:: bibtex
-
-   @article{mlconjug3,
-     title={mlconjug3},
-     author={Sekou Diao},
-     journal={GitHub. Note: https://github.com/SekouDiaoNlp/mlconjug3 Cited by},
-     year={2021}
-   }
-
 
 Credits
 -------
@@ -186,7 +287,10 @@ The logo was designed by Zuur_.
 .. _Verbiste: https://perso.b2b2c.ca/~sarrazip/dev/verbiste.html
 .. _scikit-learn: http://scikit-learn.org/stable/index.html
 .. _Zuur: https://github.com/zuuritaly
+.. _`PlanVerb: Domain-Independent Verbalization and Summary of Task Plans`: https://ojs.aaai.org/index.php/AAAI/article/download/21204/version/19491/20953
 .. _`Generative Grading Neural Approximate Parsing for Automated Student Feedback`: https://arxiv.org/abs/1905.09916
+.. _`Fluorescing Questions: Effects of Semantic Perturbations on BERT Performance in SQuAD 1.1`: https://github.com/spencerng/squad-sentiment/blob/87b42a41ba7f4f3f8d4e6c478f746d6cdf9f5515/assets/semantic-perturbations-bert-performance.pdf
+.. _`Extensions and Applications of Deep Probabilistic Inference for Generative Models`: https://drive.google.com/file/d/10IXi-RleFoG9L6G70TEKbAGd-v29R2Zz/view?usp=sharing
 .. _`Gender Bias Visualization`: https://github.com/GesaJo/Gender-Bias-Visualization
 .. _`Text Adaptation To Context`: https://github.com/lzontar/Text_Adaptation_To_Context
 .. _`Facemask Detection`: https://github.com/samuel-karanja/facemask-derection

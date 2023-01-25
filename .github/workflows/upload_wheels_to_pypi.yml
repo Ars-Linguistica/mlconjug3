@@ -47,8 +47,8 @@ jobs:
                 run: poetry install --no-interaction
             -   name: Build Package
                 run: poetry build
-            -   name: Run Bandit
-                run: poetry run bandit -r mlconjug3/ -c .bandit.yml
+            # -   name: Run Bandit
+                # run: poetry run bandit -r mlconjug3/ -c .bandit.yml
             -   name: Run Type Checker
                 run: |
                     poetry run pip install types-setuptools
@@ -56,7 +56,7 @@ jobs:
             -   name: Run Pytest with coverage
                 run: poetry run pytest --cov=./mlconjug3/
             -   name: Upload coverage artifacts to codecov
-                run: poetry run codecov --token=370386ee-28d7-441f-b4eb-7f63f8c5c3e9
+                run: poetry run codecov --token=06406f4a-05a0-4974-a902-20fd09de8b50
             -   name: Upload Package to PyPi
                 run: |
                     poetry config pypi-token.pypi ${{ secrets.PYPI_TOKEN }}

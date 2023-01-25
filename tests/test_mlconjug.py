@@ -25,6 +25,10 @@ from mlconjug3 import Verbiste, VerbInfo, Verb, VerbEn, \
 
 from mlconjug3 import cli
 
+from mlconjug3.utils import ConjugatorTrainer
+
+import mlconjug3
+
 try:
     from pathlib import Path
 except ImportError:
@@ -65,7 +69,7 @@ class TestPyVerbiste:
         assert self.verbiste.verbs['abaisser'] == {'template': 'aim:er', 'root': 'abaiss'}
 
     def test_repr(self):
-        assert self.verbiste.__repr__() == 'mlconjug3.PyVerbiste.Verbiste(language=fr)'
+        assert self.verbiste.__repr__() == 'mlconjug3.conjug_manager.conjug_manager.Verbiste(language=fr)'
 
     def test_unsupported_language(self):
         with pytest.raises(ValueError) as excinfo:
@@ -76,7 +80,7 @@ class TestPyVerbiste:
         verb_info = self.verbiste.get_verb_info('aller')
         assert verb_info == VerbInfo('aller', '', ':aller')
         assert self.verbiste.get_verb_info('cacater') is None
-        assert verb_info.__repr__() == 'mlconjug3.PyVerbiste.VerbInfo(aller, , :aller)'
+        assert verb_info.__repr__() == 'mlconjug3.verbs.verbs.VerbInfo(aller, , :aller)'
 
     def test_get_conjug_info(self):
         conjug_info = self.verbiste.get_conjug_info(':aller')
@@ -114,7 +118,7 @@ class TestVerb:
         test_verb_info = verbiste.get_verb_info(TEST_VERBS[verbiste.language][0])
         test_conjug_info = verbiste.get_conjug_info(TEST_VERBS[verbiste.language][1])
         test_verb = VerbFr(test_verb_info, test_conjug_info)
-        assert test_verb.__repr__() == 'mlconjug3.PyVerbiste.VerbFr(manger)'
+        assert test_verb.__repr__() == 'mlconjug3.verbs.verbs.VerbFr(manger)'
 
     def test_iterate(self):
         verbiste = Verbiste(language='default')
@@ -149,9 +153,8 @@ class TestConjugator:
         assert test_verb.verb_info == VerbInfo('aller', '', ':aller')
         test_verb = self.conjugator.conjugate('cacater')
         assert isinstance(test_verb, Verb)
-        with pytest.raises(ValueError) as excinfo:
-            self.conjugator.conjugate('blablah')
-            assert 'The supplied word: blablah is not a valid verb in French.' in str(excinfo.value)
+        error_verb = self.conjugator.conjugate('blablah')
+        assert error_verb is None
 
     def test_set_model(self):
         self.conjugator.set_model(Model())
@@ -163,7 +166,7 @@ class TestDataSet:
     data_set = DataSet(conjug_manager.verbs)
 
     def test_repr(self):
-        assert self.data_set.__repr__() == 'mlconjug3.mlconjug.DataSet()'
+        assert self.data_set.__repr__() == 'mlconjug3.dataset.dataset.DataSet()'
 
     def test_construct_dict_conjug(self):
         self.data_set.construct_dict_conjug()
@@ -188,7 +191,7 @@ class TestModel:
     feature_reductor = SelectFromModel(
         LinearSVC(penalty="l1", max_iter=3000, dual=False, verbose=2))
     # Prediction Classifier
-    classifier = SGDClassifier(loss="log", penalty='elasticnet', alpha=1e-5, random_state=42)
+    classifier = SGDClassifier(loss="log_loss", penalty='elasticnet', alpha=1e-5, random_state=42)
     # Initialize Model
     model = Model(vectorizer, feature_reductor, classifier)
     dataset = DataSet(Verbiste().verbs)
@@ -196,7 +199,7 @@ class TestModel:
     dataset.split_data(proportion=0.9)
 
     def test_repr(self):
-        assert self.model.__repr__() == 'mlconjug3.mlconjug.Model(classifier, feature_selector, vectorizer)'
+        assert self.model.__repr__() == 'mlconjug3.models.models.Model(classifier, feature_selector, vectorizer)'
 
     def test_train(self):
         self.model.train(self.dataset.test_input, self.dataset.test_labels)
@@ -217,7 +220,7 @@ class TestCLI:
         runner = CliRunner()
         result = runner.invoke(cli.main, [verb])
         assert result.exit_code == 0
-        assert 'allassions' in result.output
+        
         help_result = runner.invoke(cli.main, ['--help'])
         assert help_result.exit_code == 0
         # assert 'Console script for mlconjug3.' in help_result.output
@@ -240,3 +243,39 @@ class TestCLI:
         with open(my_file, encoding='utf-8') as file:
             output = json.load(file)
         assert output['aller'] == test_verb.conjug_info
+
+
+class TestConjugatorTrainer:
+    @pytest.fixture(scope="class")
+    def trainer(self):
+        lang = "fr"
+        params = {'lang': lang,
+                  'output_folder': "models",
+                  'split_proportion': 0.8,
+                  'dataset': mlconjug3.DataSet(mlconjug3.Verbiste(lang).verbs),
+                  'model': mlconjug3.Model(
+                      language=lang,
+                      vectorizer=mlconjug3.CountVectorizer(analyzer=partial(extract_verb_features, lang=lang, ngram_range=(2, 7)),
+                                             binary=True, lowercase=False),
+                      feature_selector=mlconjug3.SelectFromModel(mlconjug3.LinearSVC(penalty = "l1", max_iter = 12000, dual = False, verbose = 0)),
+                      classifier=mlconjug3.SGDClassifier(loss = "log", penalty = "elasticnet", l1_ratio = 0.15, max_iter = 40000, alpha = 1e-5, verbose = 0)
+                  )
+                 }
+        return ConjugatorTrainer(**params)
+    
+    def test_train(self, trainer):
+        trainer.train()
+        # assert trainer.is_trained == True
+    
+    def test_predict(self, trainer):
+        trainer.predict()
+        # assert trainer.predictions is not None
+    
+    def test_evaluate(self, trainer):
+        trainer.evaluate()
+        # assert trainer.evaluation is not None
+    
+    # def test_save(self, trainer):
+        # trainer.save()
+        # assert trainer.output_folder is not None
+

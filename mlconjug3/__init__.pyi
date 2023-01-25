@@ -21,11 +21,6 @@ LinearSVC: Any
 SGDClassifier: Any
 Pipeline: Any
 logger: Logger
-_RESOURCE_PACKAGE: str = __name__
-_TRANSLATIONS_PATH: str
-_SUPPORTED_LANGUAGES: Tuple[str, ...]
-_TRANSLATED_LANGUAGES: Tuple[str]
-_MLCONJUG_TRANSLATIONS: Union[gettext.GNUTranslations, gettext.NullTranslations]
 _user_locale: str
 
 def _get_user_locale() -> str: ...
