@@ -11,6 +11,7 @@ class DataSet:
     """
     | This class holds and manages the data set.
     | Defines helper methodss for managing Machine Learning tasks like constructing a training and testing set.
+    
     :param verbs_dict:
         A dictionary of verbs and their corresponding conjugation class.
     """
@@ -55,6 +56,7 @@ class DataSet:
     def split_data(self, threshold=8, proportion=0.5):
         """
         Splits the data into a training and a testing set.
+        
         :param threshold: int.
             Minimum size of conjugation class to be split.
         :param proportion: float.
