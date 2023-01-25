@@ -22,13 +22,16 @@ from mlconjug3.verbs import *
 class ConjugManager:
     """
         This is the class handling the mlconjug3 json files.
+        
         :param language: string.
             | The language of the conjugator. The default value is fr for French.
             | The allowed values are: fr, en, es, it, pt, ro.
         :ivar language: Language of the conjugator.
         :ivar verbs: Dictionary where the keys are verbs and the values are conjugation patterns.
         :ivar conjugations: Dictionary where the keys are conjugation patterns and the values are inflected forms.
-        """
+        :ivar templates: list of string representing the conjugation templates.
+        :ivar _allowed_endings: set containing the allowed endings of verbs in the target language.
+    """
 
     def __init__(self, language='default'):
         if language not in LANGUAGES:
@@ -51,6 +54,7 @@ class ConjugManager:
     def _load_verbs(self, verbs_file):
         """
         Load and parses the verbs from the json file.
+        
         :param verbs_file: string or path object.
             Path to the verbs json file.
         """
@@ -61,6 +65,7 @@ class ConjugManager:
     def _load_conjugations(self, conjugations_file):
         """
         Load and parses the conjugations from the json file.
+        
         :param conjugations_file: string or path object.
             Path to the conjugation json file.
         """
@@ -73,7 +78,8 @@ class ConjugManager:
         | Detects the allowed endings for verbs in the supported languages.
         | All the supported languages except for English restrict the form a verb can take.
         | As English is much more productive and varied in the morphology of its verbs, any word is allowed as a verb.
-        :return: set.
+        
+        :return allowed_endings: set.
             A set containing the allowed endings of verbs in the target language.
         """
         if self.language == 'en':
@@ -87,7 +93,8 @@ class ConjugManager:
         | Verbs in other languages are filtered by their endings.
         :param verb: string.
             The verb to conjugate.
-        :return: bool.
+        :return is_allowed: bool.
+        
             True if the verb is a valid verb in the language. False otherwise.
         """
         if self.language == 'en':
@@ -97,9 +104,10 @@ class ConjugManager:
     def get_verb_info(self, verb):
         """
         Gets verb information and returns a VerbInfo instance.
+        
         :param verb: string.
             Verb to conjugate.
-        :return: VerbInfo object or None.
+        :return VerbInfo: VerbInfo object or None.
         """
         if verb not in self.verbs.keys():
             return None
@@ -111,9 +119,10 @@ class ConjugManager:
     def get_conjug_info(self, template):
         """
         Gets conjugation information corresponding to the given template.
+        
         :param template: string.
             Name of the verb ending pattern.
-        :return: OrderedDict or None.
+        :return inflected_forms: OrderedDict or None.
             OrderedDict containing the conjugated suffixes of the template.
         """
         if template not in self.conjugations.keys():

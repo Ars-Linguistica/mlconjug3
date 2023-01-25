@@ -86,13 +86,14 @@ class Conjugator:
     def conjugate(self, verbs, subject='abbrev'):
         """
         Conjugate multiple verbs using multi-processing.
+        
         :param verbs: list of strings or string.
             Verbs to conjugate.
         :param subject: string.
             Toggles abbreviated or full pronouns.
             The default value is 'abbrev'.
             Select 'pronoun' for full pronouns.
-        :return: list of Verb objects or None.
+        :return verbs: list of Verb objects or None.
         """
         if isinstance(verbs, str):
             # If only a single verb is passed, call the _conjugate method directly
@@ -118,7 +119,7 @@ class Conjugator:
             Toggles abbreviated or full pronouns.
             The default value is 'abbrev'.
             Select 'pronoun' for full pronouns.
-        :return: Verb object or None.
+        :return verb: Verb object or None.
 
         """
         verb = verb.lower()

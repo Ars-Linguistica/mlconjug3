@@ -26,6 +26,7 @@ class Model:
     | The Pipeline includes a feature vectorizer, a feature selector and a classifier.
     | If any of the vectorizer, feature selector or classifier is not supplied at instance declaration,
      the __init__ method will provide good default values that get more than 92% prediction accuracy.
+     
     :param vectorizer: scikit-learn Vectorizer.
     :param feature_selector: scikit-learn Classifier with a fit_transform() method
     :param classifier: scikit-learn Classifier with a predict() method
@@ -55,6 +56,7 @@ class Model:
     def train(self, samples, labels):
         """
         Trains the pipeline on the supplied samples and labels.
+        
         :param samples: list.
             List of verbs.
         :param labels: list.
@@ -66,9 +68,10 @@ class Model:
     def predict(self, verbs):
         """
         Predicts the conjugation class of the provided list of verbs.
+        
         :param verbs: list.
             List of verbs.
-        :return: list.
+        :return predictions: list.
             List of predicted conjugation groups.
         """
         return self.pipeline.predict(verbs)

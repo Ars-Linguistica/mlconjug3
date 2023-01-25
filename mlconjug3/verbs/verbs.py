@@ -17,6 +17,7 @@ from mlconjug3.constants import *
 class VerbInfo:
     """
     This class defines the Verbiste verb information structure.
+    
     :param infinitive: string.
         Infinitive form of the verb.
     :param root: string.
@@ -53,6 +54,7 @@ class VerbInfo:
 class Verb:
     """
     This class defines the Verb Object.
+    
     :param verb_info: VerbInfo Object.
     :param conjug_info: OrderedDict.
     :param subject: string.
@@ -88,7 +90,8 @@ class Verb:
     def iterate(self):
         """
         Iterates over all conjugated forms and returns a list of tuples of those conjugated forms.
-        :return: list.
+        
+        :return conjugated_forms: list.
             List of conjugated forms.
         """
         iterate_results = []
@@ -126,6 +129,7 @@ class Verb:
     def conjugate_person(self, key, persons_dict, term):
         """
         Creates the conjugated form of the person specified by the key argument.
+        
         :param key: string.
         :param persons_dict: OrderedDict
         :param term: string.
