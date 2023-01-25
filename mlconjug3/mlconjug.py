@@ -86,6 +86,7 @@ class Conjugator:
     def conjugate(self, verbs, subject='abbrev'):
         """
         Conjugate multiple verbs using multi-processing.
+        
         :param verbs: list of strings or string.
             Verbs to conjugate.
         :param subject: string.
