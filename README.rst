@@ -82,7 +82,7 @@ mlconjug3
 
 ----
 
-.. image:: https://raw.githubusercontent.com/SekouDiaoNlp/mlconjug3/dev2/docs/images/to_be.png
+.. image:: https://raw.githubusercontent.com/SekouDiaoNlp/mlconjug3/master/docs/images/to_be.png
         :alt: Conjugation for the verb to be.
 ----
 
