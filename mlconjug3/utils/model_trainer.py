@@ -18,13 +18,22 @@ class ConjugatorTrainer:
     """
     Initialize a ConjugatorTrainer instance.
 
-    Args:
-        lang (str): The language for which the model will be trained.
-        output_folder (str): The directory where the trained model will be saved.
-        split_proportion (float): The proportion of the data set to use for training.
-        feature_extractor (obj): The feature extractor to use for the model.
-        DataSet (class): The DataSet class from the mlconjug3 library.
-        Model (obj): The model to be trained.
+    :param lang: str.
+        | The language for which the model will be trained.
+    :param output_folder: str.
+        | The directory where the trained model will be saved.
+    :param split_proportion: float.
+        | The proportion of the data set to use for training.
+    :param dataset: class.
+        | The DataSet class from the mlconjug3 library.
+    :param model: obj.
+        | The model to be trained.
+    :ivar lang: Language of the conjugator.
+    :ivar output_folder: Output folder for the trained model.
+    :ivar split_proportion: Proportion of the data set to use for training.
+    :ivar dataset: DataSet class from the mlconjug3 library.
+    :ivar model: Model to be trained.
+    :ivar conjugator: mlconjug3 Conjugator instance.
     """
     def __init__(self, lang, output_folder, split_proportion, dataset, model):
         self.lang = lang
@@ -60,7 +69,7 @@ class ConjugatorTrainer:
         Make predictions using the trained model.
 
         Returns:
-            list: A list of predictions for the conjugated verbs.
+            list predictions: A list of predictions for the conjugated verbs.
         """
         return self.model.predict(self.dataset.verbs_list)
 
