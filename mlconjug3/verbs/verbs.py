@@ -91,7 +91,7 @@ class Verb:
         """
         Iterates over all conjugated forms and returns a list of tuples of those conjugated forms.
         
-        :return: list.
+        :return conjugated_forms: list.
             List of conjugated forms.
         """
         iterate_results = []
