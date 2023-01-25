@@ -14,6 +14,30 @@ class DataSet:
     
     :param verbs_dict:
         A dictionary of verbs and their corresponding conjugation class.
+    :ivar verbs_dict:
+        A dictionary of verbs and their corresponding conjugation class.
+    :ivar verbs:
+        A list of all the verbs in the data set.
+    :ivar templates:
+        A list of all the templates in the data set.
+    :ivar verbs_list:
+        A list of all the verbs in the data set, shuffled randomly.
+    :ivar templates_list:
+        A list of the template index of each verb in the shuffled verbs_list.
+    :ivar dict_conjug:
+        A dictionary where the keys are conjugation templates and the values are the verbs that belong to that template.
+    :ivar min_threshold:
+        The minimum number of verbs in a conjugation class for it to be split into a training and testing set.
+    :ivar split_proportion:
+        The proportion of the data set that should be used as the training set.
+    :ivar train_input:
+        A list of the verbs in the training set.
+    :ivar train_labels:
+        A list of the template index of each verb in the training set.
+    :ivar test_input:
+        A list of the verbs in the testing set.
+    :ivar test_labels:
+        A list of the template index of each verb in the testing set.
     """
 
     def __init__(self, verbs_dict):
