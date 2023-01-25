@@ -79,7 +79,7 @@ class ConjugManager:
         | All the supported languages except for English restrict the form a verb can take.
         | As English is much more productive and varied in the morphology of its verbs, any word is allowed as a verb.
         
-        :return: set.
+        :return allowed_endings: set.
             A set containing the allowed endings of verbs in the target language.
         """
         if self.language == 'en':
@@ -93,7 +93,7 @@ class ConjugManager:
         | Verbs in other languages are filtered by their endings.
         :param verb: string.
             The verb to conjugate.
-        :return: bool.
+        :return is_allowed: bool.
         
             True if the verb is a valid verb in the language. False otherwise.
         """
@@ -107,7 +107,7 @@ class ConjugManager:
         
         :param verb: string.
             Verb to conjugate.
-        :return: VerbInfo object or None.
+        :return VerbInfo: VerbInfo object or None.
         """
         if verb not in self.verbs.keys():
             return None
@@ -122,7 +122,7 @@ class ConjugManager:
         
         :param template: string.
             Name of the verb ending pattern.
-        :return: OrderedDict or None.
+        :return inflected_forms: OrderedDict or None.
             OrderedDict containing the conjugated suffixes of the template.
         """
         if template not in self.conjugations.keys():
