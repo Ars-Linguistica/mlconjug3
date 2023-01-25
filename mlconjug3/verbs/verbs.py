@@ -142,11 +142,11 @@ class Verb:
             for mood, tenses in self.full_forms.items():
                 for tense, persons in tenses.items():
                     if isinstance(persons, str):
-                        if " ".join(tense, persons) == item or persons == item:
+                        if " ".join((tense, persons)) == item or persons == item:
                             return True
                     else:
                         for pers, form_ in persons.items():
-                            if " ".join(pers, form_) == item or form_ == item:
+                            if " ".join((pers, form_)) == item or form_ == item:
                                 return True
             return False
         except KeyError:
