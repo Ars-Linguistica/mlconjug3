@@ -78,10 +78,17 @@ class Verb:
         self.name = verb_info.infinitive
         self.verb_info = verb_info
         self.conjug_info = conjug_info
+        self.full_forms = {}
         self.subject = subject
         self.predicted = predicted
         self.confidence_score = None
-        self._load_conjug()
+        if subject == "pronoun":
+            self._load_conjug(subject)
+            self.full_forms = self.conjug_info
+        else:
+            self._load_conjug("pronoun")
+            self.full_forms = self.conjug_info
+            self._load_conjug(subject)
         return
 
     def __repr__(self):
@@ -181,7 +188,7 @@ class Verb:
         """
         return [item for item in self]
 
-    def _load_conjug(self):
+    def _load_conjug(self, subject="abbrev"):
         """
         | Populates the inflected forms of the verb.
         | This is the generic version of this method.
@@ -224,7 +231,7 @@ class VerbFr(Verb):
 
     language = 'fr'
 
-    def _load_conjug(self):
+    def _load_conjug(self, subject):
         """
         | Populates the inflected forms of the verb.
         | Adds personal pronouns to the inflected verbs.
@@ -235,11 +242,11 @@ class VerbFr(Verb):
                     persons_dict = OrderedDict()
                     for pers, term in persons:
                         if len(persons) == 6:
-                            key = PRONOUNS[self.language][self.subject][pers]
+                            key = PRONOUNS[self.language][subject][pers]
                         elif tense_name == 'Participe Passé':
-                            key = GENDER[self.language][self.subject][pers]
+                            key = GENDER[self.language][subject][pers]
                         elif tense_name == 'Imperatif Présent':
-                            key = IMPERATIVE_PRONOUNS[self.language][self.subject][pers]
+                            key = IMPERATIVE_PRONOUNS[self.language][subject][pers]
                         else:
                             key = term
                         if term is not None:
@@ -260,7 +267,7 @@ class VerbEn(Verb):
 
     language = 'en'
 
-    def _load_conjug(self):
+    def _load_conjug(self, subject):
         """
         | Populates the inflected forms of the verb.
         | Adds personal pronouns to the inflected verbs.
@@ -271,9 +278,9 @@ class VerbEn(Verb):
                     persons_dict = OrderedDict()
                     for pers, term in persons:
                         if len(persons) == 6:
-                            key = PRONOUNS[self.language][self.subject][pers]
+                            key = PRONOUNS[self.language][subject][pers]
                         elif tense_name == 'imperative present':
-                            key = IMPERATIVE_PRONOUNS[self.language][self.subject][pers]
+                            key = IMPERATIVE_PRONOUNS[self.language][subject][pers]
                         else:
                             key = 'to'
                         if term is not None:
@@ -298,7 +305,7 @@ class VerbEs(Verb):
 
     language = 'es'
 
-    def _load_conjug(self):
+    def _load_conjug(self, sibject):
         """
         | Populates the inflected forms of the verb.
         | Adds personal pronouns to the inflected verbs.
@@ -312,11 +319,11 @@ class VerbEs(Verb):
                         if len(persons) == 5 and not tense_name.startswith('Imperativo'):
                             continue
                         if len(persons) == 6:
-                            key = PRONOUNS[self.language][self.subject][pers]
+                            key = PRONOUNS[self.language][subject][pers]
                         elif tense_name == 'Imperativo Afirmativo':
-                            key = IMPERATIVE_PRONOUNS[self.language][self.subject][pers]
+                            key = IMPERATIVE_PRONOUNS[self.language][subject][pers]
                         elif tense_name == 'Imperativo non':
-                            key = ' '.join((IMPERATIVE_PRONOUNS[self.language][self.subject][pers],
+                            key = ' '.join((IMPERATIVE_PRONOUNS[self.language][subject][pers],
                                             NEGATION[self.language]))
                         elif tense_name == 'Gerundio Gerondio':
                             if term.endswith('ndo'):
@@ -348,7 +355,7 @@ class VerbIt(Verb):
 
     language = 'it'
 
-    def _load_conjug(self):
+    def _load_conjug(self, subject):
         """
         | Populates the inflected forms of the verb.
         | Adds personal pronouns to the inflected verbs.
@@ -359,7 +366,7 @@ class VerbIt(Verb):
                     persons_dict = OrderedDict()
                     for pers, term in persons:
                         if len(persons) == 6 and not tense_name.startswith('Imperativo'):
-                            key = PRONOUNS[self.language][self.subject][pers]
+                            key = PRONOUNS[self.language][subject][pers]
                         elif tense_name.startswith('Imperativo'):
                             key = PRONOUNS[self.language]['abbrev'][pers]
                         else:
@@ -385,7 +392,7 @@ class VerbPt(Verb):
 
     language = 'pt'
 
-    def _load_conjug(self):
+    def _load_conjug(self, subject):
         """
         | Populates the inflected forms of the verb.
         | Adds personal pronouns to the inflected verbs.
@@ -396,7 +403,7 @@ class VerbPt(Verb):
                     persons_dict = OrderedDict()
                     for pers, term in persons:
                         if len(persons) == 6 and not tense_name.startswith('Imperativo'):
-                            key = PRONOUNS[self.language][self.subject][pers]
+                            key = PRONOUNS[self.language][subject][pers]
                         elif tense_name.startswith('Imperativo'):
                             key = PRONOUNS[self.language]['abbrev'][pers]
                         else:
@@ -414,7 +421,7 @@ class VerbPt(Verb):
         return
 
 
-class VerbRo(Verb):
+class VerbRo(Verb, subject):
     """
     This class defines the Romanian Verb Object.
     """
@@ -433,9 +440,9 @@ class VerbRo(Verb):
                     persons_dict = OrderedDict()
                     for pers, term in persons:
                         if len(persons) == 6:
-                            key = PRONOUNS[self.language][self.subject][pers]
+                            key = PRONOUNS[self.language][subject][pers]
                         elif tense_name.startswith('Imperativ Imperativ'):
-                            key = IMPERATIVE_PRONOUNS[self.language][self.subject][pers]
+                            key = IMPERATIVE_PRONOUNS[self.language][subject][pers]
                         elif tense_name == 'Imperativ Negativ':
                             key = NEGATION[self.language]
                         else:
