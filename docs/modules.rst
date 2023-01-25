@@ -82,14 +82,3 @@ API Reference for the classes in utils/model_trainer.py
     :private-members:
     :show-inheritance:
     
-
-Usage Reference for cli.py in the terminal
-------------------------------------------
-
-.. automodule:: mlconjug3.cli
-    :member-order: bysource
-    :members:
-    :private-members:
-    :show-inheritance:
-    
-
