@@ -71,7 +71,7 @@ class Model:
         
         :param verbs: list.
             List of verbs.
-        :return: list.
+        :return predictions: list.
             List of predicted conjugation groups.
         """
         return self.pipeline.predict(verbs)
