@@ -419,7 +419,7 @@ class VerbPt(Verb):
         return
 
 
-class VerbRo(Verb, subject):
+class VerbRo(Verb):
     """
     This class defines the Romanian Verb Object.
     """
@@ -427,7 +427,7 @@ class VerbRo(Verb, subject):
 
     language = 'ro'
 
-    def _load_conjug(self):
+    def _load_conjug(self, subject):
         """
         | Populates the inflected forms of the verb.
         | Adds personal pronouns to the inflected verbs.
