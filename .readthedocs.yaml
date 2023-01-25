@@ -1,5 +1,8 @@
 version: 2
 
 python:
-   install:
-   - requirements: requirements_dev.txt
+  version: 3.11
+  install:
+    - method: setuptools
+    - requirements: requirements_dev.txt
+    - path: .
