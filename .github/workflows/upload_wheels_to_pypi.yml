@@ -14,6 +14,11 @@ jobs:
     build_wheels_with_poetry:
         name: Build poetry packages on ${{ matrix.os }}
         runs-on: ${{ matrix.os }}
+        permissions:
+          id-token: write
+        defaults:
+            run:
+                shell: bash
         strategy:
             fail-fast: false
             matrix:
@@ -24,9 +29,9 @@ jobs:
                 python-version: [ 3.9 ]
 
         steps:
-            -   uses: actions/checkout@v2
+            -   uses: actions/checkout@v3
 
-            -   uses: actions/setup-python@v2
+            -   uses: actions/setup-python@v4
                 with:
                     python-version: ${{ matrix.python-version }}
 
@@ -45,8 +50,14 @@ jobs:
                 run: poetry install --no-interaction --no-root
             -   name: Install Package
                 run: poetry install --no-interaction
+            -   run: |
+                   source $VENV
+                   pytest --version
             -   name: Build Package
                 run: poetry build
+            -   uses: sigstore/gh-action-sigstore-python@v1.0.0
+                with:
+                  inputs: dist/*.tar.gz dist/*.whl
             # -   name: Run Bandit
                 # run: poetry run bandit -r mlconjug3/ -c .bandit.yml
             -   name: Run Type Checker
