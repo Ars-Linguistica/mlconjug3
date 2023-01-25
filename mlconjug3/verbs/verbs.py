@@ -123,16 +123,17 @@ class Verb:
     
     def __contains__(self, item):
         """
-        The method checks if the provided form exists in the conjugated forms of the verb
-        It can accept the form as tuple of (mood, tense, person, form) or 'pronoun form' 
+        The method checks if the provided form exists in the conjugated forms of the verb.
+        It can accept the format 'pronoun form' like '"you are" in verb'.
         It will iterate over the conjugated forms and check if the form is present in the
         conjugated_info attribute of the class.
         
-        :param item: tuple of (mood, tense, person, form) or a string in the format 'pronoun form' like 'you talk'.
+        :param item: string in the format 'pronoun form' like 'tu manges' or just the verbal form like 'mangeras'.
         :return: bool
         """
         try:
             form = item.split()[-1]
+            pronouns = PRONOUNS[self.language][self.subject]
             for mood, tenses in self.conjug_info.items():
                 for tense, persons in tenses.items():
                     if isinstance(persons, str):
@@ -140,13 +141,11 @@ class Verb:
                             return True
                     else:
                         for pers, form_ in persons.items():
-                            if form_ == form:
+                            if form_ == form or f"{pronouns[pers]} {form_}" == item:
                                 return True
-        except:
             return False
-        
-        return False
-
+        except KeyError:
+            return False
     
     def __iter__(self):
         """
