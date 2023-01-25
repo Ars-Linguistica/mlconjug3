@@ -59,7 +59,7 @@ class Verbiste(ConjugManager):
 
         :param file: FileObject.
             XML file containing the verbs.
-        :return: OrderedDict.
+        :return verb_templates: OrderedDict.
             An OrderedDict containing the verb and its template for all verbs in the file.
 
         """
@@ -90,7 +90,7 @@ class Verbiste(ConjugManager):
 
         :param file: FileObject.
             XML file containing the conjugation templates.
-        :return: OrderedDict.
+        :return conjugations: OrderedDict.
             An OrderedDict containing all the conjugation templates in the file.
 
         """
@@ -112,7 +112,7 @@ class Verbiste(ConjugManager):
 
         :param tense: list of xml tags containing inflected forms.
             The list of inflected forms for the current tense being processed.
-        :return: list.
+        :return inflected_forms: list.
             List of inflected forms.
 
         """
