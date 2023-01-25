@@ -129,6 +129,20 @@ class TestVerb:
         assert len(iteration_results) == 46
         assert iteration_results[0] == ('Infinitif', 'Infinitif Présent', 'manger')
         assert iteration_results[1] == ('Indicatif', 'Présent', '1s', 'mange')
+        
+    def test_set_get_contains(self):
+        verbiste = Verbiste(language='fr')
+        test_verb_info = verbiste.get_verb_info(TEST_VERBS[verbiste.language][0])
+        test_conjug_info = verbiste.get_conjug_info(TEST_VERBS[verbiste.language][1])
+        test_verb = VerbFr(test_verb_info, test_conjug_info)
+        # Test setitem
+        test_verb["indicatif", "present", "tu"] = "manges"
+        assert test_verb.conjug_info["indicatif"]["present"]["tu"] == "manges"
+        # Test getitem
+        assert test_verb["indicatif", "present", "tu"] == "manges"
+        # Test contains using string
+        assert "tu manges" in test_verb
+        assert "tu mangeras" not in test_verb
 
 
 class TestEndingCountVectorizer:
