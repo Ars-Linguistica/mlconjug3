@@ -8,7 +8,7 @@ History
 * Added support for Python 3.11
 * Updated dependencies to scikit-learn 1.2.0 with a noticeable speed inrease in training and inference performance.
 * Added ConjugatorTrainer class to easily and flexibly train new conjugators.
-* Added support for the rich library for better visuals. Now the conjugation tables are pretty printed and formatted.
+* Added support for the rich library for better visuals. Now the conjugation tables are pretty printed, themed and formatted.
 * Added multi-processing conjugation of multiple verbs for better performance on server applications using mlconjug3.
 * Added LRU cache to the the Conjugator.conjugate() method for better performance on applications with long running time.
 * Updated documentation with the new classes and more detailed information and visuals.
