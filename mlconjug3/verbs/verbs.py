@@ -87,22 +87,86 @@ class Verb:
     def __repr__(self):
         return '{}.{}({})'.format(__name__, self.__class__.__name__, self.name)
 
+    def __getitem__(self, key):
+        """
+        Returns the conjugated form of the verb for the specified key.
+        
+        :param key: tuple of (mood, tense, person) or (mood, tense) or (mood)
+        :return: str or dict
+        """
+        if len(key) == 3:
+            mood, tense, person = key
+            return self.conjug_info[mood][tense][person]
+        elif len(key) == 2:
+            mood, tense = key
+            return self.conjug_info[mood][tense]
+        else:
+            return self.conjug_info[key[0]]
+    
+    def __setitem__(self, key, value):
+        """
+        Sets the conjugated form of the verb for the specified key.
+        
+        :param key: tuple of (mood, tense, person) or (mood, tense) or (mood)
+        :param value: str or dict
+        :return: None
+        """
+        if len(key) == 3:
+            mood, tense, person = key
+            self.conjug_info[mood][tense][person] = value
+        elif len(key) == 2:
+            mood, tense = key
+            self.conjug_info[mood][tense] = value
+        else:
+            self.conjug_info[key[0]] = value
+        return
+    
+    def __contains__(self, item):
+        """
+        Returns True if the specified conjugated form of the verb exists, False otherwise.
+        
+        :param item: tuple of (mood, tense, person, form)
+        :return: bool
+        """
+        mood, tense, person, form = item
+        try:
+            return self.conjug_info[mood][tense][person] == form
+        except KeyError:
+            return False
+    
+    def __iter__(self):
+        """
+        Lazy generator that returns all conjugated forms of the verb as tuples of (mood, tense, person, form)
+        """
+        for mood, tenses in self.conjug_info.items():
+            for tense, persons in tenses.items():
+                if isinstance(persons, str):
+                    yield mood, tense, persons
+                else:
+                    for pers, form in persons.items():
+                        yield mood, tense, pers, form
+    
+    def __len__(self):
+        """
+        Returns the number of conjugated forms of the verb
+        """
+        count = 0
+        for mood, tenses in self.conjug_info.items():
+            for tense, persons in tenses.items():
+                if isinstance(persons, str):
+                    count += 1
+                else:
+                    count += len(persons)
+        return count
+    
     def iterate(self):
         """
         Iterates over all conjugated forms and returns a list of tuples of those conjugated forms.
         
-        :return conjugated_forms: list.
-            List of conjugated forms.
+        :return conjugated_forms: generator.
+            Lazy generator of conjugated forms.
         """
-        iterate_results = []
-        for mood, tenses in self.conjug_info.items():
-            for tense, persons in tenses.items():
-                if isinstance(persons, str):
-                    iterate_results.append((mood, tense, persons))
-                else:
-                    for pers, form in persons.items():
-                        iterate_results.append((mood, tense, pers, form))
-        return iterate_results
+        self.__iter__()
 
     def _load_conjug(self):
         """
