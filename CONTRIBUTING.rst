@@ -187,7 +187,7 @@ This can be done by running
 
 .. code-block:: console
 
-    poetry update
+    $ poetry update
 
 and committing the updated pyproject.toml and poetry.lock files.
 
