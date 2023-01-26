@@ -14,6 +14,8 @@ __author__ = 'SekouDiaoNlp'
 __author_email__ = 'diao.sekou.nlp@gmail.com'
 
 
+import os
+import joblib
 import copy
 import defusedxml.ElementTree as ET
 import json
@@ -55,13 +57,23 @@ class Verbiste(ConjugManager):
     def _parse_verbs(file):
         """
         Parses the XML file.
-
+    
         :param file: FileObject.
             XML file containing the verbs.
         :return verb_templates: OrderedDict.
             An OrderedDict containing the verb and its template for all verbs in the file.
-
+    
         """
+        verb_file_path = os.path.abspath(file)
+        pkl_file = verb_file_path.replace('.xml', '.pkl')
+        
+        if os.path.isfile(pkl_file):
+            last_modified_time_verb = os.path.getmtime(verb_file_path)
+            last_modified_time_pkl = os.path.getmtime(pkl_file)
+            if last_modified_time_verb <= last_modified_time_pkl:
+                verbs_dic = joblib.load(pkl_file)
+                return verbs_dic
+        
         verbs_dic = {}
         xml = ET.parse(file)
         for verb in xml.findall("v"):
@@ -70,6 +82,8 @@ class Verbiste(ConjugManager):
             index = - len(template[template.index(":") + 1:])
             root = verb_name if index == 0 else verb_name[:index]
             verbs_dic[verb_name] = {"template": template, "root": root}
+        
+        joblib.dump(verbs_dic, pkl_file, compress = ('gzip', 3))
         return verbs_dic
 
     def _load_conjugations(self, conjugations_file):
