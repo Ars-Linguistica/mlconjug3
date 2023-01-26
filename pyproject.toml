@@ -5,14 +5,14 @@ build-backend = "poetry.core.masonry.api"
 [tool.poetry]
 name = "mlconjug3"
 version = "3.9.0"
-description = "A Python library to conjugate French, English, Spanish, Italian, Portuguese and Romanian verbs using Machine Learning techniques."
+description = "A Command Line application and Python library to conjugate French, English, Spanish, Italian, Portuguese and Romanian verbs using Machine Learning techniques."
 license = "MIT license"
 keywords = ["mlconjug3", "conjugate", "conjugator", "conjugation", "conjugaison", "conjugación", "coniugazione", "conjugação", "conjugare", "verbs", "verbes", "verbos", "ML", "machine-learning", "NLP", "linguistics", "linguistique", "linguistica", "conjug_manager", "sklearn", "scikit-learn"]
 classifiers = ["Development Status :: 5 - Production/Stable", "Topic :: Software Development :: Libraries :: Python Modules", "Topic :: Education", "Topic :: Scientific/Engineering :: Artificial Intelligence", "Topic :: Utilities", "Intended Audience :: Developers", "Intended Audience :: End Users/Desktop", "Intended Audience :: Education", "Intended Audience :: Science/Research", "License :: OSI Approved :: MIT License", "Natural Language :: English", "Natural Language :: French", "Natural Language :: Spanish", "Natural Language :: Italian", "Natural Language :: Portuguese", "Natural Language :: Romanian", "Operating System :: OS Independent", "Programming Language :: Python :: 3", "Programming Language :: Python :: 3.8", "Programming Language :: Python :: 3.9", "Programming Language :: Python :: 3.10", "Programming Language :: Python :: 3.11"]
 homepage = "https://github.com/SekouDiaoNlp/mlconjug3"
 authors = ["SekouDiaoNlp <diao.sekou.nlp@gmail.com>"]
 repository = "https://github.com/SekouDiaoNlp/mlconjug3"
-documentation = "https://mlconjug3.readthedocs.io/en/latest/"
+documentation = "https://mlconjug3.readthedocs.io/en/latest/readme.html"
 maintainers = ["SekouDiaoNlp <diao.sekou.nlp@gmail.com>"]
 readme = "README.rst"
 packages = [
@@ -37,7 +37,7 @@ colorama = "~0.4.6"
 cython = "~0.29.33"
 defusedxml = "~0.7.1"
 joblib = "~1.2.0"
-scikit-learn = "==1.2.0,>=1.2.0"
+scikit-learn = "==1.2.1,>=1.2.1"
 numpy = "~1.24.1"
 rich = "~13.2.0"
 pyyaml = "~6.0"
