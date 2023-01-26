@@ -32,6 +32,7 @@ except FileNotFoundError:
         'joblib',
         'rich',
         'pyyaml',
+        'tomlkit',
         'hydra-core',
     ]
 
