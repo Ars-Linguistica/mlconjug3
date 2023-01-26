@@ -37,7 +37,7 @@ colorama = "~0.4.6"
 cython = "~0.29.33"
 defusedxml = "~0.7.1"
 joblib = "~1.2.0"
-scikit-learn = "==1.2.1,>=1.2.1"
+scikit-learn = "==1.2.0,>=1.2.10
 numpy = "~1.24.1"
 rich = "~13.2.0"
 pyyaml = "~6.0"
