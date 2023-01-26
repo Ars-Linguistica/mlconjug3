@@ -31,8 +31,19 @@ To see a list of mlconjug3's commands type 'mlconjug3 -h' from the command line:
     'conjugation_table.json'
   
     To conjugate multiple verbs in Italian, abbreviated subject format and save
-    the conjugation table in a csv file: $ mlconjug3 -l it -s abbrev -f csv
-    'parlare' 'avere' 'essere' -o 'conjugation_table.csv'
+    the conjugation table in a csv file: $ mlconjug3 -l it -s abbrev -f json
+    'parlare' 'avere' 'essere' -o 'conjugation_table.json'
+
+    Examples of how to use mlconjug3 from the terminal with a config file:
+
+    To use a config file in your home directory:
+    $ mlconjug3 -c
+
+    To use a specific config file:
+    $ mlconjug3 -c /path/to/config.toml
+
+    To use a specific config file and override some of the settings:
+    $ mlconjug3 -c /path/to/config.toml -l en -s pronoun -o conjugation_table.json -f json
   
   Options:
     -l, --language TEXT     The language for the conjugation pipeline. The
@@ -46,6 +57,10 @@ To see a list of mlconjug3's commands type 'mlconjug3 -h' from the command line:
     -f, --file_format TEXT  The output format for storing the conjugation
                             tables. The values can be 'json', 'csv'. The default
                             value is 'json'.
+    -c, --config FILE       Path of the configuration file for specifying
+                          language, subject, output file name and format, as
+                          well as theme settings for the conjugation table
+                          columns. Supported file formats: toml, yaml
     -h, --help              Show this message and exit.
 
 
@@ -80,6 +95,71 @@ To conjugate multiple verbs in Italian, abbreviated subject format and save the 
 .. code-block:: console
 
     $ mlconjug3 -l it -s abbrev -f csv 'parlare' 'avere' 'essere' -o 'conjugation_table.csv'
+
+
+
+Examples of how to use mlconjug3 from the terminal with a config file:
+
+To use a config file in your home directory:
+
+.. code-block:: console
+
+    $ mlconjug3 -c
+
+To use a specific config file:
+
+.. code-block:: console
+
+    $ mlconjug3 -c /path/to/config.toml
+
+To use a specific config file and override some of the settings:
+
+.. code-block:: console
+
+    $ mlconjug3 -c /path/to/config.toml -l en -s pronoun -o conjugation_table.json -f json
+
+
+
+Using Configuration Files
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+mlconjug3 allows you to specify various settings using configuration files so that you don't have to type them at the command line.
+These files can be in either TOML or YAML format and mlcnjug3 will automatically check if a configuration file is located in a directory in your home folder called /mlconjug3/. 
+You can also pass the path to your configuration file by using the '-c' option.
+
+Here is an example of a config.toml file:
+
+.. code-block:: toml
+
+    language = "en"
+    subject = "abbrev"
+    output = "conjugation_table.json"
+    file_format = "json"
+
+    [theme]
+    header_style = "bold #0D47A1"
+    mood_style = "bold #F9A825"
+    tense_style = "bold bright_magenta"
+    person_style = "bold cyan"
+    conjugation_style = "bold #4CAF50"
+
+
+And here is an example of a config.yamll file:
+
+.. code-block:: yaml
+
+    language: fr
+    subject: pronoun
+    output: conjugation_table.json
+    file_format: json
+
+    theme:
+      header_style: bold blue
+      mood_style: bold yellow
+      tense_style: bold green
+      person_style: bold bright_cyan
+      conjugation_style: bold bright_magenta
+
 
 
 Use mlconjug3 in your own code
