@@ -64,7 +64,7 @@ mlconjug3
 =========
 
 
-| A Python library to conjugate verbs in French, English, Spanish, Italian, Portuguese and Romanian (more soon)
+| A Python Command Line application and library to conjugate verbs in French, English, Spanish, Italian, Portuguese and Romanian (more soon)
     using Machine Learning techniques.
 | Any verb in one of the supported language can be conjugated, as the module contains a Machine Learning model of how the verbs behave.
 | Even completely new or made-up verbs can be successfully conjugated in this manner.
@@ -104,13 +104,13 @@ Supported Languages
 Features
 --------
 
-- Easy to use API.
+- Command Line Interface tool.
+- Easy to use and intuitive API.
 - Includes pre-trained models with 99% + accuracy in predicting conjugation class of unknown verbs.
 - Easily train new models or add new languages.
 - Uses caching and multiprocessing for maximum performance.
-- Easily integrate MLConjug in your own projects.
-- Can be used as a command line tool.
-- Intuitive interface.
+- Easily integrate mlconjug3 in your own projects.
+- Extensive documentation.
 
 
 Installation
