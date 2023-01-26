@@ -68,7 +68,7 @@ You can do this by running the following commands in your terminal:
 
 .. code-block:: console
 
-    $ git clone git@github.com:your_name_here/mlconjug3.git
+    $ git clone git@github.com:SekouDiaoNlp/mlconjug3.git
 
 We recommend using poetry as our build manager and the pyproject.toml file to manage our dependencies. Make sure you have poetry installed, then
 
