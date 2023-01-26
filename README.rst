@@ -75,6 +75,7 @@ A Command Line application and Python library to conjugate verbs in French, Engl
 
 .. image:: https://raw.githubusercontent.com/SekouDiaoNlp/mlconjug3/master/docs/images/to_be.png
         :alt: Conjugation for the verb to be.
+        
 ----
 
 * Free software: MIT license
