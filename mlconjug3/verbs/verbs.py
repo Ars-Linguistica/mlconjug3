@@ -70,7 +70,7 @@ class Verb:
     :ivar predicted: bool.
         Indicates if the conjugation information was predicted by the model or retrieved from the dataset.
     """
-    __slots__ = ('name', 'verb_info', 'conjug_info', 'subject', 'predicted', 'confidence_score')
+    __slots__ = ('name', 'verb_info', 'conjug_info', 'full_forms', 'subject', 'predicted', 'confidence_score')
 
     language = 'default'
 
@@ -78,33 +78,115 @@ class Verb:
         self.name = verb_info.infinitive
         self.verb_info = verb_info
         self.conjug_info = conjug_info
+        self.full_forms = {}
         self.subject = subject
         self.predicted = predicted
         self.confidence_score = None
-        self._load_conjug()
+        if subject == "pronoun":
+            self._load_conjug(subject)
+            self.full_forms = self.conjug_info
+        else:
+            self._load_conjug("pronoun")
+            self.full_forms = self.conjug_info
+            self._load_conjug(subject)
         return
 
     def __repr__(self):
         return '{}.{}({})'.format(__name__, self.__class__.__name__, self.name)
 
+    def __getitem__(self, key):
+        """
+        Returns the conjugated form of the verb for the specified key.
+        
+        :param key: tuple of (mood, tense, person) or (mood, tense) or (mood)
+        :return: str or dict
+        """
+        if len(key) == 3:
+            mood, tense, person = key
+            return self.conjug_info[mood][tense][person]
+        elif len(key) == 2:
+            mood, tense = key
+            return self.conjug_info[mood][tense]
+        else:
+            return self.conjug_info[key]
+    
+    def __setitem__(self, key, value):
+        """
+        Sets the conjugated form of the verb for the specified key.
+        
+        :param key: tuple of (mood, tense, person) or (mood, tense) or (mood)
+        :param value: str or dict
+        :return: None
+        """
+        if len(key) == 3:
+            mood, tense, person = key
+            self.conjug_info[mood][tense][person] = value
+        elif len(key) == 2:
+            mood, tense = key
+            self.conjug_info[mood][tense] = value
+        else:
+            self.conjug_info[key] = value
+        return
+    
+    def __contains__(self, item):
+        """
+        The method checks if the provided form exists in the conjugated forms of the verb.
+        It can accept statements such as '"tu manges " in verb', '"manges" in verb' etc...
+        It will iterate over the conjugated forms and check if the form is present in the
+        full_forms attribute of the object.
+        
+        :param item: string in the format 'pronoun form' like 'tu manges' or just the verbal form like 'mangeras'.
+        :return: bool
+        """
+        try:
+            for mood, tenses in self.full_forms.items():
+                for tense, persons in tenses.items():
+                    if isinstance(persons, str):
+                        if " ".join((tense, persons)) == item or persons == item:
+                            return True
+                    else:
+                        for pers, form_ in persons.items():
+                            if " ".join((pers, form_)) == item or form_ == item:
+                                return True
+            return False
+        except KeyError:
+            return False
+    
+    def __iter__(self):
+        """
+        Lazy generator that returns all conjugated forms of the verb as tuples of (mood, tense, person, form)
+        """
+        for mood, tenses in self.conjug_info.items():
+            for tense, persons in tenses.items():
+                if isinstance(persons, str):
+                    yield mood, tense, persons
+                else:
+                    for pers, form in persons.items():
+                        yield mood, tense, pers, form
+    
+    def __len__(self):
+        """
+        Returns the number of conjugated forms of the verb
+        """
+        count = 0
+        for mood, tenses in self.conjug_info.items():
+            for tense, persons in tenses.items():
+                if isinstance(persons, str):
+                    count += 1
+                else:
+                    count += len(persons)
+        return count
+    
     def iterate(self):
         """
         Iterates over all conjugated forms and returns a list of tuples of those conjugated forms.
         
-        :return conjugated_forms: list.
-            List of conjugated forms.
+        :return conjugated_forms: generator.
+            Lazy generator of conjugated forms.
         """
-        iterate_results = []
-        for mood, tenses in self.conjug_info.items():
-            for tense, persons in tenses.items():
-                if isinstance(persons, str):
-                    iterate_results.append((mood, tense, persons))
-                else:
-                    for pers, form in persons.items():
-                        iterate_results.append((mood, tense, pers, form))
-        return iterate_results
+        return [item for item in self]
 
-    def _load_conjug(self):
+    def _load_conjug(self, subject="abbrev"):
         """
         | Populates the inflected forms of the verb.
         | This is the generic version of this method.
@@ -147,7 +229,7 @@ class VerbFr(Verb):
 
     language = 'fr'
 
-    def _load_conjug(self):
+    def _load_conjug(self, subject):
         """
         | Populates the inflected forms of the verb.
         | Adds personal pronouns to the inflected verbs.
@@ -158,11 +240,11 @@ class VerbFr(Verb):
                     persons_dict = OrderedDict()
                     for pers, term in persons:
                         if len(persons) == 6:
-                            key = PRONOUNS[self.language][self.subject][pers]
+                            key = PRONOUNS[self.language][subject][pers]
                         elif tense_name == 'Participe Passé':
-                            key = GENDER[self.language][self.subject][pers]
+                            key = GENDER[self.language][subject][pers]
                         elif tense_name == 'Imperatif Présent':
-                            key = IMPERATIVE_PRONOUNS[self.language][self.subject][pers]
+                            key = IMPERATIVE_PRONOUNS[self.language][subject][pers]
                         else:
                             key = term
                         if term is not None:
@@ -183,7 +265,7 @@ class VerbEn(Verb):
 
     language = 'en'
 
-    def _load_conjug(self):
+    def _load_conjug(self, subject):
         """
         | Populates the inflected forms of the verb.
         | Adds personal pronouns to the inflected verbs.
@@ -194,9 +276,9 @@ class VerbEn(Verb):
                     persons_dict = OrderedDict()
                     for pers, term in persons:
                         if len(persons) == 6:
-                            key = PRONOUNS[self.language][self.subject][pers]
+                            key = PRONOUNS[self.language][subject][pers]
                         elif tense_name == 'imperative present':
-                            key = IMPERATIVE_PRONOUNS[self.language][self.subject][pers]
+                            key = IMPERATIVE_PRONOUNS[self.language][subject][pers]
                         else:
                             key = 'to'
                         if term is not None:
@@ -221,7 +303,7 @@ class VerbEs(Verb):
 
     language = 'es'
 
-    def _load_conjug(self):
+    def _load_conjug(self, subject):
         """
         | Populates the inflected forms of the verb.
         | Adds personal pronouns to the inflected verbs.
@@ -235,11 +317,11 @@ class VerbEs(Verb):
                         if len(persons) == 5 and not tense_name.startswith('Imperativo'):
                             continue
                         if len(persons) == 6:
-                            key = PRONOUNS[self.language][self.subject][pers]
+                            key = PRONOUNS[self.language][subject][pers]
                         elif tense_name == 'Imperativo Afirmativo':
-                            key = IMPERATIVE_PRONOUNS[self.language][self.subject][pers]
+                            key = IMPERATIVE_PRONOUNS[self.language][subject][pers]
                         elif tense_name == 'Imperativo non':
-                            key = ' '.join((IMPERATIVE_PRONOUNS[self.language][self.subject][pers],
+                            key = ' '.join((IMPERATIVE_PRONOUNS[self.language][subject][pers],
                                             NEGATION[self.language]))
                         elif tense_name == 'Gerundio Gerondio':
                             if term.endswith('ndo'):
@@ -271,7 +353,7 @@ class VerbIt(Verb):
 
     language = 'it'
 
-    def _load_conjug(self):
+    def _load_conjug(self, subject):
         """
         | Populates the inflected forms of the verb.
         | Adds personal pronouns to the inflected verbs.
@@ -282,7 +364,7 @@ class VerbIt(Verb):
                     persons_dict = OrderedDict()
                     for pers, term in persons:
                         if len(persons) == 6 and not tense_name.startswith('Imperativo'):
-                            key = PRONOUNS[self.language][self.subject][pers]
+                            key = PRONOUNS[self.language][subject][pers]
                         elif tense_name.startswith('Imperativo'):
                             key = PRONOUNS[self.language]['abbrev'][pers]
                         else:
@@ -308,7 +390,7 @@ class VerbPt(Verb):
 
     language = 'pt'
 
-    def _load_conjug(self):
+    def _load_conjug(self, subject):
         """
         | Populates the inflected forms of the verb.
         | Adds personal pronouns to the inflected verbs.
@@ -319,7 +401,7 @@ class VerbPt(Verb):
                     persons_dict = OrderedDict()
                     for pers, term in persons:
                         if len(persons) == 6 and not tense_name.startswith('Imperativo'):
-                            key = PRONOUNS[self.language][self.subject][pers]
+                            key = PRONOUNS[self.language][subject][pers]
                         elif tense_name.startswith('Imperativo'):
                             key = PRONOUNS[self.language]['abbrev'][pers]
                         else:
@@ -345,7 +427,7 @@ class VerbRo(Verb):
 
     language = 'ro'
 
-    def _load_conjug(self):
+    def _load_conjug(self, subject):
         """
         | Populates the inflected forms of the verb.
         | Adds personal pronouns to the inflected verbs.
@@ -356,9 +438,9 @@ class VerbRo(Verb):
                     persons_dict = OrderedDict()
                     for pers, term in persons:
                         if len(persons) == 6:
-                            key = PRONOUNS[self.language][self.subject][pers]
+                            key = PRONOUNS[self.language][subject][pers]
                         elif tense_name.startswith('Imperativ Imperativ'):
-                            key = IMPERATIVE_PRONOUNS[self.language][self.subject][pers]
+                            key = IMPERATIVE_PRONOUNS[self.language][subject][pers]
                         elif tense_name == 'Imperativ Negativ':
                             key = NEGATION[self.language]
                         else:

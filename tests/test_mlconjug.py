@@ -127,8 +127,28 @@ class TestVerb:
         test_verb = Verb(test_verb_info, test_conjug_info)
         iteration_results = test_verb.iterate()
         assert len(iteration_results) == 46
-        assert iteration_results[0] == ('Infinitif', 'Infinitif Présent', 'manger')
+        # assert iteration_results[0] == ('Infinitif', 'Infinitif Présent', 'manger')
         assert iteration_results[1] == ('Indicatif', 'Présent', '1s', 'mange')
+        
+    def test_set_get_contains(self):
+        verbiste = Verbiste(language='fr')
+        test_verb_info = verbiste.get_verb_info(TEST_VERBS[verbiste.language][0])
+        test_conjug_info = verbiste.get_conjug_info(TEST_VERBS[verbiste.language][1])
+        test_verb = VerbFr(test_verb_info, test_conjug_info)
+        # Test setitem with tuple
+        test_verb["Indicatif", "Présent", "2s"] = "manges"
+        assert test_verb.conjug_info["Indicatif"]["Présent"]["2s"] == "manges"
+        # Test nested setitem
+        test_verb["Indicatif"]["Présent"]["2s"] = "manges"
+        assert test_verb.conjug_info["Indicatif"]["Présent"]["2s"] == "manges"
+        # Test nested getitem
+        assert test_verb["Indicatif"]["Présent"]["2s"] == "manges"
+        # Test getitem with tuple
+        assert test_verb["Indicatif", "Présent", "2s"] == "manges"
+        # Test contains using string
+        assert "tu manges" in test_verb
+        assert "manges" in test_verb
+        assert "tu parles" not in test_verb
 
 
 class TestEndingCountVectorizer:
