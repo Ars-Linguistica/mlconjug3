@@ -6,6 +6,7 @@
 import pytest
 import sys
 import tempfile
+import os
 
 from sklearn.exceptions import ConvergenceWarning
 import warnings
