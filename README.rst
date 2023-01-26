@@ -33,7 +33,7 @@
         :alt: Supported platforms
 
 .. image:: https://readthedocs.org/projects/mlconjug3/badge/?version=latest
-        :target: https://mlconjug3.readthedocs.io/en/latest
+        :target: https://mlconjug3.readthedocs.io/en/latest/readme.html
         :alt: Documentation Status
 
 .. image:: https://pyup.io/repos/github/SekouDiaoNlp/mlconjug3/shield.svg
@@ -79,7 +79,7 @@ A Command Line application and Python library to conjugate verbs in French, Engl
 ----
 
 * Free software: MIT license
-* Documentation: https://mlconjug3.readthedocs.io/en/latest/.
+* Documentation: https://mlconjug3.readthedocs.io/en/latest/readme.html
 
 
 Supported Languages
