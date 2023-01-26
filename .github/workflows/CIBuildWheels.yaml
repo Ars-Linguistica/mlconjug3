@@ -5,11 +5,6 @@ name: Sign with sigstore and build and upload to PyPI
 # Alternatively, to publish when a (published) GitHub Release is created, use the following:
 on:
  workflow_dispatch:
- push:
- pull_request:
- release:
-   types:
-     - published
 
 jobs:
   build_wheels:
