@@ -263,6 +263,24 @@ class TestCLI:
         with open(my_file, encoding='utf-8') as file:
             output = json.load(file)
         assert output['aller'] == test_verb.conjug_info
+        
+    def test_load_toml(self):
+        """
+        Test loading a TOML config file
+        """
+        runner = CliRunner()
+        result = runner.invoke(cli.main, ['-c', 'config.toml'])
+        assert result.exit_code == 0
+        # add any additional asserts to check if the config is loaded correctly
+    
+    def test_load_yaml(self):
+        """
+        Test loading a YAML config file
+        """
+        runner = CliRunner()
+        result = runner.invoke(cli.main, ['-c', 'config.yaml'])
+        assert result.exit_code == 0
+        # add any additional asserts to check if the config is loaded correctly
 
 
 class TestConjugatorTrainer:
