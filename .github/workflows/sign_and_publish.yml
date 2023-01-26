@@ -1,6 +1,6 @@
-name: "Use setuptools to build package and run multiple tests"
+name: "Manually sign and publish tp pypi"
 
-on: [ push, pull_request ]
+on: [ workflow_dispatch ]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -10,18 +10,20 @@ jobs:
     build_wheels_with_setuptools:
         name: Build setuptool packages on ${{ matrix.os }} on ${{ matrix.python-version }}
         runs-on: ${{ matrix.os }}
+        permissions:
+          id-token: write
         strategy:
             fail-fast: false
             matrix:
-                os: [ ubuntu-latest, windows-latest, macos-latest ]
+                os: [ ubuntu-latest ]
                 include:
                     -   os: ubuntu-latest
                         path: ~/.cache/pip
-                    -   os: macos-latest
-                        path: ~/Library/Caches/pip
+                    # -   os: macos-latest
+                        # path: ~/Library/Caches/pip
                     # -   os: windows-latest
                         # path: ~\AppData\Local\pip\Cache
-                python-version: [ 3.8, 3.9, '3.10' , '3.11']
+                python-version: [ '3.11']
 
         steps:
             -   uses: actions/checkout@v3
@@ -51,6 +53,14 @@ jobs:
             -   name: Build package using setup.py
                 run: |
                     python setup.py sdist bdist_wheel
+            -   name: Sign package with sigstore
+                uses: sigstore/gh-action-sigstore-python@v1.0.0
+                with:
+                  inputs: dist/*.tar.gz dist/*.whl
+            -   name: Publish a Python distribution to PyPI
+                uses: pypa/gh-action-pypi-publish@release/v1
+                with:
+                  password: ${{ secrets.PYPI_TOKEN }}
             -   name: Upload coverage artifacts to codecov
                 run: codecov --token=06406f4a-05a0-4974-a902-20fd09de8b50
 

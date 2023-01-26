@@ -1,19 +1,23 @@
 name: Build source and wheels packages and upload them to PyPI
 
 # Build on every branch push, tag push, and pull request change:
-on: [workflow_dispatch]
+# on: [workflow_dispatch]
 # Alternatively, to publish when a (published) GitHub Release is created, use the following:
-# on:
-#   push:
-#   pull_request:
-#   release:
-#     types:
-#       - published
+on:
+  workflow_dispatch:
+  release:
+    types:
+      - published
 
 jobs:
     build_wheels_with_poetry:
         name: Build poetry packages on ${{ matrix.os }}
         runs-on: ${{ matrix.os }}
+        permissions:
+          id-token: write
+        defaults:
+            run:
+                shell: bash
         strategy:
             fail-fast: false
             matrix:
@@ -24,9 +28,9 @@ jobs:
                 python-version: [ 3.9 ]
 
         steps:
-            -   uses: actions/checkout@v2
+            -   uses: actions/checkout@v3
 
-            -   uses: actions/setup-python@v2
+            -   uses: actions/setup-python@v4
                 with:
                     python-version: ${{ matrix.python-version }}
 
@@ -45,10 +49,9 @@ jobs:
                 run: poetry install --no-interaction --no-root
             -   name: Install Package
                 run: poetry install --no-interaction
-            -   name: Build Package
-                run: poetry build
-            # -   name: Run Bandit
-                # run: poetry run bandit -r mlconjug3/ -c .bandit.yml
+            -   run: |
+                   source $VENV
+                   poetry --version
             -   name: Run Type Checker
                 run: |
                     poetry run pip install types-setuptools
@@ -57,6 +60,17 @@ jobs:
                 run: poetry run pytest --cov=./mlconjug3/
             -   name: Upload coverage artifacts to codecov
                 run: poetry run codecov --token=06406f4a-05a0-4974-a902-20fd09de8b50
+            -   name: Build Package
+                run: poetry build
+            -   name: Sign with sigstore
+                uses: sigstore/gh-action-sigstore-python@v1.0.0
+                with:
+                  upload-signing-artifacts: true
+                  release-signing-artifacts: true
+                  inputs: dist/*.tar.gz dist/*.whl
+            # -   name: Run Bandit
+                # run: poetry run bandit -r mlconjug3/ -c .bandit.yml
+            
             -   name: Upload Package to PyPi
                 run: |
                     poetry config pypi-token.pypi ${{ secrets.PYPI_TOKEN }}
