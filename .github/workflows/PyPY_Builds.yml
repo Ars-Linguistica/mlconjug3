@@ -1,5 +1,6 @@
 name: "PyPy setuptools to build package and run multiple PyPy tests"
-
+permissions:
+    contents: read
 on: [ push, workflow_dispatch ]
 
 concurrency:
