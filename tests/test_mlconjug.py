@@ -280,8 +280,8 @@ class TestCLI:
             f.write("""
             language = "en"
             subject = "abbrev"
-            output = "conjugation_table.csv"
-            file_format = "csv"
+            output = "conjugation_table.json"
+            file_format = "json"
     
             [theme]
             header_style = "bold #0D47A1"
