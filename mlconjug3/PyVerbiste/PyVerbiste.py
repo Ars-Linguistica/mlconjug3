@@ -66,8 +66,7 @@ class Verbiste(ConjugManager):
         self.verbs = self._parse_verbs(verbs_file.replace('json', 'xml'))
         return
 
-    @staticmethod
-    def _parse_verbs(file):
+    def _parse_verbs(self, file):
         """
         Parses the XML file.
     
