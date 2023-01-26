@@ -63,22 +63,13 @@
 mlconjug3
 =========
 
+A Command Line application and Python library to conjugate verbs in French, English, Spanish, Italian, Portuguese and Romanian (more soon) using Machine Learning techniques.
 
-| A Python Command Line application and library to conjugate verbs in French, English, Spanish, Italian, Portuguese and Romanian (more soon)
-    using Machine Learning techniques.
-| Any verb in one of the supported language can be conjugated, as the module contains a Machine Learning model of how the verbs behave.
-| Even completely new or made-up verbs can be successfully conjugated in this manner.
-| The supplied pre-trained models are composed of:
+- Conjugate any verb in one of the supported languages, even completely new or made-up verbs, with the help of a pre-trained Machine Learning model.
+- The pre-trained models are composed of a binary feature extractor, a feature selector using Linear Support Vector Classification, and a classifier using Stochastic Gradient Descent.
+- Easily modify and retrain the models using any compatible classifiers from scikit-learn.
+- Uses Verbiste as the training data for the French model, and unsupervised learning techniques to generate the data for the English, Spanish, Italian, Portuguese and Romanian models.
 
-- a binary feature extractor,
-- a feature selector using Linear Support Vector Classification,
-- a classifier using Stochastic Gradient Descent.
-
-| The library mlconjug3 uses scikit-learn to implement the Machine Learning algorithms.
-| Users of the library can use any compatible classifiers from scikit-learn to modify and retrain the models.
-
-| The training data for the french model is based on Verbiste https://perso.b2b2c.ca/~sarrazip/dev/verbiste.html .
-| The training data for English, Spanish, Italian, Portuguese and Romanian was generated using unsupervised learning techniques using the French model as a model to query during the training.
 
 ----
 
@@ -111,51 +102,66 @@ Features
 - Uses caching and multiprocessing for maximum performance.
 - Easily integrate mlconjug3 in your own projects.
 - Extensive documentation.
+- Powerful machine learning algorithms for accurate verb conjugation predictions.
+- Support for multiple languages including English, Spanish, French, and German.
+- Customizable settings to fine-tune performance and adapt to different use cases.
+- Robust error handling and troubleshooting capabilities.
+- Regular updates and improvements to ensure optimal performance.
+- Community support and contributions to continuously expand the library's capabilities.
+- Integration with popular libraries such as scikit-learn and numpy for machine learning tasks.
+
 
 
 Installation
 ------------
 
+To install mlconjug3, you have multiple options:
 
-Stable release
-~~~~~~~~~~~~~~
-
-To install mlconjug3, run this command in your terminal:
-
-.. code-block:: console
-
-    $ pip install mlconjug3
-
-This is the preferred method to install mlconjug3, as it will always install the most recent stable release.
-
-If you don't have `pip`_ installed, this `Python installation guide`_ can guide
-you through the process.
-
-
-You can also install mlconjug3 by using Anaconda_ or Miniconda_ instead of `pip`_ .
-
-To install Anaconda_ or Miniconda_, please follow the installation instructions on their respective websites.
-After having installed Anaconda_ or Miniconda_, run these commands in your terminal:
+- Using pip: 
+  This is the preferred method to install mlconjug3, as it will always install the most recent stable release. 
+  To install mlconjug3, run this command in your terminal:
 
 .. code-block:: console
 
-    $ conda config --add channels conda-forge
-    $ conda config --set channel_priority strict
-    $ conda install mlconjug3
+  $ pip install mlconjug3
 
-If you already have Anaconda_ or Miniconda_ available on your system, just type this in your terminal:
+
+If you don't have `pip`_ installed, this `Python installation guide`_ can guide you through the process.
+
+- Using pipx_ (recommended for users who want to avoid conflicts with other Python packages):
 
 .. code-block:: console
 
-    $ conda install -c conda-forge mlconjug3
+  $ pipx install mlconjug3
+
+
+- Using conda:
+  You can also install mlconjug3 by using Anaconda_ or Miniconda_ instead of `pip`.
+  To install Anaconda or Miniconda, please follow the installation instructions on their respective websites.
+  After having installed Anaconda or Miniconda, run these commands in your terminal:
+
+.. code-block:: console
+
+  $ conda config --add channels conda-forge
+  $ conda config --set channel_priority strict
+  $ conda install mlconjug3
+  
+If you already have Anaconda or Miniconda available on your system, just type this in your terminal:
+
+.. code-block:: console
+
+  $ conda install -c conda-forge mlconjug3
+
 .. warning::
-    If you intend to install mlconjug3 on a Apple Macbook with an Apple M1 or M2 processor or newer,
-    it is advised that you install mlconjug3 by using the conda installation method as all dependencies will be pre-compiled.
+  If you intend to install mlconjug3 on a Apple Macbook with an Apple M1 or M2 processor or newer,
+  it is advised that you install mlconjug3 by using the conda installation method as all dependencies will be pre-compiled.
 
 .. _pip: https://pip.pypa.io
+.. _pipx: https://github.com/pypa/pipx
 .. _Python installation guide: http://docs.python-guide.org/en/latest/starting/installation/
 .. _Anaconda: https://www.anaconda.com/products/individual
 .. _Miniconda: https://docs.conda.io/en/latest/miniconda.html
+
 
 
 From sources
