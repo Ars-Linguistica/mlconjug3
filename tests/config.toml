@@ -6,8 +6,8 @@ output = "conjugation_table.csv"
 file_format = "csv"
 
 [theme]
-table_style = "bold #0D47A1"
-column_mood_style = "bold #F9A825"
-column_tense_style = "bold bright_magenta"
-column_person_style = "bold cyan"
-column_conjugation_style = "bold #4CAF50"
+header_style = "bold #0D47A1"
+mood_style = "bold #F9A825"
+tense_style = "bold bright_magenta"
+person_style = "bold cyan"
+conjugation_style = "bold #4CAF50"
