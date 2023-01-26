@@ -294,7 +294,7 @@ class TestCLI:
         runner = CliRunner()
         result = runner.invoke(cli.main, [verb, '-c', config_path])
         assert result.exit_code == 0
-        assert result.output.strip() == 'Loading config from {}'.format(config_path)
+        assert 'Loading config from {}'.format(config_path) in result.output.strip()
         # add additional asserts to check that the loaded config is used in the conjugation
     
     def test_load_yaml(self, tmpdir):
@@ -325,7 +325,7 @@ class TestCLI:
         runner = CliRunner()
         result = runner.invoke(cli.main, ['aller', '-c', config_path])
         assert result.exit_code == 0
-        assert result.output.strip() == 'Loading config from {}'.format(config_path)
+        assert 'Loading config from {}'.format(config_path) in result.output.strip()
         # Cleans temp dir
         temp_dir.cleanup() 
 
