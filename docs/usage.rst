@@ -2,9 +2,6 @@
 Usage
 =====
 
-.. NOTE:: The default language is French.
-    When called without specifying a language, the library will try to conjugate the verb in French.
-
 
 Command Line Interface
 ----------------------
@@ -14,7 +11,7 @@ Example of using mlconjug3 through a remote ssh connection:
 .. image:: https://raw.githubusercontent.com/SekouDiaoNlp/mlconjug3/master/docs/images/to_be.png
         :alt: Conjugation for the verb to be.
 
-To use mlconjug3 from the command line:
+To see a list of mlconjug3's commands type 'mlconjug3 -h' from the command line:
 
 .. code-block:: console
 
@@ -51,25 +48,33 @@ To use mlconjug3 from the command line:
                             value is 'json'.
     -h, --help              Show this message and exit.
 
-    
+
+.. NOTE:: The default language is French.
+
+    When called without specifying a language, the library will try to conjugate the verb in French.
+
+
 To conjugate a verb in English, abbreviated subject format :
 
 .. code-block:: console
 
     $ mlconjug3 -l en -s abbrev 'have'
     
+
 To conjugate multiple verbs in French, full subject format :
 
 .. code-block:: console
 
     $ mlconjug3 -l fr -s pronoun 'aimer' 'être' 'aller'
     
+
 To conjugate a verb in Spanish, full subject format and save the conjugation table in a json file:
 
 .. code-block:: console
 
     $ mlconjug3 -l es -s pronoun -f json 'hablar' -o 'conjugation_table.json'
     
+
 To conjugate multiple verbs in Italian, abbreviated subject format and save the conjugation table in a csv file:
 
 .. code-block:: console
@@ -77,8 +82,8 @@ To conjugate multiple verbs in Italian, abbreviated subject format and save the 
     $ mlconjug3 -l it -s abbrev -f csv 'parlare' 'avere' 'essere' -o 'conjugation_table.csv'
 
 
-Using mlconjug3 in your own code
----------------------------------
+Use mlconjug3 in your own code
+------------------------------
 
 This library provides an easy-to-use interface for conjugating verbs using machine learning models.
 It includes a pre-trained model for French, English, Spanish, Italian, Portuguese and Romanian verbs,
@@ -89,18 +94,16 @@ The class also manages the Verbiste data set and provides an interface with the 
 The class can be initialized with a specific language and a custom model, otherwise the default language is French
 and the pre-trained French conjugation pipeline is used.
 
-The library also includes helper classes for managing verb data, such as VerbInfo and Verb, as well as utility
-functions for feature extraction and evaluation.
+The library mlconjug3 also includes helper classes for managing verb data, such as VerbInfo and Verb,
+as well as utility functions for feature extraction and evaluation.
 
 Using the Conjugator class:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To use the Conjugator class, you need to first import the class.
+To use the Conjugator class, you need to first import the class in your code.
 
 
 .. code-block:: python
-
-    #example script
     
     from mlconjug3.conjugator import Conjugator
     
@@ -113,42 +116,81 @@ To use the Conjugator class, you need to first import the class.
     # print all the conjugated forms as a list of tuples.
     print(verb.iterate())
     
-    # You can access the conjugated forms in the attribute conjug_info
     
-    # print all the conjugations for the indicative mood
-    print(verb.conjug_info["indicatif"])
-    
-    # print the conjugation for the indicative mood, present tense, first person singular
-    print(verb.conjug_info["indicatif"]["présent"]["1s"])
-    
-    # print the conjugation for the indicative mood, present tense
-    print(verb.conjug_info["indicatif"]["présent"])
-    
-    # print the conjugation for the indicative mood
-    print(verb.conjug_info["indicatif"])
-    
-    # The class Verb and it's children adhere to the Python Data Model and can be accessed as a dictionary.
+The class Verb and it's children adhere to the Python Data Model and can be accessed as a dictionary.
+This way you can conveniently access parts of the conjugation either in the form
+Verb[mood][tense][person] or the form Verb[(mood, tense, person)].
+
+Using the form Verb[mood][tense][person] to access the conjugated forms:
+
+.. code-block:: python
     
     # get the conjugation for the indicative mood, present tense, first person singular
-    print(verb["indicatif"]["présent"]["1s"])
+    print(verb["Indicatif"]["Présent"]["1s"])
     
     # get the conjugation for the indicative mood, present tense
-    print(verb["indicatif"]["présent"])
+    print(verb["Indicatif"]["Présent"])
     
     # get the conjugation for the indicative mood
-    print(verb["indicatif"])
+    print(verb["Indicatif"])
     
-    # check if the form "je parle" is in the conjugated forms
+    
+Using the form Verb[(mood, tense, person)] to access the conjugated forms:
+
+.. code-block:: python
+
+    # get the conjugation for the indicative mood, present tense, first person singular
+    print(verb["Indicatif", "Présent", "1s"])
+    
+    # get the conjugation for the indicative mood, present tense
+    print(verb["Indicatif", "Présent"])
+    
+    # get the conjugation for the indicative mood
+    print(verb["Indicatif"])
+
+
+You can check if a conjugated form is present in the verb:
+
+.. code-block:: python
+    
+    # check if the form "je parle" is in the conjugated forms. Prints True.
     print("je parle" in verb)
     
-    # check if the form "tu parles" is in the conjugated forms
+    # check if the form "tu parles" is in the conjugated forms. Prints True.
     print("tu parles" in verb)
+    
+    # check if the form "parlent" is in the conjugated forms. Prints True.
+    print("parlent" in verb)
+    
+    # check if the form "tu manges" is in the conjugated forms. Prints False.
+    print("tu manges" not in verb)
+    
 
+You can also access the conjugated forms in the attribute conjug_info
 
+.. code-block:: python
+    
+    # print all the conjugations for the indicative mood
+    print(verb.conjug_info["Indicatif"])
+    
+    # print the conjugation for the indicative mood, present tense, first person singular
+    print(verb.conjug_info["Indicatif"]["Présent"]["1s"])
+    
+    # print the conjugation for the indicative mood, present tense
+    print(verb.conjug_info["Indicatif"]["Présent"])
+    
+    # print the conjugation for the indicative mood
+    print(verb.conjug_info["Indicatif"])
+    
 
-You can also provide your own trained model to the Conjugator class if you have trained a model using the ConjugatorTrainer class. To do this, pass the trained model object as the second argument to the Conjugator class.
+Providing a pre-trained model
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-For example, if you have trained a French conjugation model and saved it to the file "my_french_model.pickle", you can load this model and use it with the Conjugator class as follows:
+You can provide your own trained model to the Conjugator class if you have trained a model using the ConjugatorTrainer class.
+To do this, pass the trained model object as the second argument to the Conjugator class.
+
+For example, if you have trained a French conjugation model and saved it to the file "my_french_model.pickle",
+you can load this model and use it with the Conjugator class as follows:
 
 .. code-block:: python
 
@@ -164,7 +206,9 @@ For example, if you have trained a French conjugation model and saved it to the 
     # conjugate a verb
     conjugations = conjugator.conjugate("aimer")
 
-Note that the Conjugator class expects the model object to have a similar structure as the default model, with the following methods and properties:
+
+Note that the Conjugator class expects the model object to have a similar structure as the default model,
+with the following methods and properties.
 
 The model should have:
     * a fit() method for training the model on a dataset
@@ -189,7 +233,8 @@ The parameters are:
     * dataset: the dataset object which contains the data for the model.
     * model: the model object which wraps the classifier, feature selector and vectorizer.
     
-Once the parameters are set, the script creates an instance of the ConjugatorTrainer class, passing the parameters as keyword arguments.
+Once the parameters are set, the script creates an instance of the ConjugatorTrainer class,
+passing the parameters as keyword arguments.
     
 The script then calls the train() method on the ConjugatorTrainer object to train the model.
 This step may take a while, depending on the size of the dataset and the complexity of the model.
@@ -200,7 +245,8 @@ It then calls the evaluate() method to evaluate the model's performance.
     
 Finally, the script saves the model to the specified output folder.
     
-It is important to note that this script uses the default parameters for the model, and these may not be optimal for your specific use case.
+It is important to note that this script uses the default parameters for the model,
+and these may not be optimal for your specific use case.
 We recommend experimenting with different parameters and evaluating the model's performance to find the best configuration for your use case.
     
 .. code-block:: python
@@ -243,6 +289,6 @@ We recommend experimenting with different parameters and evaluating the model's 
 
 
 
-In conclusion, the mlconjug3 library provides a simple interface for conjugating verbs using machine learning models, with support for multiple languages and the ability to train custom models.
+In conclusion, the mlconjug3 library provides a simple and flexible interface for conjugating verbs using machine learning models, with support for multiple languages and the ability to train custom models.
 
 The main class of the library is the Conjugator, which can be used to conjugate verbs in the supported languages using the pre-trained models, or custom models trained using the ConjugatorTrainer class.
