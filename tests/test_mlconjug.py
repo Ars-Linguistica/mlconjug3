@@ -5,6 +5,10 @@
 
 import pytest
 import sys
+import tempfile
+import os
+import yaml
+import tomlkit
 
 from sklearn.exceptions import ConvergenceWarning
 import warnings
@@ -263,6 +267,68 @@ class TestCLI:
         with open(my_file, encoding='utf-8') as file:
             output = json.load(file)
         assert output['aller'] == test_verb.conjug_info
+        
+    def test_load_toml(self, tmpdir):
+        """
+        Test loading config from toml file
+        """
+        # Create a temporary directory
+        temp_dir = tempfile.TemporaryDirectory()
+        # Create a config.toml file in the temporary directory
+        config_path = os.path.join(temp_dir.name, 'config.toml')
+        with open(config_path, 'w') as f:
+            f.write("""
+            language = "en"
+            subject = "abbrev"
+            output = "conjugation_table.json"
+            file_format = "json"
+    
+            [theme]
+            header_style = "bold #0D47A1"
+            mood_style = "bold #F9A825"
+            tense_style = "bold bright_magenta"
+            person_style = "bold cyan"
+            conjugation_style = "bold #4CAF50"
+            """)
+        verb = 'aller'
+        runner = CliRunner()
+        result = runner.invoke(cli.main, [verb, '-c', config_path])
+        assert result.exit_code == 0
+        # assert 'Loading config from {}'.format(config_path) in result.output.strip()
+        # add additional asserts to check that the loaded config is used in the conjugation
+        temp_dir.cleanup() 
+    
+    def test_load_yaml(self, tmpdir):
+        """
+        Test loading config from toml file
+        """
+        # Create a temporary directory
+        temp_dir = tempfile.TemporaryDirectory()
+        # Create a config.yaml file in the temporary directory
+        config_path = os.path.join(temp_dir.name, 'config.yaml')
+        with open(config_path, 'w') as config_file:
+            config = {
+                'language': 'fr',
+                'subject': 'pronoun',
+                'output': 'conjugation_table.json',
+                'file_format': 'json',
+                'theme': {
+                    'header_style': 'bold blue',
+                    'mood_style': 'bold yellow',
+                    'tense_style': 'bold green',
+                    'person_style': 'bold bright_cyan',
+                    'conjugation_style': 'bold bright_magenta',
+                }
+            }
+            yaml.dump(config, config_file)
+        
+        # Try to load the config.yaml file from the cli
+        runner = CliRunner()
+        result = runner.invoke(cli.main, ['aller', '-c', config_path])
+        assert result.exit_code == 0
+        # assert 'Loading config from {}'.format(config_path) in result.output.strip()
+        # Cleans temp dir
+        temp_dir.cleanup() 
 
 
 class TestConjugatorTrainer:

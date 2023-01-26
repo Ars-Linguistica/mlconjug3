@@ -2,50 +2,57 @@
 Installation
 ============
 
+To install mlconjug3, you have multiple options:
 
-Stable release
---------------
-
-To install mlconjug3, run this command in your terminal:
-
-.. code-block:: console
-
-    $ pip install mlconjug3
-
-This is the preferred method to install mlconjug3, as it will always install the most recent stable release.
-
-If you don't have `pip`_ installed, this `Python installation guide`_ can guide
-you through the process.
-
-
-You can also install mlconjug3 by using Anaconda_ or Miniconda_ instead of `pip`_ .
-
-To install Anaconda_ or Miniconda_, please follow the installation instructions on their respective websites.
-After having installed Anaconda_ or Miniconda_, run these commands in your terminal:
+- Using pip: 
+  This is the preferred method to install mlconjug3, as it will always install the most recent stable release. 
+  To install mlconjug3, run this command in your terminal:
 
 .. code-block:: console
 
-    $ conda config --add channels conda-forge
-    $ conda config --set channel_priority strict
-    $ conda install mlconjug3
+  $ pip install mlconjug3
 
-If you already have Anaconda_ or Miniconda_ available on your system, just type this in your terminal:
+
+If you don't have `pip`_ installed, this `Python installation guide`_ can guide you through the process.
+
+- Using pipx_ (recommended for users who want to avoid conflicts with other Python packages):
 
 .. code-block:: console
 
-    $ conda install -c conda-forge mlconjug3
+  $ pipx install mlconjug3
+
+
+- Using conda:
+  You can also install mlconjug3 by using Anaconda_ or Miniconda_ instead of `pip`.
+  To install Anaconda or Miniconda, please follow the installation instructions on their respective websites.
+  After having installed Anaconda or Miniconda, run these commands in your terminal:
+
+.. code-block:: console
+
+  $ conda config --add channels conda-forge
+  $ conda config --set channel_priority strict
+  $ conda install mlconjug3
+  
+If you already have Anaconda or Miniconda available on your system, just type this in your terminal:
+
+.. code-block:: console
+
+  $ conda install -c conda-forge mlconjug3
+
 .. warning::
-    If you intend to install mlconjug3 on a Apple Macbook with an Apple M1 processor,
-    it is advised that you install mlconjug3 by using the conda installation method as all dependencies will be pre-compiled.
+  If you intend to install mlconjug3 on a Apple Macbook with an Apple M1 or M2 processor or newer,
+  it is advised that you install mlconjug3 by using the conda installation method as all dependencies will be pre-compiled.
 
 .. _pip: https://pip.pypa.io
+.. _pipx: https://github.com/pypa/pipx
 .. _Python installation guide: http://docs.python-guide.org/en/latest/starting/installation/
 .. _Anaconda: https://www.anaconda.com/products/individual
 .. _Miniconda: https://docs.conda.io/en/latest/miniconda.html
 
 
+
 From sources
-------------
+~~~~~~~~~~~~
 
 The sources for mlconjug3 can be downloaded from the `Github repo`_.
 
@@ -61,12 +68,11 @@ Or download the `tarball`_:
 
     $ curl  -OL https://github.com/SekouDiaoNlp/mlconjug3/tarball/master
 
-Once you have a copy of the source, you can install it with:
+Once you have a copy of the source, get in the source directory and you can install it with:
 
 .. code-block:: console
 
     $ python setup.py install
-
 
 Alternatively, you can use poetry to install the software:
 
@@ -79,3 +85,4 @@ Alternatively, you can use poetry to install the software:
 
 .. _Github repo: https://github.com/SekouDiaoNlp/mlconjug3
 .. _tarball: https://github.com/SekouDiaoNlp/mlconjug3/tarball/master
+

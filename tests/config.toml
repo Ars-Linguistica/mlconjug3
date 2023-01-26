@@ -1,0 +1,13 @@
+# sample /mlconjug3/config.toml
+
+language = "en"
+subject = "abbrev"
+output = "conjugation_table.json"
+file_format = "json"
+
+[theme]
+header_style = "bold #0D47A1"
+mood_style = "bold #F9A825"
+tense_style = "bold bright_magenta"
+person_style = "bold cyan"
+conjugation_style = "bold #4CAF50"

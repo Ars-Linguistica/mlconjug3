@@ -12,6 +12,14 @@
         :target: https://GitHub.com/SekouDiaoNlp/mlconjug3
         :alt: Package Maintener
 
+.. image:: https://bestpractices.coreinfrastructure.org/projects/6961/badge
+        :target: https://bestpractices.coreinfrastructure.org/projects/6961/
+        :alt: OpenSSF Best Practices
+
+.. image:: https://api.securityscorecards.dev/projects/github.com/SekouDiaoNlp/mlconjug3/badge
+        :target: https://api.securityscorecards.dev/projects/github.com/SekouDiaoNlp/mlconjug3/
+        :alt: OpenSSF ScoreCard
+
 .. image:: https://github.com/SekouDiaoNlp/mlconjug3/workflows/mlconjug3/badge.svg
         :target: https://github.com/SekouDiaoNlp/mlconjug3/actions
         :alt: Build status on Windows, MacOs and Linux
@@ -33,7 +41,7 @@
         :alt: Supported platforms
 
 .. image:: https://readthedocs.org/projects/mlconjug3/badge/?version=latest
-        :target: https://mlconjug3.readthedocs.io/en/latest
+        :target: https://mlconjug3.readthedocs.io/en/latest/readme.html
         :alt: Documentation Status
 
 .. image:: https://pyup.io/repos/github/SekouDiaoNlp/mlconjug3/shield.svg
@@ -79,7 +87,7 @@ A Command Line application and Python library to conjugate verbs in French, Engl
 ----
 
 * Free software: MIT license
-* Documentation: https://mlconjug3.readthedocs.io/en/latest/.
+* Documentation: https://mlconjug3.readthedocs.io/en/latest/readme.html
 
 
 Supported Languages
