@@ -368,6 +368,55 @@ We recommend experimenting with different parameters and evaluating the model's 
     ct.save()
 
 
+Alternatively you can load the model parameters from a yaml file using PyYaml, Hydra or any other library.
+
+Here is an example of a yaml file to store the model settings:
+
+
+.. code-block:: python
+
+    # config.yaml
+    
+    language: fr
+    
+    output_folder: models
+    
+    split_proportion: 0.8
+    
+    vectorizer:
+        type: mlconjug3.CountVectorizer
+        kwargs:
+            analyzer: 
+                type: functools.partial
+                kwargs:
+                    func: mlconjug3.feature_extractor.extract_verb_features
+                    lang: fr
+                    ngram_range: [2, 7]
+            binary: true
+            lowercase: false
+    
+    feature_selector:
+        type: mlconjug3.SelectFromModel
+        kwargs:
+            estimator:
+                type: mlconjug3.LinearSVC
+                kwargs:
+                    penalty: l1
+                    max_iter: 12000
+                    dual: false
+                    verbose: 0
+    
+    classifier:
+        type: mlconjug3.SGDClassifier
+        kwargs:
+            loss: log
+            penalty: elasticnet
+            l1_ratio: 0.15
+            max_iter: 40000
+            alpha: 1e-5
+            verbose: 0
+
+
 
 In conclusion, the mlconjug3 library provides a simple and flexible interface for conjugating verbs using machine learning models, with support for multiple languages and the ability to train custom models.
 
