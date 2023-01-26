@@ -20,6 +20,8 @@ import defusedxml.ElementTree as ET
 import json
 from collections import OrderedDict
 import pkg_resources
+import os
+import joblib
 from mlconjug3.constants import *
 from mlconjug3.verbs import *
 from mlconjug3.conjug_manager import *
@@ -94,16 +96,16 @@ class Verbiste(ConjugManager):
 
         """
         pickle_file = conjugations_file.replace('.xml', '.pkl')
-    if os.path.exists(pickle_file):
-        # check if the pickle file is newer than the xml file
-        if os.path.getmtime(pickle_file) > os.path.getmtime(conjugations_file):
-            self.conjugations = joblib.load(pickle_file)
-            return
-    # if the pickle file does not exist or is older than the xml file
-    self.conjugations = self._parse_conjugations(conjugations_file)
-    # save the conjugations to a compressed pickle file
-    joblib.dump(self.conjugations, pickle_file, compress=True)
-    return
+        if os.path.exists(pickle_file):
+            # check if the pickle file is newer than the xml file
+            if os.path.getmtime(pickle_file) > os.path.getmtime(conjugations_file):
+                self.conjugations = joblib.load(pickle_file)
+                return
+        # if the pickle file does not exist or is older than the xml file
+        self.conjugations = self._parse_conjugations(conjugations_file)
+        # save the conjugations to a compressed pickle file
+        joblib.dump(self.conjugations, pickle_file, compress=True)
+        return
 
     def _parse_conjugations(self, file):
         """
