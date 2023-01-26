@@ -1,7 +1,8 @@
 name: "Use poetry to build package and run multiple tests"
 
 on: [ push, pull_request ]
-
+permissions:
+    contents: read
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
