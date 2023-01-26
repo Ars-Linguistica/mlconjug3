@@ -48,7 +48,7 @@ jobs:
             #    if: ${{ matrix.os == 'windows-latest' }}
             -   name: Load cached venv
                 id: cached-pip-wheels
-                uses: actions/cache@58c146cc91c5b9e778e71775dfe9bf1442ad9a12 # v3.2.3
+                uses: actions/cache@v3 # v3.2.3
                 if: ${{ matrix.os != 'ubuntu-latest' }} # Linux cache seems to be corrupted
                 with:
                     path: ~/.cache

@@ -40,7 +40,7 @@ jobs:
                 with:
                     python-version: ${{ matrix.python-version }}
 
-            -   uses: actions/cache@58c146cc91c5b9e778e71775dfe9bf1442ad9a12 # v3.2.3
+            -   uses: actions/cache@v3 # v3.2.3
                 with:
                     path: ${{ matrix.path }}
                     key: ${{ runner.os }}-pip-${{ matrix.python-version }}-${{ hashFiles('**/requirements.txt') }}-${{ hashFiles('**/requirements_dev.txt') }}

@@ -36,7 +36,7 @@ jobs:
                     virtualenvs-in-project: true
             -   name: Load cached venv
                 id: cached-pip-wheels
-                uses: actions/cache@937d24475381cd9c75ae6db12cb4e79714b926ed # v2.1.7
+                uses: actions/cache@v3 # v2.1.7
                 with:
                     path: ~/.cache
                     key: venv-${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('**/poetry.lock') }}
