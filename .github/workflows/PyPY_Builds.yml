@@ -1,6 +1,6 @@
 name: "Use setuptools to build package and run multiple PyPy tests"
 
-on: [ push ]
+on: [ push, workflow_dispatch]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
