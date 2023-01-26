@@ -126,6 +126,7 @@ class Verbiste(ConjugManager):
                 conjugations_dic[template_name][mood.tag] = OrderedDict()
                 for tense in list(mood):
                     conjugations_dic[template_name][mood.tag][tense.tag.replace('-', ' ')] = self._load_tense(tense)
+        joblib.dump(conjugations_dic, pkl_file, compress = ('gzip', 3))
         return conjugations_dic
 
     @staticmethod
