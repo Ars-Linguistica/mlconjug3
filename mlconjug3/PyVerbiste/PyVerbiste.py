@@ -42,6 +42,19 @@ class Verbiste(ConjugManager):
         List of the conjugation patterns.
     """
 
+    def _load_cache(self, file):
+        file_path = os.path.abspath(file)
+        pkl_file = file_path.replace('.xml', '.pkl')
+        
+        if os.path.isfile(pkl_file):
+            last_modified_time_file = os.path.getmtime(file_path)
+            last_modified_time_pkl = os.path.getmtime(pkl_file)
+            if last_modified_time_file <= last_modified_time_pkl:
+                file_dic = joblib.load(pkl_file)
+                return file_dic
+        else:
+            return None
+    
     def _load_verbs(self, verbs_file):
         """
         Load and parses the verbs from the xml file.
@@ -64,15 +77,9 @@ class Verbiste(ConjugManager):
             An OrderedDict containing the verb and its template for all verbs in the file.
     
         """
-        verb_file_path = os.path.abspath(file)
-        pkl_file = verb_file_path.replace('.xml', '.pkl')
-        
-        if os.path.isfile(pkl_file):
-            last_modified_time_verb = os.path.getmtime(verb_file_path)
-            last_modified_time_pkl = os.path.getmtime(pkl_file)
-            if last_modified_time_verb <= last_modified_time_pkl:
-                verbs_dic = joblib.load(pkl_file)
-                return verbs_dic
+        cache = self._load_cache(file)
+        if cache:
+            return cache
         
         verbs_dic = {}
         xml = ET.parse(file)
@@ -107,6 +114,10 @@ class Verbiste(ConjugManager):
             An OrderedDict containing all the conjugation templates in the file.
 
         """
+        cache = self._load_cache(file)
+        if cache:
+            return cache
+                
         conjugations_dic = {}
         xml = ET.parse(file)
         for template in xml.findall("template"):
