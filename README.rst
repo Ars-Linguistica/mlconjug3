@@ -16,6 +16,10 @@
         :target: https://bestpractices.coreinfrastructure.org/projects/6961/
         :alt: OpenSSF Best Practices
 
+.. image:: https://api.securityscorecards.dev/projects/github.com/SekouDiaoNlp/mlconjug3/badge
+        :target: https://api.securityscorecards.dev/projects/github.com/SekouDiaoNlp/mlconjug3/
+        :alt: OpenSSF ScoreCard
+
 .. image:: https://github.com/SekouDiaoNlp/mlconjug3/workflows/mlconjug3/badge.svg
         :target: https://github.com/SekouDiaoNlp/mlconjug3/actions
         :alt: Build status on Windows, MacOs and Linux
