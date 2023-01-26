@@ -64,7 +64,7 @@ Get Started!
 ------------
 
 To get started, you'll need to fork the mlconjug3 repository on GitHub and clone your fork locally.
-You can do this by running the following commands in your terminal::
+You can do this by running the following commands in your terminal:
 
 .. code-block:: console
 
@@ -77,20 +77,20 @@ We recommend using poetry as our build manager and the pyproject.toml file to ma
     $ cd mlconjug3
     $ poetry install
 
-Before you begin working on a new feature or bugfix, create a new branch for it. This makes it easier to isolate changes and submit them in a pull request. You can create a new branch by running the following command::
+Before you begin working on a new feature or bugfix, create a new branch for it. This makes it easier to isolate changes and submit them in a pull request. You can create a new branch by running the following command:
 
 .. code-block:: console
 
     $ git checkout -b name-of-your-bugfix-or-feature
 
-We support Python versions 3.8 to 3.11, make sure that your code is compatible with all of them by running the tests::
+We support Python versions 3.8 to 3.11, make sure that your code is compatible with all of them by running the tests:
 
 .. code-block:: console
 
     $ poetry run pytest
     $ poetry run tox
 
-When you're ready to submit your changes, first make sure that all tests pass. Then, commit your changes and push your branch to your fork on GitHub::
+When you're ready to submit your changes, first make sure that all tests pass. Then, commit your changes and push your branch to your fork on GitHub:
 
 .. code-block:: console
 
@@ -134,35 +134,35 @@ Tips
 
 Here are a few tips to assist you in your development.
 
-To run a subset of the tests::
+To run a subset of the tests:
 
 .. code-block:: console
 
     $ poetry run pytest tests/test_module.py
 
 
-To run pytest with coverage::
+To run pytest with coverage:
 
 .. code-block:: console
 
     $ poetry run pytest --cov=mlconjug3
 
 
-To run mypy type checks::
+To run mypy type checks:
 
 .. code-block:: console
 
     $ poetry run mypy mlconjug3
 
 
-To check for any code style issues using flake8::
+To check for any code style issues using flake8:
 
 .. code-block:: console
 
     $ poetry run flake8 mlconjug3
 
 
-To automatically format your code using black::
+To automatically format your code using black:
 
 .. code-block:: console
 
