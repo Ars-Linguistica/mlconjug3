@@ -4,6 +4,8 @@ import sys
 import click
 from .mlconjug import Conjugator
 import json
+import tomlkit
+import yaml
 import logging
 from rich.pretty import pprint, Pretty
 from rich.table import Table
@@ -33,7 +35,12 @@ import rich
               help=("The output format for storing the conjugation tables."
               " The values can be 'json', 'csv'. The default value is 'json'."),
               type=click.STRING)
-def main(verbs, language, output, subject, file_format):
+@click.option('-c', '--config',
+              default=None,
+              help=("Path of the configuration file for specifying language, subject, output file name and format, "
+              "as well as theme settings for the conjugation table columns. Supported file formats: toml, yaml"),
+              type=click.Path(exists=True, dir_okay=False, resolve_path=True))
+def main(verbs, language, output, subject, file_format, config):
     """
     Examples of how to use mlconjug3 from the terminal
 
@@ -48,7 +55,24 @@ def main(verbs, language, output, subject, file_format):
 
     To conjugate multiple verbs in Italian, abbreviated subject format and save the conjugation table in a csv file:
     $ mlconjug3 -l it -s abbrev -f csv 'parlare' 'avere' 'essere' -o 'conjugation_table.csv'
+
+    Examples of how to use mlconjug3 from the terminal with a config file:
+
+    To use a config file in your home directory:
+    $ mlconjug3 -c
+
+    To use a specific config file:
+    $ mlconjug3 -c /path/to/config.toml
+
+    To use a specific config file and override some of the settings:
+    $ mlconjug3 -c /path/to/config.toml -l en -s pronoun -o conjugation_table.json -f csv
     """
+    config_options = load_config(config)
+    language = config_options.get('language', language)
+    subject = config_options.get('subject', subject)
+    output = config_options.get('output', output)
+    file_format = config_options.get('file_format', file_format)
+    theme_settings = config_options.get('theme', {})
     try:
         logger = logging.getLogger(__name__)
         console = Console()
@@ -76,11 +100,12 @@ def main(verbs, language, output, subject, file_format):
             missing = [verb for verb, result in zip(verbs, results) if not result]
         
         for verb, conjugation in conjugations.items():
-            table = Table(title=f"Conjugation table for '{verb.capitalize()}'", show_header=True, header_style="bold #0D47A1")
-            table.add_column("Mood", style="bold #F9A825")
-            table.add_column("Tense", style="bold bright_magenta")
-            table.add_column("Person", style="bold cyan")
-            table.add_column("Conjugation", style="bold #4CAF50")
+            table = Table(title=f"Conjugation table for '{verb.capitalize()}'", show_header=True, header_style=theme_settings.get("header_style", "bold #0D47A1"))
+            table.add_column("Mood", style=theme_settings.get("mood_style", "bold #F9A825"))
+            table.add_column("Tense", style=theme_settings.get("tense_style", "bold bright_magenta"))
+            table.add_column("Person", style=theme_settings.get("person_style", "bold cyan"))
+            table.add_column("Conjugation", style=theme_settings.get("conjugation_style", "bold #4CAF50"))
+
             for mood, tenses in conjugation.items():
                 for tense, persons in tenses.items():
                     if isinstance(persons, dict):
@@ -121,6 +146,32 @@ def main(verbs, language, output, subject, file_format):
         else:
             click.echo("Conjugations not displayed. Please check the input verbs and language.")
         sys.exit(1)
+
+
+def load_config(config):
+    """
+    Loads the config file in the given format (toml or yaml).
+    If no config file is specified, looks for a default file named /mlconjug3/config.toml or /mlconjug3/config.yaml' in the user’s home directory.
+    :param config: The path to the config file.
+    :type config: str
+    :return: A dictionary containing the configuration options.
+    :rtype: dict
+    """
+    if not config:
+        home = os.path.expanduser("~")
+        config = os.path.join(home, 'mlconjug3/config.toml')
+        if not os.path.isfile(config):
+            config = os.path.join(home, 'mlconjug3/config.yaml')
+            if not os.path.isfile(config):
+                return {}
+    config_options = {}
+    if config.endswith('.toml'):
+        with open(config, 'r') as config_file:
+            config_options = tomlkit.loads(config_file.read())
+    elif config.endswith('.yaml') or config.endswith('.yml'):
+        with open(config, 'r') as config_file:
+            config_options = yaml.load(config_file, Loader=yaml.FullLoader)
+    return config_options
     
 if __name__ == "__main__":
     main()
