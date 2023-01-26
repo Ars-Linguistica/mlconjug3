@@ -44,25 +44,35 @@ class Verbiste(ConjugManager):
     def _load_verbs(self, verbs_file):
         """
         Load and parses the verbs from the xml file.
-
+    
         :param verbs_file: string or path object.
             Path to the verbs xml file.
-
+    
         """
         self.verbs = self._parse_verbs(verbs_file.replace('json', 'xml'))
         return
-
+    
     @staticmethod
     def _parse_verbs(file):
         """
         Parses the XML file.
-
+    
         :param file: FileObject.
             XML file containing the verbs.
         :return verb_templates: OrderedDict.
             An OrderedDict containing the verb and its template for all verbs in the file.
-
+    
         """
+        verb_file_path = os.path.abspath(file)
+        pkl_file = verb_file_path.replace('.xml', '.pkl')
+        
+        if os.path.isfile(pkl_file):
+            last_modified_time_verb = os.path.getmtime(verb_file_path)
+            last_modified_time_pkl = os.path.getmtime(pkl_file)
+            if last_modified_time_verb <= last_modified_time_pkl:
+                verbs_dic = joblib.load(pkl_file)
+                return verbs_dic
+        
         verbs_dic = {}
         xml = ET.parse(file)
         for verb in xml.findall("v"):
@@ -71,6 +81,8 @@ class Verbiste(ConjugManager):
             index = - len(template[template.index(":") + 1:])
             root = verb_name if index == 0 else verb_name[:index]
             verbs_dic[verb_name] = {"template": template, "root": root}
+        
+        joblib.dump(verbs_dic, pkl_file, compress = ('gzip', 3))
         return verbs_dic
 
     def _load_conjugations(self, conjugations_file):
@@ -81,8 +93,17 @@ class Verbiste(ConjugManager):
             Path to the conjugation xml file.
 
         """
-        self.conjugations = self._parse_conjugations(conjugations_file.replace('json', 'xml'))
-        return
+        pickle_file = conjugations_file.replace('.xml', '.pkl')
+    if os.path.exists(pickle_file):
+        # check if the pickle file is newer than the xml file
+        if os.path.getmtime(pickle_file) > os.path.getmtime(conjugations_file):
+            self.conjugations = joblib.load(pickle_file)
+            return
+    # if the pickle file does not exist or is older than the xml file
+    self.conjugations = self._parse_conjugations(conjugations_file)
+    # save the conjugations to a compressed pickle file
+    joblib.dump(self.conjugations, pickle_file, compress=True)
+    return
 
     def _parse_conjugations(self, file):
         """
