@@ -10,6 +10,7 @@ and options for subject pronoun format and whether or not the conjugation inform
 The class also has methods for iterating through the conjugated forms and loading pronoun conjugations.
 """
 
+import abc
 from collections import OrderedDict
 from mlconjug3.constants import *
 
@@ -51,7 +52,44 @@ class VerbInfo:
         return self.infinitive == other.infinitive and self.root == other.root and self.template == other.template
 
 
-class Verb:
+class VerbMeta(abc.ABCMeta):
+    """
+    Abstract base class for verbs.
+
+    The class has the following abstract methods and properties:
+    __init__(verb_info, conjug_info, subject='abbrev', predicted=False)
+    __getitem__(self, key)
+    __setitem__(self, key, value)
+    __contains__(self, item)
+    __iter__(self)
+    language(self)
+    """
+    @abc.abstractmethod
+    def __init__(self, verb_info, conjug_info, subject='abbrev', predicted=False):
+        pass
+
+    @abc.abstractmethod
+    def __getitem__(self, key):
+        pass
+
+    @abc.abstractmethod
+    def __setitem__(self, key, value):
+        pass
+
+    @abc.abstractmethod
+    def __contains__(self, item):
+        pass
+
+    @abc.abstractmethod
+    def __iter__(self):
+        pass
+
+    @abc.abstractproperty
+    def language(self):
+        pass
+
+
+class Verb(metaclass=VerbMeta):
     """
     This class defines the Verb Object.
     
