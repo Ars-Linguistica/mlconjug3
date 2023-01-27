@@ -8,7 +8,7 @@ Command Line Interface
 
 Example of using mlconjug3 through a remote ssh connection:
 
-.. image:: https://raw.githubusercontent.com/SekouDiaoNlp/mlconjug3/master/docs/images/to_be.png
+.. image:: https://raw.githubusercontent.com/SekouDiaoNlp/mlconjug3/master/docs/images/D798CD83-9383-432F-9D52-1BB304FC99EB.png
         :alt: Conjugation for the verb to be.
 
 To see a list of mlconjug3's commands type 'mlconjug3 -h' from the command line:
@@ -104,19 +104,19 @@ To use a config file in your home directory:
 
 .. code-block:: console
 
-    $ mlconjug3 -c
+    $ mlconjug3 -c hablar
 
 To use a specific config file:
 
 .. code-block:: console
 
-    $ mlconjug3 -c /path/to/config.toml
+    $ mlconjug3 -c /path/to/config.toml manger parler
 
 To use a specific config file and override some of the settings:
 
 .. code-block:: console
 
-    $ mlconjug3 -c /path/to/config.toml -l en -s pronoun -o conjugation_table.json -f json
+    $ mlconjug3 -c /path/to/config.toml -l en -s pronoun -o conjugation_table.json -f json have
 
 
 
