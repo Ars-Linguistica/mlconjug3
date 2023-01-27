@@ -23,17 +23,12 @@ try:
 except FileNotFoundError:
     requirements = [
         'defusedxml',
-        'cython',
         'Click>=8.0.3',
-        'numpy',
-        'scipy',
         'scikit-learn>=1.2.0',
-        'colorama',
         'joblib',
         'rich',
         'pyyaml',
         'tomlkit',
-        'hydra-core',
     ]
 
 try:
