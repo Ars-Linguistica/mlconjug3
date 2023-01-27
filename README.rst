@@ -91,7 +91,7 @@ We are honored to have received recognition from the academic community, as mlco
 
 ----
 
-.. image:: https://raw.githubusercontent.com/SekouDiaoNlp/mlconjug3/master/docs/images/to_be.png
+.. image:: https://raw.githubusercontent.com/SekouDiaoNlp/mlconjug3/master/docs/images/D798CD83-9383-432F-9D52-1BB304FC99EB.png
         :alt: Conjugation for the verb to be.
         
 ----
