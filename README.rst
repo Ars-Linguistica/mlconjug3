@@ -4,25 +4,13 @@
 
 ----
 
-.. image:: https://img.shields.io/badge/Maintained%3F-yes-green.svg
-        :target: https://GitHub.com/SekouDiaoNlp/mlconjug3/graphs/commit-activity
-        :alt: Package Maintenance Status
-
 .. image:: https://img.shields.io/badge/maintainer-SekouDiaoNlp-blue
         :target: https://GitHub.com/SekouDiaoNlp/mlconjug3
         :alt: Package Maintener
 
-.. image:: https://bestpractices.coreinfrastructure.org/projects/6961/badge
-        :target: https://bestpractices.coreinfrastructure.org/projects/6961/
-        :alt: OpenSSF Best Practices
-
-.. image:: https://api.securityscorecards.dev/projects/github.com/SekouDiaoNlp/mlconjug3/badge
-        :target: https://api.securityscorecards.dev/projects/github.com/SekouDiaoNlp/mlconjug3/
-        :alt: OpenSSF ScoreCard
-
-.. image:: https://github.com/SekouDiaoNlp/mlconjug3/workflows/mlconjug3/badge.svg
-        :target: https://github.com/SekouDiaoNlp/mlconjug3/actions
-        :alt: Build status on Windows, MacOs and Linux
+.. image:: https://img.shields.io/pypi/pyversions/mlconjug3
+        :target: https://pypi.python.org/pypi/mlconjug3
+        :alt: Compatible Python versions
 
 .. image:: https://img.shields.io/pypi/v/mlconjug3.svg
         :target: https://pypi.python.org/pypi/mlconjug3
@@ -32,33 +20,45 @@
         :target: https://anaconda.org/conda-forge/mlconjug3
         :alt: Anaconda Package Index Status
 
-.. image:: https://img.shields.io/pypi/pyversions/mlconjug3
-        :target: https://pypi.python.org/pypi/mlconjug3
-        :alt: Compatible Python versions
-
 .. image:: https://img.shields.io/conda/pn/conda-forge/mlconjug3?color=dark%20green&label=Supported%20platforms
         :target: https://anaconda.org/conda-forge/mlconjug3
         :alt: Supported platforms
 
-.. image:: https://readthedocs.org/projects/mlconjug3/badge/?version=latest
-        :target: https://mlconjug3.readthedocs.io/en/latest/readme.html
-        :alt: Documentation Status
+.. image:: https://img.shields.io/conda/dn/conda-forge/mlconjug?label=Anaconda%20Downloads
+        :target: https://anaconda.org/conda-forge/mlconjug3
+        :alt: Conda
+
+.. image:: https://github.com/SekouDiaoNlp/mlconjug3/workflows/mlconjug3/badge.svg
+        :target: https://github.com/SekouDiaoNlp/mlconjug3/actions
+        :alt: Build status on Windows, MacOs and Linux
 
 .. image:: https://pyup.io/repos/github/SekouDiaoNlp/mlconjug3/shield.svg
         :target: https://pyup.io/repos/github/SekouDiaoNlp/mlconjug3/
         :alt: Dependencies status
 
-.. image:: https://codecov.io/gh/SekouDiaoNlp/mlconjug3/branch/master/graph/badge.svg
-        :target: https://codecov.io/gh/SekouDiaoNlp/mlconjug3
-        :alt: Code Coverage Status
+.. image:: https://readthedocs.org/projects/mlconjug3/badge/?version=latest
+        :target: https://mlconjug3.readthedocs.io/en/latest/readme.html
+        :alt: Documentation Status
+
+.. image:: https://bestpractices.coreinfrastructure.org/projects/6961/badge
+        :target: https://bestpractices.coreinfrastructure.org/projects/6961/
+        :alt: OpenSSF Best Practices
 
 .. image:: https://snyk-widget.herokuapp.com/badge/pip/mlconjug3/badge.svg
         :target: https://snyk.io/test/github/SekouDiaoNlp/mlconjug3?targetFile=requirements.txt
         :alt: Code Vulnerability Status
 
-.. image:: https://img.shields.io/conda/dn/conda-forge/mlconjug?label=Anaconda%20Total%20Downloads
-        :target: https://anaconda.org/conda-forge/mlconjug3
-        :alt: Conda
+.. image:: https://img.shields.io/badge/Maintained%3F-yes-green.svg
+        :target: https://GitHub.com/SekouDiaoNlp/mlconjug3/graphs/commit-activity
+        :alt: Package Maintenance Status
+
+.. image:: https://api.securityscorecards.dev/projects/github.com/SekouDiaoNlp/mlconjug3/badge
+        :target: https://api.securityscorecards.dev/projects/github.com/SekouDiaoNlp/mlconjug3/
+        :alt: OpenSSF ScoreCard
+
+.. image:: https://codecov.io/gh/SekouDiaoNlp/mlconjug3/branch/master/graph/badge.svg
+        :target: https://codecov.io/gh/SekouDiaoNlp/mlconjug3
+        :alt: Code Coverage Status
 
 .. image:: https://img.shields.io/mastodon/follow/109313632815812004?domain=https%3A%2F%2Ffosstodon.org&style=plastic
         :target: https://fosstodon.org/@SekouDiao
@@ -80,7 +80,7 @@ But that's not all - mlconjug3 also offers a variety of other features, such as:
 - Command Line Interface tool for quick and convenient use
 - Easy-to-use and intuitive API for integration into your own projects
 - Extensive documentation and community support for troubleshooting and expanding capabilities
-- Customizable settings to fine-tune performance and adapt to different use cases
+- Customizable settings to modify the User Interface theme, fine-tune performance and adapt to different use cases
 - Regular updates and improvements to ensure optimal performance
 - Integration with popular libraries such as scikit-learn and numpy for machine learning tasks
 - Support for multiple languages, including English, Spanish, French, and German
