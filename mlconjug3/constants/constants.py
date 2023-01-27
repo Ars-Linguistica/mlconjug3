@@ -8,9 +8,10 @@ try:
 except ImportError:
     from yaml import Loader, Dumper
 
- 
+
 import yaml
 
+RESOURCE_PACKAGE = 'mlconjug3'
 
 config_file = pkg_resources.resource_filename(RESOURCE_PACKAGE, 'config/config.yaml')
 with open(config_file, 'r') as stream:
