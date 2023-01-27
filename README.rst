@@ -71,12 +71,22 @@
 mlconjug3
 =========
 
-A Command Line application and Python library to conjugate verbs in French, English, Spanish, Italian, Portuguese and Romanian (more soon) using Machine Learning techniques.
+Welcome to mlconjug3, the ultimate tool for language learners, teachers, developers, researchers, and anyone who wants to master verb conjugation in multiple languages. With mlconjug3, you can easily conjugate any verb in French, English, Spanish, Italian, Portuguese, and Romanian (with more languages coming soon) using advanced Machine Learning techniques.
 
-- Conjugate any verb in one of the supported languages, even completely new or made-up verbs, with the help of a pre-trained Machine Learning model.
-- The pre-trained models are composed of a binary feature extractor, a feature selector using Linear Support Vector Classification, and a classifier using Stochastic Gradient Descent.
-- Easily modify and retrain the models using any compatible classifiers from scikit-learn.
-- Uses Verbiste as the training data for the French model, and unsupervised learning techniques to generate the data for the English, Spanish, Italian, Portuguese and Romanian models.
+Our pre-trained models use a binary feature extractor, Linear Support Vector Classification, and Stochastic Gradient Descent to deliver over 99% accuracy in predicting conjugation class for unknown verbs. And, with our easy-to-use API and CLI, you can quickly modify and retrain the models using any compatible classifiers from scikit-learn. Plus, we use caching and multiprocessing for maximum performance, so you can focus on perfecting your language skills.
+
+But that's not all - mlconjug3 also offers a variety of other features, such as:
+
+- Command Line Interface tool for quick and convenient use
+- Easy-to-use and intuitive API for integration into your own projects
+- Extensive documentation and community support for troubleshooting and expanding capabilities
+- Customizable settings to fine-tune performance and adapt to different use cases
+- Regular updates and improvements to ensure optimal performance
+- Integration with popular libraries such as scikit-learn and numpy for machine learning tasks
+- Support for multiple languages, including English, Spanish, French, and German
+- Robust error handling and troubleshooting capabilities
+
+We are honored to have received recognition from the academic community, as mlconjug3 has been cited in a number of publications. It is a testament to the hard work and dedication of our team, and we are humbled by the interest and support of our users.
 
 
 ----
@@ -99,25 +109,6 @@ Supported Languages
 - Italian
 - Portuguese
 - Romanian
-
-
-Features
---------
-
-- Command Line Interface tool.
-- Easy to use and intuitive API.
-- Includes pre-trained models with 99% + accuracy in predicting conjugation class of unknown verbs.
-- Easily train new models or add new languages.
-- Uses caching and multiprocessing for maximum performance.
-- Easily integrate mlconjug3 in your own projects.
-- Extensive documentation.
-- Powerful machine learning algorithms for accurate verb conjugation predictions.
-- Support for multiple languages including English, Spanish, French, and German.
-- Customizable settings to fine-tune performance and adapt to different use cases.
-- Robust error handling and troubleshooting capabilities.
-- Regular updates and improvements to ensure optimal performance.
-- Community support and contributions to continuously expand the library's capabilities.
-- Integration with popular libraries such as scikit-learn and numpy for machine learning tasks.
 
 
 
