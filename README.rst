@@ -295,6 +295,69 @@ Software projects using mlconjug3
   | Application for German-French vocabulary with simple GUI.
 
 
+Signing of Releases
+-------------------
+
+Starting with version 3.10, all versions of the mlconjug3 package released on PyPi and GitHub will be signed using sigstore. This is to ensure the authenticity and integrity of the package, and to provide an added layer of security for our users.
+
+Signing a software package is a way to ensure that the package has not been tampered with and that it comes from a trusted source. This is important because malicious actors may try to tamper with a package by adding malware or other unwanted code, or by pretending to be the author of the package.
+
+By signing mlconjug3 releases using sigstore, users can verify that the package they are downloading is the one that was created and uploaded by the package's author, Sekou Diao (diao.sekou.nlp@gmail.com), and that it has not been tampered with. This provides an additional layer of security for users and helps to ensure that they can trust the package they are using.
+
+What is sigstore?
+~~~~~~~~~~~~~~~~~
+
+Sigstore is an open-source tool that allows developers to easily sign their software releases, making it easy for users to verify the authenticity of the package. The signature is cryptographically verified against the developer's public key, which is stored on a publicly accessible keyserver. This ensures that the package has not been tampered with and that it was indeed released by the developer who claims to have released it.
+
+How to verify the signature of a release?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To verify the package, you can use the instructions provided below, which will show you how to check the package's signature and certificate using the python package sigstore, and also check for claims specific to GitHub Actions.
+
+
+To verify a mlconjug3 release, the sigstore python module can be used. By default, sigstore verify will attempt to find a <filename>.sig and <filename>.crt in the same directory as the file being verified. For example, to verify the file mlconjug3-3.10.tar.gz, sigstore verify will look for mlconjug3-3.10.tar.gz.sig and mlconjug3-3.10.tar.gz.crt.
+
+To verify the signature, use the following command:
+
+.. code-block:: console
+    
+    $ python -m sigstore verify identity mlconjug3-3.10.tar.gz \
+        --cert-identity 'diao.sekou.nlp@gmail.com' \
+        --cert-oidc-issuer 'https://github.com/login/oauth'
+
+
+Multiple files can be verified at once:
+
+.. code-block:: console
+
+    $ python -m sigstore verify identity mlconjug3-3.10.tar.gz mlconjug3-3.10.0-py3-none-any.whl \
+        --cert-identity 'diao.sekou.nlp@gmail.com' \
+        --cert-oidc-issuer 'https://github.com/login/oauth'
+
+If the signature and certificate files are at different paths, they can be specified explicitly (but only for one file at a time):
+
+.. code-block:: console
+
+    $ python -m sigstore verify identity mlconjug3-3.10.tar.gz \
+        --certificate some/other/path/mlconjug3-3.10.crt \
+        --signature some/other/path/mlconjug3-3.10.sig \
+        --cert-identity 'diao.sekou.nlp@gmail.com' \
+        --cert-oidc-issuer 'https://github.com/login/oauth'
+
+Verifying signatures from GitHub Actions:
+
+.. code-block:: console
+
+    $ python -m sigstore verify github mlconjug3-3.10.tar.gz \
+        --certificate mlconjug3-3.10.tar.gz.crt \
+        --signature mlconjug3-3.10.tar.gz.sig \
+        --cert-identity https://github.com/diao.sekou.nlp/mlconjug3/.github/workflows/sign_and_publish.yml@refs/tags/v3.10.0
+
+GitHub Actions specific claims can also be verified by adding flags such as --trigger, --sha, --name, --repository, and --ref.
+
+Please note that these are examples and the exact file names and paths may vary depending on the version and distribution of mlconjug3 being verified. It is important to ensure that the correct signature and certificate files are being used for verification.
+
+
 Credits
 -------
 
