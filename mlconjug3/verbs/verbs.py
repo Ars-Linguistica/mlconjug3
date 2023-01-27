@@ -289,8 +289,7 @@ class VerbEn(Verb):
                 elif isinstance(persons, str):
                     self.conjug_info[mood][tense_name] = self.verb_info.root + persons
                 elif persons is None:
-                    prefix = 'to ' if tense_name == 'infinitive present' else ''
-                    self.conjug_info[mood][tense_name] = prefix + self.verb_info.infinitive
+                    self.conjug_info[mood][tense_name] = "to " + self.verb_info.infinitive
         return
 
 
