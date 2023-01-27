@@ -12,7 +12,7 @@ except ImportError:
 import yaml
 
 
-config_file = pkg_resources.resource_filename(RESOURCE_PACKAGE, 'config/config.yaml'
+config_file = pkg_resources.resource_filename(RESOURCE_PACKAGE, 'config/config.yaml')
 with open(config_file, 'r') as stream:
     try:
         constants = load(stream, Loader=Loader)
