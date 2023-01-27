@@ -8,8 +8,8 @@ Command Line Interface
 
 Example of using mlconjug3 through a remote ssh connection:
 
-.. image:: https://raw.githubusercontent.com/SekouDiaoNlp/mlconjug3/master/docs/images/D798CD83-9383-432F-9D52-1BB304FC99EB.png
-        :alt: Conjugation for the verb to be.
+.. image:: https://raw.githubusercontent.com/SekouDiaoNlp/mlconjug3/master/docs/images/AC22447F-3A90-4E0B-854A-AE80043AEB6A.png
+        :alt: Conjugation for the verb to have.
 
 To see a list of mlconjug3's commands type 'mlconjug3 -h' from the command line:
 
