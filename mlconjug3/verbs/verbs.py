@@ -54,20 +54,26 @@ class VerbInfo:
 
 class VerbMeta(abc.ABCMeta):
     """
-    Abstract base class for verbs.
-
-    The class has the following abstract methods and properties:
-    __init__(verb_info, conjug_info, subject='abbrev', predicted=False)
-    __getitem__(self, key)
-    __setitem__(self, key, value)
-    __contains__(self, item)
-    __iter__(self)
-    language(self)
+    This is a metaclass for creating verb classes.
+    It contains the following abstract methods:
+    - __init__: Initializes the verb class with verb information, conjugation information, subject (default is 'abbrev') and a flag for whether the verb is predicted or not
+    - __getitem__: Allows for indexing of the verb class
+    - __setitem__: Allows for setting values of the verb class through indexing
+    - __contains__: Allows for checking if a key is present in the verb class
+    - __iter__: Allows for iteration over the verb class
+    - language: An abstract property that should be implemented to return the language of the verb class
+    - iterate: An abstract method that should be implemented to iterate over all forms of the verb
+    - load_conjug: An abstract method that should be implemented to load conjugation information for the verb
+    - conjugate: An abstract method that should be implemented to conjugate the verb based on the subject and tense provided
     """
     @abc.abstractmethod
     def __init__(self, verb_info, conjug_info, subject='abbrev', predicted=False):
         pass
 
+    @abc.abstractproperty
+    def language(self):
+        pass
+    
     @abc.abstractmethod
     def __getitem__(self, key):
         pass
@@ -84,8 +90,16 @@ class VerbMeta(abc.ABCMeta):
     def __iter__(self):
         pass
 
-    @abc.abstractproperty
-    def language(self):
+    @abc.abstractmethod
+    def iterate(self):
+        pass
+
+    @abc.abstractmethod
+    def load_conjug(self):
+        pass
+
+    @abc.abstractmethod
+    def conjugate(self, subject, tense):
         pass
 
 
