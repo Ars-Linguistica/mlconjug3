@@ -33,16 +33,12 @@ mlconjug3 = 'mlconjug3.cli:main'
 [tool.poetry.dependencies]
 python = ">=3.8.0,<3.12"
 click = "~8.1.3"
-colorama = "~0.4.6"
-cython = "~0.29.33"
 defusedxml = "~0.7.1"
 joblib = "~1.2.0"
 scikit-learn = "==1.2.0,>=1.2.0"
-numpy = "~1.24.1"
 rich = "~13.2.0"
 pyyaml = "~6.0"
 tomlkit = "~0.11.6"
-hydra-core = "~1.3.1"
 
 [tool.poetry.dev-dependencies]
 asq = "~1.3.0"
