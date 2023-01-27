@@ -10,7 +10,8 @@ The conjugation data conforms to the JSon schema defined by mlconjug3.
 __author__ = 'SekouDiaoNlp'
 __author_email__ = 'diao.sekou.nlp@gmail.com'
 
-
+import os
+import joblib
 import copy
 import defusedxml.ElementTree as ET
 import json
