@@ -4,25 +4,13 @@
 
 ----
 
-.. image:: https://img.shields.io/badge/Maintained%3F-yes-green.svg
-        :target: https://GitHub.com/SekouDiaoNlp/mlconjug3/graphs/commit-activity
-        :alt: Package Maintenance Status
-
 .. image:: https://img.shields.io/badge/maintainer-SekouDiaoNlp-blue
         :target: https://GitHub.com/SekouDiaoNlp/mlconjug3
         :alt: Package Maintener
 
-.. image:: https://bestpractices.coreinfrastructure.org/projects/6961/badge
-        :target: https://bestpractices.coreinfrastructure.org/projects/6961/
-        :alt: OpenSSF Best Practices
-
-.. image:: https://api.securityscorecards.dev/projects/github.com/SekouDiaoNlp/mlconjug3/badge
-        :target: https://api.securityscorecards.dev/projects/github.com/SekouDiaoNlp/mlconjug3/
-        :alt: OpenSSF ScoreCard
-
-.. image:: https://github.com/SekouDiaoNlp/mlconjug3/workflows/mlconjug3/badge.svg
-        :target: https://github.com/SekouDiaoNlp/mlconjug3/actions
-        :alt: Build status on Windows, MacOs and Linux
+.. image:: https://img.shields.io/pypi/pyversions/mlconjug3
+        :target: https://pypi.python.org/pypi/mlconjug3
+        :alt: Compatible Python versions
 
 .. image:: https://img.shields.io/pypi/v/mlconjug3.svg
         :target: https://pypi.python.org/pypi/mlconjug3
@@ -32,33 +20,45 @@
         :target: https://anaconda.org/conda-forge/mlconjug3
         :alt: Anaconda Package Index Status
 
-.. image:: https://img.shields.io/pypi/pyversions/mlconjug3
-        :target: https://pypi.python.org/pypi/mlconjug3
-        :alt: Compatible Python versions
-
 .. image:: https://img.shields.io/conda/pn/conda-forge/mlconjug3?color=dark%20green&label=Supported%20platforms
         :target: https://anaconda.org/conda-forge/mlconjug3
         :alt: Supported platforms
 
-.. image:: https://readthedocs.org/projects/mlconjug3/badge/?version=latest
-        :target: https://mlconjug3.readthedocs.io/en/latest/readme.html
-        :alt: Documentation Status
+.. image:: https://img.shields.io/conda/dn/conda-forge/mlconjug?label=Anaconda%20Downloads
+        :target: https://anaconda.org/conda-forge/mlconjug3
+        :alt: Conda
+
+.. image:: https://github.com/SekouDiaoNlp/mlconjug3/workflows/mlconjug3/badge.svg
+        :target: https://github.com/SekouDiaoNlp/mlconjug3/actions
+        :alt: Build status on Windows, MacOs and Linux
 
 .. image:: https://pyup.io/repos/github/SekouDiaoNlp/mlconjug3/shield.svg
         :target: https://pyup.io/repos/github/SekouDiaoNlp/mlconjug3/
         :alt: Dependencies status
 
-.. image:: https://codecov.io/gh/SekouDiaoNlp/mlconjug3/branch/master/graph/badge.svg
-        :target: https://codecov.io/gh/SekouDiaoNlp/mlconjug3
-        :alt: Code Coverage Status
+.. image:: https://readthedocs.org/projects/mlconjug3/badge/?version=latest
+        :target: https://mlconjug3.readthedocs.io/en/latest/readme.html
+        :alt: Documentation Status
+
+.. image:: https://bestpractices.coreinfrastructure.org/projects/6961/badge
+        :target: https://bestpractices.coreinfrastructure.org/projects/6961/
+        :alt: OpenSSF Best Practices
 
 .. image:: https://snyk-widget.herokuapp.com/badge/pip/mlconjug3/badge.svg
         :target: https://snyk.io/test/github/SekouDiaoNlp/mlconjug3?targetFile=requirements.txt
         :alt: Code Vulnerability Status
 
-.. image:: https://img.shields.io/conda/dn/conda-forge/mlconjug?label=Anaconda%20Total%20Downloads
-        :target: https://anaconda.org/conda-forge/mlconjug3
-        :alt: Conda
+.. image:: https://img.shields.io/badge/Maintained%3F-yes-green.svg
+        :target: https://GitHub.com/SekouDiaoNlp/mlconjug3/graphs/commit-activity
+        :alt: Package Maintenance Status
+
+.. image:: https://api.securityscorecards.dev/projects/github.com/SekouDiaoNlp/mlconjug3/badge
+        :target: https://api.securityscorecards.dev/projects/github.com/SekouDiaoNlp/mlconjug3/
+        :alt: OpenSSF ScoreCard
+
+.. image:: https://codecov.io/gh/SekouDiaoNlp/mlconjug3/branch/master/graph/badge.svg
+        :target: https://codecov.io/gh/SekouDiaoNlp/mlconjug3
+        :alt: Code Coverage Status
 
 .. image:: https://img.shields.io/mastodon/follow/109313632815812004?domain=https%3A%2F%2Ffosstodon.org&style=plastic
         :target: https://fosstodon.org/@SekouDiao
@@ -71,17 +71,27 @@
 mlconjug3
 =========
 
-A Command Line application and Python library to conjugate verbs in French, English, Spanish, Italian, Portuguese and Romanian (more soon) using Machine Learning techniques.
+Welcome to mlconjug3, the ultimate tool for language learners, teachers, developers, researchers, and anyone who wants to master verb conjugation in multiple languages. With mlconjug3, you can easily conjugate any verb in French, English, Spanish, Italian, Portuguese, and Romanian (with more languages coming soon) using advanced Machine Learning techniques.
 
-- Conjugate any verb in one of the supported languages, even completely new or made-up verbs, with the help of a pre-trained Machine Learning model.
-- The pre-trained models are composed of a binary feature extractor, a feature selector using Linear Support Vector Classification, and a classifier using Stochastic Gradient Descent.
-- Easily modify and retrain the models using any compatible classifiers from scikit-learn.
-- Uses Verbiste as the training data for the French model, and unsupervised learning techniques to generate the data for the English, Spanish, Italian, Portuguese and Romanian models.
+Our pre-trained models use a binary feature extractor, Linear Support Vector Classification, and Stochastic Gradient Descent to deliver over 99% accuracy in predicting conjugation class for unknown verbs. And, with our easy-to-use API and CLI, you can quickly modify and retrain the models using any compatible classifiers from scikit-learn. Plus, we use caching and multiprocessing for maximum performance, so you can focus on perfecting your language skills.
+
+But that's not all - mlconjug3 also offers a variety of other features, such as:
+
+- Command Line Interface tool for quick and convenient use
+- Easy-to-use and intuitive API for integration into your own projects
+- Extensive documentation and community support for troubleshooting and expanding capabilities
+- Customizable settings to modify the User Interface theme, fine-tune performance and adapt to different use cases
+- Regular updates and improvements to ensure optimal performance
+- Integration with popular libraries such as scikit-learn and numpy for machine learning tasks
+- Support for multiple languages, including English, Spanish, French, and German
+- Robust error handling and troubleshooting capabilities
+
+We are honored to have received recognition from the academic community, as mlconjug3 has been cited in a number of publications. It is a testament to the hard work and dedication of our team, and we are humbled by the interest and support of our users.
 
 
 ----
 
-.. image:: https://raw.githubusercontent.com/SekouDiaoNlp/mlconjug3/master/docs/images/to_be.png
+.. image:: https://raw.githubusercontent.com/SekouDiaoNlp/mlconjug3/master/docs/images/AC22447F-3A90-4E0B-854A-AE80043AEB6A.png
         :alt: Conjugation for the verb to be.
         
 ----
@@ -101,34 +111,18 @@ Supported Languages
 - Romanian
 
 
-Features
---------
-
-- Command Line Interface tool.
-- Easy to use and intuitive API.
-- Includes pre-trained models with 99% + accuracy in predicting conjugation class of unknown verbs.
-- Easily train new models or add new languages.
-- Uses caching and multiprocessing for maximum performance.
-- Easily integrate mlconjug3 in your own projects.
-- Extensive documentation.
-- Powerful machine learning algorithms for accurate verb conjugation predictions.
-- Support for multiple languages including English, Spanish, French, and German.
-- Customizable settings to fine-tune performance and adapt to different use cases.
-- Robust error handling and troubleshooting capabilities.
-- Regular updates and improvements to ensure optimal performance.
-- Community support and contributions to continuously expand the library's capabilities.
-- Integration with popular libraries such as scikit-learn and numpy for machine learning tasks.
-
-
 
 Installation
 ------------
 
 To install mlconjug3, you have multiple options:
 
-- Using pip: 
-  This is the preferred method to install mlconjug3, as it will always install the most recent stable release. 
-  To install mlconjug3, run this command in your terminal:
+Using pip: 
+~~~~~~~~~~
+
+  This is the preferred method to install mlconjug3, as it will always install the most recent stable release.
+
+To install mlconjug3, run this command in your terminal:
 
 .. code-block:: console
 
@@ -137,17 +131,23 @@ To install mlconjug3, you have multiple options:
 
 If you don't have `pip`_ installed, this `Python installation guide`_ can guide you through the process.
 
-- Using pipx_ (recommended for users who want to avoid conflicts with other Python packages):
+
+Using pipx_:
+~~~~~~~~~~~~
+
+  Recommended for users who want to avoid conflicts with other Python packages.
 
 .. code-block:: console
 
   $ pipx install mlconjug3
 
 
-- Using conda:
-  You can also install mlconjug3 by using Anaconda_ or Miniconda_ instead of `pip`.
-  To install Anaconda or Miniconda, please follow the installation instructions on their respective websites.
-  After having installed Anaconda or Miniconda, run these commands in your terminal:
+Using conda:
+~~~~~~~~~~~~
+
+You can also install mlconjug3 by using Anaconda_ or Miniconda_ instead of `pip`.
+To install Anaconda or Miniconda, please follow the installation instructions on their respective websites.
+After having installed Anaconda or Miniconda, run these commands in your terminal:
 
 .. code-block:: console
 
@@ -160,6 +160,9 @@ If you already have Anaconda or Miniconda available on your system, just type th
 .. code-block:: console
 
   $ conda install -c conda-forge mlconjug3
+
+
+You can find detailed instructions for installing mlconjug3 on the Anaconda eco-system here: https://github.com/conda-forge/mlconjug3-feedstock#installing-mlconjug3
 
 .. warning::
   If you intend to install mlconjug3 on a Apple Macbook with an Apple M1 or M2 processor or newer,
@@ -290,6 +293,69 @@ Software projects using mlconjug3
   | A WebApp to learn Spanish.
 - | `Learn_vocab`_
   | Application for German-French vocabulary with simple GUI.
+
+
+Signing of Releases
+-------------------
+
+Starting with version 3.10, all versions of the mlconjug3 package released on PyPi and GitHub will be signed using sigstore. This is to ensure the authenticity and integrity of the package, and to provide an added layer of security for our users.
+
+Signing a software package is a way to ensure that the package has not been tampered with and that it comes from a trusted source. This is important because malicious actors may try to tamper with a package by adding malware or other unwanted code, or by pretending to be the author of the package.
+
+By signing mlconjug3 releases using sigstore, users can verify that the package they are downloading is the one that was created and uploaded by the package's author, Sekou Diao (diao.sekou.nlp@gmail.com), and that it has not been tampered with. This provides an additional layer of security for users and helps to ensure that they can trust the package they are using.
+
+What is sigstore?
+~~~~~~~~~~~~~~~~~
+
+Sigstore is an open-source tool that allows developers to easily sign their software releases, making it easy for users to verify the authenticity of the package. The signature is cryptographically verified against the developer's public key, which is stored on a publicly accessible keyserver. This ensures that the package has not been tampered with and that it was indeed released by the developer who claims to have released it.
+
+How to verify the signature of a release?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To verify the package, you can use the instructions provided below, which will show you how to check the package's signature and certificate using the python package sigstore, and also check for claims specific to GitHub Actions.
+
+
+To verify a mlconjug3 release, the sigstore python module can be used. By default, sigstore verify will attempt to find a <filename>.sig and <filename>.crt in the same directory as the file being verified. For example, to verify the file mlconjug3-3.10.tar.gz, sigstore verify will look for mlconjug3-3.10.tar.gz.sig and mlconjug3-3.10.tar.gz.crt.
+
+To verify the signature, use the following command:
+
+.. code-block:: console
+    
+    $ python -m sigstore verify identity mlconjug3-3.10.tar.gz \
+        --cert-identity 'diao.sekou.nlp@gmail.com' \
+        --cert-oidc-issuer 'https://github.com/login/oauth'
+
+
+Multiple files can be verified at once:
+
+.. code-block:: console
+
+    $ python -m sigstore verify identity mlconjug3-3.10.tar.gz mlconjug3-3.10.0-py3-none-any.whl \
+        --cert-identity 'diao.sekou.nlp@gmail.com' \
+        --cert-oidc-issuer 'https://github.com/login/oauth'
+
+If the signature and certificate files are at different paths, they can be specified explicitly (but only for one file at a time):
+
+.. code-block:: console
+
+    $ python -m sigstore verify identity mlconjug3-3.10.tar.gz \
+        --certificate some/other/path/mlconjug3-3.10.crt \
+        --signature some/other/path/mlconjug3-3.10.sig \
+        --cert-identity 'diao.sekou.nlp@gmail.com' \
+        --cert-oidc-issuer 'https://github.com/login/oauth'
+
+Verifying signatures from GitHub Actions:
+
+.. code-block:: console
+
+    $ python -m sigstore verify github mlconjug3-3.10.tar.gz \
+        --certificate mlconjug3-3.10.tar.gz.crt \
+        --signature mlconjug3-3.10.tar.gz.sig \
+        --cert-identity https://github.com/diao.sekou.nlp/mlconjug3/.github/workflows/sign_and_publish.yml@refs/tags/v3.10.0
+
+GitHub Actions specific claims can also be verified by adding flags such as --trigger, --sha, --name, --repository, and --ref.
+
+Please note that these are examples and the exact file names and paths may vary depending on the version and distribution of mlconjug3 being verified. It is important to ensure that the correct signature and certificate files are being used for verification.
 
 
 Credits
