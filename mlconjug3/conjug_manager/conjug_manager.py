@@ -74,7 +74,7 @@ class ConjugManager:
         :param verbs_file: string or path object.
             Path to the verbs json file.
         """
-        cache = self._load_cache(file)
+        cache = self._load_cache(verbs_file)
         if cache:
             self.verbs = cache
         else:
@@ -89,7 +89,7 @@ class ConjugManager:
         :param conjugations_file: string or path object.
             Path to the conjugation json file.
         """
-        cache = self._load_cache(file)
+        cache = self._load_cache(conjugations_file)
         if cache:
             self.conjugations = cache
         else:
