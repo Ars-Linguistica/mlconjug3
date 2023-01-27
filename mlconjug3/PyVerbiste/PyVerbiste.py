@@ -91,7 +91,7 @@ class Verbiste(ConjugManager):
             root = verb_name if index == 0 else verb_name[:index]
             verbs_dic[verb_name] = {"template": template, "root": root}
         
-        pkl_file = file_path + '.pkl'
+        pkl_file = file + '.pkl'
         joblib.dump(verbs_dic, pkl_file, compress = ('gzip', 3))
         return verbs_dic
 
@@ -129,7 +129,7 @@ class Verbiste(ConjugManager):
                 conjugations_dic[template_name][mood.tag] = OrderedDict()
                 for tense in list(mood):
                     conjugations_dic[template_name][mood.tag][tense.tag.replace('-', ' ')] = self._load_tense(tense)
-        pkl_file = file_path + '.pkl'
+        pkl_file = file + '.pkl'
         joblib.dump(conjugations_dic, pkl_file, compress = ('gzip', 3))
         return conjugations_dic
 
