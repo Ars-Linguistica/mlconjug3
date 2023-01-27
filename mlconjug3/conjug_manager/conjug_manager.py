@@ -52,6 +52,21 @@ class ConjugManager:
     def __repr__(self):
         return '{}.{}(language={})'.format(__name__, self.__class__.__name__, self.language)
 
+    def _load_cache(self, file):
+        file_path = os.path.abspath(file)
+        if not file_path.endswith('.json'):
+            raise ValueError(f"Invalid file path, expected .json file, got {file_path}")
+        pkl_file = file_path + '.pkl'
+        
+        if os.path.isfile(pkl_file):
+            last_modified_time_file = os.path.getmtime(file_path)
+            last_modified_time_pkl = os.path.getmtime(pkl_file)
+            if last_modified_time_file <= last_modified_time_pkl:
+                file_dic = joblib.load(pkl_file)
+                return file_dic
+        else:
+            return None
+    
     def _load_verbs(self, verbs_file):
         """
         Load and parses the verbs from the json file.
@@ -59,8 +74,12 @@ class ConjugManager:
         :param verbs_file: string or path object.
             Path to the verbs json file.
         """
-        with open(verbs_file, encoding='utf-8') as file:
-            self.verbs = json.load(file)
+        cache = self._load_cache(file)
+        if cache:
+            self.verbs = cache
+        else:
+            with open(verbs_file, encoding='utf-8') as file:
+                self.verbs = json.load(file)
         return
 
     def _load_conjugations(self, conjugations_file):
@@ -70,8 +89,12 @@ class ConjugManager:
         :param conjugations_file: string or path object.
             Path to the conjugation json file.
         """
-        with open(conjugations_file, encoding='utf-8') as file:
-            self.conjugations = json.load(file)
+        cache = self._load_cache(file)
+        if cache:
+            self.conjugations = cache
+        else:
+            with open(conjugations_file, encoding='utf-8') as file:
+                self.conjugations = json.load(file)
         return
 
     def _detect_allowed_endings(self):
