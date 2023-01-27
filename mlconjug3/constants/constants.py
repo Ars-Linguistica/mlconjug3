@@ -2,13 +2,14 @@ import pkg_resources
 
 import os
 
- from yaml import load, dump
- try:
-     from yaml import CLoader as Loader, CDumper as Dumper
- except ImportError:
-     from yaml import Loader, Dumper
+from yaml import load, dump
+try:
+    from yaml import CLoader as Loader, CDumper as Dumper
+except ImportError:
+    from yaml import Loader, Dumper
 
- import yaml
+ 
+import yaml
 
 
 config_file = pkg_resources.resource_filename(RESOURCE_PACKAGE, 'config/config.yaml'
