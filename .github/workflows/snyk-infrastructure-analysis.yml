@@ -14,6 +14,7 @@ permissions:
 
 jobs:
   security:
+    if: github.actor!= 'dependabot-preview[bot]'
     runs-on: ubuntu-latest
     steps:
     - name: Harden Runner
