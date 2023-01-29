@@ -53,6 +53,10 @@
         :target: https://snyk.io/test/github/Ars-Linguistica/mlconjug3?targetFile=requirements.txt
         :alt: Code Vulnerability Status
 
+.. image:: https://zenodo.org/badge/194376338.svg
+        :target: https://zenodo.org/badge/latestdoi/194376338
+        :alt: DOI
+
 .. image:: https://img.shields.io/mastodon/follow/109313632815812004?domain=https%3A%2F%2Ffosstodon.org&style=plastic
         :target: https://fosstodon.org/@SekouDiao
         :alt: Follow me on Mastodon
