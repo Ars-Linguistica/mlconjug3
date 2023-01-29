@@ -67,16 +67,35 @@
 
 ----
 
-=========
-mlconjug3
-=========
+=======================================
+mlconjug3: The multi-lingual conjugator
+=======================================
 
-A Command Line application and Python library to conjugate verbs in French, English, Spanish, Italian, Portuguese and Romanian (more soon) using Machine Learning techniques.
+A Command Line application and Python library to conjugate verbs in French, English, Spanish, Italian, Portuguese, and Romanian (with more languages soon to come) using Machine Learning techniques. 🧠
 
-- Conjugate any verb in one of the supported languages, even completely new or made-up verbs, with the help of a pre-trained Machine Learning model.
-- The pre-trained models are composed of a binary feature extractor, a feature selector using Linear Support Vector Classification, and a classifier using Stochastic Gradient Descent.
-- Easily modify and retrain the models using any compatible classifiers from scikit-learn.
-- Uses Verbiste as the training data for the French model, and unsupervised learning techniques to generate the data for the English, Spanish, Italian, Portuguese and Romanian models.
+The mlconjug3 project is now a proud member of the ARS Linguistica organization. 🤝 ARS Linguistica is a community-driven, open source project that aims to develop free and accessible linguistic tools and resources for all. 🌍 With a focus on advancing linguistic research, documentation, and education, ARS Linguistica is dedicated to preserving and promoting linguistic diversity through the use of open source and open science. 💡
+
+With mlconjug3, you can:
+
+- Conjugate any verb in one of the supported languages, even completely new or made-up verbs, with the help of a pre-trained Machine Learning model. 💪
+- Easily modify and retrain the models using any compatible classifiers from scikit-learn. 🔧
+- Integrate mlconjug3 in your own projects. 🧬
+
+
+Using mlconjug3 in Academic Research
+------------------------------------
+
+mlconjug3 is a valuable tool for linguistic researchers, as it provides accurate and up-to-date conjugation information for a wide range of languages. 🧪 With its ability to handle completely new or made-up verbs, mlconjug3 is perfect for exploring new linguistic concepts and theories. 🔍 It can also be used to compare and contrast conjugation patterns across different languages, helping researchers to identify and understand linguistic trends.
+
+Integrating mlconjug3 in Applications
+-------------------------------------
+
+In addition to academic research, mlconjug3 can be integrated into a wide range of web and desktop applications. 💻 For language learning platforms, mlconjug3 provides an accurate and comprehensive source of conjugation information, helping students to quickly and easily master verb conjugation. 📚 For language translation tools, mlconjug3 can help to ensure that translations are grammatically correct, by providing accurate verb conjugation information in real-time. 💬
+
+By using mlconjug3, you are not only getting a powerful and flexible tool for verb conjugation, but you are also supporting the goals and mission of ARS Linguistica. 🙌 Whether you are a linguistic researcher, language teacher, or simply someone who is passionate about preserving linguistic heritage, your support is crucial to the success of our organization. 
+
+Join us in our mission to make linguistic tools and resources accessible to all! 💪
+
 
 
 ----
@@ -249,6 +268,8 @@ Software projects using mlconjug3
 ---------------------------------
 
 
+- | `EDS-NLP`_
+  | EDS-NLP provides a set of spaCy components that are used to extract information from clinical notes written in French.
 - | `Machine Translation Service`_
   | Translation flask API for the Helsinki NLP models available in the Huggingface Transformers library.
 - | `NLP-Suite`_
@@ -306,6 +327,7 @@ The logo was designed by Zuur_.
 .. _`Generative Grading Neural Approximate Parsing for Automated Student Feedback`: https://arxiv.org/abs/1905.09916
 .. _`Fluorescing Questions: Effects of Semantic Perturbations on BERT Performance in SQuAD 1.1`: https://github.com/spencerng/squad-sentiment/blob/87b42a41ba7f4f3f8d4e6c478f746d6cdf9f5515/assets/semantic-perturbations-bert-performance.pdf
 .. _`Extensions and Applications of Deep Probabilistic Inference for Generative Models`: https://drive.google.com/file/d/10IXi-RleFoG9L6G70TEKbAGd-v29R2Zz/view?usp=sharing
+.. _`EDS-NLP`: https://github.com/aphp/edsnlp
 .. _`Gender Bias Visualization`: https://github.com/GesaJo/Gender-Bias-Visualization
 .. _`Text Adaptation To Context`: https://github.com/lzontar/Text_Adaptation_To_Context
 .. _`Facemask Detection`: https://github.com/samuel-karanja/facemask-derection
