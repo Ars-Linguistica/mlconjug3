@@ -24,13 +24,13 @@ Usage example:
 
 """
 
-__author__ = """SekouDiaoNlp"""
+__author__ = """ArsLinguistica"""
 __email__ = 'diao.sekou.nlp@gmail.com'
 __version__ = '3.10.0'
-__copyright__ = "Copyright (c) 2023, SekouDiaoNlp"
+__copyright__ = "Copyright (c) 2023, ArsLinguistica"
 __credits__ = ("Sekou Diao", "Pierre Sarrazin",)
 __license__ = "MIT"
-__maintainer__ = "SekouDiaoNlp"
+__maintainer__ = "ArsLinguistica"
 __status__ = "Production"
 
 from .constants import *

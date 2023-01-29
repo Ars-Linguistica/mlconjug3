@@ -7,7 +7,7 @@ More information about mlconjug3 at https://pypi.org/project/mlconjug3/
 The conjugation data conforms to the JSon schema defined by mlconjug3.
 """
 
-__author__ = 'SekouDiaoNlp'
+__author__ = 'ArsLinguistica'
 __author_email__ = 'diao.sekou.nlp@gmail.com'
 
 import os

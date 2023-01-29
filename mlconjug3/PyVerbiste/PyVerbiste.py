@@ -10,7 +10,7 @@ More information on Verbiste at https://perso.b2b2c.ca/~sarrazip/dev/conjug_mana
 
 """
 
-__author__ = 'SekouDiaoNlp'
+__author__ = 'ArsLinguistica'
 __author_email__ = 'diao.sekou.nlp@gmail.com'
 
 
