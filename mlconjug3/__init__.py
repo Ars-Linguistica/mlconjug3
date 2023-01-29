@@ -24,10 +24,10 @@ Usage example:
 
 """
 
-__author__ = """Ars-Linguistica"""
+__author__ = "Sekou Diao, Ars Linguistica"""
 __email__ = 'diao.sekou.nlp@gmail.com'
-__version__ = '3.10.0'
-__copyright__ = "Copyright (c) 2023, Ars-Linguistica"
+__version__ = '3.10.1'
+__copyright__ = "Copyright (c) 2023, Ars Linguistica"
 __credits__ = ("Sekou Diao", "Pierre Sarrazin",)
 __license__ = "MIT"
 __maintainer__ = "Ars-Linguistica"
