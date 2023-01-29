@@ -1,16 +1,29 @@
-.. image:: https://raw.githubusercontent.com/SekouDiaoNlp/mlconjug3/master/logo/logotype2%20mlconjug.png
+.. image:: https://raw.githubusercontent.com/ArsLinguistica/mlconjug3/master/logo/logotype2%20mlconjug.png
         :target: https://pypi.python.org/pypi/mlconjug3
         :alt: mlconjug3 PyPi Home Page
 
 ----
 
-.. image:: https://img.shields.io/badge/maintainer-SekouDiaoNlp-blue
-        :target: https://GitHub.com/SekouDiaoNlp/mlconjug3
+
+.. image:: https://img.shields.io/badge/Maintained%3F-yes-green.svg
+        :target: https://GitHub.com/ArsLinguistica/mlconjug3/graphs/commit-activity
+        :alt: Package Maintenance Status
+
+.. image:: https://img.shields.io/badge/maintainer-ArsLinguistica-blue
+        :target: https://GitHub.com/ArsLinguistica/mlconjug3
         :alt: Package Maintener
 
-.. image:: https://img.shields.io/pypi/pyversions/mlconjug3
-        :target: https://pypi.python.org/pypi/mlconjug3
-        :alt: Compatible Python versions
+.. image:: https://bestpractices.coreinfrastructure.org/projects/6961/badge
+        :target: https://bestpractices.coreinfrastructure.org/projects/6961/
+        :alt: OpenSSF Best Practices
+
+.. image:: https://api.securityscorecards.dev/projects/github.com/ArsLinguistica/mlconjug3/badge
+        :target: https://api.securityscorecards.dev/projects/github.com/ArsLinguistica/mlconjug3/
+        :alt: OpenSSF ScoreCard
+
+.. image:: https://github.com/ArsLinguistica/mlconjug3/workflows/mlconjug3/badge.svg
+        :target: https://github.com/ArsLinguistica/mlconjug3/actions
+        :alt: Build status on Windows, MacOs and Linux
 
 .. image:: https://img.shields.io/pypi/v/mlconjug3.svg
         :target: https://pypi.python.org/pypi/mlconjug3
@@ -32,20 +45,18 @@
         :target: https://github.com/SekouDiaoNlp/mlconjug3/actions
         :alt: Build status on Windows, MacOs and Linux
 
-.. image:: https://pyup.io/repos/github/SekouDiaoNlp/mlconjug3/shield.svg
-        :target: https://pyup.io/repos/github/SekouDiaoNlp/mlconjug3/
+.. image:: https://pyup.io/repos/github/ArsLinguistica/mlconjug3/shield.svg
+        :target: https://pyup.io/repos/github/ArsLinguistica/mlconjug3/
         :alt: Dependencies status
 
-.. image:: https://readthedocs.org/projects/mlconjug3/badge/?version=latest
-        :target: https://mlconjug3.readthedocs.io/en/latest/readme.html
-        :alt: Documentation Status
 
-.. image:: https://bestpractices.coreinfrastructure.org/projects/6961/badge
-        :target: https://bestpractices.coreinfrastructure.org/projects/6961/
-        :alt: OpenSSF Best Practices
+.. image:: https://codecov.io/gh/ArsLinguistica/mlconjug3/branch/master/graph/badge.svg
+        :target: https://codecov.io/gh/ArsLinguistica/mlconjug3
+        :alt: Code Coverage Status
+
 
 .. image:: https://snyk-widget.herokuapp.com/badge/pip/mlconjug3/badge.svg
-        :target: https://snyk.io/test/github/SekouDiaoNlp/mlconjug3?targetFile=requirements.txt
+        :target: https://snyk.io/test/github/ArsLinguistica/mlconjug3?targetFile=requirements.txt
         :alt: Code Vulnerability Status
 
 .. image:: https://img.shields.io/badge/Maintained%3F-yes-green.svg
@@ -67,31 +78,41 @@
 
 ----
 
-=========
-mlconjug3
-=========
+=======================================
+mlconjug3: The multi-lingual conjugator
+=======================================
 
-Welcome to mlconjug3, the ultimate tool for language learners, teachers, developers, researchers, and anyone who wants to master verb conjugation in multiple languages. With mlconjug3, you can easily conjugate any verb in French, English, Spanish, Italian, Portuguese, and Romanian (with more languages coming soon) using advanced Machine Learning techniques.
+A Command Line application and Python library to conjugate verbs in French, English, Spanish, Italian, Portuguese, and Romanian (with more languages soon to come) using Machine Learning techniques. 🧠
 
-Our pre-trained models use a binary feature extractor, Linear Support Vector Classification, and Stochastic Gradient Descent to deliver over 99% accuracy in predicting conjugation class for unknown verbs. And, with our easy-to-use API and CLI, you can quickly modify and retrain the models using any compatible classifiers from scikit-learn. Plus, we use caching and multiprocessing for maximum performance, so you can focus on perfecting your language skills.
+The mlconjug3 project is now a proud member of the ARS Linguistica organization. 🤝 ARS Linguistica is a community-driven, open source project that aims to develop free and accessible linguistic tools and resources for all. 🌍 With a focus on advancing linguistic research, documentation, and education, ARS Linguistica is dedicated to preserving and promoting linguistic diversity through the use of open source and open science. 💡
 
-But that's not all - mlconjug3 also offers a variety of other features, such as:
+With mlconjug3, you can:
 
-- Command Line Interface tool for quick and convenient use
-- Easy-to-use and intuitive API for integration into your own projects
-- Extensive documentation and community support for troubleshooting and expanding capabilities
-- Customizable settings to modify the User Interface theme, fine-tune performance and adapt to different use cases
-- Regular updates and improvements to ensure optimal performance
-- Integration with popular libraries such as scikit-learn and numpy for machine learning tasks
-- Support for multiple languages, including English, Spanish, French, and German
-- Robust error handling and troubleshooting capabilities
+- Conjugate any verb in one of the supported languages, even completely new or made-up verbs, with the help of a pre-trained Machine Learning model. 💪
+- Easily modify and retrain the models using any compatible classifiers from scikit-learn. 🔧
+- Integrate mlconjug3 in your own projects. 🧬
 
-We are honored to have received recognition from the academic community, as mlconjug3 has been cited in a number of publications. It is a testament to the hard work and dedication of our team, and we are humbled by the interest and support of our users.
+
+Using mlconjug3 in Academic Research
+------------------------------------
+
+mlconjug3 is a valuable tool for linguistic researchers, as it provides accurate and up-to-date conjugation information for a wide range of languages. 🧪 With its ability to handle completely new or made-up verbs, mlconjug3 is perfect for exploring new linguistic concepts and theories. 🔍 It can also be used to compare and contrast conjugation patterns across different languages, helping researchers to identify and understand linguistic trends.
+
+Integrating mlconjug3 in Applications
+-------------------------------------
+
+In addition to academic research, mlconjug3 can be integrated into a wide range of web and desktop applications. 💻 For language learning platforms, mlconjug3 provides an accurate and comprehensive source of conjugation information, helping students to quickly and easily master verb conjugation. 📚 For language translation tools, mlconjug3 can help to ensure that translations are grammatically correct, by providing accurate verb conjugation information in real-time. 💬
+
+By using mlconjug3, you are not only getting a powerful and flexible tool for verb conjugation, but you are also supporting the goals and mission of ARS Linguistica. 🙌 Whether you are a linguistic researcher, language teacher, or simply someone who is passionate about preserving linguistic heritage, your support is crucial to the success of our organization. 
+
+Join us in our mission to make linguistic tools and resources accessible to all! 💪
+
 
 
 ----
 
-.. image:: https://raw.githubusercontent.com/SekouDiaoNlp/mlconjug3/master/docs/images/AC22447F-3A90-4E0B-854A-AE80043AEB6A.png
+
+.. image:: https://raw.githubusercontent.com/ArsLinguistica/mlconjug3/master/docs/images/to_be.png
         :alt: Conjugation for the verb to be.
         
 ----
@@ -185,13 +206,13 @@ You can either clone the public repository:
 
 .. code-block:: console
 
-    $ git clone git://github.com/SekouDiaoNlp/mlconjug3
+    $ git clone git://github.com/ArsLinguistica/mlconjug3
 
 Or download the `tarball`_:
 
 .. code-block:: console
 
-    $ curl  -OL https://github.com/SekouDiaoNlp/mlconjug3/tarball/master
+    $ curl  -OL https://github.com/ArsLinguistica/mlconjug3/tarball/master
 
 Once you have a copy of the source, get in the source directory and you can install it with:
 
@@ -208,8 +229,8 @@ Alternatively, you can use poetry to install the software:
     $ poetry install
 
 
-.. _Github repo: https://github.com/SekouDiaoNlp/mlconjug3
-.. _tarball: https://github.com/SekouDiaoNlp/mlconjug3/tarball/master
+.. _Github repo: https://github.com/ArsLinguistica/mlconjug3
+.. _tarball: https://github.com/ArsLinguistica/mlconjug3/tarball/master
 
 
 
@@ -243,7 +264,7 @@ If you want to cite mlconjug3 in an academic publication use this citation forma
    @article{mlconjug3,
      title={mlconjug3},
      author={Sekou Diao},
-     journal={GitHub. Note: https://github.com/SekouDiaoNlp/mlconjug3 Cited by},
+     journal={GitHub. Note: https://github.com/ArsLinguistica/mlconjug3 Cited by},
      year={2023}
    }
 
@@ -252,6 +273,8 @@ Software projects using mlconjug3
 ---------------------------------
 
 
+- | `EDS-NLP`_
+  | EDS-NLP provides a set of spaCy components that are used to extract information from clinical notes written in French.
 - | `Machine Translation Service`_
   | Translation flask API for the Helsinki NLP models available in the Huggingface Transformers library.
 - | `NLP-Suite`_
@@ -372,6 +395,7 @@ The logo was designed by Zuur_.
 .. _`Generative Grading Neural Approximate Parsing for Automated Student Feedback`: https://arxiv.org/abs/1905.09916
 .. _`Fluorescing Questions: Effects of Semantic Perturbations on BERT Performance in SQuAD 1.1`: https://github.com/spencerng/squad-sentiment/blob/87b42a41ba7f4f3f8d4e6c478f746d6cdf9f5515/assets/semantic-perturbations-bert-performance.pdf
 .. _`Extensions and Applications of Deep Probabilistic Inference for Generative Models`: https://drive.google.com/file/d/10IXi-RleFoG9L6G70TEKbAGd-v29R2Zz/view?usp=sharing
+.. _`EDS-NLP`: https://github.com/aphp/edsnlp
 .. _`Gender Bias Visualization`: https://github.com/GesaJo/Gender-Bias-Visualization
 .. _`Text Adaptation To Context`: https://github.com/lzontar/Text_Adaptation_To_Context
 .. _`Facemask Detection`: https://github.com/samuel-karanja/facemask-derection
