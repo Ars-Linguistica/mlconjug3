@@ -57,7 +57,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'MLConjug3'
-author = u'ArsLinguistica'
+author = u'Sekou Diao, ArsLinguistica'
 copyright = u"2023, ArsLinguistica"
 
 # The version info for the project you're documenting, acts as replacement
