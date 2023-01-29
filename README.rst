@@ -9,7 +9,7 @@
         :target: https://GitHub.com/Ars-Linguistica/mlconjug3/graphs/commit-activity
         :alt: Package Maintenance Status
 
-.. image:: https://img.shields.io/badge/maintainer-Ars-Linguistica-blue
+.. image:: https://img.shields.io/badge/maintainer-SekouDiaoNlp-blue
         :target: https://GitHub.com/Ars-Linguistica/mlconjug3
         :alt: Package Maintener
 
