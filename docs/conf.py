@@ -57,8 +57,8 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'MLConjug3'
-author = u'SekouDiaoNlp'
-copyright = u"2021, SekouDiaoNlp"
+author = u'ArsLinguistica'
+copyright = u"2021, ArsLinguistica"
 
 # The version info for the project you're documenting, acts as replacement
 # for |version| and |release|, also used in various other places throughout
@@ -216,7 +216,7 @@ latex_elements = {
 latex_documents = [
     ('index', 'mlconjug3.tex',
      u'MLConjug Documentation',
-     u'SekouDiaoNlp', 'manual'),
+     u'ArsLinguistica', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at
@@ -247,7 +247,7 @@ latex_documents = [
 man_pages = [
     ('index', 'mlconjug3',
      u'MLConjug3 Documentation',
-     [u'SekouDiaoNlp'], 1)
+     [u'ArsLinguistica'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -262,7 +262,7 @@ man_pages = [
 texinfo_documents = [
     ('index', 'mlconjug3',
      u'MLConjug3 Documentation',
-     u'SekouDiaoNlp',
+     u'ArsLinguistica',
      'mlconjug3',
      'One line description of project.',
      'Miscellaneous'),

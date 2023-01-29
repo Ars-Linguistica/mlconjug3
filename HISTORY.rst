@@ -92,7 +92,7 @@ History
 * Updated dependencies.
 
 
-.. _`GitHub Actions Workflows`: https://github.com/SekouDiaoNlp/mlconjug3/actions
+.. _`GitHub Actions Workflows`: https://github.com/ArsLinguistica/mlconjug3/actions
 .. _conda: https://docs.conda.io/projects/conda/en/latest/user-guide/getting-started.html
 .. _conda-forge: https://anaconda.org/conda-forge/
 

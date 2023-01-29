@@ -5,7 +5,7 @@ Credits
 Development Lead
 ----------------
 
-* SekouDiaoNlp <diao.sekou.nlp@gmail.com> GPG key ID: B51D1046EF63C50B
+* ArsLinguistica <diao.sekou.nlp@gmail.com> GPG key ID: B51D1046EF63C50B
 
 Contributors
 ------------

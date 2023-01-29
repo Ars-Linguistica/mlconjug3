@@ -13,7 +13,7 @@ PyVerbiste.
 
 """
 
-__author__ = 'SekouDiaoNlp'
+__author__ = 'ArsLinguistica'
 __author_email__ = 'diao.sekou.nlp@gmail.com'
 
 

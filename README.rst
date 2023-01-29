@@ -1,4 +1,4 @@
-.. image:: https://raw.githubusercontent.com/SekouDiaoNlp/mlconjug3/master/logo/logotype2%20mlconjug.png
+.. image:: https://raw.githubusercontent.com/ArsLinguistica/mlconjug3/master/logo/logotype2%20mlconjug.png
         :target: https://pypi.python.org/pypi/mlconjug3
         :alt: mlconjug3 PyPi Home Page
 
@@ -8,15 +8,15 @@ MLCONJUG3
 
 
 .. image:: https://img.shields.io/badge/Maintained%3F-yes-green.svg
-        :target: https://GitHub.com/SekouDiaoNlp/mlconjug3/graphs/commit-activity
+        :target: https://GitHub.com/ArsLinguistica/mlconjug3/graphs/commit-activity
         :alt: Package Maintenance Status
 
-.. image:: https://img.shields.io/badge/maintainer-SekouDiaoNlp-blue
-        :target: https://GitHub.com/SekouDiaoNlp/mlconjug3
+.. image:: https://img.shields.io/badge/maintainer-ArsLinguistica-blue
+        :target: https://GitHub.com/ArsLinguistica/mlconjug3
         :alt: Package Maintener
 
-.. image:: https://github.com/SekouDiaoNlp/mlconjug3/workflows/mlconjug3/badge.svg
-        :target: https://github.com/SekouDiaoNlp/mlconjug3/actions
+.. image:: https://github.com/ArsLinguistica/mlconjug3/workflows/mlconjug3/badge.svg
+        :target: https://github.com/ArsLinguistica/mlconjug3/actions
         :alt: Build status on Windows, MacOs and Linux
 
 .. image:: https://img.shields.io/pypi/v/mlconjug3.svg
@@ -39,16 +39,16 @@ MLCONJUG3
         :target: https://mlconjug3.readthedocs.io/en/latest
         :alt: Documentation Status
 
-.. image:: https://pyup.io/repos/github/SekouDiaoNlp/mlconjug3/shield.svg
-        :target: https://pyup.io/repos/github/SekouDiaoNlp/mlconjug3/
+.. image:: https://pyup.io/repos/github/ArsLinguistica/mlconjug3/shield.svg
+        :target: https://pyup.io/repos/github/ArsLinguistica/mlconjug3/
         :alt: Dependencies status
 
-.. image:: https://codecov.io/gh/SekouDiaoNlp/mlconjug3/branch/master/graph/badge.svg
-        :target: https://codecov.io/gh/SekouDiaoNlp/mlconjug3
+.. image:: https://codecov.io/gh/ArsLinguistica/mlconjug3/branch/master/graph/badge.svg
+        :target: https://codecov.io/gh/ArsLinguistica/mlconjug3
         :alt: Code Coverage Status
 
 .. image:: https://snyk-widget.herokuapp.com/badge/pip/mlconjug3/badge.svg
-        :target: https://snyk.io/test/github/SekouDiaoNlp/mlconjug3?targetFile=requirements.txt
+        :target: https://snyk.io/test/github/ArsLinguistica/mlconjug3?targetFile=requirements.txt
         :alt: Code Vulnerability Status
 
 .. image:: https://img.shields.io/pypi/dm/mlconjug3?label=PyPi%20Downloads
@@ -171,7 +171,7 @@ If you want to cite mlconjug3 in an academic publication use this citation forma
    @article{mlconjug3,
      title={mlconjug3},
      author={Sekou Diao},
-     journal={GitHub. Note: https://github.com/SekouDiaoNlp/mlconjug3 Cited by},
+     journal={GitHub. Note: https://github.com/ArsLinguistica/mlconjug3 Cited by},
      year={2021}
    }
 
