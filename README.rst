@@ -41,35 +41,17 @@
         :target: https://anaconda.org/conda-forge/mlconjug3
         :alt: Conda
 
-.. image:: https://github.com/SekouDiaoNlp/mlconjug3/workflows/mlconjug3/badge.svg
-        :target: https://github.com/SekouDiaoNlp/mlconjug3/actions
-        :alt: Build status on Windows, MacOs and Linux
-
 .. image:: https://pyup.io/repos/github/Ars-Linguistica/mlconjug3/shield.svg
         :target: https://pyup.io/repos/github/Ars-Linguistica/mlconjug3/
         :alt: Dependencies status
-
 
 .. image:: https://codecov.io/gh/Ars-Linguistica/mlconjug3/branch/master/graph/badge.svg
         :target: https://codecov.io/gh/Ars-Linguistica/mlconjug3
         :alt: Code Coverage Status
 
-
 .. image:: https://snyk-widget.herokuapp.com/badge/pip/mlconjug3/badge.svg
         :target: https://snyk.io/test/github/Ars-Linguistica/mlconjug3?targetFile=requirements.txt
         :alt: Code Vulnerability Status
-
-.. image:: https://img.shields.io/badge/Maintained%3F-yes-green.svg
-        :target: https://GitHub.com/SekouDiaoNlp/mlconjug3/graphs/commit-activity
-        :alt: Package Maintenance Status
-
-.. image:: https://api.securityscorecards.dev/projects/github.com/SekouDiaoNlp/mlconjug3/badge
-        :target: https://api.securityscorecards.dev/projects/github.com/SekouDiaoNlp/mlconjug3/
-        :alt: OpenSSF ScoreCard
-
-.. image:: https://codecov.io/gh/SekouDiaoNlp/mlconjug3/branch/master/graph/badge.svg
-        :target: https://codecov.io/gh/SekouDiaoNlp/mlconjug3
-        :alt: Code Coverage Status
 
 .. image:: https://img.shields.io/mastodon/follow/109313632815812004?domain=https%3A%2F%2Ffosstodon.org&style=plastic
         :target: https://fosstodon.org/@SekouDiao
