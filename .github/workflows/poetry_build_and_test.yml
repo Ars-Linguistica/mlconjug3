@@ -9,6 +9,7 @@ concurrency:
   
 jobs:
     build_wheels_with_poetry:
+        if: github.actor!= 'dependabot-preview[bot]'
         name: Build poetry packages on ${{ matrix.os }} on ${{ matrix.python-version }}
         runs-on: ${{ matrix.os }}
         defaults:
