@@ -1,4 +1,4 @@
-.. image:: https://raw.githubusercontent.com/ArsLinguistica/mlconjug3/master/logo/logotype2%20mlconjug.png
+.. image:: https://raw.githubusercontent.com/Ars-Linguistica/mlconjug3/master/logo/logotype2%20mlconjug.png
         :target: https://pypi.python.org/pypi/mlconjug3
         :alt: mlconjug3 PyPi Home Page
 
@@ -6,23 +6,23 @@
 
 
 .. image:: https://img.shields.io/badge/Maintained%3F-yes-green.svg
-        :target: https://GitHub.com/ArsLinguistica/mlconjug3/graphs/commit-activity
+        :target: https://GitHub.com/Ars-Linguistica/mlconjug3/graphs/commit-activity
         :alt: Package Maintenance Status
 
-.. image:: https://img.shields.io/badge/maintainer-ArsLinguistica-blue
-        :target: https://GitHub.com/ArsLinguistica/mlconjug3
+.. image:: https://img.shields.io/badge/maintainer-Ars-Linguistica-blue
+        :target: https://GitHub.com/Ars-Linguistica/mlconjug3
         :alt: Package Maintener
 
 .. image:: https://bestpractices.coreinfrastructure.org/projects/6961/badge
         :target: https://bestpractices.coreinfrastructure.org/projects/6961/
         :alt: OpenSSF Best Practices
 
-.. image:: https://api.securityscorecards.dev/projects/github.com/ArsLinguistica/mlconjug3/badge
-        :target: https://api.securityscorecards.dev/projects/github.com/ArsLinguistica/mlconjug3/
+.. image:: https://api.securityscorecards.dev/projects/github.com/Ars-Linguistica/mlconjug3/badge
+        :target: https://api.securityscorecards.dev/projects/github.com/Ars-Linguistica/mlconjug3/
         :alt: OpenSSF ScoreCard
 
-.. image:: https://github.com/ArsLinguistica/mlconjug3/workflows/mlconjug3/badge.svg
-        :target: https://github.com/ArsLinguistica/mlconjug3/actions
+.. image:: https://github.com/Ars-Linguistica/mlconjug3/workflows/mlconjug3/badge.svg
+        :target: https://github.com/Ars-Linguistica/mlconjug3/actions
         :alt: Build status on Windows, MacOs and Linux
 
 .. image:: https://img.shields.io/pypi/v/mlconjug3.svg
@@ -45,18 +45,18 @@
         :target: https://github.com/SekouDiaoNlp/mlconjug3/actions
         :alt: Build status on Windows, MacOs and Linux
 
-.. image:: https://pyup.io/repos/github/ArsLinguistica/mlconjug3/shield.svg
-        :target: https://pyup.io/repos/github/ArsLinguistica/mlconjug3/
+.. image:: https://pyup.io/repos/github/Ars-Linguistica/mlconjug3/shield.svg
+        :target: https://pyup.io/repos/github/Ars-Linguistica/mlconjug3/
         :alt: Dependencies status
 
 
-.. image:: https://codecov.io/gh/ArsLinguistica/mlconjug3/branch/master/graph/badge.svg
-        :target: https://codecov.io/gh/ArsLinguistica/mlconjug3
+.. image:: https://codecov.io/gh/Ars-Linguistica/mlconjug3/branch/master/graph/badge.svg
+        :target: https://codecov.io/gh/Ars-Linguistica/mlconjug3
         :alt: Code Coverage Status
 
 
 .. image:: https://snyk-widget.herokuapp.com/badge/pip/mlconjug3/badge.svg
-        :target: https://snyk.io/test/github/ArsLinguistica/mlconjug3?targetFile=requirements.txt
+        :target: https://snyk.io/test/github/Ars-Linguistica/mlconjug3?targetFile=requirements.txt
         :alt: Code Vulnerability Status
 
 .. image:: https://img.shields.io/badge/Maintained%3F-yes-green.svg
@@ -112,7 +112,7 @@ Join us in our mission to make linguistic tools and resources accessible to all!
 ----
 
 
-.. image:: https://raw.githubusercontent.com/ArsLinguistica/mlconjug3/master/docs/images/to_be.png
+.. image:: https://raw.githubusercontent.com/Ars-Linguistica/mlconjug3/master/docs/images/to_be.png
         :alt: Conjugation for the verb to be.
         
 ----
@@ -206,13 +206,13 @@ You can either clone the public repository:
 
 .. code-block:: console
 
-    $ git clone git://github.com/ArsLinguistica/mlconjug3
+    $ git clone git://github.com/Ars-Linguistica/mlconjug3
 
 Or download the `tarball`_:
 
 .. code-block:: console
 
-    $ curl  -OL https://github.com/ArsLinguistica/mlconjug3/tarball/master
+    $ curl  -OL https://github.com/Ars-Linguistica/mlconjug3/tarball/master
 
 Once you have a copy of the source, get in the source directory and you can install it with:
 
@@ -229,8 +229,8 @@ Alternatively, you can use poetry to install the software:
     $ poetry install
 
 
-.. _Github repo: https://github.com/ArsLinguistica/mlconjug3
-.. _tarball: https://github.com/ArsLinguistica/mlconjug3/tarball/master
+.. _Github repo: https://github.com/Ars-Linguistica/mlconjug3
+.. _tarball: https://github.com/Ars-Linguistica/mlconjug3/tarball/master
 
 
 
@@ -264,7 +264,7 @@ If you want to cite mlconjug3 in an academic publication use this citation forma
    @article{mlconjug3,
      title={mlconjug3},
      author={Sekou Diao},
-     journal={GitHub. Note: https://github.com/ArsLinguistica/mlconjug3 Cited by},
+     journal={GitHub. Note: https://github.com/Ars-Linguistica/mlconjug3 Cited by},
      year={2023}
    }
 
