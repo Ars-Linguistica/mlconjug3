@@ -39,13 +39,13 @@ To see a list of mlconjug3's commands type 'mlconjug3 -h' from the command line:
     Examples of how to use mlconjug3 from the terminal with a config file:
 
     To use a config file in your home directory:
-    $ mlconjug3 -c
+    $ mlconjug3 -c have
 
     To use a specific config file:
-    $ mlconjug3 -c /path/to/config.toml
+    $ mlconjug3 -c /path/to/config.toml have be eat
 
     To use a specific config file and override some of the settings:
-    $ mlconjug3 -c /path/to/config.toml -l en -s pronoun -o conjugation_table.json -f json
+    $ mlconjug3 -c /path/to/config.toml -l en -s pronoun -o conjugation_table.json -f json have fly
   
   Options:
     -l, --language TEXT     The language for the conjugation pipeline. The
