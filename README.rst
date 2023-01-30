@@ -279,6 +279,8 @@ Software projects using mlconjug3
   | Translation flask API for the Helsinki NLP models available in the Huggingface Transformers library.
 - | `NLP-Suite`_
   | NLP Suite is a package of tools designed for non-specialists, for scholars with no knowledge or little knowledge of Natural Language Processing.
+- | `Runebook`_
+  | Runebook translates various references such as programming languages, frameworks, libraries, and APIs that software engineers refer to in development.
 - | `Gender Bias Visualization`_
   | This project offers tools to visualize the gender bias in pre-trained language models to better understand the prejudices in the data.
 - | `Text Adaptation To Context`_
@@ -396,6 +398,7 @@ The logo was designed by Zuur_.
 .. _`Fluorescing Questions: Effects of Semantic Perturbations on BERT Performance in SQuAD 1.1`: https://github.com/spencerng/squad-sentiment/blob/87b42a41ba7f4f3f8d4e6c478f746d6cdf9f5515/assets/semantic-perturbations-bert-performance.pdf
 .. _`Extensions and Applications of Deep Probabilistic Inference for Generative Models`: https://drive.google.com/file/d/10IXi-RleFoG9L6G70TEKbAGd-v29R2Zz/view?usp=sharing
 .. _`EDS-NLP`: https://github.com/aphp/edsnlp
+.. _`Runebook`: https://github.com/runebookdev/runebook/tree/4391d52588bb5c5c0e7d49a0c31b4bdc1cbffb47
 .. _`Gender Bias Visualization`: https://github.com/GesaJo/Gender-Bias-Visualization
 .. _`Text Adaptation To Context`: https://github.com/lzontar/Text_Adaptation_To_Context
 .. _`Facemask Detection`: https://github.com/samuel-karanja/facemask-derection
