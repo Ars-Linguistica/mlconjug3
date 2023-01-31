@@ -4,16 +4,16 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "mlconjug3"
-version = "3.10.0"
+version = "3.10.1"
 description = "A Command Line application and Python library to conjugate French, English, Spanish, Italian, Portuguese and Romanian verbs using Machine Learning techniques."
 license = "MIT license"
 keywords = ["mlconjug3", "conjugate", "conjugator", "conjugation", "conjugaison", "conjugación", "coniugazione", "conjugação", "conjugare", "verbs", "verbes", "verbos", "ML", "machine-learning", "NLP", "linguistics", "linguistique", "linguistica", "conjug_manager", "sklearn", "scikit-learn"]
 classifiers = ["Development Status :: 5 - Production/Stable", "Topic :: Software Development :: Libraries :: Python Modules", "Topic :: Education", "Topic :: Scientific/Engineering :: Artificial Intelligence", "Topic :: Utilities", "Intended Audience :: Developers", "Intended Audience :: End Users/Desktop", "Intended Audience :: Education", "Intended Audience :: Science/Research", "License :: OSI Approved :: MIT License", "Natural Language :: English", "Natural Language :: French", "Natural Language :: Spanish", "Natural Language :: Italian", "Natural Language :: Portuguese", "Natural Language :: Romanian", "Operating System :: OS Independent", "Programming Language :: Python :: 3", "Programming Language :: Python :: 3.8", "Programming Language :: Python :: 3.9", "Programming Language :: Python :: 3.10", "Programming Language :: Python :: 3.11"]
-homepage = "https://github.com/SekouDiaoNlp/mlconjug3"
-authors = ["SekouDiaoNlp <diao.sekou.nlp@gmail.com>"]
-repository = "https://github.com/SekouDiaoNlp/mlconjug3"
+homepage = "https://github.com/Ars-Linguistica/mlconjug3"
+authors = ["Sekou Diao, Ars-Linguistica <diao.sekou.nlp@gmail.com>"]
+repository = "https://github.com/Ars-Linguistica/mlconjug3"
 documentation = "https://mlconjug3.readthedocs.io/en/latest/readme.html"
-maintainers = ["SekouDiaoNlp <diao.sekou.nlp@gmail.com>"]
+maintainers = ["Ars-Linguistica <diao.sekou.nlp@gmail.com>"]
 readme = "README.rst"
 packages = [
     { include = 'mlconjug3' },
@@ -33,22 +33,18 @@ mlconjug3 = 'mlconjug3.cli:main'
 [tool.poetry.dependencies]
 python = ">=3.8.0,<3.12"
 click = "~8.1.3"
-colorama = "~0.4.6"
-cython = "~0.29.33"
 defusedxml = "~0.7.1"
 joblib = "~1.2.0"
-scikit-learn = "==1.2.0,>=1.2.0"
-numpy = "~1.24.1"
-rich = "~13.2.0"
+scikit-learn = "==1.2.1"
+rich = ">=13.2,<13.4"
 pyyaml = "~6.0"
 tomlkit = "~0.11.6"
-hydra-core = "~1.3.1"
 
 [tool.poetry.dev-dependencies]
 asq = "~1.3.0"
 bandit = "~1.7.4"
 bump2version = "~1.0.1"
-coverage = "~7.0.5"
+coverage = "~7.1.0"
 cryptography = "~39.0.0"
 docutils = "~0.19"
 mypy = "~0.991"
@@ -57,9 +53,9 @@ pytest = "~7.2.1"
 pytest-runner = "~6.0.0"
 pyyaml = "~6.0"
 sphinx = "~6.1.3"
-tox = "~4.3.5"
+tox = "~4.4.3"
 twine = "~4.0.0"
-pytest-cov = "~3.0.0"
+pytest-cov = "~4.0.0"
 codecov = "~2.1.12"
 furo = "~2022.12.7"
 

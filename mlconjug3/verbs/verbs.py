@@ -10,6 +10,7 @@ and options for subject pronoun format and whether or not the conjugation inform
 The class also has methods for iterating through the conjugated forms and loading pronoun conjugations.
 """
 
+import abc
 from collections import OrderedDict
 from mlconjug3.constants import *
 
@@ -51,7 +52,58 @@ class VerbInfo:
         return self.infinitive == other.infinitive and self.root == other.root and self.template == other.template
 
 
-class Verb:
+class VerbMeta(abc.ABCMeta):
+    """
+    This is a metaclass for creating verb classes.
+    It contains the following abstract methods:
+    - __init__: Initializes the verb class with verb information, conjugation information, subject (default is 'abbrev') and a flag for whether the verb is predicted or not
+    - __getitem__: Allows for indexing of the verb class
+    - __setitem__: Allows for setting values of the verb class through indexing
+    - __contains__: Allows for checking if a key is present in the verb class
+    - __iter__: Allows for iteration over the verb class
+    - language: An abstract property that should be implemented to return the language of the verb class
+    - iterate: An abstract method that should be implemented to iterate over all forms of the verb
+    - load_conjug: An abstract method that should be implemented to load conjugation information for the verb
+    - conjugate: An abstract method that should be implemented to conjugate the verb based on the subject and tense provided
+    """
+    @abc.abstractmethod
+    def __init__(self, verb_info, conjug_info, subject='abbrev', predicted=False):
+        pass
+
+    @abc.abstractproperty
+    def language(self):
+        pass
+    
+    @abc.abstractmethod
+    def __getitem__(self, key):
+        pass
+
+    @abc.abstractmethod
+    def __setitem__(self, key, value):
+        pass
+
+    @abc.abstractmethod
+    def __contains__(self, item):
+        pass
+
+    @abc.abstractmethod
+    def __iter__(self):
+        pass
+
+    @abc.abstractmethod
+    def iterate(self):
+        pass
+
+    @abc.abstractmethod
+    def load_conjug(self):
+        pass
+
+    @abc.abstractmethod
+    def conjugate(self, subject, tense):
+        pass
+
+
+class Verb(metaclass=VerbMeta):
     """
     This class defines the Verb Object.
     
@@ -288,7 +340,10 @@ class VerbEn(Verb):
                     self.conjug_info[mood][tense_name] = persons_dict
                 elif isinstance(persons, str):
                     prefix = 'to ' if tense_name == 'infinitive present' else ''
-                    self.conjug_info[mood][tense_name] = prefix + self.verb_info.root + persons
+                    if tense_name == 'infinitive present':
+                        self.conjug_info[mood][tense_name] = prefix + self.verb_info.infinitive
+                    else:
+                        self.conjug_info[mood][tense_name] = prefix + self.verb_info.root + persons
                 elif persons is None:
                     prefix = 'to ' if tense_name == 'infinitive present' else ''
                     self.conjug_info[mood][tense_name] = prefix + self.verb_info.infinitive

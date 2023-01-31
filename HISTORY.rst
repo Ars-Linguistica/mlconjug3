@@ -116,7 +116,7 @@ We are excited to announce the release of mlconjug3 version 3.10! This release b
 * Updated dependencies.
 
 
-.. _`GitHub Actions Workflows`: https://github.com/SekouDiaoNlp/mlconjug3/actions
+.. _`GitHub Actions Workflows`: https://github.com/Ars-Linguistica/mlconjug3/actions
 .. _conda: https://docs.conda.io/projects/conda/en/latest/user-guide/getting-started.html
 .. _conda-forge: https://anaconda.org/conda-forge/
 

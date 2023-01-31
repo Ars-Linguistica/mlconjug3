@@ -23,17 +23,12 @@ try:
 except FileNotFoundError:
     requirements = [
         'defusedxml',
-        'cython',
         'Click>=8.0.3',
-        'numpy',
-        'scipy',
         'scikit-learn>=1.2.0',
-        'colorama',
         'joblib',
         'rich',
         'pyyaml',
         'tomlkit',
-        'hydra-core',
     ]
 
 try:
@@ -62,13 +57,13 @@ setup_requirements = [
 
 setup(
     name='mlconjug3',
-    version='3.10.0',
+    version='3.10.1',
     description="A Python library to conjugate French, English, Spanish, Italian, Portuguese and Romanian verbs using Machine Learning techniques.",
     long_description=readme + '\n\n' + installation + '\n\n' + usage + '\n\n' + history,
     long_description_content_type="text/x-rst",
-    author="SekouDiaoNlp",
+    author="Ars-Linguistica",
     author_email='diao.sekou.nlp@gmail.com',
-    url='https://github.com/SekouDiaoNlp/mlconjug3',
+    url='https://github.com/Ars-Linguistica/mlconjug3',
     packages=find_packages(include=['mlconjug3']),
     entry_points={
         'console_scripts': [

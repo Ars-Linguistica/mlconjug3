@@ -10,7 +10,7 @@ More information on Verbiste at https://perso.b2b2c.ca/~sarrazip/dev/conjug_mana
 
 """
 
-__author__ = 'SekouDiaoNlp'
+__author__ = 'Ars-Linguistica'
 __author_email__ = 'diao.sekou.nlp@gmail.com'
 
 
@@ -44,7 +44,9 @@ class Verbiste(ConjugManager):
 
     def _load_cache(self, file):
         file_path = os.path.abspath(file)
-        pkl_file = file_path.replace('.xml', '.pkl')
+        if not file_path.endswith('.xml'):
+            raise ValueError(f"Invalid file path, expected .xml file, got {file_path}")
+        pkl_file = file_path + '.pkl'
         
         if os.path.isfile(pkl_file):
             last_modified_time_file = os.path.getmtime(file_path)
@@ -89,7 +91,7 @@ class Verbiste(ConjugManager):
             root = verb_name if index == 0 else verb_name[:index]
             verbs_dic[verb_name] = {"template": template, "root": root}
         
-        pkl_file = file.replace('.xml', '.pkl')
+        pkl_file = file + '.pkl'
         joblib.dump(verbs_dic, pkl_file, compress = ('gzip', 3))
         return verbs_dic
 
@@ -127,7 +129,7 @@ class Verbiste(ConjugManager):
                 conjugations_dic[template_name][mood.tag] = OrderedDict()
                 for tense in list(mood):
                     conjugations_dic[template_name][mood.tag][tense.tag.replace('-', ' ')] = self._load_tense(tense)
-        pkl_file = file.replace('.xml', '.pkl')
+        pkl_file = file + '.pkl'
         joblib.dump(conjugations_dic, pkl_file, compress = ('gzip', 3))
         return conjugations_dic
 
