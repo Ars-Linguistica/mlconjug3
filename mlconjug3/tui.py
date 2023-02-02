@@ -18,81 +18,84 @@ The load_config function loads the configuration from a specified file in either
 import sys
 import os
 import click
+import textual
 from .mlconjug import Conjugator
 import json
 import tomlkit
 import yaml
 import logging
-import rich
-from textual import Terminal
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
-def main():
-    """
-    Examples of how to use mlconjug3 from the terminal
-    """
-    terminal = Terminal()
+@click.argument('verbs', nargs=-1)
+def main(verbs):
+    # create a Textual App instance
+    app = textual.App(title="mlconjug3")
 
-    with terminal.application("MLConjug3", layout="grid"):
-        with terminal.tab("Conjugate"):
-            with terminal.form("Verb Conjugation") as form:
-                language = form.choice("Language", options=["fr", "en", "es", "it", "pt", "ro"], default="fr")
-                verb = form.text("Verb", default="")
-                subject = form.choice("Subject", options=["abbrev", "pronoun"], default="abbrev")
-                output_file = form.text("Output file", default="")
-                file_format = form.choice("File format", options=["json", "csv"], default="json")
-                form.submit("Conjugate")
+    # create a prompt to enter verb to conjugate
+    prompt = textual.Prompt("Enter a verb to conjugate:", default="aimer")
+    verb = prompt.get()
 
-        with terminal.tab("Settings"):
-            with terminal.collapse("Load/Save Configurations"):
-                config_file = terminal.text("Config file", default="")
-                load_config_button = terminal.button("Load Config")
-                save_config_button = terminal.button("Save Config")
+    # create a tabbed panel for conjugation tables
+    conjugation_tabs = textual.TabbedPanel()
 
-            with terminal.collapse("Theme Settings"):
-                theme_settings = terminal.text("Theme Settings", default="")
-                apply_theme_button = terminal.button("Apply Theme")
-                reset_theme_button = terminal.button("Reset Theme")
-            
-        with terminal.tab("Help"):
-            terminal.text("Help content")
-    
-    if form.is_submitted():
-        # process the form data
-        config_options = load_config(config_file)
-        language = config_options.get('language', language)
-        subject = config_options.get('subject', subject)
-        output = config_options.get('output', output_file)
-        file_format = config_options.get('file_format', file_format)
-        conjugator = Conjugator(language=language, subject=subject)
-        conjugated_verb = conjugator.conjugate(verb)
-        if file_format == "json":
-            with open(output_file, "w") as f:
-                f.write(json.dumps(conjugated_verb))
-        elif file_format == "csv":
-            # write to csv file
-        else:
-            raise ValueError(f"Invalid file format: {file_format}")
-        
-    # show the terminal
-    terminal.run()
+    # create a collapsible widget to display the conjugation table
+    conjugation_table = textual.CollapsibleWidget("Conjugation table")
 
-def load_config(config_file):
-    """
-    Loads configuration from the specified file. Supports toml and yaml file formats.
-    """
-    if not config_file:
-        return {}
+    # add the verb conjugation table to the collapsible widget
+    conjugation_table.add(get_conjugation_table(verb))
 
-    if config_file.endswith(".toml"):
-        with open(config_file, "r") as f:
-            return tomlkit.loads(f.read())
-    elif config_file.endswith(".yaml") or config_file.endswith(".yml"):
-        with open(config_file, "r") as f:
-            return yaml.load(f.read(), Loader=yaml.SafeLoader)
-    else:
-        raise ValueError(f"Invalid configuration file format. Only .toml and .yaml formats are supported, not {config_file}")
+    # add the collapsible widget to the tabbed panel
+    conjugation_tabs.add(conjugation_table, title=verb)
 
-if __name__ == '__main__':
-    logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
-    main()
+    # add the tabbed panel to the app
+    app.add(conjugation_tabs)
+
+    # create a button to replicate the functionality of saving the conjugation tables
+    save_button = textual.Button("Save", action=save_conjugation_table)
+
+    # add the button to the app
+    app.add(save_button)
+
+    # create a menu to replicate the functionality of choosing the language, subject type, saving options, as well as setting a theme and saving loading settings
+    settings_menu = textual.Menu("Settings")
+
+    # add the menu options to the menu
+    settings_menu.add("Choose language", action=choose_language)
+    settings_menu.add("Choose subject type", action=choose_subject_type)
+    settings_menu.add("Save options", action=save_options)
+    settings_menu.add("Set theme", action=set_theme)
+    settings_menu.add("Save/Load settings", action=save_load_settings)
+
+    # add the menu to the app
+    app.add(settings_menu)
+
+    # run the app
+    app.run()
+
+def get_conjugation_table(verb):
+    """Get the conjugation table for the verb"""
+    conjugator = Conjugator()
+    conjugation_data = conjugator.conjugate(verb)
+    # format the conjugation data as a table
+    table = ...
+    return table
+
+def save_conjugation_table():
+    """Save the conjugation table to a file"""
+    pass
+
+def choose_language():
+    """Choose the language for the conjugation pipeline"""
+    pass
+
+def choose_subject_type():
+    """Choose the subject format type for the conjugated forms"""
+    pass
+
+def save_options():
+    """Save the options for the conjugation pipeline"""
+    pass
+
+def set_theme():
+    """Set the theme for the conjugation table columns"""
+    pass
