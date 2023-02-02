@@ -29,6 +29,7 @@ exclude = [
 
 [tool.poetry.scripts]
 mlconjug3 = 'mlconjug3.cli:main'
+mlconjug3_tui = 'mlconjug3.tui:main'
 
 [tool.poetry.dependencies]
 python = ">=3.8.0,<3.12"
