@@ -81,7 +81,10 @@ class ConjugatorApp(App):
         yield VerbInputBox(self.conjugator)
         yield ConjugationDisplay("", self.conjugator)
 
-if __name__ == "__main__":
+def main():
     conjugator = Conjugator()
     app = ConjugatorApp(conjugator)
     app.run()
+
+if __name__ == "__main__":
+    main()
