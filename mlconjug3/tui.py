@@ -70,6 +70,7 @@ def main():
             with open(output_file, "w") as f:
                 f.write(json.dumps(conjugated_verb))
         elif file_format == "csv":
+            pass
             # write to csv file
         else:
             raise ValueError(f"Invalid file format: {file_format}")
