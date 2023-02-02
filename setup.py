@@ -27,6 +27,7 @@ except FileNotFoundError:
         'scikit-learn>=1.2.1',
         'joblib',
         'rich',
+        'textual',
         'pyyaml',
         'tomlkit',
     ]
