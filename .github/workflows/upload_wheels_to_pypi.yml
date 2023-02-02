@@ -49,7 +49,7 @@ jobs:
                     virtualenvs-in-project: true
             -   name: Load cached venv
                 id: cached-pip-wheels
-                uses: actions/cache@58c146cc91c5b9e778e71775dfe9bf1442ad9a12 # v3.2.3
+                uses: actions/cache@627f0f41f6904a5b1efbaed9f96d9eb58e92e920 # v3.2.4
                 with:
                     path: ~/.cache
                     key: venv-${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('**/poetry.lock') }}
@@ -71,7 +71,7 @@ jobs:
             -   name: Build Package
                 run: poetry build
             -   name: Sign with sigstore
-                uses: sigstore/gh-action-sigstore-python@6b203deb6739fa707744be136400b8fccb1a72bd # v1.0.0
+                uses: sigstore/gh-action-sigstore-python@9ea3c9d0bed14de820f1ce678e194c250580feb4 # v1.1.0
                 with:
                   upload-signing-artifacts: true
                   release-signing-artifacts: true

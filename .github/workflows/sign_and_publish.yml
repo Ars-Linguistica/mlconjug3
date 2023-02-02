@@ -40,7 +40,7 @@ jobs:
                 with:
                     python-version: ${{ matrix.python-version }}
 
-            -   uses: actions/cache@58c146cc91c5b9e778e71775dfe9bf1442ad9a12 # v3.2.3
+            -   uses: actions/cache@627f0f41f6904a5b1efbaed9f96d9eb58e92e920 # v3.2.4
                 with:
                     path: ${{ matrix.path }}
                     key: ${{ runner.os }}-pip-${{ matrix.python-version }}-${{ hashFiles('**/requirements.txt') }}-${{ hashFiles('**/requirements_dev.txt') }}
@@ -62,7 +62,7 @@ jobs:
                 run: |
                     python setup.py sdist bdist_wheel
             -   name: Sign package with sigstore
-                uses: sigstore/gh-action-sigstore-python@6b203deb6739fa707744be136400b8fccb1a72bd # v1.0.0
+                uses: sigstore/gh-action-sigstore-python@9ea3c9d0bed14de820f1ce678e194c250580feb4 # v1.1.0
                 with:
                   inputs: dist/*.tar.gz dist/*.whl
             -   name: Publish a Python distribution to PyPI
