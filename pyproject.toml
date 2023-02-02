@@ -38,7 +38,7 @@ defusedxml = "~0.7.1"
 joblib = "~1.2.0"
 scikit-learn = "==1.2.1"
 rich = ">=13.2,<13.4"
-textual = "~0.10.1"
+textual = {extras = ["dev"], version = "^0.10.1"}
 pyyaml = "~6.0"
 tomlkit = "~0.11.6"
 
