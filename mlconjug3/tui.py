@@ -17,71 +17,61 @@ The load_config function loads the configuration from a specified file in either
 
 import sys
 import os
-import click
 from .mlconjug import Conjugator
 import json
 import tomlkit
 import yaml
 import logging
 import rich
+from textual import Window, TextView, Button
 
-from textual.app import App, ComposeResult
-from textual.containers import Container
-from textual.reactive import reactive
-from textual.widgets import Button, Header, Footer, Static, InputBox, Label
+class MainWindow(Window):
+    def __init__(self, language='fr', subject='abbrev'):
+        self.conjugator = Conjugator(language)
+        self.subject = subject
+        self.output = None
+        self.file_format = None
+        self.tab_views = []
+        self.current_tab = None
+        
+        # Set up the main window
+        super().__init__(title='mlconjug3')
+        self.set_layout('grid')
 
+        # Add a text view for entering the verb
+        self.verb_input = TextView(text='Enter a verb:', align='left')
+        self.add_view(self.verb_input, row=0, column=0, sticky='nsew', pad=10)
 
-class ConjugationDisplay(Static):
-    """A widget to display conjugation of a verb."""
+        # Add a button for conjugating the verb
+        conjugate_button = Button(text='Conjugate', align='left')
+        conjugate_button.on_click = self.conjugate
+        self.add_view(conjugate_button, row=0, column=1, pad=10)
 
-    def __init__(self, verb: str, conjugator: Conjugator):
-        self.verb = verb
-        self.conjugator = conjugator
-        self.conjugations = self.conjugator.conjugate(verb)
+        # Add a text view for the conjugated verb
+        self.conjugation_output = TextView(text='', align='left')
+        self.add_view(self.conjugation_output, row=1, column=0, column_span=2, sticky='nsew', pad=10)
 
-    @reactive
-    def watch_verb(self, verb: str) -> None:
-        """Called when the verb attribute changes."""
-        self.verb = verb
-        self.conjugations = self.conjugator.conjugate(verb)
-        self.update(self.conjugations)
+    def conjugate(self):
+        verb = self.verb_input.text
+        try:
+            conjugation = self.conjugator.conjugate(verb, subject=self.subject)
+        except Exception as e:
+            conjugation = str(e)
 
-    def compose(self) -> ComposeResult:
-        """Create child widgets of a conjugation display."""
-        yield Label("Conjugations:")
-        for tense, forms in self.conjugations.items():
-            yield Label(f"{tense}:")
-            for form, conjugation in forms.items():
-                yield Label(f"{form}: {conjugation}")
+        self.conjugation_output.text = str(conjugation)
 
-class VerbInputBox(InputBox):
-    """A widget for entering a verb to conjugate."""
+    def add_tab(self, conjugation):
+        tab_view = TextView(text=str(conjugation))
+        self.tab_views.append(tab_view)
+        self.current_tab = tab_view
 
-    def __init__(self, conjugator: Conjugator):
-        self.conjugator = conjugator
+    def switch_tab(self, index):
+        self.current_tab = self.tab_views[index]
+        self.conjugation_output.text = self.current_tab.text
 
-    def on_input(self, text: str) -> None:
-        """Event handler called when the user submits the verb."""
-        verb = text.strip()
-        if verb:
-            conjugation_display = self.query_one(ConjugationDisplay)
-            conjugation_display.watch_verb(verb)
-            self.clear()
+def run_app():
+    window = MainWindow()
+    window.run()
 
-class ConjugatorApp(App):
-    """A Textual app to conjugate verbs."""
-
-    def __init__(self, conjugator: Conjugator):
-        self.conjugator = conjugator
-
-    def compose(self) -> ComposeResult:
-        """Called to add widgets to the app."""
-        yield Header()
-        yield Footer()
-        yield VerbInputBox(self.conjugator)
-        yield ConjugationDisplay("", self.conjugator)
-
-if __name__ == "__main__":
-    conjugator = Conjugator()
-    app = ConjugatorApp(conjugator)
-    app.run()
+if __name__ == '__main__':
+    run_app()
