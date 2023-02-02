@@ -24,7 +24,7 @@ except FileNotFoundError:
     requirements = [
         'defusedxml',
         'Click>=8.0.3',
-        'scikit-learn>=1.2.0',
+        'scikit-learn>=1.2.1',
         'joblib',
         'rich',
         'pyyaml',
@@ -67,7 +67,8 @@ setup(
     packages=find_packages(include=['mlconjug3']),
     entry_points={
         'console_scripts': [
-            'mlconjug3=mlconjug3.cli:main'
+            'mlconjug3=mlconjug3.cli:main',
+            'mlconjug3_tui=mlconjug3.tui:main'
         ]
     },
     package_data={'conjug_manager': ['mlconjug3/data/conjug_manager/*'],
