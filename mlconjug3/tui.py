@@ -24,76 +24,64 @@ import tomlkit
 import yaml
 import logging
 import rich
-from textual import Terminal
 
-@click.command(context_settings=dict(help_option_names=["-h", "--help"]))
-def main():
-    """
-    Examples of how to use mlconjug3 from the terminal
-    """
-    terminal = Terminal()
+from textual.app import App, ComposeResult
+from textual.containers import Container
+from textual.reactive import reactive
+from textual.widgets import Button, Header, Footer, Static, InputBox, Label
 
-    with terminal.application("MLConjug3", layout="grid"):
-        with terminal.tab("Conjugate"):
-            with terminal.form("Verb Conjugation") as form:
-                language = form.choice("Language", options=["fr", "en", "es", "it", "pt", "ro"], default="fr")
-                verb = form.text("Verb", default="")
-                subject = form.choice("Subject", options=["abbrev", "pronoun"], default="abbrev")
-                output_file = form.text("Output file", default="")
-                file_format = form.choice("File format", options=["json", "csv"], default="json")
-                form.submit("Conjugate")
 
-        with terminal.tab("Settings"):
-            with terminal.collapse("Load/Save Configurations"):
-                config_file = terminal.text("Config file", default="")
-                load_config_button = terminal.button("Load Config")
-                save_config_button = terminal.button("Save Config")
+class ConjugationDisplay(Static):
+    """A widget to display conjugation of a verb."""
 
-            with terminal.collapse("Theme Settings"):
-                theme_settings = terminal.text("Theme Settings", default="")
-                apply_theme_button = terminal.button("Apply Theme")
-                reset_theme_button = terminal.button("Reset Theme")
-            
-        with terminal.tab("Help"):
-            terminal.text("Help content")
-    
-    if form.is_submitted():
-        # process the form data
-        config_options = load_config(config_file)
-        language = config_options.get('language', language)
-        subject = config_options.get('subject', subject)
-        output = config_options.get('output', output_file)
-        file_format = config_options.get('file_format', file_format)
-        conjugator = Conjugator(language=language, subject=subject)
-        conjugated_verb = conjugator.conjugate(verb)
-        if file_format == "json":
-            with open(output_file, "w") as f:
-                f.write(json.dumps(conjugated_verb))
-        elif file_format == "csv":
-            pass
-            # write to csv file
-        else:
-            raise ValueError(f"Invalid file format: {file_format}")
-        
-    # show the terminal
-    terminal.run()
+    def __init__(self, verb: str, conjugator: Conjugator):
+        self.verb = verb
+        self.conjugator = conjugator
+        self.conjugations = self.conjugator.conjugate(verb)
 
-def load_config(config_file):
-    """
-    Loads configuration from the specified file. Supports toml and yaml file formats.
-    """
-    if not config_file:
-        return {}
+    @reactive
+    def watch_verb(self, verb: str) -> None:
+        """Called when the verb attribute changes."""
+        self.verb = verb
+        self.conjugations = self.conjugator.conjugate(verb)
+        self.update(self.conjugations)
 
-    if config_file.endswith(".toml"):
-        with open(config_file, "r") as f:
-            return tomlkit.loads(f.read())
-    elif config_file.endswith(".yaml") or config_file.endswith(".yml"):
-        with open(config_file, "r") as f:
-            return yaml.load(f.read(), Loader=yaml.SafeLoader)
-    else:
-        raise ValueError(f"Invalid configuration file format. Only .toml and .yaml formats are supported, not {config_file}")
+    def compose(self) -> ComposeResult:
+        """Create child widgets of a conjugation display."""
+        yield Label("Conjugations:")
+        for tense, forms in self.conjugations.items():
+            yield Label(f"{tense}:")
+            for form, conjugation in forms.items():
+                yield Label(f"{form}: {conjugation}")
 
-if __name__ == '__main__':
-    logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
-    main()
+class VerbInputBox(InputBox):
+    """A widget for entering a verb to conjugate."""
+
+    def __init__(self, conjugator: Conjugator):
+        self.conjugator = conjugator
+
+    def on_input(self, text: str) -> None:
+        """Event handler called when the user submits the verb."""
+        verb = text.strip()
+        if verb:
+            conjugation_display = self.query_one(ConjugationDisplay)
+            conjugation_display.watch_verb(verb)
+            self.clear()
+
+class ConjugatorApp(App):
+    """A Textual app to conjugate verbs."""
+
+    def __init__(self, conjugator: Conjugator):
+        self.conjugator = conjugator
+
+    def compose(self) -> ComposeResult:
+        """Called to add widgets to the app."""
+        yield Header()
+        yield Footer()
+        yield VerbInputBox(self.conjugator)
+        yield ConjugationDisplay("", self.conjugator)
+
+if __name__ == "__main__":
+    conjugator = Conjugator()
+    app = ConjugatorApp(conjugator)
+    app.run()
