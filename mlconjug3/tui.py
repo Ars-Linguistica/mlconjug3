@@ -17,7 +17,6 @@ The load_config function loads the configuration from a specified file in either
 
 import sys
 import os
-import click
 import textual
 from .mlconjug import Conjugator
 import json
@@ -25,9 +24,7 @@ import tomlkit
 import yaml
 import logging
 
-@click.command(context_settings=dict(help_option_names=["-h", "--help"]))
-@click.argument('verbs', nargs=-1)
-def main(verbs):
+def main():
     # create a Textual App instance
     app = textual.App(title="mlconjug3")
 
