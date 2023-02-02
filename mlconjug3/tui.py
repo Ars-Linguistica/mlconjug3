@@ -1,3 +1,20 @@
+"""
+This is a Text User Interface (TUI) module that provides a terminal-based interface to the MLConjug3 verb conjugation library.
+
+The TUI uses the click library to build the command line interface and rich library to build the terminal interface. The TUI allows users to:
+
+Conjugate verbs in various languages (French, English, Spanish, Italian, Portuguese, and Romanian)
+Specify the language and subject (abbreviation or pronoun) for verb conjugation
+Save and load configuration options in either toml or yaml file format
+Apply custom themes to the terminal interface
+The TUI also provides a help tab with general information on how to use the application.
+
+The main function is the entry point to the TUI, it creates the terminal interface using rich library and launches the TUI using terminal.run().
+
+The load_config function loads the configuration from a specified file in either toml or yaml format.
+
+"""
+
 import sys
 import os
 import click
