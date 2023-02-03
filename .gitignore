@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Poetry
+poetry.lock
+
 # Pypi remote connection credentials
 .pypirc
 
@@ -68,4 +71,12 @@ target/
 
 # Training experiments results and old models
 utils/raw_data/old_models/
+utils/raw_data/
+conjugation_table.json
+conjugation_table.csv
 
+# Cached ressources
+mlconjug3/data/conjug_manager/*.pkl
+
+# MISC
+.pids/
