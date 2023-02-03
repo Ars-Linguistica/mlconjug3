@@ -98,7 +98,7 @@ Join us in our mission to make linguistic tools and resources accessible to all!
 ----
 
 
-.. image:: https://raw.githubusercontent.com/Ars-Linguistica/mlconjug3/master/docs/images/to_be.png
+.. image:: https://raw.githubusercontent.com/Ars-Linguistica/mlconjug3/master/docs/images/example.gif
         :alt: Conjugation for the verb to be.
         
 ----
