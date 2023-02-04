@@ -28,3 +28,28 @@ def conjugate(verb: str, language: str = 'fr', subject: str = 'abbrev', file_for
             <p>Conjugated forms: {conjugations}</p>
         </div>
     """
+
+def load_config(config):
+    """
+    Loads the config file in the given format (toml or yaml).
+    If no config file is specified, looks for a default file named /mlconjug3/config.toml or /mlconjug3/config.yaml' in the user’s home directory.
+    :param config: The path to the config file.
+    :type config: str
+    :return: A dictionary containing the configuration options.
+    :rtype: dict
+    """
+    if not config:
+        home = os.path.expanduser("~")
+        config = os.path.join(home, 'mlconjug3/config.toml')
+        if not os.path.isfile(config):
+            config = os.path.join(home, 'mlconjug3/config.yaml')
+            if not os.path.isfile(config):
+                return {}
+    config_options = {}
+    if config.endswith('.toml'):
+        with open(config, 'r') as config_file:
+            config_options = tomlkit.loads(config_file.read())
+    elif config.endswith('.yaml') or config.endswith('.yml'):
+        with open(config, 'r') as config_file:
+            config_options = yaml.load(config_file, Loader=yaml.FullLoader)
+    return config_options
