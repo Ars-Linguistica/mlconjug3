@@ -1,6 +1,5 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Query, File, UploadFile
 import os
-import tomlkit
 import yaml
 import htmx
 from .mlconjug import Conjugator
@@ -9,51 +8,54 @@ app = FastAPI()
 
 @app.get("/")
 def read_root():
-    return {"message": "Welcome to the Conjugator API"}
+    return {"message": "Welcome to the Conjugated Forms API"}
 
-@app.get("/conjugate")
+@app.post("/conjugate")
 @htmx.html
-def conjugate(verb: str, language: str = 'fr', subject: str = 'abbrev', file_format: str = 'json', config: str = None):
-    config_options = load_config(config)
+async def conjugate(verb: str = Query(None, title="Verb"), 
+             language: str = Query("fr", title="Language", description="The language to conjugate the verb in"), 
+             subject: str = Query("abbrev", title="Subject", description="The subject format (full or abbrev)"), 
+             file_format: str = Query("json", title="File Format", description="The format of the output file"), 
+             config: UploadFile = File(None)):
+    config_options = {}
+    if config:
+        config_file = await config.read()
+        config_options = yaml.load(config_file, Loader=yaml.FullLoader)
+
     language = config_options.get('language', language)
     subject = config_options.get('subject', subject)
     file_format = config_options.get('file_format', file_format)
-    theme_settings = config_options.get('theme', {})
 
-    conjugator = Conjugator(language)
-    conjugations = conjugator.conjugate(verb)
+    if not verb:
+        return """
+            <html>
+                <head>
+                    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+                </head>
+                <body>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col s12 m6 offset-m3">
+                                <div class="card red lighten-5">
+                                    <div class="card-content red-text">
+                                        <span class="card-title">Error</span>
+                                        <p>Please enter a verb to conjugate.</p>
+                                    </div>
+                                           </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </body>
+            </html>
+        """
+    conjugator = Conjugator(language=language, subject=subject)
+    conjugated_forms = conjugator.conjugate(verb)
 
-    return f"""
-        <div class="container">
-            <h1>Conjugated forms for "{verb}" in "{language}"</h1>
-            <p>Subject format: {subject}</p>
-            <p>Output format: {file_format}</p>
-            <p>Conjugated forms: {conjugations}</p>
-        </div>
-    """
-
-def load_config(config):
-    """
-    Loads the config file in the given format (toml or yaml).
-    If no config file is specified, looks for a default file named 
-    /mlconjug3/config.toml or /mlconjug3/config.yaml' in the user’s home directory.
-    :param config: The path to the config file.
-    :type config: str
-    :return: A dictionary containing the configuration options.
-    :rtype: dict
-    """
-    if not config:
-        home = os.path.expanduser("~")
-        config = os.path.join(home, 'mlconjug3/config.toml')
-        if not os.path.isfile(config):
-            config = os.path.join(home, 'mlconjug3/config.yaml')
-            if not os.path.isfile(config):
-                return {}
-    config_options = {}
-    if config.endswith('.toml'):
-        with open(config, 'r') as config_file:
-            config_options = tomlkit.loads(config_file.read())
-    elif config.endswith('.yaml') or config.endswith('.yml'):
-        with open(config, 'r') as config_file:
-            config_options = yaml.load(config_file, Loader=yaml.FullLoader)
-    return config_options
+    if file_format == "json":
+        return {"verb": verb, "conjugated_forms": conjugated_forms}
+    else:
+        return {"message": "File format not supported"}
+                        
