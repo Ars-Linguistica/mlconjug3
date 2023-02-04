@@ -59,3 +59,17 @@ async def conjugate(verb: str = Query(None, title="Verb"),
     else:
         return {"message": "File format not supported"}
                         
+def load_config(file_path):
+    if not file_path:
+        return {}
+    if file_path.endswith(".json"):
+        with open(file_path, "r") as f:
+            return json.load(f)
+    elif file_path.endswith(".toml"):
+        with open(file_path, "r") as f:
+            return tomlkit.parse(f.read())
+    elif file_path.endswith(".yaml") or file_path.endswith(".yml"):
+        with open(file_path, "r") as f:
+            return yaml.safe_load(f)
+    else:
+        raise ValueError("Unsupported configuration file format.")
