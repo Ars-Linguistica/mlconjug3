@@ -1,0 +1,40 @@
+<!-- index.html -->
+<html>
+  <head>
+    <title>mlconjug3 Web UI</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h1 class="text-center mb-5">mlconjug3 Web UI</h1>
+      <form>
+        <div class="form-group">
+          <label for="verbInput">Enter Verb:</label>
+          <input type="text" class="form-control" id="verbInput">
+        </div>
+        <div class="form-group">
+          <label for="languageSelect">Select Language:</label>
+          <select class="form-control" id="languageSelect">
+            <option value="fr">French</option>
+            <option value="en">English</option>
+            <option value="es">Spanish</option>
+            <option value="it">Italian</option>
+            <option value="pt">Portuguese</option>
+            <option value="ro">Romanian</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="subjectSelect">Select Subject Type:</label>
+          <select class="form-control" id="subjectSelect">
+            <option value="abbrev">Abbreviated</option>
+            <option value="pronoun">Pronoun</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </body>
+</html>
