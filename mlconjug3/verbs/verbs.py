@@ -297,15 +297,18 @@ class VerbFr(Verb):
                             key = GENDER[self.language][subject][pers]
                         elif tense_name == 'Imperatif Présent':
                             key = IMPERATIVE_PRONOUNS[self.language][subject][pers]
+                        elif tense_name == 'Participe Présent':
+                            key = ''
                         else:
-                            key = term
+                            key = ''
                         if term is not None:
                             self.conjugate_person(key, persons_dict, term)
                         else:
                             persons_dict[key] = None
                     self.conjug_info[mood][tense_name] = persons_dict
                 elif isinstance(persons, str):
-                    self.conjug_info[mood][tense_name] = self.verb_info.root + persons
+                    if not persons.startswith(self.verb_info.root):
+                        self.conjug_info[mood][tense_name] = self.verb_info.root + persons
         return
 
 
@@ -396,7 +399,8 @@ class VerbEs(Verb):
                             persons_dict[key] = None
                     self.conjug_info[mood][tense_name] = persons_dict
                 elif isinstance(persons, str):
-                    self.conjug_info[mood][tense_name] = self.verb_info.root + persons
+                    if not persons.startswith(self.verb_info.root):
+                        self.conjug_info[mood][tense_name] = self.verb_info.root + persons
         return
 
 
@@ -433,7 +437,8 @@ class VerbIt(Verb):
                             persons_dict[key] = None
                     self.conjug_info[mood][tense_name] = persons_dict
                 elif isinstance(persons, str):
-                    self.conjug_info[mood][tense_name] = self.verb_info.root + persons
+                    if not persons.startswith(self.verb_info.root):
+                        self.conjug_info[mood][tense_name] = self.verb_info.root + persons
         return
 
 
@@ -470,7 +475,8 @@ class VerbPt(Verb):
                             persons_dict[key] = None
                     self.conjug_info[mood][tense_name] = persons_dict
                 elif isinstance(persons, str):
-                    self.conjug_info[mood][tense_name] = self.verb_info.root + persons
+                    if not persons.startswith(self.verb_info.root):
+                        self.conjug_info[mood][tense_name] = self.verb_info.root + persons
         return
 
 
