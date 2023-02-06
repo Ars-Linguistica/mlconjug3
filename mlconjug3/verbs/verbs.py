@@ -308,7 +308,7 @@ class VerbFr(Verb):
                     self.conjug_info[mood][tense_name] = persons_dict
                 elif isinstance(persons, str):
                     if not persons.startswith(self.verb_info.root):
-                        self.conjug_info[mood][tense_name] = self.verb_info.root
+                        self.conjug_info[mood][tense_name] = self.verb_info.root + persons
         return
 
 
