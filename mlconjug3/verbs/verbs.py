@@ -300,7 +300,7 @@ class VerbFr(Verb):
                         elif tense_name == 'Participe Présent':
                             key = ''
                         else:
-                            key = term
+                            key = ''
                         if term is not None:
                             self.conjugate_person(key, persons_dict, term)
                         else:
