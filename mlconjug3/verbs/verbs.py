@@ -297,6 +297,8 @@ class VerbFr(Verb):
                             key = GENDER[self.language][subject][pers]
                         elif tense_name == 'Imperatif Présent':
                             key = IMPERATIVE_PRONOUNS[self.language][subject][pers]
+                        elif tense_name == 'Participe Présent':
+                            key = ''
                         else:
                             key = term
                         if term is not None:
