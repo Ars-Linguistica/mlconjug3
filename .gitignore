@@ -80,3 +80,8 @@ mlconjug3/data/conjug_manager/*.pkl
 
 # MISC
 .pids/
+
+# Pants workspace files
+/.pants.*
+/dist/
+/.pids
