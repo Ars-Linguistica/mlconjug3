@@ -20,6 +20,7 @@ backend_packages = [
 
 [source]
 root_patterns = [
+  '/',
   '/mlconjug3/',
   '/tests/',
 ]
