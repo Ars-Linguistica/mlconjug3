@@ -26,7 +26,7 @@ class Model:
     | The Pipeline includes a feature vectorizer, a feature selector and a classifier.
     | If any of the vectorizer, feature selector or classifier is not supplied at instance declaration,
      the __init__ method will provide good default values that get more than 92% prediction accuracy.
-     
+
     :param vectorizer: scikit-learn Vectorizer.
     :param feature_selector: scikit-learn Classifier with a fit_transform() method
     :param classifier: scikit-learn Classifier with a predict() method
@@ -35,28 +35,50 @@ class Model:
     :ivar language: Language of the corpus of verbs to be analyzed.
     """
 
-    def __init__(self, vectorizer=None, feature_selector=None, classifier=None, language=None):
+    def __init__(
+        self, vectorizer=None, feature_selector=None, classifier=None, language=None
+    ):
         if not vectorizer:
-            vectorizer = CountVectorizer(analyzer=partial(extract_verb_features, lang=language, ngram_range=(2, 7)),
-                                         binary=True, lowercase=False)
+            vectorizer = CountVectorizer(
+                analyzer=partial(
+                    extract_verb_features, lang=language, ngram_range=(2, 7)
+                ),
+                binary=True,
+                lowercase=False,
+            )
         if not feature_selector:
-            feature_selector = SelectFromModel(LinearSVC(penalty='l1', max_iter=12000, dual=False, verbose=2))
+            feature_selector = SelectFromModel(
+                LinearSVC(penalty="l1", max_iter=12000, dual=False, verbose=2)
+            )
         if not classifier:
-            classifier = SGDClassifier(loss='log_loss', penalty='elasticnet', l1_ratio=0.15,
-                                       max_iter=4000, alpha=1e-5, random_state=42, verbose=2)
-        self.pipeline = Pipeline([('vectorizer', vectorizer),
-                                  ('feature_selector', feature_selector),
-                                  ('classifier', classifier)])
+            classifier = SGDClassifier(
+                loss="log_loss",
+                penalty="elasticnet",
+                l1_ratio=0.15,
+                max_iter=4000,
+                alpha=1e-5,
+                random_state=42,
+                verbose=2,
+            )
+        self.pipeline = Pipeline(
+            [
+                ("vectorizer", vectorizer),
+                ("feature_selector", feature_selector),
+                ("classifier", classifier),
+            ]
+        )
         self.language = language
         return
 
     def __repr__(self):
-        return '{}.{}({}, {}, {})'.format(__name__, self.__class__.__name__, *sorted(self.pipeline.named_steps))
+        return "{}.{}({}, {}, {})".format(
+            __name__, self.__class__.__name__, *sorted(self.pipeline.named_steps)
+        )
 
     def train(self, samples, labels):
         """
         Trains the pipeline on the supplied samples and labels.
-        
+
         :param samples: list.
             List of verbs.
         :param labels: list.
@@ -68,13 +90,14 @@ class Model:
     def predict(self, verbs):
         """
         Predicts the conjugation class of the provided list of verbs.
-        
+
         :param verbs: list.
             List of verbs.
         :return predictions: list.
             List of predicted conjugation groups.
         """
         return self.pipeline.predict(verbs)
-      
+
+
 if __name__ == "__main__":
     pass

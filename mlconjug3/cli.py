@@ -14,33 +14,57 @@ from rich.columns import Columns
 from rich.console import Console
 import rich
 
+
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
-@click.argument('verbs', nargs=-1)
-@click.option('-l', '--language',
-              default='fr',
-              help=_("The language for the conjugation pipeline."
-                     " The values can be 'fr', 'en', 'es', 'it', 'pt' or 'ro'."
-                     " The default value is fr."),
-              type=click.STRING)
-@click.option('-o', '--output',
-              default=None,
-              help=_("Path of the filename for storing the conjugation tables."),
-              type=click.STRING)
-@click.option('-s', '--subject',
-              default='abbrev',
-              help=_("The subject format type for the conjugated forms."
-                     " The values can be 'abbrev' or 'pronoun'. The default value is 'abbrev'."),
-              type=click.STRING)
-@click.option('-f', '--file_format',
-              default='json',
-              help=("The output format for storing the conjugation tables."
-              " The values can be 'json', 'csv'. The default value is 'json'."),
-              type=click.STRING)
-@click.option('-c', '--config',
-              default=None,
-              help=("Path of the configuration file for specifying language, subject, output file name and format, "
-              "as well as theme settings for the conjugation table columns. Supported file formats: toml, yaml"),
-              type=click.Path(exists=True, dir_okay=False, resolve_path=True))
+@click.argument("verbs", nargs=-1)
+@click.option(
+    "-l",
+    "--language",
+    default="fr",
+    help=_(
+        "The language for the conjugation pipeline."
+        " The values can be 'fr', 'en', 'es', 'it', 'pt' or 'ro'."
+        " The default value is fr."
+    ),
+    type=click.STRING,
+)
+@click.option(
+    "-o",
+    "--output",
+    default=None,
+    help=_("Path of the filename for storing the conjugation tables."),
+    type=click.STRING,
+)
+@click.option(
+    "-s",
+    "--subject",
+    default="abbrev",
+    help=_(
+        "The subject format type for the conjugated forms."
+        " The values can be 'abbrev' or 'pronoun'. The default value is 'abbrev'."
+    ),
+    type=click.STRING,
+)
+@click.option(
+    "-f",
+    "--file_format",
+    default="json",
+    help=(
+        "The output format for storing the conjugation tables."
+        " The values can be 'json', 'csv'. The default value is 'json'."
+    ),
+    type=click.STRING,
+)
+@click.option(
+    "-c",
+    "--config",
+    default=None,
+    help=(
+        "Path of the configuration file for specifying language, subject, output file name and format, "
+        "as well as theme settings for the conjugation table columns. Supported file formats: toml, yaml"
+    ),
+    type=click.Path(exists=True, dir_okay=False, resolve_path=True),
+)
 def main(verbs, language, output, subject, file_format, config):
     """
     Examples of how to use mlconjug3 from the terminal
@@ -69,11 +93,11 @@ def main(verbs, language, output, subject, file_format, config):
     $ mlconjug3 -c /path/to/config.toml -l en -s pronoun -o conjugation_table.json -f csv
     """
     config_options = load_config(config)
-    language = config_options.get('language', language)
-    subject = config_options.get('subject', subject)
-    output = config_options.get('output', output)
-    file_format = config_options.get('file_format', file_format)
-    theme_settings = config_options.get('theme', {})
+    language = config_options.get("language", language)
+    subject = config_options.get("subject", subject)
+    output = config_options.get("output", output)
+    file_format = config_options.get("file_format", file_format)
+    theme_settings = config_options.get("theme", {})
     try:
         logger = logging.getLogger(__name__)
         console = Console()
@@ -97,23 +121,40 @@ def main(verbs, language, output, subject, file_format, config):
                 missing.append(verbs[0])
         else:
             results = conjugator.conjugate(verbs, subject)
-            conjugations = {verb.name: verb.conjug_info for verb in  results if verb}
+            conjugations = {verb.name: verb.conjug_info for verb in results if verb}
             missing = [verb for verb, result in zip(verbs, results) if not result]
-        
+
         for verb, conjugation in conjugations.items():
-            table = Table(title=f"Conjugation table for '{verb.capitalize()}'", show_header=True, header_style=theme_settings.get("header_style", "bold #0D47A1"))
-            table.add_column("Mood", style=theme_settings.get("mood_style", "bold #F9A825"))
-            table.add_column("Tense", style=theme_settings.get("tense_style", "bold bright_magenta"))
-            table.add_column("Person", style=theme_settings.get("person_style", "bold cyan"))
-            table.add_column("Conjugation", style=theme_settings.get("conjugation_style", "bold #4CAF50"))
+            table = Table(
+                title=f"Conjugation table for '{verb.capitalize()}'",
+                show_header=True,
+                header_style=theme_settings.get("header_style", "bold #0D47A1"),
+            )
+            table.add_column(
+                "Mood", style=theme_settings.get("mood_style", "bold #F9A825")
+            )
+            table.add_column(
+                "Tense", style=theme_settings.get("tense_style", "bold bright_magenta")
+            )
+            table.add_column(
+                "Person", style=theme_settings.get("person_style", "bold cyan")
+            )
+            table.add_column(
+                "Conjugation",
+                style=theme_settings.get("conjugation_style", "bold #4CAF50"),
+            )
 
             for mood, tenses in conjugation.items():
                 for tense, persons in tenses.items():
                     if isinstance(persons, dict):
                         for person, form in persons.items():
-                            table.add_row(mood.capitalize(), tense.capitalize(), person, form)
+                            table.add_row(
+                                mood.capitalize(), tense.capitalize(), person, form
+                            )
                     else:
-                        table.add_row(mood.capitalize(), tense.capitalize(), '', persons)
+                        table.add_row(
+                            mood.capitalize(), tense.capitalize(), "", persons
+                        )
                     table.add_section()
                 table.add_section()
             console.print(table)
@@ -121,13 +162,13 @@ def main(verbs, language, output, subject, file_format, config):
         if missing:
             for verb in missing:
                 console.print(f"The verb '{verb}' could not be conjugated.")
-        
+
         if output:
-            if file_format == 'json':
-                with open(output, 'w') as outfile:
+            if file_format == "json":
+                with open(output, "w") as outfile:
                     json.dump(conjugations, outfile)
-            elif file_format == 'csv':
-                with open(output, 'w') as outfile:
+            elif file_format == "csv":
+                with open(output, "w") as outfile:
                     writer = csv.writer(outfile)
                     writer.writerow(["Verb", "Mood", "Tense", "Person", "Conjugation"])
                     for verb, conjugation in conjugations.items():
@@ -135,17 +176,25 @@ def main(verbs, language, output, subject, file_format, config):
                             for tense, persons in tenses.items():
                                 if isinstance(persons, dict):
                                     for person, form in persons.items():
-                                        writer.writerow([verb, mood, tense, person, form])
+                                        writer.writerow(
+                                            [verb, mood, tense, person, form]
+                                        )
                                 else:
-                                    writer.writerow([verb, mood, tense, '', persons])
+                                    writer.writerow([verb, mood, tense, "", persons])
             else:
-                raise ValueError("Invalid output format. Please choose 'json' or 'csv'.")
+                raise ValueError(
+                    "Invalid output format. Please choose 'json' or 'csv'."
+                )
     except Exception as e:
         logging.error("An error occurred: {}".format(e))
         if output:
-            click.echo("Conjugations not saved. Please check the output file path and permissions.")
+            click.echo(
+                "Conjugations not saved. Please check the output file path and permissions."
+            )
         else:
-            click.echo("Conjugations not displayed. Please check the input verbs and language.")
+            click.echo(
+                "Conjugations not displayed. Please check the input verbs and language."
+            )
         sys.exit(1)
 
 
@@ -160,21 +209,20 @@ def load_config(config):
     """
     if not config:
         home = os.path.expanduser("~")
-        config = os.path.join(home, 'mlconjug3/config.toml')
+        config = os.path.join(home, "mlconjug3/config.toml")
         if not os.path.isfile(config):
-            config = os.path.join(home, 'mlconjug3/config.yaml')
+            config = os.path.join(home, "mlconjug3/config.yaml")
             if not os.path.isfile(config):
                 return {}
     config_options = {}
-    if config.endswith('.toml'):
-        with open(config, 'r') as config_file:
+    if config.endswith(".toml"):
+        with open(config, "r") as config_file:
             config_options = tomlkit.loads(config_file.read())
-    elif config.endswith('.yaml') or config.endswith('.yml'):
-        with open(config, 'r') as config_file:
+    elif config.endswith(".yaml") or config.endswith(".yml"):
+        with open(config, "r") as config_file:
             config_options = yaml.load(config_file, Loader=yaml.FullLoader)
     return config_options
-    
+
+
 if __name__ == "__main__":
     main()
-
-      

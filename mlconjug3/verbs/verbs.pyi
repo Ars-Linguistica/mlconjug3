@@ -19,30 +19,20 @@ _NEGATION: Mapping[str, str]
 
 # Declare Complex types for clarity.
 _VerbsDict = Mapping[str, Mapping[str, str]]
-_Tense = Mapping[str, Sequence[Optional[Tuple[int,str]]]]
+_Tense = Mapping[str, Sequence[Optional[Tuple[int, str]]]]
 _Mood = Dict[str, Union[str, _Tense]]
 _ConjugInfo = Mapping[str, _Mood]
 _Conjugations = Mapping[str, _ConjugInfo]
 _PathLike = Union[str, TextIO]
-
 
 class VerbInfo:
     __slots__: Tuple[str] = ...
     infinitive: str = ...
     root: str = ...
     template: str = ...
-    def __init__(self,
-                 infinitive: str,
-                 root: str,
-                 template: str
-                 ) -> None: ...
-
+    def __init__(self, infinitive: str, root: str, template: str) -> None: ...
     def __repr__(self) -> str: ...
-
-    def __eq__(self,
-               other: object
-               ) -> bool: ...
-
+    def __eq__(self, other: object) -> bool: ...
 
 class Verb:
     __slots__: Tuple[str] = ...
@@ -54,47 +44,36 @@ class Verb:
     subject: str = ...
     predicted: bool = ...
     confidence_score: Optional[float] = ...
-    def __init__(self,
-                 verb_info: VerbInfo,
-                 conjug_info: _ConjugInfo,
-                 subject: str = ...,
-                 predicted: bool = ...
-                 ) -> None: ...
-
+    def __init__(
+        self,
+        verb_info: VerbInfo,
+        conjug_info: _ConjugInfo,
+        subject: str = ...,
+        predicted: bool = ...,
+    ) -> None: ...
     def __repr__(self) -> str: ...
-
     def _load_conjug(self, subject: str) -> None: ...
-
-    def iterate(self) -> Sequence[Union[Tuple[str,str,str],Tuple[str,str,str,str]]]: ...
-
-    def conjugate_person(self,
-                         key: str,
-                         persons_dict: Mapping[str, str],
-                         term: str
-                         ) -> None: ...
-
+    def iterate(
+        self,
+    ) -> Sequence[Union[Tuple[str, str, str], Tuple[str, str, str, str]]]: ...
+    def conjugate_person(
+        self, key: str, persons_dict: Mapping[str, str], term: str
+    ) -> None: ...
 
 class VerbFr(Verb):
     def _load_conjug(self, subject: str) -> None: ...
 
-
 class VerbEn(Verb):
     def _load_conjug(self, subject: str) -> None: ...
-
 
 class VerbEs(Verb):
     def _load_conjug(self, subject: str) -> None: ...
 
-
 class VerbIt(Verb):
     def _load_conjug(self, subject: str) -> None: ...
-
 
 class VerbPt(Verb):
     def _load_conjug(self, subject: str) -> None: ...
 
-
 class VerbRo(Verb):
     def _load_conjug(self, subject: str) -> None: ...
-      
-

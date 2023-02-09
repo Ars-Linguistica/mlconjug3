@@ -10,8 +10,8 @@ More information on Verbiste at https://perso.b2b2c.ca/~sarrazip/dev/conjug_mana
 
 """
 
-__author__ = 'Ars-Linguistica'
-__author_email__ = 'diao.sekou.nlp@gmail.com'
+__author__ = "Ars-Linguistica"
+__author_email__ = "diao.sekou.nlp@gmail.com"
 
 
 import os
@@ -44,10 +44,10 @@ class Verbiste(ConjugManager):
 
     def _load_cache(self, file):
         file_path = os.path.abspath(file)
-        if not file_path.endswith('.xml'):
+        if not file_path.endswith(".xml"):
             raise ValueError(f"Invalid file path, expected .xml file, got {file_path}")
-        pkl_file = file_path + '.pkl'
-        
+        pkl_file = file_path + ".pkl"
+
         if os.path.isfile(pkl_file):
             last_modified_time_file = os.path.getmtime(file_path)
             last_modified_time_pkl = os.path.getmtime(pkl_file)
@@ -56,7 +56,7 @@ class Verbiste(ConjugManager):
                 return file_dic
         else:
             return None
-    
+
     def _load_verbs(self, verbs_file):
         """
         Load and parses the verbs from the xml file.
@@ -65,34 +65,34 @@ class Verbiste(ConjugManager):
             Path to the verbs xml file.
 
         """
-        self.verbs = self._parse_verbs(verbs_file.replace('json', 'xml'))
+        self.verbs = self._parse_verbs(verbs_file.replace("json", "xml"))
         return
 
     def _parse_verbs(self, file):
         """
         Parses the XML file.
-    
+
         :param file: FileObject.
             XML file containing the verbs.
         :return verb_templates: OrderedDict.
             An OrderedDict containing the verb and its template for all verbs in the file.
-    
+
         """
         cache = self._load_cache(file)
         if cache:
             return cache
-        
+
         verbs_dic = {}
         xml = ET.parse(file)
         for verb in xml.findall("v"):
             verb_name = verb.find("i").text
             template = verb.find("t").text
-            index = - len(template[template.index(":") + 1:])
+            index = -len(template[template.index(":") + 1 :])
             root = verb_name if index == 0 else verb_name[:index]
             verbs_dic[verb_name] = {"template": template, "root": root}
-        
-        pkl_file = file + '.pkl'
-        joblib.dump(verbs_dic, pkl_file, compress = ('gzip', 3))
+
+        pkl_file = file + ".pkl"
+        joblib.dump(verbs_dic, pkl_file, compress=("gzip", 3))
         return verbs_dic
 
     def _load_conjugations(self, conjugations_file):
@@ -103,7 +103,9 @@ class Verbiste(ConjugManager):
             Path to the conjugation xml file.
 
         """
-        self.conjugations = self._parse_conjugations(conjugations_file.replace('json', 'xml'))
+        self.conjugations = self._parse_conjugations(
+            conjugations_file.replace("json", "xml")
+        )
         return
 
     def _parse_conjugations(self, file):
@@ -119,7 +121,7 @@ class Verbiste(ConjugManager):
         cache = self._load_cache(file)
         if cache:
             return cache
-                
+
         conjugations_dic = {}
         xml = ET.parse(file)
         for template in xml.findall("template"):
@@ -128,9 +130,11 @@ class Verbiste(ConjugManager):
             for mood in list(template):
                 conjugations_dic[template_name][mood.tag] = OrderedDict()
                 for tense in list(mood):
-                    conjugations_dic[template_name][mood.tag][tense.tag.replace('-', ' ')] = self._load_tense(tense)
-        pkl_file = file + '.pkl'
-        joblib.dump(conjugations_dic, pkl_file, compress = ('gzip', 3))
+                    conjugations_dic[template_name][mood.tag][
+                        tense.tag.replace("-", " ")
+                    ] = self._load_tense(tense)
+        pkl_file = file + ".pkl"
+        joblib.dump(conjugations_dic, pkl_file, compress=("gzip", 3))
         return conjugations_dic
 
     @staticmethod
@@ -158,10 +162,11 @@ class Verbiste(ConjugManager):
                     if term.find("i").text is not None:
                         conjug.append((pers, term.find("i").text))
                     else:
-                        conjug.append((pers, ''))
+                        conjug.append((pers, ""))
                 else:
                     conjug.append((pers, None))
         return conjug
+
 
 if __name__ == "__main__":
     pass

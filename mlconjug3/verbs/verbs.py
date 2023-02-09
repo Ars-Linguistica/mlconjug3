@@ -18,7 +18,7 @@ from mlconjug3.constants import *
 class VerbInfo:
     """
     This class defines the Verbiste verb information structure.
-    
+
     :param infinitive: string.
         Infinitive form of the verb.
     :param root: string.
@@ -32,24 +32,31 @@ class VerbInfo:
     :ivar template: string.
         Name of the verb ending pattern.
     """
-    __slots__ = ('infinitive', 'root', 'template')
+
+    __slots__ = ("infinitive", "root", "template")
 
     def __init__(self, infinitive, root, template):
         self.infinitive = infinitive
         if not root:
-            self.root = '' if template[0] == ':' else template[:template.index(':')]
+            self.root = "" if template[0] == ":" else template[: template.index(":")]
         else:
             self.root = root
         self.template = template
         return
 
     def __repr__(self):
-        return '{}.{}({}, {}, {})'.format(__name__, self.__class__.__name__, self.infinitive, self.root, self.template)
+        return "{}.{}({}, {}, {})".format(
+            __name__, self.__class__.__name__, self.infinitive, self.root, self.template
+        )
 
     def __eq__(self, other):
         if not isinstance(other, VerbInfo):
             return NotImplemented
-        return self.infinitive == other.infinitive and self.root == other.root and self.template == other.template
+        return (
+            self.infinitive == other.infinitive
+            and self.root == other.root
+            and self.template == other.template
+        )
 
 
 class VerbMeta(abc.ABCMeta):
@@ -66,14 +73,15 @@ class VerbMeta(abc.ABCMeta):
     - load_conjug: An abstract method that should be implemented to load conjugation information for the verb
     - conjugate: An abstract method that should be implemented to conjugate the verb based on the subject and tense provided
     """
+
     @abc.abstractmethod
-    def __init__(self, verb_info, conjug_info, subject='abbrev', predicted=False):
+    def __init__(self, verb_info, conjug_info, subject="abbrev", predicted=False):
         pass
 
     @abc.abstractproperty
     def language(self):
         pass
-    
+
     @abc.abstractmethod
     def __getitem__(self, key):
         pass
@@ -106,7 +114,7 @@ class VerbMeta(abc.ABCMeta):
 class Verb(metaclass=VerbMeta):
     """
     This class defines the Verb Object.
-    
+
     :param verb_info: VerbInfo Object.
     :param conjug_info: OrderedDict.
     :param subject: string.
@@ -122,11 +130,20 @@ class Verb(metaclass=VerbMeta):
     :ivar predicted: bool.
         Indicates if the conjugation information was predicted by the model or retrieved from the dataset.
     """
-    __slots__ = ('name', 'verb_info', 'conjug_info', 'full_forms', 'subject', 'predicted', 'confidence_score')
 
-    language = 'default'
+    __slots__ = (
+        "name",
+        "verb_info",
+        "conjug_info",
+        "full_forms",
+        "subject",
+        "predicted",
+        "confidence_score",
+    )
 
-    def __init__(self, verb_info, conjug_info, subject='abbrev', predicted=False):
+    language = "default"
+
+    def __init__(self, verb_info, conjug_info, subject="abbrev", predicted=False):
         self.name = verb_info.infinitive
         self.verb_info = verb_info
         self.conjug_info = conjug_info
@@ -144,12 +161,12 @@ class Verb(metaclass=VerbMeta):
         return
 
     def __repr__(self):
-        return '{}.{}({})'.format(__name__, self.__class__.__name__, self.name)
+        return "{}.{}({})".format(__name__, self.__class__.__name__, self.name)
 
     def __getitem__(self, key):
         """
         Returns the conjugated form of the verb for the specified key.
-        
+
         :param key: tuple of (mood, tense, person) or (mood, tense) or (mood)
         :return: str or dict
         """
@@ -161,11 +178,11 @@ class Verb(metaclass=VerbMeta):
             return self.conjug_info[mood][tense]
         else:
             return self.conjug_info[key]
-    
+
     def __setitem__(self, key, value):
         """
         Sets the conjugated form of the verb for the specified key.
-        
+
         :param key: tuple of (mood, tense, person) or (mood, tense) or (mood)
         :param value: str or dict
         :return: None
@@ -179,14 +196,14 @@ class Verb(metaclass=VerbMeta):
         else:
             self.conjug_info[key] = value
         return
-    
+
     def __contains__(self, item):
         """
         The method checks if the provided form exists in the conjugated forms of the verb.
         It can accept statements such as '"tu manges " in verb', '"manges" in verb' etc...
         It will iterate over the conjugated forms and check if the form is present in the
         full_forms attribute of the object.
-        
+
         :param item: string in the format 'pronoun form' like 'tu manges' or just the verbal form like 'mangeras'.
         :return: bool
         """
@@ -203,7 +220,7 @@ class Verb(metaclass=VerbMeta):
             return False
         except KeyError:
             return False
-    
+
     def __iter__(self):
         """
         Lazy generator that returns all conjugated forms of the verb as tuples of (mood, tense, person, form)
@@ -215,7 +232,7 @@ class Verb(metaclass=VerbMeta):
                 else:
                     for pers, form in persons.items():
                         yield mood, tense, pers, form
-    
+
     def __len__(self):
         """
         Returns the number of conjugated forms of the verb
@@ -228,11 +245,11 @@ class Verb(metaclass=VerbMeta):
                 else:
                     count += len(persons)
         return count
-    
+
     def iterate(self):
         """
         Iterates over all conjugated forms and returns a list of tuples of those conjugated forms.
-        
+
         :return conjugated_forms: generator.
             Lazy generator of conjugated forms.
         """
@@ -250,7 +267,7 @@ class Verb(metaclass=VerbMeta):
                 if isinstance(persons, list):
                     persons_dict = OrderedDict()
                     for pers, term in persons:
-                        key = ABBREVS[pers] if len(persons) == 6 else ''
+                        key = ABBREVS[pers] if len(persons) == 6 else ""
                         if term is not None:
                             self.conjugate_person(key, persons_dict, term)
                         else:
@@ -263,7 +280,7 @@ class Verb(metaclass=VerbMeta):
     def conjugate_person(self, key, persons_dict, term):
         """
         Creates the conjugated form of the person specified by the key argument.
-        
+
         :param key: string.
         :param persons_dict: OrderedDict
         :param term: string.
@@ -277,9 +294,10 @@ class VerbFr(Verb):
     """
     This class defines the French Verb Object.
     """
+
     __slots__ = ()
 
-    language = 'fr'
+    language = "fr"
 
     def _load_conjug(self, subject):
         """
@@ -293,14 +311,14 @@ class VerbFr(Verb):
                     for pers, term in persons:
                         if len(persons) == 6:
                             key = PRONOUNS[self.language][subject][pers]
-                        elif tense_name == 'Participe Passé':
+                        elif tense_name == "Participe Passé":
                             key = GENDER[self.language][subject][pers]
-                        elif tense_name == 'Imperatif Présent':
+                        elif tense_name == "Imperatif Présent":
                             key = IMPERATIVE_PRONOUNS[self.language][subject][pers]
-                        elif tense_name == 'Participe Présent':
-                            key = ''
+                        elif tense_name == "Participe Présent":
+                            key = ""
                         else:
-                            key = ''
+                            key = ""
                         if term is not None:
                             self.conjugate_person(key, persons_dict, term)
                         else:
@@ -308,7 +326,9 @@ class VerbFr(Verb):
                     self.conjug_info[mood][tense_name] = persons_dict
                 elif isinstance(persons, str):
                     if not persons.startswith(self.verb_info.root):
-                        self.conjug_info[mood][tense_name] = self.verb_info.root + persons
+                        self.conjug_info[mood][tense_name] = (
+                            self.verb_info.root + persons
+                        )
         return
 
 
@@ -316,9 +336,10 @@ class VerbEn(Verb):
     """
     This class defines the English Verb Object.
     """
+
     __slots__ = ()
 
-    language = 'en'
+    language = "en"
 
     def _load_conjug(self, subject):
         """
@@ -332,24 +353,30 @@ class VerbEn(Verb):
                     for pers, term in persons:
                         if len(persons) == 6:
                             key = PRONOUNS[self.language][subject][pers]
-                        elif tense_name == 'imperative present':
+                        elif tense_name == "imperative present":
                             key = IMPERATIVE_PRONOUNS[self.language][subject][pers]
                         else:
-                            key = 'to'
+                            key = "to"
                         if term is not None:
                             self.conjugate_person(key, persons_dict, term)
                         else:
-                            self.conjugate_person(key, persons_dict, '')
+                            self.conjugate_person(key, persons_dict, "")
                     self.conjug_info[mood][tense_name] = persons_dict
                 elif isinstance(persons, str):
-                    prefix = 'to ' if tense_name == 'infinitive present' else ''
-                    if tense_name == 'infinitive present':
-                        self.conjug_info[mood][tense_name] = prefix + self.verb_info.infinitive
+                    prefix = "to " if tense_name == "infinitive present" else ""
+                    if tense_name == "infinitive present":
+                        self.conjug_info[mood][tense_name] = (
+                            prefix + self.verb_info.infinitive
+                        )
                     else:
-                        self.conjug_info[mood][tense_name] = prefix + self.verb_info.root + persons
+                        self.conjug_info[mood][tense_name] = (
+                            prefix + self.verb_info.root + persons
+                        )
                 elif persons is None:
-                    prefix = 'to ' if tense_name == 'infinitive present' else ''
-                    self.conjug_info[mood][tense_name] = prefix + self.verb_info.infinitive
+                    prefix = "to " if tense_name == "infinitive present" else ""
+                    self.conjug_info[mood][tense_name] = (
+                        prefix + self.verb_info.infinitive
+                    )
         return
 
 
@@ -357,9 +384,10 @@ class VerbEs(Verb):
     """
     This class defines the Spanish Verb Object.
     """
+
     __slots__ = ()
 
-    language = 'es'
+    language = "es"
 
     def _load_conjug(self, subject):
         """
@@ -372,35 +400,43 @@ class VerbEs(Verb):
                     persons_dict = OrderedDict()
 
                     for pers, term in persons:
-                        if len(persons) == 5 and not tense_name.startswith('Imperativo'):
+                        if len(persons) == 5 and not tense_name.startswith(
+                            "Imperativo"
+                        ):
                             continue
                         if len(persons) == 6:
                             key = PRONOUNS[self.language][subject][pers]
-                        elif tense_name == 'Imperativo Afirmativo':
+                        elif tense_name == "Imperativo Afirmativo":
                             key = IMPERATIVE_PRONOUNS[self.language][subject][pers]
-                        elif tense_name == 'Imperativo non':
-                            key = ' '.join((IMPERATIVE_PRONOUNS[self.language][subject][pers],
-                                            NEGATION[self.language]))
-                        elif tense_name == 'Gerundio Gerondio':
-                            if term.endswith('ndo'):
-                                key = ''
+                        elif tense_name == "Imperativo non":
+                            key = " ".join(
+                                (
+                                    IMPERATIVE_PRONOUNS[self.language][subject][pers],
+                                    NEGATION[self.language],
+                                )
+                            )
+                        elif tense_name == "Gerundio Gerondio":
+                            if term.endswith("ndo"):
+                                key = ""
                             else:
                                 continue
-                        elif tense_name == 'Infinitivo Infinitivo':
-                            if term.endswith('r'):
-                                key = ''
+                        elif tense_name == "Infinitivo Infinitivo":
+                            if term.endswith("r"):
+                                key = ""
                             else:
                                 continue
                         else:
                             key = pers
-                        if term is not None and term != '-':
+                        if term is not None and term != "-":
                             self.conjugate_person(key, persons_dict, term)
                         else:
                             persons_dict[key] = None
                     self.conjug_info[mood][tense_name] = persons_dict
                 elif isinstance(persons, str):
                     if not persons.startswith(self.verb_info.root):
-                        self.conjug_info[mood][tense_name] = self.verb_info.root + persons
+                        self.conjug_info[mood][tense_name] = (
+                            self.verb_info.root + persons
+                        )
         return
 
 
@@ -408,9 +444,10 @@ class VerbIt(Verb):
     """
     This class defines the Italian Verb Object.
     """
+
     __slots__ = ()
 
-    language = 'it'
+    language = "it"
 
     def _load_conjug(self, subject):
         """
@@ -422,15 +459,22 @@ class VerbIt(Verb):
                 if isinstance(persons, list):
                     persons_dict = OrderedDict()
                     for pers, term in persons:
-                        if len(persons) == 6 and not tense_name.startswith('Imperativo'):
+                        if len(persons) == 6 and not tense_name.startswith(
+                            "Imperativo"
+                        ):
                             key = PRONOUNS[self.language][subject][pers]
-                        elif tense_name.startswith('Imperativo'):
-                            key = PRONOUNS[self.language]['abbrev'][pers]
+                        elif tense_name.startswith("Imperativo"):
+                            key = PRONOUNS[self.language]["abbrev"][pers]
                         else:
                             key = pers
-                        if term is not None and term != '-':
-                            if tense_name == 'Imperativo non':
-                                persons_dict[key] = ' '.join((NEGATION[self.language], self.verb_info.root + term))
+                        if term is not None and term != "-":
+                            if tense_name == "Imperativo non":
+                                persons_dict[key] = " ".join(
+                                    (
+                                        NEGATION[self.language],
+                                        self.verb_info.root + term,
+                                    )
+                                )
                             else:
                                 self.conjugate_person(key, persons_dict, term)
                         else:
@@ -438,7 +482,9 @@ class VerbIt(Verb):
                     self.conjug_info[mood][tense_name] = persons_dict
                 elif isinstance(persons, str):
                     if not persons.startswith(self.verb_info.root):
-                        self.conjug_info[mood][tense_name] = self.verb_info.root + persons
+                        self.conjug_info[mood][tense_name] = (
+                            self.verb_info.root + persons
+                        )
         return
 
 
@@ -446,9 +492,10 @@ class VerbPt(Verb):
     """
     This class defines the Portuguese Verb Object.
     """
+
     __slots__ = ()
 
-    language = 'pt'
+    language = "pt"
 
     def _load_conjug(self, subject):
         """
@@ -460,15 +507,22 @@ class VerbPt(Verb):
                 if isinstance(persons, list):
                     persons_dict = OrderedDict()
                     for pers, term in persons:
-                        if len(persons) == 6 and not tense_name.startswith('Imperativo'):
+                        if len(persons) == 6 and not tense_name.startswith(
+                            "Imperativo"
+                        ):
                             key = PRONOUNS[self.language][subject][pers]
-                        elif tense_name.startswith('Imperativo'):
-                            key = PRONOUNS[self.language]['abbrev'][pers]
+                        elif tense_name.startswith("Imperativo"):
+                            key = PRONOUNS[self.language]["abbrev"][pers]
                         else:
                             key = pers
-                        if term is not None and term != '-':
-                            if tense_name == 'Imperativo Negativo':
-                                persons_dict[key] = ' '.join((NEGATION[self.language], self.verb_info.root + term))
+                        if term is not None and term != "-":
+                            if tense_name == "Imperativo Negativo":
+                                persons_dict[key] = " ".join(
+                                    (
+                                        NEGATION[self.language],
+                                        self.verb_info.root + term,
+                                    )
+                                )
                             else:
                                 self.conjugate_person(key, persons_dict, term)
                         else:
@@ -476,7 +530,9 @@ class VerbPt(Verb):
                     self.conjug_info[mood][tense_name] = persons_dict
                 elif isinstance(persons, str):
                     if not persons.startswith(self.verb_info.root):
-                        self.conjug_info[mood][tense_name] = self.verb_info.root + persons
+                        self.conjug_info[mood][tense_name] = (
+                            self.verb_info.root + persons
+                        )
         return
 
 
@@ -484,9 +540,10 @@ class VerbRo(Verb):
     """
     This class defines the Romanian Verb Object.
     """
+
     __slots__ = ()
 
-    language = 'ro'
+    language = "ro"
 
     def _load_conjug(self, subject):
         """
@@ -500,24 +557,32 @@ class VerbRo(Verb):
                     for pers, term in persons:
                         if len(persons) == 6:
                             key = PRONOUNS[self.language][subject][pers]
-                        elif tense_name.startswith('Imperativ Imperativ'):
+                        elif tense_name.startswith("Imperativ Imperativ"):
                             key = IMPERATIVE_PRONOUNS[self.language][subject][pers]
-                        elif tense_name == 'Imperativ Negativ':
+                        elif tense_name == "Imperativ Negativ":
                             key = NEGATION[self.language]
                         else:
                             key = pers
-                        if term is not None and term != '-':
-                            if tense_name == 'Imperativ Negativ':
-                                persons_dict[key] = ' '.join((NEGATION[self.language], self.verb_info.root + term))
+                        if term is not None and term != "-":
+                            if tense_name == "Imperativ Negativ":
+                                persons_dict[key] = " ".join(
+                                    (
+                                        NEGATION[self.language],
+                                        self.verb_info.root + term,
+                                    )
+                                )
                             else:
                                 self.conjugate_person(key, persons_dict, term)
                         else:
                             persons_dict[key] = None
                     self.conjug_info[mood][tense_name] = persons_dict
                 elif isinstance(persons, str):
-                    prefix = 'a ' if tense_name == 'Infinitiv Afirmativ' else ''
-                    self.conjug_info[mood][tense_name] = prefix + self.verb_info.root + persons
+                    prefix = "a " if tense_name == "Infinitiv Afirmativ" else ""
+                    self.conjug_info[mood][tense_name] = (
+                        prefix + self.verb_info.root + persons
+                    )
         return
+
 
 if __name__ == "__main__":
     pass

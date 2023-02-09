@@ -1,6 +1,5 @@
 # Stubs for mlconjug3 (Python 3)
 
-
 from .mlconjug import *
 from .PyVerbiste import *
 from typing import Tuple, Any, Union
@@ -24,5 +23,4 @@ logger: Logger
 _user_locale: str
 
 def _get_user_locale() -> str: ...
-
 def _getdoc(obj: object) -> str: ...

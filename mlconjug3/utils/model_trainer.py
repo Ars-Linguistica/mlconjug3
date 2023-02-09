@@ -14,6 +14,7 @@ import numpy as np
 from functools import partial
 from time import time
 
+
 class ConjugatorTrainer:
     """
     Initialize a ConjugatorTrainer instance.
@@ -35,6 +36,7 @@ class ConjugatorTrainer:
     :ivar model: Model to be trained.
     :ivar conjugator: mlconjug3 Conjugator instance.
     """
+
     def __init__(self, lang, output_folder, split_proportion, dataset, model):
         self.lang = lang
         self.output_folder = output_folder
@@ -58,7 +60,9 @@ class ConjugatorTrainer:
         self.dataset.split_data(proportion=self.split_proportion)
 
         # Train Conjugator
-        self.conjugator.model.train(self.dataset.verbs_list, self.dataset.templates_list)
+        self.conjugator.model.train(
+            self.dataset.verbs_list, self.dataset.templates_list
+        )
 
         # Print training duration
         print(f"{self.lang} model succesfully trained.")
@@ -96,6 +100,8 @@ class ConjugatorTrainer:
         """
         Save the trained conjugator model to the specified output folder.
         """
-        with open(f"{self.output_folder}/trained_model-{self.lang}.pickle", "wb") as file:
+        with open(
+            f"{self.output_folder}/trained_model-{self.lang}.pickle", "wb"
+        ) as file:
             pickle.dump(self.model, file)
         return
