@@ -62,7 +62,7 @@ jobs:
                 run: |
                     python setup.py sdist bdist_wheel
             -   name: Sign package with sigstore
-                uses: sigstore/gh-action-sigstore-python@9ea3c9d0bed14de820f1ce678e194c250580feb4 # v1.1.0
+                uses: sigstore/gh-action-sigstore-python@e323e1b02e26cc6600843935562c862b94200b0c # v1.2.3
                 with:
                   inputs: dist/*.tar.gz dist/*.whl
             -   name: Publish a Python distribution to PyPI
