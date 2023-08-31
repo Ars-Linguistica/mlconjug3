@@ -24,6 +24,6 @@ jobs:
 
     - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # master
     - name: Run Snyk to check for vulnerabilities
-      uses: snyk/actions/python-3.8@e25b2e6f5658d1bb7a6671b113260f13134cc3af # master
+      uses: snyk/actions/python-3.8@299cde98a08ff8b1c2bfde1e5a067bce67a6d2b8 # master
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
