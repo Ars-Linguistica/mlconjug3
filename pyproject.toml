@@ -57,7 +57,7 @@ tox = "~4.4.3"
 twine = "~4.0.0"
 pytest-cov = "~4.1.0"
 codecov = "~2.1.12"
-furo = "~2022.12.7"
+furo = "~2023.8.19"
 
 [tool.bandit]
 skips = ["B311"]
