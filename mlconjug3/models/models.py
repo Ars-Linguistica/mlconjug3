@@ -52,7 +52,7 @@ class Model:
             )
         if not classifier:
             classifier = SGDClassifier(
-                loss="log",
+                loss="log_loss",
                 penalty="elasticnet",
                 l1_ratio=0.15,
                 max_iter=4000,
