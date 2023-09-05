@@ -22,7 +22,7 @@ jobs:
       with:
         egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
 
-    - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # master
+    - uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac # master
     - name: Run Snyk to check for vulnerabilities
       uses: snyk/actions/python-3.8@299cde98a08ff8b1c2bfde1e5a067bce67a6d2b8 # master
       env:
