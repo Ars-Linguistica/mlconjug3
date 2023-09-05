@@ -187,7 +187,7 @@ To use the Conjugator class, you need to first import the class in your code.
 
 .. code-block:: python
     
-    from mlconjug3.conjugator import Conjugator
+    from mlconjug3 import Conjugator
     
     # initialize the conjugator
     conjugator = Conjugator()
@@ -277,7 +277,7 @@ you can load this model and use it with the Conjugator class as follows:
 .. code-block:: python
 
     import joblib
-    from mlconjug3.conjugator import Conjugator
+    from mlconjug3 import Conjugator
 
     # load the trained model from file
     my_french_model = joblib.load("my_french_model.pickle")

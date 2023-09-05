@@ -18,12 +18,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Harden Runner
-      uses: step-security/harden-runner@18bf8ad2ca49c14cbb28b91346d626ccfb00c518 # v2.1.0
+      uses: step-security/harden-runner@8ca2b8b2ece13480cda6dacd3511b49857a23c09 # v2.5.1
       with:
         egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
 
-    - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # master
+    - uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac # master
     - name: Run Snyk to check for vulnerabilities
-      uses: snyk/actions/python-3.8@e25b2e6f5658d1bb7a6671b113260f13134cc3af # master
+      uses: snyk/actions/python-3.8@299cde98a08ff8b1c2bfde1e5a067bce67a6d2b8 # master
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}

@@ -21,8 +21,8 @@
         :target: https://api.securityscorecards.dev/projects/github.com/Ars-Linguistica/mlconjug3/
         :alt: OpenSSF ScoreCard
 
-.. image:: https://github.com/Ars-Linguistica/mlconjug3/workflows/mlconjug3/badge.svg
-        :target: https://github.com/Ars-Linguistica/mlconjug3/actions
+.. image:: https://github.com/Ars-Linguistica/mlconjug3/actions/workflows/upload_wheels_to_pypi.yml/badge.svg
+        :target: https://github.com/Ars-Linguistica/mlconjug3/actions/workflows/upload_wheels_to_pypi.yml
         :alt: Build status on Windows, MacOs and Linux
 
 .. image:: https://img.shields.io/pypi/v/mlconjug3.svg
@@ -40,10 +40,6 @@
 .. image:: https://img.shields.io/conda/dn/conda-forge/mlconjug?label=Anaconda%20Downloads
         :target: https://anaconda.org/conda-forge/mlconjug3
         :alt: Conda
-
-.. image:: https://pyup.io/repos/github/Ars-Linguistica/mlconjug3/shield.svg
-        :target: https://pyup.io/repos/github/Ars-Linguistica/mlconjug3/
-        :alt: Dependencies status
 
 .. image:: https://codecov.io/gh/Ars-Linguistica/mlconjug3/branch/master/graph/badge.svg
         :target: https://codecov.io/gh/Ars-Linguistica/mlconjug3

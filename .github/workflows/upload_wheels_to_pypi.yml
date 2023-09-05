@@ -32,18 +32,18 @@ jobs:
 
         steps:
             - name: Harden Runner
-              uses: step-security/harden-runner@18bf8ad2ca49c14cbb28b91346d626ccfb00c518 # v2.1.0
+              uses: step-security/harden-runner@8ca2b8b2ece13480cda6dacd3511b49857a23c09 # v2.5.1
               with:
                 egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
 
-            -   uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
+            -   uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac # v4.0.0
 
-            -   uses: actions/setup-python@d27e3f3d7c64b4bbf8e4abfb9b63b83e846e0435 # v4.5.0
+            -   uses: actions/setup-python@61a6322f88396a6271a6ee3565807d608ecaddd1 # v4.7.0
                 with:
                     python-version: ${{ matrix.python-version }}
 
             -   name: Install Poetry
-                uses: snok/install-poetry@d45b6d76012debf457ab49dffc7fb7b2efe8071d # v1.3.3
+                uses: snok/install-poetry@93ada01c735cc8a383ce0ce2ae205a21c415379b # v1.3.4
                 with:
                     virtualenvs-create: true
                     virtualenvs-in-project: true
@@ -71,7 +71,7 @@ jobs:
             -   name: Build Package
                 run: poetry build
             -   name: Sign with sigstore
-                uses: sigstore/gh-action-sigstore-python@9ea3c9d0bed14de820f1ce678e194c250580feb4 # v1.1.0
+                uses: sigstore/gh-action-sigstore-python@9310933b45d7dfc2fe40c1d701ac114548c28d31 # v2.0.1
                 with:
                   upload-signing-artifacts: true
                   release-signing-artifacts: true
