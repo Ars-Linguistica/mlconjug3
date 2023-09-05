@@ -61,14 +61,14 @@ jobs:
             -   name: Build package using setup.py
                 run: |
                     python setup.py sdist bdist_wheel
-            -   name: Sign package with sigstore
-                uses: sigstore/gh-action-sigstore-python@9310933b45d7dfc2fe40c1d701ac114548c28d31 # v2.0.1
-                with:
-                  inputs: dist/*.tar.gz dist/*.whl
             -   name: Publish a Python distribution to PyPI
                 uses: pypa/gh-action-pypi-publish@b7f401de30cb6434a1e19f805ff006643653240e # release/v1
                 with:
                   password: ${{ secrets.PYPI_TOKEN }}
+            -   name: Sign package with sigstore
+                uses: sigstore/gh-action-sigstore-python@9310933b45d7dfc2fe40c1d701ac114548c28d31 # v2.0.1
+                with:
+                  inputs: dist/*.tar.gz dist/*.whl
             -   name: Upload coverage artifacts to codecov
                 run: codecov --token=06406f4a-05a0-4974-a902-20fd09de8b50
 
