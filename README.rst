@@ -41,10 +41,6 @@
         :target: https://anaconda.org/conda-forge/mlconjug3
         :alt: Conda
 
-.. image:: https://pyup.io/repos/github/Ars-Linguistica/mlconjug3/shield.svg
-        :target: https://pyup.io/repos/github/Ars-Linguistica/mlconjug3/
-        :alt: Dependencies status
-
 .. image:: https://codecov.io/gh/Ars-Linguistica/mlconjug3/branch/master/graph/badge.svg
         :target: https://codecov.io/gh/Ars-Linguistica/mlconjug3
         :alt: Code Coverage Status
