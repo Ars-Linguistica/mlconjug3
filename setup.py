@@ -24,7 +24,7 @@ except FileNotFoundError:
     requirements = [
         'defusedxml',
         'Click>=8.0.3',
-        'scikit-learn>=1.2.0',
+        'scikit-learn>=1.3.0',
         'joblib',
         'rich',
         'pyyaml',
