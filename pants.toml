@@ -1,2 +1,29 @@
 [GLOBAL]
 pants_version = "2.14.1"
+backend_packages = [
+  "pants.backend.shell",
+  "pants.backend.experimental.python.packaging.pyoxidizer",
+  "pants.backend.experimental.python.lint.pyupgrade",
+  "pants.backend.codegen.protobuf.python",
+  "pants.backend.python",
+  "pants.backend.python.mixed_interpreter_constraints",
+  "pants.backend.python.lint.bandit",
+  "pants.backend.python.lint.black",
+  "pants.backend.python.lint.docformatter",
+  "pants.backend.python.lint.flake8",
+  "pants.backend.python.lint.isort",
+  "pants.backend.python.lint.pylint",
+  "pants.backend.python.lint.yapf",
+  "pants.backend.python.typecheck.mypy",
+  "pants.backend.docker",
+]
+
+[source]
+root_patterns = [
+  '/',
+  '/mlconjug3/',
+  '/tests/',
+]
+
+[test]
+use_coverage = true

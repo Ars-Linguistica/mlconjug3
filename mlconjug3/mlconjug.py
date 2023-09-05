@@ -40,13 +40,14 @@ import re
 from zipfile import ZipFile
 
 
-VERBS = {'fr': VerbFr,
-          'en': VerbEn,
-          'es': VerbEs,
-          'it': VerbIt,
-          'pt': VerbPt,
-          'ro': VerbRo,
-          }
+VERBS = {
+    "fr": VerbFr,
+    "en": VerbEn,
+    "es": VerbEs,
+    "it": VerbIt,
+    "pt": VerbPt,
+    "ro": VerbRo,
+}
 
 
 class Conjugator:
@@ -66,13 +67,18 @@ class Conjugator:
 
     """
 
-    def __init__(self, language='fr', model=None):
+    def __init__(self, language="fr", model=None):
         self.language = language
         self.conjug_manager = Verbiste(language=language)
         if not model:
-            with ZipFile(pkg_resources.resource_stream(
-                    RESOURCE_PACKAGE, PRE_TRAINED_MODEL_PATH[language])) as content:
-                with content.open('trained_model-{}-final.pickle'.format(self.language), 'r') as archive:
+            with ZipFile(
+                pkg_resources.resource_stream(
+                    RESOURCE_PACKAGE, PRE_TRAINED_MODEL_PATH[language]
+                )
+            ) as content:
+                with content.open(
+                    "trained_model-{}-final.pickle".format(self.language), "r"
+                ) as archive:
                     model = joblib.load(archive)
         if model:
             self.set_model(model)
@@ -81,12 +87,14 @@ class Conjugator:
         return
 
     def __repr__(self):
-        return '{}.{}(language={})'.format(__name__, self.__class__.__name__, self.language)
+        return "{}.{}(language={})".format(
+            __name__, self.__class__.__name__, self.language
+        )
 
-    def conjugate(self, verbs, subject='abbrev'):
+    def conjugate(self, verbs, subject="abbrev"):
         """
         Conjugate multiple verbs using multi-processing.
-        
+
         :param verbs: list of strings or string.
             Verbs to conjugate.
         :param subject: string.
@@ -100,11 +108,13 @@ class Conjugator:
             return self._conjugate(verbs, subject)
         else:
             with ProcessPoolExecutor() as executor:
-                results = list(executor.map(self._conjugate, verbs, [subject]*len(verbs)))
+                results = list(
+                    executor.map(self._conjugate, verbs, [subject] * len(verbs))
+                )
             return results
-    
+
     @lru_cache(maxsize=1024)
-    def _conjugate(self, verb, subject='abbrev'):
+    def _conjugate(self, verb, subject="abbrev"):
         """
         | This is the main method of this class.
         | It first checks to see if the verb is in Verbiste.
@@ -126,21 +136,28 @@ class Conjugator:
         prediction_score = 0
         if not self.conjug_manager.is_valid_verb(verb):
             logger.warning(
-                _('The supplied word: {0} is not a valid verb in {1}.').format(verb, LANGUAGE_FULL[self.language]))
+                _("The supplied word: {0} is not a valid verb in {1}.").format(
+                    verb, LANGUAGE_FULL[self.language]
+                )
+            )
             return None
         if verb not in self.conjug_manager.verbs.keys():
             if self.model is None:
-                logger.warning(_('Please provide an instance of a mlconjug3.mlconjug3.Model'))
                 logger.warning(
-                _('The supplied word: {0} is not in the conjugation {1} table and no Conjugation Model was provided.').format(
-                    verb, LANGUAGE_FULL[self.language]))
+                    _("Please provide an instance of a mlconjug3.mlconjug3.Model")
+                )
+                logger.warning(
+                    _(
+                        "The supplied word: {0} is not in the conjugation {1} table and no Conjugation Model was provided."
+                    ).format(verb, LANGUAGE_FULL[self.language])
+                )
                 return None
-            
+
             prediction = self.model.predict([verb])[0]
             prediction_score = self.model.pipeline.predict_proba([verb])[0][prediction]
             predicted = True
             template = self.conjug_manager.templates[prediction]
-            index = - len(template[template.index(":") + 1:])
+            index = -len(template[template.index(":") + 1 :])
             root = verb if index == 0 else verb[:index]
             verb_info = VerbInfo(verb, root, template)
             conjug_info = self.conjug_manager.get_conjug_info(verb_info.template)
@@ -154,7 +171,9 @@ class Conjugator:
             if conjug_info is None:
                 return None
         if predicted:
-            verb_object = VERBS[self.language](verb_info, conjug_info, subject, predicted)
+            verb_object = VERBS[self.language](
+                verb_info, conjug_info, subject, predicted
+            )
             verb_object.confidence_score = round(prediction_score, 3)
         else:
             verb_object = VERBS[self.language](verb_info, conjug_info, subject)
@@ -170,7 +189,9 @@ class Conjugator:
 
         """
         if not isinstance(model, Model):
-            logger.warning(_('Please provide an instance of a mlconjug3.mlconjug3.Model'))
+            logger.warning(
+                _("Please provide an instance of a mlconjug3.mlconjug3.Model")
+            )
             raise ValueError
         else:
             self.model = model

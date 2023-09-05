@@ -8,11 +8,12 @@ from random import Random
 from collections import defaultdict
 from mlconjug3.constants import *
 
+
 class DataSet:
     """
     | This class holds and manages the data set.
     | Defines helper methodss for managing Machine Learning tasks like constructing a training and testing set.
-    
+
     :param verbs_dict:
         A dictionary of verbs and their corresponding conjugation class.
     :ivar verbs_dict:
@@ -44,9 +45,7 @@ class DataSet:
     def __init__(self, verbs_dict):
         self.verbs_dict = verbs_dict
         self.verbs = self.verbs_dict.keys()
-        self.templates = sorted(
-            {verb['template'] for verb in self.verbs_dict.values()}
-        )
+        self.templates = sorted({verb["template"] for verb in self.verbs_dict.values()})
 
         self.verbs_list = []
         self.templates_list = []
@@ -61,7 +60,7 @@ class DataSet:
         return
 
     def __repr__(self):
-        return '{}.{}()'.format(__name__, self.__class__.__name__)
+        return "{}.{}()".format(__name__, self.__class__.__name__)
 
     def construct_dict_conjug(self):
         """
@@ -81,7 +80,7 @@ class DataSet:
     def split_data(self, threshold=8, proportion=0.5):
         """
         Splits the data into a training and a testing set.
-        
+
         :param threshold: int.
             Minimum size of conjugation class to be split.
         :param proportion: float.
@@ -90,7 +89,7 @@ class DataSet:
         :raises: ValueError.
         """
         if proportion <= 0 or proportion > 1:
-            raise ValueError(_('The split proportion must be between 0 and 1.'))
+            raise ValueError(_("The split proportion must be between 0 and 1."))
         self.min_threshold = threshold
         self.split_proportion = proportion
         train_set = []
@@ -112,6 +111,7 @@ class DataSet:
         self.test_input = [elmt[0] for elmt in test_set]
         self.test_labels = [self.templates.index(elmt[1]) for elmt in test_set]
         return
-      
+
+
 if __name__ == "__main__":
     pass

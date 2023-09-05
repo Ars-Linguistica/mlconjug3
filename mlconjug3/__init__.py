@@ -24,11 +24,14 @@ Usage example:
 
 """
 
-__author__ = "Sekou Diao, Ars Linguistica"""
-__email__ = 'diao.sekou.nlp@gmail.com'
-__version__ = '3.10.3'
+__author__ = "Sekou Diao, Ars Linguistica" ""
+__email__ = "diao.sekou.nlp@gmail.com"
+__version__ = "3.10.3"
 __copyright__ = "Copyright (c) 2023, Ars Linguistica"
-__credits__ = ("Sekou Diao", "Pierre Sarrazin",)
+__credits__ = (
+    "Sekou Diao",
+    "Pierre Sarrazin",
+)
 __license__ = "MIT"
 __maintainer__ = "Ars-Linguistica"
 __status__ = "Production"
@@ -59,8 +62,9 @@ def _get_user_locale():
         The user locale.
 
     """
-    if 'Windows' in platform.system():
+    if "Windows" in platform.system():
         import ctypes
+
         windll = ctypes.windll.kernel32
         default_locale = windows_locale[windll.GetUserDefaultUILanguage()]
     else:
@@ -71,7 +75,7 @@ def _get_user_locale():
         else:
             user_locale = default_locale[:2]
     else:
-        user_locale = 'en'
+        user_locale = "en"
     return user_locale
 
 
@@ -95,9 +99,13 @@ def _getdoc(obj):
 _user_locale = _get_user_locale()
 
 if _user_locale in TRANSLATED_LANGUAGES:
-    MLCONJUG_TRANSLATIONS = gettext.translation(domain='mlconjug3',
-                                                 localedir=TRANSLATIONS_PATH,
-                                                 languages=[_user_locale], fallback=True, codeset='UTF-8')
+    MLCONJUG_TRANSLATIONS = gettext.translation(
+        domain="mlconjug3",
+        localedir=TRANSLATIONS_PATH,
+        languages=[_user_locale],
+        fallback=True,
+        codeset="UTF-8",
+    )
 else:
     MLCONJUG_TRANSLATIONS = gettext.NullTranslations()
 
