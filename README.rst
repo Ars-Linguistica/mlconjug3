@@ -21,8 +21,8 @@
         :target: https://api.securityscorecards.dev/projects/github.com/Ars-Linguistica/mlconjug3/
         :alt: OpenSSF ScoreCard
 
-.. image:: https://github.com/Ars-Linguistica/mlconjug3/workflows/mlconjug3/badge.svg
-        :target: https://github.com/Ars-Linguistica/mlconjug3/actions
+.. image:: https://github.com/Ars-Linguistica/mlconjug3/actions/workflows/upload_wheels_to_pypi.yml/badge.svg
+        :target: https://github.com/Ars-Linguistica/mlconjug3/actions/workflows/upload_wheels_to_pypi.yml
         :alt: Build status on Windows, MacOs and Linux
 
 .. image:: https://img.shields.io/pypi/v/mlconjug3.svg
