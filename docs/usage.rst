@@ -296,6 +296,7 @@ The model should have:
     * a fit() method for training the model on a dataset
     * a predict() method for making predictions on new data
     * a '__classes__' property that returns an array of the class labels
+
 As long as your custom model has these properties and methods, it should be compatible with the Conjugator class.
 
 
@@ -375,7 +376,7 @@ Alternatively you can load the model parameters from a yaml file using PyYaml, H
 Here is an example of a yaml file to store the model settings:
 
 
-.. code-block:: python
+.. code-block:: yaml
 
     # config.yaml
     
