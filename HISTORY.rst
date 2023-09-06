@@ -2,6 +2,13 @@
 History
 =======
 
+3.12.0 (2023-06-09)
+-------------------
+
+* Fixed rendering issue for italian verbs in the command line interface.
+* Updated dependencies.
+* Updated documentation.
+
 3.10.0 (2023-26-01)
 -------------------
 
