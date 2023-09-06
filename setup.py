@@ -57,7 +57,7 @@ setup_requirements = [
 
 setup(
     name='mlconjug3',
-    version='3.10.4',
+    version='3.11.0',
     description="A Python library to conjugate French, English, Spanish, Italian, Portuguese and Romanian verbs using Machine Learning techniques.",
     long_description=readme,
     long_description_content_type="text/x-rst",
