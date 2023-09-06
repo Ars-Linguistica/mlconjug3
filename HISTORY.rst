@@ -2,7 +2,7 @@
 History
 =======
 
-3.12.0 (2023-06-09)
+3.11.0 (2023-06-09)
 -------------------
 
 * Fixed rendering issue for italian verbs in the command line interface.
