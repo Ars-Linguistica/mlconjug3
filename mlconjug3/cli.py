@@ -149,7 +149,7 @@ def main(verbs, language, output, subject, file_format, config):
                     if isinstance(persons, dict):
                         for person, form in persons.items():
                             table.add_row(
-                                mood.capitalize(), tense.capitalize(), person, form
+                                mood.capitalize(), tense.capitalize(), str(person), form
                             )
                     else:
                         table.add_row(
@@ -177,7 +177,7 @@ def main(verbs, language, output, subject, file_format, config):
                                 if isinstance(persons, dict):
                                     for person, form in persons.items():
                                         writer.writerow(
-                                            [verb, mood, tense, person, form]
+                                            [str(item) for item in [verb, mood, tense, person, form]]
                                         )
                                 else:
                                     writer.writerow([verb, mood, tense, "", persons])
