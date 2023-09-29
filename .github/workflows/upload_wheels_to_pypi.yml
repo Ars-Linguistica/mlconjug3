@@ -71,7 +71,7 @@ jobs:
             -   name: Build Package
                 run: poetry build
             -   name: Sign with sigstore
-                uses: sigstore/gh-action-sigstore-python@9310933b45d7dfc2fe40c1d701ac114548c28d31 # v2.0.1
+                uses: sigstore/gh-action-sigstore-python@1a402ed919f6cb88b9bafb523fb65508c442514b # v2.1.0
                 with:
                   upload-signing-artifacts: true
                   release-signing-artifacts: true
