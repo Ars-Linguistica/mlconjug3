@@ -2,6 +2,11 @@
 History
 =======
 
+Pending
+-------
+
+* Fix `subject=="abbrev"` option.
+
 3.11.0 (2023-06-09)
 -------------------
 
