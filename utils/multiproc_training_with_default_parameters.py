@@ -1,6 +1,5 @@
 import mlconjug3
 import numpy as np
-from functools import partial
 from time import time
 from joblib import Parallel, delayed
 import joblib
@@ -17,24 +16,6 @@ OUTPUT_DIR = Path("trained_models")
 OUTPUT_DIR.mkdir(exist_ok=True)
 
 # --------------------------
-# LANGUAGE TUNING ONLY
-# (no duplication of model logic)
-# --------------------------
-K_MAP = {
-    "en": 2000,
-    "fr": 3000,
-    "es": 3500,
-    "it": 5000,
-    "pt": 4500,
-    "ro": 3000,
-}
-
-ITER_MAP = {
-    "it": 5000,
-    "pt": 4000,
-}
-
-# --------------------------
 # DATASETS
 # --------------------------
 print("\n[1/5] Building datasets...")
@@ -45,13 +26,19 @@ datasets = {
 }
 
 for lang, ds in datasets.items():
-    ds.split_data(proportion=1)
-    print(f"  ✓ {lang}: {len(ds.verbs_list)} verbs")
+    ds.split_data(proportion=0.8)  # ✅ USE BUILT-IN SPLIT
+    print(
+        f"  ? {lang}: "
+        f"total={len(ds.verbs_list)} | "
+        f"train={len(ds.train_input)} | "
+        f"test={len(ds.test_input)}"
+    )
 
 print("\n[2/5] Training models in parallel...\n")
 
+
 # --------------------------
-# MODEL FACTORY (LEAN)
+# MODEL FACTORY
 # --------------------------
 def build_model(lang: str):
     return mlconjug3.Model(language=lang)
@@ -67,7 +54,8 @@ def train_one(lang: str):
     model = build_model(lang)
     ds = datasets[lang]
 
-    model.train(ds.verbs_list, ds.templates_list)
+    # ✅ TRAIN USING DATASET API
+    model.train(ds.train_input, ds.train_labels)
 
     t = time() - start
     print(f"[TRAIN] {lang} done in {t:.2f}s")
@@ -91,20 +79,22 @@ for lang, model, t in results:
 
 
 # --------------------------
-# EVALUATION (CLEAN)
+# EVALUATION (REAL)
 # --------------------------
 print("\n[3/5] Evaluating models...\n")
 
 for lang in langs:
-    pred = models[lang].predict(datasets[lang].verbs_list)
-    true = datasets[lang].templates_list
+    ds = datasets[lang]
+
+    pred = models[lang].predict(ds.test_input)
+    true = ds.test_labels
 
     acc = accuracy_score(true, pred)
     print(f"{lang.upper():2}: acc={acc:.4f}")
 
 
 # --------------------------
-# SAVE MODELS (ZIP FORMAT)
+# SAVE MODELS
 # --------------------------
 print("\n[4/5] Saving models...\n")
 
@@ -119,19 +109,21 @@ for lang in langs:
 
     model_path.unlink()
 
-    print(f"  ✓ Saved {zip_path}")
+    print(f"  ? Saved {zip_path}")
 
 
 # --------------------------
-# FINAL REPORT (COMPACT + USEFUL)
+# FINAL REPORT
 # --------------------------
 print("\n[5/5] Final Training Report\n")
 
 report = []
 
 for lang in langs:
-    pred = models[lang].predict(datasets[lang].verbs_list)
-    true = datasets[lang].templates_list
+    ds = datasets[lang]
+
+    pred = models[lang].predict(ds.test_input)
+    true = ds.test_labels
 
     acc = float(np.mean(pred == true))
     misses = int(np.sum(pred != true))
