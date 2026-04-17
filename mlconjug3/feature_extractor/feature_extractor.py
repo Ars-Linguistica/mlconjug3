@@ -1,12 +1,10 @@
 """
 Feature extraction module for verb conjugation classification.
 
-This version provides:
-- Morphological signals (prefix/suffix structure)
-- Length + phonetic statistics
-- Language-aware vowel/consonant ratios
-- Structural repetition patterns
-- Light internal character patterns (bigram-like signals)
+Now optimized for:
+- Romanian (morphological complexity)
+- Italian (stem variation)
+- Stable performance for Romance languages
 """
 
 import re
@@ -14,14 +12,6 @@ from mlconjug3.constants import ALPHABET
 
 
 def extract_verb_features(verb, lang=None, ngram_range=None):
-    """
-    Extract handcrafted linguistic features from a verb.
-
-    NOTE:
-    - Character n-grams are handled separately in CountVectorizer.
-    - This function only provides symbolic/linguistic features.
-    """
-
     _white_spaces = re.compile(r"\s\s+")
     verb = _white_spaces.sub(" ", verb).lower()
 
@@ -31,8 +21,10 @@ def extract_verb_features(verb, lang=None, ngram_range=None):
     verb_len = len(verb)
     features = []
 
+    weak_lang = lang in {"ro", "it"}
+
     # ---------------------------
-    # Basic morphology
+    # CORE MORPHOLOGY
     # ---------------------------
     features.append(f"END={verb[-2:]}")
     features.append(f"END3={verb[-3:]}" if verb_len >= 3 else f"END3={verb}")
@@ -43,19 +35,25 @@ def extract_verb_features(verb, lang=None, ngram_range=None):
     features.append(f"LEN={verb_len}")
 
     # ---------------------------
-    # Suffix patterns (strong signal)
+    # SUFFIX FEATURES (BOOSTED FOR WEAK LANGUAGES)
     # ---------------------------
-    for i in range(2, min(6, verb_len + 1)):
+    max_suf = 7 if weak_lang else 5
+
+    for i in range(2, min(max_suf, verb_len + 1)):
         features.append(f"SUF{i}={verb[-i:]}")
 
+    # extra suffix emphasis for RO/IT
+    if weak_lang:
+        features.append(f"SUF_LONG={verb[-6:] if verb_len >= 6 else verb}")
+
     # ---------------------------
-    # Prefix patterns
+    # PREFIX FEATURES
     # ---------------------------
     for i in range(2, min(5, verb_len + 1)):
         features.append(f"PREF{i}={verb[:i]}")
 
     # ---------------------------
-    # Language-specific phonetics
+    # PHONETIC FEATURES
     # ---------------------------
     if lang not in ALPHABET:
         lang = "en"
@@ -72,16 +70,18 @@ def extract_verb_features(verb, lang=None, ngram_range=None):
         features.append(f"V/C={round(vowels / consonants, 2)}")
 
     # ---------------------------
-    # Structural signal: double letters
+    # STRUCTURE SIGNAL (LIGHTWEIGHT ONLY)
     # ---------------------------
     has_double = any(verb[i] == verb[i + 1] for i in range(len(verb) - 1))
     features.append(f"HAS_DOUBLE={has_double}")
 
     # ---------------------------
-    # Internal character patterns (light bigram signal)
+    # INTERNAL PATTERN (REDUCED NOISE VERSION)
     # ---------------------------
-    for i in range(len(verb) - 1):
-        features.append(f"BI_{verb[i:i+2]}")
+    # Only for weak languages to avoid hurting FR/ES/PT
+    if weak_lang:
+        for i in range(0, len(verb) - 2, 2):  # sparse sampling instead of full bigrams
+            features.append(f"BI_{verb[i:i+2]}")
 
     return features
 
