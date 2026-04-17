@@ -13,7 +13,7 @@ concurrency:
 
 jobs:
   test:
-    name: ${{ matrix.os }} • Python ${{ matrix.python-version }} • sklearn ${{ matrix.sklearn }}
+    name: ${{ matrix.os }} • Python ${{ matrix.python-version }} • ${{ matrix.sklearn_label }}
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -24,6 +24,12 @@ jobs:
         sklearn:
           - ">=1.2,<1.4"
           - ">=1.3,<2"
+
+        include:
+          - sklearn: ">=1.2,<1.4"
+            sklearn_label: "sk12"
+          - sklearn: ">=1.3,<2"
+            sklearn_label: "sk13plus"
 
         exclude:
           # sklearn >=1.3 requires Python >=3.9
@@ -55,7 +61,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: .venv
-          key: venv-${{ runner.os }}-${{ matrix.python-version }}-${{ matrix.sklearn }}-${{ hashFiles('poetry.lock') }}
+          key: venv-${{ runner.os }}-${{ matrix.python-version }}-${{ matrix.sklearn_label }}-${{ hashFiles('poetry.lock') }}
 
       - name: Install dependencies
         run: poetry install --no-interaction
