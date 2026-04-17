@@ -1,99 +1,79 @@
-"""
-This module declares the Model class.
-"""
+from functools import partial
+from typing import Optional, Sequence, Any
 
-from sklearn.feature_selection import SelectFromModel
 from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.svm import LinearSVC
 from sklearn.linear_model import SGDClassifier
 from sklearn.pipeline import Pipeline
 
-from mlconjug3.constants import *
 from mlconjug3.feature_extractor import extract_verb_features
-
-from functools import partial
 
 
 class Model:
     """
-    Manages the scikit-learn pipeline.
+    Core ML model for verb template classification.
+    Lightweight defaults, tuned externally via trainer.py.
     """
 
     def __init__(
-        self, vectorizer=None, feature_selector=None, classifier=None, language=None
-    ):
-        # ---------------------------
-        # Vectorizer
-        # ---------------------------
-        if not vectorizer:
-            tokenizer = partial(extract_verb_features, lang=language)
+        self,
+        vectorizer: Optional[Any] = None,
+        classifier: Optional[Any] = None,
+        language: Optional[str] = None,
+    ) -> None:
+        self.language = language
 
+        # --------------------------
+        # VECTORIZER (ROBUST DEFAULT)
+        # --------------------------
+        if vectorizer is None:
             vectorizer = CountVectorizer(
-                analyzer="word",
-                tokenizer=tokenizer,
-                token_pattern=None,  # IMPORTANT: disables default regex tokenizer
-                ngram_range=(2, 7),
+                analyzer=partial(
+                    extract_verb_features,
+                    lang=language,
+                    ngram_range=(2, 8),  # improved long morphology capture
+                ),
                 binary=True,
                 lowercase=False,
             )
 
-        # ---------------------------
-        # Feature selector
-        # ---------------------------
-        if not feature_selector:
-            feature_selector = SelectFromModel(
-                LinearSVC(
-                    penalty="l1",
-                    max_iter=12000,
-                    dual=False,
-                    verbose=2,
-                )
-            )
-
-        # ---------------------------
-        # Classifier
-        # ---------------------------
-        if not classifier:
+        # --------------------------
+        # CLASSIFIER (STABLE DEFAULT)
+        # --------------------------
+        if classifier is None:
             classifier = SGDClassifier(
                 loss="log_loss",
                 penalty="elasticnet",
                 l1_ratio=0.15,
+                alpha=3e-6,          # slightly stronger fit than before
                 max_iter=4000,
-                alpha=1e-5,
+                tol=1e-4,
+                early_stopping=False,
+                n_iter_no_change=10,
                 random_state=42,
-                verbose=2,
+                verbose=0,
             )
 
-        # ---------------------------
-        # Pipeline
-        # ---------------------------
+        # --------------------------
+        # PIPELINE
+        # --------------------------
         self.pipeline = Pipeline(
             [
                 ("vectorizer", vectorizer),
-                ("feature_selector", feature_selector),
                 ("classifier", classifier),
             ]
         )
 
-        self.language = language
+    def __repr__(self) -> str:
+        return f"{__name__}.{self.__class__.__name__}(pipeline)"
 
-    def __repr__(self):
-        return "{}.{}({}, {}, {})".format(
-            __name__, self.__class__.__name__, *sorted(self.pipeline.named_steps)
-        )
+    def train(self, samples: Sequence[str], labels: Sequence[int]) -> "Model":
+        self.pipeline.fit(samples, labels)
+        return self
 
-    def train(self, samples, labels):
-        """
-        Train the pipeline.
-        """
-        self.pipeline = self.pipeline.fit(samples, labels)
-
-    def predict(self, verbs):
-        """
-        Predict conjugation class.
-        """
+    def predict(self, verbs: Sequence[str]):
         return self.pipeline.predict(verbs)
 
-
-if __name__ == "__main__":
-    pass
+    def predict_proba(self, verbs: Sequence[str]):
+        if hasattr(self.pipeline, "predict_proba"):
+            return self.pipeline.predict_proba(verbs)
+        raise AttributeError("Classifier does not support predict_proba")
