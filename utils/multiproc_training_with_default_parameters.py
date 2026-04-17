@@ -66,7 +66,7 @@ def train_one(lang: str):
 # --------------------------
 # PARALLEL TRAINING
 # --------------------------
-results = Parallel(n_jobs=min(len(langs), 4))(
+results = Parallel(n_jobs=min(len(langs), 8))(
     delayed(train_one)(lang) for lang in langs
 )
 
