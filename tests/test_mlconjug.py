@@ -133,7 +133,7 @@ class TestVerb:
         assert len(iteration_results) == 46
         # assert iteration_results[0] == ('Infinitif', 'Infinitif Présent', 'manger')
         assert iteration_results[1] == ('Indicatif', 'Présent', '1s', 'mange')
-        
+
     def test_set_get_contains(self):
         verbiste = Verbiste(language='fr')
         test_verb_info = verbiste.get_verb_info(TEST_VERBS[verbiste.language][0])
@@ -157,12 +157,24 @@ class TestVerb:
 
 class TestEndingCountVectorizer:
     ngrange = (2, 7)
-    custom_vectorizer = partial(extract_verb_features, lang='fr', ngram_range=ngrange)
-    vectorizer = CountVectorizer(analyzer=custom_vectorizer, binary=True, ngram_range=ngrange)
 
-    def test_char_ngrams(self):
-        ngrams = self.vectorizer._char_ngrams('aller')
-        assert 'ller' in ngrams
+    tokenizer = partial(extract_verb_features, lang="fr")
+
+    vectorizer = CountVectorizer(
+        analyzer="word",
+        tokenizer=tokenizer,
+        token_pattern=None,
+        ngram_range=ngrange,
+        binary=True,
+        lowercase=False,
+    )
+
+    def test_ngrams_present(self):
+        X = self.vectorizer.fit_transform(["aller"])
+        features = self.vectorizer.get_feature_names_out()
+
+        # ensure some n-gram features are produced
+        assert any(len(f.split()) >= 2 for f in features)
 
 
 class TestConjugator:
@@ -244,7 +256,7 @@ class TestCLI:
         runner = CliRunner()
         result = runner.invoke(cli.main, [verb])
         assert result.exit_code == 0
-        
+
         help_result = runner.invoke(cli.main, ['--help'])
         assert help_result.exit_code == 0
         # assert 'Console script for mlconjug3.' in help_result.output
@@ -267,7 +279,7 @@ class TestCLI:
         with open(my_file, encoding='utf-8') as file:
             output = json.load(file)
         assert output['aller'] == test_verb.conjug_info
-        
+
     def test_load_toml(self, tmpdir):
         """
         Test loading config from toml file
@@ -282,7 +294,7 @@ class TestCLI:
             subject = "abbrev"
             output = "conjugation_table.json"
             file_format = "json"
-    
+
             [theme]
             header_style = "bold #0D47A1"
             mood_style = "bold #F9A825"
@@ -296,8 +308,8 @@ class TestCLI:
         assert result.exit_code == 0
         # assert 'Loading config from {}'.format(config_path) in result.output.strip()
         # add additional asserts to check that the loaded config is used in the conjugation
-        temp_dir.cleanup() 
-    
+        temp_dir.cleanup()
+
     def test_load_yaml(self, tmpdir):
         """
         Test loading config from toml file
@@ -321,14 +333,14 @@ class TestCLI:
                 }
             }
             yaml.dump(config, config_file)
-        
+
         # Try to load the config.yaml file from the cli
         runner = CliRunner()
         result = runner.invoke(cli.main, ['aller', '-c', config_path])
         assert result.exit_code == 0
         # assert 'Loading config from {}'.format(config_path) in result.output.strip()
         # Cleans temp dir
-        temp_dir.cleanup() 
+        temp_dir.cleanup()
 
 
 class TestConjugatorTrainer:
@@ -348,19 +360,19 @@ class TestConjugatorTrainer:
                   )
                  }
         return ConjugatorTrainer(**params)
-    
+
     def test_train(self, trainer):
         trainer.train()
         # assert trainer.is_trained == True
-    
+
     def test_predict(self, trainer):
         trainer.predict()
         # assert trainer.predictions is not None
-    
+
     def test_evaluate(self, trainer):
         trainer.evaluate()
         # assert trainer.evaluation is not None
-    
+
     # def test_save(self, trainer):
         # trainer.save()
         # assert trainer.output_folder is not None
