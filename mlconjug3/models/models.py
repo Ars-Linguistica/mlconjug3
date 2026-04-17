@@ -3,7 +3,7 @@ from typing import Optional, Sequence, Any
 
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.linear_model import SGDClassifier
-from sklearn.pipeline import Pipeline
+from sklearn.pipeline import Pipeline, FeatureUnion
 
 from mlconjug3.feature_extractor import extract_verb_features
 
@@ -11,7 +11,11 @@ from mlconjug3.feature_extractor import extract_verb_features
 class Model:
     """
     Core ML model for verb template classification.
-    Lightweight defaults, tuned externally via trainer.py.
+
+    Current design:
+    - Character n-grams (strong morphological signal)
+    - Linguistic feature tokens (rule-based signals)
+    - Linear classifier optimized for sparse features
     """
 
     def __init__(
@@ -23,28 +27,39 @@ class Model:
         self.language = language
 
         # --------------------------
-        # VECTORIZER (ROBUST DEFAULT)
+        # FEATURE PIPELINE (HYBRID)
         # --------------------------
         if vectorizer is None:
-            vectorizer = CountVectorizer(
+            char_vectorizer = CountVectorizer(
+                analyzer="char",
+                ngram_range=(2, 6),
+                lowercase=True,
+            )
+
+            linguistic_vectorizer = CountVectorizer(
                 analyzer=partial(
                     extract_verb_features,
                     lang=language,
-                    ngram_range=(2, 8),  # improved long morphology capture
                 ),
-                binary=True,
                 lowercase=False,
             )
 
+            vectorizer = FeatureUnion(
+                [
+                    ("char_features", char_vectorizer),
+                    ("linguistic_features", linguistic_vectorizer),
+                ]
+            )
+
         # --------------------------
-        # CLASSIFIER (STABLE DEFAULT)
+        # CLASSIFIER
         # --------------------------
         if classifier is None:
             classifier = SGDClassifier(
                 loss="log_loss",
                 penalty="elasticnet",
                 l1_ratio=0.15,
-                alpha=3e-6,          # slightly stronger fit than before
+                alpha=3e-6,
                 max_iter=4000,
                 tol=1e-4,
                 early_stopping=False,
@@ -58,7 +73,7 @@ class Model:
         # --------------------------
         self.pipeline = Pipeline(
             [
-                ("vectorizer", vectorizer),
+                ("features", vectorizer),
                 ("classifier", classifier),
             ]
         )
