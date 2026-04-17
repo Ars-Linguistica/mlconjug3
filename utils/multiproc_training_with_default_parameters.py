@@ -5,8 +5,9 @@ from joblib import Parallel, delayed
 import joblib
 from zipfile import ZipFile, ZIP_DEFLATED
 from pathlib import Path
+from collections import Counter, defaultdict
 
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, confusion_matrix
 
 np.random.seed(42)
 
@@ -26,27 +27,19 @@ datasets = {
 }
 
 for lang, ds in datasets.items():
-    ds.split_data(proportion=0.8)  # ✅ USE BUILT-IN SPLIT
+    ds.split_data(proportion=0.8)
     print(
-        f"  ? {lang}: "
-        f"total={len(ds.verbs_list)} | "
-        f"train={len(ds.train_input)} | "
-        f"test={len(ds.test_input)}"
+        f"  ? {lang}: total={len(ds.verbs_list)} | "
+        f"train={len(ds.train_input)} | test={len(ds.test_input)}"
     )
 
 print("\n[2/5] Training models in parallel...\n")
 
 
-# --------------------------
-# MODEL FACTORY
-# --------------------------
 def build_model(lang: str):
     return mlconjug3.Model(language=lang)
 
 
-# --------------------------
-# TRAIN FUNCTION
-# --------------------------
 def train_one(lang: str):
     print(f"[TRAIN] {lang} starting...")
     start = time()
@@ -54,7 +47,6 @@ def train_one(lang: str):
     model = build_model(lang)
     ds = datasets[lang]
 
-    # ✅ TRAIN USING DATASET API
     model.train(ds.train_input, ds.train_labels)
 
     t = time() - start
@@ -63,10 +55,7 @@ def train_one(lang: str):
     return lang, model, t
 
 
-# --------------------------
-# PARALLEL TRAINING
-# --------------------------
-results = Parallel(n_jobs=min(len(langs), 8))(
+results = Parallel(n_jobs=min(len(langs), 4))(
     delayed(train_one)(lang) for lang in langs
 )
 
@@ -77,21 +66,18 @@ for lang, model, t in results:
     models[lang] = model
     training_times[lang] = t
 
-
 # --------------------------
-# EVALUATION (REAL)
+# EVALUATION
 # --------------------------
 print("\n[3/5] Evaluating models...\n")
 
 for lang in langs:
     ds = datasets[lang]
-
     pred = models[lang].predict(ds.test_input)
     true = ds.test_labels
 
     acc = accuracy_score(true, pred)
     print(f"{lang.upper():2}: acc={acc:.4f}")
-
 
 # --------------------------
 # SAVE MODELS
@@ -108,9 +94,53 @@ for lang in langs:
         zf.write(model_path, arcname=model_path.name)
 
     model_path.unlink()
-
     print(f"  ? Saved {zip_path}")
 
+# --------------------------
+# ERROR ANALYSIS (RO + IT)
+# --------------------------
+print("\n[6/6] ERROR ANALYSIS (RO + IT)\n")
+
+
+def error_analysis(lang):
+    print("\n==============================")
+    print(f" ERROR ANALYSIS: {lang.upper()}")
+    print("==============================\n")
+
+    ds = datasets[lang]
+    model = models[lang]
+
+    y_true = ds.test_labels
+    y_pred = model.predict(ds.test_input)
+
+    acc = accuracy_score(y_true, y_pred)
+    print(f"Accuracy: {acc:.4f}\n")
+
+    # confusion pairs
+    conf = Counter()
+    for t, p in zip(y_true, y_pred):
+        if t != p:
+            conf[(t, p)] += 1
+
+    print("Top confusion pairs:\n")
+    for (t, p), c in conf.most_common(15):
+        print(f"{t} ? {p} : {c}")
+
+    # examples
+    print("\nSample misclassified verbs:\n")
+
+    grouped = defaultdict(list)
+    for verb, t, p in zip(ds.test_input, y_true, y_pred):
+        if t != p:
+            grouped[(t, p)].append(verb)
+
+    for (t, p), verbs in list(grouped.items())[:5]:
+        print(f"\n{t} ? {p} ({len(verbs)} cases)")
+        print("Examples:", verbs[:10])
+
+
+error_analysis("ro")
+error_analysis("it")
 
 # --------------------------
 # FINAL REPORT
@@ -121,7 +151,6 @@ report = []
 
 for lang in langs:
     ds = datasets[lang]
-
     pred = models[lang].predict(ds.test_input)
     true = ds.test_labels
 

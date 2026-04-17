@@ -1,10 +1,7 @@
 """
-Feature extraction module for verb conjugation classification.
+This module declares the feature extractors for verbs.
 
-Now optimized for:
-- Romanian (morphological complexity)
-- Italian (stem variation)
-- Stable performance for Romance languages
+A custom tokenizer optimized for extracting verb features.
 """
 
 import re
@@ -12,6 +9,13 @@ from mlconjug3.constants import ALPHABET
 
 
 def extract_verb_features(verb, lang=None, ngram_range=None):
+    """
+    Extract base features from a verb.
+
+    NOTE:
+    - ngram_range is ignored (sklearn handles n-grams)
+    """
+
     _white_spaces = re.compile(r"\s\s+")
     verb = _white_spaces.sub(" ", verb).lower()
 
@@ -21,10 +25,8 @@ def extract_verb_features(verb, lang=None, ngram_range=None):
     verb_len = len(verb)
     features = []
 
-    weak_lang = lang in {"ro", "it"}
-
     # ---------------------------
-    # CORE MORPHOLOGY
+    # BASE MORPHOLOGY (GLOBAL)
     # ---------------------------
     features.append(f"END={verb[-2:]}")
     features.append(f"END3={verb[-3:]}" if verb_len >= 3 else f"END3={verb}")
@@ -34,17 +36,62 @@ def extract_verb_features(verb, lang=None, ngram_range=None):
 
     features.append(f"LEN={verb_len}")
 
-    # ---------------------------
-    # SUFFIX FEATURES (BOOSTED FOR WEAK LANGUAGES)
-    # ---------------------------
-    max_suf = 7 if weak_lang else 5
-
-    for i in range(2, min(max_suf, verb_len + 1)):
+    # Strong suffix hierarchy
+    for i in range(2, min(7, verb_len + 1)):
         features.append(f"SUF{i}={verb[-i:]}")
 
-    # extra suffix emphasis for RO/IT
-    if weak_lang:
-        features.append(f"SUF_LONG={verb[-6:] if verb_len >= 6 else verb}")
+    # =========================================================
+    # 🇮🇹 ITALIAN TARGETED FEATURES
+    # =========================================================
+    if lang == "it":
+
+        ends_are = verb.endswith("are")
+        ends_ere = verb.endswith("ere")
+        ends_ire = verb.endswith("ire")
+
+        features.append(f"IT_ARE={ends_are}")
+        features.append(f"IT_ERE={ends_ere}")
+        features.append(f"IT_IRE={ends_ire}")
+
+        # -isc verbs (key signal)
+        features.append(f"IT_ISC={'isc' in verb[-6:]}")
+
+        # stem variability
+        features.append(f"IT_STEM_VAR={len(set(verb[:3]))}")
+
+        # vowel structure
+        vowels_it = sum(verb.count(c) for c in "aeiou")
+        features.append(f"IT_VOWELS={vowels_it}")
+        features.append(f"IT_VOWEL_RATIO={round(vowels_it / max(1, verb_len), 3)}")
+
+        # suffix tension (helps separate similar endings)
+        features.append(f"IT_SUFFIX_TENSION={verb[-1] + verb[-2:]}")
+
+    # =========================================================
+    # 🇷🇴 ROMANIAN TARGETED FEATURES
+    # =========================================================
+    if lang == "ro":
+
+        features.append(f"RO_IZA={verb.endswith('iza')}")
+        features.append(f"RO_IFICA={verb.endswith('ifica')}")
+        features.append(f"RO_UI={verb.endswith('ui')}")
+        features.append(f"RO_A_VERB={verb.endswith('a')}")
+
+        # derived verbs cluster (key for template 105)
+        features.append(
+            f"RO_DERIV_CHAIN={'iza' in verb or 'fica' in verb or 'ui' in verb}"
+        )
+
+        # complexity signal
+        features.append(f"RO_COMPLEXITY={len(set(verb)) + verb_len}")
+
+        # suffix entropy proxy
+        features.append(f"RO_SUFFIX3={verb[-3:]}")
+
+        # vowel duplication signal
+        features.append(
+            f"RO_DOUBLE_VOWEL={'aa' in verb or 'ee' in verb or 'ii' in verb}"
+        )
 
     # ---------------------------
     # PREFIX FEATURES
@@ -70,18 +117,11 @@ def extract_verb_features(verb, lang=None, ngram_range=None):
         features.append(f"V/C={round(vowels / consonants, 2)}")
 
     # ---------------------------
-    # STRUCTURE SIGNAL (LIGHTWEIGHT ONLY)
+    # STRUCTURE FEATURES
     # ---------------------------
-    has_double = any(verb[i] == verb[i + 1] for i in range(len(verb) - 1))
-    features.append(f"HAS_DOUBLE={has_double}")
-
-    # ---------------------------
-    # INTERNAL PATTERN (REDUCED NOISE VERSION)
-    # ---------------------------
-    # Only for weak languages to avoid hurting FR/ES/PT
-    if weak_lang:
-        for i in range(0, len(verb) - 2, 2):  # sparse sampling instead of full bigrams
-            features.append(f"BI_{verb[i:i+2]}")
+    features.append(
+        f"HAS_DOUBLE={any(verb[i] == verb[i + 1] for i in range(len(verb) - 1))}"
+    )
 
     return features
 
