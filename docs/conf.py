@@ -57,8 +57,8 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'MLConjug3'
-author = u'ArsLinguistica'
-copyright = u"2021, ArsLinguistica"
+author = u'Sekou Diao, Ars-Linguistica'
+copyright = u"2023, Ars-Linguistica"
 
 # The version info for the project you're documenting, acts as replacement
 # for |version| and |release|, also used in various other places throughout
@@ -117,8 +117,7 @@ gettext_compact = False
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = "sphinx_rtd_theme"
-
+html_theme = "furo"
 # Theme options are theme-specific and customize the look and feel of a
 # theme further.  For a list of options available for each theme, see the
 # documentation.
@@ -216,7 +215,7 @@ latex_elements = {
 latex_documents = [
     ('index', 'mlconjug3.tex',
      u'MLConjug Documentation',
-     u'ArsLinguistica', 'manual'),
+     u'Ars-Linguistica', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at
@@ -247,7 +246,7 @@ latex_documents = [
 man_pages = [
     ('index', 'mlconjug3',
      u'MLConjug3 Documentation',
-     [u'ArsLinguistica'], 1)
+     [u'Ars-Linguistica'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -262,7 +261,7 @@ man_pages = [
 texinfo_documents = [
     ('index', 'mlconjug3',
      u'MLConjug3 Documentation',
-     u'ArsLinguistica',
+     u'Ars-Linguistica',
      'mlconjug3',
      'One line description of project.',
      'Miscellaneous'),

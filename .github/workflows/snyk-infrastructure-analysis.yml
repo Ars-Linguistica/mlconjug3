@@ -6,12 +6,24 @@
 # and fail PR checks, see https://github.com/snyk/actions/
 name: Workflow for Python using Snyk 
 on: push
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+permissions:
+  contents: read
+
 jobs:
   security:
+    if: github.actor!= 'dependabot-preview[bot]'
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
+    - name: Harden Runner
+      uses: step-security/harden-runner@8ca2b8b2ece13480cda6dacd3511b49857a23c09 # v2.5.1
+      with:
+        egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
+
+    - uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac # master
     - name: Run Snyk to check for vulnerabilities
-      uses: snyk/actions/python-3.8@master
+      uses: snyk/actions/python-3.8@299cde98a08ff8b1c2bfde1e5a067bce67a6d2b8 # master
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}

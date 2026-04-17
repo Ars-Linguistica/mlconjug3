@@ -1,0 +1,1 @@
+21:32:28.39 [WARN] Please either set `enabled = true` in the [anonymous-telemetry] section of pants.toml to enable sending anonymous stats to the Pants project to aid development, or set `enabled = false` to disable it. No telemetry sent for this run. An explicit setting will get rid of this message. See https://www.pantsbuild.org/v2.14/docs/anonymous-telemetry for details.

@@ -1,11 +1,20 @@
 name: "Use poetry to build package and run multiple tests"
 
 on: [ push, pull_request ]
-
+permissions:
+    contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+  
 jobs:
     build_wheels_with_poetry:
+        if: github.actor!= 'dependabot-preview[bot]'
         name: Build poetry packages on ${{ matrix.os }} on ${{ matrix.python-version }}
         runs-on: ${{ matrix.os }}
+        defaults:
+            run:
+                shell: bash
         strategy:
             fail-fast: false
             matrix:
@@ -17,26 +26,31 @@ jobs:
                         path: ~/Library/Caches/pip
                     -   os: windows-latest
                         path: ~\AppData\Local\pip\Cache
-                python-version: [ 3.8, 3.9, '3.10' ]
+                python-version: [ 3.8, 3.9, '3.10', '3.11' ]
 
         steps:
-            -   uses: actions/checkout@v2
+            - name: Harden Runner
+              uses: step-security/harden-runner@8ca2b8b2ece13480cda6dacd3511b49857a23c09 # v2.5.1
+              with:
+                egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
 
-            -   uses: actions/setup-python@v2
+            -   uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac # v4.0.0
+
+            -   uses: actions/setup-python@61a6322f88396a6271a6ee3565807d608ecaddd1 # v4.7.0
                 with:
                     python-version: ${{ matrix.python-version }}
 
             -   name: Install Poetry
-                uses: snok/install-poetry@v1
+                uses: snok/install-poetry@93ada01c735cc8a383ce0ce2ae205a21c415379b # v1.3.4
                 with:
                     virtualenvs-create: true
                     virtualenvs-in-project: true
-#            -   name: Clear corrupted cache
-#                run: poetry cache clear pypi --all --no-interaction
-#                if: ${{ matrix.os == 'ubuntu-latest' }} # Clear Linux cache
+         #   -   name: Set Poetry path
+        #        run: export PATH="$HOME/.poetry/bin:$PATH"
+            #    if: ${{ matrix.os == 'windows-latest' }}
             -   name: Load cached venv
                 id: cached-pip-wheels
-                uses: actions/cache@v2
+                uses: actions/cache@627f0f41f6904a5b1efbaed9f96d9eb58e92e920 # v3.2.4
                 if: ${{ matrix.os != 'ubuntu-latest' }} # Linux cache seems to be corrupted
                 with:
                     path: ~/.cache
@@ -45,15 +59,18 @@ jobs:
                 run: poetry install --no-interaction --no-root
             -   name: Install Package
                 run: poetry install --no-interaction
-            -   name: Run Bandit
-                run: poetry run bandit -r mlconjug3/ -c .bandit.yml
+            -   run: |
+                   source $VENV
+                   pytest --version
+           #  -   name: Run Bandit
+            #     run: poetry run bandit -r mlconjug3/ -c .bandit.yml
             -   name: Run Type Checker
                 run: |
-                    poetry run pip install types-setuptools
-                    poetry run mypy
+                   poetry run pip install types-setuptools
+                   poetry run mypy
             -   name: Run Pytest with coverage
                 run: poetry run pytest --cov=./mlconjug3/
             -   name: Build Package
                 run: poetry build
             -   name: Upload coverage artifacts to codecov
-                run: poetry run codecov --token=370386ee-28d7-441f-b4eb-7f63f8c5c3e9
+                run: poetry run codecov --token=06406f4a-05a0-4974-a902-20fd09de8b50

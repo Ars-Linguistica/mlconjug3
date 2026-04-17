@@ -24,15 +24,19 @@ Usage example:
 
 """
 
-__author__ = """ArsLinguistica"""
-__email__ = 'diao.sekou.nlp@gmail.com'
-__version__ = '3.8.3'
-__copyright__ = "Copyright (c) 2021, ArsLinguistica"
-__credits__ = ("Sekou Diao", "Pierre Sarrazin",)
+__author__ = "Sekou Diao, Ars Linguistica" ""
+__email__ = "diao.sekou.nlp@gmail.com"
+__version__ = '3.11.0'
+__copyright__ = "Copyright (c) 2023, Ars Linguistica"
+__credits__ = (
+    "Sekou Diao",
+    "Pierre Sarrazin",
+)
 __license__ = "MIT"
-__maintainer__ = "ArsLinguistica"
+__maintainer__ = "Ars-Linguistica"
 __status__ = "Production"
 
+from .constants import *
 from .mlconjug import *
 from .PyVerbiste import *
 
@@ -48,13 +52,6 @@ from locale import windows_locale, getdefaultlocale
 import gettext
 import inspect
 
-# Sets up the automatic translation of annotated strings displayed to the user.
-_RESOURCE_PACKAGE = 'mlconjug3'
-_TRANSLATIONS_PATH = pkg_resources.resource_filename(_RESOURCE_PACKAGE, 'locale')
-
-_SUPPORTED_LANGUAGES = ('default', 'en', 'es', 'fr', 'it', 'pt', 'ro')
-_TRANSLATED_LANGUAGES = _SUPPORTED_LANGUAGES[2:]
-
 
 def _get_user_locale():
     """
@@ -65,8 +62,9 @@ def _get_user_locale():
         The user locale.
 
     """
-    if 'Windows' in platform.system():
+    if "Windows" in platform.system():
         import ctypes
+
         windll = ctypes.windll.kernel32
         default_locale = windows_locale[windll.GetUserDefaultUILanguage()]
     else:
@@ -77,7 +75,7 @@ def _get_user_locale():
         else:
             user_locale = default_locale[:2]
     else:
-        user_locale = 'en'
+        user_locale = "en"
     return user_locale
 
 
@@ -100,14 +98,18 @@ def _getdoc(obj):
 
 _user_locale = _get_user_locale()
 
-if _user_locale in _TRANSLATED_LANGUAGES:
-    _MLCONJUG_TRANSLATIONS = gettext.translation(domain='mlconjug3',
-                                                 localedir=_TRANSLATIONS_PATH,
-                                                 languages=[_user_locale], fallback=True, codeset='UTF-8')
+if _user_locale in TRANSLATED_LANGUAGES:
+    MLCONJUG_TRANSLATIONS = gettext.translation(
+        domain="mlconjug3",
+        localedir=TRANSLATIONS_PATH,
+        languages=[_user_locale],
+        fallback=True,
+        codeset="UTF-8",
+    )
 else:
-    _MLCONJUG_TRANSLATIONS = gettext.NullTranslations()
+    MLCONJUG_TRANSLATIONS = gettext.NullTranslations()
 
-_MLCONJUG_TRANSLATIONS.install()
+MLCONJUG_TRANSLATIONS.install()
 
 # Replaces the getdoc method
 inspect.getdoc = _getdoc

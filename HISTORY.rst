@@ -2,6 +2,37 @@
 History
 =======
 
+3.11.0 (2023-06-09)
+-------------------
+
+* Fixed rendering issue for italian verbs in the command line interface.
+* Updated dependencies.
+* Updated documentation.
+
+3.10.0 (2023-26-01)
+-------------------
+
+We are excited to announce the release of mlconjug3 version 3.10! This release brings a number of new features and improvements to make your experience even better.
+
+* Config files for ease of use of the command line: You can now use config files to specify your preferences for the command line interface. This allows you to easily set your language, subject, output file, and file format, as well as customize the styling of the conjugation table.
+* Caching of xml conjugation files for faster loading: We have implemented caching of the xml conjugation files, which will greatly speed up the loading time of the conjugator.
+* Complete overhaul of the documentation: We have completely overhauled the documentation for mlconjug3, making it more comprehensive and user-friendly.
+* Signed release using sigstore: We have signed this release using sigstore_, which ensures that the release has not been tampered with and comes from a trusted source.
+
+.. _sigstore: https://www.sigstore.dev
+
+3.9.0 (2023-24-01)
+------------------
+
+* Added support for Python 3.11
+* Updated dependencies to scikit-learn 1.2.0 with a noticeable speed inrease in training and inference performance.
+* Added ConjugatorTrainer class to easily and flexibly train new conjugators.
+* Added support for the rich library for better visuals. Now the conjugation tables are pretty printed, themed and formatted.
+* Added multi-processing conjugation of multiple verbs for better performance on server applications using mlconjug3.
+* Added LRU cache to the the Conjugator.conjugate() method for better performance on applications with long running time.
+* Updated documentation with the new classes and more detailed information and visuals.
+* Refactor of internal classes, but keeping the same public interface in preparation for mlconjug3 v4.
+
 3.8.3 (2022-01-03)
 ------------------
 
@@ -92,7 +123,7 @@ History
 * Updated dependencies.
 
 
-.. _`GitHub Actions Workflows`: https://github.com/ArsLinguistica/mlconjug3/actions
+.. _`GitHub Actions Workflows`: https://github.com/Ars-Linguistica/mlconjug3/actions
 .. _conda: https://docs.conda.io/projects/conda/en/latest/user-guide/getting-started.html
 .. _conda-forge: https://anaconda.org/conda-forge/
 

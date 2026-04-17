@@ -1,0 +1,215 @@
+ABBREVS: &id002 !!python/tuple
+- 1s
+- 2s
+- 3s
+- 1p
+- 2p
+- 3p
+
+ALPHABET:
+  en:
+    consonants: bcdfghjklmnpqrstvwxyz
+    vowels: aeiouy
+  es:
+    consonants: "bcdfghjklmn\xF1pqrstvwxyz"
+    vowels: "a\xE1ei\xEDo\xF3u\xFAy"
+  fr:
+    consonants: "bc\xE7dfghjklmnpqrstvwxyz"
+    vowels: "a\xE1\xE0\xE2e\xEA\xE9\xE8i\xEE\xEFo\xF4\xF6\u0153u\xFB\xF9y"
+  it:
+    consonants: bcdfghjklmnpqrstvwxyz
+    vowels: "a\xE0e\xE9\xE8i\xEC\xEEo\xF3\xF2u\xF9y"
+  pt:
+    consonants: "bc\xE7dfghjklmnpqrstvwxyz"
+    vowels: "a\xE0\xE3\xE1\xE1e\xEA\xE9i\xEDo\xF3\xF5u\xFAy"
+  ro:
+    consonants: "bcdfghjklmnpqrs\u0219\u015Ft\u021B\u0163vwxyz"
+    vowels: "a\u0103\xE2ei\xEEouy"
+
+AUXILIARIES:
+  en: null
+  es: 'no'
+  fr: null
+  it: non
+  pt: "n\xE3o"
+  ro: nu
+
+CONJUGATIONS_RESOURCE_PATH:
+  en: data/conjug_manager/conjugation-en.json
+  es: data/conjug_manager/conjugation-es.json
+  fr: data/conjug_manager/conjugation-fr.json
+  it: data/conjug_manager/conjugation-it.json
+  pt: data/conjug_manager/conjugation-pt.json
+  ro: data/conjug_manager/conjugation-ro.json
+
+GENDER:
+  en: null
+  es: null
+  fr:
+    abbrev: !!python/tuple
+    - ms
+    - mp
+    - fs
+    - fp
+    pronoun: !!python/tuple
+    - masculin singulier
+    - masculin pluriel
+    - feminin singulier
+    - feminin pluriel
+  it: null
+  pt: null
+  ro: null
+
+IMPERATIVE_PRONOUNS:
+  en:
+    abbrev: &id001 !!python/tuple
+    - 2s
+    - 1p
+    - 2p
+    pronoun: !!python/tuple
+    - ''
+    - let's
+    - ''
+  es:
+    abbrev: !!python/tuple
+    - 2s
+    - 3s
+    - 1p
+    - 2p
+    - 3p
+    pronoun: !!python/tuple
+    - "t\xFA"
+    - "\xE9l"
+    - nosotros
+    - vosotros
+    - ellos
+  fr:
+    abbrev: *id001
+    pronoun: !!python/tuple
+    - ''
+    - ''
+    - ''
+  it: null
+  pt: null
+  ro:
+    abbrev: !!python/tuple
+    - 2s
+    - 2p
+    pronoun: !!python/tuple
+    - tu
+    - voi
+
+LANGUAGES: !!python/tuple
+- default
+- fr
+- en
+- es
+- it
+- pt
+- ro
+
+LANGUAGE_FULL:
+  en: English
+  es: "Espa\xF1ol"
+  fr: "Fran\xE7ais"
+  it: Italiano
+  pt: "Portugu\xEAs"
+  ro: "Rom\xE2n\u0103"
+
+NEGATION:
+  en: don't
+  es: 'no'
+  fr: ne
+  it: non
+  pt: "n\xE3o"
+  ro: nu
+
+PRE_TRAINED_MODEL_PATH:
+  en: data/models/trained_model-en-final.zip
+  es: data/models/trained_model-es-final.zip
+  fr: data/models/trained_model-fr-final.zip
+  it: data/models/trained_model-it-final.zip
+  pt: data/models/trained_model-pt-final.zip
+  ro: data/models/trained_model-ro-final.zip
+
+PRONOUNS:
+  en:
+    abbrev: *id002
+    pronoun: !!python/tuple
+    - I
+    - you
+    - he/she/it
+    - you
+    - we
+    - they
+  es:
+    abbrev: *id002
+    pronoun: !!python/tuple
+    - yo
+    - "t\xFA"
+    - "\xE9l"
+    - nosotros
+    - vosotros
+    - ellos
+  fr:
+    abbrev: *id002
+    pronoun: !!python/tuple
+    - je
+    - tu
+    - il (elle, on)
+    - nous
+    - vous
+    - ils (elles)
+  it:
+    abbrev: *id002
+    pronoun: !!python/tuple
+    - io
+    - tu
+    - egli/ella
+    - noi
+    - voi
+    - essi/esse
+  pt:
+    abbrev: *id002
+    pronoun: !!python/tuple
+    - eu
+    - tu
+    - ele
+    - "n\xF3s"
+    - "v\xF3s"
+    - eles
+  ro:
+    abbrev: *id002
+    pronoun: !!python/tuple
+    - eu
+    - tu
+    - el/ea
+    - noi
+    - voi
+    - ei/ele
+
+RESOURCE_PACKAGE: mlconjug3
+
+SUPPORTED_LANGUAGES: !!python/tuple
+- default
+- en
+- es
+- fr
+- it
+- pt
+- ro
+
+TRANSLATED_LANGUAGES: !!python/tuple
+- es
+- fr
+- it
+- pt
+- ro
+
+VERBS_RESOURCE_PATH:
+  en: data/conjug_manager/verbs-en.json
+  es: data/conjug_manager/verbs-es.json
+  fr: data/conjug_manager/verbs-fr.json
+  it: data/conjug_manager/verbs-it.json
+  pt: data/conjug_manager/verbs-pt.json
+  ro: data/conjug_manager/verbs-ro.json

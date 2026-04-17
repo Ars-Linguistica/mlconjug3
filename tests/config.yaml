@@ -1,0 +1,11 @@
+language: fr
+subject: pronoun
+output: conjugation_table.json
+file_format: json
+
+theme:
+  header_style: bold blue
+  mood_style: bold yellow
+  tense_style: bold green
+  person_style: bold bright_cyan
+  conjugation_style: bold bright_magenta

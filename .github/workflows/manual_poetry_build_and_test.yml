@@ -1,4 +1,6 @@
 name: "Manual Poetry Build and test Workflow"
+permissions:
+    contents: read
 on: [workflow_dispatch]
 jobs:
     build_wheels_with_poetry:
@@ -18,20 +20,25 @@ jobs:
                 python-version: [ 3.7, 3.8, 3.9, '3.10', 'pypy-3.7' ]
 
         steps:
-            -   uses: actions/checkout@v2
+            - name: Harden Runner
+              uses: step-security/harden-runner@8ca2b8b2ece13480cda6dacd3511b49857a23c09 # v2.5.1
+              with:
+                egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
 
-            -   uses: actions/setup-python@v2
+            -   uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac # v2.6.0
+
+            -   uses: actions/setup-python@61a6322f88396a6271a6ee3565807d608ecaddd1 # v4.7.0
                 with:
                     python-version: ${{ matrix.python-version }}
 
             -   name: Install Poetry
-                uses: snok/install-poetry@v1
+                uses: snok/install-poetry@93ada01c735cc8a383ce0ce2ae205a21c415379b # v1.3.4
                 with:
                     virtualenvs-create: true
                     virtualenvs-in-project: true
             -   name: Load cached venv
                 id: cached-pip-wheels
-                uses: actions/cache@v2
+                uses: actions/cache@627f0f41f6904a5b1efbaed9f96d9eb58e92e920 # v3.2.4
                 with:
                     path: ~/.cache
                     key: venv-${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('**/poetry.lock') }}
