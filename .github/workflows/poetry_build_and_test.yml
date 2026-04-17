@@ -1,76 +1,102 @@
-name: "Use poetry to build package and run multiple tests"
+name: Build & Test (Poetry)
 
-on: [ push, pull_request ]
+on:
+  push:
+  pull_request:
+
 permissions:
-    contents: read
+  contents: read
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
-  
+
 jobs:
-    build_wheels_with_poetry:
-        if: github.actor!= 'dependabot-preview[bot]'
-        name: Build poetry packages on ${{ matrix.os }} on ${{ matrix.python-version }}
-        runs-on: ${{ matrix.os }}
-        defaults:
-            run:
-                shell: bash
-        strategy:
-            fail-fast: false
-            matrix:
-                os: [ ubuntu-latest, windows-latest, macos-latest ]
-                include:
-                    -   os: ubuntu-latest
-                        path: ~/.cache/pip
-                    -   os: macos-latest
-                        path: ~/Library/Caches/pip
-                    -   os: windows-latest
-                        path: ~\AppData\Local\pip\Cache
-                python-version: [ 3.8, 3.9, '3.10', '3.11' ]
+  test:
+    name: ${{ matrix.os }} • Python ${{ matrix.python-version }} • sklearn ${{ matrix.sklearn }}
+    runs-on: ${{ matrix.os }}
 
-        steps:
-            - name: Harden Runner
-              uses: step-security/harden-runner@8ca2b8b2ece13480cda6dacd3511b49857a23c09 # v2.5.1
-              with:
-                egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12", "3.13", "3.14", "3.15"]
+        sklearn:
+          - ">=1.2,<1.4"
+          - ">=1.3,<2"
 
-            -   uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac # v4.0.0
+        exclude:
+          # sklearn >=1.3 requires Python >=3.9
+          - python-version: "3.8"
+            sklearn: ">=1.3,<2"
 
-            -   uses: actions/setup-python@61a6322f88396a6271a6ee3565807d608ecaddd1 # v4.7.0
-                with:
-                    python-version: ${{ matrix.python-version }}
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
 
-            -   name: Install Poetry
-                uses: snok/install-poetry@93ada01c735cc8a383ce0ce2ae205a21c415379b # v1.3.4
-                with:
-                    virtualenvs-create: true
-                    virtualenvs-in-project: true
-         #   -   name: Set Poetry path
-        #        run: export PATH="$HOME/.poetry/bin:$PATH"
-            #    if: ${{ matrix.os == 'windows-latest' }}
-            -   name: Load cached venv
-                id: cached-pip-wheels
-                uses: actions/cache@627f0f41f6904a5b1efbaed9f96d9eb58e92e920 # v3.2.4
-                if: ${{ matrix.os != 'ubuntu-latest' }} # Linux cache seems to be corrupted
-                with:
-                    path: ~/.cache
-                    key: venv-${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('**/poetry.lock') }}
-            -   name: Install dependencies
-                run: poetry install --no-interaction --no-root
-            -   name: Install Package
-                run: poetry install --no-interaction
-            -   run: |
-                   source $VENV
-                   pytest --version
-           #  -   name: Run Bandit
-            #     run: poetry run bandit -r mlconjug3/ -c .bandit.yml
-            -   name: Run Type Checker
-                run: |
-                   poetry run pip install types-setuptools
-                   poetry run mypy
-            -   name: Run Pytest with coverage
-                run: poetry run pytest --cov=./mlconjug3/
-            -   name: Build Package
-                run: poetry build
-            -   name: Upload coverage artifacts to codecov
-                run: poetry run codecov --token=06406f4a-05a0-4974-a902-20fd09de8b50
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: "pip"
+
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+        with:
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+
+      - name: Cache Poetry virtualenv
+        uses: actions/cache@v4
+        with:
+          path: .venv
+          key: venv-${{ runner.os }}-${{ matrix.python-version }}-${{ matrix.sklearn }}-${{ hashFiles('poetry.lock') }}
+
+      - name: Install dependencies
+        run: poetry install --no-interaction
+
+      - name: Override scikit-learn version (matrix)
+        run: poetry run pip install "scikit-learn${{ matrix.sklearn }}"
+
+      - name: Show environment info
+        run: |
+          poetry run python --version
+          poetry run pip list
+
+      - name: Run type checking
+        run: |
+          poetry run pip install types-setuptools
+          poetry run mypy
+
+      - name: Run tests
+        run: poetry run pytest --cov=mlconjug3 --cov-report=xml
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          files: ./coverage.xml
+
+  build:
+    name: Build package
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+
+      - name: Build package
+        run: poetry build
