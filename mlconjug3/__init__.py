@@ -48,7 +48,7 @@ from sklearn.pipeline import Pipeline
 
 import pkg_resources
 import platform
-from locale import windows_locale, getdefaultlocale
+from locale import windows_locale, getlocale
 import gettext
 import inspect
 
@@ -68,7 +68,7 @@ def _get_user_locale():
         windll = ctypes.windll.kernel32
         default_locale = windows_locale[windll.GetUserDefaultUILanguage()]
     else:
-        default_locale = getdefaultlocale()
+        default_locale = getlocale()
     if default_locale:
         if isinstance(default_locale, tuple):
             user_locale = [0][:2]
