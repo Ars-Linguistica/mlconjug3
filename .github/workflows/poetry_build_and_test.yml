@@ -50,9 +50,16 @@ jobs:
         run: |
           echo "$env:APPDATA\Python\Scripts" | Out-File -Append -FilePath $env:GITHUB_PATH
 
-      - name: Verify Poetry install (debug)
+      - name: Verify Poetry install
         shell: bash
         run: poetry --version
+
+      # 🔥 CRITICAL FIX: prevent numpy source builds
+      - name: Force binary installs only
+        shell: bash
+        run: |
+          poetry run pip install --upgrade pip
+          poetry run pip config set global.only-binary ":all:"
 
       - name: Cache Poetry virtualenv
         uses: actions/cache@v4
