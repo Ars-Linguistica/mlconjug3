@@ -1,3 +1,13 @@
+"""
+mlconjug.py
+
+Main entry point for verb conjugation using a hybrid approach:
+- Rule-based conjugation via Verbiste for known verbs
+- Machine learning fallback for unknown verbs
+
+This module exposes the `Conjugator` class.
+"""
+
 from .PyVerbiste import Verbiste
 from .conjug_manager import ConjugManager
 from .constants import *
@@ -12,6 +22,7 @@ from concurrent.futures import ProcessPoolExecutor
 from zipfile import ZipFile
 import joblib
 from importlib import resources
+import numpy as np
 
 
 VERBS = {
@@ -26,17 +37,28 @@ VERBS = {
 
 class Conjugator:
     """
-    Main class for conjugation using Verbiste + ML fallback.
+    Main class for verb conjugation.
+
+    Combines:
+    - Verbiste dictionary-based conjugation
+    - Machine learning fallback for unknown verbs
     """
 
     def __init__(self, language="fr", model=None):
+        """
+        Initialize the Conjugator.
+
+        Parameters
+        ----------
+        language : str
+            Target language.
+        model : Model or estimator, optional
+            A trained model. If None, a pre-trained model is loaded.
+        """
         self.language = language
         self.conjug_manager = Verbiste(language=language)
 
-        if not model:
-            # ----------------------------
-            # Modern resource loading (no pkg_resources)
-            # ----------------------------
+        if model is None:
             resource_path = resources.files(RESOURCE_PACKAGE).joinpath(
                 PRE_TRAINED_MODEL_PATH[language]
             )
@@ -48,12 +70,26 @@ class Conjugator:
                     ) as archive:
                         model = joblib.load(archive)
 
-        self.model = model if model else None
+            self.set_model(model)
+        else:
+            if isinstance(model, Model):
+                self.set_model(model)
+            else:
+                logger.warning(
+                    _("Using a non-Model estimator. Compatibility is not guaranteed.")
+                )
+                self.model = model
 
     def __repr__(self):
+        """
+        String representation of the Conjugator.
+        """
         return f"{__name__}.{self.__class__.__name__}(language={self.language})"
 
     def conjugate(self, verbs, subject="abbrev"):
+        """
+        Conjugate one or multiple verbs.
+        """
         if isinstance(verbs, str):
             return self._conjugate(verbs, subject)
 
@@ -64,11 +100,12 @@ class Conjugator:
 
     @lru_cache(maxsize=1024)
     def _conjugate(self, verb, subject="abbrev"):
+        """
+        Internal conjugation logic.
+        """
         verb = verb.lower()
 
-        # ----------------------------
-        # 1. Try Verbiste (known verbs)
-        # ----------------------------
+        # Known verb
         if verb in self.conjug_manager.verbs:
             verb_info = self.conjug_manager.get_verb_info(verb)
             conjug_info = self.conjug_manager.get_conjug_info(verb_info.template)
@@ -78,31 +115,55 @@ class Conjugator:
 
             return VERBS[self.language](verb_info, conjug_info, subject)
 
-        # ----------------------------
-        # 2. Unknown verb → ML fallback
-        # ----------------------------
+        # ML fallback
         if self.model is None:
             logger.warning(
                 _("Please provide an instance of a mlconjug3.mlconjug3.Model")
             )
-            logger.warning(
-                _(
-                    "The supplied word: {0} is not in the conjugation {1} table and no Conjugation Model was provided."
-                ).format(verb, LANGUAGE_FULL[self.language])
-            )
             return None
 
-        # ML prediction
         prediction = self.model.predict([verb])[0]
 
+        template = None
+        confidence_score = None
+
+        # support numpy integers
+        if isinstance(prediction, (int, np.integer)):
+            try:
+                template = self.conjug_manager.templates[int(prediction)]
+            except Exception:
+                raise ValueError(
+                    f"Invalid template index predicted: {prediction}"
+                )
+
+        elif isinstance(prediction, str):
+            template = prediction
+
+        else:
+            raise ValueError(
+                f"Unsupported prediction type: {type(prediction)}"
+            )
+
+        # Probability handling
         try:
-            prediction_score = self.model.pipeline.predict_proba([verb])[0][prediction]
+            if hasattr(self.model, "predict_proba"):
+                proba = self.model.predict_proba([verb])[0]
+
+                if hasattr(self.model, "pipeline"):
+                    classes = self.model.pipeline.classes_
+                elif hasattr(self.model, "classes_"):
+                    classes = self.model.classes_
+                else:
+                    classes = None
+
+                if classes is not None:
+                    class_index = list(classes).index(prediction)
+                    confidence_score = round(float(proba[class_index]), 3)
+
         except Exception:
-            prediction_score = 0.0
+            confidence_score = None
 
-        template = self.conjug_manager.templates[prediction]
-
-        # root extraction (unchanged logic)
+        # Build verb
         index = -len(template[template.index(":") + 1 :])
         root = verb if index == 0 else verb[:index]
 
@@ -110,11 +171,16 @@ class Conjugator:
         conjug_info = self.conjug_manager.get_conjug_info(template)
 
         verb_object = VERBS[self.language](verb_info, conjug_info, subject)
-        verb_object.confidence_score = round(prediction_score, 3)
+
+        if confidence_score is not None:
+            verb_object.confidence_score = confidence_score
 
         return verb_object
 
     def set_model(self, model):
+        """
+        Set the conjugation model.
+        """
         if not isinstance(model, Model):
             logger.warning(
                 _("Please provide an instance of a mlconjug3.mlconjug3.Model")
