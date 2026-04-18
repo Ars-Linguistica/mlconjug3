@@ -44,7 +44,15 @@ jobs:
           virtualenvs-in-project: true
           installer-parallel: true
 
+      # ✅ FIX: ensure poetry is available on Windows PATH
+      - name: Add Poetry to PATH (Windows fix)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          echo "$env:APPDATA\Python\Scripts" | Out-File -Append -FilePath $env:GITHUB_PATH
+
       - name: Verify Poetry install (debug)
+        shell: bash
         run: poetry --version
 
       - name: Cache Poetry virtualenv
@@ -54,17 +62,21 @@ jobs:
           key: venv-${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('poetry.lock') }}
 
       - name: Install dependencies
+        shell: bash
         run: poetry install --no-interaction --no-ansi --sync
 
       - name: Show environment info
+        shell: bash
         run: |
           python --version
           poetry run pip list
 
       - name: Run type checking
+        shell: bash
         run: poetry run mypy
 
       - name: Run tests
+        shell: bash
         run: poetry run pytest --cov=mlconjug3 --cov-report=xml
 
       - name: Upload coverage to Codecov
