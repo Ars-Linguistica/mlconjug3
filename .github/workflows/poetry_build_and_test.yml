@@ -54,13 +54,6 @@ jobs:
         shell: bash
         run: poetry --version
 
-      # Prevent numpy source builds
-      - name: Force binary installs only
-        shell: bash
-        run: |
-          poetry run pip install --upgrade pip
-          poetry run pip config set global.only-binary ":all:"
-
       - name: Cache Poetry virtualenv
         uses: actions/cache@v4
         with:
