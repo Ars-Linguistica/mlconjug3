@@ -62,7 +62,7 @@ pyyaml = ">=6,<7"
 tomlkit = ">=0.11,<1"
 
 # =========================================================
-# 🔥 CRITICAL FIX: NumPy MUST be <2.0 for stability
+# CRITICAL FIX: NumPy MUST be <2.0 for stability
 # =========================================================
 numpy = ">=1.26.4,<2.0"
 
