@@ -1,7 +1,11 @@
 """
-This module declares the feature extractors for verbs.
+Feature extraction module for mlconjug3.
 
-A custom tokenizer optimized for extracting verb features.
+This module provides a custom feature extractor used to transform verbs
+into machine-learning-friendly representations.
+
+The extractor generates morphological, phonetic, and language-specific
+features optimized for conjugation template classification.
 """
 
 import re
@@ -10,10 +14,30 @@ from mlconjug3.constants import ALPHABET
 
 def extract_verb_features(verb, lang=None, ngram_range=None):
     """
-    Extract base features from a verb.
+    Extract feature representation from a verb for ML classification.
 
-    NOTE:
-    - ngram_range is ignored (sklearn handles n-grams)
+    This function converts a verb string into a list of symbolic features
+    capturing morphological structure, suffixes, prefixes, phonetic
+    composition, and language-specific patterns.
+
+    Notes
+    -----
+    - The parameter ``ngram_range`` is ignored (handled externally by scikit-learn).
+    - Features are engineered for conjugation template prediction tasks.
+
+    Parameters
+    ----------
+    verb : str
+        The verb to transform into features.
+    lang : str, optional
+        Language code (e.g. "fr", "en", "it", "ro").
+    ngram_range : tuple, optional
+        Ignored parameter (for compatibility with sklearn interfaces).
+
+    Returns
+    -------
+    list of str
+        List of extracted symbolic features.
     """
 
     _white_spaces = re.compile(r"\s\s+")
@@ -26,7 +50,7 @@ def extract_verb_features(verb, lang=None, ngram_range=None):
     features = []
 
     # ---------------------------
-    # BASE MORPHOLOGY (GLOBAL)
+    # BASE MORPHOLOGICAL FEATURES
     # ---------------------------
     features.append(f"END={verb[-2:]}")
     features.append(f"END3={verb[-3:]}" if verb_len >= 3 else f"END3={verb}")
@@ -36,12 +60,12 @@ def extract_verb_features(verb, lang=None, ngram_range=None):
 
     features.append(f"LEN={verb_len}")
 
-    # Strong suffix hierarchy
+    # Suffix hierarchy (captures morphological endings)
     for i in range(2, min(7, verb_len + 1)):
         features.append(f"SUF{i}={verb[-i:]}")
 
     # =========================================================
-    # 🇮🇹 ITALIAN TARGETED FEATURES
+    # ITALIAN-SPECIFIC FEATURES
     # =========================================================
     if lang == "it":
 
@@ -53,22 +77,18 @@ def extract_verb_features(verb, lang=None, ngram_range=None):
         features.append(f"IT_ERE={ends_ere}")
         features.append(f"IT_IRE={ends_ire}")
 
-        # -isc verbs (key signal)
         features.append(f"IT_ISC={'isc' in verb[-6:]}")
 
-        # stem variability
         features.append(f"IT_STEM_VAR={len(set(verb[:3]))}")
 
-        # vowel structure
         vowels_it = sum(verb.count(c) for c in "aeiou")
         features.append(f"IT_VOWELS={vowels_it}")
         features.append(f"IT_VOWEL_RATIO={round(vowels_it / max(1, verb_len), 3)}")
 
-        # suffix tension (helps separate similar endings)
         features.append(f"IT_SUFFIX_TENSION={verb[-1] + verb[-2:]}")
 
     # =========================================================
-    # 🇷🇴 ROMANIAN TARGETED FEATURES
+    # ROMANIAN-SPECIFIC FEATURES
     # =========================================================
     if lang == "ro":
 
@@ -77,18 +97,14 @@ def extract_verb_features(verb, lang=None, ngram_range=None):
         features.append(f"RO_UI={verb.endswith('ui')}")
         features.append(f"RO_A_VERB={verb.endswith('a')}")
 
-        # derived verbs cluster (key for template 105)
         features.append(
             f"RO_DERIV_CHAIN={'iza' in verb or 'fica' in verb or 'ui' in verb}"
         )
 
-        # complexity signal
         features.append(f"RO_COMPLEXITY={len(set(verb)) + verb_len}")
 
-        # suffix entropy proxy
         features.append(f"RO_SUFFIX3={verb[-3:]}")
 
-        # vowel duplication signal
         features.append(
             f"RO_DOUBLE_VOWEL={'aa' in verb or 'ee' in verb or 'ii' in verb}"
         )
@@ -117,7 +133,7 @@ def extract_verb_features(verb, lang=None, ngram_range=None):
         features.append(f"V/C={round(vowels / consonants, 2)}")
 
     # ---------------------------
-    # STRUCTURE FEATURES
+    # STRUCTURAL FEATURES
     # ---------------------------
     features.append(
         f"HAS_DOUBLE={any(verb[i] == verb[i + 1] for i in range(len(verb) - 1))}"

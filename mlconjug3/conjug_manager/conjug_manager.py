@@ -1,7 +1,11 @@
 """
-ConjugManager.
+Conjugation manager module for mlconjug3.
 
-Handles mlconjug3 JSON conjugation data.
+This module defines the ConjugManager class, responsible for loading,
+caching, and managing verb and conjugation data.
+
+It serves as the bridge between raw dataset resources (JSON files)
+and the higher-level conjugation logic used by the library.
 """
 
 __author__ = "Ars-Linguistica"
@@ -20,7 +24,26 @@ from mlconjug3.verbs import *
 
 class ConjugManager:
     """
-    Handles mlconjug3 JSON files.
+    Manager for verb and conjugation data.
+
+    This class loads verb lexicons and conjugation templates from JSON
+    resources and provides access utilities for conjugation lookup.
+
+    Parameters
+    ----------
+    language : str, default="default"
+        Target language code. If "default", falls back to French ("fr").
+
+    Attributes
+    ----------
+    language : str
+        Active language used by the manager.
+    verbs : dict
+        Dictionary of verbs and their metadata.
+    conjugations : OrderedDict
+        Mapping of conjugation templates to tense structures.
+    templates : list of str
+        Sorted list of available conjugation templates.
     """
 
     def __init__(self, language="default"):
@@ -46,6 +69,9 @@ class ConjugManager:
         self.templates = sorted(self.conjugations.keys())
 
     def __repr__(self):
+        """
+        String representation of the ConjugManager.
+        """
         return f"{__name__}.{self.__class__.__name__}(language={self.language})"
 
     # ---------------------------
@@ -53,6 +79,19 @@ class ConjugManager:
     # ---------------------------
 
     def _is_real_file(self, path):
+        """
+        Check whether a path points to a real filesystem file.
+
+        Parameters
+        ----------
+        path : str
+            File path to check.
+
+        Returns
+        -------
+        bool
+            True if file exists on filesystem, False otherwise.
+        """
         try:
             return os.path.isfile(path)
         except Exception:
@@ -60,7 +99,17 @@ class ConjugManager:
 
     def _open_resource(self, relative_path):
         """
-        Open a resource in a zip-safe way.
+        Open a package resource in a zip-safe manner.
+
+        Parameters
+        ----------
+        relative_path : str
+            Path relative to the package resources.
+
+        Returns
+        -------
+        file-like object
+            Opened resource stream.
         """
         return resources.files(RESOURCE_PACKAGE).joinpath(relative_path).open(
             "r", encoding="utf-8"
@@ -72,7 +121,17 @@ class ConjugManager:
 
     def _load_cache(self, file):
         """
-        Load cache only if file is a real filesystem path.
+        Load cached version of a resource if available.
+
+        Parameters
+        ----------
+        file : str
+            Path to resource file.
+
+        Returns
+        -------
+        object or None
+            Cached data if valid cache exists, otherwise None.
         """
         if not self._is_real_file(file):
             return None
@@ -90,7 +149,14 @@ class ConjugManager:
 
     def _save_cache(self, file, data):
         """
-        Save cache only if file is writable.
+        Save data to cache if filesystem write is possible.
+
+        Parameters
+        ----------
+        file : str
+            Original resource file path.
+        data : object
+            Data to cache.
         """
         if not self._is_real_file(file):
             return
@@ -98,7 +164,7 @@ class ConjugManager:
         try:
             joblib.dump(data, file + ".pkl", compress=("gzip", 3))
         except Exception:
-            pass  # safe fallback
+            pass  # safe fallback for read-only or zip environments
 
     # ---------------------------
     # Loaders
@@ -106,7 +172,12 @@ class ConjugManager:
 
     def _load_verbs(self, verbs_file):
         """
-        Load verbs JSON.
+        Load verb dictionary from JSON resource.
+
+        Parameters
+        ----------
+        verbs_file : str
+            Path to verbs JSON resource.
         """
         cache = self._load_cache(verbs_file)
         if cache:
@@ -124,7 +195,12 @@ class ConjugManager:
 
     def _load_conjugations(self, conjugations_file):
         """
-        Load conjugations JSON.
+        Load conjugation templates from JSON resource.
+
+        Parameters
+        ----------
+        conjugations_file : str
+            Path to conjugation templates JSON resource.
         """
         cache = self._load_cache(conjugations_file)
         if cache:
@@ -146,15 +222,35 @@ class ConjugManager:
 
     def _detect_allowed_endings(self):
         """
-        Detect allowed verb endings.
+        Compute allowed verb endings for filtering.
+
+        Returns
+        -------
+        set
+            Set of valid verb suffixes for the current language.
         """
         if self.language == "en":
             return set()
-        return {verb.split(" ")[0][-2:] for verb in self.verbs if len(verb) >= 2}
+
+        return {
+            verb.split(" ")[0][-2:]
+            for verb in self.verbs
+            if len(verb) >= 2
+        }
 
     def is_valid_verb(self, verb):
         """
-        Check if verb is valid.
+        Check whether a verb is valid for the current language rules.
+
+        Parameters
+        ----------
+        verb : str
+            Verb to validate.
+
+        Returns
+        -------
+        bool
+            True if verb is valid, False otherwise.
         """
         if self.language == "en":
             return True
@@ -162,7 +258,17 @@ class ConjugManager:
 
     def get_verb_info(self, verb):
         """
-        Get VerbInfo.
+        Retrieve metadata for a verb.
+
+        Parameters
+        ----------
+        verb : str
+            Verb to look up.
+
+        Returns
+        -------
+        VerbInfo or None
+            VerbInfo object if verb exists, otherwise None.
         """
         if verb not in self.verbs:
             return None
@@ -172,7 +278,17 @@ class ConjugManager:
 
     def get_conjug_info(self, template):
         """
-        Get conjugation template.
+        Retrieve conjugation structure for a template.
+
+        Parameters
+        ----------
+        template : str
+            Conjugation template identifier.
+
+        Returns
+        -------
+        dict or None
+            Deep copy of conjugation structure, or None if not found.
         """
         if template not in self.conjugations:
             return None

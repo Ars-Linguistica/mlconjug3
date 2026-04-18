@@ -51,9 +51,9 @@ class Conjugator:
         Parameters
         ----------
         language : str
-            Target language.
+            Target language code.
         model : Model or estimator, optional
-            A trained model. If None, a pre-trained model is loaded.
+            Pre-trained ML model. If None, a default model is loaded.
         """
         self.language = language
         self.conjug_manager = Verbiste(language=language)
@@ -82,13 +82,30 @@ class Conjugator:
 
     def __repr__(self):
         """
-        String representation of the Conjugator.
+        Return string representation of Conjugator.
+
+        Returns
+        -------
+        str
+            Debug representation including language.
         """
         return f"{__name__}.{self.__class__.__name__}(language={self.language})"
 
     def conjugate(self, verbs, subject="abbrev"):
         """
         Conjugate one or multiple verbs.
+
+        Parameters
+        ----------
+        verbs : str or list[str]
+            Verb or list of verbs to conjugate.
+        subject : str, optional
+            Subject formatting style.
+
+        Returns
+        -------
+        Verb or list[Verb]
+            Conjugated verb object(s).
         """
         if isinstance(verbs, str):
             return self._conjugate(verbs, subject)
@@ -102,6 +119,18 @@ class Conjugator:
     def _conjugate(self, verb, subject="abbrev"):
         """
         Internal conjugation logic.
+
+        Parameters
+        ----------
+        verb : str
+            Verb to conjugate.
+        subject : str
+            Subject formatting style.
+
+        Returns
+        -------
+        Verb or None
+            Conjugated verb object or None if unavailable.
         """
         verb = verb.lower()
 
@@ -180,6 +209,20 @@ class Conjugator:
     def set_model(self, model):
         """
         Set the conjugation model.
+
+        Parameters
+        ----------
+        model : Model
+            Trained ML model.
+
+        Raises
+        ------
+        ValueError
+            If model is not a valid Model instance.
+
+        Returns
+        -------
+        None
         """
         if not isinstance(model, Model):
             logger.warning(

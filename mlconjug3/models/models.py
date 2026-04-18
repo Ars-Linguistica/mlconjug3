@@ -35,11 +35,11 @@ class Model:
         Parameters
         ----------
         vectorizer : sklearn-compatible transformer, optional
-            Feature extraction component.
+            Feature extraction component used to convert verbs into feature vectors.
         classifier : sklearn-compatible estimator, optional
-            Classification model.
+            Classification model used to predict verb templates.
         language : str, optional
-            Language code for feature extraction.
+            Language code used for feature extraction rules.
         """
 
         self.language = language
@@ -83,7 +83,12 @@ class Model:
 
     def __repr__(self) -> str:
         """
-        String representation of the Model.
+        Return string representation of the Model.
+
+        Returns
+        -------
+        str
+            Debug representation including language.
         """
         return f"{self.__class__.__name__}(language={self.language})"
 
@@ -94,16 +99,16 @@ class Model:
         sample_weight=None
     ) -> "Model":
         """
-        Train the model.
+        Train the model on labeled verb data.
 
         Parameters
         ----------
-        samples : list[str]
-            Training samples (verbs).
-        labels : list[int]
-            Template indices.
+        samples : Sequence[str]
+            Input verb strings used for training.
+        labels : Sequence[int]
+            Target template indices.
         sample_weight : array-like, optional
-            Sample weights.
+            Optional weights for each training sample.
 
         Returns
         -------
@@ -123,36 +128,38 @@ class Model:
 
     def predict(self, verbs: Sequence[str]):
         """
-        Predict template labels for verbs.
+        Predict conjugation template indices for input verbs.
 
         Parameters
         ----------
-        verbs : list[str]
+        verbs : Sequence[str]
+            Input verbs.
 
         Returns
         -------
-        array
-            Predicted labels.
+        ndarray
+            Predicted template indices (shape: [n_samples]).
         """
         return self.pipeline.predict(verbs)
 
     def predict_proba(self, verbs: Sequence[str]):
         """
-        Predict class probabilities.
+        Predict probability distribution over conjugation templates.
 
         Parameters
         ----------
-        verbs : list[str]
+        verbs : Sequence[str]
+            Input verbs.
 
         Returns
         -------
-        array
-            Probability matrix.
+        ndarray
+            Probability matrix of shape (n_samples, n_classes).
 
         Raises
         ------
         AttributeError
-            If classifier does not support probability prediction.
+            If the classifier does not support probability prediction.
         """
         if hasattr(self.pipeline, "predict_proba"):
             return self.pipeline.predict_proba(verbs)
