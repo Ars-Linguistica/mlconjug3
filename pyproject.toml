@@ -26,7 +26,6 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: 3.14",
-    "Programming Language :: Python :: 3.15",
 ]
 
 homepage = "https://github.com/Ars-Linguistica/mlconjug3"
@@ -63,6 +62,9 @@ joblib = ">=1.2,<2"
 rich = ">=13,<14"
 pyyaml = ">=6,<7"
 tomlkit = ">=0.11,<1"
+
+# 🔥 FIX: ensure NumPy compatibility across Python 3.9–3.14
+numpy = ">=1.26,<3"
 
 [tool.poetry.group.dev.dependencies]
 pytest = ">=7,<9"
