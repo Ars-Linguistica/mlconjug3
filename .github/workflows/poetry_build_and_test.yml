@@ -20,7 +20,9 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          # Stable
+          # -------------------------
+          # STABLE
+          # -------------------------
           - { os: ubuntu-latest, python-version: "3.9", experimental: false }
           - { os: ubuntu-latest, python-version: "3.10", experimental: false }
           - { os: ubuntu-latest, python-version: "3.11", experimental: false }
@@ -36,7 +38,9 @@ jobs:
           - { os: windows-latest, python-version: "3.11", experimental: false }
           - { os: windows-latest, python-version: "3.12", experimental: false }
 
-          # Experimental
+          # -------------------------
+          # EXPERIMENTAL
+          # -------------------------
           - { os: ubuntu-latest, python-version: "3.13", experimental: true }
           - { os: ubuntu-latest, python-version: "3.14", experimental: true }
 
@@ -66,7 +70,7 @@ jobs:
           virtualenvs-create: true
           virtualenvs-in-project: true
 
-      # FIX: ensure Poetry is on PATH everywhere
+      # ✅ FIX: correct PATH for ALL OS
       - name: Add Poetry to PATH (Unix)
         if: runner.os != 'Windows'
         run: echo "$HOME/.local/bin" >> $GITHUB_PATH
@@ -74,12 +78,13 @@ jobs:
       - name: Add Poetry to PATH (Windows)
         if: runner.os == 'Windows'
         shell: pwsh
-        run: echo "$env:APPDATA\Python\Scripts" >> $env:GITHUB_PATH
+        run: echo "$env:USERPROFILE\.local\bin" >> $env:GITHUB_PATH
 
       - name: Verify Poetry
         run: poetry --version
 
-      - uses: actions/cache@v4
+      - name: Cache virtualenv
+        uses: actions/cache@v4
         with:
           path: .venv
           key: venv-${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('poetry.lock') }}
@@ -87,7 +92,7 @@ jobs:
       - name: Install dependencies
         run: poetry install --no-interaction --no-ansi --sync
 
-      # Stability for BLAS / SciPy
+      # Stability fix for Windows SciPy crashes
       - name: Limit threads (Windows)
         if: runner.os == 'Windows'
         shell: pwsh
@@ -97,15 +102,15 @@ jobs:
           echo "MKL_NUM_THREADS=1" >> $env:GITHUB_ENV
           echo "NUMEXPR_NUM_THREADS=1" >> $env:GITHUB_ENV
 
-      - name: Debug env
+      - name: Debug environment
         run: |
           python --version
           poetry run pip list
 
-      - name: Type check
+      - name: Run type checking
         run: poetry run mypy
 
-      - name: Tests
+      - name: Run tests
         run: poetry run pytest --cov=mlconjug3 --cov-report=xml
 
       - uses: codecov/codecov-action@v4
@@ -113,6 +118,7 @@ jobs:
           files: ./coverage.xml
 
   build:
+    name: Build package
     runs-on: ubuntu-latest
     needs: test
 
