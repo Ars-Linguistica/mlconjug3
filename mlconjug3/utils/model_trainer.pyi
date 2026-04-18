@@ -1,5 +1,6 @@
 import multiprocessing
 import mlconjug3
+from mlconjug3.dataset import DataSet
 import pickle
 import numpy as np
 from functools import partial
