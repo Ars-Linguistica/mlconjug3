@@ -43,7 +43,7 @@ jobs:
           virtualenvs-in-project: true
           installer-parallel: true
 
-      # ✅ FIX: Correct Poetry path on Windows
+      # ✅ Correct Poetry PATH (Windows)
       - name: Add Poetry to PATH (Windows)
         if: runner.os == 'Windows'
         shell: pwsh
@@ -52,28 +52,6 @@ jobs:
 
       - name: Verify Poetry install
         run: poetry --version
-
-      # 🔥 Force binary wheels
-      - name: Force binary installs only
-        run: |
-          poetry run pip install --upgrade pip
-          poetry run pip config set global.only-binary ":all:"
-
-      # 🔥 SciPy fix for Windows 3.13+
-      - name: Pre-install compatible SciPy (Windows 3.13+)
-        if: runner.os == 'Windows' && startsWith(matrix.python-version, '3.13')
-        run: |
-          poetry run pip install "scipy<1.13"
-
-      # 🔥 OpenMP stabilization
-      - name: Limit threads (Windows stability)
-        if: runner.os == 'Windows'
-        shell: pwsh
-        run: |
-          echo "OMP_NUM_THREADS=1" >> $env:GITHUB_ENV
-          echo "OPENBLAS_NUM_THREADS=1" >> $env:GITHUB_ENV
-          echo "MKL_NUM_THREADS=1" >> $env:GITHUB_ENV
-          echo "NUMEXPR_NUM_THREADS=1" >> $env:GITHUB_ENV
 
       - name: Cache Poetry virtualenv
         uses: actions/cache@v4
@@ -84,6 +62,23 @@ jobs:
       - name: Install dependencies
         run: poetry install --no-interaction --no-ansi --sync
 
+      # 🔥 FIX: install scipy AFTER venv exists
+      - name: Fix SciPy (Windows Python 3.13+)
+        if: runner.os == 'Windows' && startsWith(matrix.python-version, '3.13')
+        shell: pwsh
+        run: |
+          poetry run pip install "scipy<1.13"
+
+      # 🔥 Optional but recommended stability
+      - name: Limit threads (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          echo "OMP_NUM_THREADS=1" >> $env:GITHUB_ENV
+          echo "OPENBLAS_NUM_THREADS=1" >> $env:GITHUB_ENV
+          echo "MKL_NUM_THREADS=1" >> $env:GITHUB_ENV
+          echo "NUMEXPR_NUM_THREADS=1" >> $env:GITHUB_ENV
+
       - name: Show environment info
         run: |
           python --version
@@ -92,7 +87,6 @@ jobs:
       - name: Run type checking
         run: poetry run mypy
 
-      # ✅ Correct shells per OS
       - name: Run tests (Linux/macOS)
         if: runner.os != 'Windows'
         run: poetry run pytest --cov=mlconjug3 --cov-report=xml
