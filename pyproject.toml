@@ -61,10 +61,13 @@ rich = ">=13,<14"
 pyyaml = ">=6,<7"
 tomlkit = ">=0.11,<1"
 
-numpy = ">=1.26.4,<2.2"
+# =========================================================
+# 🔥 CRITICAL FIX: NumPy MUST be <2.0 for stability
+# =========================================================
+numpy = ">=1.26.4,<2.0"
 
 # =========================================================
-# correct sklearn split by Python version
+# scikit-learn split (Python compatibility fix)
 # =========================================================
 scikit-learn = [
     { version = ">=1.3,<1.8", python = ">=3.9,<3.11" },
