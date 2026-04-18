@@ -86,7 +86,7 @@ print("\n[4/5] Saving models...\n")
 
 for lang in langs:
     model_path = OUTPUT_DIR / f"trained_model-{lang}-final.pickle"
-    zip_path = OUTPUT_DIR / f"trained_model_{lang}.zip"
+    zip_path = OUTPUT_DIR / f"trained_model-{lang}-final.zip"
 
     joblib.dump(models[lang], model_path)
 
