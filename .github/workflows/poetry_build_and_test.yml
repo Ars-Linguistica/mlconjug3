@@ -53,16 +53,16 @@ jobs:
     continue-on-error: ${{ matrix.experimental }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5  # pinned from v4
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065  # pinned from v5
         with:
           python-version: ${{ matrix.python-version }}
           cache: pip
 
       - run: python -m pip install -U pip setuptools wheel
 
-      - uses: snok/install-poetry@v1
+      - uses: snok/install-poetry@76e04a911780d5b312d89783f7b1cd627778900a  # pinned from v1
         with:
           version: "1.8.3"
           virtualenvs-create: true
@@ -79,7 +79,7 @@ jobs:
 
       - run: poetry --version
 
-      - uses: actions/cache@v4
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830  # pinned from v4
         with:
           path: .venv
           key: venv-${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('poetry.lock') }}
@@ -107,7 +107,7 @@ jobs:
         if: ${{ !(runner.os == 'Windows' && (matrix.python-version == '3.13' || matrix.python-version == '3.14')) }}
         run: poetry run pytest --cov=mlconjug3 --cov-report=xml
 
-      - uses: codecov/codecov-action@v4
+      - uses: codecov/codecov-action@b9fd7d16f6d7d1b5d2bec1a2887e65ceed900238  # pinned from v4
         if: ${{ !(runner.os == 'Windows' && (matrix.python-version == '3.13' || matrix.python-version == '3.14')) }}
         with:
           files: ./coverage.xml
@@ -117,13 +117,13 @@ jobs:
     needs: test
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5  # pinned from v4
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065  # pinned from v5
         with:
           python-version: "3.11"
 
-      - uses: snok/install-poetry@v1
+      - uses: snok/install-poetry@76e04a911780d5b312d89783f7b1cd627778900a  # pinned from v1
         with:
           version: "1.8.3"
 
