@@ -144,7 +144,7 @@ class TestModel:
 
     def test_predict(self):
         result = self.model.predict(['aimer'])
-        assert isinstance(result[0], np.int64)
+        assert isinstance(result[0], (int, np.integer))
 
 
 class TestCLI:
