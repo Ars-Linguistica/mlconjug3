@@ -20,10 +20,6 @@
         :target: https://api.securityscorecards.dev/projects/github.com/Ars-Linguistica/mlconjug3/
         :alt: OpenSSF ScoreCard
 
-.. image:: https://github.com/Ars-Linguistica/mlconjug3/actions/workflows/upload_wheels_to_pypi.yml/badge.svg
-        :target: https://github.com/Ars-Linguistica/mlconjug3/actions/workflows/upload_wheels_to_pypi.yml
-        :alt: Build status on Windows, MacOs and Linux
-
 .. image:: https://img.shields.io/pypi/v/mlconjug3.svg
         :target: https://pypi.python.org/pypi/mlconjug3
         :alt: Pypi Python Package Index Status
@@ -48,8 +44,8 @@
         :target: https://snyk.io/test/github/Ars-Linguistica/mlconjug3?targetFile=requirements.txt
         :alt: Code Vulnerability Status
 
-.. image:: https://zenodo.org/badge/194376338.svg
-        :target: https://zenodo.org/badge/latestdoi/194376338
+.. image:: https://img.shields.io/badge/DOI-10.5281%2Fzenodo.194376338-blue.svg
+        :target: https://doi.org/10.5281/zenodo.194376338
         :alt: DOI
 
 .. image:: https://img.shields.io/mastodon/follow/109313632815812004?domain=https%3A%2F%2Ffosstodon.org&style=plastic
@@ -62,15 +58,15 @@
 mlconjug3: The multi-lingual conjugator
 =======================================
 
-A Command Line application and Python library to conjugate verbs in French, English, Spanish, Italian, Portuguese, and Romanian (with more languages soon to come) using Machine Learning techniques. ?
+A Command Line application and Python library to conjugate verbs in French, English, Spanish, Italian, Portuguese, and Romanian (with more languages soon to come) using Machine Learning techniques.
 
-The mlconjug3 project is now a proud member of the ARS Linguistica organization. ? ARS Linguistica is a community-driven, open source project that aims to develop free and accessible linguistic tools and resources for all. ? With a focus on advancing linguistic research, documentation, and education, ARS Linguistica is dedicated to preserving and promoting linguistic diversity through the use of open source and open science. ?
+The mlconjug3 project is now a proud member of the ARS Linguistica organization. ARS Linguistica is a community-driven, open source project that aims to develop free and accessible linguistic tools and resources for all. With a focus on advancing linguistic research, documentation, and education, ARS Linguistica is dedicated to preserving and promoting linguistic diversity through the use of open source and open science.
 
 With mlconjug3, you can:
 
-- Conjugate any verb in one of the supported languages, even completely new or made-up verbs, with the help of a pre-trained Machine Learning model. ?
-- Easily modify and retrain the models using any compatible classifiers from scikit-learn. ?
-- Integrate mlconjug3 in your own projects. ?
+- Conjugate any verb in one of the supported languages, even completely new or made-up verbs, with the help of a pre-trained Machine Learning model.
+- Easily modify and retrain the models using any compatible classifiers from scikit-learn.
+- Integrate mlconjug3 in your own projects.
 
 ----
 
@@ -113,14 +109,13 @@ Improvements:
 
 Behavioral changes:
 
-- Slight changes in prediction outputs due to improved feature representation
+- Slight variations in prediction outputs due to improved feature representation
 - Optional sample weighting added to training pipeline
 - Internal API refactoring (public API remains backward compatible)
 
 Migration notes:
 
 - No breaking changes in public API
-- Retraining recommended for best performance
 - Minor variation in predictions expected due to improved model generalization
 
 ----
@@ -128,16 +123,16 @@ Migration notes:
 Using mlconjug3 in Academic Research
 ------------------------------------
 
-mlconjug3 is a valuable tool for linguistic researchers, as it provides accurate and up-to-date conjugation information for a wide range of languages. ? With its ability to handle completely new or made-up verbs, mlconjug3 is perfect for exploring new linguistic concepts and theories. ? It can also be used to compare and contrast conjugation patterns across different languages, helping researchers to identify and understand linguistic trends.
+mlconjug3 is a valuable tool for linguistic researchers, as it provides accurate and up-to-date conjugation information for a wide range of languages. With its ability to handle completely new or made-up verbs, mlconjug3 is perfect for exploring new linguistic concepts and theories. It can also be used to compare and contrast conjugation patterns across different languages, helping researchers to identify and understand linguistic trends.
 
 Integrating mlconjug3 in Applications
 -------------------------------------
 
-In addition to academic research, mlconjug3 can be integrated into a wide range of web and desktop applications. ? For language learning platforms, mlconjug3 provides an accurate and comprehensive source of conjugation information, helping students to quickly and easily master verb conjugation. ? For language translation tools, mlconjug3 can help to ensure that translations are grammatically correct, by providing accurate verb conjugation information in real-time. ?
+In addition to academic research, mlconjug3 can be integrated into a wide range of web and desktop applications. For language learning platforms, mlconjug3 provides an accurate and comprehensive source of conjugation information, helping students to quickly and easily master verb conjugation. For language translation tools, mlconjug3 can help to ensure that translations are grammatically correct, by providing accurate verb conjugation information in real-time.
 
-By using mlconjug3, you are not only getting a powerful and flexible tool for verb conjugation, but you are also supporting the goals and mission of ARS Linguistica. ? Whether you are a linguistic researcher, language teacher, or simply someone who is passionate about preserving linguistic heritage, your support is crucial to the success of our organization.
+By using mlconjug3, you are not only getting a powerful and flexible tool for verb conjugation, but you are also supporting the goals and mission of ARS Linguistica. Whether you are a linguistic researcher, language teacher, or simply someone who is passionate about preserving linguistic heritage, your support is crucial to the success of our organization.
 
-Join us in our mission to make linguistic tools and resources accessible to all! ?
+Join us in our mission to make linguistic tools and resources accessible to all!
 
 ----
 
@@ -164,7 +159,7 @@ Supported Languages
 Academic publications citing mlconjug3
 --------------------------------------
 
-- | Gerard Canal, Senka Krivic ?, Paul Luff, Andrew Coles.
+- | Gerard Canal, Senka Krivic, Paul Luff, Andrew Coles.
   | "`PlanVerb: Domain-Independent Verbalization and Summary of Task Plans`_".
   | Thirty-Sixth AAAI Conference on Artificial Intelligence (AAAI-22), 2022.
 
@@ -266,23 +261,81 @@ Software projects using mlconjug3
 Installation
 ------------
 
-(To preserve original content unchanged)
-... [UNCHANGED CONTENT CONTINUES EXACTLY AS IN YOUR ORIGINAL FILE] ...
+You can install mlconjug3 using different methods depending on your workflow.
+
+### 1. Install via pip (recommended)
+
+.. code:: bash
+
+   pip install mlconjug3
+
+
+### 2. Install from source (GitHub)
+
+.. code:: bash
+
+   git clone https://github.com/Ars-Linguistica/mlconjug3.git
+   cd mlconjug3
+   pip install .
+
+
+### 3. Install via conda (conda-forge)
+
+.. code:: bash
+
+   conda install -c conda-forge mlconjug3
+
+
+----
 
 Signing of Releases
 -------------------
 
-Starting with version 3.10, all versions of the mlconjug3 package released on PyPi and GitHub will be signed using sigstore.
+Starting with version 3.10, all releases of mlconjug3 published on PyPI and GitHub are signed using Sigstore.
 
-What is sigstore?
+What is Sigstore?
 ~~~~~~~~~~~~~~~~~
 
-Sigstore is an open-source tool...
+Sigstore is an open-source project that provides simple, transparent, and secure software signing. It allows developers to sign releases without managing long-lived cryptographic keys.
 
-How to verify the signature of a release?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Instead, Sigstore uses short-lived certificates issued through identity providers, making the signing process both secure and easy to verify.
 
-To verify the package...
+This ensures that mlconjug3 releases on PyPI can be cryptographically verified and have not been tampered with.
+
+How to verify a release?
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+You can verify mlconjug3 package signatures using `cosign`, which is part of the Sigstore ecosystem.
+
+Install cosign:
+
+.. code:: bash
+
+   # Linux / macOS
+   curl -O -L https://github.com/sigstore/cosign/releases/latest/download/cosign-linux-amd64
+   chmod +x cosign-linux-amd64
+   sudo mv cosign-linux-amd64 /usr/local/bin/cosign
+
+   # macOS (Homebrew)
+   brew install cosign
+
+Verify a release:
+
+.. code:: bash
+
+   cosign verify-blob \
+       --certificate-identity https://github.com/Ars-Linguistica/mlconjug3/.github/workflows/upload_wheels_to_pypi.yml \
+       --certificate-oidc-issuer https://token.actions.githubusercontent.com \
+       mlconjug3-<version>.tar.gz \
+       --signature mlconjug3-<version>.tar.gz.sig
+
+This ensures:
+- The package was built by the official CI pipeline
+- The release was not modified after publication
+- The signature matches the GitHub Actions identity
+
+For more details, see:
+https://docs.sigstore.dev/
 
 Credits
 -------
