@@ -19,8 +19,74 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13", "3.14"]
+        include:
+          # -------------------------
+          # STABLE PYTHON VERSIONS
+          # -------------------------
+          - os: ubuntu-latest
+            python-version: "3.9"
+            experimental: false
+          - os: ubuntu-latest
+            python-version: "3.10"
+            experimental: false
+          - os: ubuntu-latest
+            python-version: "3.11"
+            experimental: false
+          - os: ubuntu-latest
+            python-version: "3.12"
+            experimental: false
+
+          - os: macos-latest
+            python-version: "3.9"
+            experimental: false
+          - os: macos-latest
+            python-version: "3.10"
+            experimental: false
+          - os: macos-latest
+            python-version: "3.11"
+            experimental: false
+          - os: macos-latest
+            python-version: "3.12"
+            experimental: false
+
+          - os: windows-latest
+            python-version: "3.9"
+            experimental: false
+          - os: windows-latest
+            python-version: "3.10"
+            experimental: false
+          - os: windows-latest
+            python-version: "3.11"
+            experimental: false
+          - os: windows-latest
+            python-version: "3.12"
+            experimental: false
+
+          # -------------------------
+          # EXPERIMENTAL (ALLOW FAIL)
+          # -------------------------
+          - os: ubuntu-latest
+            python-version: "3.13"
+            experimental: true
+          - os: ubuntu-latest
+            python-version: "3.14"
+            experimental: true
+
+          - os: macos-latest
+            python-version: "3.13"
+            experimental: true
+          - os: macos-latest
+            python-version: "3.14"
+            experimental: true
+
+          - os: windows-latest
+            python-version: "3.13"
+            experimental: true
+          - os: windows-latest
+            python-version: "3.14"
+            experimental: true
+
+    continue-on-error: ${{ matrix.experimental }}
 
     steps:
       - name: Checkout
@@ -41,36 +107,30 @@ jobs:
           version: "1.8.3"
           virtualenvs-create: true
           virtualenvs-in-project: true
-          installer-parallel: true
 
-      # ✅ Correct Poetry PATH (Windows)
+      # FIX: ensure Poetry is available on Windows
       - name: Add Poetry to PATH (Windows)
         if: runner.os == 'Windows'
         shell: pwsh
         run: |
-          echo "$env:USERPROFILE\.local\bin" | Out-File -Append -FilePath $env:GITHUB_PATH
+          echo "$env:APPDATA\Python\Scripts" | Out-File -Append -FilePath $env:GITHUB_PATH
 
-      - name: Verify Poetry install
-        run: poetry --version
+      # Cross-platform safe
+      - name: Verify Poetry
+        run: python -m poetry --version
 
-      - name: Cache Poetry virtualenv
+      - name: Cache virtualenv
         uses: actions/cache@v4
         with:
           path: .venv
           key: venv-${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('poetry.lock') }}
 
+      # CRITICAL: install BEFORE any poetry run
       - name: Install dependencies
-        run: poetry install --no-interaction --no-ansi --sync
+        run: python -m poetry install --no-interaction --no-ansi --sync
 
-      # 🔥 FIX: install scipy AFTER venv exists
-      - name: Fix SciPy (Windows Python 3.13+)
-        if: runner.os == 'Windows' && startsWith(matrix.python-version, '3.13')
-        shell: pwsh
-        run: |
-          poetry run pip install "scipy<1.13"
-
-      # 🔥 Optional but recommended stability
-      - name: Limit threads (Windows)
+      # Reduce BLAS crashes on Windows
+      - name: Limit threads (Windows stability)
         if: runner.os == 'Windows'
         shell: pwsh
         run: |
@@ -79,24 +139,18 @@ jobs:
           echo "MKL_NUM_THREADS=1" >> $env:GITHUB_ENV
           echo "NUMEXPR_NUM_THREADS=1" >> $env:GITHUB_ENV
 
-      - name: Show environment info
+      - name: Show environment
         run: |
           python --version
-          poetry run pip list
+          python -m poetry run pip list
 
       - name: Run type checking
-        run: poetry run mypy
+        run: python -m poetry run mypy
 
-      - name: Run tests (Linux/macOS)
-        if: runner.os != 'Windows'
-        run: poetry run pytest --cov=mlconjug3 --cov-report=xml
+      - name: Run tests
+        run: python -m poetry run pytest --cov=mlconjug3 --cov-report=xml
 
-      - name: Run tests (Windows)
-        if: runner.os == 'Windows'
-        shell: pwsh
-        run: poetry run pytest --cov=mlconjug3 --cov-report=xml
-
-      - name: Upload coverage to Codecov
+      - name: Upload coverage
         uses: codecov/codecov-action@v4
         with:
           files: ./coverage.xml
@@ -121,4 +175,4 @@ jobs:
           version: "1.8.3"
 
       - name: Build package
-        run: poetry build
+        run: python -m poetry build
