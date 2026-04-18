@@ -11,7 +11,7 @@ from functools import lru_cache
 from concurrent.futures import ProcessPoolExecutor
 from zipfile import ZipFile
 import joblib
-import pkg_resources
+from importlib import resources
 
 
 VERBS = {
@@ -34,15 +34,19 @@ class Conjugator:
         self.conjug_manager = Verbiste(language=language)
 
         if not model:
-            with ZipFile(
-                pkg_resources.resource_stream(
-                    RESOURCE_PACKAGE, PRE_TRAINED_MODEL_PATH[language]
-                )
-            ) as content:
-                with content.open(
-                    f"trained_model-{self.language}-final.pickle", "r"
-                ) as archive:
-                    model = joblib.load(archive)
+            # ----------------------------
+            # Modern resource loading (no pkg_resources)
+            # ----------------------------
+            resource_path = resources.files(RESOURCE_PACKAGE).joinpath(
+                PRE_TRAINED_MODEL_PATH[language]
+            )
+
+            with resource_path.open("rb") as stream:
+                with ZipFile(stream) as content:
+                    with content.open(
+                        f"trained_model-{self.language}-final.pickle"
+                    ) as archive:
+                        model = joblib.load(archive)
 
         self.model = model if model else None
 
@@ -88,7 +92,7 @@ class Conjugator:
             )
             return None
 
-        # ML prediction path (this is critical for words like "cacater")
+        # ML prediction
         prediction = self.model.predict([verb])[0]
 
         try:
@@ -98,7 +102,7 @@ class Conjugator:
 
         template = self.conjug_manager.templates[prediction]
 
-        # root extraction (same logic as before, preserved)
+        # root extraction (unchanged logic)
         index = -len(template[template.index(":") + 1 :])
         root = verb if index == 0 else verb[:index]
 
