@@ -13,7 +13,7 @@ concurrency:
 
 jobs:
   test:
-    name: ${{ matrix.os }} • Python ${{ matrix.python-version }}
+    name: ${{ matrix.os }} ? Python ${{ matrix.python-version }}
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -23,11 +23,6 @@ jobs:
         python-version: ["3.9", "3.10", "3.11", "3.12", "3.13", "3.14"]
 
     steps:
-      - name: Harden Runner
-        uses: step-security/harden-runner@v2
-        with:
-          egress-policy: audit
-
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -49,27 +44,30 @@ jobs:
           virtualenvs-in-project: true
           installer-parallel: true
 
+      - name: Verify Poetry install (debug)
+        run: python -m poetry --version
+
       - name: Cache Poetry virtualenv
         uses: actions/cache@v4
         with:
           path: .venv
           key: venv-${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('poetry.lock') }}
 
+      # ✅ FIX: ALWAYS use python -m poetry on Windows compatibility
       - name: Install dependencies
-        run: poetry install --no-interaction --no-ansi --sync
+        run: python -m poetry install --no-interaction --no-ansi --sync
 
       - name: Show environment info
         run: |
-          poetry run python --version
-          poetry run pip list
+          python --version
+          python -m poetry run pip list
 
       - name: Run type checking
         run: |
-          poetry run pip install types-setuptools
-          poetry run mypy
+          python -m poetry run mypy
 
       - name: Run tests
-        run: poetry run pytest --cov=mlconjug3 --cov-report=xml
+        run: python -m poetry run pytest --cov=mlconjug3 --cov-report=xml
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
@@ -96,4 +94,4 @@ jobs:
           version: "1.8.3"
 
       - name: Build package
-        run: poetry build
+        run: python -m poetry build
