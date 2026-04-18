@@ -9,7 +9,6 @@ class Model:
     def __init__(
         self,
         vectorizer: Optional[Any] = ...,
-        feature_selector: Optional[Any] = ...,
         classifier: Optional[Any] = ...,
         language: Optional[str] = ...,
     ) -> None: ...
@@ -19,7 +18,10 @@ class Model:
     def train(
         self,
         samples: Sequence[str],
-        labels: Sequence[str],
-    ) -> None: ...
+        labels: Sequence[int],
+        sample_weight: Optional[Sequence[float]] = ...,
+    ) -> "Model": ...
 
-    def predict(self, verbs: Sequence[str]) -> Sequence[str]: ...
+    def predict(self, verbs: Sequence[str]) -> Sequence[int]: ...
+
+    def predict_proba(self, verbs: Sequence[str]) -> Any: ...
