@@ -28,10 +28,6 @@ warnings.filterwarnings("ignore", category=FutureWarning)
 warnings.filterwarnings("ignore", category=ConvergenceWarning)
 
 
-# ============================================================
-# EXISTING TESTS (UNCHANGED FOR STABILITY)
-# ============================================================
-
 class TestConjugator:
     conjugator = Conjugator()
 
@@ -83,10 +79,6 @@ class TestFeatureExtractor:
         assert any("HAS_DOUBLE" in f for f in feats)
 
 
-# ============================================================
-# DATASET TESTS
-# ============================================================
-
 class TestDataSetCoverage:
 
     def make_dataset(self):
@@ -121,10 +113,6 @@ class TestDataSetCoverage:
         assert "DataSet" in ds.__repr__()
 
 
-# ============================================================
-# FIXED STRESS TEST
-# ============================================================
-
 class DummyModel:
     def predict(self, x):
         return ["A:default"]
@@ -146,10 +134,6 @@ class TestConjugatorStress:
         result = c.conjugate("unknownverb")
         assert result is not None
 
-
-# ============================================================
-# ConjugManager COVERAGE BOOST
-# ============================================================
 
 class TestConjugManagerCoverage:
 
@@ -183,10 +167,6 @@ class TestConjugManagerCoverage:
         with pytest.raises(ValueError):
             cm._load_cache(str(fake_file))
 
-
-# ============================================================
-# MLCONJUG EDGE COVERAGE BOOST
-# ============================================================
 
 class TestConjugatorMLBranches:
 
@@ -240,10 +220,6 @@ class TestConjugatorMLBranches:
         assert result is not None
 
 
-# ============================================================
-# MODEL COVERAGE (FIXED FOR MULTICLASS SAFETY)
-# ============================================================
-
 class TestModelCoverage:
 
     def test_repr(self):
@@ -282,11 +258,9 @@ class TestModelCoverage:
         m = Model(language="fr")
         m.train(["aller", "finir", "manger"], [0, 1, 2])
 
-        try:
-            proba = m.predict_proba(["aller"])
-            assert proba is not None
-        except Exception:
-            assert True
+        proba = m.predict_proba(["aller"])
+        assert proba is not None
+        assert isinstance(proba, (list, np.ndarray))
 
     def test_predict_proba_error_branch(self):
         class FakePipeline:
@@ -312,10 +286,6 @@ class TestModelCoverage:
         m.train(X, y)
         assert m.predict(["aller"]) is not None
 
-
-# ============================================================
-# ⭐ NEW: VERBS.PY FULL COVERAGE BOOST (IMPORTANT ADDITION)
-# ============================================================
 
 class TestVerbCoverage:
 
@@ -358,7 +328,7 @@ class TestVerbCoverage:
 
         v = Verb(vi, conjug_info)
 
-        assert ("vais" in v) or (True)  # ensures branch execution regardless of format
+        assert "vais" in v  # fixed: real assertion
 
     def test_verb_getitem_setitem(self):
         vi = VerbInfo("aller", "all", ":root")
@@ -373,10 +343,8 @@ class TestVerbCoverage:
 
         v = Verb(vi, conjug_info)
 
-        # __getitem__
         assert v["indicatif"]["present"]["je"] in ["vais", "allvais", None]
 
-        # __setitem__
         v["indicatif", "present", "je"] = "vais_mod"
         assert v["indicatif"]["present"]["je"] == "vais_mod"
 
@@ -408,10 +376,6 @@ class TestVerbCoverage:
         assert VerbPt(vi, base)
         assert VerbRo(vi, base)
 
-
-# ============================================================
-# TRAINER (UNCHANGED)
-# ============================================================
 
 class DummyDataset:
     def __init__(self):
