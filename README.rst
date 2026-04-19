@@ -86,6 +86,7 @@ Compatibility Matrix (v4.0.1)
 +----------------------+----------------------+------------------------------+
 | Python 3.13+         | ~ Experimental       | Native binary instability    |
 +----------------------+----------------------+------------------------------+
+
 ⚠ IMPORTANT:
 Windows + Python 3.13/3.14 may crash due to upstream SciPy binary incompatibilities.
 These builds are marked experimental in CI.
