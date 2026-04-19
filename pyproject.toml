@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "mlconjug3"
-version = "4.0.0"
+version = "4.0.1"
 description = "A Command Line application and Python library to conjugate French, English, Spanish, Italian, Portuguese and Romanian verbs using Machine Learning techniques."
 license = "MIT"
 

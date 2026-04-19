@@ -70,7 +70,7 @@ With mlconjug3, you can:
 
 ----
 
-Compatibility Matrix (v4.0.0)
+Compatibility Matrix (v4.0.1)
 -----------------------------
 
 +----------------------+----------------------+------------------------------+
@@ -86,13 +86,14 @@ Compatibility Matrix (v4.0.0)
 +----------------------+----------------------+------------------------------+
 | Python 3.13+         | ~ Experimental       | Native binary instability    |
 +----------------------+----------------------+------------------------------+
+
 ⚠ IMPORTANT:
 Windows + Python 3.13/3.14 may crash due to upstream SciPy binary incompatibilities.
 These builds are marked experimental in CI.
 
 ----
 
-Release Notes (v4.0.0)
+Release Notes (v4.0.1)
 ----------------------
 
 This release introduces major internal improvements to the ML pipeline.

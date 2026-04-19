@@ -2,7 +2,7 @@
 History
 =======
 
-4.0.0 (2026-04-18)
+4.0.1 (2026-04-18)
 ------------------
 
 This is a **major release** of mlconjug3 with significant improvements to the

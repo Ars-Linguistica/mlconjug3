@@ -15,7 +15,7 @@ This module:
 
 __author__ = "Sekou Diao, Ars Linguistica"
 __email__ = "diao.sekou.nlp@gmail.com"
-__version__ = "4.0.0"
+__version__ = "4.0.1"
 __copyright__ = "Copyright (c) 2023, Ars Linguistica"
 __credits__ = (
     "Sekou Diao",
