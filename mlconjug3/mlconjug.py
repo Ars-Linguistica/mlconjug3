@@ -1,43 +1,28 @@
 """
-mlconjug3 Main module.
+mlconjug.py
 
-This module provides an easy-to-use interface for conjugating verbs using machine learning models.
-It includes a pre-trained model for French, English, Spanish, Italian, Portuguese and Romanian verbs,
-as well as interfaces for training custom models and conjugating verbs in multiple languages.
+Main entry point for verb conjugation using a hybrid approach:
+- Rule-based conjugation via Verbiste for known verbs
+- Machine learning fallback for unknown verbs
 
-The main class of the module is Conjugator, which provides the conjugate() method for conjugating verbs.
-The class also manages the Verbiste data set and provides an interface with the scikit-learn pipeline.
-The class can be initialized with a specific language and a custom model, otherwise the default language is French
-and the pre-trained French conjugation pipeline is used.
-
-The module also includes helper classes for managing verb data, such as VerbInfo and Verb, as well as utility
-functions for feature extraction and evaluation.
+This module exposes the `Conjugator` class.
 """
 
 from .PyVerbiste import Verbiste
-
 from .conjug_manager import ConjugManager
-
 from .constants import *
-
 from .verbs import *
-
 from .feature_extractor import extract_verb_features
-
 from .dataset import DataSet
-
 from .models import Model
-
 from .utils import logger
 
 from functools import lru_cache
 from concurrent.futures import ProcessPoolExecutor
-from random import Random
-from collections import defaultdict
-import joblib
-import pkg_resources
-import re
 from zipfile import ZipFile
+import joblib
+from importlib import resources
+import numpy as np
 
 
 VERBS = {
@@ -52,151 +37,158 @@ VERBS = {
 
 class Conjugator:
     """
-    | This is the main class of the project.
-    | The class manages the Verbiste data set and provides an interface with the scikit-learn pipeline.
-    | If no parameters are provided, the default language is set to french and the pre-trained french conjugation pipeline is used.
-    | The class defines the method conjugate(verb, language) which is the main method of the module.
+    Main class for verb conjugation.
 
-    :param language: string.
-        Language of the conjugator. The default language is 'fr' for french.
-    :param model: mlconjug3.Model or scikit-learn Pipeline or Classifier implementing the fit() and predict() methods.
-        A user provided pipeline if the user has trained his own pipeline.
-    :ivar language: string. Language of the conjugator.
-    :ivar model: mlconjug3.Model or scikit-learn Pipeline or Classifier implementing the fit() and predict() methods.
-    :ivar conjug_manager: Verbiste object.
-
+    Combines:
+    - Verbiste dictionary-based conjugation
+    - Machine learning fallback for unknown verbs
     """
 
     def __init__(self, language="fr", model=None):
         self.language = language
         self.conjug_manager = Verbiste(language=language)
-        if not model:
-            with ZipFile(
-                pkg_resources.resource_stream(
-                    RESOURCE_PACKAGE, PRE_TRAINED_MODEL_PATH[language]
-                )
-            ) as content:
-                with content.open(
-                    "trained_model-{}-final.pickle".format(self.language), "r"
-                ) as archive:
-                    model = joblib.load(archive)
-        if model:
+
+        if model is None:
+            resource_path = resources.files(RESOURCE_PACKAGE).joinpath(
+                PRE_TRAINED_MODEL_PATH[language]
+            )
+
+            with resource_path.open("rb") as stream:
+                with ZipFile(stream) as content:
+                    with content.open(
+                        f"trained_model-{self.language}-final.pickle"
+                    ) as archive:
+                        model = joblib.load(archive)
+
             self.set_model(model)
         else:
-            self.model = model
-        return
+            if isinstance(model, Model):
+                self.set_model(model)
+            else:
+                logger.warning(
+                    _("Using a non-Model estimator. Compatibility is not guaranteed.")
+                )
+                self.model = model
 
     def __repr__(self):
-        return "{}.{}(language={})".format(
-            __name__, self.__class__.__name__, self.language
-        )
+        return f"{__name__}.{self.__class__.__name__}(language={self.language})"
 
     def conjugate(self, verbs, subject="abbrev"):
-        """
-        Conjugate multiple verbs using multi-processing.
-
-        :param verbs: list of strings or string.
-            Verbs to conjugate.
-        :param subject: string.
-            Toggles abbreviated or full pronouns.
-            The default value is 'abbrev'.
-            Select 'pronoun' for full pronouns.
-        :return verbs: list of Verb objects or None.
-        """
         if isinstance(verbs, str):
-            # If only a single verb is passed, call the _conjugate method directly
             return self._conjugate(verbs, subject)
-        else:
-            with ProcessPoolExecutor() as executor:
-                results = list(
-                    executor.map(self._conjugate, verbs, [subject] * len(verbs))
-                )
-            return results
+
+        with ProcessPoolExecutor() as executor:
+            return list(
+                executor.map(self._conjugate, verbs, [subject] * len(verbs))
+            )
 
     @lru_cache(maxsize=1024)
     def _conjugate(self, verb, subject="abbrev"):
-        """
-        | This is the main method of this class.
-        | It first checks to see if the verb is in Verbiste.
-        | If it is not, and a pre-trained scikit-learn pipeline has been supplied, the method then calls the pipeline
-         to predict the conjugation class of the provided verb.
-
-        | Returns a Verb object or None.
-
-        :param verb: string.
-            Verb to conjugate.
-        :param subject: string.
-            Toggles abbreviated or full pronouns.
-            The default value is 'abbrev'.
-            Select 'pronoun' for full pronouns.
-        :return verb: Verb object or None.
-
-        """
         verb = verb.lower()
-        prediction_score = 0
-        if not self.conjug_manager.is_valid_verb(verb):
-            logger.warning(
-                _("The supplied word: {0} is not a valid verb in {1}.").format(
-                    verb, LANGUAGE_FULL[self.language]
-                )
-            )
-            return None
-        if verb not in self.conjug_manager.verbs.keys():
-            if self.model is None:
-                logger.warning(
-                    _("Please provide an instance of a mlconjug3.mlconjug3.Model")
-                )
-                logger.warning(
-                    _(
-                        "The supplied word: {0} is not in the conjugation {1} table and no Conjugation Model was provided."
-                    ).format(verb, LANGUAGE_FULL[self.language])
-                )
-                return None
 
-            prediction = self.model.predict([verb])[0]
-            prediction_score = self.model.pipeline.predict_proba([verb])[0][prediction]
-            predicted = True
-            template = self.conjug_manager.templates[prediction]
-            index = -len(template[template.index(":") + 1 :])
-            root = verb if index == 0 else verb[:index]
-            verb_info = VerbInfo(verb, root, template)
-            conjug_info = self.conjug_manager.get_conjug_info(verb_info.template)
-        else:
-            predicted = False
-            infinitive = verb
-            verb_info = self.conjug_manager.get_verb_info(infinitive)
+        # ---------------------------
+        # RULE-BASED PATH
+        # ---------------------------
+        if verb in self.conjug_manager.verbs:
+            verb_info = self.conjug_manager.get_verb_info(verb)
+
+            # guard against corrupted/empty Verbiste entries
             if verb_info is None:
                 return None
+
             conjug_info = self.conjug_manager.get_conjug_info(verb_info.template)
-            if conjug_info is None:
+
+            # prevent Verb(None) crash
+            if verb_info is None or conjug_info is None:
                 return None
-        if predicted:
-            verb_object = VERBS[self.language](
-                verb_info, conjug_info, subject, predicted
+
+            return VERBS[self.language](verb_info, conjug_info, subject)
+
+        # ---------------------------
+        # ML FALLBACK PATH
+        # ---------------------------
+        if self.model is None:
+            logger.warning(
+                _("Please provide an instance of a mlconjug3.mlconjug3.Model")
             )
-            verb_object.confidence_score = round(prediction_score, 3)
+            return None
+
+        prediction = self.model.predict([verb])[0]
+
+        template = None
+        confidence_score = None
+
+        # ---------------------------
+        # TEMPLATE RESOLUTION
+        # ---------------------------
+        if isinstance(prediction, (int, np.integer)):
+            try:
+                templates = self.conjug_manager.templates
+
+                # guard empty / corrupted templates
+                if not templates:
+                    return None
+
+                template = templates[int(prediction)]
+            except Exception:
+                return None
+
+        elif isinstance(prediction, str):
+            template = prediction
+
         else:
-            verb_object = VERBS[self.language](verb_info, conjug_info, subject)
+            return None
+
+        # ---------------------------
+        # PROBABILITY HANDLING
+        # ---------------------------
+        try:
+            if hasattr(self.model, "predict_proba"):
+                proba = self.model.predict_proba([verb])[0]
+
+                if hasattr(self.model, "pipeline"):
+                    classes = self.model.pipeline.classes_
+                elif hasattr(self.model, "classes_"):
+                    classes = self.model.classes_
+                else:
+                    classes = None
+
+                if classes is not None and prediction in classes:
+                    class_index = list(classes).index(prediction)
+                    confidence_score = round(float(proba[class_index]), 3)
+
+        except Exception:
+            confidence_score = None
+
+        # ---------------------------
+        # FINAL VERB BUILD (SAFE)
+        # ---------------------------
+        try:
+            colon_index = template.index(":")
+            index = -len(template[colon_index + 1:])
+            root = verb if index == 0 else verb[:index]
+        except Exception:
+            return None
+
+        verb_info = VerbInfo(verb, root, template)
+        conjug_info = self.conjug_manager.get_conjug_info(template)
+
+        # final guard against corrupted conjugation data
+        if verb_info is None or conjug_info is None:
+            return None
+
+        verb_object = VERBS[self.language](verb_info, conjug_info, subject)
+
+        if confidence_score is not None:
+            verb_object.confidence_score = confidence_score
 
         return verb_object
 
     def set_model(self, model):
-        """
-        Assigns the provided pre-trained scikit-learn pipeline to be able to conjugate unknown verbs.
-
-        :param model: scikit-learn Classifier or Pipeline.
-        :raises: ValueError.
-
-        """
         if not isinstance(model, Model):
             logger.warning(
                 _("Please provide an instance of a mlconjug3.mlconjug3.Model")
             )
-            raise ValueError
-        else:
-            self.model = model
-        return
+            raise ValueError("Invalid model type")
 
-
-if __name__ == "__main__":
-    pass
+        self.model = model

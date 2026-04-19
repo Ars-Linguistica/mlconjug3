@@ -1,60 +1,145 @@
 """
-This module declares the feature extractors for verbs.
+Feature extraction module for mlconjug3.
 
-A custom vectorizer optimized for extracting verb features,
-including n-grams of verb endings and beginnings, verb length,
-number of vowels and consonants, and ratio of vowels to consonants.
+This module provides a custom feature extractor used to transform verbs
+into machine-learning-friendly representations.
+
+The extractor generates morphological, phonetic, and language-specific
+features optimized for conjugation template classification.
 """
 
 import re
 from mlconjug3.constants import ALPHABET
 
 
-def extract_verb_features(verb, lang, ngram_range):
+def extract_verb_features(verb, lang=None, ngram_range=None):
     """
-    | Custom Vectorizer optimized for extracting verbs features.
-    | As in Indo-European languages verbs are inflected by adding a morphological suffix,
-     the vectorizer extracts verb endings and produces a vector representation of the verb with binary features.
-    | To enhance the results of the feature extration, several other features have been included:
-    | The features are the verb's ending n-grams, starting n-grams, length of the verb, number of vowels,
-     number of consonants and the ratio of vowels over consonants.
+    Extract feature representation from a verb for ML classification.
 
-    :param verb: string.
-        Verb to vectorize.
-    :param lang: string.
-        Language to analyze.
-    :param ngram_range: tuple.
-        The range of the ngram sliding window.
-    :return features: list.
-        List of the most salient features of the verb for the task of finding it's conjugation's class.
+    This function converts a verb string into a list of symbolic features
+    capturing morphological structure, suffixes, prefixes, phonetic
+    composition, and language-specific patterns.
+
+    Notes
+    -----
+    - The parameter ``ngram_range`` is ignored (handled externally by scikit-learn).
+    - Features are engineered for conjugation template prediction tasks.
+
+    Parameters
+    ----------
+    verb : str
+        The verb to transform into features.
+    lang : str, optional
+        Language code (e.g. "fr", "en", "it", "ro").
+    ngram_range : tuple, optional
+        Ignored parameter (for compatibility with sklearn interfaces).
+
+    Returns
+    -------
+    list of str
+        List of extracted symbolic features.
     """
+
     _white_spaces = re.compile(r"\s\s+")
-    verb = _white_spaces.sub(" ", verb)
-    verb = verb.lower()
+    verb = _white_spaces.sub(" ", verb).lower()
+
+    if not verb:
+        return []
+
     verb_len = len(verb)
-    length_feature = "LEN={}".format(str(verb_len))
-    min_n, max_n = ngram_range
-    final_ngrams = [
-        "END={}".format(verb[-n:]) for n in range(min_n, min(max_n + 1, verb_len + 1))
-    ]
-    initial_ngrams = [
-        "START={}".format(verb[:n]) for n in range(min_n, min(max_n + 1, verb_len + 1))
-    ]
+    features = []
+
+    # ---------------------------
+    # BASE MORPHOLOGICAL FEATURES
+    # ---------------------------
+    features.append(f"END={verb[-2:]}")
+    features.append(f"END3={verb[-3:]}" if verb_len >= 3 else f"END3={verb}")
+
+    features.append(f"START={verb[:2]}")
+    features.append(f"START3={verb[:3]}" if verb_len >= 3 else f"START3={verb}")
+
+    features.append(f"LEN={verb_len}")
+
+    # Suffix hierarchy (captures morphological endings)
+    for i in range(2, min(7, verb_len + 1)):
+        features.append(f"SUF{i}={verb[-i:]}")
+
+    # =========================================================
+    # ITALIAN-SPECIFIC FEATURES
+    # =========================================================
+    if lang == "it":
+
+        ends_are = verb.endswith("are")
+        ends_ere = verb.endswith("ere")
+        ends_ire = verb.endswith("ire")
+
+        features.append(f"IT_ARE={ends_are}")
+        features.append(f"IT_ERE={ends_ere}")
+        features.append(f"IT_IRE={ends_ire}")
+
+        features.append(f"IT_ISC={'isc' in verb[-6:]}")
+
+        features.append(f"IT_STEM_VAR={len(set(verb[:3]))}")
+
+        vowels_it = sum(verb.count(c) for c in "aeiou")
+        features.append(f"IT_VOWELS={vowels_it}")
+        features.append(f"IT_VOWEL_RATIO={round(vowels_it / max(1, verb_len), 3)}")
+
+        features.append(f"IT_SUFFIX_TENSION={verb[-1] + verb[-2:]}")
+
+    # =========================================================
+    # ROMANIAN-SPECIFIC FEATURES
+    # =========================================================
+    if lang == "ro":
+
+        features.append(f"RO_IZA={verb.endswith('iza')}")
+        features.append(f"RO_IFICA={verb.endswith('ifica')}")
+        features.append(f"RO_UI={verb.endswith('ui')}")
+        features.append(f"RO_A_VERB={verb.endswith('a')}")
+
+        features.append(
+            f"RO_DERIV_CHAIN={'iza' in verb or 'fica' in verb or 'ui' in verb}"
+        )
+
+        features.append(f"RO_COMPLEXITY={len(set(verb)) + verb_len}")
+
+        features.append(f"RO_SUFFIX3={verb[-3:]}")
+
+        features.append(
+            f"RO_DOUBLE_VOWEL={'aa' in verb or 'ee' in verb or 'ii' in verb}"
+        )
+
+    # ---------------------------
+    # PREFIX FEATURES
+    # ---------------------------
+    for i in range(2, min(5, verb_len + 1)):
+        features.append(f"PREF{i}={verb[:i]}")
+
+    # ---------------------------
+    # PHONETIC FEATURES
+    # ---------------------------
     if lang not in ALPHABET:
-        lang = "en"  # We chose 'en' as the default alphabet because english is more standard, without accents or diactrics.
+        lang = "en"
+
     vowels = sum(verb.count(c) for c in ALPHABET[lang]["vowels"])
-    vowels_number = "VOW_NUM={}".format(vowels)
     consonants = sum(verb.count(c) for c in ALPHABET[lang]["consonants"])
-    consonants_number = "CONS_NUM={}".format(consonants)
+
+    features.append(f"VOW_NUM={vowels}")
+    features.append(f"CONS_NUM={consonants}")
+
     if consonants == 0:
-        vow_cons_ratio = "V/C=N/A"
+        features.append("V/C=N/A")
     else:
-        vow_cons_ratio = "V/C={}".format(round(vowels / consonants, 2))
-    final_ngrams.extend(initial_ngrams)
-    final_ngrams.extend(
-        (length_feature, vowels_number, consonants_number, vow_cons_ratio)
+        features.append(f"V/C={round(vowels / consonants, 2)}")
+
+    # ---------------------------
+    # STRUCTURAL FEATURES
+    # ---------------------------
+    features.append(
+        f"HAS_DOUBLE={any(verb[i] == verb[i + 1] for i in range(len(verb) - 1))}"
     )
-    return final_ngrams
+
+    return features
 
 
 if __name__ == "__main__":

@@ -1,103 +1,166 @@
 """
-This module declares the Model class.
+models.py
 
-It provides a Model class that wraps around scikit-learn's pipeline,
-and offers a simple train, predict, and evaluate interface for training conjugation models.
-The Model class also provides default values for the vectorizer, feature selector and classifier,
-which work well for many languages and can be overridden as needed.
+Defines the core machine learning model used for verb conjugation.
 """
 
-from sklearn.feature_selection import SelectFromModel
+from functools import partial
+from typing import Optional, Sequence, Any
+
 from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.svm import LinearSVC
 from sklearn.linear_model import SGDClassifier
 from sklearn.pipeline import Pipeline
 
-from mlconjug3.constants import *
-
 from mlconjug3.feature_extractor import extract_verb_features
-
-from functools import partial
 
 
 class Model:
     """
-    | This class manages the scikit-learn pipeline.
-    | The Pipeline includes a feature vectorizer, a feature selector and a classifier.
-    | If any of the vectorizer, feature selector or classifier is not supplied at instance declaration,
-     the __init__ method will provide good default values that get more than 92% prediction accuracy.
+    Machine learning model for verb template classification.
 
-    :param vectorizer: scikit-learn Vectorizer.
-    :param feature_selector: scikit-learn Classifier with a fit_transform() method
-    :param classifier: scikit-learn Classifier with a predict() method
-    :param language: Language of the corpus of verbs to be analyzed.
-    :ivar pipeline: scikit-learn Pipeline Object.
-    :ivar language: Language of the corpus of verbs to be analyzed.
+    This class wraps a scikit-learn Pipeline composed of:
+    - A feature extractor (CountVectorizer with custom analyzer)
+    - A classifier (SGDClassifier by default)
     """
 
     def __init__(
-        self, vectorizer=None, feature_selector=None, classifier=None, language=None
-    ):
-        if not vectorizer:
+        self,
+        vectorizer: Optional[Any] = None,
+        classifier: Optional[Any] = None,
+        language: Optional[str] = None,
+    ) -> None:
+        """
+        Initialize the Model.
+
+        Parameters
+        ----------
+        vectorizer : sklearn-compatible transformer, optional
+            Feature extraction component used to convert verbs into feature vectors.
+        classifier : sklearn-compatible estimator, optional
+            Classification model used to predict verb templates.
+        language : str, optional
+            Language code used for feature extraction rules.
+        """
+
+        self.language = language
+
+        # --------------------------
+        # VECTORISER
+        # --------------------------
+        if vectorizer is None:
             vectorizer = CountVectorizer(
                 analyzer=partial(
-                    extract_verb_features, lang=language, ngram_range=(2, 7)
+                    extract_verb_features,
+                    lang=language,
                 ),
                 binary=True,
                 lowercase=False,
             )
-        if not feature_selector:
-            feature_selector = SelectFromModel(
-                LinearSVC(penalty="l1", max_iter=12000, dual=False, verbose=2)
-            )
-        if not classifier:
+
+        # --------------------------
+        # CLASSIFIER
+        # --------------------------
+        if classifier is None:
             classifier = SGDClassifier(
                 loss="log_loss",
                 penalty="elasticnet",
                 l1_ratio=0.15,
+                alpha=3e-6,
                 max_iter=4000,
-                alpha=1e-5,
+                tol=1e-4,
+                early_stopping=False,
+                n_iter_no_change=10,
                 random_state=42,
-                verbose=2,
             )
-        self.pipeline = Pipeline(
-            [
-                ("vectorizer", vectorizer),
-                ("feature_selector", feature_selector),
-                ("classifier", classifier),
-            ]
-        )
-        self.language = language
-        return
 
-    def __repr__(self):
-        return "{}.{}({}, {}, {})".format(
-            __name__, self.__class__.__name__, *sorted(self.pipeline.named_steps)
-        )
+        # --------------------------
+        # PIPELINE
+        # --------------------------
+        self.pipeline = Pipeline([
+            ("vectorizer", vectorizer),
+            ("classifier", classifier),
+        ])
 
-    def train(self, samples, labels):
+    def __repr__(self) -> str:
         """
-        Trains the pipeline on the supplied samples and labels.
+        Return string representation of the Model.
 
-        :param samples: list.
-            List of verbs.
-        :param labels: list.
-            List of verb templates.
+        Returns
+        -------
+        str
+            Debug representation including language.
         """
-        self.pipeline = self.pipeline.fit(samples, labels)
-        return
+        return f"{self.__class__.__name__}(language={self.language})"
 
-    def predict(self, verbs):
+    def train(
+        self,
+        samples: Sequence[str],
+        labels: Sequence[int],
+        sample_weight=None
+    ) -> "Model":
         """
-        Predicts the conjugation class of the provided list of verbs.
+        Train the model on labeled verb data.
 
-        :param verbs: list.
-            List of verbs.
-        :return predictions: list.
-            List of predicted conjugation groups.
+        Parameters
+        ----------
+        samples : Sequence[str]
+            Input verb strings used for training.
+        labels : Sequence[int]
+            Target template indices.
+        sample_weight : array-like, optional
+            Optional weights for each training sample.
+
+        Returns
+        -------
+        Model
+            Trained model instance.
+        """
+        if sample_weight is not None:
+            self.pipeline.fit(
+                samples,
+                labels,
+                classifier__sample_weight=sample_weight
+            )
+        else:
+            self.pipeline.fit(samples, labels)
+
+        return self
+
+    def predict(self, verbs: Sequence[str]):
+        """
+        Predict conjugation template indices for input verbs.
+
+        Parameters
+        ----------
+        verbs : Sequence[str]
+            Input verbs.
+
+        Returns
+        -------
+        ndarray
+            Predicted template indices (shape: [n_samples]).
         """
         return self.pipeline.predict(verbs)
 
+    def predict_proba(self, verbs: Sequence[str]):
+        """
+        Predict probability distribution over conjugation templates.
 
-if __name__ == "__main__":
-    pass
+        Parameters
+        ----------
+        verbs : Sequence[str]
+            Input verbs.
+
+        Returns
+        -------
+        ndarray
+            Probability matrix of shape (n_samples, n_classes).
+
+        Raises
+        ------
+        AttributeError
+            If the classifier does not support probability prediction.
+        """
+        if hasattr(self.pipeline, "predict_proba"):
+            return self.pipeline.predict_proba(verbs)
+        raise AttributeError("Classifier does not support predict_proba")

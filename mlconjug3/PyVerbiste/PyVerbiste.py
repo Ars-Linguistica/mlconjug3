@@ -1,26 +1,23 @@
 """
 PyVerbiste.
 
-This module contains the code for the class Vrbiste.
-More information about mlconjug3 at https://pypi.org/project/mlconjug3/
+Handles Verbiste XML data and provides a lightweight rule-based
+conjugation backend using XML templates.
 
-
-The conjugation data conforms to the XML schema defined by Verbiste.
-More information on Verbiste at https://perso.b2b2c.ca/~sarrazip/dev/conjug_manager.html
-
+This module supports both filesystem-based resources and packaged
+resources (e.g., inside wheels or zip files), with optional caching
+for performance.
 """
 
 __author__ = "Ars-Linguistica"
 __author_email__ = "diao.sekou.nlp@gmail.com"
 
-
 import os
 import joblib
-import copy
 import defusedxml.ElementTree as ET
-import json
 from collections import OrderedDict
-import pkg_resources
+from importlib import resources
+
 from mlconjug3.constants import *
 from mlconjug3.verbs import *
 from mlconjug3.conjug_manager import *
@@ -28,62 +25,179 @@ from mlconjug3.conjug_manager import *
 
 class Verbiste(ConjugManager):
     """
-    This is the class handling the Verbiste xml files.
+    Verbiste XML-based conjugation manager.
 
-    :param language: string.
-        | The language of the conjugator. The default value is fr for French.
-        | The allowed values are: fr, en, es, it, pt, ro.
-    :ivar language: Language of the conjugator.
-    :ivar verbs: Dictionary where the keys are verbs and the values are conjugation patterns.
-    :ivar conjugations: Dictionary where the keys are conjugation patterns and the values are inflected forms.
-    :ivar _allowed_endings: set.
-        | A set containing the allowed endings of verbs in the target language.
-    :ivar templates: list of strings.
-        List of the conjugation patterns.
+    This class loads verb definitions and conjugation templates from
+    Verbiste XML resources. It supports:
+
+    - Loading from filesystem or packaged resources
+    - Transparent caching using joblib
+    - Graceful fallback when resources are missing
+
+    Inherits from:
+        ConjugManager
     """
 
+    # ---------------------------
+    # File helpers
+    # ---------------------------
+
+    def _is_real_file(self, path):
+        """
+        Determine whether a given path refers to a real file
+        on the local filesystem.
+
+        Parameters
+        ----------
+        path : str
+            File path to check.
+
+        Returns
+        -------
+        bool
+            True if the file exists on disk, False otherwise.
+        """
+        try:
+            return os.path.isfile(path)
+        except Exception:
+            return False
+
+    # ---------------------------
+    # Cache handling
+    # ---------------------------
+
     def _load_cache(self, file):
-        file_path = os.path.abspath(file)
-        if not file_path.endswith(".xml"):
-            raise ValueError(f"Invalid file path, expected .xml file, got {file_path}")
-        pkl_file = file_path + ".pkl"
+        """
+        Load a cached version of parsed XML data if available.
+
+        Cache is only used when the source file exists on disk and
+        the cache file is newer than the source XML.
+
+        Parameters
+        ----------
+        file : str
+            Path to the XML file.
+
+        Returns
+        -------
+        dict or None
+            Cached data if valid, otherwise None.
+
+        Raises
+        ------
+        ValueError
+            If the file extension is not `.xml`.
+        """
+        if not self._is_real_file(file):
+            return None
+
+        if not file.endswith(".xml"):
+            raise ValueError(f"Invalid file path, expected .xml file, got {file}")
+
+        pkl_file = file + ".pkl"
 
         if os.path.isfile(pkl_file):
-            last_modified_time_file = os.path.getmtime(file_path)
-            last_modified_time_pkl = os.path.getmtime(pkl_file)
-            if last_modified_time_file <= last_modified_time_pkl:
-                file_dic = joblib.load(pkl_file)
-                return file_dic
-        else:
+            if os.path.getmtime(file) <= os.path.getmtime(pkl_file):
+                return joblib.load(pkl_file)
+
+        return None
+
+    def _save_cache(self, file, data):
+        """
+        Save parsed XML data to a cache file.
+
+        Cache is only written when the file exists on disk and is writable.
+        Failures are silently ignored (important for packaged environments).
+
+        Parameters
+        ----------
+        file : str
+            Original XML file path.
+        data : dict
+            Parsed data to cache.
+        """
+        if not self._is_real_file(file):
+            return
+
+        try:
+            joblib.dump(data, file + ".pkl", compress=("gzip", 3))
+        except Exception:
+            pass  # Safe fallback for read-only or zip environments
+
+    # ---------------------------
+    # Resource handling
+    # ---------------------------
+
+    def _open_resource(self, relative_path):
+        """
+        Open a packaged resource in a zip-safe way.
+
+        Parameters
+        ----------
+        relative_path : str
+            Path relative to the package root.
+
+        Returns
+        -------
+        file-like object or None
+            Opened binary stream if resource exists, otherwise None.
+        """
+        try:
+            return resources.files(RESOURCE_PACKAGE).joinpath(relative_path).open("rb")
+        except (FileNotFoundError, ModuleNotFoundError):
             return None
+
+    # ---------------------------
+    # Verb loading
+    # ---------------------------
 
     def _load_verbs(self, verbs_file):
         """
-        Load and parses the verbs from the xml file.
+        Load verbs from an XML resource.
 
-        :param verbs_file: string or path object.
-            Path to the verbs xml file.
+        Parameters
+        ----------
+        verbs_file : str
+            Path to the verbs resource (JSON name will be converted to XML).
 
+        Notes
+        -----
+        The method automatically converts `.json` paths to `.xml`
+        to maintain compatibility with existing configuration.
         """
-        self.verbs = self._parse_verbs(verbs_file.replace("json", "xml"))
-        return
+        xml_file = verbs_file.replace("json", "xml")
+        self.verbs = self._parse_verbs(xml_file)
 
     def _parse_verbs(self, file):
         """
-        Parses the XML file.
+        Parse verbs from a Verbiste XML file.
 
-        :param file: FileObject.
-            XML file containing the verbs.
-        :return verb_templates: OrderedDict.
-            An OrderedDict containing the verb and its template for all verbs in the file.
+        Parameters
+        ----------
+        file : str
+            Path to the XML file.
 
+        Returns
+        -------
+        dict
+            Dictionary mapping verb names to their template and root.
         """
         cache = self._load_cache(file)
         if cache:
             return cache
 
         verbs_dic = {}
-        xml = ET.parse(file)
+
+        # Load XML (filesystem or package resource)
+        if self._is_real_file(file):
+            xml = ET.parse(file)
+        else:
+            f = self._open_resource(file)
+            if f is None:
+                return {}  # Safe fallback
+            with f:
+                xml = ET.parse(f)
+
         for verb in xml.findall("v"):
             verb_name = verb.find("i").text
             template = verb.find("t").text
@@ -91,80 +205,108 @@ class Verbiste(ConjugManager):
             root = verb_name if index == 0 else verb_name[:index]
             verbs_dic[verb_name] = {"template": template, "root": root}
 
-        pkl_file = file + ".pkl"
-        joblib.dump(verbs_dic, pkl_file, compress=("gzip", 3))
+        self._save_cache(file, verbs_dic)
         return verbs_dic
+
+    # ---------------------------
+    # Conjugation loading
+    # ---------------------------
 
     def _load_conjugations(self, conjugations_file):
         """
-        Load and parses the conjugations from the xml file.
+        Load conjugation templates from XML resource.
 
-        :param conjugations_file: string or path object.
-            Path to the conjugation xml file.
-
+        Parameters
+        ----------
+        conjugations_file : str
+            Path to the conjugation templates resource.
         """
-        self.conjugations = self._parse_conjugations(
-            conjugations_file.replace("json", "xml")
-        )
-        return
+        xml_file = conjugations_file.replace("json", "xml")
+        self.conjugations = self._parse_conjugations(xml_file)
 
     def _parse_conjugations(self, file):
         """
-        Parses the XML file.
+        Parse conjugation templates from XML.
 
-        :param file: FileObject.
-            XML file containing the conjugation templates.
-        :return conjugations: OrderedDict.
-            An OrderedDict containing all the conjugation templates in the file.
+        Parameters
+        ----------
+        file : str
+            Path to the XML file.
 
+        Returns
+        -------
+        dict
+            Nested dictionary of conjugation templates.
         """
         cache = self._load_cache(file)
         if cache:
             return cache
 
         conjugations_dic = {}
-        xml = ET.parse(file)
+
+        # Load XML
+        if self._is_real_file(file):
+            xml = ET.parse(file)
+        else:
+            f = self._open_resource(file)
+            if f is None:
+                return {}
+            with f:
+                xml = ET.parse(f)
+
         for template in xml.findall("template"):
             template_name = template.get("name")
             conjugations_dic[template_name] = OrderedDict()
+
             for mood in list(template):
                 conjugations_dic[template_name][mood.tag] = OrderedDict()
+
                 for tense in list(mood):
                     conjugations_dic[template_name][mood.tag][
                         tense.tag.replace("-", " ")
                     ] = self._load_tense(tense)
-        pkl_file = file + ".pkl"
-        joblib.dump(conjugations_dic, pkl_file, compress=("gzip", 3))
+
+        self._save_cache(file, conjugations_dic)
         return conjugations_dic
+
+    # ---------------------------
+    # Tense parsing
+    # ---------------------------
 
     @staticmethod
     def _load_tense(tense):
         """
-        Load and parses the inflected forms of the tense from xml file.
+        Parse a tense node into conjugation forms.
 
-        :param tense: list of xml tags containing inflected forms.
-            The list of inflected forms for the current tense being processed.
-        :return inflected_forms: list.
-            List of inflected forms.
+        Parameters
+        ----------
+        tense : xml.etree.ElementTree.Element
+            XML node representing a tense.
 
+        Returns
+        -------
+        list or str or None
+            - List of (person_index, form) tuples for multi-person tenses
+            - String for single-form tenses
+            - None if empty
         """
         persons = list(tense)
+
         if not persons:
             return None
-        elif len(persons) == 1:
-            if persons[0].find("i") is None:
-                return None
-            conjug = persons[0].find("i").text
-        else:
-            conjug = []
-            for pers, term in enumerate(persons):
-                if term.find("i") is not None:
-                    if term.find("i").text is not None:
-                        conjug.append((pers, term.find("i").text))
-                    else:
-                        conjug.append((pers, ""))
-                else:
-                    conjug.append((pers, None))
+
+        if len(persons) == 1:
+            node = persons[0].find("i")
+            return node.text if node is not None else None
+
+        conjug = []
+        for pers, term in enumerate(persons):
+            node = term.find("i")
+            if node is not None:
+                conjug.append((pers, node.text or ""))
+            else:
+                conjug.append((pers, None))
+
         return conjug
 
 
