@@ -11,7 +11,7 @@ We believe that everyone has something valuable to offer, and we're excited to s
 
 Whether you're a seasoned developer or just starting out, we have plenty of opportunities for you to get involved.
 From fixing bugs to adding new features, there's something for everyone.
-And with support for Python 3.8 to 3.11 and the use of modern best practices like the build manager Poetry and the pyproject.toml file, you'll be able to work with the latest tools in the Python ecosystem.
+And with support for Python 3.9 to 3.14 and the use of modern best practices like the build manager Poetry and the pyproject.toml file, you'll be able to work with the latest tools in the Python ecosystem.
 
 You can contribute in many ways:
 
