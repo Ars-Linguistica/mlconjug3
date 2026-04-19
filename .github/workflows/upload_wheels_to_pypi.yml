@@ -15,13 +15,11 @@ concurrency:
 
 jobs:
   build_wheels:
-    name: Build wheels on ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
+    name: Build wheel (pure Python)
+    runs-on: ubuntu-latest
 
     strategy:
       fail-fast: false
-      matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
 
     steps:
       - uses: actions/checkout@v4
@@ -32,23 +30,17 @@ jobs:
 
       - name: Install build tools
         run: |
-          python -m pip install -U pip setuptools wheel cibuildwheel
+          python -m pip install -U pip setuptools wheel build
 
-      - name: Build wheels
-        env:
-          CIBW_BUILD: "cp39-* cp310-* cp311-* cp312-* cp313-*"
-          CIBW_SKIP: "pp* *musllinux*"
-          CIBW_ARCHS_LINUX: "auto"
-          CIBW_ARCHS_MACOS: "x86_64 arm64"
-          CIBW_TEST_SKIP: "*"
+      - name: Build wheel
         run: |
-          python -m cibuildwheel --output-dir wheelhouse
+          python -m build --wheel --outdir dist
 
-      - name: Upload wheels artifact
+      - name: Upload wheel artifact
         uses: actions/upload-artifact@v4
         with:
-          name: wheels-${{ matrix.os }}
-          path: wheelhouse/*.whl
+          name: wheel
+          path: dist/*.whl
 
   build_sdist:
     name: Build source distribution
@@ -66,7 +58,7 @@ jobs:
           python -m pip install -U pip build
 
       - name: Build sdist
-        run: python -m build --sdist
+        run: python -m build --sdist --outdir dist
 
       - name: Upload sdist artifact
         uses: actions/upload-artifact@v4
@@ -96,7 +88,7 @@ jobs:
           find dist -type f -name "*.tar.gz" -exec cp {} release/ \;
 
       # -------------------------
-      # 1. OIDC TRUSTED PUBLISHING (PRIMARY)
+      # OIDC TRUSTED PUBLISHING (PRIMARY)
       # -------------------------
       - name: Publish to PyPI (OIDC Trusted Publishing)
         id: pypi-oidc
@@ -106,7 +98,7 @@ jobs:
           packages-dir: release/
 
       # -------------------------
-      # 2. FALLBACK TOKEN PUBLISHING (LEGACY SAFETY NET)
+      # FALLBACK TOKEN PUBLISHING (LEGACY SAFETY NET)
       # -------------------------
       - name: Publish to PyPI (Token fallback)
         if: steps.pypi-oidc.outcome == 'failure'
