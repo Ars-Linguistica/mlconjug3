@@ -75,7 +75,7 @@ We recommend using Poetry as our build manager and the pyproject.toml file to ma
     $ cd mlconjug3
     $ poetry install
 
-Before you begin working on a new feature or bugfix, create a new branch for it. This makes it easier to isolate changes and submit them in a pull request. You can create a new branch by running the following command::
+Before you begin working on a new feature or bugfix, create a new branch for it. This makes it easier to isolate changes and submit them in a pull request. You can create a new branch by running the following command:
 
 .. code-block:: console
 
