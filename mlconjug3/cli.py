@@ -25,8 +25,6 @@ import yaml
 from rich.table import Table
 from rich.console import Console
 
-from .mlconjug import Conjugator
-
 try:
     from .utils import _
 except Exception:
@@ -102,6 +100,8 @@ def main(verbs, language, output, subject, file_format, config):
     Save output:
         mlconjug3 -l es -o output.json 'hablar'
     """
+    from .mlconjug import Conjugator
+
     config_options = load_config(config)
 
     language = config_options.get("language", language)

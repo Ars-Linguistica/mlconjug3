@@ -33,6 +33,7 @@ from .constants import *
 from .constants.constants import TRANSLATIONS_RESOURCE
 from .mlconjug import *
 from .PyVerbiste import *
+from .utils.model_trainer import ConjugatorTrainer
 
 from sklearn.feature_selection import SelectFromModel
 from sklearn.feature_extraction.text import CountVectorizer

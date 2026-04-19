@@ -1,8 +1,12 @@
 """
-PyVerbiste
+PyVerbiste.
 
-Handles loading, parsing, and caching of Verbiste XML linguistic resources.
-Provides filesystem-safe and package-resource-safe access to conjugation data.
+Handles Verbiste XML data and provides a lightweight rule-based
+conjugation backend using XML templates.
+
+This module supports both filesystem-based resources and packaged
+resources (e.g., inside wheels or zip files), with optional caching
+for performance.
 """
 
 __author__ = "Ars-Linguistica"
@@ -21,45 +25,68 @@ from mlconjug3.conjug_manager import *
 
 class Verbiste(ConjugManager):
     """
-    Verbiste backend implementation for parsing XML conjugation resources.
+    Verbiste XML-based conjugation manager.
 
-    This class extends ConjugManager and provides:
-    - XML parsing of verb lexicons and conjugation templates
-    - Optional disk caching via joblib
-    - Zip-safe resource loading via importlib.resources
+    This class loads verb definitions and conjugation templates from
+    Verbiste XML resources. It supports:
+
+    - Loading from filesystem or packaged resources
+    - Transparent caching using joblib
+    - Graceful fallback when resources are missing
+
+    Inherits from:
+        ConjugManager
     """
+
+    # ---------------------------
+    # File helpers
+    # ---------------------------
 
     def _is_real_file(self, path):
         """
-        Check whether a given path is a real filesystem path.
+        Determine whether a given path refers to a real file
+        on the local filesystem.
 
-        Used to distinguish between:
-        - Local filesystem files
-        - Package-embedded resources (zip/importlib)
+        Parameters
+        ----------
+        path : str
+            File path to check.
 
-        :param path: File path to check
-        :type path: str
-        :return: True if path exists on filesystem, False otherwise
-        :rtype: bool
+        Returns
+        -------
+        bool
+            True if the file exists on disk, False otherwise.
         """
         try:
             return os.path.isfile(path)
         except Exception:
             return False
 
+    # ---------------------------
+    # Cache handling
+    # ---------------------------
+
     def _load_cache(self, file):
         """
-        Load cached parsed XML data if available and valid.
+        Load a cached version of parsed XML data if available.
 
-        Cache is only used when:
-        - File is on filesystem
-        - File has a corresponding `.pkl` cache
-        - Cache is newer than source XML
+        Cache is only used when the source file exists on disk and
+        the cache file is newer than the source XML.
 
-        :param file: Path to XML file
-        :type file: str
-        :return: Cached data or None if unavailable
-        :rtype: dict | None
+        Parameters
+        ----------
+        file : str
+            Path to the XML file.
+
+        Returns
+        -------
+        dict or None
+            Cached data if valid, otherwise None.
+
+        Raises
+        ------
+        ValueError
+            If the file extension is not `.xml`.
         """
         if not self._is_real_file(file):
             return None
@@ -77,18 +104,17 @@ class Verbiste(ConjugManager):
 
     def _save_cache(self, file, data):
         """
-        Save parsed data to cache file.
+        Save parsed XML data to a cache file.
 
-        Cache is only written when:
-        - File exists on filesystem
-        - Write permissions are available
+        Cache is only written when the file exists on disk and is writable.
+        Failures are silently ignored (important for packaged environments).
 
-        Failures are silently ignored (safe for zip/package environments).
-
-        :param file: Original XML file path
-        :type file: str
-        :param data: Parsed data to cache
-        :type data: dict
+        Parameters
+        ----------
+        file : str
+            Original XML file path.
+        data : dict
+            Parsed data to cache.
         """
         if not self._is_real_file(file):
             return
@@ -96,41 +122,65 @@ class Verbiste(ConjugManager):
         try:
             joblib.dump(data, file + ".pkl", compress=("gzip", 3))
         except Exception:
-            pass
+            pass  # Safe fallback for read-only or zip environments
+
+    # ---------------------------
+    # Resource handling
+    # ---------------------------
 
     def _open_resource(self, relative_path):
         """
-        Open a package resource in a filesystem-agnostic way.
+        Open a packaged resource in a zip-safe way.
 
-        Supports both installed packages and zipped distributions.
+        Parameters
+        ----------
+        relative_path : str
+            Path relative to the package root.
 
-        :param relative_path: Relative path inside package
-        :type relative_path: str
-        :return: Binary file-like object
-        :rtype: BinaryIO
+        Returns
+        -------
+        file-like object or None
+            Opened binary stream if resource exists, otherwise None.
         """
-        return resources.files(RESOURCE_PACKAGE).joinpath(relative_path).open("rb")
+        try:
+            return resources.files(RESOURCE_PACKAGE).joinpath(relative_path).open("rb")
+        except (FileNotFoundError, ModuleNotFoundError):
+            return None
+
+    # ---------------------------
+    # Verb loading
+    # ---------------------------
 
     def _load_verbs(self, verbs_file):
         """
-        Load verb lexicon from XML source.
+        Load verbs from an XML resource.
 
-        :param verbs_file: Path to verbs resource (XML or logical name)
-        :type verbs_file: str
+        Parameters
+        ----------
+        verbs_file : str
+            Path to the verbs resource (JSON name will be converted to XML).
+
+        Notes
+        -----
+        The method automatically converts `.json` paths to `.xml`
+        to maintain compatibility with existing configuration.
         """
         xml_file = verbs_file.replace("json", "xml")
         self.verbs = self._parse_verbs(xml_file)
 
     def _parse_verbs(self, file):
         """
-        Parse verb lexicon XML into a structured dictionary.
+        Parse verbs from a Verbiste XML file.
 
-        Uses cache when available.
+        Parameters
+        ----------
+        file : str
+            Path to the XML file.
 
-        :param file: Path to XML file or resource
-        :type file: str
-        :return: Dictionary mapping verbs to root and template info
-        :rtype: dict
+        Returns
+        -------
+        dict
+            Dictionary mapping verb names to their template and root.
         """
         cache = self._load_cache(file)
         if cache:
@@ -138,10 +188,14 @@ class Verbiste(ConjugManager):
 
         verbs_dic = {}
 
+        # Load XML (filesystem or package resource)
         if self._is_real_file(file):
             xml = ET.parse(file)
         else:
-            with self._open_resource(file) as f:
+            f = self._open_resource(file)
+            if f is None:
+                return {}  # Safe fallback
+            with f:
                 xml = ET.parse(f)
 
         for verb in xml.findall("v"):
@@ -154,26 +208,35 @@ class Verbiste(ConjugManager):
         self._save_cache(file, verbs_dic)
         return verbs_dic
 
+    # ---------------------------
+    # Conjugation loading
+    # ---------------------------
+
     def _load_conjugations(self, conjugations_file):
         """
-        Load conjugation templates from XML source.
+        Load conjugation templates from XML resource.
 
-        :param conjugations_file: Path to conjugation XML resource
-        :type conjugations_file: str
+        Parameters
+        ----------
+        conjugations_file : str
+            Path to the conjugation templates resource.
         """
         xml_file = conjugations_file.replace("json", "xml")
         self.conjugations = self._parse_conjugations(xml_file)
 
     def _parse_conjugations(self, file):
         """
-        Parse conjugation template XML into structured dictionary.
+        Parse conjugation templates from XML.
 
-        Uses cache when available.
+        Parameters
+        ----------
+        file : str
+            Path to the XML file.
 
-        :param file: Path to XML file or resource
-        :type file: str
-        :return: Nested dictionary of conjugation templates
-        :rtype: dict
+        Returns
+        -------
+        dict
+            Nested dictionary of conjugation templates.
         """
         cache = self._load_cache(file)
         if cache:
@@ -181,10 +244,14 @@ class Verbiste(ConjugManager):
 
         conjugations_dic = {}
 
+        # Load XML
         if self._is_real_file(file):
             xml = ET.parse(file)
         else:
-            with self._open_resource(file) as f:
+            f = self._open_resource(file)
+            if f is None:
+                return {}
+            with f:
                 xml = ET.parse(f)
 
         for template in xml.findall("template"):
@@ -202,15 +269,26 @@ class Verbiste(ConjugManager):
         self._save_cache(file, conjugations_dic)
         return conjugations_dic
 
+    # ---------------------------
+    # Tense parsing
+    # ---------------------------
+
     @staticmethod
     def _load_tense(tense):
         """
-        Convert XML tense node into structured conjugation data.
+        Parse a tense node into conjugation forms.
 
-        :param tense: XML tense node
-        :type tense: xml.etree.ElementTree.Element
-        :return: Either a string, list of (person, form), or None
-        :rtype: str | list[tuple[int, str]] | None
+        Parameters
+        ----------
+        tense : xml.etree.ElementTree.Element
+            XML node representing a tense.
+
+        Returns
+        -------
+        list or str or None
+            - List of (person_index, form) tuples for multi-person tenses
+            - String for single-form tenses
+            - None if empty
         """
         persons = list(tense)
 
