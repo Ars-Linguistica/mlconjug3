@@ -45,16 +45,6 @@ class Conjugator:
     """
 
     def __init__(self, language="fr", model=None):
-        """
-        Initialize the Conjugator.
-
-        Parameters
-        ----------
-        language : str
-            Target language code.
-        model : Model or estimator, optional
-            Pre-trained ML model. If None, a default model is loaded.
-        """
         self.language = language
         self.conjug_manager = Verbiste(language=language)
 
@@ -81,32 +71,9 @@ class Conjugator:
                 self.model = model
 
     def __repr__(self):
-        """
-        Return string representation of Conjugator.
-
-        Returns
-        -------
-        str
-            Debug representation including language.
-        """
         return f"{__name__}.{self.__class__.__name__}(language={self.language})"
 
     def conjugate(self, verbs, subject="abbrev"):
-        """
-        Conjugate one or multiple verbs.
-
-        Parameters
-        ----------
-        verbs : str or list[str]
-            Verb or list of verbs to conjugate.
-        subject : str, optional
-            Subject formatting style.
-
-        Returns
-        -------
-        Verb or list[Verb]
-            Conjugated verb object(s).
-        """
         if isinstance(verbs, str):
             return self._conjugate(verbs, subject)
 
@@ -117,34 +84,29 @@ class Conjugator:
 
     @lru_cache(maxsize=1024)
     def _conjugate(self, verb, subject="abbrev"):
-        """
-        Internal conjugation logic.
-
-        Parameters
-        ----------
-        verb : str
-            Verb to conjugate.
-        subject : str
-            Subject formatting style.
-
-        Returns
-        -------
-        Verb or None
-            Conjugated verb object or None if unavailable.
-        """
         verb = verb.lower()
 
-        # Known verb
+        # ---------------------------
+        # RULE-BASED PATH
+        # ---------------------------
         if verb in self.conjug_manager.verbs:
             verb_info = self.conjug_manager.get_verb_info(verb)
+
+            # guard against corrupted/empty Verbiste entries
+            if verb_info is None:
+                return None
+
             conjug_info = self.conjug_manager.get_conjug_info(verb_info.template)
 
+            # prevent Verb(None) crash
             if verb_info is None or conjug_info is None:
                 return None
 
             return VERBS[self.language](verb_info, conjug_info, subject)
 
-        # ML fallback
+        # ---------------------------
+        # ML FALLBACK PATH
+        # ---------------------------
         if self.model is None:
             logger.warning(
                 _("Please provide an instance of a mlconjug3.mlconjug3.Model")
@@ -156,24 +118,30 @@ class Conjugator:
         template = None
         confidence_score = None
 
-        # support numpy integers
+        # ---------------------------
+        # TEMPLATE RESOLUTION
+        # ---------------------------
         if isinstance(prediction, (int, np.integer)):
             try:
-                template = self.conjug_manager.templates[int(prediction)]
+                templates = self.conjug_manager.templates
+
+                # guard empty / corrupted templates
+                if not templates:
+                    return None
+
+                template = templates[int(prediction)]
             except Exception:
-                raise ValueError(
-                    f"Invalid template index predicted: {prediction}"
-                )
+                return None
 
         elif isinstance(prediction, str):
             template = prediction
 
         else:
-            raise ValueError(
-                f"Unsupported prediction type: {type(prediction)}"
-            )
+            return None
 
-        # Probability handling
+        # ---------------------------
+        # PROBABILITY HANDLING
+        # ---------------------------
         try:
             if hasattr(self.model, "predict_proba"):
                 proba = self.model.predict_proba([verb])[0]
@@ -185,19 +153,29 @@ class Conjugator:
                 else:
                     classes = None
 
-                if classes is not None:
+                if classes is not None and prediction in classes:
                     class_index = list(classes).index(prediction)
                     confidence_score = round(float(proba[class_index]), 3)
 
         except Exception:
             confidence_score = None
 
-        # Build verb
-        index = -len(template[template.index(":") + 1 :])
-        root = verb if index == 0 else verb[:index]
+        # ---------------------------
+        # FINAL VERB BUILD (SAFE)
+        # ---------------------------
+        try:
+            colon_index = template.index(":")
+            index = -len(template[colon_index + 1:])
+            root = verb if index == 0 else verb[:index]
+        except Exception:
+            return None
 
         verb_info = VerbInfo(verb, root, template)
         conjug_info = self.conjug_manager.get_conjug_info(template)
+
+        # final guard against corrupted conjugation data
+        if verb_info is None or conjug_info is None:
+            return None
 
         verb_object = VERBS[self.language](verb_info, conjug_info, subject)
 
@@ -207,23 +185,6 @@ class Conjugator:
         return verb_object
 
     def set_model(self, model):
-        """
-        Set the conjugation model.
-
-        Parameters
-        ----------
-        model : Model
-            Trained ML model.
-
-        Raises
-        ------
-        ValueError
-            If model is not a valid Model instance.
-
-        Returns
-        -------
-        None
-        """
         if not isinstance(model, Model):
             logger.warning(
                 _("Please provide an instance of a mlconjug3.mlconjug3.Model")
