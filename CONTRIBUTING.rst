@@ -81,7 +81,7 @@ Before you begin working on a new feature or bugfix, create a new branch for it.
 
     $ git checkout -b name-of-your-bugfix-or-feature
 
-We support Python versions 3.8 to 3.11. Make sure your code is compatible with all of them by running the tests:
+We support Python versions 3.9 to 3.14. Make sure your code is compatible with all of them by running the tests:
 
 .. code-block:: console
 
