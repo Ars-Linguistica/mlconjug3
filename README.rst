@@ -70,7 +70,7 @@ With mlconjug3, you can:
 
 ----
 
-Compatibility Matrix (v4.0.0)
+Compatibility Matrix (v4.0.1)
 -----------------------------
 
 +----------------------+----------------------+------------------------------+
@@ -92,7 +92,7 @@ These builds are marked experimental in CI.
 
 ----
 
-Release Notes (v4.0.0)
+Release Notes (v4.0.1)
 ----------------------
 
 This release introduces major internal improvements to the ML pipeline.
