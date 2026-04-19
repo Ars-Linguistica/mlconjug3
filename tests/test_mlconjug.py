@@ -197,7 +197,7 @@ class TestConjugatorMLBranches:
             "indicative": {"present": []}
         }
 
-        result = c.conjugate("aller")
+        result = c.conjugate("cacater")
         assert result is not None
 
     def test_predict_proba_branch(self):
