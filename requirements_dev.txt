@@ -352,9 +352,9 @@ idna==3.4 ; python_version < "3.12" and python_version >= "3.8" \
 imagesize==1.4.1 ; python_version >= "3.8" and python_version < "3.12" \
     --hash=sha256:0d8d18d08f840c19d0ee7ca1fd82490fdc3729b7ac93f49870406ddde8ef8d8b \
     --hash=sha256:69150444affb9cb0d5cc5a92b3676f0b2fb7cd9ae39e947a5e11a36b4497cd4a
-importlib-metadata==6.0.0 ; python_version < "3.12" and python_version >= "3.8" \
-    --hash=sha256:7efb448ec9a5e313a57655d35aa54cd3e01b7e1fbcf72dce1bf06119420f5bad \
-    --hash=sha256:e354bedeb60efa6affdcc8ae121b73544a7aa74156d047311948f6d711cd378d
+importlib-metadata==8.7.1 ; python_version < "3.12" and python_version >= "3.8" \
+    --hash=sha256:49fef1ae6440c182052f407c8d34a68f72efc36db9ca90dc0113398f2fdde8bb \
+    --hash=sha256:5a1f80bf1daa489495071efbb095d75a634cf28a8bc299581244063b53176151
 importlib-resources==5.10.2 ; python_full_version >= "3.8.0" and python_version < "3.9" \
     --hash=sha256:7d543798b0beca10b6a01ac7cafda9f822c54db9e8376a6bf57e0cbd74d486b6 \
     --hash=sha256:e4a96c8cc0339647ff9a5e0550d9f276fc5a01ffa276012b58ec108cfd7b8484
