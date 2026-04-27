@@ -12,6 +12,7 @@ Each language class customizes how conjugation forms are constructed.
 
 import abc
 from collections import OrderedDict
+import copy
 from mlconjug3.constants import *
 
 
@@ -153,8 +154,9 @@ class Verb(metaclass=VerbMeta):
             self._load_conjug(subject)
             self.full_forms = self.conjug_info
         else:
+            self.conjug_info = self.full_forms
             self._load_conjug("pronoun")
-            self.full_forms = self.conjug_info
+            self.conjug_info = conjug_info
             self._load_conjug(subject)
 
     def __repr__(self):
