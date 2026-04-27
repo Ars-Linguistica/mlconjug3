@@ -1,0 +1,105 @@
+name: Test PyPI Release (Build → Publish → Verify)
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*-rc*"
+
+permissions:
+  contents: read
+  id-token: write  # required for OIDC
+
+jobs:
+  build:
+    name: Build distribution
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install build tools
+        run: |
+          python -m pip install -U pip build
+
+      - name: Build package
+        run: python -m build
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/*
+
+  publish_testpypi:
+    name: Publish to TestPyPI
+    needs: build
+    runs-on: ubuntu-latest
+
+    environment:
+      name: testpypi
+
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist
+
+      # -------------------------
+      # OIDC (preferred)
+      # -------------------------
+      - name: Publish via OIDC
+        id: publish_oidc
+        continue-on-error: true
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/
+          packages-dir: dist/
+
+      # -------------------------
+      # Token fallback (optional safety net)
+      # -------------------------
+      - name: Publish via token fallback
+        if: steps.publish_oidc.outcome == 'failure'
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.TEST_PYPI_TOKEN }}
+        run: |
+          python -m pip install -U twine
+          python -m twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+
+  test_install:
+    name: Install from TestPyPI and run full tests
+    needs: publish_testpypi
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Create clean environment
+        run: |
+          python -m venv venv
+          source venv/bin/activate
+          python -m pip install -U pip
+
+      - name: Install runtime dependencies first (important for ML stack)
+        run: |
+          source venv/bin/activate
+          pip install numpy scipy scikit-learn
+
+      - name: Install from TestPyPI
+        run: |
+          source venv/bin/activate
+          pip install \
+            --index-url https://test.pypi.org/simple/ \
+            --extra-index-url https://pypi.org/simple/ \
+            mlconjug3
+
+      - name: Run full test suite (installed package)
+        run: |
+          source venv/bin/activate
+          pip install pytest pytest-cov
+          pytest --cov=mlconjug3

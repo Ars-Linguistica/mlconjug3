@@ -2,20 +2,16 @@ coverage:
   status:
     project:
       default:
-        # Do not fail PRs if the code coverage drops.
-        target: 0%
-        threshold: 40%
-        if_ci_failed: success
-        informational: true
+        target: 75%
+        threshold: 2%
+        informational: false
 
-steps:
-  # (Other steps go here)
-  - name: "Upload coverage to Codecov"
-    uses: codecov/codecov-action@v3
-    with:
-      if_ci_failed: success
+    patch:
+      default:
+        target: 75%
+        threshold: 2%
+        informational: false
 
 ignore:
   - "**/*.yaml"
   - "**/*.yml"
-

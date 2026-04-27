@@ -6,14 +6,14 @@ Contributing
 
 Welcome to the mlconjug3 project!
 
-We're thrilled that you're interested in joining our community of contributors and helping us make this project even better. 
+We're thrilled that you're interested in joining our community of contributors and helping us make this project even better.
 We believe that everyone has something valuable to offer, and we're excited to see how your unique skills and perspectives can help shape the future of this project.
 
-Whether you're a seasoned developer or just starting out, we have plenty of opportunities for you to get involved. 
+Whether you're a seasoned developer or just starting out, we have plenty of opportunities for you to get involved.
 From fixing bugs to adding new features, there's something for everyone.
-And with the support for python 3.8 to 3.11 and the use of modern best practices like the use of the build manager poetry and the pyproject.toml file, you'll be able to work with the latest and greatest tools in the Python ecosystem.
+And with support for Python 3.9 to 3.14 and the use of modern best practices like the build manager Poetry and the pyproject.toml file, you'll be able to work with the latest tools in the Python ecosystem.
 
-You can contribute in many ways::
+You can contribute in many ways:
 
 Types of Contributions
 ----------------------
@@ -44,9 +44,8 @@ and "help wanted" is open to whoever wants to implement it.
 Write Documentation
 ~~~~~~~~~~~~~~~~~~~
 
-mlconjug3 could always use more documentation, whether as part of the
-official MLConjug docs, in docstrings, or even on the web in blog posts,
-articles, and such.
+mlconjug3 could always use more documentation, whether as part of the official docs,
+in docstrings, or even in blog posts and articles.
 
 Submit Feedback
 ~~~~~~~~~~~~~~~
@@ -56,9 +55,8 @@ The best way to send feedback is to file an issue at https://github.com/Ars-Ling
 If you are proposing a feature:
 
 * Explain in detail how it would work.
-* Keep the scope as narrow as possible, to make it easier to implement.
-* Remember that this is a volunteer-driven project, and that contributions
-  are welcome :)
+* Keep the scope as narrow as possible to make it easier to implement.
+* Remember that this is a volunteer-driven project, and contributions are welcome.
 
 Get Started!
 ------------
@@ -70,7 +68,7 @@ You can do this by running the following commands in your terminal:
 
     $ git clone git@github.com:Ars-Linguistica/mlconjug3.git
 
-We recommend using poetry as our build manager and the pyproject.toml file to manage our dependencies. Make sure you have poetry installed, then
+We recommend using Poetry as our build manager and the pyproject.toml file to manage dependencies. Make sure you have Poetry installed, then:
 
 .. code-block:: console
 
@@ -83,14 +81,14 @@ Before you begin working on a new feature or bugfix, create a new branch for it.
 
     $ git checkout -b name-of-your-bugfix-or-feature
 
-We support Python versions 3.8 to 3.11, make sure that your code is compatible with all of them by running the tests:
+We support Python versions 3.9 to 3.14. Make sure your code is compatible with all of them by running the tests:
 
 .. code-block:: console
 
     $ poetry run pytest
     $ poetry run tox
 
-When you're ready to submit your changes, first make sure that all tests pass. Then, commit your changes and push your branch to your fork on GitHub:
+When you're ready to submit your changes, first make sure all tests pass. Then commit your changes and push your branch:
 
 .. code-block:: console
 
@@ -100,95 +98,78 @@ When you're ready to submit your changes, first make sure that all tests pass. T
 
 Finally, submit a pull request through the GitHub website.
 
-
 Pull Request Guidelines
 -----------------------
 
-Before you submit, make sure that all of the following are true::
+Before you submit, make sure that:
 
-1. All tests pass
-2. The pull request includes a clear description of the changes you've made
-3. You've added yourself to the CONTRIBUTORS.rst file
-4. You've added and ran the appropriate GitHub action workflows and checked that they have passed.
+1. All tests pass.
+2. The pull request includes a clear description of changes.
+3. You've added yourself to the CONTRIBUTORS.rst file.
+4. You've run the appropriate GitHub Actions workflows and verified they passed.
 
-Please note that we may ask you to make changes to your pull request before it is merged. We'll review your changes and provide feedback as soon as possible. Thank you for your contribution!
+We may ask you to make changes before merging. Thank you for contributing.
 
 Checking GitHub Actions
 -----------------------
 
-Checking the status of the GitHub workflows of a pull request can be done by following these steps::
+To check workflow status for a pull request:
 
-1. Go to the pull request on GitHub that you want to check the status of.
-2. Look at the "Checks" section of the pull request, which is located at the bottom of the pull request page, next to the "Files changed" tab.
-3. Here, you will see the status of all the workflows that are associated with the pull request. Each workflow will have a name and a status (e.g. "continuous-integration/travis-ci/pr", "success").
-4. Click on the name of the workflow to view more details about it. This will take you to the "Actions" tab of the pull request, where you can see the output of each job that is associated with that workflow.
-5. Look for the "Status" field of each job to see if it has passed or failed. If a job has failed, you can click on the job name to view more details about the failure, such as the error message or log output.
-6. If any of the workflows fail, make changes to your pull request to address the issues and update the pull request.
+1. Go to the pull request page on GitHub.
+2. Look at the "Checks" section.
+3. Review workflow names and statuses.
+4. Click a workflow for details in the "Actions" tab.
+5. Inspect job logs if failures occur.
+6. Fix issues and update your PR if needed.
 
-Once all workflows have passed, your pull request will be ready for review and merging.
-It's also worth noting that you can also check the status of the workflows on the GitHub Actions tab of the repository, where you can see all the recent workflows runs and their statuses.
-
+Once all workflows pass, the PR is ready for review.
 
 Tips
 ----
 
-Here are a few tips to assist you in your development.
-
-To run a subset of the tests:
+To run a subset of tests:
 
 .. code-block:: console
 
     $ poetry run pytest tests/test_module.py
 
-
-To run pytest with coverage:
+To run tests with coverage:
 
 .. code-block:: console
 
     $ poetry run pytest --cov=mlconjug3
 
-
-To run mypy type checks:
+To run type checks:
 
 .. code-block:: console
 
     $ poetry run mypy mlconjug3
 
-
-To check for any code style issues using flake8:
+To check style issues:
 
 .. code-block:: console
 
     $ poetry run flake8 mlconjug3
 
-
-To automatically format your code using black:
+To format code:
 
 .. code-block:: console
 
     $ poetry run black mlconjug3
 
-It is also recommended to use pre-commit hooks to automatically run these checks before committing your changes. This can be easily set up using pre-commit by installing it in your virtual environment with 
+It is recommended to use pre-commit hooks:
 
 .. code-block:: console
 
-    $ poetry add pre-commitand 
-
-then running 
-
-.. code-block:: console
-
+    $ poetry add pre-commit
     $ pre-commit install
 
-in the root of your local repository.
-
-Additionally, it is a good practice to regularly update your dependencies to ensure compatibility and security.
-This can be done by running 
+To update dependencies:
 
 .. code-block:: console
 
     $ poetry update
 
-and committing the updated pyproject.toml and poetry.lock files.
+Regularly updating dependencies helps maintain compatibility and security.
 
-By following these best practices and utilizing these tools, you can ensure that your contributions adhere to the project's standards and maintain the overall quality of the codebase.
+By following these practices and using these tools, you help ensure high-quality contributions to the project.

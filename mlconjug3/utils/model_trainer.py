@@ -1,10 +1,12 @@
 """
-This module provides the ConjugatorTrainer class, a tool for training, evaluating,
-and saving models for conjugating verbs in different languages.
+This module provides the ConjugatorTrainer class for training, evaluating,
+and saving machine learning models used for verb conjugation.
 
-The ConjugatorTrainer class allows the user to train a model for a specific language using the mlconjug3 library.
-The user can also evaluate the model's performance and save the trained model for later use.
-
+It supports:
+- Dataset splitting
+- Model training via mlconjug3 pipeline
+- Evaluation against ground truth templates
+- Serialization of trained models
 """
 
 import multiprocessing
@@ -17,24 +19,37 @@ from time import time
 
 class ConjugatorTrainer:
     """
-    Initialize a ConjugatorTrainer instance.
+    Trainer class for ML-based verb conjugation models.
 
-    :param lang: str.
-        | The language for which the model will be trained.
-    :param output_folder: str.
-        | The directory where the trained model will be saved.
-    :param split_proportion: float.
-        | The proportion of the data set to use for training.
-    :param dataset: class.
-        | The DataSet class from the mlconjug3 library.
-    :param model: obj.
-        | The model to be trained.
-    :ivar lang: Language of the conjugator.
-    :ivar output_folder: Output folder for the trained model.
-    :ivar split_proportion: Proportion of the data set to use for training.
-    :ivar dataset: DataSet class from the mlconjug3 library.
-    :ivar model: Model to be trained.
-    :ivar conjugator: mlconjug3 Conjugator instance.
+    This class orchestrates:
+    - Dataset preparation
+    - Model training
+    - Evaluation of template prediction accuracy
+    - Persistence of trained models
+
+    :param lang: Target language code (e.g., 'fr', 'en', 'es').
+    :type lang: str
+    :param output_folder: Directory where trained model will be saved.
+    :type output_folder: str
+    :param split_proportion: Train/test split ratio for dataset.
+    :type split_proportion: float
+    :param dataset: Dataset object providing verbs and templates.
+    :type dataset: DataSet
+    :param model: Machine learning model to train.
+    :type model: Model
+
+    :ivar lang: Language of the training pipeline.
+    :vartype lang: str
+    :ivar output_folder: Output directory for serialized model.
+    :vartype output_folder: str
+    :ivar split_proportion: Dataset split ratio.
+    :vartype split_proportion: float
+    :ivar dataset: Dataset instance used for training.
+    :vartype dataset: DataSet
+    :ivar model: ML model instance.
+    :vartype model: Model
+    :ivar conjugator: mlconjug3 Conjugator instance wrapping the model.
+    :vartype conjugator: Conjugator
     """
 
     def __init__(self, lang, output_folder, split_proportion, dataset, model):
@@ -43,65 +58,80 @@ class ConjugatorTrainer:
         self.split_proportion = split_proportion
         self.dataset = dataset
         self.model = model
-        # Initialize Conjugator
+
+        # Initialize Conjugator wrapper
         self.conjugator = mlconjug3.Conjugator(
             self.lang,
             model=self.model,
         )
-        return
 
     def train(self):
         """
-        Train the model using the specified parameters.
+        Train the conjugation model using the provided dataset split.
+
+        Steps:
+        - Splits dataset into train/test sets
+        - Trains model on verb samples and template labels
+        - Reports completion status
         """
         np.random.seed(42)
 
-        # Initialize Data Set
+        # Split dataset
         self.dataset.split_data(proportion=self.split_proportion)
 
-        # Train Conjugator
+        # Train model
         self.conjugator.model.train(
-            self.dataset.verbs_list, self.dataset.templates_list
+            self.dataset.verbs_list,
+            self.dataset.templates_list,
         )
 
-        # Print training duration
-        print(f"{self.lang} model succesfully trained.")
-        return
+        print(f"{self.lang} model successfully trained.")
 
     def predict(self):
         """
-        Make predictions using the trained model.
+        Generate predictions for all verbs in the dataset.
 
-        Returns predictions:
-            list predictions: A list of predictions for the conjugated verbs.
+        :return: Predicted template indices.
+        :rtype: list | numpy.ndarray
         """
         return self.model.predict(self.dataset.verbs_list)
 
     def evaluate(self):
         """
-        Evaluate the performance of the model's predictions.
+        Evaluate model accuracy against ground truth templates.
 
-        Prints the score of the model, with the number of misses out of the total number of entries.
+        Computes:
+        - Accuracy score
+        - Number of mismatches
+        - Total number of samples
+
+        Prints evaluation summary.
         """
         predictions = self.model.predict(self.dataset.verbs_list)
+
         score = len(
             [a == b for a, b in zip(predictions, self.dataset.templates_list) if a == b]
         ) / len(predictions)
+
         misses = len(
             [a != b for a, b in zip(predictions, self.dataset.templates_list) if a != b]
         )
+
         entries = len(predictions)
+
         print(
-            f"The score of the {self.lang} model is {score} with {misses} misses out of {entries} entries."
+            f"The score of the {self.lang} model is {score} "
+            f"with {misses} misses out of {entries} entries."
         )
-        return
 
     def save(self):
         """
-        Save the trained conjugator model to the specified output folder.
+        Save trained model to disk using pickle serialization.
+
+        Output format:
+        trained_model-{lang}.pickle
         """
         with open(
             f"{self.output_folder}/trained_model-{self.lang}.pickle", "wb"
         ) as file:
             pickle.dump(self.model, file)
-        return
