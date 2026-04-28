@@ -66,7 +66,7 @@ jobs:
                 with:
                   password: ${{ secrets.PYPI_TOKEN }}
             -   name: Sign package with sigstore
-                uses: sigstore/gh-action-sigstore-python@9310933b45d7dfc2fe40c1d701ac114548c28d31 # v2.0.1
+                uses: sigstore/gh-action-sigstore-python@04cffa1d795717b140764e8b640de88853c92acc # v3.3.0
                 with:
                   inputs: dist/*.tar.gz dist/*.whl
             -   name: Upload coverage artifacts to codecov
