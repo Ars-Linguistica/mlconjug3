@@ -337,9 +337,9 @@ exceptiongroup==1.1.0 ; python_full_version >= "3.8.0" and python_version < "3.1
 filelock==3.9.0 ; python_full_version >= "3.8.0" and python_version < "3.12" \
     --hash=sha256:7b319f24340b51f55a2bf7a12ac0755a9b03e718311dac567a0f4f7fabd2f5de \
     --hash=sha256:f58d535af89bb9ad5cd4df046f741f8553a418c01a7856bf0d173bbc9f6bd16d
-furo==2022.12.7 ; python_full_version >= "3.8.0" and python_version < "3.12" \
-    --hash=sha256:7cb76c12a25ef65db85ab0743df907573d03027a33631f17d267e598ebb191f7 \
-    --hash=sha256:d8008f8efbe7587a97ba533c8b2df1f9c21ee9b3e5cad0d27f61193d38b1a986
+furo==2025.12.19 ; python_full_version >= "3.8.0" and python_version < "3.12" \
+    --hash=sha256:188d1f942037d8b37cd3985b955839fea62baa1730087dc29d157677c857e2a7 \
+    --hash=sha256:bb0ead5309f9500130665a26bee87693c41ce4dbdff864dbfb6b0dae4673d24f
 gitdb==4.0.10 ; python_full_version >= "3.8.0" and python_version < "3.12" \
     --hash=sha256:6eb990b69df4e15bad899ea868dc46572c3f75339735663b81de79b06f17eb9a \
     --hash=sha256:c286cf298426064079ed96a9e4a9d39e7f3e9bf15ba60701e95f5492f28415c7
