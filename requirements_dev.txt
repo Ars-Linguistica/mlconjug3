@@ -683,9 +683,9 @@ sphinxcontrib-serializinghtml==1.1.5 ; python_version >= "3.8" and python_versio
 stevedore==4.1.1 ; python_version >= "3.8" and python_version < "3.12" \
     --hash=sha256:7f8aeb6e3f90f96832c301bff21a7eb5eefbe894c88c506483d355565d88cc1a \
     --hash=sha256:aa6436565c069b2946fe4ebff07f5041e0c8bf18c7376dd29edf80cf7d524e4e
-threadpoolctl==3.1.0 ; python_version >= "3.8" and python_version < "3.12" \
-    --hash=sha256:8b99adda265feb6773280df41eece7b2e6561b772d21ffd52e372f999024907b \
-    --hash=sha256:a335baacfaa4400ae1f0d8e3a58d6674d2f8828e3716bb2802c44955ad391380
+threadpoolctl==3.6.0 ; python_version >= "3.8" and python_version < "3.12" \
+    --hash=sha256:43a0b8fd5a2928500110039e43a5eed8480b918967083ea48dc3ab9f13c4a7fb \
+    --hash=sha256:8ab8b4aa3491d812b623328249fab5302a68d2d71745c8a4c719a2fcaba9f44e
 tomli==2.0.1 ; python_full_version >= "3.8.0" and python_full_version <= "3.11.0a6" \
     --hash=sha256:939de3e7a6161af0c887ef91b7d41a53e7c5a1ca976325f429cb46ea9bc30ecc \
     --hash=sha256:de526c12914f0c550d15924c62d72abc48d6fe7364aa87328337a31007fe8a4f
