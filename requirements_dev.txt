@@ -349,9 +349,9 @@ gitpython==3.1.30 ; python_full_version >= "3.8.0" and python_version < "3.12" \
 idna==3.4 ; python_version < "3.12" and python_version >= "3.8" \
     --hash=sha256:814f528e8dead7d329833b91c5faa87d60bf71824cd12a7530b5526063d02cb4 \
     --hash=sha256:90b77e79eaa3eba6de819a0c442c0b4ceefc341a7a2ab77d7562bf49f425c5c2
-imagesize==1.4.1 ; python_version >= "3.8" and python_version < "3.12" \
-    --hash=sha256:0d8d18d08f840c19d0ee7ca1fd82490fdc3729b7ac93f49870406ddde8ef8d8b \
-    --hash=sha256:69150444affb9cb0d5cc5a92b3676f0b2fb7cd9ae39e947a5e11a36b4497cd4a
+imagesize==1.5.0 ; python_version >= "3.8" and python_version < "3.12" \
+    --hash=sha256:32677681b3f434c2cb496f00e89c5a291247b35b1f527589909e008057da5899 \
+    --hash=sha256:8bfc5363a7f2133a89f0098451e0bcb1cd71aba4dc02bbcecb39d99d40e1b94f
 importlib-metadata==6.0.0 ; python_version < "3.12" and python_version >= "3.8" \
     --hash=sha256:7efb448ec9a5e313a57655d35aa54cd3e01b7e1fbcf72dce1bf06119420f5bad \
     --hash=sha256:e354bedeb60efa6affdcc8ae121b73544a7aa74156d047311948f6d711cd378d
