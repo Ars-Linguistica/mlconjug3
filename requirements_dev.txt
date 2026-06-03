@@ -535,9 +535,9 @@ pytest-runner==6.0.0 ; python_full_version >= "3.8.0" and python_version < "3.12
 pytest==7.2.1 ; python_full_version >= "3.8.0" and python_version < "3.12" \
     --hash=sha256:c7c6ca206e93355074ae32f7403e8ea12163b1163c976fee7d4d84027c162be5 \
     --hash=sha256:d45e0952f3727241918b8fd0f376f5ff6b301cc0777c6f9a556935c92d8a7d42
-pytz==2022.7.1 ; python_version >= "3.8" and python_version < "3.12" \
-    --hash=sha256:01a0681c4b9684a28304615eba55d1ab31ae00bf68ec157ec3708a8182dbbcd0 \
-    --hash=sha256:78f4f37d8198e0627c5f1143240bb0206b8691d8d7ac6d78fee88b78733f8c4a
+pytz==2026.2 ; python_version >= "3.8" and python_version < "3.12" \
+    --hash=sha256:04156e608bee23d3792fd45c94ae47fae1036688e75032eea2e3bf0323d1f126 \
+    --hash=sha256:0e60b47b29f21574376f218fe21abc009894a2321ea16c6754f3cad6eb7cdd6a
 pywin32-ctypes==0.2.0 ; python_full_version >= "3.8.0" and python_version < "3.12" and sys_platform == "win32" \
     --hash=sha256:24ffc3b341d457d48e8922352130cf2644024a4ff09762a2261fd34c36ee5942 \
     --hash=sha256:9dc2d991b3479cc2df15930958b674a48a227d5361d413827a4cfd0b5876fc98
