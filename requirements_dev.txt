@@ -499,9 +499,9 @@ numpy==1.24.1 ; python_version >= "3.8" and python_version < "3.12" \
     --hash=sha256:ed5fb71d79e771ec930566fae9c02626b939e37271ec285e9efaf1b5d4370e7d \
     --hash=sha256:ef85cf1f693c88c1fd229ccd1055570cb41cdf4875873b7728b6301f12cd05bf \
     --hash=sha256:f1b739841821968798947d3afcefd386fa56da0caf97722a5de53e07c4ccedc7
-packaging==23.0 ; python_version < "3.12" and python_version >= "3.8" \
-    --hash=sha256:714ac14496c3e68c99c29b00845f7a2b85f3bb6f1078fd9f72fd20f0570002b2 \
-    --hash=sha256:b6ad297f8907de0fa2fe1ccbd26fdaf387f5f47c7275fedf8cce89f99446cf97
+packaging==26.2 ; python_version < "3.12" and python_version >= "3.8" \
+    --hash=sha256:5fc45236b9446107ff2415ce77c807cee2862cb6fac22b8a73826d0693b0980e \
+    --hash=sha256:ff452ff5a3e828ce110190feff1178bb1f2ea2281fa2075aadb987c2fb221661
 pathlib2==2.3.7.post1 ; python_full_version >= "3.8.0" and python_version < "3.12" \
     --hash=sha256:5266a0fd000452f1b3467d782f079a4343c63aaa119221fbdc4e39577489ca5b \
     --hash=sha256:9fe0edad898b83c0c3e199c842b27ed216645d2e177757b2dd67384d4113c641
