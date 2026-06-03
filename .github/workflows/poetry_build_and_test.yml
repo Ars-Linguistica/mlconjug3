@@ -107,7 +107,7 @@ jobs:
         if: ${{ !(runner.os == 'Windows' && (matrix.python-version == '3.13' || matrix.python-version == '3.14')) }}
         run: poetry run pytest --cov=mlconjug3 --cov-report=xml
 
-      - uses: codecov/codecov-action@b9fd7d16f6d7d1b5d2bec1a2887e65ceed900238  # pinned from v4
+      - uses: codecov/codecov-action@e79a6962e0d4c0c17b229090214935d2e33f8354  # pinned from v6.0.1
         if: ${{ !(runner.os == 'Windows' && (matrix.python-version == '3.13' || matrix.python-version == '3.14')) }}
         with:
           files: ./coverage.xml
